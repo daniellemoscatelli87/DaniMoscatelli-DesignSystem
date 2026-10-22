@@ -8,6 +8,7 @@ import {
   TableProperties, Box,
   Search, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
 } from "lucide-react";
+import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
 import { FormShowcase } from "./components/showcase/FormShowcase";
 import { DataShowcase } from "./components/showcase/DataShowcase";
@@ -26,6 +27,120 @@ import { HomeShowcase } from "./components/showcase/HomeShowcase";
 import { PrinciplesShowcase } from "./components/showcase/PrinciplesShowcase";
 import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
+
+/* ── pt-BR labels for nav (keys are the English labels) ── */
+const ptLabels: Record<string, string> = {
+  "Start": "Início",
+  "Brand": "Marca",
+  "Foundation": "Fundamentos",
+  "Concepts": "Conceitos",
+  "Guidelines": "Diretrizes",
+  "Backgrounds": "Fundos",
+  "Motion": "Motion",
+  "Templates": "Templates",
+  "Components": "Componentes",
+  "Home": "Início",
+  "Get Started": "Primeiros passos",
+  "Design Principles": "Princípios de design",
+  "Develop": "Desenvolvimento",
+  "Brand Identity": "Identidade de marca",
+  "Logo Vertical": "Logo vertical",
+  "Logo Horizontal": "Logo horizontal",
+  "Symbol / Icon": "Símbolo / Ícone",
+  "Symbol Usage": "Uso do símbolo",
+  "Responsiveness": "Responsividade",
+  "Application on Backgrounds": "Aplicação em fundos",
+  "Brand Palette": "Paleta da marca",
+  "Typography": "Tipografia",
+  "Usage Rules": "Regras de uso",
+  "Clear Space": "Área de respiro",
+  "Color Palette": "Paleta de cores",
+  "Spacing": "Espaçamento",
+  "Radius": "Raio",
+  "Shadows": "Sombras",
+  "Tokens": "Tokens",
+  "Design Tokens": "Design Tokens",
+  "What are tokens": "O que são tokens",
+  "The three layers": "As três camadas",
+  "Guide for designers": "Guia para designers",
+  "AI and tokens": "IA e tokens",
+  "Design ↔ Dev Mapping": "Mapeamento Design ↔ Dev",
+  "Implementation in code": "Implementação em código",
+  "Integration": "Integração",
+  "Usability": "Usabilidade",
+  "Accessibility": "Acessibilidade",
+  "Principles": "Princípios",
+  "Action hierarchy": "Hierarquia de ações",
+  "Target size": "Tamanho de alvo",
+  "System status": "Status do sistema",
+  "Content states": "Estados de conteúdo",
+  "Errors & microcopy": "Erros e microcopy",
+  "Destructive actions": "Ações destrutivas",
+  "Quick review": "Revisão rápida",
+  "Contrast": "Contraste",
+  "Focus": "Foco",
+  "Keyboard": "Teclado",
+  "Forms & labels": "Formulários e rótulos",
+  "Structure & ARIA": "Estrutura e ARIA",
+  "Checklist": "Checklist",
+  "Gradient Animation": "Gradiente animado",
+  "Canvas Reveal": "Canvas Reveal",
+  "Vortex": "Vórtice",
+  "Background Lines": "Linhas de fundo",
+  "Motion Design": "Motion Design",
+  "Enter & Exit Presets": "Presets de entrada e saída",
+  "Easing Reference": "Referência de easing",
+  "Spring Physics": "Física de mola",
+  "Stagger & Sequences": "Stagger e sequências",
+  "Hover Interactions": "Interações de hover",
+  "Micro-interactions": "Microinterações",
+  "Loaders & Progress": "Loaders e progresso",
+  "Layout Transitions": "Transições de layout",
+  "Marquee": "Marquee",
+  "Animated List": "Lista animada",
+  "Orbiting Circles": "Círculos orbitais",
+  "Wobble Card": "Card Wobble",
+  "Motion Tokens": "Tokens de movimento",
+  "Dashboard": "Dashboard",
+  "Settings": "Configurações",
+  "Auth": "Autenticação",
+  "Team": "Equipe",
+  "Inbox": "Caixa de entrada",
+  "Pricing": "Preços",
+  "Contact": "Contato",
+  "Landing Page": "Landing page",
+  "Buttons": "Botões",
+  "Button Variants": "Variantes de botão",
+  "Form Controls": "Controles de formulário",
+  "Data Display": "Exibição de dados",
+  "KPI Cards": "Cards de KPI",
+  "Charts": "Gráficos",
+  "Table": "Tabela",
+  "Feedback": "Feedback",
+  "Tabs": "Abas",
+  "Alerts": "Alertas",
+  "Toasts": "Toasts",
+  "Progress": "Progresso",
+  "Skeleton": "Skeleton",
+  "Labels": "Rótulos",
+  "Badges & Tags": "Badges e tags",
+  "Avatar": "Avatar",
+  "Empty States": "Estados vazios",
+  "Timeline": "Linha do tempo",
+  "Icons": "Ícones",
+  "Sizes & Colors": "Tamanhos e cores",
+  "Library": "Biblioteca",
+  "Overlays": "Overlays",
+  "Breadcrumb": "Breadcrumb",
+  "Pagination": "Paginação",
+  "Tooltips": "Tooltips",
+  "Dropdown": "Dropdown",
+  "Dialogs": "Diálogos",
+  "Accordion": "Accordion",
+  "Feedback & Status": "Feedback e status",
+  "Labels & Patterns": "Rótulos e padrões",
+  "Overlays & Navigation": "Overlays e navegação",
+};
 
 /* ── Sidebar nav structure ── */
 type SubItem = { id: string; label: string; sectionId: string };
@@ -238,6 +353,13 @@ const navGroups: { group: string; items: NavItem[] }[] = [
   },
 ];
 
+const groupIcons: Record<string, React.ElementType> = {
+  Start: Rocket,
+  Concepts: Lightbulb,
+  Guidelines: Compass,
+  Components: Layers,
+};
+
 const sectionComponents: Record<string, React.ReactNode> = {
   usability:     <UsabilityShowcase />,
   accessibility: <AccessibilityShowcase />,
@@ -276,7 +398,9 @@ const sectionLabels: Record<string, string> = {
   templates:   "Templates",
 };
 
-export default function App() {
+function AppShell() {
+  const { lang, setLang, t } = useI18n();
+  const tl = (label: string) => (lang === "pt" ? ptLabels[label] ?? label : label);
   const [dark, setDark] = useState(true);
   const [activeSection, setActiveSection] = useState("overview");
   const [sidebarExpanded, setSidebarExpanded] = useState<Record<string, boolean>>({
@@ -295,7 +419,10 @@ export default function App() {
     motion:      false,
     backgrounds: false,
   });
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const collapsed = !hovered;
   // Anchor to scroll to after a section switch
   const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
 
@@ -319,7 +446,9 @@ export default function App() {
 
   // Click on a parent nav item: toggle expand + switch section
   const handleParentClick = (id: string) => {
-    setSidebarExpanded(prev => ({ ...prev, [id]: !prev[id] }));
+    setSidebarExpanded(prev => ({ [id]: !prev[id] }));
+    const owner = navGroups.find(g => g.items.some(i => i.id === id));
+    if (owner && owner.items.length === 1) setOpenGroups({});
     setActiveSection(id);
     setPendingAnchor(null);
     setMobileSidebarOpen(false);
@@ -342,6 +471,10 @@ export default function App() {
   };
 
   const navigateTo = (id: string, anchor?: string) => {
+    const owner = navGroups.find(g => g.items.some(i => i.id === id));
+    const target = owner?.items.find(i => i.id === id);
+    setOpenGroups(owner && owner.items.length > 1 ? { [owner.group]: true } : {});
+    setSidebarExpanded(target?.items ? { [id]: true } : {});
     setActiveSection(id);
     setPendingAnchor(anchor ?? null);
     setMobileSidebarOpen(false);
@@ -358,16 +491,19 @@ export default function App() {
       : activeSection === "overview"
         ? <HomeShowcase onNavigate={navigateTo} />
         : sectionComponents[activeSection];
-  const currentLabel = sectionLabels[activeSection];
+  const currentLabel = tl(sectionLabels[activeSection]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* ── TOP NAV ── */}
       <header className="fixed top-0 inset-x-0 z-40 h-16 bg-card/80 backdrop-blur-xl border-b border-border flex items-center px-4 gap-3" style={{ boxShadow: "var(--shadow-sm)" }}>
-        {/* Mobile menu toggle */}
+        {/* Menu toggle: collapses the sidebar on desktop, opens the drawer on mobile */}
         <button
-          className="lg:hidden h-8 w-8 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors shrink-0"
+          type="button"
+          className="lg:hidden h-9 w-9 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors shrink-0"
           onClick={() => setMobileSidebarOpen(v => !v)}
+          aria-label={t("Toggle menu", "Abrir/fechar menu")}
+          title={t("Toggle menu", "Abrir/fechar menu")}
         >
           <svg style={{ height: "18px", width: "18px" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
         </button>
@@ -405,7 +541,7 @@ export default function App() {
           }
           @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
-        <button type="button" onClick={() => navigateTo("overview")} aria-label="Home" className="flex items-center gap-2.5 min-w-0 text-left">
+        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2.5 min-w-0 text-left">
           <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
           <div className="flex items-center gap-0">
             <span
@@ -434,9 +570,31 @@ export default function App() {
         {/* Search hint */}
         <button className="hidden md:flex items-center gap-2 h-7 px-3 rounded-[8px] border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors">
           <Search className="h-3 w-3" />
-          <span>Search</span>
+          <span>{t("Search", "Buscar")}</span>
           <kbd className="ml-1.5 px-1 py-0.5 text-[0.5625rem] rounded-[3px] bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
         </button>
+
+
+        {/* Language segmented pill */}
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-0.5 rounded-[10px] bg-muted border border-border gap-0.5">
+          {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
+            <button
+              key={code}
+              type="button"
+              onClick={() => setLang(code)}
+              aria-pressed={lang === code}
+              title={full}
+              aria-label={full}
+              className={`flex items-center gap-1.5 h-7 px-2.5 rounded-[8px] text-[0.75rem] font-medium transition-all duration-150 ${
+                lang === code
+                  ? "bg-card text-foreground shadow-sm border border-border"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {short}
+            </button>
+          ))}
+        </div>
 
         {/* Dark/Light segmented pill */}
         <div className="flex items-center h-8 p-0.5 rounded-[10px] bg-muted border border-border gap-0.5">
@@ -449,7 +607,7 @@ export default function App() {
             }`}
           >
             <Sun style={{ height: "13px", width: "13px" }} />
-            <span className="hidden sm:inline">Light</span>
+            <span className="hidden sm:inline">{t("Light", "Claro")}</span>
           </button>
           <button
             onClick={() => setDark(true)}
@@ -460,7 +618,7 @@ export default function App() {
             }`}
           >
             <Moon style={{ height: "13px", width: "13px" }} />
-            <span className="hidden sm:inline">Dark</span>
+            <span className="hidden sm:inline">{t("Dark", "Escuro")}</span>
           </button>
         </div>
       </header>
@@ -477,73 +635,124 @@ export default function App() {
           )}
 
           <aside
-            className={`fixed top-16 bottom-0 z-30 w-60 border-r border-border overflow-y-auto bg-sidebar transition-transform duration-200
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            onFocus={() => setHovered(true)}
+            onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHovered(false); }}
+            className={`fixed top-16 bottom-0 z-40 w-60 ${collapsed ? "lg:w-16" : ""} border-r border-border bg-sidebar ${collapsed ? "" : "lg:shadow-[8px_0_24px_-12px_rgba(0,0,0,0.25)]"} flex flex-col transition-[transform,width] duration-200
               ${mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
           >
-            <div className="py-4 px-3">
-              {navGroups.map(group => (
-                <div key={group.group} className="mb-5">
-                  {group.group && (
-                    <p className="px-3 mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {group.group}
-                    </p>
-                  )}
-                  {group.items.map(item => {
-                    const Icon = item.icon;
-                    const isActive = activeSection === item.id;
-                    const isExpanded = sidebarExpanded[item.id];
-                    return (
-                      <div key={item.id}>
-                        <button
-                          onClick={() => handleParentClick(item.id)}
-                          className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150 mb-0.5
-                            ${isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
-                        >
-                          <span className="flex items-center gap-2.5">
-                            <Icon className="h-4 w-4 shrink-0" />
-                            {item.label}
-                          </span>
-                          {item.items && (
-                            <ChevronRight className={`h-3.5 w-3.5 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""}`} />
-                          )}
-                        </button>
-
-                        {item.items && isExpanded && (
-                          <div className="ml-9 mb-1 space-y-0.5">
-                            {item.items.map(sub => {
-                              const isSubActive =
-                                activeSection === sub.sectionId &&
-                                (pendingAnchor === sub.id || (!pendingAnchor && sub.id === item.id));
-                              return (
-                                <button
-                                  key={sub.id}
-                                  onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
-                                  className={`w-full text-left px-3 py-1.5 rounded-[7px] text-[0.8125rem] transition-colors
-                                    ${isSubActive
-                                      ? "text-primary font-medium bg-primary/8"
-                                      : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
-                                    }`}
-                                >
-                                  {sub.label}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              ))}
+            <div className={`hidden lg:flex h-12 shrink-0 items-center px-3 ${collapsed ? "lg:justify-center lg:px-0" : ""}`}>
+              <div
+                className={`flex items-center gap-2 text-muted-foreground ${collapsed ? "" : "w-full"}`}
+                title={t("Menu", "Menu")}
+                role="img"
+                aria-label={t("Menu", "Menu")}
+              >
+                <span className="h-9 w-9 flex items-center justify-center shrink-0">
+                  <svg style={{ height: "18px", width: "18px" }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+                </span>
+                <span className={`text-xs font-medium uppercase tracking-wider whitespace-nowrap ${collapsed ? "lg:hidden" : ""}`}>{t("Menu", "Menu")}</span>
+              </div>
             </div>
+            <div className={`flex-1 overflow-y-auto overflow-x-hidden py-4 px-3 ${collapsed ? "lg:px-2" : ""}`}>
+              {navGroups.map(group => {
+                const single = group.items.length === 1;
+                const GroupIcon = groupIcons[group.group] ?? Layers;
+                const groupOpen = !!openGroups[group.group];
+                const groupActive = group.items.some(i => i.id === activeSection || i.items?.some(s => s.sectionId === activeSection));
+                const renderItem = (item: NavItem, label: string, nested: boolean) => {
+                  const Icon = item.icon;
+                  const isActive = activeSection === item.id;
+                  const isExpanded = sidebarExpanded[item.id];
+                  return (
+                    <div key={item.id}>
+                      <button
+                        onClick={() => handleParentClick(item.id)}
+                        title={collapsed ? tl(label) : undefined}
+                        aria-label={tl(label)}
+                        aria-expanded={item.items ? !!isExpanded : undefined}
+                        className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                          ${collapsed ? "lg:justify-center lg:px-0" : ""}
+                          ${isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                      >
+                        <span className="flex items-center gap-2.5 min-w-0">
+                          <Icon className="h-4 w-4 shrink-0" />
+                          <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(label)}</span>
+                        </span>
+                        {item.items && (
+                          <ChevronRight className={`h-3.5 w-3.5 shrink-0 transition-transform duration-150 ${isExpanded ? "rotate-90" : ""} ${collapsed ? "lg:hidden" : ""}`} />
+                        )}
+                      </button>
+
+                      {item.items && isExpanded && (
+                        <div className={`mb-1 space-y-0.5 ${nested ? "ml-9" : "ml-3 pl-2 border-l border-border"} ${collapsed ? "lg:hidden" : ""}`}>
+                          {item.items.map(sub => {
+                            const isSubActive =
+                              activeSection === sub.sectionId &&
+                              (pendingAnchor === sub.id || (!pendingAnchor && sub.id === item.id));
+                            return (
+                              <button
+                                key={sub.id}
+                                onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
+                                className={`w-full text-left px-3 py-1.5 rounded-[7px] text-[0.8125rem] transition-colors
+                                  ${isSubActive
+                                    ? "text-primary font-medium bg-primary/8"
+                                    : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
+                                  }`}
+                              >
+                                {tl(sub.label)}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  );
+                };
+
+                if (single) {
+                  return <div key={group.group} className="mb-1">{renderItem(group.items[0], group.group, false)}</div>;
+                }
+
+                return (
+                  <div key={group.group} className="mb-1">
+                    <button
+                      onClick={() => {
+                        setOpenGroups(prev => ({ [group.group]: !prev[group.group] }));
+                        setSidebarExpanded({});
+                      }}
+                      title={collapsed ? tl(group.group) : undefined}
+                      aria-label={tl(group.group)}
+                      aria-expanded={groupOpen}
+                      className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                        ${collapsed ? "lg:justify-center lg:px-0" : ""}
+                        ${groupActive && !groupOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                    >
+                      <span className="flex items-center gap-2.5 min-w-0">
+                        <GroupIcon className="h-4 w-4 shrink-0" />
+                        <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(group.group)}</span>
+                      </span>
+                      <ChevronRight className={`h-3.5 w-3.5 shrink-0 transition-transform duration-150 ${groupOpen ? "rotate-90" : ""} ${collapsed ? "lg:hidden" : ""}`} />
+                    </button>
+                    {groupOpen && (
+                      <div className={`ml-3 pl-2 border-l border-border ${collapsed ? "lg:hidden" : ""}`}>
+                        {group.items.map(item => renderItem(item, item.label, true))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+
           </aside>
         </>
 
         {/* ── MAIN CONTENT ── */}
-        <main className="flex-1 lg:ml-60 min-w-0 flex flex-col">
+        <main className={`flex-1 lg:ml-16 min-w-0 flex flex-col transition-[margin] duration-200`}>
           {/* Section header bar */}
-          <div className="sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-b border-border px-6 md:px-10 py-3 flex items-center gap-2">
-            <nav className="flex items-center gap-1.5 text-[0.8125rem]">
+          <div className="sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-b border-border px-6 md:px-10 py-3">
+            <nav className="max-w-5xl mx-auto w-full flex items-center gap-1.5 text-[0.8125rem]">
               <img src={logoVermelho} alt="" className="h-4 w-4 object-contain opacity-70" />
               <span className="text-muted-foreground">Dani Moscatelli</span>
               <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -551,8 +760,10 @@ export default function App() {
             </nav>
           </div>
 
-          <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto w-full flex-1">
-            {currentContent}
+          <div className="px-6 md:px-10 py-10 w-full flex-1">
+            <div className="max-w-5xl mx-auto w-full">
+              {currentContent}
+            </div>
           </div>
 
           <footer className="relative z-10 border-t border-border px-6 md:px-10 py-6">
@@ -568,7 +779,7 @@ export default function App() {
                   Dani Moscatelli
                 </a>{" "}
                 <span aria-hidden className="mx-1 text-muted-foreground/60">•</span>{" "}
-                Experience Design Studio. All rights reserved.
+                {t("Experience Design Studio. All rights reserved.", "Experience Design Studio. Todos os direitos reservados.")}
               </p>
             </div>
           </footer>
@@ -589,5 +800,13 @@ export default function App() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <I18nProvider>
+      <AppShell />
+    </I18nProvider>
   );
 }

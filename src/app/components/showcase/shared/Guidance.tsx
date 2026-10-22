@@ -1,5 +1,6 @@
 import React from "react";
 import { Check, X, Info } from "lucide-react";
+import { useI18n } from "../../../i18n";
 
 export const display = "font-[family-name:var(--font-display)]";
 
@@ -36,15 +37,16 @@ export function Callout({ title, children }: { title: string; children: React.Re
 }
 
 export function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
+  const { t } = useI18n();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
       {[
-        { title: "Do", items: dos, Icon: Check },
-        { title: "Don't", items: donts, Icon: X },
+        { title: "Do", label: t("Do", "Faça"), items: dos, Icon: Check },
+        { title: "Don't", label: t("Don't", "Não faça"), items: donts, Icon: X },
       ].map(col => (
         <Panel key={col.title} className="p-5">
           <p className="flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-foreground mb-3">
-            <col.Icon className="h-3.5 w-3.5 text-primary" aria-hidden /> {col.title}
+            <col.Icon className="h-3.5 w-3.5 text-primary" aria-hidden /> {col.label}
           </p>
           <ul className="space-y-2">
             {col.items.map(i => (

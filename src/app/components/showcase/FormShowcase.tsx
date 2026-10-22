@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { useI18n } from "../../i18n";
 import {
   Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload,
   Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
@@ -112,6 +113,8 @@ function InputField({
 }
 
 export function FormShowcase() {
+  const { t } = useI18n();
+  const formTokenGroups = getFormTokenGroups(t);
   const [showPwd, setShowPwd] = useState(false);
   const [checkA, setCheckA] = useState<boolean | "indeterminate">(true);
   const [checkB, setCheckB] = useState<boolean | "indeterminate">(false);
@@ -126,34 +129,34 @@ export function FormShowcase() {
 
       {/* ── BUTTONS ── */}
       <section id="buttons">
-        <SectionHeader title="Buttons" description="Consistent button hierarchy. Crimson for primary CTAs, outline for secondary, ghost for tertiary." />
+        <SectionHeader title={t("Buttons", "Botões")} description={t("Consistent button hierarchy. Crimson for primary CTAs, outline for secondary, ghost for tertiary.", "Hierarquia de botões consistente. Crimson para CTAs primários, outline para secundários, ghost para terciários.")} />
 
-        <SubSection title="Variants">
+        <SubSection title={t("Variants", "Variantes")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
-              <Btn variant="primary" icon={<Zap className="h-4 w-4" />}>Primary CTA</Btn>
-              <Btn variant="outline">Outline</Btn>
-              <Btn variant="secondary">Secondary</Btn>
+              <Btn variant="primary" icon={<Zap className="h-4 w-4" />}>{t("Primary CTA", "CTA primário")}</Btn>
+              <Btn variant="outline">{t("Outline", "Contorno")}</Btn>
+              <Btn variant="secondary">{t("Secondary", "Secundário")}</Btn>
               <Btn variant="ghost">Ghost</Btn>
-              <Btn variant="crimson-outline">Crimson Outline</Btn>
-              <Btn variant="primary" disabled>Disabled</Btn>
-              <Btn variant="primary" loading onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}>Loading</Btn>
+              <Btn variant="crimson-outline">{t("Crimson Outline", "Contorno Crimson")}</Btn>
+              <Btn variant="primary" disabled>{t("Disabled", "Desabilitado")}</Btn>
+              <Btn variant="primary" loading onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}>{t("Loading", "Carregando")}</Btn>
             </div>
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Sizes">
+        <SubSection title={t("Sizes", "Tamanhos")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
-              <Btn size="sm">Small</Btn>
-              <Btn size="md">Medium</Btn>
-              <Btn size="lg">Large</Btn>
-              <Btn size="xl">Extra Large</Btn>
+              <Btn size="sm">{t("Small", "Pequeno")}</Btn>
+              <Btn size="md">{t("Medium", "Médio")}</Btn>
+              <Btn size="lg">{t("Large", "Grande")}</Btn>
+              <Btn size="xl">{t("Extra Large", "Extra grande")}</Btn>
             </div>
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Icon Buttons">
+        <SubSection title={t("Icon Buttons", "Botões de ícone")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
               <Btn size="icon-sm" variant="outline" icon={<Plus className="h-4 w-4" />} iconOnly />
@@ -167,14 +170,14 @@ export function FormShowcase() {
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Compound Buttons">
+        <SubSection title={t("Compound Buttons", "Botões compostos")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
-              <Btn variant="primary" icon={<Send className="h-4 w-4" />}>Send Report</Btn>
-              <Btn variant="outline" icon={<Upload className="h-4 w-4" />}>Upload File</Btn>
-              <Btn variant="ghost" icon={<Star className="h-4 w-4" />}>Favorite</Btn>
-              <Btn variant="outline" size="lg" icon={<Plus className="h-4 w-4" />}>New Project</Btn>
-              <Btn variant="primary" size="lg" icon={<Check className="h-4 w-4" />}>Confirm</Btn>
+              <Btn variant="primary" icon={<Send className="h-4 w-4" />}>{t("Send Report", "Enviar relatório")}</Btn>
+              <Btn variant="outline" icon={<Upload className="h-4 w-4" />}>{t("Upload File", "Enviar arquivo")}</Btn>
+              <Btn variant="ghost" icon={<Star className="h-4 w-4" />}>{t("Favorite", "Favoritar")}</Btn>
+              <Btn variant="outline" size="lg" icon={<Plus className="h-4 w-4" />}>{t("New Project", "Novo projeto")}</Btn>
+              <Btn variant="primary" size="lg" icon={<Check className="h-4 w-4" />}>{t("Confirm", "Confirmar")}</Btn>
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -182,26 +185,26 @@ export function FormShowcase() {
 
       {/* ── INPUTS ── */}
       <section id="inputs">
-        <SectionHeader title="Form Controls" description="Clean, accessible form inputs with consistent styling across all states." />
+        <SectionHeader title={t("Form Controls", "Controles de formulário")} description={t("Clean, accessible form inputs with consistent styling across all states.", "Campos de formulário limpos e acessíveis, com estilo consistente em todos os estados.")} />
 
-        <SubSection title="Text Inputs">
+        <SubSection title={t("Text Inputs", "Campos de texto")}>
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <InputField label="Default Input" placeholder="Enter text..." />
-              <InputField label="With Icon" placeholder="Search anything..." leftIcon={<Search className="h-4 w-4" />} />
+              <InputField label={t("Default Input", "Campo padrão")} placeholder={t("Enter text...", "Digite um texto...")} />
+              <InputField label={t("With Icon", "Com ícone")} placeholder={t("Search anything...", "Busque qualquer coisa...")} leftIcon={<Search className="h-4 w-4" />} />
               <InputField
-                label="Password"
+                label={t("Password", "Senha")}
                 type={showPwd ? "text" : "password"}
-                placeholder="Enter password..."
+                placeholder={t("Enter password...", "Digite a senha...")}
                 rightElement={
                   <button onClick={() => setShowPwd(!showPwd)} className="text-muted-foreground hover:text-foreground">
                     {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                   </button>
                 }
               />
-              <InputField label="With Hint" placeholder="Enter your email..." type="email" hint="We'll never share your email with anyone." />
-              <InputField label="Error State" placeholder="Enter value..." error="This field is required." />
-              <InputField label="Disabled" placeholder="Disabled input..." disabled />
+              <InputField label={t("With Hint", "Com dica")} placeholder={t("Enter your email...", "Digite seu e-mail...")} type="email" hint={t("We'll never share your email with anyone.", "Nunca compartilharemos seu e-mail com ninguém.")} />
+              <InputField label={t("Error State", "Estado de erro")} placeholder={t("Enter value...", "Digite um valor...")} error={t("This field is required.", "Este campo é obrigatório.")} />
+              <InputField label={t("Disabled", "Desabilitado")} placeholder={t("Disabled input...", "Campo desabilitado...")} disabled />
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -210,18 +213,18 @@ export function FormShowcase() {
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">Message</label>
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Message", "Mensagem")}</label>
                 <textarea
-                  placeholder="Write your message here..."
+                  placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")}
                   rows={4}
                   className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">Notes</label>
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Notes", "Notas")}</label>
                 <textarea
-                  placeholder="Add notes..."
+                  placeholder={t("Add notes...", "Adicione notas...")}
                   rows={4}
                   className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
                   disabled
@@ -235,15 +238,15 @@ export function FormShowcase() {
         <SubSection title="Select">
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {["Default Select", "With Label"].map((lbl, i) => (
-                <div key={lbl} className="flex flex-col gap-1.5">
+              {[t("Default Select", "Select padrão"), t("With Label", "Com rótulo")].map((lbl, i) => (
+                <div key={i} className="flex flex-col gap-1.5">
                   <label className="text-[0.875rem] font-medium text-foreground">{lbl}</label>
                   <div className="relative">
                     <select className="w-full appearance-none bg-card border border-border text-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
-                      <option>Select an option...</option>
-                      <option>Option Alpha</option>
-                      <option>Option Beta</option>
-                      <option>Option Gamma</option>
+                      <option>{t("Select an option...", "Selecione uma opção...")}</option>
+                      <option>{t("Option Alpha", "Opção Alfa")}</option>
+                      <option>{t("Option Beta", "Opção Beta")}</option>
+                      <option>{t("Option Gamma", "Opção Gama")}</option>
                     </select>
                     <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                   </div>
@@ -257,11 +260,11 @@ export function FormShowcase() {
           <ShowcaseCard>
             <div className="flex flex-wrap gap-8">
               {[
-                { label: "Checked", state: checkA, setter: setCheckA },
-                { label: "Unchecked", state: checkB, setter: setCheckB },
-                { label: "Indeterminate", state: checkC, setter: setCheckC },
-              ].map(({ label, state, setter }) => (
-                <label key={label} className="flex items-center gap-2.5 cursor-pointer select-none group">
+                { id: "checked", label: t("Checked", "Marcado"), state: checkA, setter: setCheckA },
+                { id: "unchecked", label: t("Unchecked", "Desmarcado"), state: checkB, setter: setCheckB },
+                { id: "indeterminate", label: t("Indeterminate", "Indeterminado"), state: checkC, setter: setCheckC },
+              ].map(({ id, label, state, setter }) => (
+                <label key={id} className="flex items-center gap-2.5 cursor-pointer select-none group">
                   <CheckboxPrimitive.Root
                     checked={state}
                     onCheckedChange={setter}
@@ -280,7 +283,7 @@ export function FormShowcase() {
               ))}
               <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
                 <div className="h-5 w-5 rounded-[5px] border border-border bg-card" />
-                <span className="text-[0.9375rem] text-foreground">Disabled</span>
+                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
             </div>
           </ShowcaseCard>
@@ -298,27 +301,27 @@ export function FormShowcase() {
                       >
                         {radio === val && <div className="h-2 w-2 rounded-full bg-primary" />}
                       </div>
-                      <span className="text-[0.9375rem] text-foreground">Option {val.toUpperCase()}</span>
+                      <span className="text-[0.9375rem] text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
                     </label>
                   </RadioGroupPrimitive.Item>
                 ))}
                 <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
                   <div className="h-5 w-5 rounded-full border-2 border-border" />
-                  <span className="text-[0.9375rem] text-foreground">Disabled</span>
+                  <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
                 </label>
               </div>
             </RadioGroupPrimitive.Root>
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Switch / Toggle">
+        <SubSection title={t("Switch / Toggle", "Switch / Toggle")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-8">
               {[
-                { label: "Notifications", state: swA, setter: setSwA },
-                { label: "Dark Mode", state: swB, setter: setSwB },
-              ].map(({ label, state, setter }) => (
-                <div key={label} className="flex items-center gap-3">
+                { id: "notifications", label: t("Notifications", "Notificações"), state: swA, setter: setSwA },
+                { id: "dark", label: t("Dark Mode", "Dark Mode"), state: swB, setter: setSwB },
+              ].map(({ id, label, state, setter }) => (
+                <div key={id} className="flex items-center gap-3">
                   <SwitchPrimitive.Root
                     checked={state}
                     onCheckedChange={setter}
@@ -335,19 +338,19 @@ export function FormShowcase() {
               ))}
               <div className="flex items-center gap-3 opacity-40 cursor-not-allowed">
                 <div className="h-6 w-11 rounded-full bg-switch-background" />
-                <span className="text-[0.9375rem] text-foreground">Disabled</span>
+                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
               </div>
             </div>
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Search Bar">
+        <SubSection title={t("Search Bar", "Barra de busca")}>
           <ShowcaseCard>
             <div className="max-w-md">
               <div className="relative">
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input
-                  placeholder="Search anything..."
+                  placeholder={t("Search anything...", "Busque qualquer coisa...")}
                   className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[12px] pl-10 pr-4 py-3 text-[0.9375rem] outline-none transition-all duration-150 focus:ring-2 focus:ring-ring focus:border-primary/60"
                   style={{ boxShadow: "var(--shadow-sm)" }}
                 />
@@ -364,7 +367,7 @@ export function FormShowcase() {
       <section id="buttons-tokens" className="space-y-5">
         <div>
           <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Tokens</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">CSS custom properties used by buttons and form controls.</p>
+          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
         </div>
         <TokenTable groups={formTokenGroups} />
       </section>
@@ -372,46 +375,48 @@ export function FormShowcase() {
   );
 }
 
-const formTokenGroups: TokenGroup[] = [
+function getFormTokenGroups(t: (en: string, pt: string) => string): TokenGroup[] {
+  return [
   {
-    group: "Button Colors",
+    group: t("Button Colors", "Cores de botão"),
     tokens: [
-      { name: "--primary",               description: "Primary button background",     light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--primary-foreground",    description: "Text on primary button",        light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--primary-hover",         description: "Hover state of primary",        light: "#D44D4D", dark: "#DC5E5E", isColor: true },
-      { name: "--secondary",             description: "Secondary button background",   light: "#E4E9F0", dark: "rgba(40,48,67,0.80)", isColor: true },
-      { name: "--secondary-foreground",  description: "Text on secondary button",      light: "#131A27", dark: "#E4E9F0", isColor: true },
-      { name: "--muted",                 description: "Ghost button hover background", light: "#E8EDF3", dark: "rgba(40,48,67,0.60)", isColor: true },
-      { name: "--destructive",           description: "Danger / delete button",        light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--destructive-foreground",description: "Text on destructive button",    light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
+      { name: "--primary",               description: t("Primary button background", "Fundo do botão primário"),     light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--primary-foreground",    description: t("Text on primary button", "Texto no botão primário"),        light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
+      { name: "--primary-hover",         description: t("Hover state of primary", "Estado hover do primário"),        light: "#D44D4D", dark: "#DC5E5E", isColor: true },
+      { name: "--secondary",             description: t("Secondary button background", "Fundo do botão secundário"),   light: "#E4E9F0", dark: "rgba(40,48,67,0.80)", isColor: true },
+      { name: "--secondary-foreground",  description: t("Text on secondary button", "Texto no botão secundário"),      light: "#131A27", dark: "#E4E9F0", isColor: true },
+      { name: "--muted",                 description: t("Ghost button hover background", "Fundo de hover do botão ghost"), light: "#E8EDF3", dark: "rgba(40,48,67,0.60)", isColor: true },
+      { name: "--destructive",           description: t("Danger / delete button", "Botão de perigo / excluir"),        light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--destructive-foreground",description: t("Text on destructive button", "Texto no botão destrutivo"),    light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
     ],
   },
   {
-    group: "Input & Form",
+    group: t("Input & Form", "Input e formulário"),
     tokens: [
-      { name: "--input",            description: "Input border color",          light: "transparent",         dark: "rgba(19,26,39,0.60)", isColor: true },
-      { name: "--input-background", description: "Input field background",      light: "#FFFFFF",             dark: "rgba(19,26,39,0.60)", isColor: true },
-      { name: "--ring",             description: "Focus ring",                  light: "rgba(212,77,77,0.35)",dark: "rgba(212,77,77,0.40)", isColor: true },
-      { name: "--border",           description: "Default border",              light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.07)", isColor: true },
-      { name: "--border-strong",    description: "Hover / active border",       light: "rgba(19,26,39,0.16)", dark: "rgba(255,255,255,0.12)", isColor: true },
-      { name: "--foreground",       description: "Input text",                  light: "#131A27",             dark: "#E4E9F0", isColor: true },
-      { name: "--muted-foreground", description: "Placeholder text",            light: "#627288",             dark: "#8898B0", isColor: true },
+      { name: "--input",            description: t("Input border color", "Cor da borda do input"),          light: "transparent",         dark: "rgba(19,26,39,0.60)", isColor: true },
+      { name: "--input-background", description: t("Input field background", "Fundo do campo de input"),      light: "#FFFFFF",             dark: "rgba(19,26,39,0.60)", isColor: true },
+      { name: "--ring",             description: t("Focus ring", "Anel de foco"),                  light: "rgba(212,77,77,0.35)",dark: "rgba(212,77,77,0.40)", isColor: true },
+      { name: "--border",           description: t("Default border", "Borda padrão"),              light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.07)", isColor: true },
+      { name: "--border-strong",    description: t("Hover / active border", "Borda de hover / ativo"),       light: "rgba(19,26,39,0.16)", dark: "rgba(255,255,255,0.12)", isColor: true },
+      { name: "--foreground",       description: t("Input text", "Texto do input"),                  light: "#131A27",             dark: "#E4E9F0", isColor: true },
+      { name: "--muted-foreground", description: t("Placeholder text", "Texto de placeholder"),            light: "#627288",             dark: "#8898B0", isColor: true },
     ],
   },
   {
-    group: "Shape",
+    group: t("Shape", "Forma"),
     tokens: [
-      { name: "--radius-sm", description: "Small inputs / badges",     light: "calc(0.75rem - 4px)" },
-      { name: "--radius-md", description: "Buttons, text inputs",      light: "0.75rem" },
-      { name: "--radius-lg", description: "Large controls",            light: "calc(0.75rem + 4px)" },
+      { name: "--radius-sm", description: t("Small inputs / badges", "Inputs pequenos / badges"),     light: "calc(0.75rem - 4px)" },
+      { name: "--radius-md", description: t("Buttons, text inputs", "Botões, campos de texto"),      light: "0.75rem" },
+      { name: "--radius-lg", description: t("Large controls", "Controles grandes"),            light: "calc(0.75rem + 4px)" },
     ],
   },
   {
-    group: "Typography",
+    group: t("Typography", "Tipografia"),
     tokens: [
-      { name: "--font-sans",            description: "UI text / button labels", light: "Plus Jakarta Sans" },
-      { name: "--font-weight-semibold", description: "Button label weight",     light: "600" },
-      { name: "--font-weight-medium",   description: "Input label weight",      light: "500" },
+      { name: "--font-sans",            description: t("UI text / button labels", "Texto de UI / rótulos de botão"), light: "Plus Jakarta Sans" },
+      { name: "--font-weight-semibold", description: t("Button label weight", "Peso do rótulo do botão"),     light: "600" },
+      { name: "--font-weight-medium",   description: t("Input label weight", "Peso do rótulo do input"),      light: "500" },
     ],
   },
 ];
+}

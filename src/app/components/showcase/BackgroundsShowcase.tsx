@@ -3,6 +3,7 @@ import React, {
 } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { useI18n } from "../../i18n";
 import {
   Zap, Shield, BarChart2, TrendingUp, Package,
   Check, ArrowRight,
@@ -107,11 +108,12 @@ function GradientAnimBg({
 function Swatch({
   entry, active, disabled, onToggle,
 }: { entry: PaletteEntry; active: boolean; disabled: boolean; onToggle: () => void }) {
+  const { t } = useI18n();
   const isWhite = entry.display === "#FFFFFF";
   return (
     <button
       onClick={onToggle}
-      title={`${entry.label}${active ? " — click to remove" : disabled ? " — maximum reached" : " — click to add"}`}
+      title={`${entry.label}${active ? t(" — click to remove", " — clique para remover") : disabled ? t(" — maximum reached", " — máximo atingido") : t(" — click to add", " — clique para adicionar")}`}
       style={{
         width: 24, height: 24, borderRadius: "50%", flexShrink: 0,
         background: entry.display,
@@ -143,6 +145,7 @@ function Swatch({
 function GradientControls({
   dark, activeIds, onToggle,
 }: { dark: boolean; activeIds: string[]; onToggle: (id: string) => void }) {
+  const { t } = useI18n();
   const palette    = dark ? DARK_PALETTE : LIGHT_PALETTE;
   const graphite   = palette.filter(e => e.group === "Graphite");
   const crimson    = palette.filter(e => e.group === "Crimson");
@@ -153,14 +156,14 @@ function GradientControls({
       {/* Header */}
       <div className="flex items-center justify-between">
         <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-          Blob colors
+          {t("Blob colors", "Cores dos blobs")}
         </span>
         <span className={`text-[0.625rem] font-bold px-2 py-0.5 rounded-full ${
           maxReached
             ? "bg-destructive/10 text-destructive"
             : "bg-muted text-muted-foreground"
         }`}>
-          {activeIds.length}/{MAX_BLOBS} ativas
+          {activeIds.length}/{MAX_BLOBS} {t("active", "ativas")}
         </span>
       </div>
 
@@ -190,6 +193,7 @@ function GradientControls({
 
 /* Dedicated card for Gradient Animation — combines preview + controls + docs */
 function GradientAnimCard() {
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
 
   const [activeIds, setActiveIds] = useState<string[]>(() =>
@@ -215,19 +219,22 @@ function GradientAnimCard() {
   }, []);
 
   const name        = "Gradient Animation";
-  const description = "Color blobs that move to create an organic atmosphere. Select up to 8 colors from the graphite + crimson palette directly below.";
-  const technique   = "motion/react blobs (circular divs with filter: blur) animated in a loop with repeatType 'mirror'. 10 predefined trajectory slots. Select and combine palette colors freely — each active color takes one slot.";
+  const description = t("Color blobs that move to create an organic atmosphere. Select up to 8 colors from the graphite + crimson palette directly below.", "Blobs de cor que se movem para criar uma atmosfera orgânica. Selecione até 8 cores da paleta graphite + crimson logo abaixo.");
+  const technique   = t("motion/react blobs (circular divs with filter: blur) animated in a loop with repeatType 'mirror'. 10 predefined trajectory slots. Select and combine palette colors freely — each active color takes one slot.", "Blobs com motion/react (divs circulares com filter: blur) animados em loop com repeatType 'mirror'. 10 slots de trajetória predefinidos. Selecione e combine as cores da paleta livremente — cada cor ativa ocupa um slot.");
   const tags: EffectTag[] = ["Animado"];
-  const components  = ["Hero section", "Login page", "Splash screen", "Product landing"];
+  const components  = [
+    t("Hero section", "Seção hero"), t("Login page", "Página de login"),
+    t("Splash screen", "Tela de splash"), t("Product landing", "Landing de produto"),
+  ];
   const useWhen     = [
-    "Product hero with a premium tone and immersive visuals.",
-    "When you want to create energy without decorative elements.",
-    "High-value conversion pages (Enterprise, Custom pricing).",
+    t("Product hero with a premium tone and immersive visuals.", "Hero de produto com tom premium e visual imersivo."),
+    t("When you want to create energy without decorative elements.", "Quando você quer criar energia sem elementos decorativos."),
+    t("High-value conversion pages (Enterprise, Custom pricing).", "Páginas de conversão de alto valor (Enterprise, preço personalizado)."),
   ];
   const avoidWhen   = [
-    "Very dense content — the motion competes with reading.",
-    "Use across multiple sections — reserve for the hero only.",
-    "Marca que prioriza austeridade absoluta.",
+    t("Very dense content — the motion competes with reading.", "Conteúdo muito denso — o movimento compete com a leitura."),
+    t("Use across multiple sections — reserve for the hero only.", "Uso em várias seções — reserve apenas para o hero."),
+    t("Brands that prioritize absolute austerity.", "Marcas que priorizam austeridade absoluta."),
   ];
 
   return (
@@ -248,21 +255,21 @@ function GradientAnimCard() {
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5 leading-relaxed">{description}</p>
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
-            {tags.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
-                style={{ background: tagColors[t].bg, color: tagColors[t].color }}>
-                {t}
+            {tags.map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
+                {bi(TAG_LABEL[tg])}
               </span>
             ))}
           </div>
         </div>
 
         <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
-          {(["spec", "usage"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)}
+          {(["spec", "usage"] as const).map(k => (
+            <button key={k} onClick={() => setTab(k)}
               className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors
-                ${tab === t ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {t === "spec" ? "Technique" : "When to use"}
+                ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
+              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
           ))}
         </div>
@@ -270,11 +277,11 @@ function GradientAnimCard() {
         {tab === "spec" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Implementation</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
               <p className="text-[0.8125rem] text-foreground/80 mt-0.5 leading-relaxed">{technique}</p>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Compatible components</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {components.map(c => (
                   <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
@@ -287,7 +294,7 @@ function GradientAnimCard() {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ Use when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {useWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
@@ -297,7 +304,7 @@ function GradientAnimCard() {
               </ul>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ Avoid when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {avoidWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
@@ -341,16 +348,16 @@ const CANVAS_PRESETS: CanvasPreset[] = [
 ];
 
 const DOT_SIZES = [
-  { id: "xs", label: "XP", px: 2 },
-  { id: "sm", label: "P",  px: 4 },
-  { id: "md", label: "M",  px: 6 },
-  { id: "lg", label: "G",  px: 10 },
+  { id: "xs", label: { en: "XS", pt: "XP" }, px: 2 },
+  { id: "sm", label: { en: "S",  pt: "P" },  px: 4 },
+  { id: "md", label: { en: "M",  pt: "M" },  px: 6 },
+  { id: "lg", label: { en: "L",  pt: "G" },  px: 10 },
 ];
 
 const ANIM_SPEEDS = [
-  { id: "slow",   label: "Lenta",  val: 2 },
-  { id: "normal", label: "Normal", val: 4 },
-  { id: "fast",   label: "Fast", val: 8 },
+  { id: "slow",   label: { en: "Slow",   pt: "Lenta" },  val: 2 },
+  { id: "normal", label: { en: "Normal", pt: "Normal" }, val: 4 },
+  { id: "fast",   label: { en: "Fast",   pt: "Rápida" }, val: 8 },
 ];
 
 /* Animated dot canvas — mounted via AnimatePresence on card hover */
@@ -495,6 +502,7 @@ function RevealCardItem({
 
 /* Dedicated card with color, size and speed controls */
 function CanvasRevealCard() {
+  const { t, bi, lang } = useI18n();
   const dark = useDarkMode();
   const [presetId,  setPresetId]  = useState("crimson");
   const [dotSizeId, setDotSizeId] = useState("sm");
@@ -510,9 +518,9 @@ function CanvasRevealCard() {
   const tags: EffectTag[] = ["Interativo", "Canvas"];
 
   const demoCards: RevealCardDef[] = [
-    { title: "Security",      icon: <Shield     style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#0D1119" },
-    { title: "Performance",    icon: <Zap        style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#131A27" },
-    { title: "Escalabilidade", icon: <TrendingUp style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#1C2333" },
+    { title: t("Security", "Segurança"),      icon: <Shield     style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#0D1119" },
+    { title: t("Performance", "Performance"),    icon: <Zap        style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#131A27" },
+    { title: t("Scalability", "Escalabilidade"), icon: <TrendingUp style={{ width:38, height:38, color:"rgba(255,255,255,0.45)" }} />, bg: "#1C2333" },
   ];
 
   return (
@@ -522,7 +530,7 @@ function CanvasRevealCard() {
       <div className="grid grid-cols-3">
         {demoCards.map(card => (
           <RevealCardItem
-            key={card.title}
+            key={card.bg}
             card={card}
             colors={preset.colors}
             dotSize={dotOpt.px}
@@ -534,7 +542,7 @@ function CanvasRevealCard() {
       {/* Controls */}
       <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Cores</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1.5">
             {CANVAS_PRESETS.map(p => (
               <button key={p.id} onClick={() => setPresetId(p.id)}
@@ -556,7 +564,7 @@ function CanvasRevealCard() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Tamanho</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Size", "Tamanho")}</span>
           <div className="flex gap-1">
             {DOT_SIZES.map(s => (
               <button key={s.id} onClick={() => setDotSizeId(s.id)}
@@ -566,14 +574,14 @@ function CanvasRevealCard() {
                   background: dotSizeId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: dotSizeId === s.id ? "#D44D4D" : idle,
                 }}>
-                {s.label}
+                {bi(s.label)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Velocidade</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
             {ANIM_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
@@ -583,7 +591,7 @@ function CanvasRevealCard() {
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: speedId === s.id ? "#D44D4D" : idle,
                 }}>
-                {s.label}
+                {bi(s.label)}
               </button>
             ))}
           </div>
@@ -596,22 +604,22 @@ function CanvasRevealCard() {
           <div>
             <h3 className="text-[0.9375rem] font-black text-foreground tracking-[-0.025em]">Canvas Reveal</h3>
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5 leading-relaxed">
-              Hover over the cards. Animated colored dots fill the card on hover — the icon rises and the title appears.
+              {t("Hover over the cards. Animated colored dots fill the card on hover — the icon rises and the title appears.", "Passe o mouse sobre os cards. Pontos coloridos animados preenchem o card no hover — o ícone sobe e o título aparece.")}
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
-            {tags.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
-                style={{ background: tagColors[t].bg, color: tagColors[t].color }}>{t}</span>
+            {tags.map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
         </div>
 
         <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
-          {(["spec", "usage"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)}
-              className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors ${tab === t ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {t === "spec" ? "Technique" : "When to use"}
+          {(["spec", "usage"] as const).map(k => (
+            <button key={k} onClick={() => setTab(k)}
+              className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
+              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
           ))}
         </div>
@@ -619,15 +627,15 @@ function CanvasRevealCard() {
         {tab === "spec" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Implementation</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
               <p className="text-[0.8125rem] text-foreground/80 mt-0.5 leading-relaxed">
-                2D canvas with a dot grid — each dot has a random <code className="text-primary text-[0.6875rem]">phase</code> on a sine wave, creating independent pulsing. <code className="text-primary text-[0.6875rem]">AnimatePresence</code> mounts/unmounts the canvas on hover with a fade. Content uses <code className="text-primary text-[0.6875rem]">motion.div</code> for the title slide.
+                {lang === "pt" ? <>Canvas 2D com uma grade de pontos — cada ponto tem uma <code className="text-primary text-[0.6875rem]">phase</code> aleatória em uma onda senoidal, criando pulsos independentes. <code className="text-primary text-[0.6875rem]">AnimatePresence</code> monta/desmonta o canvas no hover com um fade. O conteúdo usa <code className="text-primary text-[0.6875rem]">motion.div</code> para o deslize do título.</> : <>2D canvas with a dot grid — each dot has a random <code className="text-primary text-[0.6875rem]">phase</code> on a sine wave, creating independent pulsing. <code className="text-primary text-[0.6875rem]">AnimatePresence</code> mounts/unmounts the canvas on hover with a fade. Content uses <code className="text-primary text-[0.6875rem]">motion.div</code> for the title slide.</>}
               </p>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Compatible components</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
-                {["Feature cards", "Pricing cards", "Testimonials", "Product showcase"].map(c => (
+                {[t("Feature cards", "Cards de funcionalidades"), t("Pricing cards", "Cards de preços"), t("Testimonials", "Depoimentos"), t("Product showcase", "Vitrine de produto")].map(c => (
                   <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
                 ))}
               </div>
@@ -638,9 +646,9 @@ function CanvasRevealCard() {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ Use when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
-                {["Feature cards or product differentiators.", "Exploration sections where the user has time.", "When you want to create a wow moment without distraction."].map((w, i) => (
+                {[t("Feature cards or product differentiators.", "Cards de funcionalidades ou diferenciais do produto."), t("Exploration sections where the user has time.", "Seções de exploração em que o usuário tem tempo."), t("When you want to create a wow moment without distraction.", "Quando você quer criar um momento uau sem distração.")].map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
                     <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#4fb57b" }} />{w}
                   </li>
@@ -648,9 +656,9 @@ function CanvasRevealCard() {
               </ul>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ Avoid when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
               <ul className="mt-1.5 space-y-1">
-                {["Mobile — hover doesn't exist on touch.", "Cards with a lot of internal information.", "Contexts with a reduced-motion preference."].map((w, i) => (
+                {[t("Mobile — hover doesn't exist on touch.", "Mobile — hover não existe em telas touch."), t("Cards with a lot of internal information.", "Cards com muita informação interna."), t("Contexts with a reduced-motion preference.", "Contextos com preferência por movimento reduzido.")].map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
                     <span className="text-destructive shrink-0 mt-0.5 text-[0.75rem]">✕</span>{w}
                   </li>
@@ -693,9 +701,9 @@ const BB_PALETTES: BBPalette[] = [
     slow: [[20,60,70],[30,70,40],[60,20,70],[20,50,60]] },
 ];
 const BB_SPEEDS = [
-  { id: "slow",   label: "Lenta",  mul: 0.45, interval: 6000 },
-  { id: "normal", label: "Normal", mul: 1.0,  interval: 3800 },
-  { id: "fast",   label: "Fast", mul: 2.2,  interval: 1900 },
+  { id: "slow",   label: { en: "Slow",   pt: "Lenta" },  mul: 0.45, interval: 6000 },
+  { id: "normal", label: { en: "Normal", pt: "Normal" }, mul: 1.0,  interval: 3800 },
+  { id: "fast",   label: { en: "Fast",   pt: "Rápida" }, mul: 2.2,  interval: 1900 },
 ] as const;
 type BBSpeedId = typeof BB_SPEEDS[number]["id"];
 type BBCfg = { speedMul: number; bangInterval: number; palette: BBPalette };
@@ -720,14 +728,14 @@ const BGL_PALETTES: BglPalette[] = [
     vRgb: [[40,48,67],[55,65,85],[73,86,105],[30,38,57]] },
 ];
 const BGL_SPEEDS = [
-  { id: "slow",   label: "Lenta",  mul: 0.4 },
-  { id: "normal", label: "Normal", mul: 1.0 },
-  { id: "fast",   label: "Fast", mul: 2.5 },
+  { id: "slow",   label: { en: "Slow",   pt: "Lenta" },  mul: 0.4 },
+  { id: "normal", label: { en: "Normal", pt: "Normal" }, mul: 1.0 },
+  { id: "fast",   label: { en: "Fast",   pt: "Rápida" }, mul: 2.5 },
 ] as const;
 const BGL_DENSITIES = [
-  { id: "low",    label: "Baixa",  val: 0.4 },
-  { id: "normal", label: "Normal", val: 1.0 },
-  { id: "high",   label: "Alta",   val: 2.2 },
+  { id: "low",    label: { en: "Low",    pt: "Baixa" },  val: 0.4 },
+  { id: "normal", label: { en: "Normal", pt: "Normal" }, val: 1.0 },
+  { id: "high",   label: { en: "High",   pt: "Alta" },   val: 2.2 },
 ] as const;
 type BglSpeedId   = typeof BGL_SPEEDS[number]["id"];
 type BglDensityId = typeof BGL_DENSITIES[number]["id"];
@@ -1144,6 +1152,7 @@ function BackgroundLinesBg({ dark, cfg, children }: { dark: boolean; cfg: BglCfg
 ══════════════════════════════════════════════════════════ */
 
 function BigBangCard() {
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [speedId,   setSpeedId]   = useState<BBSpeedId>("normal");
   const [paletteId, setPaletteId] = useState("crimson");
@@ -1167,7 +1176,7 @@ function BigBangCard() {
       {/* Controls */}
       <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Velocidade</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
             {BB_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
@@ -1177,14 +1186,14 @@ function BigBangCard() {
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: speedId === s.id ? "#D44D4D" : idle,
                 }}>
-                {s.label}
+                {bi(s.label)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Cores</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1.5">
             {BB_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
@@ -1212,18 +1221,18 @@ function BigBangCard() {
           <div>
             <h3 className="text-[0.9375rem] font-black text-foreground tracking-[-0.025em]">{ef.name}</h3>
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5 leading-relaxed">
-              Cyclic cosmic explosion: particles burst from the center with concentric shockwaves, light trails and a nebular glow. Conveys scale, power and impact.
+              {t("Cyclic cosmic explosion: particles burst from the center with concentric shockwaves, light trails and a nebular glow. Conveys scale, power and impact.", "Explosão cósmica cíclica: partículas saem do centro com ondas de choque concêntricas, rastros de luz e um brilho nebular. Transmite escala, poder e impacto.")}
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
-            {ef.tags.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
-                style={{ background: tagColors[t].bg, color: tagColors[t].color }}>{t}</span>
+            {ef.tags.map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
         </div>
         <p className="text-[0.75rem] text-muted-foreground/70 leading-relaxed">
-          2D canvas with a radially fired particle system. Shockwaves with growing radius and decreasing opacity. Core glow via radialGradient + persistent nebula. Line trail between previous and current position.
+          {t("2D canvas with a radially fired particle system. Shockwaves with growing radius and decreasing opacity. Core glow via radialGradient + persistent nebula. Line trail between previous and current position.", "Canvas 2D com um sistema de partículas disparadas radialmente. Ondas de choque com raio crescente e opacidade decrescente. Brilho do núcleo via radialGradient + nebulosa persistente. Rastro em linha entre a posição anterior e a atual.")}
         </p>
       </div>
     </div>
@@ -1235,6 +1244,7 @@ function BigBangCard() {
 ══════════════════════════════════════════════════════════ */
 
 function BgLinesCard() {
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [speedId,   setSpeedId]   = useState<BglSpeedId>("normal");
   const [paletteId, setPaletteId] = useState("crimson");
@@ -1260,7 +1270,7 @@ function BgLinesCard() {
       {/* Controls */}
       <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Velocidade</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
             {BGL_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
@@ -1270,14 +1280,14 @@ function BgLinesCard() {
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: speedId === s.id ? "#D44D4D" : idle,
                 }}>
-                {s.label}
+                {bi(s.label)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Densidade</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Density", "Densidade")}</span>
           <div className="flex gap-1">
             {BGL_DENSITIES.map(d => (
               <button key={d.id} onClick={() => setDensityId(d.id)}
@@ -1287,14 +1297,14 @@ function BgLinesCard() {
                   background: densityId === d.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: densityId === d.id ? "#D44D4D" : idle,
                 }}>
-                {d.label}
+                {bi(d.label)}
               </button>
             ))}
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Cores</span>
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1.5">
             {BGL_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
@@ -1322,18 +1332,18 @@ function BgLinesCard() {
           <div>
             <h3 className="text-[0.9375rem] font-black text-foreground tracking-[-0.025em]">{ef.name}</h3>
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5 leading-relaxed">
-              Horizontal streams and vertical drops with lit gradients, scanner beam and sparkles at intersections. Evokes data flow, pipelines and infrastructure.
+              {t("Horizontal streams and vertical drops with lit gradients, scanner beam and sparkles at intersections. Evokes data flow, pipelines and infrastructure.", "Fluxos horizontais e gotas verticais com gradientes luminosos, feixe de scanner e faíscas nas interseções. Evoca fluxo de dados, pipelines e infraestrutura.")}
             </p>
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
-            {ef.tags.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
-                style={{ background: tagColors[t].bg, color: tagColors[t].color }}>{t}</span>
+            {ef.tags.map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
         </div>
         <p className="text-[0.75rem] text-muted-foreground/70 leading-relaxed">
-          2D canvas with a cell grid. H-streams with a tail gradient; V-drops with a bright tip. Sinusoidal scanner beam. Sparks at intersections. Perimeter radial vignette.
+          {t("2D canvas with a cell grid. H-streams with a tail gradient; V-drops with a bright tip. Sinusoidal scanner beam. Sparks at intersections. Perimeter radial vignette.", "Canvas 2D com grade de células. H-streams com gradiente na cauda; V-drops com ponta brilhante. Feixe de scanner senoidal. Faíscas nas interseções. Vinheta radial no perímetro.")}
         </p>
       </div>
     </div>
@@ -1351,6 +1361,7 @@ function BgLinesCard() {
 ══════════════════════════════════════════════════════════ */
 
 function HeroContent({ dark }: { dark: boolean }) {
+  const { t, lang } = useI18n();
   const c = dark ? "#E4E9F0" : "#131A27";
   const m = dark ? "#627288" : "#8898B0";
   return (
@@ -1358,20 +1369,20 @@ function HeroContent({ dark }: { dark: boolean }) {
       <div style={{ maxWidth: 280 }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 10px", borderRadius: 99, border: `1px solid ${dark ? "rgba(255,255,255,0.15)" : "rgba(19,26,39,0.15)"}`, marginBottom: 14 }}>
           <span style={{ width: 6, height: 6, borderRadius: 99, background: "#D44D4D", display: "inline-block" }} />
-          <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: dark ? "rgba(255,255,255,0.6)" : "#627288", textTransform: "uppercase", letterSpacing: "0.06em" }}>v2.0 available</span>
+          <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: dark ? "rgba(255,255,255,0.6)" : "#627288", textTransform: "uppercase", letterSpacing: "0.06em" }}>{t("v2.0 available", "v2.0 disponível")}</span>
         </div>
         <h1 style={{ fontSize: "1.375rem", fontWeight: 900, color: c, lineHeight: 1.15, letterSpacing: "-0.03em", marginBottom: 10 }}>
-          The platform for<br />teams that ship.
+          {lang === "pt" ? <>A plataforma para<br />times que entregam.</> : <>The platform for<br />teams that ship.</>}
         </h1>
         <p style={{ fontSize: "0.8125rem", color: m, lineHeight: 1.6, marginBottom: 18 }}>
-          Deploy, observability and monitoring in one place.
+          {t("Deploy, observability and monitoring in one place.", "Deploy, observabilidade e monitoramento em um só lugar.")}
         </p>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 9, background: "#D44D4D", color: "#fff", fontSize: "0.75rem", fontWeight: 700, border: "none", cursor: "pointer" }}>
-            Get started <ArrowRight style={{ width: 12, height: 12 }} />
+            {t("Get started", "Começar")} <ArrowRight style={{ width: 12, height: 12 }} />
           </button>
           <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 9, border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(19,26,39,0.15)"}`, background: "transparent", color: dark ? "#8898B0" : "#627288", fontSize: "0.75rem", fontWeight: 600, cursor: "pointer" }}>
-            Ver demo
+            {t("View demo", "Ver demo")}
           </button>
         </div>
       </div>
@@ -1380,15 +1391,16 @@ function HeroContent({ dark }: { dark: boolean }) {
 }
 
 function StatsContent({ dark }: { dark: boolean }) {
+  const { t, lang } = useI18n();
   const m = dark ? "#627288" : "#8898B0";
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: 24 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 20, maxWidth: 300, width: "100%" }}>
         <h2 style={{ fontSize: "1.25rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27", letterSpacing: "-0.025em", textAlign: "center", lineHeight: 1.2 }}>
-          Hover to reveal<br />what's below.
+          {lang === "pt" ? <>Passe o mouse para revelar<br />o que está embaixo.</> : <>Hover to reveal<br />what's below.</>}
         </h2>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, width: "100%" }}>
-          {[{ v: "99.9%", l: "Uptime" }, { v: "50ms", l: "Latency" }, { v: "10k+", l: "Customers" }].map(s => (
+          {[{ v: "99.9%", l: "Uptime" }, { v: "50ms", l: t("Latency", "Latência") }, { v: "10k+", l: t("Customers", "Clientes") }].map(s => (
             <div key={s.l} style={{ textAlign: "center", padding: "10px 6px", borderRadius: 10, background: dark ? "rgba(19,26,39,0.60)" : "rgba(255,255,255,0.70)", backdropFilter: "blur(8px)", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(19,26,39,0.08)"}` }}>
               <div style={{ fontSize: "1rem", fontWeight: 900, color: "#D44D4D" }}>{s.v}</div>
               <div style={{ fontSize: "0.5625rem", color: m }}>{s.l}</div>
@@ -1401,18 +1413,19 @@ function StatsContent({ dark }: { dark: boolean }) {
 }
 
 function VortexContent({ dark }: { dark: boolean }) {
+  const { t, lang } = useI18n();
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: 24 }}>
       <div style={{ textAlign: "center" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 14px", borderRadius: 99, background: dark ? "rgba(212,77,77,0.15)" : "rgba(212,77,77,0.10)", border: `1px solid rgba(212,77,77,0.25)`, marginBottom: 14 }}>
           <Zap style={{ width: 12, height: 12, color: "#D44D4D" }} />
-          <span style={{ fontSize: "0.625rem", fontWeight: 700, color: "#D44D4D", textTransform: "uppercase", letterSpacing: "0.07em" }}>Processamento</span>
+          <span style={{ fontSize: "0.625rem", fontWeight: 700, color: "#D44D4D", textTransform: "uppercase", letterSpacing: "0.07em" }}>{t("Processing", "Processamento")}</span>
         </div>
         <h2 style={{ fontSize: "1.25rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27", letterSpacing: "-0.025em", lineHeight: 1.2, marginBottom: 8 }}>
-          1M+ eventos<br />por segundo.
+          {lang === "pt" ? <>1M+ eventos<br />por segundo.</> : <>1M+ events<br />per second.</>}
         </h2>
         <p style={{ fontSize: "0.75rem", color: dark ? "#627288" : "#8898B0" }}>
-          Distributed infrastructure with zero downtime.
+          {t("Distributed infrastructure with zero downtime.", "Infraestrutura distribuída com zero downtime.")}
         </p>
       </div>
     </div>
@@ -1420,21 +1433,22 @@ function VortexContent({ dark }: { dark: boolean }) {
 }
 
 function LinesContent({ dark }: { dark: boolean }) {
+  const { t } = useI18n();
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%", padding: 24 }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, width: "100%", maxWidth: 300 }}>
-        <p style={{ fontSize: "0.5625rem", fontWeight: 700, color: dark ? "#495669" : "#8898B0", textTransform: "uppercase", letterSpacing: "0.07em" }}>Integrations</p>
+        <p style={{ fontSize: "0.5625rem", fontWeight: 700, color: dark ? "#495669" : "#8898B0", textTransform: "uppercase", letterSpacing: "0.07em" }}>{t("Integrations", "Integrações")}</p>
         {[
-          { icon: Shield, label: "GitHub Actions", status: "Ativo" },
-          { icon: BarChart2, label: "Datadog", status: "Ativo" },
-          { icon: Package, label: "Docker Hub", status: "Configurando" },
+          { icon: Shield, label: "GitHub Actions", status: "active" },
+          { icon: BarChart2, label: "Datadog", status: "active" },
+          { icon: Package, label: "Docker Hub", status: "setup" },
         ].map(item => (
           <div key={item.label} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 12px", borderRadius: 10, background: dark ? "rgba(19,26,39,0.70)" : "rgba(255,255,255,0.80)", backdropFilter: "blur(8px)", border: `1px solid ${dark ? "rgba(255,255,255,0.07)" : "rgba(19,26,39,0.08)"}` }}>
             <div style={{ width: 28, height: 28, borderRadius: 8, background: dark ? "rgba(212,77,77,0.15)" : "rgba(212,77,77,0.10)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
               <item.icon style={{ width: 14, height: 14, color: "#D44D4D" }} />
             </div>
             <span style={{ flex: 1, fontSize: "0.75rem", fontWeight: 600, color: dark ? "#E4E9F0" : "#131A27" }}>{item.label}</span>
-            <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: item.status === "Ativo" ? "#4fb57b" : dark ? "#627288" : "#8898B0" }}>● {item.status}</span>
+            <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: item.status === "active" ? "#4fb57b" : dark ? "#627288" : "#8898B0" }}>● {item.status === "active" ? t("Active", "Ativo") : t("Setting up", "Configurando")}</span>
           </div>
         ))}
       </div>
@@ -1461,6 +1475,14 @@ type EffectDef = {
   previewLight: React.ReactNode;
 };
 
+const TAG_LABEL: Record<EffectTag, { en: string; pt: string }> = {
+  "Animado":    { en: "Animated",    pt: "Animado" },
+  "Interativo": { en: "Interactive", pt: "Interativo" },
+  "Canvas":     { en: "Canvas",      pt: "Canvas" },
+  "SVG":        { en: "SVG",         pt: "SVG" },
+  "3D":         { en: "3D",          pt: "3D" },
+};
+
 const tagColors: Record<EffectTag, { bg: string; color: string }> = {
   "Animado":    { bg: "rgba(96,165,250,0.12)",   color: "#60a5fa" },
   "Interativo": { bg: "rgba(167,139,250,0.12)",   color: "#a78bfa" },
@@ -1470,6 +1492,7 @@ const tagColors: Record<EffectTag, { bg: string; color: string }> = {
 };
 
 function EffectCard({ ef }: { ef: EffectDef }) {
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [tab, setTab] = useState<"spec" | "usage">("spec");
   const preview = dark ? ef.previewDark : ef.previewLight;
@@ -1490,21 +1513,21 @@ function EffectCard({ ef }: { ef: EffectDef }) {
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5 leading-relaxed">{ef.description}</p>
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
-            {ef.tags.map(t => (
-              <span key={t} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
-                style={{ background: tagColors[t].bg, color: tagColors[t].color }}>
-                {t}
+            {ef.tags.map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
+                {bi(TAG_LABEL[tg])}
               </span>
             ))}
           </div>
         </div>
 
         <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
-          {(["spec", "usage"] as const).map(t => (
-            <button key={t} onClick={() => setTab(t)}
+          {(["spec", "usage"] as const).map(k => (
+            <button key={k} onClick={() => setTab(k)}
               className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors
-                ${tab === t ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {t === "spec" ? "Technique" : "When to use"}
+                ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
+              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
           ))}
         </div>
@@ -1512,11 +1535,11 @@ function EffectCard({ ef }: { ef: EffectDef }) {
         {tab === "spec" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Implementation</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
               <p className="text-[0.8125rem] text-foreground/80 mt-0.5 leading-relaxed">{ef.technique}</p>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">Compatible components</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {ef.components.map(c => (
                   <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
@@ -1529,7 +1552,7 @@ function EffectCard({ ef }: { ef: EffectDef }) {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ Use when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {ef.useWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
@@ -1539,7 +1562,7 @@ function EffectCard({ ef }: { ef: EffectDef }) {
               </ul>
             </div>
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ Avoid when</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {ef.avoidWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
@@ -1567,49 +1590,49 @@ const effects: EffectDef[] = [
    TOKENS
 ══════════════════════════════════════════════════════════ */
 
-const bgTokenGroups: TokenGroup[] = [
+const getBgTokenGroups = (t: (en: string, pt: string) => string): TokenGroup[] => [
   {
-    group: "Gradient Animation — blobs",
+    group: t("Gradient Animation — blobs", "Gradient Animation — blobs"),
     tokens: [
-      { name: "--graphite-700", description: "Blob base dark",    light: "#283043", dark: "#283043", isColor: true },
-      { name: "--crimson-900",  description: "Blob accent dark",  light: "#3A0909", dark: "#3A0909", isColor: true },
-      { name: "--graphite-100", description: "Blob base light",   light: "#D6DCE6", isColor: true },
-      { name: "--crimson-50",   description: "Blob accent light", light: "#FDF2F2", isColor: true },
+      { name: "--graphite-700", description: t("Blob base dark", "Base do blob (dark)"),    light: "#283043", dark: "#283043", isColor: true },
+      { name: "--crimson-900",  description: t("Blob accent dark", "Destaque do blob (dark)"),  light: "#3A0909", dark: "#3A0909", isColor: true },
+      { name: "--graphite-100", description: t("Blob base light", "Base do blob (light)"),   light: "#D6DCE6", isColor: true },
+      { name: "--crimson-50",   description: t("Blob accent light", "Destaque do blob (light)"), light: "#FDF2F2", isColor: true },
     ],
   },
   {
-    group: "Canvas Reveal — hover cells",
+    group: t("Canvas Reveal — hover cells", "Canvas Reveal — células no hover"),
     tokens: [
-      { name: "--graphite-900", description: "Dark cell (tone 1)",  light: "#131A27", dark: "#131A27", isColor: true },
-      { name: "--graphite-800", description: "Dark cell (tone 2)",  light: "#1C2333", dark: "#1C2333", isColor: true },
-      { name: "--graphite-700", description: "Dark cell (tone 3)",  light: "#283043", dark: "#283043", isColor: true },
-      { name: "--graphite-200", description: "Light cell",         light: "#B3BDD0", isColor: true },
+      { name: "--graphite-900", description: t("Dark cell (tone 1)", "Célula escura (tom 1)"),  light: "#131A27", dark: "#131A27", isColor: true },
+      { name: "--graphite-800", description: t("Dark cell (tone 2)", "Célula escura (tom 2)"),  light: "#1C2333", dark: "#1C2333", isColor: true },
+      { name: "--graphite-700", description: t("Dark cell (tone 3)", "Célula escura (tom 3)"),  light: "#283043", dark: "#283043", isColor: true },
+      { name: "--graphite-200", description: t("Light cell", "Célula clara"),         light: "#B3BDD0", isColor: true },
     ],
   },
   {
-    group: "Big Bang — Crimson palette (default)",
+    group: t("Big Bang — Crimson palette (default)", "Big Bang — paleta Crimson (padrão)"),
     tokens: [
-      { name: "fast[0]",  description: "Fast particle — white tip",           light: "#ffffff", dark: "#ffffff", isColor: true },
-      { name: "mid[0]",   description: "Medium particle — primary accent",          light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "mid[1]",   description: "Medium particle — pinkish variation",          light: "#E88080", dark: "#E88080", isColor: true },
-      { name: "slow[0]",  description: "Slow particle — dark graphite",          light: "#374155", dark: "#374155", isColor: true },
-      { name: "slow[2]",  description: "Slow particle — medium graphite",           light: "#627288", dark: "#627288", isColor: true },
+      { name: "fast[0]",  description: t("Fast particle — white tip", "Partícula rápida — ponta branca"),           light: "#ffffff", dark: "#ffffff", isColor: true },
+      { name: "mid[0]",   description: t("Medium particle — primary accent", "Partícula média — destaque primário"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "mid[1]",   description: t("Medium particle — pinkish variation", "Partícula média — variação rosada"),          light: "#E88080", dark: "#E88080", isColor: true },
+      { name: "slow[0]",  description: t("Slow particle — dark graphite", "Partícula lenta — graphite escuro"),          light: "#374155", dark: "#374155", isColor: true },
+      { name: "slow[2]",  description: t("Slow particle — medium graphite", "Partícula lenta — graphite médio"),           light: "#627288", dark: "#627288", isColor: true },
     ],
   },
   {
-    group: "Background Lines — H-streams Crimson palette (default)",
+    group: t("Background Lines — H-streams Crimson palette (default)", "Background Lines — H-streams, paleta Crimson (padrão)"),
     tokens: [
-      { name: "hRgb[0]",  description: "Stream horizontal — crimson puro",           light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "hRgb[1]",  description: "Stream horizontal — crimson suave",          light: "#E88080", dark: "#E88080", isColor: true },
-      { name: "hRgb[3]",  description: "Stream tip — warm white",              light: "#ffffff", dark: "#ffffff", isColor: true },
+      { name: "hRgb[0]",  description: t("Horizontal stream — pure crimson", "Stream horizontal — crimson puro"),           light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "hRgb[1]",  description: t("Horizontal stream — soft crimson", "Stream horizontal — crimson suave"),          light: "#E88080", dark: "#E88080", isColor: true },
+      { name: "hRgb[3]",  description: t("Stream tip — warm white", "Ponta do stream — branco quente"),              light: "#ffffff", dark: "#ffffff", isColor: true },
     ],
   },
   {
-    group: "Background Lines — V-drops (graphite, todos os modos)",
+    group: t("Background Lines — V-drops (graphite, all modes)", "Background Lines — V-drops (graphite, todos os modos)"),
     tokens: [
-      { name: "vRgb[0]",  description: "Drop vertical — graphite escuro",            light: "#374155", dark: "#374155", isColor: true },
-      { name: "vRgb[1]",  description: "Vertical drop — medium graphite",             light: "#495669", dark: "#495669", isColor: true },
-      { name: "vRgb[2]",  description: "Drop vertical — graphite claro",             light: "#627288", dark: "#627288", isColor: true },
+      { name: "vRgb[0]",  description: t("Vertical drop — dark graphite", "Drop vertical — graphite escuro"),            light: "#374155", dark: "#374155", isColor: true },
+      { name: "vRgb[1]",  description: t("Vertical drop — medium graphite", "Drop vertical — graphite médio"),             light: "#495669", dark: "#495669", isColor: true },
+      { name: "vRgb[2]",  description: t("Vertical drop — light graphite", "Drop vertical — graphite claro"),             light: "#627288", dark: "#627288", isColor: true },
     ],
   },
 ];
@@ -1619,15 +1642,16 @@ const bgTokenGroups: TokenGroup[] = [
 ══════════════════════════════════════════════════════════ */
 
 export function BackgroundsShowcase() {
+  const { t, bi } = useI18n();
+  const bgTokenGroups = getBgTokenGroups(t);
   return (
     <div className="space-y-14">
 
       {/* Intro */}
       <div className="space-y-4">
         <p className="text-[0.9375rem] text-muted-foreground leading-relaxed max-w-2xl">
-          Four animated, interactive background patterns — each with a distinct visual personality, adapted to the Design System's graphite + crimson palette.
-          The previews respond to the site's dark/light mode — use the toggle at the top of the page to switch.
-          All previews are interactive: hover to feel the effects in real time.
+          {t("Four animated, interactive background patterns — each with a distinct visual personality, adapted to the Design System's graphite + crimson palette. The previews respond to the site's dark/light mode — use the toggle at the top of the page to switch. All previews are interactive: hover to feel the effects in real time.",
+            "Quatro padrões de fundo animados e interativos — cada um com uma personalidade visual distinta, adaptados à paleta graphite + crimson do Design System. Os previews respondem ao modo dark/light do site — use o botão no topo da página para alternar. Todos os previews são interativos: passe o mouse para sentir os efeitos em tempo real.")}
         </p>
 
         {/* Legend */}
@@ -1635,7 +1659,7 @@ export function BackgroundsShowcase() {
           {(Object.entries(tagColors) as [EffectTag, { bg: string; color: string }][]).map(([tag, style]) => (
             <span key={tag} className="px-2.5 py-1 rounded-[6px] text-[0.6875rem] font-semibold"
               style={{ background: style.bg, color: style.color }}>
-              {tag}
+              {bi(TAG_LABEL[tag])}
             </span>
           ))}
         </div>
@@ -1675,42 +1699,42 @@ export function BackgroundsShowcase() {
       {/* Usage guide */}
       <section id="section-backgrounds" className="space-y-4">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Composition guide</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">How to combine the four effects on a landing page — with a palette suggestion for each section.</p>
+          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Composition guide", "Guia de composição")}</h2>
+          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How to combine the four effects on a landing page — with a palette suggestion for each section.", "Como combinar os quatro efeitos em uma landing page — com sugestão de paleta para cada seção.")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
             {
-              title: "Technical SaaS",
+              title: t("Technical SaaS", "SaaS técnico"),
               mode: "dark-first" as const,
               accent: "#D44D4D",
               sections: [
-                { label: "Hero",     effect: "Gradient Animation", note: "Blobs suaves, alta legibilidade",   band: "#1e2a3d", accent: "#3b6fd4" },
-                { label: "Features", effect: "Bg Lines Graphite",   note: "Data grid, dense",             band: "#131a27", accent: "#8898b0" },
-                { label: "Pricing",  effect: "Canvas Reveal",      note: "Hover reveals plan card",       band: "#0d1119", accent: "var(--success)" },
-                { label: "CTA",      effect: "Big Bang Crimson",   note: "Impact explosion at the close",band: "#1a0e0e", accent: "#D44D4D" },
+                { label: "Hero",     effect: "Gradient Animation", note: t("Soft blobs, high legibility", "Blobs suaves, alta legibilidade"),   band: "#1e2a3d", accent: "#3b6fd4" },
+                { label: "Features", effect: "Bg Lines Graphite",   note: t("Data grid, dense", "Grade de dados, densa"),             band: "#131a27", accent: "#8898b0" },
+                { label: t("Pricing", "Preços"),  effect: "Canvas Reveal",      note: t("Hover reveals plan card", "Hover revela o card do plano"),       band: "#0d1119", accent: "var(--success)" },
+                { label: "CTA",      effect: "Big Bang Crimson",   note: t("Impact explosion at the close", "Explosão de impacto no fechamento"),band: "#1a0e0e", accent: "#D44D4D" },
               ],
             },
             {
-              title: "Data product",
+              title: t("Data product", "Produto de dados"),
               mode: "dark" as const,
               accent: "#7C3AED",
               sections: [
-                { label: "Hero",        effect: "Big Bang Cosmos",    note: "Transmite escala e poder",          band: "#0d1119", accent: "#7C3AED" },
-                { label: "Dashboard",   effect: "Canvas Reveal",      note: "Product screenshot with hover",  band: "#1c2333", accent: "#06b6d4" },
-                { label: "Integrations", effect: "Bg Lines Cyan",     note: "Evokes pipelines and flow",          band: "#0f1e2e", accent: "#0ea5e9" },
-                { label: "Conversion",   effect: "Big Bang + Wobble",  note: "Highlighted crimson CTA",          band: "#0d1119", accent: "#D44D4D" },
+                { label: "Hero",        effect: "Big Bang Cosmos",    note: t("Conveys scale and power", "Transmite escala e poder"),          band: "#0d1119", accent: "#7C3AED" },
+                { label: "Dashboard",   effect: "Canvas Reveal",      note: t("Product screenshot with hover", "Screenshot do produto com hover"),  band: "#1c2333", accent: "#06b6d4" },
+                { label: t("Integrations", "Integrações"), effect: "Bg Lines Cyan",     note: t("Evokes pipelines and flow", "Evoca pipelines e fluxo"),          band: "#0f1e2e", accent: "#0ea5e9" },
+                { label: t("Conversion", "Conversão"),   effect: "Big Bang + Wobble",  note: t("Highlighted crimson CTA", "CTA crimson em destaque"),          band: "#0d1119", accent: "#D44D4D" },
               ],
             },
             {
-              title: "Produto consumer",
+              title: t("Consumer product", "Produto consumer"),
               mode: "light-first" as const,
               accent: "#8B5CF6",
               sections: [
-                { label: "Hero",        effect: "Gradient Animation", note: "Light — suave, acolhedor",        band: "#edf0f5", accent: "#8B5CF6" },
-                { label: "Features",    effect: "Bg Lines Graphite",   note: "Neutro e elegante",               band: "#ffffff",  accent: "#8898b0" },
-                { label: "Testimonials", effect: "Canvas Reveal",      note: "Light on social proof cards",  band: "#ecf0f5",  accent: "#3b82f6" },
-                { label: "CTA",         effect: "Big Bang Aurora",    note: "Dark inversion + final energy",   band: "#131a27",  accent: "#8B5CF6" },
+                { label: "Hero",        effect: "Gradient Animation", note: t("Light — soft, welcoming", "Light — suave, acolhedor"),        band: "#edf0f5", accent: "#8B5CF6" },
+                { label: "Features",    effect: "Bg Lines Graphite",   note: t("Neutral and elegant", "Neutro e elegante"),               band: "#ffffff",  accent: "#8898b0" },
+                { label: t("Testimonials", "Depoimentos"), effect: "Canvas Reveal",      note: t("Light on social proof cards", "Light em cards de prova social"),  band: "#ecf0f5",  accent: "#3b82f6" },
+                { label: "CTA",         effect: "Big Bang Aurora",    note: t("Dark inversion + final energy", "Inversão dark + energia final"),   band: "#131a27",  accent: "#8B5CF6" },
               ],
             },
           ].map(guide => (
@@ -1755,28 +1779,28 @@ export function BackgroundsShowcase() {
         {/* Palette × Effect — compatibility table */}
         <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="px-4 py-3 border-b border-border">
-            <p className="text-[0.8125rem] font-bold text-foreground">Palettes × Usage context</p>
-            <p className="text-[0.6875rem] text-muted-foreground mt-0.5">Quick guide to which palette to use for each section type.</p>
+            <p className="text-[0.8125rem] font-bold text-foreground">{t("Palettes × Usage context", "Paletas × Contexto de uso")}</p>
+            <p className="text-[0.6875rem] text-muted-foreground mt-0.5">{t("Quick guide to which palette to use for each section type.", "Guia rápido de qual paleta usar em cada tipo de seção.")}</p>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-[0.6875rem]">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left px-4 py-2.5 text-muted-foreground font-semibold w-28">Paleta</th>
-                  <th className="text-left px-3 py-2.5 text-muted-foreground font-semibold">Personalidade</th>
+                  <th className="text-left px-4 py-2.5 text-muted-foreground font-semibold w-28">{t("Palette", "Paleta")}</th>
+                  <th className="text-left px-3 py-2.5 text-muted-foreground font-semibold">{t("Personality", "Personalidade")}</th>
                   <th className="text-left px-3 py-2.5 text-muted-foreground font-semibold">Big Bang</th>
                   <th className="text-left px-3 py-2.5 text-muted-foreground font-semibold">Bg Lines</th>
                 </tr>
               </thead>
               <tbody>
                 {[
-                  { palette: "Crimson", dot: "#D44D4D", personality: "Energy, urgency, primary brand", bb: "Launch hero, CTA", bgl: "Technical features, B2B product" },
-                  { palette: "Cosmos",  dot: "#7C3AED", personality: "Mystery, scale, ambition",         bb: "Impact hero, splash screens",  bgl: "AI product, data, ML" },
-                  { palette: "Ocean",  dot: "#0EA5E9", personality: "Trust, flow, technology",      bb: "Infrastructure product, cloud",  bgl: "Pipelines, ETL, integrations" },
-                  { palette: "Neon",    dot: "#22D3EE", personality: "Innovation, future, creative energy",bb: "Gaming, creativity, agencies",    bgl: "Dev product, realtime, live" },
-                  { palette: "Cyan",   dot: "#06B6D4", personality: "Precision, data, clean technical",   bb: "—",                                bgl: "Dashboard, analytics, CI/CD" },
-                  { palette: "Aurora",  dot: "#8B5CF6", personality: "Premium, criativo, diferenciado",  bb: "CTA consumer, produto consumer",   bgl: "Design tools, plataformas criativas" },
-                  { palette: "Graphite", dot: "#8898B0", personality: "Neutral, elegant, subtle background",  bb: "—",                                bgl: "Features background, light mode" },
+                  { palette: "Crimson", dot: "#D44D4D", personality: t("Energy, urgency, primary brand", "Energia, urgência, marca principal"), bb: t("Launch hero, CTA", "Hero de lançamento, CTA"), bgl: t("Technical features, B2B product", "Funcionalidades técnicas, produto B2B") },
+                  { palette: "Cosmos",  dot: "#7C3AED", personality: t("Mystery, scale, ambition", "Mistério, escala, ambição"),         bb: t("Impact hero, splash screens", "Hero de impacto, telas de splash"),  bgl: t("AI product, data, ML", "Produto de IA, dados, ML") },
+                  { palette: "Ocean",  dot: "#0EA5E9", personality: t("Trust, flow, technology", "Confiança, fluxo, tecnologia"),      bb: t("Infrastructure product, cloud", "Produto de infraestrutura, cloud"),  bgl: t("Pipelines, ETL, integrations", "Pipelines, ETL, integrações") },
+                  { palette: "Neon",    dot: "#22D3EE", personality: t("Innovation, future, creative energy", "Inovação, futuro, energia criativa"),bb: t("Gaming, creativity, agencies", "Games, criatividade, agências"),    bgl: t("Dev product, realtime, live", "Produto para devs, realtime, ao vivo") },
+                  { palette: "Cyan",   dot: "#06B6D4", personality: t("Precision, data, clean technical", "Precisão, dados, técnico e limpo"),   bb: "—",                                bgl: t("Dashboard, analytics, CI/CD", "Dashboard, analytics, CI/CD") },
+                  { palette: "Aurora",  dot: "#8B5CF6", personality: t("Premium, creative, distinctive", "Premium, criativo, diferenciado"),  bb: t("Consumer CTA, consumer product", "CTA consumer, produto consumer"),   bgl: t("Design tools, creative platforms", "Ferramentas de design, plataformas criativas") },
+                  { palette: "Graphite", dot: "#8898B0", personality: t("Neutral, elegant, subtle background", "Neutro, elegante, fundo sutil"),  bb: "—",                                bgl: t("Features background, light mode", "Fundo de features, light mode") },
                 ].map(row => (
                   <tr key={row.palette} className="border-b border-border/50 last:border-0 hover:bg-muted/30 transition-colors">
                     <td className="px-4 py-2.5">
@@ -1799,9 +1823,9 @@ export function BackgroundsShowcase() {
       {/* Tokens */}
       <section id="backgrounds-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Color tokens</h2>
+          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Color tokens", "Tokens de cor")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">
-            Reference values for the system's four Canvas patterns. Big Bang and Background Lines use interchangeable palettes — the tokens below document the default palette (Crimson).
+            {t("Reference values for the system's four Canvas patterns. Big Bang and Background Lines use interchangeable palettes — the tokens below document the default palette (Crimson).", "Valores de referência para os quatro padrões Canvas do sistema. Big Bang e Background Lines usam paletas intercambiáveis — os tokens abaixo documentam a paleta padrão (Crimson).")}
           </p>
         </div>
         <TokenTable groups={bgTokenGroups} />

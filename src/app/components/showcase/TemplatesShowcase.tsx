@@ -19,6 +19,9 @@ import {
   XAxis, YAxis, CartesianGrid,
   ResponsiveContainer, Tooltip as ReTooltip,
 } from "recharts";
+import { useI18n } from "../../i18n";
+
+type L = { en: string; pt: string };
 
 /* ─────────────────────────────────────────────
    Shared helpers
@@ -74,18 +77,18 @@ const sparkData = [
 ];
 
 const kpis = [
-  { label: "Total Revenue",    value: "$84,320",  delta: "+12.5%", up: true,  icon: DollarSign },
-  { label: "Active Users",     value: "12,840",   delta: "+8.2%",  up: true,  icon: Users },
-  { label: "Orders",           value: "3,204",    delta: "+5.1%",  up: true,  icon: ShoppingCart },
-  { label: "Churn Rate",       value: "1.8%",     delta: "-0.3%",  up: false, icon: Activity },
+  { label: { en: "Total Revenue", pt: "Receita total" },    value: "$84,320",  delta: "+12.5%", up: true,  icon: DollarSign },
+  { label: { en: "Active Users", pt: "Usuários ativos" },     value: "12,840",   delta: "+8.2%",  up: true,  icon: Users },
+  { label: { en: "Orders", pt: "Pedidos" },           value: "3,204",    delta: "+5.1%",  up: true,  icon: ShoppingCart },
+  { label: { en: "Churn Rate", pt: "Taxa de churn" },       value: "1.8%",     delta: "-0.3%",  up: false, icon: Activity },
 ];
 
 const recentActivity = [
-  { user: "Ana Lima",    action: "purchased Pro plan",   time: "2m ago",  status: "success" },
-  { user: "Carlos M.",  action: "opened a support ticket", time: "14m ago", status: "info" },
-  { user: "Beatriz S.", action: "cancelled subscription", time: "1h ago",  status: "error" },
-  { user: "Diego F.",   action: "upgraded to Enterprise", time: "3h ago",  status: "success" },
-  { user: "Fernanda P.",action: "submitted a review",    time: "5h ago",  status: "warning" },
+  { user: "Ana Lima",    action: { en: "purchased Pro plan", pt: "comprou o plano Pro" },   time: { en: "2m ago", pt: "há 2 min" },  status: "success" },
+  { user: "Carlos M.",  action: { en: "opened a support ticket", pt: "abriu um chamado de suporte" }, time: { en: "14m ago", pt: "há 14 min" }, status: "info" },
+  { user: "Beatriz S.", action: { en: "cancelled subscription", pt: "cancelou a assinatura" }, time: { en: "1h ago", pt: "há 1 h" },  status: "error" },
+  { user: "Diego F.",   action: { en: "upgraded to Enterprise", pt: "fez upgrade para Enterprise" }, time: { en: "3h ago", pt: "há 3 h" },  status: "success" },
+  { user: "Fernanda P.",action: { en: "submitted a review",    pt: "enviou uma avaliação" }, time: { en: "5h ago", pt: "há 5 h" },  status: "warning" },
 ];
 
 const statusDot: Record<string, string> = {
@@ -96,6 +99,7 @@ const statusDot: Record<string, string> = {
 };
 
 function DashboardTemplate() {
+  const { t, bi } = useI18n();
   return (
     <TemplateFrame>
       <div className="flex h-[540px] bg-background overflow-hidden">
@@ -108,17 +112,17 @@ function DashboardTemplate() {
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
           </div>
           {[
-            { icon: LayoutDashboard, label: "Dashboard", active: true  },
-            { icon: BarChart2,       label: "Analytics",  active: false },
-            { icon: Users,           label: "Customers",  active: false },
-            { icon: ShoppingCart,    label: "Orders",     active: false },
-            { icon: FileText,        label: "Reports",    active: false },
-            { icon: Settings,        label: "Settings",   active: false },
+            { icon: LayoutDashboard, label: { en: "Dashboard", pt: "Dashboard" }, active: true  },
+            { icon: BarChart2,       label: { en: "Analytics", pt: "Análises" },  active: false },
+            { icon: Users,           label: { en: "Customers", pt: "Clientes" },  active: false },
+            { icon: ShoppingCart,    label: { en: "Orders", pt: "Pedidos" },     active: false },
+            { icon: FileText,        label: { en: "Reports", pt: "Relatórios" },     active: false },
+            { icon: Settings,        label: { en: "Settings", pt: "Configurações" },   active: false },
           ].map(item => {
             const Icon = item.icon;
             return (
               <button
-                key={item.label}
+                key={item.label.en}
                 className={`flex items-center gap-2 px-2.5 py-1.5 rounded-[7px] text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors
                   ${item.active
                     ? "bg-primary/10 text-primary"
@@ -126,7 +130,7 @@ function DashboardTemplate() {
                   }`}
               >
                 <Icon className="h-3.5 w-3.5 shrink-0" />
-                {item.label}
+                {bi(item.label)}
               </button>
             );
           })}
@@ -149,14 +153,14 @@ function DashboardTemplate() {
           <div className="sticky top-0 z-10 bg-background/90 backdrop-blur border-b border-border px-5 py-2.5 flex items-center justify-between">
             <div>
               <h1 className="text-[0.9375rem] font-bold text-foreground">Dashboard</h1>
-              <p className="text-[0.6875rem] text-muted-foreground">July 29, 2026</p>
+              <p className="text-[0.6875rem] text-muted-foreground">{t("July 29, 2026", "29 de julho de 2026")}</p>
             </div>
             <div className="flex items-center gap-2">
               <button className="h-7 w-7 rounded-[7px] border border-border bg-card flex items-center justify-center text-muted-foreground">
                 <Bell className="h-3.5 w-3.5" />
               </button>
               <button className="h-7 px-2.5 rounded-[7px] bg-primary text-primary-foreground text-[0.6875rem] font-semibold flex items-center gap-1">
-                <Plus className="h-3 w-3" /> New Report
+                <Plus className="h-3 w-3" /> {t("New Report", "Novo relatório")}
               </button>
             </div>
           </div>
@@ -167,15 +171,15 @@ function DashboardTemplate() {
               {kpis.map(k => {
                 const Icon = k.icon;
                 return (
-                  <div key={k.label} className="bg-card rounded-[12px] border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+                  <div key={k.label.en} className="bg-card rounded-[12px] border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[0.6875rem] text-muted-foreground font-medium">{k.label}</span>
+                      <span className="text-[0.6875rem] text-muted-foreground font-medium">{bi(k.label)}</span>
                       <Icon className="h-3.5 w-3.5 text-muted-foreground" />
                     </div>
                     <div className="text-[1.0625rem] font-bold text-foreground mb-1">{k.value}</div>
                     <div className={`flex items-center gap-0.5 text-[0.6875rem] font-medium ${k.up ? "text-success" : "text-primary"}`}>
                       {k.up ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
-                      {k.delta} vs last month
+                      {k.delta} {t("vs last month", "vs. mês passado")}
                     </div>
                   </div>
                 );
@@ -188,8 +192,8 @@ function DashboardTemplate() {
               <div className="bg-card rounded-[12px] border border-border p-4" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
-                    <div className="text-[0.8125rem] font-semibold text-foreground">Revenue Overview</div>
-                    <div className="text-[0.6875rem] text-muted-foreground">Last 12 months</div>
+                    <div className="text-[0.8125rem] font-semibold text-foreground">{t("Revenue Overview", "Visão geral da receita")}</div>
+                    <div className="text-[0.6875rem] text-muted-foreground">{t("Last 12 months", "Últimos 12 meses")}</div>
                   </div>
                   <span className="text-[0.6875rem] px-2 py-0.5 rounded-full bg-success/10 text-success font-medium flex items-center gap-0.5">
                     <TrendingUp className="h-2.5 w-2.5" /> 12.5%
@@ -216,15 +220,15 @@ function DashboardTemplate() {
 
               {/* Activity */}
               <div className="bg-card rounded-[12px] border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-                <div className="text-[0.8125rem] font-semibold text-foreground mb-3">Recent Activity</div>
+                <div className="text-[0.8125rem] font-semibold text-foreground mb-3">{t("Recent Activity", "Atividade recente")}</div>
                 <div className="space-y-2.5">
                   {recentActivity.map((a, i) => (
                     <div key={i} className="flex gap-2">
                       <div className="mt-1 h-1.5 w-1.5 rounded-full shrink-0" style={{ background: `var(--${a.status === "error" ? "primary" : a.status})` }} />
                       <div>
                         <div className="text-[0.6875rem] font-medium text-foreground leading-tight">{a.user}</div>
-                        <div className="text-[0.625rem] text-muted-foreground leading-tight">{a.action}</div>
-                        <div className="text-[0.5625rem] text-muted-foreground/60 mt-0.5">{a.time}</div>
+                        <div className="text-[0.625rem] text-muted-foreground leading-tight">{bi(a.action)}</div>
+                        <div className="text-[0.5625rem] text-muted-foreground/60 mt-0.5">{bi(a.time)}</div>
                       </div>
                     </div>
                   ))}
@@ -242,6 +246,7 @@ function DashboardTemplate() {
    2. Settings Template
 ───────────────────────────────────────────── */
 function SettingsTemplate() {
+  const { t, bi } = useI18n();
   const [activeTab, setActiveTab] = useState("profile");
   const [notifEmail, setNotifEmail] = useState(true);
   const [notifPush, setNotifPush] = useState(false);
@@ -257,10 +262,10 @@ function SettingsTemplate() {
   }, []);
 
   const tabs = [
-    { id: "profile",       label: "Profile" },
-    { id: "notifications", label: "Notifications" },
-    { id: "appearance",    label: "Appearance" },
-    { id: "billing",       label: "Billing" },
+    { id: "profile",       label: t("Profile", "Perfil") },
+    { id: "notifications", label: t("Notifications", "Notificações") },
+    { id: "appearance",    label: t("Appearance", "Aparência") },
+    { id: "billing",       label: t("Billing", "Cobrança") },
   ];
 
   return (
@@ -275,10 +280,10 @@ function SettingsTemplate() {
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
           </div>
           {[
-            { icon: Home,     label: "Home",     active: false },
-            { icon: Users,    label: "Team",     active: false },
-            { icon: Settings, label: "Settings", active: true  },
-            { icon: HelpCircle, label: "Help",   active: false },
+            { icon: Home,     label: t("Home", "Início"),     active: false },
+            { icon: Users,    label: t("Team", "Equipe"),     active: false },
+            { icon: Settings, label: t("Settings", "Configurações"), active: true  },
+            { icon: HelpCircle, label: t("Help", "Ajuda"),   active: false },
           ].map(item => {
             const Icon = item.icon;
             return (
@@ -293,23 +298,23 @@ function SettingsTemplate() {
         {/* Main */}
         <div className="flex-1 overflow-y-auto">
           <div className="border-b border-border px-6 py-3">
-            <h1 className="text-[0.9375rem] font-bold text-foreground">Settings</h1>
-            <p className="text-[0.6875rem] text-muted-foreground">Manage your account preferences</p>
+            <h1 className="text-[0.9375rem] font-bold text-foreground">{t("Settings", "Configurações")}</h1>
+            <p className="text-[0.6875rem] text-muted-foreground">{t("Manage your account preferences", "Gerencie as preferências da sua conta")}</p>
           </div>
 
           {/* Tabs */}
           <div className="flex border-b border-border px-6">
-            {tabs.map(t => (
+            {tabs.map(tb => (
               <button
-                key={t.id}
-                onClick={() => setActiveTab(t.id)}
+                key={tb.id}
+                onClick={() => setActiveTab(tb.id)}
                 className={`px-3 py-2.5 text-[0.75rem] font-medium border-b-2 transition-colors -mb-px
-                  ${activeTab === t.id
+                  ${activeTab === tb.id
                     ? "border-primary text-primary"
                     : "border-transparent text-muted-foreground hover:text-foreground"
                   }`}
               >
-                {t.label}
+                {tb.label}
               </button>
             ))}
           </div>
@@ -324,14 +329,14 @@ function SettingsTemplate() {
                   <div>
                     <div className="text-[0.875rem] font-semibold text-foreground">Dani Moscatelli</div>
                     <div className="text-[0.75rem] text-muted-foreground">dani@moscatelli.co</div>
-                    <button className="mt-1 text-[0.6875rem] text-primary font-medium hover:underline">Change photo</button>
+                    <button className="mt-1 text-[0.6875rem] text-primary font-medium hover:underline">{t("Change photo", "Alterar foto")}</button>
                   </div>
                 </div>
                 {[
-                  { label: "Full Name",    val: "Dani Moscatelli", type: "text" },
+                  { label: t("Full Name", "Nome completo"),    val: "Dani Moscatelli", type: "text" },
                   { label: "Email",        val: "dani@moscatelli.co", type: "email" },
-                  { label: "Job Title",    val: "Design Lead", type: "text" },
-                  { label: "Company",      val: "Moscatelli Co.", type: "text" },
+                  { label: t("Job Title", "Cargo"),    val: t("Design Lead", "Líder de Design"), type: "text" },
+                  { label: t("Company", "Empresa"),      val: "Moscatelli Co.", type: "text" },
                 ].map(f => (
                   <div key={f.label}>
                     <label className="block text-[0.75rem] font-medium text-foreground mb-1">{f.label}</label>
@@ -344,7 +349,7 @@ function SettingsTemplate() {
                 ))}
                 <div className="flex justify-end pt-1">
                   <button className="h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
-                    Save Changes
+                    {t("Save Changes", "Salvar alterações")}
                   </button>
                 </div>
               </div>
@@ -353,8 +358,8 @@ function SettingsTemplate() {
             {activeTab === "notifications" && (
               <div className="space-y-3 max-w-md">
                 {[
-                  { label: "Email notifications", desc: "Receive updates via email", val: notifEmail, set: setNotifEmail },
-                  { label: "Push notifications",  desc: "Receive browser push alerts", val: notifPush, set: setNotifPush },
+                  { label: t("Email notifications", "Notificações por email"), desc: t("Receive updates via email", "Receba atualizações por email"), val: notifEmail, set: setNotifEmail },
+                  { label: t("Push notifications", "Notificações push"),  desc: t("Receive browser push alerts", "Receba alertas push no navegador"), val: notifPush, set: setNotifPush },
                 ].map(item => (
                   <div key={item.label} className="flex items-center justify-between p-3 rounded-[10px] border border-border bg-card">
                     <div>
@@ -375,26 +380,26 @@ function SettingsTemplate() {
 
             {activeTab === "appearance" && (
               <div className="space-y-3 max-w-md">
-                <div className="text-[0.8125rem] font-medium text-foreground mb-3">Theme</div>
+                <div className="text-[0.8125rem] font-medium text-foreground mb-3">{t("Theme", "Tema")}</div>
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { label: "Dark Mode", icon: Moon,  active: darkToggle },
-                    { label: "Light Mode", icon: Sun, active: !darkToggle },
-                  ].map(t => {
-                    const Icon = t.icon;
+                    { id: "dark", label: t("Dark Mode", "Modo escuro"), icon: Moon,  active: darkToggle },
+                    { id: "light", label: t("Light Mode", "Modo claro"), icon: Sun, active: !darkToggle },
+                  ].map(th => {
+                    const Icon = th.icon;
                     return (
                       <button
-                        key={t.label}
+                        key={th.id}
                         onClick={() => {
-                          const newDark = t.label === "Dark Mode";
+                          const newDark = th.id === "dark";
                           document.documentElement.classList.toggle("dark", newDark);
                         }}
                         className={`p-3 rounded-[10px] border-2 flex flex-col items-center gap-2 transition-all
-                          ${t.active ? "border-primary bg-primary/5" : "border-border bg-card"}`}
+                          ${th.active ? "border-primary bg-primary/5" : "border-border bg-card"}`}
                       >
-                        <Icon className={`h-5 w-5 ${t.active ? "text-primary" : "text-muted-foreground"}`} />
-                        <span className={`text-[0.75rem] font-medium ${t.active ? "text-primary" : "text-muted-foreground"}`}>{t.label}</span>
-                        {t.active && <Check className="h-3 w-3 text-primary" />}
+                        <Icon className={`h-5 w-5 ${th.active ? "text-primary" : "text-muted-foreground"}`} />
+                        <span className={`text-[0.75rem] font-medium ${th.active ? "text-primary" : "text-muted-foreground"}`}>{th.label}</span>
+                        {th.active && <Check className="h-3 w-3 text-primary" />}
                       </button>
                     );
                   })}
@@ -407,21 +412,21 @@ function SettingsTemplate() {
                 <div className="p-3 rounded-[10px] border border-primary/30 bg-primary/5 flex items-center justify-between">
                   <div>
                     <div className="text-[0.8125rem] font-semibold text-foreground flex items-center gap-1.5">
-                      <Star className="h-3.5 w-3.5 text-primary" /> Pro Plan
+                      <Star className="h-3.5 w-3.5 text-primary" /> {t("Pro Plan", "Plano Pro")}
                     </div>
-                    <div className="text-[0.6875rem] text-muted-foreground">$49/month · Renews Aug 1, 2026</div>
+                    <div className="text-[0.6875rem] text-muted-foreground">{t("$49/month · Renews Aug 1, 2026", "$49/mês · Renova em 1 de ago de 2026")}</div>
                   </div>
-                  <button className="h-7 px-3 rounded-[7px] border border-border bg-card text-[0.6875rem] font-medium text-foreground">Manage</button>
+                  <button className="h-7 px-3 rounded-[7px] border border-border bg-card text-[0.6875rem] font-medium text-foreground">{t("Manage", "Gerenciar")}</button>
                 </div>
                 <div className="p-3 rounded-[10px] border border-border bg-card flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CreditCard className="h-4 w-4 text-muted-foreground" />
                     <div>
                       <div className="text-[0.8125rem] font-medium text-foreground">•••• 4242</div>
-                      <div className="text-[0.6875rem] text-muted-foreground">Expires 09/27</div>
+                      <div className="text-[0.6875rem] text-muted-foreground">{t("Expires 09/27", "Expira em 09/27")}</div>
                     </div>
                   </div>
-                  <button className="text-[0.6875rem] text-primary font-medium hover:underline">Update</button>
+                  <button className="text-[0.6875rem] text-primary font-medium hover:underline">{t("Update", "Atualizar")}</button>
                 </div>
               </div>
             )}
@@ -436,6 +441,7 @@ function SettingsTemplate() {
    3. Login / Auth Template
 ───────────────────────────────────────────── */
 function AuthTemplate() {
+  const { t, bi } = useI18n();
   const [showPass, setShowPass] = useState(false);
   const [tab, setTab] = useState<"login" | "signup">("login");
 
@@ -452,10 +458,10 @@ function AuthTemplate() {
             </div>
             <h2 className="text-[1.125rem] font-bold text-foreground mb-2">DaniMoscatelli</h2>
             <p className="text-[0.8125rem] text-muted-foreground leading-relaxed max-w-[200px]">
-              Premium Design System for modern SaaS applications.
+              {t("Premium Design System for modern SaaS applications.", "Design System premium para aplicações SaaS modernas.")}
             </p>
             <div className="mt-6 space-y-2">
-              {["40+ Components", "Dark & Light Mode", "Radix UI Powered"].map(f => (
+              {[t("40+ Components", "Mais de 40 componentes"), t("Dark & Light Mode", "Modo escuro e claro"), t("Radix UI Powered", "Baseado em Radix UI")].map(f => (
                 <div key={f} className="flex items-center gap-2 text-[0.75rem] text-muted-foreground">
                   <Check className="h-3.5 w-3.5 text-success shrink-0" />
                   {f}
@@ -470,31 +476,31 @@ function AuthTemplate() {
           <div className="w-full max-w-[280px]">
             {/* Toggle */}
             <div className="flex rounded-[10px] border border-border bg-muted/40 p-0.5 mb-6">
-              {(["login", "signup"] as const).map(t => (
+              {(["login", "signup"] as const).map(tb => (
                 <button
-                  key={t}
-                  onClick={() => setTab(t)}
+                  key={tb}
+                  onClick={() => setTab(tb)}
                   className={`flex-1 py-1.5 rounded-[8px] text-[0.75rem] font-semibold transition-all
-                    ${tab === t ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
+                    ${tab === tb ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
                 >
-                  {t === "login" ? "Sign In" : "Sign Up"}
+                  {tb === "login" ? t("Sign In", "Entrar") : t("Sign Up", "Cadastrar")}
                 </button>
               ))}
             </div>
 
             <div className="mb-5">
               <h1 className="text-[1.125rem] font-bold text-foreground">
-                {tab === "login" ? "Welcome back" : "Create account"}
+                {tab === "login" ? t("Welcome back", "Bem-vindo de volta") : t("Create account", "Criar conta")}
               </h1>
               <p className="text-[0.75rem] text-muted-foreground mt-0.5">
-                {tab === "login" ? "Sign in to your workspace" : "Get started for free"}
+                {tab === "login" ? t("Sign in to your workspace", "Entre no seu workspace") : t("Get started for free", "Comece gratuitamente")}
               </p>
             </div>
 
             <div className="space-y-3">
               {tab === "signup" && (
                 <div>
-                  <label className="block text-[0.75rem] font-medium text-foreground mb-1">Full Name</label>
+                  <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Full Name", "Nome completo")}</label>
                   <div className="relative">
                     <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                     <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
@@ -510,8 +516,8 @@ function AuthTemplate() {
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-[0.75rem] font-medium text-foreground">Password</label>
-                  {tab === "login" && <button className="text-[0.6875rem] text-primary hover:underline">Forgot?</button>}
+                  <label className="text-[0.75rem] font-medium text-foreground">{t("Password", "Senha")}</label>
+                  {tab === "login" && <button className="text-[0.6875rem] text-primary hover:underline">{t("Forgot?", "Esqueceu?")}</button>}
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
@@ -524,12 +530,12 @@ function AuthTemplate() {
 
               <button className="w-full h-9 rounded-[8px] bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 mt-1">
                 <LogIn className="h-3.5 w-3.5" />
-                {tab === "login" ? "Sign In" : "Create Account"}
+                {tab === "login" ? t("Sign In", "Entrar") : t("Create Account", "Criar conta")}
               </button>
 
               <div className="relative py-1">
                 <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
-                <div className="relative text-center"><span className="bg-background px-2 text-[0.625rem] text-muted-foreground">or continue with</span></div>
+                <div className="relative text-center"><span className="bg-background px-2 text-[0.625rem] text-muted-foreground">{t("or continue with", "ou continue com")}</span></div>
               </div>
 
               <button className="w-full h-9 rounded-[8px] border border-border bg-card text-[0.8125rem] font-medium text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-2">
@@ -563,6 +569,19 @@ const roleColor: Record<string, string> = {
   Developer: "bg-success/10 text-success",
 };
 
+const roleLabel: Record<string, L> = {
+  Admin:     { en: "Admin", pt: "Admin" },
+  Editor:    { en: "Editor", pt: "Editor" },
+  Viewer:    { en: "Viewer", pt: "Leitor" },
+  Developer: { en: "Developer", pt: "Desenvolvedor" },
+};
+
+const statusLabel: Record<string, L> = {
+  Active:   { en: "Active", pt: "Ativo" },
+  Inactive: { en: "Inactive", pt: "Inativo" },
+  Pending:  { en: "Pending", pt: "Pendente" },
+};
+
 const statusColor: Record<string, string> = {
   Active:   "bg-success/10 text-success border-success/20",
   Inactive: "bg-muted text-muted-foreground border-border",
@@ -570,6 +589,7 @@ const statusColor: Record<string, string> = {
 };
 
 function TeamTemplate() {
+  const { t, bi } = useI18n();
   const [search, setSearch] = useState("");
   const filtered = teamMembers.filter(
     m => m.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -582,15 +602,15 @@ function TeamTemplate() {
         {/* Header */}
         <div className="border-b border-border px-6 py-4 flex items-center justify-between shrink-0">
           <div>
-            <h1 className="text-[0.9375rem] font-bold text-foreground">Team Members</h1>
-            <p className="text-[0.6875rem] text-muted-foreground">{teamMembers.length} members in your workspace</p>
+            <h1 className="text-[0.9375rem] font-bold text-foreground">{t("Team Members", "Membros da equipe")}</h1>
+            <p className="text-[0.6875rem] text-muted-foreground">{teamMembers.length} {t("members in your workspace", "membros no seu workspace")}</p>
           </div>
           <div className="flex items-center gap-2">
             <button className="h-8 px-3 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
-              <Download className="h-3.5 w-3.5" /> Export
+              <Download className="h-3.5 w-3.5" /> {t("Export", "Exportar")}
             </button>
             <button className="h-8 px-3 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold flex items-center gap-1.5 hover:opacity-90 transition-opacity">
-              <UserPlus className="h-3.5 w-3.5" /> Invite
+              <UserPlus className="h-3.5 w-3.5" /> {t("Invite", "Convidar")}
             </button>
           </div>
         </div>
@@ -602,12 +622,12 @@ function TeamTemplate() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search members..."
+              placeholder={t("Search members...", "Buscar membros...")}
               className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-1.5 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
             />
           </div>
           <button className="h-8 px-3 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-muted-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
-            <Filter className="h-3.5 w-3.5" /> Filter
+            <Filter className="h-3.5 w-3.5" /> {t("Filter", "Filtrar")}
           </button>
         </div>
 
@@ -616,8 +636,8 @@ function TeamTemplate() {
           <table className="w-full">
             <thead className="sticky top-0 bg-muted/40 border-b border-border">
               <tr>
-                {["Member", "Role", "Status", "Joined", ""].map(h => (
-                  <th key={h} className="text-left px-6 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{h}</th>
+                {[t("Member", "Membro"), t("Role", "Função"), "Status", t("Joined", "Entrada"), ""].map((h, hi) => (
+                  <th key={hi} className="text-left px-6 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{h}</th>
                 ))}
               </tr>
             </thead>
@@ -637,16 +657,16 @@ function TeamTemplate() {
                   </td>
                   <td className="px-6 py-3">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[0.625rem] font-semibold ${roleColor[m.role]}`}>
-                      {m.role}
+                      {bi(roleLabel[m.role])}
                     </span>
                   </td>
                   <td className="px-6 py-3">
                     <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[0.625rem] font-medium border ${statusColor[m.status]}`}>
                       <span className="h-1.5 w-1.5 rounded-full" style={{ background: "currentColor" }} />
-                      {m.status}
+                      {bi(statusLabel[m.status])}
                     </span>
                   </td>
-                  <td className="px-6 py-3 text-[0.75rem] text-muted-foreground">Jul 2026</td>
+                  <td className="px-6 py-3 text-[0.75rem] text-muted-foreground">{t("Jul 2026", "jul de 2026")}</td>
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-1 justify-end">
                       <button className="h-6 w-6 rounded-[6px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
@@ -665,14 +685,14 @@ function TeamTemplate() {
           {filtered.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
               <Search className="h-6 w-6 mb-2 opacity-30" />
-              <p className="text-[0.8125rem]">No members found for "<strong className="text-foreground">{search}</strong>"</p>
+              <p className="text-[0.8125rem]">{t("No members found for", "Nenhum membro encontrado para")} "<strong className="text-foreground">{search}</strong>"</p>
             </div>
           )}
         </div>
 
         {/* Pagination */}
         <div className="border-t border-border px-6 py-2.5 flex items-center justify-between shrink-0 bg-background">
-          <span className="text-[0.6875rem] text-muted-foreground">{filtered.length} of {teamMembers.length} results</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{filtered.length} {t("of", "de")} {teamMembers.length} {t("results", "resultados")}</span>
           <div className="flex items-center gap-1">
             {[1, 2, 3].map(p => (
               <button key={p} className={`h-6 w-6 rounded-[6px] text-[0.6875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>{p}</button>
@@ -688,13 +708,13 @@ function TeamTemplate() {
    5. Notifications / Inbox Template
 ───────────────────────────────────────────── */
 const notifications = [
-  { icon: CheckCircle, type: "success", title: "Payment confirmed",        body: "Invoice #INV-2048 for $1,200 has been paid.",            time: "Just now",   read: false },
-  { icon: UserPlus,    type: "info",    title: "New team member",           body: "Ana Lima joined your workspace as Editor.",              time: "5m ago",    read: false },
-  { icon: AlertCircle, type: "error",   title: "Deployment failed",         body: "Build #1049 failed during the test stage.",              time: "22m ago",   read: false },
-  { icon: Bell,        type: "warning", title: "Usage limit approaching",   body: "You've used 87% of your monthly API quota.",             time: "1h ago",    read: true  },
-  { icon: Clock,       type: "info",    title: "Scheduled maintenance",     body: "Planned downtime Sunday Jul 30 from 02:00–04:00 UTC.",   time: "3h ago",    read: true  },
-  { icon: Info,        type: "info",    title: "New feature: Templates",    body: "Check out the new templates section in the Design System.", time: "Yesterday", read: true  },
-  { icon: Star,        type: "warning", title: "Review requested",          body: "Diego F. requested a review on PR #204.",               time: "2d ago",    read: true  },
+  { icon: CheckCircle, type: "success", title: { en: "Payment confirmed", pt: "Pagamento confirmado" },        body: { en: "Invoice #INV-2048 for $1,200 has been paid.", pt: "A fatura #INV-2048 de $1,200 foi paga." },            time: { en: "Just now", pt: "Agora mesmo" },   read: false },
+  { icon: UserPlus,    type: "info",    title: { en: "New team member", pt: "Novo membro na equipe" },           body: { en: "Ana Lima joined your workspace as Editor.", pt: "Ana Lima entrou no seu workspace como Editora." },              time: { en: "5m ago", pt: "há 5 min" },    read: false },
+  { icon: AlertCircle, type: "error",   title: { en: "Deployment failed", pt: "Falha no deploy" },         body: { en: "Build #1049 failed during the test stage.", pt: "O build #1049 falhou na etapa de testes." },              time: { en: "22m ago", pt: "há 22 min" },   read: false },
+  { icon: Bell,        type: "warning", title: { en: "Usage limit approaching", pt: "Limite de uso próximo" },   body: { en: "You've used 87% of your monthly API quota.", pt: "Você usou 87% da sua cota mensal de API." },             time: { en: "1h ago", pt: "há 1 h" },    read: true  },
+  { icon: Clock,       type: "info",    title: { en: "Scheduled maintenance", pt: "Manutenção programada" },     body: { en: "Planned downtime Sunday Jul 30 from 02:00–04:00 UTC.", pt: "Indisponibilidade planejada no domingo, 30 de jul, das 02:00 às 04:00 UTC." },   time: { en: "3h ago", pt: "há 3 h" },    read: true  },
+  { icon: Info,        type: "info",    title: { en: "New feature: Templates", pt: "Novo recurso: Templates" },    body: { en: "Check out the new templates section in the Design System.", pt: "Conheça a nova seção de templates no Design System." }, time: { en: "Yesterday", pt: "Ontem" }, read: true  },
+  { icon: Star,        type: "warning", title: { en: "Review requested", pt: "Revisão solicitada" },          body: { en: "Diego F. requested a review on PR #204.", pt: "Diego F. pediu uma revisão no PR #204." },               time: { en: "2d ago", pt: "há 2 dias" },    read: true  },
 ];
 
 const notifColor: Record<string, string> = {
@@ -705,6 +725,7 @@ const notifColor: Record<string, string> = {
 };
 
 function InboxTemplate() {
+  const { t, bi } = useI18n();
   const [selected, setSelected] = useState<number | null>(0);
   const [items, setItems] = useState(notifications.map((n, i) => ({ ...n, id: i })));
 
@@ -720,7 +741,7 @@ function InboxTemplate() {
           <div className="px-4 py-3 border-b border-border flex items-center justify-between shrink-0">
             <div>
               <h1 className="text-[0.875rem] font-bold text-foreground flex items-center gap-2">
-                Inbox
+                {t("Inbox", "Caixa de entrada")}
                 {unread > 0 && (
                   <span className="px-1.5 py-0.5 rounded-full bg-primary text-primary-foreground text-[0.5625rem] font-bold">{unread}</span>
                 )}
@@ -746,12 +767,12 @@ function InboxTemplate() {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-start justify-between gap-1 mb-0.5">
                       <span className={`text-[0.75rem] font-semibold leading-tight truncate ${!n.read ? "text-foreground" : "text-muted-foreground"}`}>
-                        {n.title}
+                        {bi(n.title)}
                       </span>
                       {!n.read && <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0 mt-1" />}
                     </div>
-                    <p className="text-[0.625rem] text-muted-foreground leading-tight line-clamp-1">{n.body}</p>
-                    <span className="text-[0.5625rem] text-muted-foreground/60">{n.time}</span>
+                    <p className="text-[0.625rem] text-muted-foreground leading-tight line-clamp-1">{bi(n.body)}</p>
+                    <span className="text-[0.5625rem] text-muted-foreground/60">{bi(n.time)}</span>
                   </div>
                 </button>
               );
@@ -773,21 +794,21 @@ function InboxTemplate() {
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <h2 className="text-[0.9375rem] font-semibold text-foreground">{n.title}</h2>
-                      <span className="text-[0.75rem] text-muted-foreground">{n.time}</span>
+                      <h2 className="text-[0.9375rem] font-semibold text-foreground">{bi(n.title)}</h2>
+                      <span className="text-[0.75rem] text-muted-foreground">{bi(n.time)}</span>
                     </div>
                   </div>
                   <button className="h-7 w-7 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
                     <X className="h-4 w-4" />
                   </button>
                 </div>
-                <p className="text-[0.875rem] text-muted-foreground leading-relaxed mb-6">{n.body}</p>
+                <p className="text-[0.875rem] text-muted-foreground leading-relaxed mb-6">{bi(n.body)}</p>
                 <div className="flex gap-2">
                   <button className="h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
-                    View Details
+                    {t("View Details", "Ver detalhes")}
                   </button>
                   <button className="h-8 px-4 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
-                    Dismiss
+                    {t("Dismiss", "Dispensar")}
                   </button>
                 </div>
               </div>
@@ -795,7 +816,7 @@ function InboxTemplate() {
           })() : (
             <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
               <Inbox className="h-8 w-8 mb-2 opacity-30" />
-              <p className="text-[0.875rem]">Select a notification</p>
+              <p className="text-[0.875rem]">{t("Select a notification", "Selecione uma notificação")}</p>
             </div>
           )}
         </div>
@@ -811,47 +832,59 @@ const plans = [
   {
     name: "Starter",
     price: "Free",
-    period: "",
-    desc: "For freelancers and personal projects.",
-    features: ["3 projects", "2 users", "1GB storage", "Email support"],
-    cta: "Get Started",
+    period: { en: "", pt: "" },
+    desc: { en: "For freelancers and personal projects.", pt: "Para freelancers e projetos pessoais." },
+    features: [
+      { en: "3 projects", pt: "3 projetos" }, { en: "2 users", pt: "2 usuários" },
+      { en: "1GB storage", pt: "1GB de armazenamento" }, { en: "Email support", pt: "Suporte por email" },
+    ],
+    cta: { en: "Get Started", pt: "Começar" },
     highlight: false,
     icon: Package,
   },
   {
     name: "Pro",
     price: "$49",
-    period: "/month",
-    desc: "For growing teams.",
-    features: ["Unlimited projects", "10 users", "50GB storage", "Priority support", "Advanced analytics"],
-    cta: "Upgrade to Pro",
+    period: { en: "/month", pt: "/mês" },
+    desc: { en: "For growing teams.", pt: "Para equipes em crescimento." },
+    features: [
+      { en: "Unlimited projects", pt: "Projetos ilimitados" }, { en: "10 users", pt: "10 usuários" },
+      { en: "50GB storage", pt: "50GB de armazenamento" }, { en: "Priority support", pt: "Suporte prioritário" },
+      { en: "Advanced analytics", pt: "Análises avançadas" },
+    ],
+    cta: { en: "Upgrade to Pro", pt: "Fazer upgrade para Pro" },
     highlight: true,
     icon: Zap,
   },
   {
     name: "Enterprise",
     price: "$199",
-    period: "/month",
-    desc: "For large companies.",
-    features: ["Everything in Pro", "Unlimited users", "500GB storage", "99.99% SLA", "Dedicated manager"],
-    cta: "Contact Sales",
+    period: { en: "/month", pt: "/mês" },
+    desc: { en: "For large companies.", pt: "Para grandes empresas." },
+    features: [
+      { en: "Everything in Pro", pt: "Tudo do Pro" }, { en: "Unlimited users", pt: "Usuários ilimitados" },
+      { en: "500GB storage", pt: "500GB de armazenamento" }, { en: "99.99% SLA", pt: "SLA de 99,99%" },
+      { en: "Dedicated manager", pt: "Gerente dedicado" },
+    ],
+    cta: { en: "Contact Sales", pt: "Falar com vendas" },
     highlight: false,
     icon: Building2,
   },
 ];
 
 function PricingTemplate() {
+  const { t, bi } = useI18n();
   const [annual, setAnnual] = useState(false);
 
   return (
     <TemplateFrame>
       <div className="bg-background min-h-[480px] p-6">
         <div className="text-center mb-6">
-          <h2 className="text-[1.25rem] font-bold text-foreground mb-1">Plans & Pricing</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mb-4">Start for free. Scale as you grow.</p>
+          <h2 className="text-[1.25rem] font-bold text-foreground mb-1">{t("Plans & Pricing", "Planos e preços")}</h2>
+          <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Start for free. Scale as you grow.", "Comece grátis. Escale conforme você cresce.")}</p>
           {/* Toggle */}
           <div className="inline-flex items-center gap-3">
-            <span className={`text-[0.75rem] font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>Monthly</span>
+            <span className={`text-[0.75rem] font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>{t("Monthly", "Mensal")}</span>
             <button
               onClick={() => setAnnual(v => !v)}
               className={`w-10 h-5.5 rounded-full transition-colors relative flex items-center ${annual ? "bg-primary" : "bg-muted-foreground/30"}`}
@@ -860,7 +893,7 @@ function PricingTemplate() {
               <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${annual ? "left-[22px]" : "left-0.5"}`} />
             </button>
             <span className={`text-[0.75rem] font-medium ${annual ? "text-foreground" : "text-muted-foreground"}`}>
-              Yearly
+              {t("Yearly", "Anual")}
               <span className="ml-1.5 px-1.5 py-0.5 rounded-full bg-success/10 text-success text-[0.5625rem] font-bold">-20%</span>
             </span>
           </div>
@@ -871,7 +904,7 @@ function PricingTemplate() {
             const Icon = plan.icon;
             const price = annual && plan.price !== "Free"
               ? `$${Math.round(parseInt(plan.price.replace("$", "")) * 0.8)}`
-              : plan.price;
+              : plan.price === "Free" ? t("Free", "Grátis") : plan.price;
             return (
               <div
                 key={plan.name}
@@ -884,7 +917,7 @@ function PricingTemplate() {
               >
                 {plan.highlight && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-primary text-primary-foreground text-[0.5625rem] font-bold whitespace-nowrap">
-                    Most Popular
+                    {t("Most Popular", "Mais popular")}
                   </div>
                 )}
                 <div className="flex items-center gap-2 mb-3">
@@ -893,18 +926,18 @@ function PricingTemplate() {
                   </div>
                   <div>
                     <div className="text-[0.8125rem] font-bold text-foreground">{plan.name}</div>
-                    <div className="text-[0.5625rem] text-muted-foreground">{plan.desc}</div>
+                    <div className="text-[0.5625rem] text-muted-foreground">{bi(plan.desc)}</div>
                   </div>
                 </div>
                 <div className="mb-4">
                   <span className="text-[1.5rem] font-extrabold text-foreground">{price}</span>
-                  <span className="text-[0.75rem] text-muted-foreground">{plan.period}</span>
+                  <span className="text-[0.75rem] text-muted-foreground">{bi(plan.period)}</span>
                 </div>
                 <div className="space-y-1.5 flex-1 mb-4">
                   {plan.features.map(f => (
-                    <div key={f} className="flex items-center gap-2 text-[0.6875rem] text-muted-foreground">
+                    <div key={f.en} className="flex items-center gap-2 text-[0.6875rem] text-muted-foreground">
                       <CheckCircle className={`h-3 w-3 shrink-0 ${plan.highlight ? "text-primary" : "text-success"}`} />
-                      {f}
+                      {bi(f)}
                     </div>
                   ))}
                 </div>
@@ -913,7 +946,7 @@ function PricingTemplate() {
                     ? "bg-primary text-primary-foreground hover:opacity-90"
                     : "border border-border bg-card text-foreground hover:bg-accent"
                   }`}>
-                  {plan.cta}
+                  {bi(plan.cta)}
                 </button>
               </div>
             );
@@ -930,36 +963,37 @@ function PricingTemplate() {
 const contactChannels = [
   {
     icon: Mail,
-    label: "Email",
+    label: { en: "Email", pt: "Email" },
     value: "contato@danimos.co",
-    desc: "Response within 24h",
+    desc: { en: "Response within 24h", pt: "Resposta em até 24h" },
     color: "bg-info/10 text-info",
   },
   {
     icon: Phone,
-    label: "Phone",
+    label: { en: "Phone", pt: "Telefone" },
     value: "+55 (11) 9 9999-0000",
-    desc: "Mon–Fri, 9am–6pm BRT",
+    desc: { en: "Mon–Fri, 9am–6pm BRT", pt: "Seg–Sex, 9h–18h BRT" },
     color: "bg-success/10 text-success",
   },
   {
     icon: MapPin,
-    label: "Address",
-    value: "São Paulo, SP — Brazil",
-    desc: "Av. Paulista, 1000",
+    label: { en: "Address", pt: "Endereço" },
+    value: { en: "São Paulo, SP — Brazil", pt: "São Paulo, SP — Brasil" } as string | L,
+    desc: { en: "Av. Paulista, 1000", pt: "Av. Paulista, 1000" },
     color: "bg-warning/10 text-warning",
   },
 ];
 
-const subjects = [
-  "Technical support",
-  "Sales / Plans",
-  "Partnership",
-  "Press",
-  "Other",
+const subjects: L[] = [
+  { en: "Technical support", pt: "Suporte técnico" },
+  { en: "Sales / Plans", pt: "Vendas / Planos" },
+  { en: "Partnership", pt: "Parcerias" },
+  { en: "Press", pt: "Imprensa" },
+  { en: "Other", pt: "Outro" },
 ];
 
 function ContactTemplate() {
+  const { t, bi } = useI18n();
   const [sent, setSent] = useState(false);
   const [subject, setSubject] = useState("Technical support");
   const [subjectOpen, setSubjectOpen] = useState(false);
@@ -983,9 +1017,9 @@ function ContactTemplate() {
             <div className="h-10 w-10 rounded-[12px] bg-primary/12 flex items-center justify-center mb-4">
               <MessageSquare className="h-5 w-5 text-primary" />
             </div>
-            <h2 className="text-[1rem] font-bold text-foreground mb-1">Contact us</h2>
+            <h2 className="text-[1rem] font-bold text-foreground mb-1">{t("Contact us", "Fale conosco")}</h2>
             <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">
-              Have a question, a suggestion, or want to learn more about our plans? Get in touch.
+              {t("Have a question, a suggestion, or want to learn more about our plans? Get in touch.", "Tem uma dúvida, uma sugestão ou quer saber mais sobre nossos planos? Entre em contato.")}
             </p>
           </div>
 
@@ -993,13 +1027,13 @@ function ContactTemplate() {
             {contactChannels.map(ch => {
               const Icon = ch.icon;
               return (
-                <div key={ch.label} className="flex items-start gap-3 p-3 rounded-[10px] border border-border bg-background/60">
+                <div key={ch.label.en} className="flex items-start gap-3 p-3 rounded-[10px] border border-border bg-background/60">
                   <div className={`h-8 w-8 rounded-[8px] flex items-center justify-center shrink-0 ${ch.color}`}>
                     <Icon className="h-4 w-4" />
                   </div>
                   <div>
-                    <div className="text-[0.75rem] font-semibold text-foreground">{ch.value}</div>
-                    <div className="text-[0.6875rem] text-muted-foreground">{ch.desc}</div>
+                    <div className="text-[0.75rem] font-semibold text-foreground">{typeof ch.value === "string" ? ch.value : bi(ch.value)}</div>
+                    <div className="text-[0.6875rem] text-muted-foreground">{bi(ch.desc)}</div>
                   </div>
                 </div>
               );
@@ -1008,7 +1042,7 @@ function ContactTemplate() {
 
           {/* Social links */}
           <div className="relative z-10 mt-auto pt-4 border-t border-border">
-            <p className="text-[0.6875rem] text-muted-foreground mb-3">Follow us</p>
+            <p className="text-[0.6875rem] text-muted-foreground mb-3">{t("Follow us", "Siga-nos")}</p>
             <div className="flex items-center gap-2">
               {["LinkedIn", "Twitter", "GitHub"].map(s => (
                 <button
@@ -1029,34 +1063,34 @@ function ContactTemplate() {
               <div className="h-16 w-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
                 <CheckCircle className="h-8 w-8 text-success" />
               </div>
-              <h3 className="text-[1.0625rem] font-bold text-foreground mb-2">Message sent!</h3>
+              <h3 className="text-[1.0625rem] font-bold text-foreground mb-2">{t("Message sent!", "Mensagem enviada!")}</h3>
               <p className="text-[0.875rem] text-muted-foreground max-w-xs mb-6">
-                Thanks for reaching out. Our team will get back to you within 24 business hours.
+                {t("Thanks for reaching out. Our team will get back to you within 24 business hours.", "Obrigado pelo contato. Nossa equipe responderá em até 24 horas úteis.")}
               </p>
               <button
                 onClick={() => setSent(false)}
                 className="h-9 px-5 rounded-[10px] border border-border bg-card text-[0.875rem] font-medium text-foreground hover:bg-accent transition-colors"
               >
-                Send another message
+                {t("Send another message", "Enviar outra mensagem")}
               </button>
             </div>
           ) : (
             <form onSubmit={handleSend} className="space-y-4 max-w-md">
               <div>
-                <h3 className="text-[0.9375rem] font-bold text-foreground mb-0.5">New message</h3>
-                <p className="text-[0.75rem] text-muted-foreground">Fill out the form below and we will get back to you shortly.</p>
+                <h3 className="text-[0.9375rem] font-bold text-foreground mb-0.5">{t("New message", "Nova mensagem")}</h3>
+                <p className="text-[0.75rem] text-muted-foreground">{t("Fill out the form below and we will get back to you shortly.", "Preencha o formulário abaixo e retornaremos em breve.")}</p>
               </div>
 
               {/* Name + Email row */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[0.75rem] font-medium text-foreground mb-1">Name</label>
+                  <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Name", "Nome")}</label>
                   <div className="relative">
                     <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
                     <input
                       required
                       type="text"
-                      placeholder="Your name"
+                      placeholder={t("Your name", "Seu nome")}
                       className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
                     />
                   </div>
@@ -1068,7 +1102,7 @@ function ContactTemplate() {
                     <input
                       required
                       type="email"
-                      placeholder="you@email.com"
+                      placeholder={t("you@email.com", "voce@email.com")}
                       className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
                     />
                   </div>
@@ -1078,7 +1112,7 @@ function ContactTemplate() {
               {/* Phone */}
               <div>
                 <label className="block text-[0.75rem] font-medium text-foreground mb-1">
-                  Phone <span className="text-muted-foreground font-normal">(optional)</span>
+                  {t("Phone", "Telefone")} <span className="text-muted-foreground font-normal">({t("optional", "opcional")})</span>
                 </label>
                 <div className="relative">
                   <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
@@ -1092,28 +1126,28 @@ function ContactTemplate() {
 
               {/* Subject dropdown */}
               <div>
-                <label className="block text-[0.75rem] font-medium text-foreground mb-1">Subject</label>
+                <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Subject", "Assunto")}</label>
                 <div className="relative">
                   <button
                     type="button"
                     onClick={() => setSubjectOpen(v => !v)}
                     className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground text-left flex items-center justify-between outline-none focus:ring-1 focus:ring-ring transition-all"
                   >
-                    {subject}
+                    {bi(subjects.find(x => x.en === subject) ?? subjects[0])}
                     <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
                   </button>
                   {subjectOpen && (
                     <div className="absolute top-full left-0 right-0 mt-1 z-20 bg-popover border border-border rounded-[10px] py-1 shadow-lg" style={{ boxShadow: "var(--shadow-md)" }}>
                       {subjects.map(s => (
                         <button
-                          key={s}
+                          key={s.en}
                           type="button"
-                          onClick={() => { setSubject(s); setSubjectOpen(false); }}
+                          onClick={() => { setSubject(s.en); setSubjectOpen(false); }}
                           className={`w-full text-left px-3 py-2 text-[0.8125rem] transition-colors flex items-center justify-between
-                            ${subject === s ? "text-primary font-medium bg-primary/5" : "text-foreground hover:bg-accent"}`}
+                            ${subject === s.en ? "text-primary font-medium bg-primary/5" : "text-foreground hover:bg-accent"}`}
                         >
-                          {s}
-                          {subject === s && <Check className="h-3 w-3 text-primary" />}
+                          {bi(s)}
+                          {subject === s.en && <Check className="h-3 w-3 text-primary" />}
                         </button>
                       ))}
                     </div>
@@ -1123,11 +1157,11 @@ function ContactTemplate() {
 
               {/* Message */}
               <div>
-                <label className="block text-[0.75rem] font-medium text-foreground mb-1">Message</label>
+                <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Message", "Mensagem")}</label>
                 <textarea
                   required
                   rows={4}
-                  placeholder="Describe your question or request in detail..."
+                  placeholder={t("Describe your question or request in detail...", "Descreva sua dúvida ou solicitação em detalhes...")}
                   className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all resize-none"
                 />
               </div>
@@ -1141,7 +1175,7 @@ function ContactTemplate() {
                   className="mt-0.5 h-3.5 w-3.5 rounded accent-[var(--primary)] shrink-0"
                 />
                 <label htmlFor="consent" className="text-[0.6875rem] text-muted-foreground leading-snug cursor-pointer">
-                  I agree to the <span className="text-primary underline underline-offset-2 cursor-pointer">Terms of Use</span> and <span className="text-primary underline underline-offset-2 cursor-pointer">Privacy Policy</span>.
+                  {t("I agree to the ", "Concordo com os ")}<span className="text-primary underline underline-offset-2 cursor-pointer">{t("Terms of Use", "Termos de Uso")}</span>{t(" and ", " e a ")}<span className="text-primary underline underline-offset-2 cursor-pointer">{t("Privacy Policy", "Política de Privacidade")}</span>.
                 </label>
               </div>
 
@@ -1151,7 +1185,7 @@ function ContactTemplate() {
                 className="w-full h-10 rounded-[10px] bg-primary text-primary-foreground text-[0.875rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
                 <Send className="h-4 w-4" />
-                Send message
+                {t("Send message", "Enviar mensagem")}
               </button>
             </form>
           )}
@@ -1165,12 +1199,13 @@ function ContactTemplate() {
    Main export
 ───────────────────────────────────────────── */
 export function TemplatesShowcase() {
+  const { t, bi } = useI18n();
   return (
     <div className="space-y-16">
       <div className="mb-2">
-        <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">Templates</h2>
+        <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{t("Templates", "Templates")}</h2>
         <p className="text-[0.9375rem] text-muted-foreground">
-          Ready-to-use layouts that combine design system components into real product screens.
+          {t("Ready-to-use layouts that combine design system components into real product screens.", "Layouts prontos para usar que combinam componentes do design system em telas reais de produto.")}
         </p>
       </div>
 
@@ -1182,37 +1217,37 @@ export function TemplatesShowcase() {
 
       {/* 2 — Settings */}
       <section id="template-settings">
-        <TemplateLabel icon={Settings} label="Settings Page" />
+        <TemplateLabel icon={Settings} label={t("Settings Page", "Página de configurações")} />
         <SettingsTemplate />
       </section>
 
       {/* 3 — Auth */}
       <section id="template-auth">
-        <TemplateLabel icon={LogIn} label="Authentication" />
+        <TemplateLabel icon={LogIn} label={t("Authentication", "Autenticação")} />
         <AuthTemplate />
       </section>
 
       {/* 4 — Team */}
       <section id="template-team">
-        <TemplateLabel icon={Users} label="Team Management" />
+        <TemplateLabel icon={Users} label={t("Team Management", "Gestão de equipe")} />
         <TeamTemplate />
       </section>
 
       {/* 5 — Inbox */}
       <section id="template-inbox">
-        <TemplateLabel icon={Inbox} label="Notifications / Inbox" />
+        <TemplateLabel icon={Inbox} label={t("Notifications / Inbox", "Notificações / Caixa de entrada")} />
         <InboxTemplate />
       </section>
 
       {/* 6 — Pricing */}
       <section id="template-pricing">
-        <TemplateLabel icon={CreditCard} label="Pricing & Plans" />
+        <TemplateLabel icon={CreditCard} label={t("Pricing & Plans", "Preços e planos")} />
         <PricingTemplate />
       </section>
 
       {/* 7 — Contact */}
       <section id="template-contact">
-        <TemplateLabel icon={MessageSquare} label="Contact" />
+        <TemplateLabel icon={MessageSquare} label={t("Contact", "Contato")} />
         <ContactTemplate />
       </section>
 
@@ -1226,65 +1261,65 @@ export function TemplatesShowcase() {
       <section id="templates-tokens" className="space-y-5">
         <div>
           <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Tokens</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">Core CSS custom properties shared across all templates.</p>
+          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("Core CSS custom properties shared across all templates.", "Propriedades CSS personalizadas principais compartilhadas por todos os templates.")}</p>
         </div>
-        <TokenTable groups={templatesTokenGroups} />
+        <TokenTable groups={templatesTokenGroups(t)} />
       </section>
     </div>
   );
 }
 
-const templatesTokenGroups: TokenGroup[] = [
+const templatesTokenGroups = (t: (en: string, pt: string) => string): TokenGroup[] => [
   {
-    group: "Layout Background",
+    group: t("Layout Background", "Fundo do layout"),
     tokens: [
-      { name: "--background",      description: "Page / app shell background",  light: "#ECF0F5",              dark: "#0D1119",              isColor: true },
-      { name: "--foreground",      description: "Default body text",             light: "#131A27",              dark: "#E4E9F0",              isColor: true },
-      { name: "--muted-foreground",description: "Subdued labels and captions",   light: "#627288",              dark: "#8898B0",              isColor: true },
+      { name: "--background",      description: t("Page / app shell background", "Fundo da página / estrutura do app"),  light: "#ECF0F5",              dark: "#0D1119",              isColor: true },
+      { name: "--foreground",      description: t("Default body text", "Texto padrão do corpo"),             light: "#131A27",              dark: "#E4E9F0",              isColor: true },
+      { name: "--muted-foreground",description: t("Subdued labels and captions", "Rótulos e legendas discretos"),   light: "#627288",              dark: "#8898B0",              isColor: true },
     ],
   },
   {
-    group: "Sidebar",
+    group: t("Sidebar", "Barra lateral"),
     tokens: [
-      { name: "--sidebar",                   description: "Sidebar panel background",      light: "#FFFFFF",              dark: "rgba(13,17,25,0.97)",  isColor: true },
-      { name: "--sidebar-foreground",        description: "Sidebar text",                  light: "#131A27",              dark: "#E4E9F0",              isColor: true },
-      { name: "--sidebar-primary",           description: "Active nav item",               light: "#D44D4D",              dark: "#D44D4D",              isColor: true },
-      { name: "--sidebar-primary-foreground",description: "Text on active nav item",       light: "#FFFFFF",              dark: "#FFFFFF",              isColor: true },
-      { name: "--sidebar-accent",            description: "Nav hover background",          light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
-      { name: "--sidebar-border",            description: "Sidebar separator",             light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.06)", isColor: true },
+      { name: "--sidebar",                   description: t("Sidebar panel background", "Fundo do painel da barra lateral"),      light: "#FFFFFF",              dark: "rgba(13,17,25,0.97)",  isColor: true },
+      { name: "--sidebar-foreground",        description: t("Sidebar text", "Texto da barra lateral"),                  light: "#131A27",              dark: "#E4E9F0",              isColor: true },
+      { name: "--sidebar-primary",           description: t("Active nav item", "Item de navegação ativo"),               light: "#D44D4D",              dark: "#D44D4D",              isColor: true },
+      { name: "--sidebar-primary-foreground",description: t("Text on active nav item", "Texto no item de navegação ativo"),       light: "#FFFFFF",              dark: "#FFFFFF",              isColor: true },
+      { name: "--sidebar-accent",            description: t("Nav hover background", "Fundo de hover da navegação"),          light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
+      { name: "--sidebar-border",            description: t("Sidebar separator", "Separador da barra lateral"),             light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.06)", isColor: true },
     ],
   },
   {
-    group: "Card & Section Surfaces",
+    group: t("Card & Section Surfaces", "Superfícies de cards e seções"),
     tokens: [
-      { name: "--card",            description: "Content card background",       light: "#FFFFFF",             dark: "rgba(19,26,39,0.75)", isColor: true },
-      { name: "--card-foreground", description: "Card body text",                light: "#131A27",             dark: "#E4E9F0",             isColor: true },
-      { name: "--border",          description: "Section divider",               light: "rgba(19,26,39,0.09)",dark: "rgba(255,255,255,0.07)", isColor: true },
-      { name: "--muted",           description: "Subtle row / alternate bg",    light: "#E8EDF3",             dark: "rgba(40,48,67,0.60)", isColor: true },
+      { name: "--card",            description: t("Content card background", "Fundo do card de conteúdo"),       light: "#FFFFFF",             dark: "rgba(19,26,39,0.75)", isColor: true },
+      { name: "--card-foreground", description: t("Card body text", "Texto do corpo do card"),                light: "#131A27",             dark: "#E4E9F0",             isColor: true },
+      { name: "--border",          description: t("Section divider", "Divisor de seção"),               light: "rgba(19,26,39,0.09)",dark: "rgba(255,255,255,0.07)", isColor: true },
+      { name: "--muted",           description: t("Subtle row / alternate bg", "Linha sutil / fundo alternado"),    light: "#E8EDF3",             dark: "rgba(40,48,67,0.60)", isColor: true },
     ],
   },
   {
-    group: "Brand & CTA",
+    group: t("Brand & CTA", "Marca e CTA"),
     tokens: [
-      { name: "--primary",            description: "Primary CTA button / link",  light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--primary-foreground", description: "Text on CTA",               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--primary-muted",      description: "Tinted CTA zone",           light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
+      { name: "--primary",            description: t("Primary CTA button / link", "Botão / link CTA primário"),  light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--primary-foreground", description: t("Text on CTA", "Texto sobre o CTA"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
+      { name: "--primary-muted",      description: t("Tinted CTA zone", "Área de CTA com tom"),           light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
     ],
   },
   {
-    group: "Elevation",
+    group: t("Elevation", "Elevação"),
     tokens: [
-      { name: "--shadow-sm", description: "Card lift",                light: "0 1px 3px …" },
-      { name: "--shadow",    description: "Section container shadow", light: "0 2px 6px …" },
-      { name: "--shadow-lg", description: "Hero / modal shadow",     light: "0 8px 24px …" },
+      { name: "--shadow-sm", description: t("Card lift", "Elevação do card"),                light: "0 1px 3px …" },
+      { name: "--shadow",    description: t("Section container shadow", "Sombra do container de seção"), light: "0 2px 6px …" },
+      { name: "--shadow-lg", description: t("Hero / modal shadow", "Sombra de hero / modal"),     light: "0 8px 24px …" },
     ],
   },
   {
-    group: "Shape",
+    group: t("Shape", "Forma"),
     tokens: [
-      { name: "--radius",    description: "Default border radius", light: "0.75rem" },
-      { name: "--radius-lg", description: "Cards and panels",      light: "calc(0.75rem + 4px)" },
-      { name: "--radius-xl", description: "Hero sections",         light: "calc(0.75rem + 12px)" },
+      { name: "--radius",    description: t("Default border radius", "Raio de borda padrão"), light: "0.75rem" },
+      { name: "--radius-lg", description: t("Cards and panels", "Cards e painéis"),      light: "calc(0.75rem + 4px)" },
+      { name: "--radius-xl", description: t("Hero sections", "Seções hero"),         light: "calc(0.75rem + 12px)" },
     ],
   },
 ];
@@ -1316,48 +1351,52 @@ const landingStats = [
 
 /* ── extra data ── */
 const revenueData = [
-  { m: "Jan", v: 38 }, { m: "Feb", v: 52 }, { m: "Mar", v: 47 },
-  { m: "Apr", v: 68 }, { m: "May", v: 61 }, { m: "Jun", v: 80 },
-  { m: "Jul", v: 74 }, { m: "Aug", v: 93 }, { m: "Sep", v: 87 },
-  { m: "Oct", v: 105 },{ m: "Nov", v: 118 },{ m: "Dec", v: 134 },
+  { m: "Jan", mp: "Jan", v: 38 }, { m: "Feb", mp: "Fev", v: 52 }, { m: "Mar", mp: "Mar", v: 47 },
+  { m: "Apr", mp: "Abr", v: 68 }, { m: "May", mp: "Mai", v: 61 }, { m: "Jun", mp: "Jun", v: 80 },
+  { m: "Jul", mp: "Jul", v: 74 }, { m: "Aug", mp: "Ago", v: 93 }, { m: "Sep", mp: "Set", v: 87 },
+  { m: "Oct", mp: "Out", v: 105 },{ m: "Nov", mp: "Nov", v: 118 },{ m: "Dec", mp: "Dez", v: 134 },
 ];
 
 const allTestimonials = [
-  { name: "Ana Lima",       role: "CTO @ Fintech BR",      text: "We cut our time-to-market by 60%. We would never go back to separate tools.", avatar: "AL", stars: 5 },
-  { name: "Carlos Mendes",  role: "Head of Growth",         text: "The analytics dashboard changed how we make product decisions. Total clarity.",  avatar: "CM", stars: 5 },
-  { name: "Beatriz Santos", role: "Engineering Manager",    text: "Set up in minutes, scales to millions of users with zero friction. Impressive.",   avatar: "BS", stars: 5 },
-  { name: "Diego Ferreira", role: "Founder @ Startup SP",   text: "The only platform that delivered on its promise. Positive ROI in under 30 days.",    avatar: "DF", stars: 5 },
-  { name: "Fernanda Paiva", role: "CPO @ ScaleUp",          text: "Flawless design, exceptional support and APIs any dev loves working with.",           avatar: "FP", stars: 5 },
+  { name: "Ana Lima",       role: { en: "CTO @ Fintech BR", pt: "CTO @ Fintech BR" },      text: { en: "We cut our time-to-market by 60%. We would never go back to separate tools.", pt: "Reduzimos nosso time-to-market em 60%. Nunca voltaríamos a usar ferramentas separadas." }, avatar: "AL", stars: 5 },
+  { name: "Carlos Mendes",  role: { en: "Head of Growth", pt: "Head de Growth" },         text: { en: "The analytics dashboard changed how we make product decisions. Total clarity.", pt: "O dashboard de análises mudou a forma como tomamos decisões de produto. Clareza total." },  avatar: "CM", stars: 5 },
+  { name: "Beatriz Santos", role: { en: "Engineering Manager", pt: "Gerente de Engenharia" },    text: { en: "Set up in minutes, scales to millions of users with zero friction. Impressive.", pt: "Configurado em minutos, escala para milhões de usuários sem atrito. Impressionante." },   avatar: "BS", stars: 5 },
+  { name: "Diego Ferreira", role: { en: "Founder @ Startup SP", pt: "Fundador @ Startup SP" },   text: { en: "The only platform that delivered on its promise. Positive ROI in under 30 days.", pt: "A única plataforma que cumpriu o que prometeu. ROI positivo em menos de 30 dias." },    avatar: "DF", stars: 5 },
+  { name: "Fernanda Paiva", role: { en: "CPO @ ScaleUp", pt: "CPO @ ScaleUp" },          text: { en: "Flawless design, exceptional support and APIs any dev loves working with.", pt: "Design impecável, suporte excepcional e APIs com as quais qualquer dev adora trabalhar." },           avatar: "FP", stars: 5 },
 ];
 
 const roadmapItems = [
-  { date: "Q1 2026", label: "Launch",     desc: "Core platform with dashboard, analytics and basic integrations.",    done: true  },
-  { date: "Q2 2026", label: "AI & Automation", desc: "Proactive suggestion engine and natural-language automations.",    done: true  },
-  { date: "Q3 2026", label: "Enterprise",     desc: "SSO, advanced RBAC, 99.99% SLA and dedicated account manager.",        done: false },
-  { date: "Q4 2026", label: "Global Edge",    desc: "Expansion to 20 CDN regions and GDPR + SOC 2 compliance.",          done: false },
+  { date: "Q1 2026", label: { en: "Launch", pt: "Lançamento" },     desc: { en: "Core platform with dashboard, analytics and basic integrations.", pt: "Plataforma principal com dashboard, análises e integrações básicas." },    done: true  },
+  { date: "Q2 2026", label: { en: "AI & Automation", pt: "IA e automação" }, desc: { en: "Proactive suggestion engine and natural-language automations.", pt: "Motor de sugestões proativas e automações em linguagem natural." },    done: true  },
+  { date: "Q3 2026", label: { en: "Enterprise", pt: "Enterprise" },     desc: { en: "SSO, advanced RBAC, 99.99% SLA and dedicated account manager.", pt: "SSO, RBAC avançado, SLA de 99,99% e gerente de conta dedicado." },        done: false },
+  { date: "Q4 2026", label: { en: "Global Edge", pt: "Edge global" },    desc: { en: "Expansion to 20 CDN regions and GDPR + SOC 2 compliance.", pt: "Expansão para 20 regiões de CDN e conformidade com GDPR + SOC 2." },          done: false },
 ];
 
 const faqItems = [
-  { q: "Do I need a credit card to get started?",   a: "No. The Starter plan is free forever, no card required. You only enter payment details when you upgrade." },
-  { q: "Can I cancel at any time?",            a: "Yes. Cancel with one click in the settings panel. No fees, no red tape. Access stays active until the end of the paid period." },
-  { q: "How does data migration work?",            a: "We offer automatic CSV import, direct connections to Notion, Airtable and Google Sheets, plus dedicated support for enterprise migrations." },
-  { q: "Does the platform scale with my growth?",      a: "Yes. Our serverless infrastructure adjusts resources automatically — from 10 to 10 million users with no reconfiguration." },
-  { q: "Do you offer support in Portuguese?",               a: "Yes. PT-BR support via chat, email and, on Pro+ plans, by phone and video call during business hours." },
+  { q: { en: "Do I need a credit card to get started?", pt: "Preciso de cartão de crédito para começar?" },   a: { en: "No. The Starter plan is free forever, no card required. You only enter payment details when you upgrade.", pt: "Não. O plano Starter é gratuito para sempre, sem cartão. Você só informa os dados de pagamento ao fazer upgrade." } },
+  { q: { en: "Can I cancel at any time?", pt: "Posso cancelar a qualquer momento?" },            a: { en: "Yes. Cancel with one click in the settings panel. No fees, no red tape. Access stays active until the end of the paid period.", pt: "Sim. Cancele com um clique no painel de configurações. Sem taxas, sem burocracia. O acesso continua ativo até o fim do período pago." } },
+  { q: { en: "How does data migration work?", pt: "Como funciona a migração de dados?" },            a: { en: "We offer automatic CSV import, direct connections to Notion, Airtable and Google Sheets, plus dedicated support for enterprise migrations.", pt: "Oferecemos importação automática de CSV, conexões diretas com Notion, Airtable e Google Sheets, além de suporte dedicado para migrações enterprise." } },
+  { q: { en: "Does the platform scale with my growth?", pt: "A plataforma escala junto com o meu crescimento?" },      a: { en: "Yes. Our serverless infrastructure adjusts resources automatically — from 10 to 10 million users with no reconfiguration.", pt: "Sim. Nossa infraestrutura serverless ajusta os recursos automaticamente — de 10 a 10 milhões de usuários, sem reconfiguração." } },
+  { q: { en: "Do you offer support in Portuguese?", pt: "Vocês oferecem suporte em português?" },               a: { en: "Yes. PT-BR support via chat, email and, on Pro+ plans, by phone and video call during business hours.", pt: "Sim. Suporte em PT-BR por chat, email e, nos planos Pro+, por telefone e videochamada em horário comercial." } },
 ];
 
-const comparisonPlans = [
-  { feature: "Projects",        starter: "3",          pro: "Unlimited",  enterprise: "Unlimited"  },
-  { feature: "Users",        starter: "2",          pro: "10",          enterprise: "Unlimited"  },
-  { feature: "Storage",   starter: "1 GB",       pro: "50 GB",       enterprise: "500 GB"      },
-  { feature: "Analytics",       starter: "Basic",     pro: "Advanced",    enterprise: "Custom"      },
-  { feature: "AI & Automation",  starter: "—",          pro: "✓",           enterprise: "✓ + Custom"  },
+type Cell = string | L;
+const comparisonPlans: { feature: Cell; starter: Cell; pro: Cell; enterprise: Cell }[] = [
+  { feature: { en: "Projects", pt: "Projetos" },        starter: "3",          pro: { en: "Unlimited", pt: "Ilimitado" },  enterprise: { en: "Unlimited", pt: "Ilimitado" }  },
+  { feature: { en: "Users", pt: "Usuários" },        starter: "2",          pro: "10",          enterprise: { en: "Unlimited", pt: "Ilimitado" }  },
+  { feature: { en: "Storage", pt: "Armazenamento" },   starter: "1 GB",       pro: "50 GB",       enterprise: "500 GB"      },
+  { feature: { en: "Analytics", pt: "Análises" },       starter: { en: "Basic", pt: "Básico" },     pro: { en: "Advanced", pt: "Avançado" },    enterprise: { en: "Custom", pt: "Personalizado" }      },
+  { feature: { en: "AI & Automation", pt: "IA e automação" },  starter: "—",          pro: "✓",           enterprise: { en: "✓ + Custom", pt: "✓ + Personalizado" }  },
   { feature: "SSO / SAML",      starter: "—",          pro: "—",           enterprise: "✓"           },
   { feature: "SLA",             starter: "—",          pro: "99.9%",       enterprise: "99.99%"      },
-  { feature: "Support",         starter: "Email",      pro: "Priority", enterprise: "Dedicated"    },
+  { feature: { en: "Support", pt: "Suporte" },         starter: "Email",      pro: { en: "Priority", pt: "Prioritário" }, enterprise: { en: "Dedicated", pt: "Dedicado" }    },
 ];
 
 
 function LandingTemplate() {
+  const { t, bi, lang } = useI18n();
+  const cell = (v: string | L) => (typeof v === "string" ? v : bi(v));
+  const revData = revenueData.map(d => ({ ...d, m: lang === "pt" ? d.mp : d.m }));
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -1385,14 +1424,14 @@ function LandingTemplate() {
             <span className="text-[0.875rem] font-extrabold text-foreground tracking-tight">DaniMS</span>
           </div>
           <div className="flex items-center gap-4">
-            {["Product", "Pricing", "Roadmap", "Blog", "Contact"].map(item => (
+            {[t("Product", "Produto"), t("Pricing", "Preços"), "Roadmap", "Blog", t("Contact", "Contato")].map(item => (
               <button key={item} className="text-[0.75rem] font-medium text-muted-foreground hover:text-foreground transition-colors">{item}</button>
             ))}
           </div>
           <div className="flex items-center gap-2">
-            <button className="h-7 px-3 text-[0.75rem] font-medium text-muted-foreground hover:text-foreground transition-colors">Sign in</button>
+            <button className="h-7 px-3 text-[0.75rem] font-medium text-muted-foreground hover:text-foreground transition-colors">{t("Sign in", "Entrar")}</button>
             <button className="h-7 px-3 rounded-[7px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
-              Get started free
+              {t("Get started free", "Comece grátis")}
             </button>
           </div>
         </nav>
@@ -1404,37 +1443,37 @@ function LandingTemplate() {
           <div className="absolute top-10 right-1/5 w-[180px] h-[180px] rounded-full bg-warning/4 blur-3xl pointer-events-none" />
           <div className="relative z-10 text-center max-w-2xl mx-auto">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-[0.6875rem] font-semibold mb-5">
-              <Sparkles className="h-3 w-3" /> New — Built-in AI in the dashboard <ArrowRight className="h-3 w-3" />
+              <Sparkles className="h-3 w-3" /> {t("New — Built-in AI in the dashboard", "Novo — IA integrada ao dashboard")} <ArrowRight className="h-3 w-3" />
             </div>
             <h1 className="text-[2.25rem] font-black text-foreground tracking-[-0.04em] leading-[1.1] mb-4">
-              A plataforma SaaS que<br/>
-              <span style={{ color: "var(--primary)" }}>accelerates your growth</span><br/>
-              for real
+              {t("The SaaS platform that", "A plataforma SaaS que")}<br/>
+              <span style={{ color: "var(--primary)" }}>{t("accelerates your growth", "acelera o seu crescimento")}</span><br/>
+              {t("for real", "de verdade")}
             </h1>
             <p className="text-[0.9375rem] text-muted-foreground max-w-lg mx-auto leading-relaxed mb-8">
-              Real-time analytics, smart AI automations and enterprise infrastructure — all in one premium dashboard your team will love.
+              {t("Real-time analytics, smart AI automations and enterprise infrastructure — all in one premium dashboard your team will love.", "Análises em tempo real, automações inteligentes com IA e infraestrutura enterprise — tudo em um dashboard premium que sua equipe vai adorar.")}
             </p>
             <div className="flex items-center justify-center gap-3 mb-5">
               {subscribed ? (
                 <div className="flex items-center gap-2 px-4 py-2 rounded-[10px] bg-success/10 border border-success/20 text-success text-[0.8125rem] font-medium">
-                  <CheckCircle className="h-4 w-4" /> Great! We will be in touch soon.
+                  <CheckCircle className="h-4 w-4" /> {t("Great! We will be in touch soon.", "Ótimo! Entraremos em contato em breve.")}
                 </div>
               ) : (
                 <form onSubmit={e => { e.preventDefault(); if (email) setSubscribed(true); }} className="flex gap-2 w-full max-w-sm">
                   <div className="relative flex-1">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-                    <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="you@email.com"
+                    <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder={t("you@email.com", "voce@email.com")}
                       className="w-full bg-card border border-border rounded-[9px] pl-9 pr-3 py-2.5 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
                   </div>
                   <button type="submit" className="h-10 px-4 rounded-[9px] bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity whitespace-nowrap flex items-center gap-1.5">
-                    <Rocket className="h-3.5 w-3.5" /> Get started free
+                    <Rocket className="h-3.5 w-3.5" /> {t("Get started free", "Comece grátis")}
                   </button>
                 </form>
               )}
             </div>
             <div className="flex items-center justify-center gap-5 text-[0.6875rem] text-muted-foreground">
-              {["No credit card", "Setup in 2 minutes", "Cancel anytime"].map(t => (
-                <span key={t} className="flex items-center gap-1.5"><Check className="h-3 w-3 text-success" />{t}</span>
+              {[t("No credit card", "Sem cartão de crédito"), t("Setup in 2 minutes", "Configuração em 2 minutos"), t("Cancel anytime", "Cancele quando quiser")].map(item => (
+                <span key={item} className="flex items-center gap-1.5"><Check className="h-3 w-3 text-success" />{item}</span>
               ))}
             </div>
           </div>
@@ -1444,12 +1483,12 @@ function LandingTemplate() {
         <div className="border-y border-border bg-card/50 px-6 py-5">
           <div className="grid grid-cols-4 gap-0 divide-x divide-border max-w-2xl mx-auto">
             {[
-              { value: "99.99%", label: "Uptime SLA" },
-              { value: "50ms",   label: "P99 Latency" },
-              { value: "12k+",   label: "Active customers" },
-              { value: "200+",   label: "Integrations" },
+              { value: "99.99%", label: t("Uptime SLA", "SLA de uptime") },
+              { value: "50ms",   label: t("P99 Latency", "Latência P99") },
+              { value: "12k+",   label: t("Active customers", "Clientes ativos") },
+              { value: "200+",   label: t("Integrations", "Integrações") },
             ].map(s => (
-              <div key={s.label} className="text-center px-4">
+              <div key={s.value} className="text-center px-4">
                 <div className="text-[1.375rem] font-black text-foreground tracking-tight">{s.value}</div>
                 <div className="text-[0.6875rem] text-muted-foreground">{s.label}</div>
               </div>
@@ -1460,8 +1499,8 @@ function LandingTemplate() {
         {/* ══ PRODUCT MOCKUP ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-6">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Platform</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">Everything your team needs, in one place</h2>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Platform", "Plataforma")}</p>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Everything your team needs, in one place", "Tudo o que sua equipe precisa, em um só lugar")}</h2>
           </div>
           <div className="max-w-2xl mx-auto rounded-[16px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xl)" }}>
             <div className="h-8 bg-muted/60 border-b border-border flex items-center px-4 gap-2 shrink-0">
@@ -1472,9 +1511,9 @@ function LandingTemplate() {
               {/* KPIs */}
               <div className="grid grid-cols-4 gap-2 mb-3">
                 {[
-                  { label: "MRR Revenue",  value: "$134k", delta: "+12.5%", up: true  },
-                  { label: "Users",     value: "12.8k", delta: "+8.2%",  up: true  },
-                  { label: "Conversion",   value: "3.4%",  delta: "+0.5%",  up: true  },
+                  { label: t("MRR Revenue", "Receita MRR"),  value: "$134k", delta: "+12.5%", up: true  },
+                  { label: t("Users", "Usuários"),     value: "12.8k", delta: "+8.2%",  up: true  },
+                  { label: t("Conversion", "Conversão"),   value: "3.4%",  delta: "+0.5%",  up: true  },
                   { label: "Churn",        value: "1.8%",  delta: "-0.3%",  up: false },
                 ].map(k => (
                   <div key={k.label} className="rounded-[9px] border border-border bg-background p-2.5">
@@ -1489,12 +1528,12 @@ function LandingTemplate() {
               {/* Chart */}
               <div className="rounded-[9px] border border-border bg-background p-3 mb-3">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[0.625rem] font-semibold text-foreground">Revenue — last 12 months</span>
+                  <span className="text-[0.625rem] font-semibold text-foreground">{t("Revenue — last 12 months", "Receita — últimos 12 meses")}</span>
                   <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-success/10 text-success font-semibold">+12.5%</span>
                 </div>
                 <div className="h-[80px]">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={revenueData} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
+                    <AreaChart data={revData} margin={{ top: 2, right: 0, left: 0, bottom: 0 }}>
                       <defs>
                         <linearGradient id="lRevGrad" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="5%"  stopColor="var(--primary)" stopOpacity={0.3} />
@@ -1511,14 +1550,14 @@ function LandingTemplate() {
               {/* Table preview */}
               <div className="rounded-[9px] border border-border bg-background overflow-hidden">
                 <div className="grid grid-cols-4 gap-0 border-b border-border bg-muted/40 px-3 py-1.5">
-                  {["Customer", "Plan", "MRR", "Status"].map(h => (
+                  {[t("Customer", "Cliente"), t("Plan", "Plano"), "MRR", "Status"].map(h => (
                     <div key={h} className="text-[0.5rem] font-semibold uppercase tracking-wide text-muted-foreground">{h}</div>
                   ))}
                 </div>
                 {[
-                  { name: "Fintech BR",  plan: "Enterprise", mrr: "$4,200", status: "Ativo",   sc: "text-success" },
-                  { name: "ScaleUp SP",  plan: "Pro",        mrr: "$490",   status: "Ativo",   sc: "text-success" },
-                  { name: "StartupMVP",  plan: "Starter",    mrr: "—",      status: "Trial",   sc: "text-warning" },
+                  { name: "Fintech BR",  plan: "Enterprise", mrr: "$4,200", status: t("Active", "Ativo"),   sc: "text-success" },
+                  { name: "ScaleUp SP",  plan: "Pro",        mrr: "$490",   status: t("Active", "Ativo"),   sc: "text-success" },
+                  { name: "StartupMVP",  plan: "Starter",    mrr: "—",      status: t("Trial", "Em teste"),   sc: "text-warning" },
                 ].map(r => (
                   <div key={r.name} className="grid grid-cols-4 gap-0 px-3 py-2 border-b border-border last:border-0 items-center">
                     <div className="text-[0.625rem] font-medium text-foreground">{r.name}</div>
@@ -1535,8 +1574,8 @@ function LandingTemplate() {
         {/* ══ BENTO GRID ══ */}
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Why DaniMS</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">Built for teams that scale fast</h2>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Why DaniMS", "Por que o DaniMS")}</p>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Built for teams that scale fast", "Feito para equipes que crescem rápido")}</h2>
           </div>
           <div className="max-w-2xl mx-auto grid grid-cols-3 grid-rows-2 gap-3" style={{ gridTemplateRows: "auto auto" }}>
             {/* Large card - spans 2 cols */}
@@ -1545,11 +1584,11 @@ function LandingTemplate() {
               <div className="h-8 w-8 rounded-[10px] bg-primary/10 flex items-center justify-center mb-3">
                 <Sparkles className="h-4 w-4 text-primary" />
               </div>
-              <div className="text-[0.875rem] font-bold text-foreground mb-1">AI that works for you</div>
-              <div className="text-[0.75rem] text-muted-foreground leading-snug mb-3">Proactive suggestions, natural-language automations and automatically generated reports.</div>
+              <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("AI that works for you", "IA que trabalha para você")}</div>
+              <div className="text-[0.75rem] text-muted-foreground leading-snug mb-3">{t("Proactive suggestions, natural-language automations and automatically generated reports.", "Sugestões proativas, automações em linguagem natural e relatórios gerados automaticamente.")}</div>
               <div className="flex gap-2">
-                {["Daily summaries", "Smart alerts", "Auto-tagging"].map(t => (
-                  <span key={t} className="text-[0.5625rem] px-2 py-0.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15">{t}</span>
+                {[t("Daily summaries", "Resumos diários"), t("Smart alerts", "Alertas inteligentes"), t("Auto-tagging", "Marcação automática")].map(chip => (
+                  <span key={chip} className="text-[0.5625rem] px-2 py-0.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15">{chip}</span>
                 ))}
               </div>
             </div>
@@ -1558,15 +1597,15 @@ function LandingTemplate() {
               <ShieldCheck className="h-5 w-5 text-success mb-2" />
               <div>
                 <div className="text-[0.8125rem] font-bold text-foreground mb-1">SOC 2 Type II</div>
-                <div className="text-[0.6875rem] text-muted-foreground">Compliance and end-to-end encryption by default.</div>
+                <div className="text-[0.6875rem] text-muted-foreground">{t("Compliance and end-to-end encryption by default.", "Conformidade e criptografia de ponta a ponta por padrão.")}</div>
               </div>
             </div>
             {/* Small card */}
             <div className="rounded-[14px] border border-border bg-card p-4 flex flex-col justify-between" style={{ boxShadow: "var(--shadow-xs)" }}>
               <Globe className="h-5 w-5 text-info mb-2" />
               <div>
-                <div className="text-[0.8125rem] font-bold text-foreground mb-1">20 CDN regions</div>
-                <div className="text-[0.6875rem] text-muted-foreground">Minimal latency for users in any country.</div>
+                <div className="text-[0.8125rem] font-bold text-foreground mb-1">{t("20 CDN regions", "20 regiões de CDN")}</div>
+                <div className="text-[0.6875rem] text-muted-foreground">{t("Minimal latency for users in any country.", "Latência mínima para usuários em qualquer país.")}</div>
               </div>
             </div>
             {/* Medium card - spans 2 cols */}
@@ -1575,8 +1614,8 @@ function LandingTemplate() {
               <div className="h-8 w-8 rounded-[10px] bg-info/10 flex items-center justify-center mb-3">
                 <Layers className="h-4 w-4 text-info" />
               </div>
-              <div className="text-[0.875rem] font-bold text-foreground mb-1">200+ Native integrations</div>
-              <div className="text-[0.75rem] text-muted-foreground leading-snug mb-3">Connect with Slack, Notion, HubSpot, Stripe and more in one click. No manual setup.</div>
+              <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("200+ Native integrations", "Mais de 200 integrações nativas")}</div>
+              <div className="text-[0.75rem] text-muted-foreground leading-snug mb-3">{t("Connect with Slack, Notion, HubSpot, Stripe and more in one click. No manual setup.", "Conecte com Slack, Notion, HubSpot, Stripe e mais em um clique. Sem configuração manual.")}</div>
               <div className="flex gap-2">
                 {["Slack", "Notion", "Stripe", "HubSpot", "Zapier"].map(t => (
                   <span key={t} className="text-[0.5625rem] px-2 py-0.5 rounded-full bg-muted text-muted-foreground font-medium border border-border">{t}</span>
@@ -1591,23 +1630,23 @@ function LandingTemplate() {
           <div className="max-w-2xl mx-auto">
             <div className="flex items-end justify-between mb-6">
               <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Analytics</p>
-                <h2 className="text-[1.125rem] font-black text-foreground tracking-tight">Measurable results, month by month</h2>
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Analytics", "Análises")}</p>
+                <h2 className="text-[1.125rem] font-black text-foreground tracking-tight">{t("Measurable results, month by month", "Resultados mensuráveis, mês a mês")}</h2>
               </div>
               <div className="flex gap-3 text-[0.625rem] text-muted-foreground">
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-primary inline-block" />Revenue</span>
-                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-info inline-block" />Users (×10)</span>
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-primary inline-block" />{t("Revenue", "Receita")}</span>
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-info inline-block" />{t("Users (×10)", "Usuários (×10)")}</span>
               </div>
             </div>
             <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
               <div className="h-[130px]">
                 <ResponsiveContainer width="100%" height="100%">
-                  <ReBarChart data={revenueData} margin={{ top: 4, right: 0, left: -20, bottom: 0 }} barGap={3}>
+                  <ReBarChart data={revData} margin={{ top: 4, right: 0, left: -20, bottom: 0 }} barGap={3}>
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
                     <XAxis dataKey="m" tick={{ fontSize: 9, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
                     <YAxis tick={{ fontSize: 9, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} />
                     <ReTooltip contentStyle={{ background: "var(--popover)", border: "1px solid var(--border)", borderRadius: 8, fontSize: 10, color: "var(--popover-foreground)" }} />
-                    <Bar dataKey="v" name="Revenue" fill="var(--primary)" radius={[4, 4, 0, 0]} opacity={0.9} />
+                    <Bar dataKey="v" name={t("Revenue", "Receita")} fill="var(--primary)" radius={[4, 4, 0, 0]} opacity={0.9} />
                   </ReBarChart>
                 </ResponsiveContainer>
               </div>
@@ -1619,7 +1658,7 @@ function LandingTemplate() {
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-8">
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Roadmap</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">Where we are and where we are going</h2>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Where we are and where we are going", "Onde estamos e para onde vamos")}</h2>
           </div>
           <div className="max-w-lg mx-auto relative">
             {/* Vertical line */}
@@ -1637,10 +1676,10 @@ function LandingTemplate() {
                   <div className="pt-1.5 pb-2">
                     <div className="flex items-center gap-2 mb-0.5">
                       <span className="text-[0.6875rem] font-semibold text-primary">{item.date}</span>
-                      {item.done && <span className="text-[0.5625rem] px-1.5 py-0.5 rounded-full bg-success/10 text-success border border-success/20 font-semibold">Done</span>}
+                      {item.done && <span className="text-[0.5625rem] px-1.5 py-0.5 rounded-full bg-success/10 text-success border border-success/20 font-semibold">{t("Done", "Concluído")}</span>}
                     </div>
-                    <div className="text-[0.875rem] font-bold text-foreground mb-0.5">{item.label}</div>
-                    <div className="text-[0.75rem] text-muted-foreground leading-snug">{item.desc}</div>
+                    <div className="text-[0.875rem] font-bold text-foreground mb-0.5">{bi(item.label)}</div>
+                    <div className="text-[0.75rem] text-muted-foreground leading-snug">{bi(item.desc)}</div>
                   </div>
                 </div>
               ))}
@@ -1651,17 +1690,17 @@ function LandingTemplate() {
         {/* ══ COMPARISON TABLE ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Plans</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">Compare and choose your plan</h2>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Plans", "Planos")}</p>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Compare and choose your plan", "Compare e escolha seu plano")}</h2>
           </div>
           <div className="max-w-2xl mx-auto rounded-[14px] border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
             {/* Header */}
             <div className="grid grid-cols-4 border-b border-border bg-muted/40">
-              <div className="px-4 py-3 text-[0.6875rem] font-semibold text-muted-foreground">Feature</div>
+              <div className="px-4 py-3 text-[0.6875rem] font-semibold text-muted-foreground">{t("Feature", "Recurso")}</div>
               {[
-                { name: "Starter", price: "Free",   highlight: false },
-                { name: "Pro",     price: "$49/month",  highlight: true  },
-                { name: "Enterprise", price: "$199/month", highlight: false },
+                { name: "Starter", price: t("Free", "Grátis"),   highlight: false },
+                { name: "Pro",     price: t("$49/month", "$49/mês"),  highlight: true  },
+                { name: "Enterprise", price: t("$199/month", "$199/mês"), highlight: false },
               ].map(p => (
                 <div key={p.name} className={`px-4 py-3 text-center ${p.highlight ? "bg-primary/5" : ""}`}>
                   <div className={`text-[0.75rem] font-bold ${p.highlight ? "text-primary" : "text-foreground"}`}>{p.name}</div>
@@ -1671,24 +1710,24 @@ function LandingTemplate() {
             </div>
             {/* Rows */}
             {comparisonPlans.map((row, i) => (
-              <div key={row.feature} className={`grid grid-cols-4 border-b border-border last:border-0 ${i % 2 === 0 ? "bg-card" : "bg-muted/20"}`}>
-                <div className="px-4 py-2.5 text-[0.75rem] font-medium text-foreground">{row.feature}</div>
-                <div className="px-4 py-2.5 text-[0.75rem] text-muted-foreground text-center">{row.starter}</div>
-                <div className="px-4 py-2.5 text-[0.75rem] text-foreground font-medium text-center bg-primary/3">{row.pro}</div>
-                <div className="px-4 py-2.5 text-[0.75rem] text-muted-foreground text-center">{row.enterprise}</div>
+              <div key={i} className={`grid grid-cols-4 border-b border-border last:border-0 ${i % 2 === 0 ? "bg-card" : "bg-muted/20"}`}>
+                <div className="px-4 py-2.5 text-[0.75rem] font-medium text-foreground">{cell(row.feature)}</div>
+                <div className="px-4 py-2.5 text-[0.75rem] text-muted-foreground text-center">{cell(row.starter)}</div>
+                <div className="px-4 py-2.5 text-[0.75rem] text-foreground font-medium text-center bg-primary/3">{cell(row.pro)}</div>
+                <div className="px-4 py-2.5 text-[0.75rem] text-muted-foreground text-center">{cell(row.enterprise)}</div>
               </div>
             ))}
             {/* CTA row */}
             <div className="grid grid-cols-4 border-t border-border bg-muted/20 px-0 py-3">
               <div />
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">Get started</button>
+                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Get started", "Começar")}</button>
               </div>
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] bg-primary text-primary-foreground text-[0.6875rem] font-semibold hover:opacity-90 transition-opacity">Upgrade</button>
+                <button className="h-7 px-4 rounded-[7px] bg-primary text-primary-foreground text-[0.6875rem] font-semibold hover:opacity-90 transition-opacity">{t("Upgrade", "Fazer upgrade")}</button>
               </div>
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">Talk to sales</button>
+                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Talk to sales", "Falar com vendas")}</button>
               </div>
             </div>
           </div>
@@ -1697,24 +1736,24 @@ function LandingTemplate() {
         {/* ══ TESTIMONIALS CAROUSEL ══ */}
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Testimonials</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">What our customers say</h2>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Testimonials", "Depoimentos")}</p>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("What our customers say", "O que nossos clientes dizem")}</h2>
           </div>
           <div className="max-w-2xl mx-auto">
             <div className="grid grid-cols-3 gap-3 mb-4">
-              {visibleTestimonials.map((t, i) => (
-                <div key={`${t.name}-${slide}-${i}`} className="p-4 rounded-[12px] border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
+              {visibleTestimonials.map((tm, i) => (
+                <div key={`${tm.name}-${slide}-${i}`} className="p-4 rounded-[12px] border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
                   <div className="flex gap-0.5 mb-3">
-                    {Array.from({ length: t.stars }).map((_, si) => <Star key={si} className="h-3 w-3 text-warning" />)}
+                    {Array.from({ length: tm.stars }).map((_, si) => <Star key={si} className="h-3 w-3 text-warning" />)}
                   </div>
-                  <p className="text-[0.75rem] text-muted-foreground leading-snug mb-4 italic">"{t.text}"</p>
+                  <p className="text-[0.75rem] text-muted-foreground leading-snug mb-4 italic">"{bi(tm.text)}"</p>
                   <div className="flex items-center gap-2.5 mt-auto">
                     <div className="h-8 w-8 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                      <span className="text-[0.5625rem] font-black text-primary">{t.avatar}</span>
+                      <span className="text-[0.5625rem] font-black text-primary">{tm.avatar}</span>
                     </div>
                     <div>
-                      <div className="text-[0.75rem] font-bold text-foreground leading-none">{t.name}</div>
-                      <div className="text-[0.5625rem] text-muted-foreground mt-0.5">{t.role}</div>
+                      <div className="text-[0.75rem] font-bold text-foreground leading-none">{tm.name}</div>
+                      <div className="text-[0.5625rem] text-muted-foreground mt-0.5">{bi(tm.role)}</div>
                     </div>
                   </div>
                 </div>
@@ -1740,8 +1779,8 @@ function LandingTemplate() {
         {/* ══ FAQ ACCORDION ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">FAQ</p>
-            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">Frequently asked questions</h2>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("FAQ", "FAQ")}</p>
+            <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Frequently asked questions", "Perguntas frequentes")}</h2>
           </div>
           <div className="max-w-xl mx-auto space-y-2">
             {faqItems.map((item, i) => (
@@ -1750,13 +1789,13 @@ function LandingTemplate() {
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-muted/30 transition-colors"
                 >
-                  <span className="text-[0.875rem] font-semibold text-foreground pr-4">{item.q}</span>
+                  <span className="text-[0.875rem] font-semibold text-foreground pr-4">{bi(item.q)}</span>
                   <ChevronRight className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-90" : ""}`} />
                 </button>
                 {openFaq === i && (
                   <div className="px-4 pb-4 pt-0">
                     <div className="h-px bg-border mb-3" />
-                    <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">{item.a}</p>
+                    <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">{bi(item.a)}</p>
                   </div>
                 )}
               </div>
@@ -1776,14 +1815,14 @@ function LandingTemplate() {
             {/* Header */}
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary text-[0.6875rem] font-semibold mb-3">
-                <MessageSquare className="h-3 w-3" /> Contato
+                <MessageSquare className="h-3 w-3" /> {t("Contact", "Contato")}
               </div>
               <h2 className="text-[1.375rem] font-black text-foreground tracking-[-0.03em] mb-2">
-                Vamos construir algo<br/>
-                <span style={{ color: "var(--primary)" }}>amazing together</span>
+                {t("Let's build something", "Vamos construir algo")}<br/>
+                <span style={{ color: "var(--primary)" }}>{t("amazing together", "incrível juntos")}</span>
               </h2>
               <p className="text-[0.8125rem] text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                Our team replies in under 2 hours on business days. Pick your preferred channel or fill out the form.
+                {t("Our team replies in under 2 hours on business days. Pick your preferred channel or fill out the form.", "Nossa equipe responde em menos de 2 horas em dias úteis. Escolha seu canal preferido ou preencha o formulário.")}
               </p>
             </div>
 
@@ -1800,16 +1839,16 @@ function LandingTemplate() {
                 },
                 {
                   icon: PlayCircle,
-                  label: "Book a demo",
-                  value: "Calendar available",
+                  label: t("Book a demo", "Agendar demo"),
+                  value: t("Calendar available", "Agenda disponível"),
                   badge: "30 min",
                   badgeColor: "bg-primary/10 text-primary border-primary/20",
                   iconBg: "bg-primary/10 text-primary",
                 },
                 {
                   icon: MessageSquare,
-                  label: "Live chat",
-                  value: "Mon–Fri, 9am–6pm",
+                  label: t("Live chat", "Chat ao vivo"),
+                  value: t("Mon–Fri, 9am–6pm", "Seg–Sex, 9h–18h"),
                   badge: "Online",
                   badgeColor: "bg-success/10 text-success border-success/20",
                   iconBg: "bg-success/10 text-success",
@@ -1829,7 +1868,7 @@ function LandingTemplate() {
                       <div className="text-[0.6875rem] text-muted-foreground">{ch.value}</div>
                     </div>
                     <div className="flex items-center gap-1 text-[0.6875rem] font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                      Acessar <ArrowRight className="h-3 w-3" />
+                      {t("Access", "Acessar")} <ArrowRight className="h-3 w-3" />
                     </div>
                   </div>
                 );
@@ -1839,7 +1878,7 @@ function LandingTemplate() {
             {/* Divider */}
             <div className="max-w-2xl mx-auto flex items-center gap-3 mb-8">
               <div className="flex-1 h-px bg-border" />
-              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground px-2">or send a message</span>
+              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground px-2">{t("or send a message", "ou envie uma mensagem")}</span>
               <div className="flex-1 h-px bg-border" />
             </div>
 
@@ -1849,18 +1888,18 @@ function LandingTemplate() {
               {/* Left — trust panel */}
               <div className="space-y-5">
                 <div>
-                  <div className="text-[0.875rem] font-bold text-foreground mb-1">Why choose us?</div>
+                  <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("Why choose us?", "Por que nos escolher?")}</div>
                   <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
-                    Over 12,000 teams trust DaniMS to accelerate their growth.
+                    {t("Over 12,000 teams trust DaniMS to accelerate their growth.", "Mais de 12.000 equipes confiam no DaniMS para acelerar o crescimento.")}
                   </p>
                 </div>
 
                 <div className="space-y-2.5">
                   {[
-                    { icon: CheckCircle, text: "Guaranteed response within 2h",  color: "text-success" },
-                    { icon: ShieldCheck, text: "100% data protection (SOC 2)", color: "text-info"    },
-                    { icon: Star,        text: "4.9★ customer satisfaction", color: "text-warning" },
-                    { icon: Rocket,      text: "Free guided onboarding",  color: "text-primary" },
+                    { icon: CheckCircle, text: t("Guaranteed response within 2h", "Resposta garantida em até 2h"),  color: "text-success" },
+                    { icon: ShieldCheck, text: t("100% data protection (SOC 2)", "100% de proteção de dados (SOC 2)"), color: "text-info"    },
+                    { icon: Star,        text: t("4.9★ customer satisfaction", "4,9★ de satisfação dos clientes"), color: "text-warning" },
+                    { icon: Rocket,      text: t("Free guided onboarding", "Onboarding guiado gratuito"),  color: "text-primary" },
                   ].map(item => {
                     const Icon = item.icon;
                     return (
@@ -1878,7 +1917,7 @@ function LandingTemplate() {
                     {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-2.5 w-2.5 text-warning" />)}
                   </div>
                   <p className="text-[0.6875rem] text-muted-foreground italic leading-snug mb-2.5">
-                    "The team replied in minutes and helped us integrate everything. Exceptional support."
+                    "{t("The team replied in minutes and helped us integrate everything. Exceptional support.", "A equipe respondeu em minutos e nos ajudou a integrar tudo. Suporte excepcional.")}"
                   </p>
                   <div className="flex items-center gap-2">
                     <div className="h-6 w-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
@@ -1900,8 +1939,8 @@ function LandingTemplate() {
                     <Send className="h-4 w-4 text-primary" />
                   </div>
                   <div>
-                    <div className="text-[0.875rem] font-bold text-foreground">Send your message</div>
-                    <div className="text-[0.6875rem] text-muted-foreground">We reply within 2 business hours</div>
+                    <div className="text-[0.875rem] font-bold text-foreground">{t("Send your message", "Envie sua mensagem")}</div>
+                    <div className="text-[0.6875rem] text-muted-foreground">{t("We reply within 2 business hours", "Respondemos em até 2 horas úteis")}</div>
                   </div>
                 </div>
 
@@ -1912,16 +1951,16 @@ function LandingTemplate() {
                         <CheckCircle className="h-7 w-7 text-success" />
                       </div>
                       <div>
-                        <p className="text-[0.9375rem] font-bold text-foreground mb-1">Message sent!</p>
+                        <p className="text-[0.9375rem] font-bold text-foreground mb-1">{t("Message sent!", "Mensagem enviada!")}</p>
                         <p className="text-[0.75rem] text-muted-foreground leading-relaxed max-w-[200px] mx-auto">
-                          Our team will reply within 2 hours. Check your inbox.
+                          {t("Our team will reply within 2 hours. Check your inbox.", "Nossa equipe responderá em até 2 horas. Confira sua caixa de entrada.")}
                         </p>
                       </div>
                       <button
                         onClick={() => setContactSent(false)}
                         className="mt-1 h-8 px-4 rounded-[8px] border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors"
                       >
-                        Send another message
+                        {t("Send another message", "Enviar outra mensagem")}
                       </button>
                     </div>
                   ) : (
@@ -1930,11 +1969,11 @@ function LandingTemplate() {
                       <div className="grid grid-cols-2 gap-2.5">
                         <div className="space-y-1">
                           <label className="block text-[0.6875rem] font-semibold text-foreground">
-                            Nome <span className="text-primary">*</span>
+                            {t("Name", "Nome")} <span className="text-primary">*</span>
                           </label>
                           <div className="relative">
                             <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
-                            <input required type="text" placeholder="Your name"
+                            <input required type="text" placeholder={t("Your name", "Seu nome")}
                               className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
@@ -1944,7 +1983,7 @@ function LandingTemplate() {
                           </label>
                           <div className="relative">
                             <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
-                            <input required type="email" placeholder="you@email.com"
+                            <input required type="email" placeholder={t("you@email.com", "voce@email.com")}
                               className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
@@ -1953,7 +1992,7 @@ function LandingTemplate() {
                       {/* Company + Phone */}
                       <div className="grid grid-cols-2 gap-2.5">
                         <div className="space-y-1">
-                          <label className="block text-[0.6875rem] font-semibold text-foreground">Company</label>
+                          <label className="block text-[0.6875rem] font-semibold text-foreground">{t("Company", "Empresa")}</label>
                           <div className="relative">
                             <Building2 className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="text" placeholder="DaniMS Co."
@@ -1961,7 +2000,7 @@ function LandingTemplate() {
                           </div>
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-[0.6875rem] font-semibold text-foreground">Telefone</label>
+                          <label className="block text-[0.6875rem] font-semibold text-foreground">{t("Phone", "Telefone")}</label>
                           <div className="relative">
                             <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="tel" placeholder="+55 11 9 0000-0000"
@@ -1972,9 +2011,9 @@ function LandingTemplate() {
 
                       {/* Subject chips */}
                       <div className="space-y-1.5">
-                        <label className="block text-[0.6875rem] font-semibold text-foreground">Subject</label>
+                        <label className="block text-[0.6875rem] font-semibold text-foreground">{t("Subject", "Assunto")}</label>
                         <div className="flex flex-wrap gap-1.5">
-                          {["Support", "Sales", "Demo", "Partnership", "Other"].map(s => (
+                          {[t("Support", "Suporte"), t("Sales", "Vendas"), "Demo", t("Partnership", "Parcerias"), t("Other", "Outro")].map(s => (
                             <button key={s} type="button"
                               className="px-2.5 py-1 rounded-full border border-border bg-muted text-[0.625rem] font-medium text-muted-foreground hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-all">
                               {s}
@@ -1986,9 +2025,9 @@ function LandingTemplate() {
                       {/* Message */}
                       <div className="space-y-1">
                         <label className="block text-[0.6875rem] font-semibold text-foreground">
-                          Mensagem <span className="text-primary">*</span>
+                          {t("Message", "Mensagem")} <span className="text-primary">*</span>
                         </label>
-                        <textarea required rows={3} placeholder="Describe your question or project in detail..."
+                        <textarea required rows={3} placeholder={t("Describe your question or project in detail...", "Descreva sua dúvida ou projeto em detalhes...")}
                           className="w-full bg-background border border-border rounded-[8px] px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all resize-none" />
                       </div>
 
@@ -1997,12 +2036,12 @@ function LandingTemplate() {
                         <label className="flex items-start gap-1.5 cursor-pointer flex-1">
                           <input type="checkbox" required className="mt-0.5 h-3 w-3 rounded accent-[var(--primary)] shrink-0" />
                           <span className="text-[0.5625rem] text-muted-foreground leading-snug">
-                            I agree to the <span className="text-primary underline underline-offset-1">Terms</span> and <span className="text-primary underline underline-offset-1">Privacy</span>
+                            {t("I agree to the ", "Concordo com os ")}<span className="text-primary underline underline-offset-1">{t("Terms", "Termos")}</span>{t(" and ", " e a ")}<span className="text-primary underline underline-offset-1">{t("Privacy", "Privacidade")}</span>
                           </span>
                         </label>
                         <button type="submit"
                           className="shrink-0 h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5 whitespace-nowrap">
-                          <Send className="h-3 w-3" /> Send
+                          <Send className="h-3 w-3" /> {t("Send", "Enviar")}
                         </button>
                       </div>
                     </form>
@@ -2024,15 +2063,15 @@ function LandingTemplate() {
                 <span className="text-[0.875rem] font-extrabold text-foreground">DaniMS</span>
               </div>
               <div className="flex items-center gap-4">
-                {["Product", "Pricing", "Blog", "Careers", "Contact"].map(l => (
+                {[t("Product", "Produto"), t("Pricing", "Preços"), "Blog", t("Careers", "Carreiras"), t("Contact", "Contato")].map(l => (
                   <button key={l} className="text-[0.6875rem] text-muted-foreground hover:text-foreground transition-colors">{l}</button>
                 ))}
               </div>
             </div>
             <div className="flex items-center justify-between pt-4 border-t border-border">
-              <span className="text-[0.625rem] text-muted-foreground">© 2026 DaniMoscatelli. All rights reserved.</span>
+              <span className="text-[0.625rem] text-muted-foreground">© 2026 DaniMoscatelli. {t("All rights reserved.", "Todos os direitos reservados.")}</span>
               <div className="flex items-center gap-3">
-                {["Privacy", "Terms", "Cookies"].map(l => (
+                {[t("Privacy", "Privacidade"), t("Terms", "Termos"), "Cookies"].map(l => (
                   <button key={l} className="text-[0.6875rem] text-muted-foreground hover:text-foreground transition-colors">{l}</button>
                 ))}
               </div>

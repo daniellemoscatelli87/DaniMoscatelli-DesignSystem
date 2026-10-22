@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useI18n } from "../../../i18n";
 
 export type TokenRow = {
   name: string;
@@ -45,6 +46,7 @@ function Swatch({ value }: { value: string }) {
 }
 
 function TokenRowItem({ token, isDark }: { token: TokenRow; isDark: boolean }) {
+  const { t } = useI18n();
   const value = isDark ? (token.dark ?? token.light) : token.light;
   const hasDarkVariant = !!token.dark && token.dark !== token.light;
 
@@ -59,7 +61,7 @@ function TokenRowItem({ token, isDark }: { token: TokenRow; isDark: boolean }) {
         {/* Dot indicator when a dark variant exists but isn't currently shown */}
         {hasDarkVariant && (
           <span
-            title={isDark ? `Light: ${token.light}` : `Dark: ${token.dark}`}
+            title={isDark ? `${t("Light", "Claro")}: ${token.light}` : `${t("Dark", "Escuro")}: ${token.dark}`}
             className="ml-1 h-1.5 w-1.5 rounded-full bg-muted-foreground/30 shrink-0 cursor-help"
           />
         )}
@@ -70,19 +72,20 @@ function TokenRowItem({ token, isDark }: { token: TokenRow; isDark: boolean }) {
 
 export function TokenTable({ groups }: { groups: TokenGroup[] }) {
   const isDark = useDarkMode();
+  const { t } = useI18n();
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 pb-2 border-b border-border">
-        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">Token</span>
-        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">Usage</span>
+        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Token", "Token")}</span>
+        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Usage", "Uso")}</span>
         <div className="flex items-center gap-2 justify-end">
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-            Value
+            {t("Value", "Valor")}
           </span>
           <span className="inline-flex items-center px-1.5 py-0.5 rounded-[4px] text-[0.5625rem] font-semibold uppercase tracking-wide bg-primary/10 text-primary">
-            {isDark ? "Dark" : "Light"}
+            {isDark ? t("Dark", "Escuro") : t("Light", "Claro")}
           </span>
         </div>
       </div>
@@ -93,8 +96,8 @@ export function TokenTable({ groups }: { groups: TokenGroup[] }) {
             {g.group}
           </p>
           <div className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
-            {g.tokens.map(t => (
-              <TokenRowItem key={t.name} token={t} isDark={isDark} />
+            {g.tokens.map(tk => (
+              <TokenRowItem key={tk.name} token={tk} isDark={isDark} />
             ))}
           </div>
         </div>

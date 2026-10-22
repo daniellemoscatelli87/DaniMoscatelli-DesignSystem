@@ -5,6 +5,7 @@ import {
   ArrowRight, ChevronDown, Sparkles, Loader, MousePointer2,
   Wind, Layers, Activity, Clock, Move, Users,
 } from "lucide-react";
+import { useI18n } from "../../i18n";
 
 /* ── Section wrapper ── */
 function Section({ id, title, sub, children }: { id: string; title: string; sub: string; children: React.ReactNode }) {
@@ -31,10 +32,11 @@ function Token({ name, value }: { name: string; value: string }) {
 
 /* ── Replay button ── */
 function ReplayBtn({ onClick }: { onClick: () => void }) {
+  const { t, bi } = useI18n();
   return (
     <button onClick={onClick}
       className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary transition-colors mt-2">
-      <RefreshCw className="h-3 w-3" /> replay
+      <RefreshCw className="h-3 w-3" /> {t("replay", "repetir")}
     </button>
   );
 }
@@ -45,6 +47,7 @@ function ReplayBtn({ onClick }: { onClick: () => void }) {
 const enterPresets = [
   {
     label: "Fade In",
+    labelPt: "Fade in",
     desc: "opacity 0 → 1",
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -52,6 +55,7 @@ const enterPresets = [
   },
   {
     label: "Slide Up",
+    labelPt: "Deslizar para cima",
     desc: "y 44 → 0",
     initial: { opacity: 0, y: 44 },
     animate: { opacity: 1, y: 0 },
@@ -59,6 +63,7 @@ const enterPresets = [
   },
   {
     label: "Slide Right",
+    labelPt: "Deslizar da esquerda",
     desc: "x -44 → 0",
     initial: { opacity: 0, x: -44 },
     animate: { opacity: 1, x: 0 },
@@ -66,6 +71,7 @@ const enterPresets = [
   },
   {
     label: "Scale In",
+    labelPt: "Escala de entrada",
     desc: "scale 0.5 → 1",
     initial: { opacity: 0, scale: 0.5 },
     animate: { opacity: 1, scale: 1 },
@@ -73,6 +79,7 @@ const enterPresets = [
   },
   {
     label: "Blur In",
+    labelPt: "Blur de entrada",
     desc: "blur 16px → 0",
     initial: { opacity: 0, filter: "blur(16px)" },
     animate: { opacity: 1, filter: "blur(0px)" },
@@ -80,6 +87,7 @@ const enterPresets = [
   },
   {
     label: "Rotate In",
+    labelPt: "Rotação de entrada",
     desc: "rotate -20 → 0",
     initial: { opacity: 0, rotate: -20, scale: 0.8 },
     animate: { opacity: 1, rotate: 0, scale: 1 },
@@ -87,6 +95,7 @@ const enterPresets = [
   },
   {
     label: "Flip Y",
+    labelPt: "Giro em Y",
     desc: "rotateX 90 → 0",
     initial: { opacity: 0, rotateX: 90 },
     animate: { opacity: 1, rotateX: 0 },
@@ -94,7 +103,9 @@ const enterPresets = [
   },
   {
     label: "Bounce",
+    labelPt: "Salto elástico",
     desc: "spring with bounce",
+    descPt: "spring com bounce",
     initial: { opacity: 0, scale: 0.3 },
     animate: { opacity: 1, scale: 1 },
     transition: { type: "spring", stiffness: 320, damping: 12 },
@@ -102,6 +113,7 @@ const enterPresets = [
 ];
 
 function EnterPresets() {
+  const { t, bi } = useI18n();
   const [keys, setKeys] = useState<number[]>(enterPresets.map((_, i) => i));
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
@@ -113,8 +125,8 @@ function EnterPresets() {
     timersRef.current = [];
     // Stagger each preset 700ms apart so you can watch them one at a time
     enterPresets.forEach((_, i) => {
-      const t = setTimeout(() => replay(i), i * 700);
-      timersRef.current.push(t);
+      const tid = setTimeout(() => replay(i), i * 700);
+      timersRef.current.push(tid);
     });
   };
 
@@ -125,10 +137,10 @@ function EnterPresets() {
   }, []);
 
   return (
-    <Section id="enter-presets" title="Enter & Exit Presets" sub="Ready-made animation variants for mounting components into the DOM. Click «Replay all» to watch them in sequence.">
+    <Section id="enter-presets" title={t("Enter & Exit Presets", "Presets de entrada e saída")} sub={t("Ready-made animation variants for mounting components into the DOM. Click «Replay all» to watch them in sequence.", "Variantes de animação prontas para montar componentes no DOM. Clique em «Repetir todos» para vê-los em sequência.")}>
       <div className="flex justify-end">
         <button onClick={replayAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
-          <RefreshCw className="h-3.5 w-3.5" /> Replay all
+          <RefreshCw className="h-3.5 w-3.5" /> {t("Replay all", "Repetir todos")}
         </button>
       </div>
       <div className="grid grid-cols-4 gap-3">
@@ -147,8 +159,8 @@ function EnterPresets() {
               </motion.div>
             </div>
             <div className="text-center w-full">
-              <div className="text-[0.75rem] font-bold text-foreground">{preset.label}</div>
-              <div className="text-[0.625rem] text-muted-foreground font-mono mt-0.5">{preset.desc}</div>
+              <div className="text-[0.75rem] font-bold text-foreground">{t(preset.label, (preset as any).labelPt)}</div>
+              <div className="text-[0.625rem] text-muted-foreground font-mono mt-0.5">{(preset as any).descPt ? t(preset.desc, (preset as any).descPt) : preset.desc}</div>
             </div>
             <ReplayBtn onClick={() => replay(i)} />
           </div>
@@ -161,18 +173,19 @@ function EnterPresets() {
 /* ══════════════════════════════════════
    SECTION 2 — Easing Reference
 ══════════════════════════════════════ */
-const easings: { label: string; curve: string; value: [number, number, number, number] | string }[] = [
-  { label: "Linear",       curve: "M0,80 L80,0",                     value: "linear" },
-  { label: "Ease In",      curve: "M0,80 C60,80 80,20 80,0",          value: [0.42, 0, 1, 1] },
-  { label: "Ease Out",     curve: "M0,80 C0,60 20,0 80,0",            value: [0, 0, 0.58, 1] },
-  { label: "Ease In Out",  curve: "M0,80 C20,80 60,0 80,0",           value: [0.42, 0, 0.58, 1] },
-  { label: "Back",         curve: "M0,80 C20,100 60,-20 80,0",        value: [0.34, 1.56, 0.64, 1] },
-  { label: "Anticipate",   curve: "M0,80 C10,90 60,-20 80,0",        value: [0.2, -0.4, 0.8, 1.4] },
-  { label: "Snappy",       curve: "M0,80 C5,80 10,0 80,0",            value: [0.16, 1, 0.3, 1] },
-  { label: "Expo Out",     curve: "M0,80 C0,80 2,0 80,0",             value: [0.19, 1, 0.22, 1] },
+const easings: { label: string; labelPt: string; curve: string; value: [number, number, number, number] | string }[] = [
+  { label: "Linear", labelPt: "Linear",       curve: "M0,80 L80,0",                     value: "linear" },
+  { label: "Ease In", labelPt: "Ease In",      curve: "M0,80 C60,80 80,20 80,0",          value: [0.42, 0, 1, 1] },
+  { label: "Ease Out", labelPt: "Ease Out",     curve: "M0,80 C0,60 20,0 80,0",            value: [0, 0, 0.58, 1] },
+  { label: "Ease In Out", labelPt: "Ease In Out",  curve: "M0,80 C20,80 60,0 80,0",           value: [0.42, 0, 0.58, 1] },
+  { label: "Back", labelPt: "Back",         curve: "M0,80 C20,100 60,-20 80,0",        value: [0.34, 1.56, 0.64, 1] },
+  { label: "Anticipate", labelPt: "Antecipação",   curve: "M0,80 C10,90 60,-20 80,0",        value: [0.2, -0.4, 0.8, 1.4] },
+  { label: "Snappy", labelPt: "Ágil",       curve: "M0,80 C5,80 10,0 80,0",            value: [0.16, 1, 0.3, 1] },
+  { label: "Expo Out", labelPt: "Expo Out",     curve: "M0,80 C0,80 2,0 80,0",             value: [0.19, 1, 0.22, 1] },
 ];
 
 function EasingReference() {
+  const { t, bi } = useI18n();
   const [running, setRunning] = useState<number | null>(null);
   const [keys, setKeys] = useState<number[]>(easings.map((_, i) => i));
 
@@ -183,7 +196,7 @@ function EasingReference() {
   };
 
   return (
-    <Section id="easing" title="Easing Reference" sub="Visual comparison of cubic-bezier curves used across the design system.">
+    <Section id="easing" title={t("Easing Reference", "Referência de easing")} sub={t("Visual comparison of cubic-bezier curves used across the design system.", "Comparação visual das curvas cubic-bezier usadas em todo o design system.")}>
       <div className="grid grid-cols-4 gap-3">
         {easings.map((e, i) => (
           <div key={e.label} className="rounded-[14px] border border-border bg-card p-4 space-y-3 cursor-pointer hover:border-primary/30 transition-colors group" style={{ boxShadow: "var(--shadow-xs)" }} onClick={() => run(i)}>
@@ -194,19 +207,22 @@ function EasingReference() {
                 <line x1="0" y1="80" x2="80" y2="80" stroke="var(--border)" strokeWidth="1" />
                 <path d={e.curve} fill="none" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" />
                 {/* Animated dot */}
-                <motion.circle
+                <circle
                   key={keys[i]}
                   r={4}
                   fill="var(--primary)"
-                  initial={{ offsetDistance: "0%" } as any}
-                  animate={running === i ? { offsetDistance: "100%" } as any : {}}
-                  transition={{ duration: 0.9, ease: typeof e.value === "string" ? e.value : e.value }}
-                  style={{ offsetPath: `path('${e.curve}')` } as any}
+                  style={{
+                    offsetPath: `path('${e.curve}')`,
+                    offsetDistance: running === i ? "100%" : "0%",
+                    transition: running === i
+                      ? `offset-distance 0.9s ${typeof e.value === "string" ? e.value : `cubic-bezier(${e.value.join(",")})`}`
+                      : "none",
+                  } as React.CSSProperties}
                 />
               </svg>
             </div>
             <div className="text-center">
-              <div className="text-[0.75rem] font-bold text-foreground group-hover:text-primary transition-colors">{e.label}</div>
+              <div className="text-[0.75rem] font-bold text-foreground group-hover:text-primary transition-colors">{t(e.label, e.labelPt)}</div>
               <div className="text-[0.5625rem] font-mono text-muted-foreground mt-0.5">
                 {typeof e.value === "string" ? e.value : `[${e.value.join(", ")}]`}
               </div>
@@ -214,7 +230,7 @@ function EasingReference() {
           </div>
         ))}
       </div>
-      <p className="text-[0.6875rem] text-muted-foreground">Click a card to animate the dot along the curve.</p>
+      <p className="text-[0.6875rem] text-muted-foreground">{t("Click a card to animate the dot along the curve.", "Clique em um card para animar o ponto ao longo da curva.")}</p>
     </Section>
   );
 }
@@ -223,15 +239,16 @@ function EasingReference() {
    SECTION 3 — Spring Physics
 ══════════════════════════════════════ */
 const springPresets = [
-  { label: "Gentle",   stiffness: 120,  damping: 14,  mass: 1,   color: "bg-info/15 border-info/25 text-info" },
-  { label: "Default",  stiffness: 260,  damping: 20,  mass: 1,   color: "bg-primary/15 border-primary/25 text-primary" },
-  { label: "Snappy",   stiffness: 400,  damping: 25,  mass: 1,   color: "bg-warning/15 border-warning/25 text-warning" },
-  { label: "Bouncy",   stiffness: 600,  damping: 8,   mass: 1,   color: "bg-success/15 border-success/25 text-success" },
-  { label: "Stiff",    stiffness: 900,  damping: 40,  mass: 1,   color: "bg-destructive/15 border-destructive/25 text-destructive" },
-  { label: "Wobbly",   stiffness: 180,  damping: 6,   mass: 1.2, color: "bg-chart-4/15 border-chart-4/25 text-chart-4" },
+  { label: "Gentle", labelPt: "Suave",   stiffness: 120,  damping: 14,  mass: 1,   color: "bg-info/15 border-info/25 text-info" },
+  { label: "Default", labelPt: "Padrão",  stiffness: 260,  damping: 20,  mass: 1,   color: "bg-primary/15 border-primary/25 text-primary" },
+  { label: "Snappy", labelPt: "Ágil",   stiffness: 400,  damping: 25,  mass: 1,   color: "bg-warning/15 border-warning/25 text-warning" },
+  { label: "Bouncy", labelPt: "Elástica",   stiffness: 600,  damping: 8,   mass: 1,   color: "bg-success/15 border-success/25 text-success" },
+  { label: "Stiff", labelPt: "Rígida",    stiffness: 900,  damping: 40,  mass: 1,   color: "bg-destructive/15 border-destructive/25 text-destructive" },
+  { label: "Wobbly", labelPt: "Oscilante",   stiffness: 180,  damping: 6,   mass: 1.2, color: "bg-chart-4/15 border-chart-4/25 text-chart-4" },
 ];
 
 function SpringPhysics() {
+  const { t, bi } = useI18n();
   const [keys, setKeys] = useState(springPresets.map((_, i) => i));
   const [active, setActive] = useState<number | null>(null);
 
@@ -245,10 +262,10 @@ function SpringPhysics() {
   };
 
   return (
-    <Section id="spring" title="Spring Physics" sub="Physics-based animation presets. Click a card to see the spring in action.">
+    <Section id="spring" title={t("Spring Physics", "Física de spring")} sub={t("Physics-based animation presets. Click a card to see the spring in action.", "Presets de animação baseados em física. Clique em um card para ver o spring em ação.")}>
       <div className="flex justify-end">
         <button onClick={triggerAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
-          <Play className="h-3.5 w-3.5" /> Play all
+          <Play className="h-3.5 w-3.5" /> {t("Play all", "Tocar todos")}
         </button>
       </div>
       <div className="grid grid-cols-3 gap-3">
@@ -266,7 +283,7 @@ function SpringPhysics() {
               />
             </div>
             <div>
-              <div className="text-[0.8125rem] font-bold text-foreground group-hover:text-primary transition-colors mb-1">{p.label}</div>
+              <div className="text-[0.8125rem] font-bold text-foreground group-hover:text-primary transition-colors mb-1">{t(p.label, p.labelPt)}</div>
               <div className="grid grid-cols-3 gap-1">
                 {[["s", p.stiffness], ["d", p.damping], ["m", p.mass]].map(([k, v]) => (
                   <div key={k as string} className="text-center rounded-[6px] bg-muted/50 py-1 px-1">
@@ -287,6 +304,7 @@ function SpringPhysics() {
 }
 
 function SpringPlayground() {
+  const { t, bi } = useI18n();
   const [stiffness, setStiffness] = useState(260);
   const [damping, setDamping]     = useState(20);
   const [mass, setMass]           = useState(1);
@@ -298,23 +316,23 @@ function SpringPlayground() {
     <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-[0.875rem] font-bold text-foreground">Spring Playground</div>
-          <div className="text-[0.6875rem] text-muted-foreground">Tune stiffness, damping, and mass live.</div>
+          <div className="text-[0.875rem] font-bold text-foreground">{t("Spring Playground", "Playground de spring")}</div>
+          <div className="text-[0.6875rem] text-muted-foreground">{t("Tune stiffness, damping, and mass live.", "Ajuste rigidez, amortecimento e massa em tempo real.")}</div>
         </div>
         <button onClick={run} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
-          <Play className="h-3.5 w-3.5" /> Play
+          <Play className="h-3.5 w-3.5" /> {t("Play", "Tocar")}
         </button>
       </div>
       {/* Controls */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "Stiffness", min: 10, max: 1000, step: 10, value: stiffness, set: setStiffness },
-          { label: "Damping",   min: 0,  max: 60,   step: 1,  value: damping,   set: setDamping   },
-          { label: "Mass",      min: 0.1,max: 5,    step: 0.1,value: mass,      set: setMass      },
+          { label: "Stiffness", labelPt: "Rigidez", min: 10, max: 1000, step: 10, value: stiffness, set: setStiffness },
+          { label: "Damping", labelPt: "Amortecimento", min: 0,  max: 60,   step: 1,  value: damping,   set: setDamping   },
+          { label: "Mass", labelPt: "Massa", min: 0.1,max: 5,    step: 0.1,value: mass,      set: setMass      },
         ].map(ctrl => (
           <div key={ctrl.label} className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-[0.6875rem] font-semibold text-foreground">{ctrl.label}</label>
+              <label className="text-[0.6875rem] font-semibold text-foreground">{t(ctrl.label, ctrl.labelPt)}</label>
               <span className="text-[0.6875rem] font-mono text-primary">{ctrl.value}</span>
             </div>
             <input type="range" min={ctrl.min} max={ctrl.max} step={ctrl.step} value={ctrl.value}
@@ -352,6 +370,18 @@ const staggerItems = [
   "Support",
 ];
 
+const staggerItemsPt = [
+  "Painel de análises",
+  "Gestão de usuários",
+  "Cobrança e planos",
+  "Acesso à API",
+  "Integrações",
+  "Colaboração em equipe",
+  "Logs de auditoria",
+  "Configurações",
+  "Suporte",
+];
+
 const staggerContainer = {
   hidden: {},
   show: { transition: { staggerChildren: 0.07 } },
@@ -362,6 +392,7 @@ const staggerChild = {
 };
 
 function StaggerSection() {
+  const { t, bi } = useI18n();
   const [key, setKey] = useState(0);
   const [staggerDelay, setStaggerDelay] = useState(0.07);
   const container = {
@@ -370,11 +401,11 @@ function StaggerSection() {
   };
 
   return (
-    <Section id="stagger" title="Stagger & Sequences" sub="Cascade children into view with configurable stagger delays.">
+    <Section id="stagger" title={t("Stagger & Sequences", "Stagger e sequências")} sub={t("Cascade children into view with configurable stagger delays.", "Faça os filhos entrarem em cascata com atrasos de stagger configuráveis.")}>
       <div className="rounded-[16px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
-            <label className="text-[0.6875rem] font-semibold text-foreground">Stagger delay</label>
+            <label className="text-[0.6875rem] font-semibold text-foreground">{t("Stagger delay", "Atraso do stagger")}</label>
             <input type="range" min={0.02} max={0.2} step={0.01} value={staggerDelay}
               onChange={e => setStaggerDelay(Number(e.target.value))}
               className="w-28 accent-[var(--primary)] h-1 rounded-full cursor-pointer" />
@@ -382,7 +413,7 @@ function StaggerSection() {
           </div>
           <button onClick={() => setKey(k => k + 1)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
-            <RefreshCw className="h-3.5 w-3.5" /> Replay
+            <RefreshCw className="h-3.5 w-3.5" /> {t("Replay", "Repetir")}
           </button>
         </div>
 
@@ -393,7 +424,7 @@ function StaggerSection() {
               <div className="h-6 w-6 rounded-[7px] bg-primary/12 flex items-center justify-center shrink-0">
                 <span className="text-[0.5rem] font-black text-primary">{String(i + 1).padStart(2, "0")}</span>
               </div>
-              <span className="text-[0.75rem] font-medium text-foreground">{item}</span>
+              <span className="text-[0.75rem] font-medium text-foreground">{t(item, staggerItemsPt[i])}</span>
             </motion.div>
           ))}
         </motion.div>
@@ -406,6 +437,7 @@ function StaggerSection() {
    SECTION 5 — Hover Effects
 ══════════════════════════════════════ */
 function HoverSection() {
+  const { t, bi } = useI18n();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-50, 50], [22, -22]);
@@ -429,12 +461,12 @@ function HoverSection() {
   const resetTilt = () => { x.set(0); y.set(0); };
 
   return (
-    <Section id="hover" title="Hover Interactions" sub="Pointer-driven micro-animations for interactive surfaces.">
+    <Section id="hover" title={t("Hover Interactions", "Interações de hover")} sub={t("Pointer-driven micro-animations for interactive surfaces.", "Microanimações guiadas pelo ponteiro para superfícies interativas.")}>
       <div className="grid grid-cols-4 gap-3">
 
         {/* Lift */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Lift</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Lift", "Elevação")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               whileHover={{ y: -6, boxShadow: "0 16px 40px -8px rgba(0,0,0,0.35)" }}
@@ -450,7 +482,7 @@ function HoverSection() {
 
         {/* Scale */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Scale</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Scale", "Escala")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               whileHover={{ scale: 1.12 }}
@@ -466,14 +498,14 @@ function HoverSection() {
 
         {/* Glow */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Glow</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Glow", "Brilho")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.button
               whileHover={{ boxShadow: "0 0 24px 6px var(--primary)" }}
               transition={{ duration: 0.25 }}
               className="px-4 py-2 rounded-[10px] bg-primary text-primary-foreground text-[0.75rem] font-bold"
             >
-              Get started
+              {t("Get started", "Começar")}
             </motion.button>
           </div>
           <p className="text-[0.625rem] text-muted-foreground font-mono">boxShadow glow</p>
@@ -481,7 +513,7 @@ function HoverSection() {
 
         {/* 3D Tilt */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">3D Tilt</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("3D Tilt", "Inclinação 3D")}</div>
           <div className="flex items-center justify-center py-2" style={{ perspective: 500 }}>
             <motion.div
               onMouseMove={handleMouse}
@@ -500,7 +532,7 @@ function HoverSection() {
                 style={{ transform: "translateZ(20px)" }}
               >
                 <Move className="text-primary" style={{ height: 20, width: 20 }} />
-                <span className="text-[0.5625rem] font-semibold text-primary/70 tracking-wide">MOVE CURSOR</span>
+                <span className="text-[0.5625rem] font-semibold text-primary/70 tracking-wide">{t("MOVE CURSOR", "MOVA O CURSOR")}</span>
               </div>
             </motion.div>
           </div>
@@ -509,7 +541,7 @@ function HoverSection() {
 
         {/* Border sweep */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Border Sweep</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Border Sweep", "Varredura de borda")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               initial={{ backgroundSize: "0% 2px" }}
@@ -518,7 +550,7 @@ function HoverSection() {
               className="px-3 py-1.5 text-[0.75rem] font-semibold text-foreground cursor-pointer"
               style={{ backgroundImage: "linear-gradient(var(--primary), var(--primary))", backgroundRepeat: "no-repeat", backgroundPosition: "bottom left" }}
             >
-              Hover me
+              {t("Hover me", "Passe o mouse")}
             </motion.div>
           </div>
           <p className="text-[0.625rem] text-muted-foreground font-mono">backgroundSize sweep</p>
@@ -529,14 +561,14 @@ function HoverSection() {
 
         {/* Color shift */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Color Shift</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Color Shift", "Mudança de cor")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               whileHover={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
               transition={{ duration: 0.2 }}
               className="px-4 py-2 rounded-[10px] border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer"
             >
-              Fill on hover
+              {t("Fill on hover", "Preenche no hover")}
             </motion.div>
           </div>
           <p className="text-[0.625rem] text-muted-foreground font-mono">backgroundColor transition</p>
@@ -544,7 +576,7 @@ function HoverSection() {
 
         {/* Reveal */}
         <div className="rounded-[14px] border border-border bg-card p-4 space-y-3 group overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Icon Reveal</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Icon Reveal", "Ícone revelado")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               initial={false}
@@ -552,7 +584,7 @@ function HoverSection() {
               className="flex items-center gap-2 px-4 py-2 rounded-[10px] bg-muted border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer overflow-hidden"
             >
               <motion.span variants={{ hover: { x: -4 } }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
-                Learn more
+                {t("Learn more", "Saiba mais")}
               </motion.span>
               <motion.div
                 variants={{ hover: { x: 0, opacity: 1 } }}
@@ -563,7 +595,7 @@ function HoverSection() {
               </motion.div>
             </motion.div>
           </div>
-          <p className="text-[0.625rem] text-muted-foreground font-mono">staggered slide reveal</p>
+          <p className="text-[0.625rem] text-muted-foreground font-mono">{t("staggered slide reveal", "revelação deslizante em sequência")}</p>
         </div>
       </div>
     </Section>
@@ -571,6 +603,7 @@ function HoverSection() {
 }
 
 function MagneticButton() {
+  const { t, bi } = useI18n();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 300, damping: 20 });
@@ -587,7 +620,7 @@ function MagneticButton() {
 
   return (
     <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-      <div className="text-[0.75rem] font-bold text-foreground">Magnetic</div>
+      <div className="text-[0.75rem] font-bold text-foreground">{t("Magnetic", "Magnético")}</div>
       <div className="flex items-center justify-center py-3">
         <div onMouseMove={handleMouse} onMouseLeave={reset} className="flex items-center justify-center w-24 h-14">
           <motion.button
@@ -607,6 +640,7 @@ function MagneticButton() {
    SECTION 6 — Micro-interactions
 ══════════════════════════════════════ */
 function MicroInteractions() {
+  const { t, bi } = useI18n();
   const [liked, setLiked]       = useState(false);
   const [checked, setChecked]   = useState(false);
   const [toggled, setToggled]   = useState(false);
@@ -615,12 +649,12 @@ function MicroInteractions() {
   const [counter, setCounter]   = useState(0);
 
   return (
-    <Section id="micro" title="Micro-interactions" sub="Delight in the details — small animations that confirm user actions.">
+    <Section id="micro" title={t("Micro-interactions", "Microinterações")} sub={t("Delight in the details — small animations that confirm user actions.", "Encante nos detalhes — pequenas animações que confirmam as ações do usuário.")}>
       <div className="grid grid-cols-3 gap-3">
 
         {/* Like */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Like Button</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Like Button", "Botão de curtir")}</div>
           <motion.button onClick={() => setLiked(l => !l)} whileTap={{ scale: 0.85 }} className="relative">
             <motion.div
               animate={{ scale: liked ? [1, 1.4, 1] : 1 }}
@@ -640,15 +674,15 @@ function MicroInteractions() {
               )}
             </AnimatePresence>
           </motion.button>
-          <span className="text-[0.6875rem] text-muted-foreground">{liked ? "Liked!" : "Click to like"}</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{liked ? t("Liked!", "Curtiu!") : t("Click to like", "Clique para curtir")}</span>
         </div>
 
         {/* Checkbox */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Checkbox</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Checkbox", "Checkbox")}</div>
           <motion.button
             onClick={() => setChecked(c => !c)}
-            animate={{ backgroundColor: checked ? "var(--primary)" : "transparent" }}
+            animate={{ backgroundColor: checked ? "var(--primary)" : "rgba(0, 0, 0, 0)" }}
             transition={{ duration: 0.2 }}
             className="h-8 w-8 rounded-[8px] border-2 flex items-center justify-center"
             style={{ borderColor: checked ? "var(--primary)" : "var(--border)" }}
@@ -666,14 +700,14 @@ function MicroInteractions() {
               )}
             </AnimatePresence>
           </motion.button>
-          <span className="text-[0.6875rem] text-muted-foreground">{checked ? "Checked" : "Unchecked"}</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{checked ? t("Checked", "Marcado") : t("Unchecked", "Desmarcado")}</span>
         </div>
 
         {/* Toggle */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Toggle Switch</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Toggle Switch", "Toggle switch")}</div>
           <motion.button
-            onClick={() => setToggled(t => !t)}
+            onClick={() => setToggled(v => !v)}
             animate={{ backgroundColor: toggled ? "var(--primary)" : "var(--muted)" }}
             transition={{ duration: 0.2 }}
             className="relative h-7 w-12 rounded-full flex items-center px-1"
@@ -684,12 +718,12 @@ function MicroInteractions() {
               className="h-5 w-5 rounded-full bg-white shadow-sm"
             />
           </motion.button>
-          <span className="text-[0.6875rem] text-muted-foreground">{toggled ? "On" : "Off"}</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{toggled ? t("On", "Ligado") : t("Off", "Desligado")}</span>
         </div>
 
         {/* Star Rating */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Star Rating</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Star Rating", "Avaliação por estrelas")}</div>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map(n => (
               <motion.button key={n} onClick={() => setRating(n)}
@@ -700,12 +734,12 @@ function MicroInteractions() {
               </motion.button>
             ))}
           </div>
-          <span className="text-[0.6875rem] text-muted-foreground">{rating > 0 ? `${rating}/5 stars` : "Rate this"}</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{rating > 0 ? `${rating}/5 ${t("stars", "estrelas")}` : t("Rate this", "Avalie")}</span>
         </div>
 
         {/* Bell notification */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Notification Bell</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Notification Bell", "Sino de notificação")}</div>
           <motion.button
             onClick={() => { setNotified(true); setTimeout(() => setNotified(false), 1500); }}
             animate={{ rotate: notified ? [0, -20, 20, -15, 15, -8, 8, 0] : 0 }}
@@ -726,12 +760,12 @@ function MicroInteractions() {
               )}
             </AnimatePresence>
           </motion.button>
-          <span className="text-[0.6875rem] text-muted-foreground">Tap to notify</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{t("Tap to notify", "Toque para notificar")}</span>
         </div>
 
         {/* Counter */}
         <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Counter</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Counter", "Contador")}</div>
           <div className="flex items-center gap-3">
             <motion.button whileTap={{ scale: 0.85 }} onClick={() => setCounter(c => Math.max(0, c - 1))}
               className="h-8 w-8 rounded-full border border-border bg-muted flex items-center justify-center text-foreground font-bold">
@@ -754,7 +788,7 @@ function MicroInteractions() {
               +
             </motion.button>
           </div>
-          <span className="text-[0.6875rem] text-muted-foreground">Number flip</span>
+          <span className="text-[0.6875rem] text-muted-foreground">{t("Number flip", "Virada de número")}</span>
         </div>
       </div>
     </Section>
@@ -765,6 +799,7 @@ function MicroInteractions() {
    SECTION 7 — Loaders & Progress
 ══════════════════════════════════════ */
 function LoadersSection() {
+  const { t, bi } = useI18n();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -773,12 +808,12 @@ function LoadersSection() {
   }, []);
 
   return (
-    <Section id="loaders" title="Loaders & Progress" sub="Animated loading states that communicate ongoing work.">
+    <Section id="loaders" title={t("Loaders & Progress", "Loaders e progresso")} sub={t("Animated loading states that communicate ongoing work.", "Estados de loading animados que comunicam trabalho em andamento.")}>
       <div className="grid grid-cols-3 gap-3">
 
         {/* Spinner variants */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Spinners</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Spinners", "Spinners")}</div>
           <div className="flex items-center justify-around">
             {/* CSS border spin */}
             <div className="h-7 w-7 rounded-full border-2 border-border border-t-primary animate-spin" />
@@ -806,11 +841,11 @@ function LoadersSection() {
 
         {/* Progress bar */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Progress Bars</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Progress Bars", "Barras de progresso")}</div>
           <div className="space-y-3">
             <div className="space-y-1">
               <div className="flex justify-between text-[0.6rem] text-muted-foreground">
-                <span>Upload</span><span>{progress}%</span>
+                <span>{t("Upload", "Envio")}</span><span>{progress}%</span>
               </div>
               <div className="h-1.5 bg-muted rounded-full overflow-hidden">
                 <motion.div animate={{ width: `${progress}%` }} transition={{ duration: 0.1 }} className="h-full bg-primary rounded-full" />
@@ -818,7 +853,7 @@ function LoadersSection() {
             </div>
             <div className="space-y-1">
               <div className="flex justify-between text-[0.6rem] text-muted-foreground">
-                <span>Processing</span><span className="text-warning">75%</span>
+                <span>{t("Processing", "Processando")}</span><span className="text-warning">75%</span>
               </div>
               <div className="h-1.5 bg-muted rounded-full overflow-hidden relative">
                 <div className="absolute inset-0 h-full w-3/4 bg-warning rounded-full" />
@@ -834,7 +869,7 @@ function LoadersSection() {
 
         {/* Skeleton */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Skeleton</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Skeleton", "Skeleton")}</div>
           <div className="flex items-center gap-3">
             <motion.div
               animate={{ opacity: [0.4, 0.9, 0.4] }}
@@ -859,13 +894,13 @@ function LoadersSection() {
 
         {/* Step indicator */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Step Indicator</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Step Indicator", "Indicador de etapas")}</div>
           <StepIndicator />
         </div>
 
         {/* Circular */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-4 flex flex-col items-start" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Circular Progress</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Circular Progress", "Progresso circular")}</div>
           <div className="flex-1 flex items-center justify-center w-full">
             <svg width="72" height="72" viewBox="0 0 72 72">
               <circle cx="36" cy="36" r="30" fill="none" stroke="var(--muted)" strokeWidth="6" />
@@ -888,7 +923,7 @@ function LoadersSection() {
 
         {/* Typing dots */}
         <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Chat States</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Chat States", "Estados de chat")}</div>
           <div className="space-y-3">
             <div className="flex items-end gap-2">
               <div className="h-6 w-6 rounded-full bg-muted shrink-0" />
@@ -908,7 +943,7 @@ function LoadersSection() {
                 transition={{ duration: 0.3 }}
                 className="rounded-[10px] rounded-br-[2px] bg-primary px-3 py-2 max-w-[140px]"
               >
-                <p className="text-[0.6875rem] text-primary-foreground">Message sent ✓</p>
+                <p className="text-[0.6875rem] text-primary-foreground">{t("Message sent ✓", "Mensagem enviada ✓")}</p>
               </motion.div>
             </div>
           </div>
@@ -919,8 +954,10 @@ function LoadersSection() {
 }
 
 function StepIndicator() {
+  const { t, bi } = useI18n();
   const [step, setStep] = useState(1);
   const steps = ["Setup", "Configure", "Done"];
+  const stepsPt = ["Preparar", "Configurar", "Pronto"];
 
   return (
     <div className="space-y-3">
@@ -953,7 +990,7 @@ function StepIndicator() {
       <div className="flex justify-between gap-2">
         {steps.map((s, i) => (
           <span key={s} className={`text-[0.5625rem] font-semibold transition-colors duration-200 ${i + 1 <= step ? "text-primary" : "text-muted-foreground"}`}>
-            {s}
+            {t(s, stepsPt[i])}
           </span>
         ))}
       </div>
@@ -961,13 +998,13 @@ function StepIndicator() {
         {step > 1 && (
           <button onClick={() => setStep(s => s - 1)}
             className="px-2.5 py-1 rounded-[7px] border border-border bg-muted text-[0.625rem] font-medium text-foreground hover:bg-accent transition-colors">
-            Back
+            {t("Back", "Voltar")}
           </button>
         )}
         {step < steps.length && (
           <button onClick={() => setStep(s => s + 1)}
             className="px-2.5 py-1 rounded-[7px] bg-primary text-primary-foreground text-[0.625rem] font-semibold hover:opacity-90 transition-opacity">
-            Next
+            {t("Next", "Próximo")}
           </button>
         )}
       </div>
@@ -979,19 +1016,22 @@ function StepIndicator() {
    SECTION 8 — Layout Transitions
 ══════════════════════════════════════ */
 function LayoutTransitions() {
+  const { t, bi } = useI18n();
   const [view, setView] = useState<"grid" | "list">("grid");
   const [tab, setTab]   = useState(0);
   const tabs = ["Overview", "Analytics", "Settings"];
+  const tabsPt = ["Visão geral", "Análises", "Configurações"];
   const items = ["Q4 Report", "Dashboard Alpha", "Customers", "Billing", "Users", "Support"];
+  const itemsPt = ["Relatório do T4", "Painel Alpha", "Clientes", "Cobrança", "Usuários", "Suporte"];
 
   return (
-    <Section id="layout" title="Layout Transitions" sub="Animate layout changes and shared elements with layoutId.">
+    <Section id="layout" title={t("Layout Transitions", "Transições de layout")} sub={t("Animate layout changes and shared elements with layoutId.", "Anime mudanças de layout e elementos compartilhados com layoutId.")}>
       <div className="grid grid-cols-2 gap-3">
 
         {/* Grid / List switch */}
         <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between">
-            <div className="text-[0.75rem] font-bold text-foreground">Grid ↔ List</div>
+            <div className="text-[0.75rem] font-bold text-foreground">{t("Grid ↔ List", "Grade ↔ Lista")}</div>
             <div className="flex gap-1 p-0.5 bg-muted rounded-[8px]">
               {(["grid", "list"] as const).map(v => (
                 <button key={v} onClick={() => setView(v)}
@@ -999,17 +1039,17 @@ function LayoutTransitions() {
                   {view === v && (
                     <motion.div layoutId="view-pill" className="absolute inset-0 bg-card rounded-[6px]" style={{ boxShadow: "var(--shadow-xs)" }} />
                   )}
-                  <span className="relative z-10">{v}</span>
+                  <span className="relative z-10">{v === "grid" ? t("grid", "grade") : t("list", "lista")}</span>
                 </button>
               ))}
             </div>
           </div>
           <motion.div layout className={`gap-2 ${view === "grid" ? "grid grid-cols-3" : "flex flex-col"}`}>
-            {items.map(item => (
+            {items.map((item, idx) => (
               <motion.div key={item} layout
                 className={`bg-muted/40 border border-border rounded-[8px] flex items-center gap-2 ${view === "grid" ? "flex-col p-2.5 text-center" : "px-3 py-2"}`}>
                 <div className="h-5 w-5 rounded-[5px] bg-primary/15 shrink-0" />
-                <span className="text-[0.625rem] font-medium text-foreground">{item}</span>
+                <span className="text-[0.625rem] font-medium text-foreground">{t(item, itemsPt[idx])}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -1017,12 +1057,12 @@ function LayoutTransitions() {
 
         {/* Tab underline */}
         <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground">Animated Tabs</div>
+          <div className="text-[0.75rem] font-bold text-foreground">{t("Animated Tabs", "Abas animadas")}</div>
           <div className="border-b border-border flex gap-0">
-            {tabs.map((t, i) => (
-              <button key={t} onClick={() => setTab(i)}
+            {tabs.map((tabName, i) => (
+              <button key={tabName} onClick={() => setTab(i)}
                 className={`relative px-3 py-2 text-[0.75rem] font-semibold transition-colors ${tab === i ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
-                {t}
+                {t(tabName, tabsPt[i])}
                 {tab === i && <motion.div layoutId="tab-under" className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-t-full" />}
               </button>
             ))}
@@ -1034,7 +1074,7 @@ function LayoutTransitions() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="rounded-[10px] bg-muted/30 border border-border p-4 min-h-[80px] flex items-center justify-center">
-              <span className="text-[0.75rem] text-muted-foreground">{tabs[tab]} content</span>
+              <span className="text-[0.75rem] text-muted-foreground">{t(tabs[tab], tabsPt[tab])} {t("content", "conteúdo")}</span>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1047,11 +1087,12 @@ function LayoutTransitions() {
    SECTION 9 — Design Tokens
 ══════════════════════════════════════ */
 function TokensSection() {
+  const { t, bi } = useI18n();
   return (
-    <Section id="tokens" title="Motion Tokens" sub="Consistent duration and easing values used across the design system.">
+    <Section id="tokens" title={t("Motion Tokens", "Tokens de movimento")} sub={t("Consistent duration and easing values used across the design system.", "Valores consistentes de duração e easing usados em todo o design system.")}>
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-2">
-          <div className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-[0.08em] mb-3">Duration</div>
+          <div className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-[0.08em] mb-3">{t("Duration", "Duração")}</div>
           <Token name="--duration-instant"   value="80ms"  />
           <Token name="--duration-fast"      value="150ms" />
           <Token name="--duration-normal"    value="250ms" />
@@ -1070,7 +1111,7 @@ function TokensSection() {
 
       {/* Duration visual reference */}
       <div className="rounded-[14px] border border-border bg-card p-5 space-y-3 mt-2" style={{ boxShadow: "var(--shadow-xs)" }}>
-        <div className="text-[0.75rem] font-bold text-foreground mb-4">Duration Reference</div>
+        <div className="text-[0.75rem] font-bold text-foreground mb-4">{t("Duration Reference", "Referência de duração")}</div>
         <DurationBars />
       </div>
     </Section>
@@ -1078,6 +1119,7 @@ function TokensSection() {
 }
 
 function DurationBars() {
+  const { t, bi } = useI18n();
   const [key, setKey] = useState(0);
   const durations = [
     { label: "instant",  ms: 80,  color: "bg-chart-1" },
@@ -1092,7 +1134,7 @@ function DurationBars() {
     <div className="space-y-2">
       <div className="flex justify-end mb-3">
         <button onClick={() => setKey(k => k + 1)} className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary transition-colors">
-          <RefreshCw className="h-3 w-3" /> replay
+          <RefreshCw className="h-3 w-3" /> {t("replay", "repetir")}
         </button>
       </div>
       {durations.map((d, i) => (
@@ -1119,23 +1161,23 @@ function DurationBars() {
 ══════════════════════════════════════ */
 
 const marqueeFeatures = [
-  { icon: Zap,      label: "Lightning Fast",   sub: "< 50ms response"    },
-  { icon: Star,     label: "5-star Rated",     sub: "4.9 avg on G2"      },
-  { icon: Check,    label: "SOC 2 Compliant",  sub: "Enterprise ready"   },
-  { icon: Sparkles, label: "AI-powered",       sub: "Native LLM support" },
-  { icon: Layers,   label: "Multi-tenant",     sub: "Team workspaces"    },
-  { icon: Activity, label: "99.99% Uptime",    sub: "SLA guarantee"      },
-  { icon: Clock,    label: "24/7 Support",     sub: "Always available"   },
-  { icon: Wind,     label: "Edge Network",     sub: "Global CDN"         },
+  { icon: Zap,      label: "Lightning Fast", labelPt: "Ultrarrápido",   sub: "< 50ms response", subPt: "resposta em < 50ms"    },
+  { icon: Star,     label: "5-star Rated", labelPt: "Nota 5 estrelas",     sub: "4.9 avg on G2", subPt: "média 4,9 no G2"      },
+  { icon: Check,    label: "SOC 2 Compliant", labelPt: "Em conformidade com SOC 2",  sub: "Enterprise ready", subPt: "Pronto para empresas"   },
+  { icon: Sparkles, label: "AI-powered", labelPt: "Com IA",       sub: "Native LLM support", subPt: "Suporte nativo a LLM" },
+  { icon: Layers,   label: "Multi-tenant", labelPt: "Multi-tenant",     sub: "Team workspaces", subPt: "Workspaces de equipe"    },
+  { icon: Activity, label: "99.99% Uptime", labelPt: "99,99% de uptime",    sub: "SLA guarantee", subPt: "Garantia de SLA"      },
+  { icon: Clock,    label: "24/7 Support", labelPt: "Suporte 24/7",     sub: "Always available", subPt: "Sempre disponível"   },
+  { icon: Wind,     label: "Edge Network", labelPt: "Rede edge",     sub: "Global CDN", subPt: "CDN global"         },
 ];
 
 const marqueeReviews = [
-  { name: "Ana Souza",   role: "CTO @ TechBR",    quote: "Best tool I've used in years.",        stars: 5 },
-  { name: "Pedro Lima",  role: "Product @ Scale",  quote: "Setup in 5 minutes. Absolutely incredible.",  stars: 5 },
-  { name: "Clara Nunes", role: "Dev @ Startup",    quote: "Support is fast and exceptional.",            stars: 5 },
-  { name: "Rafa Melo",   role: "CEO @ Innova",     quote: "Transformou completamente nosso workflow.",     stars: 5 },
-  { name: "Julia Costa", role: "Design @ Studio",  quote: "Zero learning curve. Perfect.",         stars: 5 },
-  { name: "Bruno Dias",  role: "Eng @ Fintech",    quote: "API integration in under 1 hour.",       stars: 5 },
+  { name: "Ana Souza",   role: "CTO @ TechBR",    quote: "Best tool I've used in years.", quotePt: "A melhor ferramenta que usei em anos.",        stars: 5 },
+  { name: "Pedro Lima",  role: "Product @ Scale",  quote: "Setup in 5 minutes. Absolutely incredible.", quotePt: "Configurei em 5 minutos. Simplesmente incrível.",  stars: 5 },
+  { name: "Clara Nunes", role: "Dev @ Startup",    quote: "Support is fast and exceptional.", quotePt: "O suporte é rápido e excepcional.",            stars: 5 },
+  { name: "Rafa Melo",   role: "CEO @ Innova",     quote: "Completely transformed our workflow.", quotePt: "Transformou completamente nosso workflow.",     stars: 5 },
+  { name: "Julia Costa", role: "Design @ Studio",  quote: "Zero learning curve. Perfect.", quotePt: "Zero curva de aprendizado. Perfeito.",         stars: 5 },
+  { name: "Bruno Dias",  role: "Eng @ Fintech",    quote: "API integration in under 1 hour.", quotePt: "Integração da API em menos de 1 hora.",       stars: 5 },
 ];
 
 function MarqueeRow({ items, direction, duration }: {
@@ -1162,6 +1204,7 @@ function MarqueeRow({ items, direction, duration }: {
 }
 
 function MarqueeSection() {
+  const { t, bi } = useI18n();
   const featureCards = marqueeFeatures.map((f, i) => {
     const Icon = f.icon;
     return (
@@ -1170,8 +1213,8 @@ function MarqueeSection() {
           <Icon className="h-3.5 w-3.5 text-primary" />
         </div>
         <div>
-          <div className="text-[0.6875rem] font-bold text-foreground whitespace-nowrap">{f.label}</div>
-          <div className="text-[0.5625rem] text-muted-foreground whitespace-nowrap">{f.sub}</div>
+          <div className="text-[0.6875rem] font-bold text-foreground whitespace-nowrap">{t(f.label, f.labelPt)}</div>
+          <div className="text-[0.5625rem] text-muted-foreground whitespace-nowrap">{t(f.sub, f.subPt)}</div>
         </div>
       </div>
     );
@@ -1182,7 +1225,7 @@ function MarqueeSection() {
       <div className="flex gap-0.5">
         {Array.from({ length: r.stars }).map((_, j) => <Star key={j} className="h-2.5 w-2.5 fill-warning text-warning" />)}
       </div>
-      <p className="text-[0.6875rem] text-foreground italic leading-snug">"{r.quote}"</p>
+      <p className="text-[0.6875rem] text-foreground italic leading-snug">"{t(r.quote, r.quotePt)}"</p>
       <div className="flex items-center gap-1.5 mt-0.5">
         <div className="h-5 w-5 rounded-full bg-primary/12 flex items-center justify-center shrink-0">
           <span className="text-[0.375rem] font-black text-primary">{r.name.split(" ").map(w => w[0]).join("")}</span>
@@ -1196,7 +1239,7 @@ function MarqueeSection() {
   ));
 
   return (
-    <Section id="marquee" title="Marquee" sub="Infinite auto-scrolling ticker. Hover to pause — ideal for logos, reviews, and feature highlights.">
+    <Section id="marquee" title="Marquee" sub={t("Infinite auto-scrolling ticker. Hover to pause — ideal for logos, reviews, and feature highlights.", "Ticker com rolagem automática infinita. Passe o mouse para pausar — ideal para logos, avaliações e destaques de recursos.")}>
       <style>{`
         @keyframes marquee-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
         @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
@@ -1229,20 +1272,24 @@ type NotifItem = {
   desc: string;
   time: string;
   action?: string;
+  titlePt: string;
+  descPt: string;
+  actionPt?: string;
 };
 
 const notifPool: Omit<NotifItem, "id">[] = [
-  { icon: Star,       iconCls: "bg-warning/12 text-warning",     title: "New review",     desc: "Ana Souza gave the project 5 stars.",    time: "now",  action: "View"      },
-  { icon: Check,      iconCls: "bg-success/12 text-success",     title: "Deploy complete",   desc: "v2.4.1 in production with no errors.",         time: "2s"                        },
-  { icon: Bell,       iconCls: "bg-primary/12 text-primary",     title: "Payment received", desc: "$1,290 from Company X confirmed.",           time: "5s",     action: "View"      },
-  { icon: ArrowRight, iconCls: "bg-info/12 text-info",           title: "New user",       desc: "Pedro Lima joined the Pro plan.",             time: "8s"                        },
-  { icon: Activity,   iconCls: "bg-chart-4/12 text-chart-4",     title: "Goal reached",      desc: "100 conversions today — monthly record!",       time: "12s",    action: "Celebrate" },
-  { icon: Zap,        iconCls: "bg-destructive/12 text-destructive", title: "Usage alert",  desc: "API rate limit at 80% — check now.",   time: "16s"                       },
-  { icon: Layers,     iconCls: "bg-primary/12 text-primary",     title: "Integration active",   desc: "Slack connected successfully.",                time: "20s"                       },
-  { icon: Sparkles,   iconCls: "bg-warning/12 text-warning",     title: "Report ready",   desc: "Q4 analysis available for download.",     time: "25s",    action: "Download"   },
+  { icon: Star,       iconCls: "bg-warning/12 text-warning",     title: "New review",     desc: "Ana Souza gave the project 5 stars.", titlePt: "Nova avaliação", descPt: "Ana Souza deu 5 estrelas ao projeto.",    time: "now",  action: "View", actionPt: "Ver"      },
+  { icon: Check,      iconCls: "bg-success/12 text-success",     title: "Deploy complete",   desc: "v2.4.1 in production with no errors.", titlePt: "Deploy concluído", descPt: "v2.4.1 em produção sem erros.",         time: "2s"                        },
+  { icon: Bell,       iconCls: "bg-primary/12 text-primary",     title: "Payment received", desc: "$1,290 from Company X confirmed.", titlePt: "Pagamento recebido", descPt: "US$ 1.290 da Empresa X confirmados.",           time: "5s",     action: "View", actionPt: "Ver"      },
+  { icon: ArrowRight, iconCls: "bg-info/12 text-info",           title: "New user",       desc: "Pedro Lima joined the Pro plan.", titlePt: "Novo usuário", descPt: "Pedro Lima entrou no plano Pro.",             time: "8s"                        },
+  { icon: Activity,   iconCls: "bg-chart-4/12 text-chart-4",     title: "Goal reached",      desc: "100 conversions today — monthly record!", titlePt: "Meta atingida", descPt: "100 conversões hoje — recorde do mês!",       time: "12s",    action: "Celebrate", actionPt: "Comemorar" },
+  { icon: Zap,        iconCls: "bg-destructive/12 text-destructive", title: "Usage alert",  desc: "API rate limit at 80% — check now.", titlePt: "Alerta de uso", descPt: "Limite de requisições da API em 80% — confira agora.",   time: "16s"                       },
+  { icon: Layers,     iconCls: "bg-primary/12 text-primary",     title: "Integration active",   desc: "Slack connected successfully.", titlePt: "Integração ativa", descPt: "Slack conectado com sucesso.",                time: "20s"                       },
+  { icon: Sparkles,   iconCls: "bg-warning/12 text-warning",     title: "Report ready",   desc: "Q4 analysis available for download.", titlePt: "Relatório pronto", descPt: "Análise do T4 disponível para download.",     time: "25s",    action: "Download", actionPt: "Baixar"   },
 ];
 
 function AnimatedListSection() {
+  const { t, bi } = useI18n();
   const idxRef = useRef(3);
   const [items, setItems] = useState<NotifItem[]>([
     { ...notifPool[0], id: "init-0" },
@@ -1262,7 +1309,7 @@ function AnimatedListSection() {
   }, [paused]);
 
   return (
-    <Section id="animated-list" title="Animated List" sub="New items appear at the top and push existing ones down — ideal for activity feeds, inboxes, and live alerts.">
+    <Section id="animated-list" title={t("Animated List", "Lista animada")} sub={t("New items appear at the top and push existing ones down — ideal for activity feeds, inboxes, and live alerts.", "Novos itens aparecem no topo e empurram os existentes para baixo — ideal para feeds de atividade, caixas de entrada e alertas em tempo real.")}>
       <div className="max-w-lg mx-auto">
         <div className="rounded-[16px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
           {/* Header */}
@@ -1273,15 +1320,15 @@ function AnimatedListSection() {
                 transition={{ duration: 1.8, repeat: Infinity }}
                 className="h-2 w-2 rounded-full bg-success"
               />
-              <span className="text-[0.8125rem] font-bold text-foreground">Live notifications</span>
+              <span className="text-[0.8125rem] font-bold text-foreground">{t("Live notifications", "Notificações ao vivo")}</span>
             </div>
             <button
               onClick={() => setPaused(p => !p)}
               className="flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border border-border bg-muted text-[0.625rem] font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
               {paused
-                ? <><Play className="h-2.5 w-2.5" /> Retomar</>
-                : <><span className="flex gap-0.5 items-center"><span className="block h-2.5 w-0.5 bg-current rounded-full"/><span className="block h-2.5 w-0.5 bg-current rounded-full"/></span> Pausar</>
+                ? <><Play className="h-2.5 w-2.5" /> {t("Resume", "Retomar")}</>
+                : <><span className="flex gap-0.5 items-center"><span className="block h-2.5 w-0.5 bg-current rounded-full"/><span className="block h-2.5 w-0.5 bg-current rounded-full"/></span> {t("Pause", "Pausar")}</>
               }
             </button>
           </div>
@@ -1307,14 +1354,14 @@ function AnimatedListSection() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-[0.75rem] font-bold text-foreground">{item.title}</span>
-                        <span className="text-[0.5625rem] text-muted-foreground shrink-0 font-mono">{item.time}</span>
+                        <span className="text-[0.75rem] font-bold text-foreground">{t(item.title, item.titlePt)}</span>
+                        <span className="text-[0.5625rem] text-muted-foreground shrink-0 font-mono">{item.time === "now" ? t("now", "agora") : item.time}</span>
                       </div>
-                      <p className="text-[0.6875rem] text-muted-foreground mt-0.5 truncate">{item.desc}</p>
+                      <p className="text-[0.6875rem] text-muted-foreground mt-0.5 truncate">{t(item.desc, item.descPt)}</p>
                     </div>
                     {item.action && (
                       <button className="shrink-0 px-2 py-1 rounded-[6px] bg-primary/10 text-[0.5625rem] font-bold text-primary hover:bg-primary/20 transition-colors whitespace-nowrap">
-                        {item.action}
+                        {t(item.action, item.actionPt ?? item.action)}
                       </button>
                     )}
                   </motion.div>
@@ -1647,13 +1694,14 @@ function AvatarOrbitCanvas() {
 }
 
 function OrbitingCirclesSection() {
+  const { t, bi } = useI18n();
   return (
-    <Section id="orbiting-circles" title="Orbiting Circles" sub="Icons orbit a central element at different radii and speeds — great for feature showcases and product hero sections.">
+    <Section id="orbiting-circles" title={t("Orbiting Circles", "Círculos em órbita")} sub={t("Icons orbit a central element at different radii and speeds — great for feature showcases and product hero sections.", "Ícones orbitam um elemento central em raios e velocidades diferentes — ótimo para vitrines de recursos e seções hero de produto.")}>
       <div className="grid grid-cols-2 gap-4">
 
         {/* Forward orbit */}
         <div className="rounded-[16px] border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Clockwise</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Clockwise", "Sentido horário")}</div>
           <OrbitCanvas
             center={
               <motion.div
@@ -1670,7 +1718,7 @@ function OrbitingCirclesSection() {
 
         {/* Reverse orbit */}
         <div className="rounded-[16px] border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
-          <div className="text-[0.75rem] font-bold text-foreground self-start">Counterclockwise</div>
+          <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Counterclockwise", "Sentido anti-horário")}</div>
           <OrbitCanvas
             reverse
             center={
@@ -1689,8 +1737,8 @@ function OrbitingCirclesSection() {
         {/* Solid variant — full width */}
         <div className="col-span-2 rounded-[16px] border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between w-full mb-1">
-            <div className="text-[0.75rem] font-bold text-foreground">Solid icons</div>
-            <span className="text-[0.625rem] text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">solid background</span>
+            <div className="text-[0.75rem] font-bold text-foreground">{t("Solid icons", "Ícones sólidos")}</div>
+            <span className="text-[0.625rem] text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">{t("solid background", "fundo sólido")}</span>
           </div>
           <OrbitCanvas
             solid
@@ -1711,10 +1759,10 @@ function OrbitingCirclesSection() {
         <div className="col-span-2 rounded-[16px] border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between w-full mb-2">
             <div>
-              <div className="text-[0.75rem] font-bold text-foreground">Avatars with tooltip</div>
-              <div className="text-[0.6875rem] text-muted-foreground">Hover over an avatar to pause and see the name</div>
+              <div className="text-[0.75rem] font-bold text-foreground">{t("Avatars with tooltip", "Avatares com tooltip")}</div>
+              <div className="text-[0.6875rem] text-muted-foreground">{t("Hover over an avatar to pause and see the name", "Passe o mouse sobre um avatar para pausar e ver o nome")}</div>
             </div>
-            <span className="text-[0.625rem] text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">hover to pause</span>
+            <span className="text-[0.625rem] text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">{t("hover to pause", "passe o mouse para pausar")}</span>
           </div>
           <AvatarOrbitCanvas />
         </div>
@@ -1745,17 +1793,18 @@ function useDarkMode() {
 type SpotlightOption = {
   id: string;
   label: string;
+  labelPt: string;
   swatch: string | null;       // null = no spotlight
   rgba: (alpha: number) => string;
 };
 
 const SPOTLIGHT_OPTIONS: SpotlightOption[] = [
-  { id: "none",    label: "Nenhum", swatch: null,      rgba: () => "none" },
-  { id: "crimson", label: "Crimson",swatch: "#D44D4D", rgba: a => `rgba(212,77,77,${a})` },
-  { id: "blue",    label: "Blue",   swatch: "#3B82F6", rgba: a => `rgba(59,130,246,${a})` },
-  { id: "teal",    label: "Teal",   swatch: "#14B8A6", rgba: a => `rgba(20,184,166,${a})` },
-  { id: "purple",  label: "Purple", swatch: "#A855F7", rgba: a => `rgba(168,85,247,${a})` },
-  { id: "amber",   label: "Amber",  swatch: "#F59E0B", rgba: a => `rgba(245,158,11,${a})` },
+  { id: "none",    label: "None", labelPt: "Nenhum", swatch: null,      rgba: () => "none" },
+  { id: "crimson", label: "Crimson", labelPt: "Carmesim", swatch: "#D44D4D", rgba: a => `rgba(212,77,77,${a})` },
+  { id: "blue",    label: "Blue", labelPt: "Azul", swatch: "#3B82F6", rgba: a => `rgba(59,130,246,${a})` },
+  { id: "teal",    label: "Teal", labelPt: "Verde-azulado", swatch: "#14B8A6", rgba: a => `rgba(20,184,166,${a})` },
+  { id: "purple",  label: "Purple", labelPt: "Roxo", swatch: "#A855F7", rgba: a => `rgba(168,85,247,${a})` },
+  { id: "amber",   label: "Amber", labelPt: "Âmbar", swatch: "#F59E0B", rgba: a => `rgba(245,158,11,${a})` },
 ];
 
 function WobbleCardDemo({
@@ -1765,6 +1814,7 @@ function WobbleCardDemo({
   spotlightId: string;
   wobbleEnabled: boolean;
 }) {
+  const { t } = useI18n();
   const cardRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const rx = useMotionValue(0);
@@ -1838,13 +1888,13 @@ function WobbleCardDemo({
           <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: "#D44D4D", textTransform: "uppercase", letterSpacing: "0.06em" }}>Enterprise</span>
         </div>
         <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27", lineHeight: 1.2, letterSpacing: "-0.03em", marginBottom: 8 }}>
-          Bank-grade<br />security.
+          {t("Bank-grade", "Segurança")}<br />{t("security.", "nível bancário.")}
         </h3>
         <p style={{ fontSize: "0.75rem", color: dark ? "#627288" : "#8898B0", lineHeight: 1.6, marginBottom: 16 }}>
-          SOC 2 Type II, end-to-end encryption and complete access auditing.
+          {t("SOC 2 Type II, end-to-end encryption and complete access auditing.", "SOC 2 Tipo II, criptografia de ponta a ponta e auditoria completa de acessos.")}
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 18 }}>
-          {["SSO & mandatory MFA", "Real-time audit log", "RBAC per workspace"].map(item => (
+          {[t("SSO & mandatory MFA", "SSO e MFA obrigatório"), t("Real-time audit log", "Log de auditoria em tempo real"), t("RBAC per workspace", "RBAC por workspace")].map(item => (
             <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 16, height: 16, borderRadius: 8, background: "rgba(212,77,77,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <Check style={{ width: 9, height: 9, color: "#D44D4D" }} />
@@ -1857,10 +1907,10 @@ function WobbleCardDemo({
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div>
             <span style={{ fontSize: "1.375rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27" }}>R$499</span>
-            <span style={{ fontSize: "0.625rem", color: dark ? "#495669" : "#8898B0" }}>/mo</span>
+            <span style={{ fontSize: "0.625rem", color: dark ? "#495669" : "#8898B0" }}>{t("/mo", "/mês")}</span>
           </div>
           <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 9, background: "#D44D4D", color: "#fff", fontSize: "0.6875rem", fontWeight: 700, border: "none", cursor: "pointer" }}>
-            Contratar <ArrowRight style={{ width: 12, height: 12 }} />
+            {t("Subscribe", "Contratar")} <ArrowRight style={{ width: 12, height: 12 }} />
           </button>
         </div>
       </div>
@@ -1869,6 +1919,7 @@ function WobbleCardDemo({
 }
 
 function WobbleCardSection() {
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [spotlightId,   setSpotlightId]   = useState("crimson");
   const [wobbleEnabled, setWobbleEnabled] = useState(true);
@@ -1880,8 +1931,8 @@ function WobbleCardSection() {
   return (
     <Section
       id="wobble-card"
-      title="Wobble Card"
-      sub="Card with 3D perspective that tilts as the mouse moves. Configure the spotlight and motion below."
+      title={t("Wobble Card", "Card com wobble")}
+      sub={t("Card with 3D perspective that tilts as the mouse moves. Configure the spotlight and motion below.", "Card com perspectiva 3D que inclina conforme o mouse se move. Configure o spotlight e o movimento abaixo.")}
     >
       <div className="rounded-[20px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
         {/* Preview */}
@@ -1903,7 +1954,7 @@ function WobbleCardSection() {
                 <button
                   key={opt.id}
                   onClick={() => setSpotlightId(opt.id)}
-                  title={opt.label}
+                  title={t(opt.label, opt.labelPt)}
                   className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
                   style={spotlightId === opt.id
                     ? activeStyle
@@ -1914,7 +1965,7 @@ function WobbleCardSection() {
                   ) : (
                     <span style={{ width: 10, height: 10, borderRadius: "50%", border: `1.5px solid ${idleColor}`, display: "inline-block", flexShrink: 0 }} />
                   )}
-                  {opt.label}
+                  {t(opt.label, opt.labelPt)}
                 </button>
               ))}
             </div>
@@ -1922,8 +1973,8 @@ function WobbleCardSection() {
 
           {/* Wobble toggle */}
           <div className="flex items-center gap-3">
-            <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Movimento</span>
-            {[{ id: true, label: "Ativo" }, { id: false, label: "Desativo" }].map(opt => (
+            <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Motion", "Movimento")}</span>
+            {[{ id: true, label: t("On", "Ativo") }, { id: false, label: t("Off", "Inativo") }].map(opt => (
               <button
                 key={String(opt.id)}
                 onClick={() => setWobbleEnabled(opt.id)}
@@ -1941,15 +1992,15 @@ function WobbleCardSection() {
         {/* Docs */}
         <div className="border-t border-border bg-card p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
           <div>
-            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">Technique</p>
+            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Technique", "Técnica")}</p>
             <p className="text-[0.75rem] text-foreground leading-relaxed">
-              <code className="text-primary text-[0.6875rem]">useMotionValue</code> + <code className="text-primary text-[0.6875rem]">useSpring</code> for <code className="text-primary text-[0.6875rem]">rotateX/Y</code> with damping. Spotlight via <code className="text-primary text-[0.6875rem]">radial-gradient</code> dynamic in the DOM.
+              <code className="text-primary text-[0.6875rem]">useMotionValue</code> + <code className="text-primary text-[0.6875rem]">useSpring</code> {t("for", "para")} <code className="text-primary text-[0.6875rem]">rotateX/Y</code> {t("with damping. Spotlight via dynamic", "com amortecimento. Spotlight via")} <code className="text-primary text-[0.6875rem]">radial-gradient</code> {t("in the DOM.", "dinâmico no DOM.")}
             </p>
           </div>
           <div>
-            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">Use when</p>
+            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Use when", "Quando usar")}</p>
             <ul className="space-y-1">
-              {["Pricing card for a recommended plan.", "Feature card that needs to stand out.", "Premium product or testimonial card."].map(w => (
+              {[t("Pricing card for a recommended plan.", "Card de preço para um plano recomendado."), t("Feature card that needs to stand out.", "Card de recurso que precisa se destacar."), t("Premium product or testimonial card.", "Card de produto premium ou depoimento.")].map(w => (
                 <li key={w} className="flex items-start gap-1.5 text-[0.75rem] text-foreground">
                   <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 text-green-500" />{w}
                 </li>
@@ -1957,9 +2008,9 @@ function WobbleCardSection() {
             </ul>
           </div>
           <div>
-            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">Avoid when</p>
+            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Avoid when", "Evitar quando")}</p>
             <ul className="space-y-1">
-              {["Mobile — without a cursor the effect is static.", "Many wobble cards in the same grid.", "Content with tables or nested grids."].map(w => (
+              {[t("Mobile — without a cursor the effect is static.", "Mobile — sem cursor o efeito fica estático."), t("Many wobble cards in the same grid.", "Vários cards com wobble no mesmo grid."), t("Content with tables or nested grids.", "Conteúdo com tabelas ou grids aninhados.")].map(w => (
                 <li key={w} className="flex items-start gap-1.5 text-[0.75rem] text-muted-foreground">
                   <span className="shrink-0 mt-0.5 text-destructive font-bold">×</span>{w}
                 </li>
@@ -1976,6 +2027,7 @@ function WobbleCardSection() {
    ROOT EXPORT
 ══════════════════════════════════════ */
 export function MotionShowcase() {
+  const { t, bi } = useI18n();
   return (
     <div className="space-y-16 pb-16">
       {/* Hero */}
@@ -1992,13 +2044,13 @@ export function MotionShowcase() {
           </motion.div>
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary text-[0.75rem] font-semibold mb-3">
-              <Activity className="h-3 w-3" /> Motion Design
+              <Activity className="h-3 w-3" /> {t("Motion Design", "Motion design")}
             </div>
             <h1 className="text-[1.375rem] font-black text-foreground tracking-[-0.03em] mb-2">
-              Animations & Motion
+              {t("Animations & Motion", "Animações e movimento")}
             </h1>
             <p className="text-[0.875rem] text-muted-foreground max-w-xl leading-relaxed">
-              Motion principles, enter and exit presets, spring physics, micro-interactions and duration/easing tokens used across the design system.
+              {t("Motion principles, enter and exit presets, spring physics, micro-interactions and duration/easing tokens used across the design system.", "Princípios de movimento, presets de entrada e saída, física de spring, microinterações e tokens de duração/easing usados em todo o design system.")}
             </p>
           </div>
         </div>
@@ -2006,17 +2058,17 @@ export function MotionShowcase() {
         {/* Principles row */}
         <div className="relative mt-8 grid grid-cols-4 gap-3">
           {[
-            { icon: Clock,      label: "Purposeful",  desc: "Every animation has a reason — no gratuitous motion."   },
-            { icon: Zap,        label: "Responsive",  desc: "Instant feedback (<100ms) for all interactive elements." },
-            { icon: Wind,       label: "Natural",     desc: "Spring physics mirror real-world motion and weight."     },
-            { icon: Sparkles,   label: "Consistent",  desc: "Shared tokens ensure cohesive motion across surfaces."   },
+            { icon: Clock,      label: "Purposeful", labelPt: "Com propósito",  desc: "Every animation has a reason — no gratuitous motion.", descPt: "Toda animação tem um motivo — sem movimento gratuito."   },
+            { icon: Zap,        label: "Responsive", labelPt: "Responsivo",  desc: "Instant feedback (<100ms) for all interactive elements.", descPt: "Feedback instantâneo (<100ms) em todos os elementos interativos." },
+            { icon: Wind,       label: "Natural", labelPt: "Natural",     desc: "Spring physics mirror real-world motion and weight.", descPt: "A física de spring reflete o movimento e o peso do mundo real."     },
+            { icon: Sparkles,   label: "Consistent", labelPt: "Consistente",  desc: "Shared tokens ensure cohesive motion across surfaces.", descPt: "Tokens compartilhados garantem movimento coeso em todas as superfícies."   },
           ].map(p => {
             const Icon = p.icon;
             return (
               <div key={p.label} className="rounded-[12px] border border-border bg-muted/30 p-3.5">
                 <Icon className="h-4 w-4 text-primary mb-2" />
-                <div className="text-[0.75rem] font-bold text-foreground mb-0.5">{p.label}</div>
-                <div className="text-[0.6125rem] text-muted-foreground leading-snug">{p.desc}</div>
+                <div className="text-[0.75rem] font-bold text-foreground mb-0.5">{t(p.label, p.labelPt)}</div>
+                <div className="text-[0.6125rem] text-muted-foreground leading-snug">{t(p.desc, p.descPt)}</div>
               </div>
             );
           })}

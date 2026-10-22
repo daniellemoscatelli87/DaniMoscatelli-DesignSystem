@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import * as LucideIcons from "lucide-react";
+import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 
 const {
@@ -548,6 +549,24 @@ const iconCategories: { name: string; icons: IconEntry[] }[] = [
   },
 ];
 
+const categoryPt: Record<string, string> = {
+  "Navigation": "Navegação",
+  "Actions": "Ações",
+  "Status & Feedback": "Status e Feedback",
+  "Data & Analytics": "Dados e Análises",
+  "Files & Documents": "Arquivos e Documentos",
+  "Media": "Mídia",
+  "Communication": "Comunicação",
+  "Users & Identity": "Usuários e Identidade",
+  "System & Dev": "Sistema e Dev",
+  "Commerce & Finance": "Comércio e Finanças",
+  "Interface & Layout": "Interface e Layout",
+  "Maps & Transport": "Mapas e Transporte",
+  "Nature & Science": "Natureza e Ciência",
+  "Design & Text": "Design e Texto",
+  "Fun & Misc": "Diversão e Diversos",
+};
+
 /* Filter out any entries where the icon resolved to undefined/null */
 const safeCategories = iconCategories.map(cat => ({
   ...cat,
@@ -567,6 +586,10 @@ const sizes = [
   { label: "XL",   px: 32 },
   { label: "2XL",  px: 40 },
 ];
+
+const colorLabelPt: Record<string, string> = {
+  Foreground: "Foreground", Muted: "Muted", Primary: "Primária", Success: "Sucesso", Warning: "Alerta", Info: "Info",
+};
 
 const colorVariants = [
   { label: "Foreground",  cls: "text-foreground" },
@@ -610,6 +633,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
    Main export
 ───────────────────────────────────────────── */
 export function IconsShowcase() {
+  const { t } = useI18n();
   const [search, setSearch] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
 
@@ -632,17 +656,23 @@ export function IconsShowcase() {
 
   const filteredTotal = filtered.reduce((acc, c) => acc + c.icons.length, 0);
 
+  const localizedTokenGroups: TokenGroup[] = iconsTokenGroups.map(g => ({
+    ...g,
+    group: t(g.group, groupPt[g.group] ?? g.group),
+    tokens: g.tokens.map(tk => ({ ...tk, description: t(tk.description, descPt[tk.name] ?? tk.description) })),
+  }));
+
   return (
     <div className="space-y-16">
 
       {/* ── USAGE GUIDE ── */}
       <section id="icon-sizes">
         <SectionHeader
-          title="Icons"
-          description="Outline Lucide React icons only. Never use filled, skeuomorphic, or heavy-stroke icons."
+          title={t("Icons", "Ícones")}
+          description={t("Outline Lucide React icons only. Never use filled, skeuomorphic, or heavy-stroke icons.", "Apenas ícones outline do Lucide React. Nunca use ícones preenchidos, esqueuomórficos ou de traço grosso.")}
         />
 
-        <SubSection title="Sizes">
+        <SubSection title={t("Sizes", "Tamanhos")}>
           <ShowcaseCard>
             <div className="flex flex-wrap items-end gap-8">
               {sizes.map(s => (
@@ -662,20 +692,20 @@ export function IconsShowcase() {
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Colors">
+        <SubSection title={t("Colors", "Cores")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-8">
               {colorVariants.map(v => (
                 <div key={v.label} className="flex flex-col items-center gap-2">
                   <Bell className={`w-5 h-5 ${v.cls}`} strokeWidth={1.75} />
-                  <span className="text-[0.75rem] text-muted-foreground">{v.label}</span>
+                  <span className="text-[0.75rem] text-muted-foreground">{t(v.label, colorLabelPt[v.label] ?? v.label)}</span>
                 </div>
               ))}
             </div>
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="Stroke weight">
+        <SubSection title={t("Stroke weight", "Espessura do traço")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-8">
               {[
@@ -693,7 +723,7 @@ export function IconsShowcase() {
                         : "text-muted-foreground"
                     }`}
                   >
-                    {s.label}
+                    {s.sw === 1.75 ? t("1.75 (default)", "1.75 (padrão)") : s.label}
                   </span>
                 </div>
               ))}
@@ -701,17 +731,17 @@ export function IconsShowcase() {
           </ShowcaseCard>
         </SubSection>
 
-        <SubSection title="In context">
+        <SubSection title={t("In context", "Em contexto")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3">
               <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] bg-primary text-primary-foreground text-[0.9375rem] font-semibold hover:opacity-90 transition-opacity">
-                <Plus className="w-4 h-4" strokeWidth={2} /> New
+                <Plus className="w-4 h-4" strokeWidth={2} /> {t("New", "Novo")}
               </button>
               <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
-                <Download className="w-4 h-4" strokeWidth={1.75} /> Export
+                <Download className="w-4 h-4" strokeWidth={1.75} /> {t("Export", "Exportar")}
               </button>
               <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
-                <Filter className="w-4 h-4" strokeWidth={1.75} /> Filter
+                <Filter className="w-4 h-4" strokeWidth={1.75} /> {t("Filter", "Filtrar")}
               </button>
               {([Search, Settings, Bell, MoreHorizontal] as React.ElementType[]).map((Icon, i) => (
                 <button
@@ -722,13 +752,13 @@ export function IconsShowcase() {
                 </button>
               ))}
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-success/10 text-success border border-success/20">
-                <CheckCircle className="w-3.5 h-3.5" strokeWidth={2} /> Active
+                <CheckCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Active", "Ativo")}
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-primary/10 text-primary border border-primary/20">
-                <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> Alert
+                <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Alert", "Alerta")}
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-warning/10 text-warning border border-warning/20">
-                <Clock className="w-3.5 h-3.5" strokeWidth={2} /> Pending
+                <Clock className="w-3.5 h-3.5" strokeWidth={2} /> {t("Pending", "Pendente")}
               </span>
             </div>
           </ShowcaseCard>
@@ -740,11 +770,11 @@ export function IconsShowcase() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">
-              Library
+              {t("Library", "Biblioteca")}
             </h2>
             <p className="text-[0.9375rem] text-muted-foreground">
-              {search ? `${filteredTotal} of ${totalIcons}` : totalIcons} icons in{" "}
-              {safeCategories.length} categories · Click to copy the name
+              {search ? t(`${filteredTotal} of ${totalIcons}`, `${filteredTotal} de ${totalIcons}`) : totalIcons} {t("icons in", "ícones em")}{" "}
+              {safeCategories.length} {t("categories · Click to copy the name", "categorias · Clique para copiar o nome")}
             </p>
           </div>
           <div className="relative w-full sm:w-64 shrink-0">
@@ -752,7 +782,8 @@ export function IconsShowcase() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Search icon..."
+              placeholder={t("Search icon...", "Buscar ícone...")}
+              aria-label={t("Search icon", "Buscar ícone")}
               className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] pl-9 pr-3 py-2 text-[0.875rem] outline-none focus:ring-2 focus:ring-ring focus:border-primary/60 transition-all"
             />
           </div>
@@ -763,7 +794,7 @@ export function IconsShowcase() {
             <div key={cat.name}>
               <div className="flex items-center gap-3 mb-3">
                 <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                  {cat.name}
+                  {t(cat.name, categoryPt[cat.name] ?? cat.name)}
                 </h3>
                 <span className="text-[0.6875rem] text-muted-foreground/50 font-mono">
                   {cat.icons.length}
@@ -786,7 +817,7 @@ export function IconsShowcase() {
                       : <Icon className="w-5 h-5" strokeWidth={1.75} />
                     }
                     <span className="text-[0.5625rem] font-medium text-center leading-tight w-full truncate">
-                      {copied === label ? "Copied!" : label}
+                      {copied === label ? t("Copied!", "Copiado!") : label}
                     </span>
                   </button>
                 ))}
@@ -798,7 +829,7 @@ export function IconsShowcase() {
             <div className="flex flex-col items-center justify-center py-20 text-muted-foreground gap-3">
               <Search className="w-8 h-8 opacity-30" />
               <p className="text-[0.9rem]">
-                No icon found for{" "}
+                {t("No icon found for", "Nenhum ícone encontrado para")}{" "}
                 <strong className="text-foreground">"{search}"</strong>
               </p>
             </div>
@@ -810,9 +841,9 @@ export function IconsShowcase() {
       <section id="icons-tokens" className="space-y-5">
         <div>
           <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Tokens</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">CSS custom properties for icon color, sizing, and context.</p>
+          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties for icon color, sizing, and context.", "Propriedades CSS customizadas para cor, tamanho e contexto dos ícones.")}</p>
         </div>
-        <TokenTable groups={iconsTokenGroups} />
+        <TokenTable groups={localizedTokenGroups} />
       </section>
     </div>
   );
@@ -856,3 +887,33 @@ const iconsTokenGroups: TokenGroup[] = [
     ],
   },
 ];
+
+const groupPt: Record<string, string> = {
+  "Icon Colors": "Cores de Ícone",
+  "Icon Containers": "Containers de Ícone",
+  "Sizing (Tailwind shortcuts)": "Tamanhos (atalhos do Tailwind)",
+};
+
+const descPt: Record<string, string> = {
+  "--foreground": "Ícone padrão / de ênfase",
+  "--muted-foreground": "Ícone secundário / discreto",
+  "--foreground-subtle": "Ícone decorativo / desabilitado",
+  "--primary": "Ícone de destaque / ativo",
+  "--success": "Ícone de confirmação / concluído",
+  "--warning": "Ícone de cautela / alerta",
+  "--error": "Ícone de erro / perigo",
+  "--info": "Ícone informativo",
+  "--violet": "Ícone de destaque roxo",
+  "--orange": "Ícone de destaque laranja",
+  "--muted": "Fundo do container de ícone",
+  "--primary-muted": "Fundo do container de ícone primário",
+  "--success-muted": "Fundo do container de ícone de sucesso",
+  "--warning-muted": "Fundo do container de ícone de alerta",
+  "--info-muted": "Fundo do container de ícone de info",
+  "h-3 w-3": "Extra pequeno  (12px) — dica inline",
+  "h-4 w-4": "Pequeno        (16px) — nav, rótulos",
+  "h-5 w-5": "Padrão         (20px) — corpo, botões",
+  "h-6 w-6": "Médio          (24px) — cabeçalhos de seção",
+  "h-8 w-8": "Grande         (32px) — ícones de destaque",
+  "h-10 w-10": "Extra grande   (40px) — hero / splash",
+};
