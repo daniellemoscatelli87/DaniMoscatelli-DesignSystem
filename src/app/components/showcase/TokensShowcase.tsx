@@ -104,7 +104,7 @@ export function TokensShowcase() {
       {/* ══════════════════════════════════════
           1. WHAT ARE TOKENS — for beginners
       ══════════════════════════════════════ */}
-      <section className="space-y-5">
+      <section className="space-y-5" id="tokens-intro">
         <div className="space-y-1">
           <p className="text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-primary">Fundamentals</p>
           <h1 className="text-[2.25rem] font-black text-foreground tracking-[-0.04em] leading-none">
@@ -192,7 +192,7 @@ export function TokensShowcase() {
           2. THE THREE LAYERS — why the designer
              defines the first one if the code is different
       ══════════════════════════════════════ */}
-      <section className="space-y-5">
+      <section className="space-y-5" id="tokens-hierarchy">
         <SectionTitle
           label="Hierarchy"
           title="Why three layers?"
@@ -323,7 +323,7 @@ export function TokensShowcase() {
       {/* ══════════════════════════════════════
           3. DESIGNER GUIDE — how to define tokens correctly
       ══════════════════════════════════════ */}
-      <section className="space-y-5">
+      <section className="space-y-5" id="tokens-design">
         <SectionTitle
           label="Practical guide"
           title="How designers define tokens correctly"
@@ -402,7 +402,7 @@ export function TokensShowcase() {
       {/* ══════════════════════════════════════
           4. AI AND TOKENS
       ══════════════════════════════════════ */}
-      <section className="space-y-5">
+      <section className="space-y-5" id="tokens-ia">
         <SectionTitle
           label="Artificial Intelligence"
           title="AI and tokens: opportunities and pitfalls"
@@ -622,7 +622,7 @@ export function TokensShowcase() {
       {/* ══════════════════════════════════════
           7. HOW THEY ARE DEFINED — real code
       ══════════════════════════════════════ */}
-      <section className="space-y-4">
+      <section className="space-y-4" id="tokens-definition">
         <SectionTitle
           label="Implementation"
           title="How tokens are defined in code"

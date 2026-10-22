@@ -6,7 +6,7 @@ import {
   BarChart2, Bell, Grid3X3,
   ChevronRight, Zap,
   TableProperties, Box,
-  Search, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins,
+  Search, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
 } from "lucide-react";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
 import { FormShowcase } from "./components/showcase/FormShowcase";
@@ -15,12 +15,17 @@ import { FeedbackShowcase } from "./components/showcase/FeedbackShowcase";
 import { OverlaysShowcase } from "./components/showcase/OverlaysShowcase";
 import { IconsShowcase } from "./components/showcase/IconsShowcase";
 import { TemplatesShowcase } from "./components/showcase/TemplatesShowcase";
-import { PostsShowcase } from "./components/showcase/PostsShowcase";
 import { MotionShowcase } from "./components/showcase/MotionShowcase";
 import { BackgroundsShowcase } from "./components/showcase/BackgroundsShowcase";
 import { BrandShowcase } from "./components/showcase/BrandShowcase";
 import { TokensShowcase } from "./components/showcase/TokensShowcase";
 import { IntegrationShowcase } from "./components/showcase/IntegrationShowcase";
+import { DevelopShowcase } from "./components/showcase/DevelopShowcase";
+import { GetStartedShowcase } from "./components/showcase/GetStartedShowcase";
+import { HomeShowcase } from "./components/showcase/HomeShowcase";
+import { PrinciplesShowcase } from "./components/showcase/PrinciplesShowcase";
+import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
+import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 
 /* ── Sidebar nav structure ── */
 type SubItem = { id: string; label: string; sectionId: string };
@@ -32,6 +37,15 @@ type NavItem = {
 };
 
 const navGroups: { group: string; items: NavItem[] }[] = [
+  {
+    group: "Start",
+    items: [
+      { id: "overview", label: "Home", icon: Home },
+      { id: "get-started", label: "Get Started", icon: Rocket },
+      { id: "principles", label: "Design Principles", icon: Lightbulb },
+      { id: "develop", label: "Develop", icon: Code2 },
+    ],
+  },
   {
     group: "Brand",
     items: [
@@ -67,7 +81,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
-    group: "Conceitos",
+    group: "Concepts",
     items: [
       { id: "tokens", label: "Design Tokens", icon: Coins,
         items: [
@@ -77,6 +91,36 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "tokens-ia",         label: "AI and tokens",             sectionId: "tokens" },
           { id: "tokens-bridge",     label: "Design ↔ Dev Mapping", sectionId: "tokens" },
           { id: "tokens-definition", label: "Implementation in code", sectionId: "tokens" },
+        ],
+      },
+      { id: "integration", label: "Integration", icon: Plug },
+    ],
+  },
+  {
+    group: "Guidelines",
+    items: [
+      { id: "usability", label: "Usability", icon: Compass,
+        items: [
+          { id: "ux-principles",   label: "Principles",         sectionId: "usability" },
+          { id: "ux-hierarchy",    label: "Action hierarchy",   sectionId: "usability" },
+          { id: "ux-targets",      label: "Target size",        sectionId: "usability" },
+          { id: "ux-feedback",     label: "System status",      sectionId: "usability" },
+          { id: "ux-states",       label: "Content states",     sectionId: "usability" },
+          { id: "ux-errors",       label: "Errors & microcopy", sectionId: "usability" },
+          { id: "ux-destructive",  label: "Destructive actions",sectionId: "usability" },
+          { id: "ux-checklist",    label: "Quick review",       sectionId: "usability" },
+        ],
+      },
+      { id: "accessibility", label: "Accessibility", icon: Accessibility,
+        items: [
+          { id: "a11y-principles", label: "Principles",         sectionId: "accessibility" },
+          { id: "a11y-contrast",   label: "Contrast",           sectionId: "accessibility" },
+          { id: "a11y-focus",      label: "Focus",              sectionId: "accessibility" },
+          { id: "a11y-keyboard",   label: "Keyboard",           sectionId: "accessibility" },
+          { id: "a11y-forms",      label: "Forms & labels",     sectionId: "accessibility" },
+          { id: "a11y-structure",  label: "Structure & ARIA",   sectionId: "accessibility" },
+          { id: "a11y-motion",     label: "Motion",             sectionId: "accessibility" },
+          { id: "a11y-checklist",  label: "Checklist",          sectionId: "accessibility" },
         ],
       },
     ],
@@ -172,10 +216,10 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "badges-tokens", label: "Tokens",        sectionId: "badges" },
         ],
       },
-      { id: "icons", label: "Ícones", icon: Shapes,
+      { id: "icons", label: "Icons", icon: Shapes,
         items: [
-          { id: "icon-sizes",   label: "Tamanhos & Cores", sectionId: "icons" },
-          { id: "icon-library", label: "Biblioteca",       sectionId: "icons" },
+          { id: "icon-sizes",   label: "Sizes & Colors", sectionId: "icons" },
+          { id: "icon-library", label: "Library",       sectionId: "icons" },
           { id: "icons-tokens", label: "Tokens",           sectionId: "icons" },
         ],
       },
@@ -194,114 +238,9 @@ const navGroups: { group: string; items: NavItem[] }[] = [
   },
 ];
 
-/* ── Overview hero ── */
-const highlights = [
-  { icon: Palette,      label: "Design Tokens",    desc: "Semantic color, radius, shadow, and typography tokens for both modes." },
-  { icon: Type,         label: "Plus Jakarta Sans", desc: "Modern rounded geometric sans-serif for maximum legibility." },
-  { icon: Layers,       label: "Glassmorphism",     desc: "Dark mode surface treatment with backdrop blur and ambient shadows." },
-  { icon: Zap,          label: "Radix UI",          desc: "Accessible interactive primitives with full keyboard support." },
-  { icon: BarChart2,    label: "Charts",            desc: "Minimal Recharts integration with crimson highlights." },
-  { icon: Grid3X3,      label: "8pt Grid",          desc: "Consistent 4px base grid creating visual rhythm and alignment." },
-];
-
-function OverviewSection() {
-  return (
-    <section id="overview" className="space-y-12">
-      {/* Hero */}
-      <div className="relative overflow-hidden rounded-[24px] border border-border p-10 bg-card" style={{ boxShadow: "var(--shadow-lg)" }}>
-        {/* Background accent */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-chart-2/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-        <div className="relative flex items-start gap-8">
-          <img
-            src={logoVermelho}
-            alt="Dani Moscatelli"
-            className="hidden sm:block h-24 w-24 object-contain shrink-0 opacity-90"
-          />
-          <div>
-            <div className="flex items-baseline gap-3 mb-4">
-              <span aria-hidden className="h-px w-6 bg-primary translate-y-[-0.35em]" />
-              <span className="text-[1.75rem] leading-none text-foreground font-semibold tracking-[-0.03em]">
-                Design System
-              </span>
-              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground font-[family-name:var(--font-sans)]">
-                v1.0
-              </span>
-            </div>
-            <h1 className="text-[2.5rem] tracking-[-0.035em] text-foreground mb-3 leading-none">
-              Dani<br />
-              <span style={{ color: "var(--primary)" }}>Moscatelli</span>
-            </h1>
-            <p className="text-[1.0625rem] text-muted-foreground max-w-lg leading-relaxed mb-6">
-              Premium design system built on cool graphite with a burnt crimson accent.
-              Optimized for modern SaaS dashboards and enterprise applications.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {[
-                { label: "40+ Components", color: "bg-primary/12 text-primary" },
-                { label: "Dark & Light Mode", color: "bg-muted text-foreground" },
-                { label: "Fully Accessible", color: "bg-muted text-foreground" },
-                { label: "Radix UI Primitives", color: "bg-muted text-foreground" },
-              ].map(tag => (
-                <span key={tag.label} className={`inline-flex items-center px-3 py-1 rounded-full text-[0.8125rem] font-medium ${tag.color}`}>
-                  {tag.label}
-                </span>
-              ))}
-            </div>
-          </div>{/* end content col */}
-        </div>{/* end flex row */}
-      </div>{/* end hero card */}
-
-      {/* Principles */}
-      <div>
-        <h2 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-4">Design Principles</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {highlights.map(h => {
-            const Icon = h.icon;
-            return (
-              <div key={h.label} className="flex gap-4 p-4 rounded-[14px] bg-card border border-border hover:border-[var(--border-strong)] transition-colors" style={{ boxShadow: "var(--shadow-xs)" }}>
-                <div className="h-9 w-9 rounded-[10px] bg-muted flex items-center justify-center shrink-0">
-                  <Icon className="h-4.5 w-4.5 text-muted-foreground" style={{ height: "18px", width: "18px" }} />
-                </div>
-                <div>
-                  <div className="text-[0.9rem] font-semibold text-foreground mb-0.5">{h.label}</div>
-                  <div className="text-[0.8125rem] text-muted-foreground leading-snug">{h.desc}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Color preview strip */}
-      <div>
-        <h2 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-4">Palette Preview</h2>
-        <div className="flex rounded-[16px] overflow-hidden h-16 border border-border/40" style={{ boxShadow: "var(--shadow-sm)" }}>
-          {[
-            "#EDF0F5","#D6DCE6","#B3BDD0","#8898B0","#627288",
-            "#495669","#374155","#283043","#1C2333","#131A27","#0D1119",
-          ].map(c => (
-            <div key={c} className="flex-1" style={{ backgroundColor: c }} />
-          ))}
-          <div className="w-px bg-background/20" />
-          {[
-            "#FDF2F2","#F9DADA","#F3B3B3","#E88080","#D44D4D",
-            "#B82828","#8C1B1B","#6D1313","#520E0E","#3A0909","#220505",
-          ].map(c => (
-            <div key={c} className="flex-1" style={{ backgroundColor: c }} />
-          ))}
-        </div>
-        <div className="flex justify-between text-[0.6875rem] text-muted-foreground mt-2 px-1">
-          <span>Graphite Scale — 50 → 950</span>
-          <span>Crimson Scale — 50 → 950</span>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const sectionComponents: Record<string, React.ReactNode> = {
-  overview:  <OverviewSection />,
+  usability:     <UsabilityShowcase />,
+  accessibility: <AccessibilityShowcase />,
   brand:     <BrandShowcase />,
   colors:    <FoundationShowcase />,
   tokens:      <TokensShowcase />,
@@ -315,32 +254,38 @@ const sectionComponents: Record<string, React.ReactNode> = {
   motion:      <MotionShowcase />,
   backgrounds: <BackgroundsShowcase />,
   templates:   <TemplatesShowcase />,
-  posts:       <PostsShowcase />,
 };
 
 const sectionLabels: Record<string, string> = {
   overview:  "Home",
+  "get-started": "Get Started",
+  principles: "Design Principles",
+  develop:   "Develop",
+  usability:     "Usability",
+  accessibility: "Accessibility",
   brand:     "Brand Identity",
   colors:    "Foundation",
   buttons:   "Form Controls",
   data:      "Data Display",
   feedback:  "Feedback & Status",
   badges:    "Labels & Patterns",
-  icons:     "Ícones",
+  icons:     "Icons",
   overlays:  "Overlays & Navigation",
   motion:      "Motion Design",
   backgrounds: "Backgrounds",
   templates:   "Templates",
-  posts:       "Posts & Carrosseis",
 };
 
 export default function App() {
   const [dark, setDark] = useState(true);
-  const [activeSection, setActiveSection] = useState("brand");
+  const [activeSection, setActiveSection] = useState("overview");
   const [sidebarExpanded, setSidebarExpanded] = useState<Record<string, boolean>>({
     brand:     false,
+    usability: false,
+    accessibility: false,
+    tokens:    false,
     templates: false,
-    colors:    true,
+    colors:    false,
     buttons:   false,
     data:      false,
     feedback:  false,
@@ -349,7 +294,6 @@ export default function App() {
     overlays:  false,
     motion:      false,
     backgrounds: false,
-    posts:       false,
   });
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   // Anchor to scroll to after a section switch
@@ -397,7 +341,23 @@ export default function App() {
     }
   };
 
-  const currentContent = sectionComponents[activeSection];
+  const navigateTo = (id: string, anchor?: string) => {
+    setActiveSection(id);
+    setPendingAnchor(anchor ?? null);
+    setMobileSidebarOpen(false);
+    if (!anchor) window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const currentContent =
+    activeSection === "get-started"
+      ? <GetStartedShowcase onNavigate={navigateTo} />
+      : activeSection === "principles"
+      ? <PrinciplesShowcase onNavigate={navigateTo} />
+      : activeSection === "develop"
+      ? <DevelopShowcase onNavigate={navigateTo} />
+      : activeSection === "overview"
+        ? <HomeShowcase onNavigate={navigateTo} />
+        : sectionComponents[activeSection];
   const currentLabel = sectionLabels[activeSection];
 
   return (
@@ -415,11 +375,16 @@ export default function App() {
         {/* Logo + wordmark */}
         <style>{`
           @keyframes ds-shimmer {
-            0%   { background-position: -300% center; }
-            100% { background-position: 300% center; }
+            from { background-position: 0% 50%; }
+            to   { background-position: 200% 50%; }
           }
+          .ds-wordmark { color: var(--graphite-900); }
+          .dark .ds-wordmark { color: #ffffff; }
           .ds-shimmer {
-            background: linear-gradient(
+            display: inline-block;
+            line-height: 1.4;
+            padding-bottom: 0.12em;
+            background-image: linear-gradient(
               90deg,
               #627288 0%,
               #8898B0 25%,
@@ -427,19 +392,25 @@ export default function App() {
               #8898B0 75%,
               #627288 100%
             );
-            background-size: 300% auto;
+            background-size: 200% 100%;
+            background-repeat: repeat-x;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
             animation: ds-shimmer 5.5s linear infinite;
           }
+          html:not(.dark) .ds-shimmer {
+            background-image: linear-gradient(90deg, #627288 0%, #495669 25%, #131A27 50%, #495669 75%, #627288 100%);
+          }
+          @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
-        <div className="flex items-center gap-2.5 min-w-0">
+        <button type="button" onClick={() => navigateTo("overview")} aria-label="Home" className="flex items-center gap-2.5 min-w-0 text-left">
           <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
           <div className="flex items-center gap-0">
             <span
-              className="text-[1.0625rem] font-semibold tracking-tight whitespace-nowrap"
-              style={{ fontFamily: "var(--font-sans)", color: "#ffffff" }}
+              className="ds-wordmark text-[1.0625rem] font-semibold tracking-tight whitespace-nowrap"
+              style={{ fontFamily: "var(--font-sans)" }}
             >
               Dani Moscatelli
             </span>
@@ -456,7 +427,7 @@ export default function App() {
               Design System
             </span>
           </div>
-        </div>
+        </button>
 
         <div className="flex-1" />
 
@@ -564,23 +535,12 @@ export default function App() {
                   })}
                 </div>
               ))}
-
-              {/* Mode toggle in sidebar */}
-              <div className="mt-6 pt-4 border-t border-border">
-                <button
-                  onClick={() => setDark(d => !d)}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-                >
-                  {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                  {dark ? "Light Mode" : "Dark Mode"}
-                </button>
-              </div>
             </div>
           </aside>
         </>
 
         {/* ── MAIN CONTENT ── */}
-        <main className="flex-1 lg:ml-60 min-w-0">
+        <main className="flex-1 lg:ml-60 min-w-0 flex flex-col">
           {/* Section header bar */}
           <div className="sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-b border-border px-6 md:px-10 py-3 flex items-center gap-2">
             <nav className="flex items-center gap-1.5 text-[0.8125rem]">
@@ -591,9 +551,27 @@ export default function App() {
             </nav>
           </div>
 
-          <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto">
+          <div className="px-6 md:px-10 py-10 max-w-5xl mx-auto w-full flex-1">
             {currentContent}
           </div>
+
+          <footer className="relative z-10 border-t border-border px-6 md:px-10 py-6">
+            <div className="max-w-5xl mx-auto flex items-center justify-center text-center">
+              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">
+                © 2026{" "}
+                <a
+                  href="https://www.daniellemoscatelli.com.br"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+                >
+                  Dani Moscatelli
+                </a>{" "}
+                <span aria-hidden className="mx-1 text-muted-foreground/60">•</span>{" "}
+                Experience Design Studio. All rights reserved.
+              </p>
+            </div>
+          </footer>
         </main>
       </div>
 

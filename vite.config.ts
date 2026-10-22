@@ -1,8 +1,8 @@
-
 import { defineConfig } from 'vite'
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+
 
 function figmaAssetResolver() {
   return {
@@ -17,9 +17,7 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  // Base URL para publicação no GitHub Pages
   base: '/DaniMoscatelli-DesignSystem/',
-
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
@@ -27,7 +25,6 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-
   resolve: {
     alias: {
       // Alias @ to the src directory
