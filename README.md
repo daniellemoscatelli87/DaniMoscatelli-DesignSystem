@@ -1,7 +1,7 @@
 
-  # Design System for SaaS App
+  # Dani Moscatelli - Design System
 
-  This is a code bundle for Design System for SaaS App. The original project is available at https://www.figma.com/design/bSbgJnCDJW5jjuaXPt3Elb/Design-System-for-SaaS-App.
+  This is a code bundle for Dani Moscatelli - Design System. The original project is available at https://www.figma.com/design/bSbgJnCDJW5jjuaXPt3Elb/Dani-Moscatelli---Design-System.
 
   ## Running the code
 
