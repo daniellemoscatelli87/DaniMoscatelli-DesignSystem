@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Avatar Circles", pt: "Avatar Circles" },
+    desc: { en: "Overlapping avatar circles with a “+N” count, ported from Magic UI and adapted to the tokens (borders follow the background, three sizes, “+N” clickable only with a destination). Under Components › Badges › Avatar.", pt: "Círculos de avatares sobrepostos com “+N”, portado do Magic UI e adaptado aos tokens (bordas seguem o fundo, três tamanhos, “+N” clicável só com destino). Em Componentes › Badges › Avatar." },
+    page: "badges", anchor: "avatar-circles",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Partner invitation card", pt: "Card de convite ao parceiro" },
     desc: { en: "Card inviting professionals to join the Partner Network: hero tag, headline with highlight, benefit, primary action and secondary link. Vertical and horizontal, sizes S, M and L, card, tint and dark surfaces. Under Components › Cards.", pt: "Card que convida profissionais para a Rede de Parceiros: selo, título com destaque, benefício, ação principal e link secundário. Vertical e horizontal, tamanhos P, M e G, superfícies card, apoio e grafite. Em Componentes › Cards." },
     page: "cards", anchor: "card-partner",

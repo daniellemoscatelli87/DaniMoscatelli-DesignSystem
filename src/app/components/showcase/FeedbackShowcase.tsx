@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Selo } from "@/app/components/ui/selo";
+import { AvatarCircles } from "@/app/components/ui/avatar-circles";
 import { MapPin, Sparkles } from "lucide-react";
 import {
   CheckCircle, AlertCircle, AlertTriangle, Info, X,
@@ -11,6 +12,12 @@ import { useI18n } from "../../i18n";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
+
+const DEMO_AVATARS = ["Ana", "Bruno", "Carla", "Diego", "Elisa", "Fábio"].map((name, i) => ({
+  imageUrl: `${import.meta.env.BASE_URL}avatares/avatar-${i + 1}.svg`,
+  profileUrl: "#avatar-circles",
+  name,
+}));
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -512,6 +519,47 @@ export function FeedbackShowcase() {
                 <span className="text-[0.6875rem] text-muted-foreground">{t("Group", "Grupo")}</span>
               </div>
             </div>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title="Avatar Circles">
+          <div id="avatar-circles" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+              {t("Overlapping avatar circles with a final “+N” circle, ported from Magic UI and adapted to the system tokens: borders follow the background, so it works on light and dark themes, and the “+N” only becomes a link when a destination is given. Use it as social proof next to a call to action. ", "Círculos de avatares sobrepostos com um último círculo “+N”, portado do Magic UI e adaptado aos tokens do sistema: as bordas seguem o fundo, então funciona nos temas claro e escuro, e o “+N” só vira link quando há um destino. Use como prova social ao lado de uma chamada para ação. ")}
+              {t('Clients already working with the studio on a product page, participants of a challenge or members of an organization.', 'Clientes que já usam o estúdio em uma página de produto, participantes de um desafio ou membros de uma organização.')}
+            </p>
+            <div className="flex flex-col gap-6">
+              {([["sm", "SM · 32 px"], ["md", "MD · 40 px"], ["lg", "LG · 48 px"]] as const).map(([size, label]) => (
+                <div key={size} className="flex flex-wrap items-center gap-4">
+                  <AvatarCircles size={size} numPeople={99} moreHref="#avatar-circles" avatarUrls={DEMO_AVATARS} />
+                  <span className="text-[0.6875rem] text-muted-foreground">{label}</span>
+                </div>
+              ))}
+              <div className="flex flex-wrap items-center gap-4 rounded-[14px] border border-border bg-muted/40 p-4">
+                <AvatarCircles numPeople={48} avatarUrls={DEMO_AVATARS.slice(0, 4)} />
+                <p className="text-[0.8125rem] text-foreground">
+                  <span className="font-semibold">{t("52 teams", "52 times")}</span>{" "}
+                  <span className="text-muted-foreground">{t("already investigate their challenges here.", "já investigam seus desafios por aqui.")}</span>
+                </p>
+              </div>
+            </div>
+            <pre className="mt-4 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { AvatarCircles } from "@/app/components/ui/avatar-circles";
+
+<AvatarCircles
+  numPeople={99}
+  moreHref="/pessoas"
+  avatarUrls={[
+    { imageUrl: "/avatares/avatar-1.svg", profileUrl: "/perfil/ana", name: "Ana" },
+    { imageUrl: "/avatares/avatar-2.svg", profileUrl: "/perfil/bruno", name: "Bruno" },
+  ]}
+/>`}</code></pre>
+            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("Props: avatarUrls (imageUrl, profileUrl, name), numPeople, moreHref, size sm | md | lg, className.", "Props: avatarUrls (imageUrl, profileUrl, name), numPeople, moreHref, size sm | md | lg, className.")}</li>
+              <li>• {t("Three to six avatars; beyond that, the “+N” carries the rest.", "De três a seis avatares; acima disso, o “+N” resume o restante.")}</li>
+              <li>• {t("Always pass name: it becomes the image alt text and the tooltip.", "Sempre informe name: vira o texto alternativo da imagem e o tooltip.")}</li>
+              <li>• {t("Only show real people with consent; otherwise use initials avatars.", "Só mostre pessoas reais com consentimento; senão, use avatares de iniciais.")}</li>
+            </ul>
           </ShowcaseCard>
         </SubSection>
       </section>
