@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Hero tag (selo)", pt: "Selo (tag do hero)" },
+    desc: { en: "The pill at the top of the Experience Intelligence page on the studio site is now a component: card background, thin border, uppercase with wide tracking and a primary dot or icon. Under Labels › Hero tag, with usage rules and tokens.", pt: "A pílula do topo da página Experience Intelligence do site do estúdio virou componente: fundo de card, borda fina, caixa alta com espaçamento largo e ponto ou ícone na cor primária. Em Rótulos › Selo, com regras de uso e tokens." },
+    page: "badges", anchor: "selo",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Side panel (drawer)", pt: "Painel lateral (gaveta)" },
     desc: { en: "The studio site's contact drawer documented and turned into a component: anatomy (header, scrollable body, fixed action bar, footer), behavior, the full contact form variant with validation and success state, accessibility checklist, usage and tokens.", pt: "A gaveta de contato do site do estúdio documentada e transformada em componente: anatomia (cabeçalho, corpo rolável, barra de ação fixa, rodapé), comportamento, a variante formulário de contato com validação e estado de sucesso, checklist de acessibilidade, uso e tokens." },
     page: "sidepanel", anchor: "sidepanel-anatomy",

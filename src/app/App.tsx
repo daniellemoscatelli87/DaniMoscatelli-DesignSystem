@@ -138,6 +138,7 @@ const ptLabels: Record<string, string> = {
   "Skeleton": "Skeleton",
   "Labels": "Rótulos",
   "Badges & Tags": "Badges e tags",
+  "Hero tag (selo)": "Selo (tag do hero)",
   "Avatar": "Avatar",
   "Empty States": "Estados vazios",
   "Timeline": "Linha do tempo",
@@ -360,6 +361,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
       { id: "badges", label: "Labels", icon: Layers,
         items: [
           { id: "badges",        label: "Badges & Tags", sectionId: "badges" },
+          { id: "selo",          label: "Hero tag (selo)", sectionId: "badges" },
           { id: "avatar",        label: "Avatar",        sectionId: "badges" },
           { id: "empty-states",  label: "Empty States",  sectionId: "badges" },
           { id: "timeline",      label: "Timeline",      sectionId: "badges" },

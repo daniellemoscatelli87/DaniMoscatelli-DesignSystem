@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { Selo } from "@/app/components/ui/selo";
+import { MapPin, Sparkles } from "lucide-react";
 import {
   CheckCircle, AlertCircle, AlertTriangle, Info, X,
   Loader2, Clock, Check,
@@ -399,6 +401,40 @@ export function FeedbackShowcase() {
             </div>
           </ShowcaseCard>
         </SubSection>
+
+        <div id="selo" className="scroll-mt-32" />
+        <SubSection title={t("Hero tag (selo)", "Selo (tag do hero)")}>
+          <ShowcaseCard>
+            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
+              {t(
+                "The pill used at the top of the Experience Intelligence page on the studio site: card background, thin border, small uppercase text with wide tracking and a primary dot. Use it to set the context at the top of a page or section (product name, place, theme), never for status or counts.",
+                "A pílula usada no topo da página Experience Intelligence do site do estúdio: fundo de card, borda fina, texto pequeno em caixa alta com espaçamento largo e um ponto na cor primária. Use para situar a pessoa no topo de uma página ou seção (nome do produto, lugar, tema), nunca para status ou contagem.",
+              )}
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Selo>DM | Experience Intelligence</Selo>
+              <Selo icon={<MapPin />}>{t("Local fashion in Curitiba", "Moda local em Curitiba")}</Selo>
+              <Selo tone="primary" icon={<Sparkles />}>{t("New", "Novidade")}</Selo>
+              <Selo size="sm">{t("Section", "Seção")}</Selo>
+              <Selo dot={false}>{t("No dot", "Sem ponto")}</Selo>
+            </div>
+            <div className="mt-4 rounded-[12px] bg-foreground p-5">
+              <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-background/60">{t("On a dark surface", "Sobre superfície escura")}</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-[0.75rem] font-semibold uppercase tracking-[0.14em] text-white/85"><span aria-hidden className="h-2 w-2 rounded-full bg-primary" />{t("Inverted", "Invertido")}</span>
+              </div>
+            </div>
+            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("One hero tag per page or section; it comes right above the title.", "Um selo por página ou seção; ele vem logo acima do título.")}</li>
+              <li>• {t("Short text (two to four words), uppercase by the component, never a sentence.", "Texto curto (duas a quatro palavras), caixa alta pelo componente, nunca uma frase.")}</li>
+              <li>• {t("Dot or one icon in the primary color, never both.", "Ponto ou um ícone na cor primária, nunca os dois.")}</li>
+              <li>• {t("It is not interactive. For filters use chips; for status use badges or the status chip.", "Não é interativo. Para filtros use chips; para status use badges ou o chip de status.")}</li>
+            </ul>
+            <pre className="mt-4 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Selo } from "@/app/components/ui/selo";
+<Selo>DM | Experience Intelligence</Selo>
+<Selo icon={<MapPin />}>Moda local em Curitiba</Selo>`}</code></pre>
+          </ShowcaseCard>
+        </SubSection>
       </section>
 
       {/* ── TIMELINE ── */}
@@ -590,6 +626,8 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--violet-muted", description: t("Violet badge tinted", "Badge violeta com tom"),  light: "rgba(186,105,220,0.10)", dark: "rgba(235,108,255,0.12)", isColor: true },
       { name: "--orange",       description: t("Orange accent badge", "Badge de destaque laranja"),  light: "#fa9852", dark: "#ff8833", isColor: true },
       { name: "--orange-muted", description: t("Orange badge tinted", "Badge laranja com tom"),  light: "rgba(250,152,82,0.10)", dark: "rgba(255,136,51,0.12)", isColor: true },
+      { name: "--card / --border", description: t("Hero tag (selo) surface and border", "Superfície e borda do selo (tag do hero)"), light: "#FFFFFF", dark: "card", isColor: false },
+      { name: "--graphite-700", description: t("Hero tag text (graphite-300 in dark)", "Texto do selo (graphite-300 no escuro)"), light: "graphite-700", dark: "graphite-300", isColor: false },
       { name: "--muted",        description: t("Neutral / default badge", "Badge neutro / padrão"),light: "#E8EDF3", dark: "rgba(40,48,67,0.60)", isColor: true },
     ],
   },
