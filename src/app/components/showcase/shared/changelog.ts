@@ -14,6 +14,16 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Partner invitation card", pt: "Card de convite ao parceiro" },
+    desc: { en: "Card inviting professionals to join the Partner Network: hero tag, headline with highlight, benefit, primary action and secondary link. Vertical and horizontal, sizes S, M and L, card, tint and dark surfaces. Under Components › Cards.", pt: "Card que convida profissionais para a Rede de Parceiros: selo, título com destaque, benefício, ação principal e link secundário. Vertical e horizontal, tamanhos P, M e G, superfícies card, apoio e grafite. Em Componentes › Cards." },
+    page: "cards", anchor: "card-partner",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Headlines with a primary-color highlight", pt: "Títulos com destaque na cor primária" },
+    desc: { en: "The site's hero pattern applied to headlines: the key expression is set in the primary color (Heading component, highlight between asterisks). Page titles updated and the rule documented under Foundation › Typography.", pt: "Padrão do hero do site aplicado aos títulos: a expressão-chave fica na cor primária (componente Heading, destaque entre asteriscos). Títulos de página atualizados e regra documentada em Fundamentos › Tipografia." },
+    page: "colors", anchor: "typography",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Upload components", pt: "Componentes de upload" },
     desc: { en: "Drop area (with camera on mobile), file list with progress and states, single image with preview and image gallery with cover. Type, size and count validation, accessibility checklist, usage and tokens.", pt: "Área de arrastar e soltar (com câmera no celular), lista de arquivos com progresso e estados, imagem única com prévia e galeria de imagens com capa. Validação de tipo, tamanho e quantidade, checklist de acessibilidade, uso e tokens." },
     page: "upload", anchor: "upload-dropzone",

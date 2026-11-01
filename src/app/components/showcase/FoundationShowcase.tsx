@@ -1,5 +1,6 @@
 import React from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { Heading } from "@/app/components/ui/heading";
 import { Check, X } from "lucide-react";
 import { useI18n } from "../../i18n";
 
@@ -173,6 +174,25 @@ export function FoundationShowcase() {
       {/* ── TYPOGRAPHY ── */}
       <section id="typography" className="space-y-10">
         <SectionHeader title={t("Typography", "Tipografia")} description={t("Three-family system with complementary roles: clarity, impact and emotion.", "Sistema de três famílias com papéis complementares: clareza, impacto e emoção.")} />
+
+        <SubSection title={t("Headline with highlight (hero pattern)", "Título com destaque (padrão do hero)")}>
+          <div className="bg-card rounded-[16px] border border-border p-6 sm:p-8 space-y-6" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <Heading level={2} size="hero">Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>
+            <div className="h-px bg-border" />
+            <div className="grid gap-6 md:grid-cols-2">
+              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">Princípios de **design**</Heading></div>
+              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">Faça parte da **Rede de Parceiros**</Heading></div>
+            </div>
+            <ul className="grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("One highlight per title, one to three words, in the primary color; never the whole title.", "Um destaque por título, de uma a três palavras, na cor primária; nunca o título inteiro.")}</li>
+              <li>• {t("Highlight the expression that carries the value (“ativo estratégico”), not a connector.", "Destaque a expressão que carrega o valor (“ativo estratégico”), não um conectivo.")}</li>
+              <li>• {t("Plus Jakarta Sans Bold (700), as on the site hero. Hero: tracking -0.03em, line height 1.1. Page: -0.035em. Section: -0.02em.", "Plus Jakarta Sans Bold (700), como no hero do site. Hero: tracking -0,03em, entrelinha 1,1. Página: -0,035em. Seção: -0,02em.")}</li>
+              <li>• {t("Large text, so the primary color passes contrast on light and dark backgrounds.", "Texto grande, então a cor primária passa no contraste nos fundos claro e escuro.")}</li>
+            </ul>
+            <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Heading } from "@/app/components/ui/heading";
+<Heading level={1} size="hero">Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>`}</code></pre>
+          </div>
+        </SubSection>
 
         {/* ── Role overview ── */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

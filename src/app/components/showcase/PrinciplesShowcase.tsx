@@ -139,7 +139,7 @@ export function PrinciplesShowcase({ onNavigate }: { onNavigate: Navigate }) {
     <div className="space-y-10 min-w-0">
       <PageHeader
         eyebrow={t("Start", "Início")}
-        title={t("Design Principles", "Princípios de Design")}
+        title={t("Design **principles**", "Princípios de **design**")}
         description={t("The decisions behind every screen, token and component in this system.", "As decisões por trás de cada tela, token e componente deste sistema.")}
       />
 
