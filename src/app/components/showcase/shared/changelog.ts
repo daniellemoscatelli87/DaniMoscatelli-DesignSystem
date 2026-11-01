@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Glassmorphism cards with finishes", pt: "Cards glassmorphism com acabamentos" },
+    desc: { en: "New finish prop with degrees of transparency: translucent, frosted, light focus and crystal, combinable with tone and opacity. Interactive picker in the glassmorphism cards section; finish tokens.", pt: "Nova prop finish com graus de transparência: translúcido, fosco, foco de luz e cristal, combináveis com tom e opacidade. Seletor interativo na seção de cards glassmorphism; tokens dos acabamentos." },
+    page: "cards", anchor: "card-glass",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Doodle texture", pt: "Textura doodle" },
     desc: { en: "Seamless pattern with 66 line icons from the studio's universe (research, innovation, UX, UI, people, journeys, sticky notes, design thinking). Solid stroke color: graphite-200 on light, graphite-800 on dark, or any token via mask. SVG and PNG downloads. Under Backgrounds.", pt: "Padrão sem emenda com 66 ícones de traço do universo do estúdio (pesquisa, inovação, UX, UI, pessoas, jornadas, post-its, design thinking). Traço em cor sólida: grafite-200 no claro, grafite-800 no escuro, ou qualquer token via máscara. Download em SVG e PNG. Em Backgrounds." },
     page: "backgrounds", anchor: "doodle-bg",
