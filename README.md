@@ -1,4 +1,4 @@
-# Dani Moscatelli Design System
+# Dani Moscatelli - Design System
 
 Design system oficial do estúdio Dani Moscatelli | Experience Design Studio, publicado em https://daniellemoscatelli87.github.io/DaniMoscatelli-DesignSystem/ e mostrado no site em https://www.danimoscatelli.com.br/designsystem.
 
