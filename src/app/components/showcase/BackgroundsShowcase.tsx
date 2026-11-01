@@ -1671,7 +1671,12 @@ function DoodleTextureCard() {
     <div className="rounded-[20px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
       <div className="relative isolate h-80 overflow-hidden bg-background">
         <DoodleTexture scale={scale} color={color} />
-        <HeroContent dark={dark} />
+        {/* conteúdo em card sólido: a textura fica atrás, nunca sob o texto */}
+        <div className="flex h-full w-full items-center justify-center p-6">
+          <div className="rounded-[20px] border border-border bg-card px-2 py-1" style={{ boxShadow: "var(--shadow-lg)" }}>
+            <HeroContent dark={dark} />
+          </div>
+        </div>
       </div>
       <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
