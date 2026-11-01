@@ -336,9 +336,10 @@ export function CardShowcase() {
               </div>
             </GlassScene>
           </div>
-          <div>
+          {/* só no tema escuro: no modo claro nada da cena escura aparece */}
+          <div className="hidden dark:block">
             <SubTitle>{t("Dark glass (tone escura)", "Vidro escuro (tom escuro)")}</SubTitle>
-            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Graphite glass with white text, for photos and busy scenes. The example follows the theme: over the light brand scene here, over the dark one in dark mode.", "Vidro grafite com texto branco, para fotos e cenas movimentadas. O exemplo segue o tema: sobre a cena clara da marca aqui, sobre a escura no modo escuro.")}</p>
+            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Graphite glass with white text, for photos and busy scenes. This block only appears in dark mode.", "Vidro grafite com texto branco, para fotos e cenas movimentadas. Este bloco só aparece no modo escuro.")}</p>
             <GlassScene>
               <div className="grid gap-5 md:grid-cols-[1.2fr_0.8fr]">
                 <GlassCard tone="escura" intensity="media">
