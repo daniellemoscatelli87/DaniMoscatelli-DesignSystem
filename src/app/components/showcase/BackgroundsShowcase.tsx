@@ -1643,7 +1643,7 @@ const getBgTokenGroups = (t: (en: string, pt: string) => string): TokenGroup[] =
    DOODLE TEXTURE — textura de ícones de traço
 ══════════════════════════════════════ */
 function DoodleTextureCard() {
-  const { t } = useI18n();
+  const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [scale, setScale] = useState<"p" | "m" | "g">("m");
   const [colorId, setColorId] = useState("neutra");
@@ -1689,6 +1689,15 @@ function DoodleTextureCard() {
         </div>
       </div>
       <div className="border-t border-border px-5 py-4 space-y-4">
+        <div className="flex items-start gap-3 justify-between">
+          <h3 className="text-[0.9375rem] font-black text-foreground tracking-[-0.025em]">{t("Doodle Texture", "Textura doodle")}</h3>
+          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+            {(["SVG"] as EffectTag[]).map(tg => (
+              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+                style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
+            ))}
+          </div>
+        </div>
         <p className="text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("A seamless pattern of line icons from the studio's universe: research, innovation, UX, UI, people, journeys, sticky notes and design thinking. Sixty-six distinct drawings on an 800 px tile.", 'Padrão sem emenda de ícones de traço do universo do estúdio: pesquisa, inovação, UX, UI, pessoas, jornadas, post-its e design thinking. Sessenta e seis desenhos distintos em um ladrilho de 800 px.')} {t("Strokes are solid colors, never transparent: graphite-200 on the light theme and graphite-800 on the dark theme by default, as in the reference wallpaper. In React the drawing is applied as a mask, so the stroke can take any token.", "Os traços são cores sólidas, nunca transparentes: grafite-200 no tema claro e grafite-800 no escuro por padrão, como no papel de parede de referência. No React o desenho é aplicado como máscara, então o traço aceita qualquer token.")}</p>
         <div className="flex flex-wrap gap-2">
           {downloads.map(([label, file]) => (
