@@ -7,7 +7,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight,
+  PanelRight, UploadCloud,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -30,6 +30,7 @@ import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 import { CardShowcase } from "./components/showcase/CardShowcase";
 import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
+import { UploadShowcase } from "./components/showcase/UploadShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -156,6 +157,14 @@ const ptLabels: Record<string, string> = {
   "Labels & Patterns": "Rótulos e padrões",
   "Overlays & Navigation": "Overlays e navegação",
   "Side Panel": "Painel lateral",
+  "Upload": "Upload",
+  "Drop area": "Área de soltar",
+  "File list": "Lista de arquivos",
+  "Single image": "Imagem única",
+  "Gallery": "Galeria",
+  "Spreadsheet import": "Importar planilha",
+  "States": "Estados e mensagens",
+
   "Anatomy": "Anatomia",
   "Behavior": "Comportamento",
   "Contact form": "Formulário de contato",
@@ -396,6 +405,19 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "sidepanel-tokens",   label: "Tokens",                  sectionId: "sidepanel" },
         ],
       },
+      { id: "upload", label: "Upload", icon: UploadCloud,
+        items: [
+          { id: "upload-dropzone", label: "Drop area",               sectionId: "upload" },
+          { id: "upload-list",     label: "File list",               sectionId: "upload" },
+          { id: "upload-image",    label: "Single image",            sectionId: "upload" },
+          { id: "upload-gallery",  label: "Gallery",                 sectionId: "upload" },
+          { id: "upload-sheet",    label: "Spreadsheet import",      sectionId: "upload" },
+          { id: "upload-states",   label: "States",                  sectionId: "upload" },
+          { id: "upload-a11y",     label: "Accessibility checklist", sectionId: "upload" },
+          { id: "upload-usage",    label: "Usage",                   sectionId: "upload" },
+          { id: "upload-tokens",   label: "Tokens",                  sectionId: "upload" },
+        ],
+      },
     ],
   },
 ];
@@ -422,6 +444,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
   sidepanel: <SidePanelShowcase />,
+  upload:    <UploadShowcase />,
   motion:      <MotionShowcase />,
   backgrounds: <BackgroundsShowcase />,
   templates:   <TemplatesShowcase />,
@@ -444,6 +467,7 @@ const sectionLabels: Record<string, string> = {
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
   sidepanel: "Side Panel",
+  upload:    "Upload",
   motion:      "Motion Design",
   backgrounds: "Backgrounds",
   templates:   "Templates",
@@ -469,6 +493,7 @@ function AppShell() {
     icons:     false,
     overlays:  false,
     sidepanel: false,
+    upload:    false,
     motion:      false,
     backgrounds: false,
   });

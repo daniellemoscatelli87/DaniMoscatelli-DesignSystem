@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Upload components", pt: "Componentes de upload" },
+    desc: { en: "Drop area (with camera on mobile), file list with progress and states, single image with preview and image gallery with cover. Type, size and count validation, accessibility checklist, usage and tokens.", pt: "Área de arrastar e soltar (com câmera no celular), lista de arquivos com progresso e estados, imagem única com prévia e galeria de imagens com capa. Validação de tipo, tamanho e quantidade, checklist de acessibilidade, uso e tokens." },
+    page: "upload", anchor: "upload-dropzone",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Hero tag (selo)", pt: "Selo (tag do hero)" },
     desc: { en: "The pill at the top of the Experience Intelligence page on the studio site is now a component: card background, thin border, uppercase with wide tracking and a primary dot or icon. Under Labels › Hero tag, with usage rules and tokens.", pt: "A pílula do topo da página Experience Intelligence do site do estúdio virou componente: fundo de card, borda fina, caixa alta com espaçamento largo e ponto ou ícone na cor primária. Em Rótulos › Selo, com regras de uso e tokens." },
     page: "badges", anchor: "selo",
