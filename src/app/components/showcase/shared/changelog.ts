@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Doodle texture", pt: "Textura doodle" },
+    desc: { en: "Seamless pattern with 66 line icons from the studio's universe (research, innovation, UX, UI, people, journeys, sticky notes, design thinking). Solid stroke color: graphite-200 on light, graphite-800 on dark, or any token via mask. SVG and PNG downloads. Under Backgrounds.", pt: "Padrão sem emenda com 66 ícones de traço do universo do estúdio (pesquisa, inovação, UX, UI, pessoas, jornadas, post-its, design thinking). Traço em cor sólida: grafite-200 no claro, grafite-800 no escuro, ou qualquer token via máscara. Download em SVG e PNG. Em Backgrounds." },
+    page: "backgrounds", anchor: "doodle-bg",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Glassmorphism cards", pt: "Cards glassmorphism" },
     desc: { en: "New Cards subcategory: GlassCard component with light and dark glass, three intensities, primary tint, interactive version and a solid fallback under reduced transparency; rules for background, contrast and quantity.", pt: "Nova subcategoria em Cards: componente GlassCard com vidro claro e escuro, três intensidades, tingimento na primária, versão interativa e fallback sólido com transparência reduzida; regras de fundo, contraste e quantidade." },
     page: "cards", anchor: "card-glass",

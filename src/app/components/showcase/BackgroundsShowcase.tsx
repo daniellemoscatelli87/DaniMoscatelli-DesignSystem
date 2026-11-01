@@ -3,6 +3,8 @@ import React, {
 } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { DoodleTexture, doodleTextureFiles } from "@/app/components/ui/doodle-texture";
+import { Download } from "lucide-react";
 import { useI18n } from "../../i18n";
 import {
   Zap, Shield, BarChart2, TrendingUp, Package,
@@ -1637,6 +1639,80 @@ const getBgTokenGroups = (t: (en: string, pt: string) => string): TokenGroup[] =
   },
 ];
 
+/* ══════════════════════════════════════
+   DOODLE TEXTURE — textura de ícones de traço
+══════════════════════════════════════ */
+function DoodleTextureCard() {
+  const { t } = useI18n();
+  const dark = useDarkMode();
+  const [scale, setScale] = useState<"p" | "m" | "g">("m");
+  const [colorId, setColorId] = useState("neutra");
+  const colors: { id: string; label: string; value?: string }[] = [
+    { id: "neutra", label: t("Neutral", "Neutra") },
+    { id: "forte", label: t("Strong", "Forte"), value: dark ? "var(--graphite-700)" : "var(--graphite-300)" },
+    { id: "primaria", label: t("Primary", "Primária"), value: dark ? "var(--primary)" : "var(--primary-muted-foreground)" },
+  ];
+  const color = colors.find(c => c.id === colorId)?.value;
+  const ctrl = dark ? "rgba(255,255,255,0.07)" : "rgba(19,26,39,0.08)";
+  const idle = dark ? "#8898B0" : "#627288";
+  const base = import.meta.env.BASE_URL;
+  const downloads: [string, string][] = [
+    [t("SVG light", "SVG claro"), doodleTextureFiles.claro], [t("SVG dark", "SVG escuro"), doodleTextureFiles.escuro],
+    [t("SVG primary", "SVG primária"), doodleTextureFiles.primaria], [t("SVG stroke (currentColor)", "SVG traço (currentColor)"), doodleTextureFiles.traco],
+    [t("PNG light 1600 px", "PNG claro 1600 px"), doodleTextureFiles.pngClaro], [t("PNG dark 1600 px", "PNG escuro 1600 px"), doodleTextureFiles.pngEscuro],
+  ];
+  const Btn = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
+    <button onClick={onClick} className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+      style={{ border: `1.5px solid ${active ? "var(--primary)" : ctrl}`, background: active ? "var(--primary-muted)" : "transparent", color: active ? "var(--primary-text, var(--primary))" : idle }}>
+      {children}
+    </button>
+  );
+  return (
+    <div className="rounded-[20px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
+      <div className="relative isolate h-80 overflow-hidden bg-background">
+        <DoodleTexture scale={scale} color={color} />
+        <HeroContent dark={dark} />
+      </div>
+      <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+        <div className="flex items-center gap-3">
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Scale", "Escala")}</span>
+          <div className="flex gap-1">{(["p", "m", "g"] as const).map(s => <Btn key={s} active={scale === s} onClick={() => setScale(s)}>{s.toUpperCase()}</Btn>)}</div>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-[0.6875rem] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Stroke", "Traço")}</span>
+          <div className="flex gap-1">{colors.map(c => <Btn key={c.id} active={colorId === c.id} onClick={() => setColorId(c.id)}>{c.label}</Btn>)}</div>
+        </div>
+      </div>
+      <div className="border-t border-border px-5 py-4 space-y-4">
+        <p className="text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("A seamless pattern of line icons from the studio's universe: research, innovation, UX, UI, people, journeys, sticky notes and design thinking. Sixty-six distinct drawings on an 800 px tile.", 'Padrão sem emenda de ícones de traço do universo do estúdio: pesquisa, inovação, UX, UI, pessoas, jornadas, post-its e design thinking. Sessenta e seis desenhos distintos em um ladrilho de 800 px.')} {t("Strokes are solid colors, never transparent: graphite-200 on the light theme and graphite-800 on the dark theme by default, as in the reference wallpaper. In React the drawing is applied as a mask, so the stroke can take any token.", "Os traços são cores sólidas, nunca transparentes: grafite-200 no tema claro e grafite-800 no escuro por padrão, como no papel de parede de referência. No React o desenho é aplicado como máscara, então o traço aceita qualquer token.")}</p>
+        <div className="flex flex-wrap gap-2">
+          {downloads.map(([label, file]) => (
+            <a key={file} href={base + file} download className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary">
+              <Download className="h-3.5 w-3.5" aria-hidden /> {label}
+            </a>
+          ))}
+        </div>
+        <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { DoodleTexture } from "@/app/components/ui/doodle-texture";
+
+<section className="relative isolate">
+  <DoodleTexture scale="m" />              {/* grafite-200 / grafite-800 */}
+  <DoodleTexture color="var(--primary)" />  {/* qualquer token */}
+  …
+</section>
+
+/* fora do React (CSS) */
+background: var(--background) url("/texturas/doodle-studio-claro.svg") 0 0 / 640px repeat;`}</code></pre>
+        <ul className="grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+          <li>• {t("Use behind heroes, empty states, onboarding and waiting screens; never behind long text.", "Use atrás de heros, estados vazios, onboarding e telas de espera; nunca atrás de texto longo.")}</li>
+          <li>• {t("Keep the default grays for a quiet background; the primary stroke is for small areas or brand moments.", "Mantenha os cinzas padrão para um fundo discreto; o traço primário é para áreas pequenas ou momentos de marca.")}</li>
+          <li>• {t("The tile is seamless in both directions; keep the scale between 480 and 800 px so the icons read.", "O ladrilho não tem emenda nas duas direções; mantenha a escala entre 480 e 800 px para os ícones lerem.")}</li>
+          <li>• {t("Static and decorative: no motion, aria-hidden, no pointer events.", "Estática e decorativa: sem movimento, aria-hidden, sem eventos de ponteiro.")}</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 /* ══════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════ */
@@ -1683,6 +1759,11 @@ export function BackgroundsShowcase() {
       {/* Background Lines — dedicated card with speed, density and palette controls */}
       <section id="bg-lines-bg">
         <BgLinesCard />
+      </section>
+
+      {/* Doodle Texture — textura de ícones de traço */}
+      <section id="doodle-bg">
+        <DoodleTextureCard />
       </section>
 
       {/* Remaining effects */}
