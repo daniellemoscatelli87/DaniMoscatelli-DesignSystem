@@ -9,6 +9,8 @@ import {
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
+import { SegmentedControl } from "@/app/components/ui/segmented-control";
+import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
 
 /* ── Shared helpers ── */
 function SectionHeader({ title, description }: { title: string; description?: string }) {
@@ -117,6 +119,7 @@ export function FormShowcase() {
   const { t } = useI18n();
   const formTokenGroups = getFormTokenGroups(t);
   const [showPwd, setShowPwd] = useState(false);
+  const [condicao, setCondicao] = useState("nova");
   const [checkA, setCheckA] = useState<boolean | "indeterminate">(true);
   const [checkB, setCheckB] = useState<boolean | "indeterminate">(false);
   const [checkC, setCheckC] = useState<boolean | "indeterminate">("indeterminate");
@@ -339,6 +342,64 @@ export function FormShowcase() {
                 </label>
               </div>
             </RadioGroupPrimitive.Root>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Segmented control", "Controle segmentado")}>
+          <div id="segmented" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+              {t("Coupled options that are tapped like buttons; exactly one is always selected. For short, exclusive choices with two to five options and one- or two-word labels: condition, period, view mode. For long lists use Select; for independent choices use Checkbox or Switch.", "Opções acopladas que se tocam como botões; sempre há exatamente uma selecionada. Para escolhas curtas e exclusivas, de duas a cinco opções com rótulos de uma ou duas palavras: condição, período, modo de exibição. Para listas longas use Select; para escolhas independentes use Checkbox ou Switch.")}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Item condition", "Condição do item")}</label>
+                <SegmentedControl aria-label={t("Item condition", "Condição do item")} value={condicao} onValueChange={setCondicao} options={[{ value: "nova", label: t("New", "Nova") }, { value: "usada", label: t("Used", "Usada") }, { value: "tanto-faz", label: t("Either", "Tanto faz") }]} />
+                <p className="text-[0.75rem] text-muted-foreground">{t("Selected: ", "Opção escolhida: ")}<span className="font-medium text-foreground">{condicao}</span></p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Billing", "Cobrança")} <span className="text-muted-foreground font-normal">· variant="solida"</span></label>
+                <SegmentedControl aria-label={t("Billing", "Cobrança")} variant="solida" options={[{ value: "mensal", label: t("Monthly", "Mensal") }, { value: "anual", label: t("Yearly", "Anual") }]} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("With icons", "Com ícones")}</label>
+                <SegmentedControl aria-label={t("View mode", "Modo de exibição")} options={[{ value: "lista", label: t("List", "Lista"), icon: <List /> }, { value: "grade", label: t("Grid", "Grade"), icon: <LayoutGrid /> }, { value: "mapa", label: t("Map", "Mapa"), icon: <MapIcon /> }]} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Full width", "Largura total")} <span className="text-muted-foreground font-normal">· fullWidth</span></label>
+                <SegmentedControl aria-label={t("Period", "Período")} fullWidth options={[{ value: "pf", label: t("Individual", "Pessoa física") }, { value: "pj", label: t("Company", "Pessoa jurídica") }]} />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Sizes", "Tamanhos")}</label>
+                <div className="flex flex-col items-start gap-3">
+                  <SegmentedControl size="sm" aria-label={t("Period", "Período")} options={[{ value: "hoje", label: t("Today", "Hoje") }, { value: "semana", label: t("This week", "Esta semana") }, { value: "mes", label: t("This month", "Este mês") }]} />
+                  <SegmentedControl size="md" aria-label={t("Period", "Período")} options={[{ value: "hoje", label: t("Today", "Hoje") }, { value: "semana", label: t("This week", "Esta semana") }, { value: "mes", label: t("This month", "Este mês") }]} />
+                  <SegmentedControl size="lg" aria-label={t("Period", "Período")} options={[{ value: "hoje", label: t("Today", "Hoje") }, { value: "semana", label: t("This week", "Esta semana") }, { value: "mes", label: t("This month", "Este mês") }]} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <label className="text-[0.875rem] font-medium text-foreground">{t("Disabled option", "Opção desabilitada")}</label>
+                <SegmentedControl aria-label={t("Delivery", "Entrega")} options={[{ value: "online", label: "Online" }, { value: "presencial", label: t("In person", "Presencial"), disabled: true }]} />
+              </div>
+            </div>
+            <pre className="mt-5 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { SegmentedControl } from "@/app/components/ui/segmented-control";
+
+<SegmentedControl
+  aria-label="Condição"
+  value={condicao}
+  onValueChange={setCondicao}
+  options={[
+    { value: "nova", label: "Nova" },
+    { value: "usada", label: "Usada" },
+    { value: "tanto-faz", label: "Tanto faz" },
+  ]}
+/>`}</code></pre>
+            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.", "Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.")}</li>
+              <li>• {t("Keyboard: arrows move the selection, Tab enters and leaves the group. Minimum height 32 px (sm), 40 px (md) and 44 px (lg).", "Teclado: setas movem a seleção, Tab entra e sai do grupo. Altura mínima de 32 px (sm), 40 px (md) e 44 px (lg).")}</li>
+              <li>• {t("The selection is never removed by tapping again: there is always one active option.", "A seleção nunca é removida ao tocar de novo: sempre há uma opção ativa.")}</li>
+              <li>• {t("Always give the group a visible label or an aria-label.", "Dê sempre ao grupo um rótulo visível ou um aria-label.")}</li>
+            </ul>
           </ShowcaseCard>
         </SubSection>
 

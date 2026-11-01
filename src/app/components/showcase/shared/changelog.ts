@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Segmented control", pt: "Controle segmentado" },
+    desc: { en: "Coupled options tapped like buttons, always with one selected: soft and solid variants, three sizes, icons, full width and disabled option. Under Components › Buttons › Segmented control.", pt: "Opções acopladas que se tocam como botões, sempre com uma selecionada: variantes suave e sólida, três tamanhos, ícones, largura total e opção desabilitada. Em Componentes › Botões › Controle segmentado." },
+    page: "buttons", anchor: "segmented",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Shine Border with color combinations", pt: "Shine Border com combinações de cores" },
     desc: { en: "New preset prop with five token-only combinations (primaria, dourada, primaria-dourada, ouro, contraste); the gold is the --warning token. shineColor still accepts a list of colors. Documented under Motion › Shine Border.", pt: "Nova prop preset com cinco combinações só de tokens (primária, dourada, primária-dourada, ouro, contraste); o dourado é o token --warning. shineColor segue aceitando uma lista de cores. Documentado em Motion › Shine Border." },
     page: "motion", anchor: "shine-border",
