@@ -13,6 +13,9 @@ import {
 import { Button } from "../ui/button";
 import { ShineBorder } from "../ui/shine-border";
 import { PartnerCard } from "../ui/partner-card";
+import { GlassCard, GlassScene } from "../ui/glass-card";
+import { AvatarCircles } from "../ui/avatar-circles";
+import { ArrowUpRight, MapPin, Heart } from "lucide-react";
 import { Handshake, Store } from "lucide-react";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, SubTitle, display } from "./shared/Guidance";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
@@ -215,6 +218,117 @@ export function CardShowcase() {
               ]}
             />
           </div>
+        </div>
+      </section>
+
+      <section id="card-glass" className="scroll-mt-32">
+        <SectionHeader
+          title={t("Glassmorphism cards", "Cards glassmorphism")}
+          description={t(
+            "Translucent surfaces that blur what is behind them, with a light border and a thin highlight on top. They only work over a colorful background, gradient or image; on a flat background they become a regular card. Use for a few highlighted elements, never for long lists or extended reading.",
+            "Superfícies translúcidas que desfocam o que está atrás, com borda clara e um fio de luz no topo. Só funcionam sobre um fundo com cor, gradiente ou imagem; sobre fundo liso viram um card comum. Use para poucos elementos em destaque, nunca para listas longas ou leitura extensa.",
+          )}
+        />
+        <div className="space-y-6">
+          <div>
+            <SubTitle>{t("Light glass — intensities", "Vidro claro — intensidades")}</SubTitle>
+            <GlassScene>
+              <div className="grid gap-5 md:grid-cols-3">
+                <GlassCard intensity="leve">
+                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground dark:text-white/70">{t("Challenges in progress", "Desafios em andamento")}</p>
+                  <p className={`${display} mt-2 text-[2.25rem] font-bold leading-none tracking-[-0.03em]`}>{"12"}</p>
+                  <p className="mt-2 text-[0.8125rem] text-muted-foreground dark:text-white/70">{t("3 with evidence collected this week", "3 com evidências coletadas nesta semana")}</p>
+                  <p className="mt-4 text-[0.6875rem] font-mono text-muted-foreground dark:text-white/60">intensity="leve"</p>
+                </GlassCard>
+                <GlassCard intensity="media" interactive tabIndex={0} role="link">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground dark:text-white/70"><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
+                      <p className={`${display} mt-2 text-[1.125rem] font-semibold tracking-[-0.01em]`}>{t("Clínica Horizonte", "Clínica Horizonte")}</p>
+                    </div>
+                    <ArrowUpRight className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+                  </div>
+                  <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground dark:text-white/70">{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
+                  <div className="mt-4 flex items-center justify-between">
+                    <AvatarCircles size="sm" numPeople={12} avatarUrls={[1, 2, 3].map(i => ({ imageUrl: `${import.meta.env.BASE_URL}avatares/avatar-${i}.svg`, profileUrl: "#card-glass", name: `Pessoa ${i}` }))} />
+                    <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{t("Open challenge", "Abrir desafio")}</span>
+                  </div>
+                  <p className="mt-4 text-[0.6875rem] font-mono text-muted-foreground dark:text-white/60">intensity="media" interactive</p>
+                </GlassCard>
+                <GlassCard intensity="forte" tint>
+                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--primary-text,var(--primary))]">{t("What do you want to improve?", "O que você deseja melhorar?")}</p>
+                  <p className={`${display} mt-2 text-[1.125rem] font-semibold tracking-[-0.01em]`}>{t("Start a challenge", "Comece um desafio")}</p>
+                  <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground dark:text-white/70">{t("Describe the human problem in your own words; the system guides the rest.", "Descreva o problema humano com suas palavras; o sistema conduz o resto.")}</p>
+                  <Button className="mt-4 w-full rounded-full">{t("Start", "Começar")}</Button>
+                  <p className="mt-4 text-[0.6875rem] font-mono text-muted-foreground dark:text-white/60">intensity="forte" tint</p>
+                </GlassCard>
+              </div>
+            </GlassScene>
+          </div>
+          <div>
+            <SubTitle>{t("Dark glass — over photos and ambient scenes", "Vidro escuro — sobre fotos e ambientes")}</SubTitle>
+            <GlassScene dark>
+              <div className="grid gap-5 md:grid-cols-[1.2fr_0.8fr]">
+                <GlassCard tone="escura" intensity="media">
+                  <p className={`${display} text-[1.375rem] font-bold leading-tight tracking-[-0.02em]`}>{t("Turn people\u2019s experience into a strategic asset.", "Transforme a experiência das pessoas em ativo estratégico.")}</p>
+                  <p className="mt-2 max-w-prose text-[0.875rem] leading-relaxed text-white/75">{t("Dark glass cards over photos and ambient scenes: the content reads well and the image stays visible.", "Cards de vidro escuro sobre fotos e ambientes: o conteúdo lê bem e a imagem continua aparecendo.")}</p>
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    <Button className="rounded-full">{t("Learn more", "Saiba mais")}</Button>
+                    <span className="text-[0.6875rem] font-mono text-white/60">tone="escura"</span>
+                  </div>
+                </GlassCard>
+                <GlassCard tone="escura" intensity="forte" tint>
+                  <div className="flex items-center gap-2 text-white/80"><Heart className="h-4 w-4 text-primary" aria-hidden /><span className="text-[0.8125rem] font-semibold">{t("Favorites", "Favoritos")}</span></div>
+                  <p className={`${display} mt-3 text-[2rem] font-bold leading-none tracking-[-0.03em]`}>36</p>
+                  <p className="mt-2 text-[0.8125rem] text-white/70">{t("saved this month", "salvos neste mês")}</p>
+                  <p className="mt-4 text-[0.6875rem] font-mono text-white/60">tone="escura" intensity="forte" tint</p>
+                </GlassCard>
+              </div>
+            </GlassScene>
+          </div>
+          <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
+            <DataTable
+              head={[t("Rule", "Regra"), t("Guidance", "Orientação")]}
+              rows={[
+                [t("Background", "Fundo"), t("Only over color, gradient or image. GlassScene is a demo backdrop; in the product, the hero, a photo or the brand gradient does this job.", "Só sobre cor, gradiente ou imagem. O GlassScene é um fundo de demonstração; no produto, o hero, uma foto ou o gradiente da marca fazem esse papel.")],
+                [t("Quantity", "Quantidade"), t("One to three per view. Glass loses meaning when everything is glass.", "De um a três por tela. O vidro perde sentido quando tudo é vidro.")],
+                [t("Contrast", "Contraste"), t("Light glass at 55% or more for body text; dark glass at 50% or more. Check contrast against the busiest part of the background.", "Vidro claro com 55% ou mais para texto corrido; vidro escuro com 50% ou mais. Confira o contraste contra a parte mais movimentada do fundo.")],
+                [t("Content", "Conteúdo"), t("Short content: a number, a title, one sentence, one action. Long reading goes on a solid card.", "Conteúdo curto: um número, um título, uma frase, uma ação. Leitura longa vai em card sólido.")],
+                [t("Performance", "Desempenho"), t("backdrop-filter is costly: avoid in long lists and inside scroll areas on mobile.", "backdrop-filter custa caro: evite em listas longas e dentro de áreas de rolagem no celular.")],
+                [t("Reduced transparency", "Transparência reduzida"), t("With prefers-reduced-transparency the card becomes solid (card or graphite).", "Com prefers-reduced-transparency o card vira sólido (card ou grafite).")],
+              ]}
+            />
+            <div className="space-y-4">
+              <DoDont
+                dos={[
+                  t("Use for a hero summary, a highlighted store or a floating action card.", "Use para um resumo no hero, uma loja em destaque ou um card de ação flutuante."),
+                  t("Keep the system radius (20 px) and spacing; glass changes the surface, not the anatomy.", "Mantenha o raio do sistema (20 px) e os espaçamentos; o vidro muda a superfície, não a anatomia."),
+                  t("Pair dark glass with photos and light glass with the brand gradient.", "Combine vidro escuro com fotos e vidro claro com o gradiente da marca."),
+                ]}
+                donts={[
+                  t("Do not use glass on a flat background or inside another glass card.", "Não use vidro sobre fundo liso nem dentro de outro card de vidro."),
+                  t("Do not place forms, tables or long text on glass.", "Não coloque formulários, tabelas ou textos longos sobre vidro."),
+                  t("Do not lower the opacity to make it “more glassy” at the cost of contrast.", "Não baixe a opacidade para ficar “mais vidro” à custa do contraste."),
+                ]}
+              />
+              <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { GlassCard } from "@/app/components/ui/glass-card";
+
+<GlassCard intensity="media" tone="clara" interactive>…</GlassCard>
+<GlassCard tone="escura" intensity="forte" tint>…</GlassCard>`}</code></pre>
+            </div>
+          </div>
+          <TokenTable groups={[{
+            group: t("Glass tokens", "Tokens do vidro"),
+            tokens: [
+              { name: "intensity leve / media / forte", description: t("Backdrop blur", "Desfoque do fundo"), light: "blur 12 px · 24 px · 40 px" },
+              { name: "clara — bg", description: t("Light glass background", "Fundo do vidro claro"), light: "white 40% · 55% · 70%", dark: "white 8% · 12% · 16%" },
+              { name: "escura — bg", description: t("Dark glass background", "Fundo do vidro escuro"), light: "graphite-950 35% · 50% · 65%" },
+              { name: "border", description: t("Glass edge", "Borda do vidro"), light: "white 60% (clara) · white 15% (escura)", dark: "white 15%" },
+              { name: "highlight", description: t("1 px top highlight", "Fio de luz no topo, 1 px"), light: "gradient white 80%", dark: "gradient white 40%" },
+              { name: "radius / padding", description: t("Same anatomy as Card", "Mesma anatomia do Card"), light: "20 px / 24 px" },
+              { name: "shadow", description: t("Soft elevation", "Elevação suave"), light: "0 8px 32px graphite-950 8% (clara) · 25% (escura)" },
+            ],
+          }]} />
         </div>
       </section>
 
