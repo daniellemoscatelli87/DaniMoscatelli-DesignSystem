@@ -43,7 +43,7 @@ function maskPhone(v: string) {
 }
 
 /* ── Variante: formulário de contato do site ── */
-function ContactPanelDemo() {
+function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: string; outline?: boolean }) {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const [sent, setSent] = useState(false);
@@ -86,8 +86,10 @@ function ContactPanelDemo() {
   return (
     <SidePanel open={open} onOpenChange={o => { setOpen(o); if (!o) setTimeout(reset, 300); }}>
       <SidePanelTrigger asChild>
-        <button className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-          {t("Contact", "Contato")}
+        <button className={outline
+          ? "inline-flex h-10 items-center gap-2 rounded-[12px] border border-border bg-card px-4 text-[0.9375rem] font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          : "inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"}>
+          {triggerLabel ?? t("Contact", "Contato")}
         </button>
       </SidePanelTrigger>
       <SidePanelContent closeLabel={t("Close contact form", "Fechar formulário de contato")}>
@@ -209,33 +211,6 @@ function ContactPanelDemo() {
   );
 }
 
-/* ── Demonstração simples ── */
-function SimplePanelDemo() {
-  const { t } = useI18n();
-  return (
-    <SidePanel>
-      <SidePanelTrigger asChild>
-        <button className="inline-flex h-10 items-center gap-2 rounded-[12px] border border-border bg-card px-4 text-[0.9375rem] font-semibold text-foreground transition-colors hover:bg-accent">
-          {t("Open side panel", "Abrir painel lateral")}
-        </button>
-      </SidePanelTrigger>
-      <SidePanelContent closeLabel={t("Close panel", "Fechar painel")}>
-        <SidePanelHeader eyebrow={t("Details", "Detalhes")} title={t("Side panel", "Painel lateral")} description={t("Header, scrollable body and a fixed action bar.", "Cabeçalho, corpo rolável e barra de ação fixa.")} />
-        <SidePanelBody>
-          <div className="space-y-3 text-[0.875rem] leading-relaxed text-muted-foreground">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <p key={i}>{t("The body scrolls on its own while the header and the action bar stay in place. Press Esc, click outside or use the close button to dismiss.", "O corpo rola sozinho enquanto o cabeçalho e a barra de ação ficam no lugar. Pressione Esc, clique fora ou use o botão fechar para sair.")}</p>
-            ))}
-          </div>
-        </SidePanelBody>
-        <SidePanelActions>
-          <button className="h-10 w-full rounded-full bg-primary text-[0.875rem] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)]">{t("Primary action", "Ação principal")}</button>
-        </SidePanelActions>
-      </SidePanelContent>
-    </SidePanel>
-  );
-}
-
 export function SidePanelShowcase() {
   const { t } = useI18n();
 
@@ -304,8 +279,8 @@ export function SidePanelShowcase() {
         <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <ShowcaseCard>
             <p className="mb-4 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it", "Experimente")}</p>
-            <SimplePanelDemo />
-            <p className="mt-4 text-[0.75rem] text-muted-foreground">{t("Open, scroll the body, press Esc, click outside, use Tab: the focus stays inside and returns to this button when it closes.", "Abra, role o corpo, pressione Esc, clique fora, use Tab: o foco fica dentro e volta para este botão ao fechar.")}</p>
+            <ContactPanelDemo triggerLabel={t("Open panel with form", "Abrir painel com formulário")} outline />
+            <p className="mt-4 text-[0.75rem] text-muted-foreground">{t("Open, fill in or try to submit empty to see the validation, press Esc, click outside, use Tab: the focus stays inside and returns to this button when it closes.", "Abra, preencha ou tente enviar vazio para ver a validação, pressione Esc, clique fora, use Tab: o foco fica dentro e volta para este botão ao fechar.")}</p>
           </ShowcaseCard>
           <ShowcaseCard>
             <ul className="space-y-3">
