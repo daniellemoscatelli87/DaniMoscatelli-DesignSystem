@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Shine Border with color combinations", pt: "Shine Border com combinações de cores" },
+    desc: { en: "New preset prop with five token-only combinations (primaria, dourada, primaria-dourada, ouro, contraste); the gold is the --warning token. shineColor still accepts a list of colors. Documented under Motion › Shine Border.", pt: "Nova prop preset com cinco combinações só de tokens (primária, dourada, primária-dourada, ouro, contraste); o dourado é o token --warning. shineColor segue aceitando uma lista de cores. Documentado em Motion › Shine Border." },
+    page: "motion", anchor: "shine-border",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Avatar Circles", pt: "Avatar Circles" },
     desc: { en: "Overlapping avatar circles with a “+N” count, ported from Magic UI and adapted to the tokens (borders follow the background, three sizes, “+N” clickable only with a destination). Under Components › Badges › Avatar.", pt: "Círculos de avatares sobrepostos com “+N”, portado do Magic UI e adaptado aos tokens (bordas seguem o fundo, três tamanhos, “+N” clicável só com destino). Em Componentes › Badges › Avatar." },
     page: "badges", anchor: "avatar-circles",

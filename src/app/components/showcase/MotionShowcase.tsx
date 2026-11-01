@@ -6,7 +6,7 @@ import {
   Wind, Layers, Activity, Clock, Move, Users,
 } from "lucide-react";
 import { useI18n } from "../../i18n";
-import { ShineBorder } from "../ui/shine-border";
+import { ShineBorder, shinePresets, type ShinePreset } from "../ui/shine-border";
 
 /* ── Section wrapper ── */
 function Section({ id, title, sub, children }: { id: string; title: string; sub: string; children: React.ReactNode }) {
@@ -2069,6 +2069,38 @@ function ShineBorderSection() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="space-y-3">
+        <p className="text-[0.875rem] font-semibold text-foreground">{t("Color combinations", "Combinações de cores")}</p>
+        <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">
+          {t("shineColor accepts a list of colors; the shine passes through them in order. The presets below only use system tokens: the gold is the --warning token (amber), brighter in the dark theme. Pass preset=\"…\" or your own list in shineColor.", "shineColor aceita uma lista de cores; o brilho passa por elas na ordem. As combinações abaixo usam só tokens do sistema: o dourado é o token --warning (âmbar), mais vivo no tema escuro. Passe preset=\"…\" ou sua própria lista em shineColor.")}
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {(Object.keys(shinePresets) as ShinePreset[]).map(name => {
+            const descr: Record<ShinePreset, string> = {
+              primaria: t("Primary with the support blue.", "Primária com o azul de apoio."),
+              dourada: t("Gold with the primary: premium, recommended, plan highlight.", "Dourado com a vermelho: premium, recomendado, destaque de plano."),
+              "primaria-dourada": t("Primary with a touch of gold.", "Vermelho com um toque dourado."),
+              ouro: t("Gold only: seal, achievement, special edition.", "Só dourado: selo, conquista, edição especial."),
+              contraste: t("Primary with the text color: more contrast, less color.", "Vermelho com a cor do texto: mais contraste, menos cor."),
+            };
+            return (
+              <div key={name} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
+                <ShineBorder preset={name} duration={12} borderWidth={name === "dourada" || name === "ouro" ? 2 : 1} />
+                <div className="mb-3 flex gap-1.5">
+                  {shinePresets[name].slice(0, 2).map((c, i) => (
+                    <span key={i} className="h-3 w-3 rounded-full border border-border" style={{ background: c }} />
+                  ))}
+                </div>
+                <p className="text-[0.875rem] font-bold text-foreground">preset="{name}"</p>
+                <p className="mt-1 min-h-10 text-[0.75rem] leading-relaxed text-muted-foreground">{descr[name]}</p>
+                <code className="mt-3 block truncate text-[0.6875rem] font-mono text-muted-foreground">{shinePresets[name].slice(0, 2).join(" · ")}</code>
+              </div>
+            );
+          })}
+        </div>
+        <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`<ShineBorder preset="dourada" borderWidth={2} />
+<ShineBorder shineColor={["var(--warning)", "var(--primary)", "var(--warning)"]} />`}</code></pre>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Token name="borderWidth" value="1px default" />
