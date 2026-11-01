@@ -7,6 +7,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
+  PanelRight,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -28,6 +29,7 @@ import { PrinciplesShowcase } from "./components/showcase/PrinciplesShowcase";
 import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 import { CardShowcase } from "./components/showcase/CardShowcase";
+import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -152,6 +154,12 @@ const ptLabels: Record<string, string> = {
   "Feedback & Status": "Feedback e status",
   "Labels & Patterns": "Rótulos e padrões",
   "Overlays & Navigation": "Overlays e navegação",
+  "Side Panel": "Painel lateral",
+  "Anatomy": "Anatomia",
+  "Behavior": "Comportamento",
+  "Contact form": "Formulário de contato",
+  "Accessibility checklist": "Checklist de acessibilidade",
+  "Usage": "Uso",
 };
 
 /* ── Sidebar nav structure ── */
@@ -376,6 +384,16 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "overlays-tokens",  label: "Tokens",     sectionId: "overlays" },
         ],
       },
+      { id: "sidepanel", label: "Side Panel", icon: PanelRight,
+        items: [
+          { id: "sidepanel-anatomy",  label: "Anatomy",                 sectionId: "sidepanel" },
+          { id: "sidepanel-behavior", label: "Behavior",                sectionId: "sidepanel" },
+          { id: "sidepanel-contact",  label: "Contact form",            sectionId: "sidepanel" },
+          { id: "sidepanel-a11y",     label: "Accessibility checklist", sectionId: "sidepanel" },
+          { id: "sidepanel-usage",    label: "Usage",                   sectionId: "sidepanel" },
+          { id: "sidepanel-tokens",   label: "Tokens",                  sectionId: "sidepanel" },
+        ],
+      },
     ],
   },
 ];
@@ -401,6 +419,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   badges:    <FeedbackShowcase />,
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
+  sidepanel: <SidePanelShowcase />,
   motion:      <MotionShowcase />,
   backgrounds: <BackgroundsShowcase />,
   templates:   <TemplatesShowcase />,
@@ -422,6 +441,7 @@ const sectionLabels: Record<string, string> = {
   badges:    "Labels & Patterns",
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
+  sidepanel: "Side Panel",
   motion:      "Motion Design",
   backgrounds: "Backgrounds",
   templates:   "Templates",
@@ -446,6 +466,7 @@ function AppShell() {
     badges:    false,
     icons:     false,
     overlays:  false,
+    sidepanel: false,
     motion:      false,
     backgrounds: false,
   });

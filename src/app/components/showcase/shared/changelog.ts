@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Side panel (drawer)", pt: "Painel lateral (gaveta)" },
+    desc: { en: "The studio site's contact drawer documented and turned into a component: anatomy (header, scrollable body, fixed action bar, footer), behavior, the full contact form variant with validation and success state, accessibility checklist, usage and tokens.", pt: "A gaveta de contato do site do estúdio documentada e transformada em componente: anatomia (cabeçalho, corpo rolável, barra de ação fixa, rodapé), comportamento, a variante formulário de contato com validação e estado de sucesso, checklist de acessibilidade, uso e tokens." },
+    page: "sidepanel", anchor: "sidepanel-anatomy",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Maintained on GitHub, no longer in Figma Make", pt: "Mantido no GitHub, não mais no Figma Make" },
     desc: { en: "From November 1st, 2026 the repository is the single source of truth: every change is made in code, published automatically as a numbered version (v1, v2, ...) and checked against the previous version so nothing disappears unnoticed.", pt: "A partir de 1º de novembro de 2026 o repositório é a única fonte da verdade: toda mudança é feita no código, publicada automaticamente como versão numerada (v1, v2, ...) e comparada com a anterior para que nada suma sem aviso." },
     page: "overview",
