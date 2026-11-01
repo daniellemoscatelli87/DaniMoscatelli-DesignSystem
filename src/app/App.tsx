@@ -915,15 +915,14 @@ function AppShell() {
               <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">
                 © 2026{" "}
                 <a
-                  href="https://www.daniellemoscatelli.com.br"
+                  href="https://www.danimoscatelli.com.br"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-medium text-foreground underline decoration-primary/40 underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
                 >
-                  Dani Moscatelli
-                </a>{" "}
-                <span aria-hidden className="mx-1 text-muted-foreground/60">•</span>{" "}
-                {t("Experience Design Studio. All rights reserved.", "Experience Design Studio. Todos os direitos reservados.")}
+                  Dani Moscatelli <span aria-hidden className="mx-1 text-muted-foreground/60">•</span> Experience Design Studio
+                </a>
+                . {t("All rights reserved.", "Todos os direitos reservados.")}
               </p>
             </div>
           </footer>
