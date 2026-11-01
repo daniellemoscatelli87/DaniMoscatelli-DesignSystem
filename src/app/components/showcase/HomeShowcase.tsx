@@ -43,7 +43,7 @@ const explore: { label: Bi; items: CardItem[] }[] = [
     items: [
       { icon: Image, title: { en: "Backgrounds", pt: "Backgrounds" }, desc: { en: "Animated surfaces: gradients, canvas reveal, vortex and lines.", pt: "Superfícies animadas: gradientes, canvas reveal, vortex e linhas." }, target: { page: "backgrounds" } },
       { icon: Wind, title: { en: "Motion Design", pt: "Motion Design" }, desc: { en: "Presets, easing, spring physics and motion tokens.", pt: "Presets, easing, física de spring e tokens de movimento." }, target: { page: "motion" } },
-      { icon: Component, title: { en: "Components", pt: "Componentes" }, desc: { en: "Buttons, data display, feedback, labels, icons and overlays.", pt: "Botões, exibição de dados, feedback, labels, ícones e overlays." }, target: { page: "buttons" } },
+      { icon: Component, title: { en: "Components", pt: "Componentes" }, desc: { en: "Buttons, cards, data display, feedback, labels, icons and overlays.", pt: "Botões, cards, exibição de dados, feedback, labels, ícones e overlays." }, target: { page: "buttons" } },
       { icon: LayoutTemplate, title: { en: "Templates", pt: "Templates" }, desc: { en: "Dashboard, auth, pricing, landing page and more.", pt: "Dashboard, login, preços, landing page e mais." }, target: { page: "templates" } },
     ],
   },

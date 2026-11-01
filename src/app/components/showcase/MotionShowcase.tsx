@@ -6,6 +6,7 @@ import {
   Wind, Layers, Activity, Clock, Move, Users,
 } from "lucide-react";
 import { useI18n } from "../../i18n";
+import { ShineBorder } from "../ui/shine-border";
 
 /* ── Section wrapper ── */
 function Section({ id, title, sub, children }: { id: string; title: string; sub: string; children: React.ReactNode }) {
@@ -2023,6 +2024,68 @@ function WobbleCardSection() {
   );
 }
 
+function ShineBorderSection() {
+  const { t } = useI18n();
+  const examples = [
+    {
+      label: t("Slow emphasis", "Ênfase lenta"),
+      use: t("Persistent premium or recommended card", "Card premium ou recomendado persistente"),
+      duration: 18,
+      colors: ["var(--primary)", "var(--chart-2)", "var(--primary)"],
+    },
+    {
+      label: t("Standard", "Padrão"),
+      use: t("Short decision flow or feature highlight", "Fluxo curto de decisão ou destaque de recurso"),
+      duration: 14,
+      colors: ["var(--primary)", "var(--foreground)", "var(--primary)"],
+    },
+    {
+      label: t("Fast preview", "Prévia rápida"),
+      use: t("Documentation demos only—not persistent UI", "Apenas demos de documentação — não para UI persistente"),
+      duration: 8,
+      colors: ["var(--chart-2)", "var(--primary)", "var(--chart-2)"],
+    },
+  ];
+
+  return (
+    <Section
+      id="shine-border"
+      title="Shine Border"
+      sub={t(
+        "A looping decorative border for opt-in emphasis. Motion owns its timing and accessibility; Cards owns its composition and usage hierarchy.",
+        "Uma borda decorativa em loop para ênfase opcional. Motion define timing e acessibilidade; Cards define composição e hierarquia de uso.",
+      )}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {examples.map(example => (
+          <div key={example.label} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
+            <ShineBorder duration={example.duration} shineColor={example.colors} />
+            <Sparkles className="mb-4 h-5 w-5 text-primary" aria-hidden />
+            <p className="text-[0.875rem] font-bold text-foreground">{example.label}</p>
+            <p className="mt-1 min-h-10 text-[0.75rem] leading-relaxed text-muted-foreground">{example.use}</p>
+            <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+              <code className="text-[0.6875rem] font-mono text-primary">duration</code>
+              <span className="text-[0.6875rem] font-mono text-muted-foreground">{example.duration}s</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <Token name="borderWidth" value="1px default" />
+        <Token name="duration" value="14s default" />
+        <Token name="easing" value="linear · infinite" />
+      </div>
+      <div className="rounded-[14px] border border-border bg-muted/40 p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
+        <span className="font-semibold text-foreground">{t("Accessibility:", "Acessibilidade:")}</span>{" "}
+        {t(
+          "the implementation uses motion-safe, so prefers-reduced-motion keeps the visual border but removes the loop. Do not use Shine Border as the only indicator of selection or status.",
+          "a implementação usa motion-safe; assim, prefers-reduced-motion mantém a borda visual, mas remove o loop. Não use Shine Border como único indicador de seleção ou status.",
+        )}
+      </div>
+    </Section>
+  );
+}
+
 /* ══════════════════════════════════════
    ROOT EXPORT
 ══════════════════════════════════════ */
@@ -2087,6 +2150,7 @@ export function MotionShowcase() {
       <AnimatedListSection />
       <OrbitingCirclesSection />
       <WobbleCardSection />
+      <ShineBorderSection />
       <TokensSection />
     </div>
   );

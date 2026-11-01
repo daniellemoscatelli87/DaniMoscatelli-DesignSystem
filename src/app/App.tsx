@@ -6,7 +6,7 @@ import {
   BarChart2, Bell, Grid3X3,
   ChevronRight, Zap,
   TableProperties, Box,
-  Search, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
+  Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -27,6 +27,7 @@ import { HomeShowcase } from "./components/showcase/HomeShowcase";
 import { PrinciplesShowcase } from "./components/showcase/PrinciplesShowcase";
 import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
+import { CardShowcase } from "./components/showcase/CardShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -100,6 +101,7 @@ const ptLabels: Record<string, string> = {
   "Animated List": "Lista animada",
   "Orbiting Circles": "Círculos orbitais",
   "Wobble Card": "Card Wobble",
+  "Shine Border": "Shine Border",
   "Motion Tokens": "Tokens de movimento",
   "Dashboard": "Dashboard",
   "Settings": "Configurações",
@@ -112,6 +114,16 @@ const ptLabels: Record<string, string> = {
   "Buttons": "Botões",
   "Button Variants": "Variantes de botão",
   "Form Controls": "Controles de formulário",
+  "Cards": "Cards",
+  "Card Anatomy": "Anatomia do card",
+  "Variants": "Variantes",
+  "Layout & Sizing": "Layout e dimensionamento",
+  "Nested Cards": "Cards aninhados",
+  "Buttons in Cards": "Botões em cards",
+  "Interactive States": "Estados interativos",
+  "Usage Guidelines": "Diretrizes de uso",
+  "Card Accessibility": "Acessibilidade do card",
+  "Card Tokens": "Tokens de card",
   "Data Display": "Exibição de dados",
   "KPI Cards": "Cards de KPI",
   "Charts": "Gráficos",
@@ -271,6 +283,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "animated-list",   label: "Animated List",        sectionId: "motion" },
           { id: "orbiting-circles",label: "Orbiting Circles",     sectionId: "motion" },
           { id: "wobble-card",     label: "Wobble Card",          sectionId: "motion" },
+          { id: "shine-border",    label: "Shine Border",         sectionId: "motion" },
           { id: "tokens",          label: "Motion Tokens",        sectionId: "motion" },
         ],
       },
@@ -302,6 +315,20 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "buttons",        label: "Button Variants", sectionId: "buttons" },
           { id: "inputs",         label: "Form Controls",   sectionId: "buttons" },
           { id: "buttons-tokens", label: "Tokens",          sectionId: "buttons" },
+        ],
+      },
+      { id: "cards", label: "Cards", icon: Grid3X3,
+        items: [
+          { id: "card-anatomy",       label: "Card Anatomy",       sectionId: "cards" },
+          { id: "card-variants",      label: "Variants",           sectionId: "cards" },
+          { id: "card-shine",         label: "Shine Border",       sectionId: "cards" },
+          { id: "card-layout",        label: "Layout & Sizing",    sectionId: "cards" },
+          { id: "card-nested",        label: "Nested Cards",       sectionId: "cards" },
+          { id: "card-actions",       label: "Buttons in Cards",   sectionId: "cards" },
+          { id: "card-states",        label: "Interactive States", sectionId: "cards" },
+          { id: "card-guidelines",    label: "Usage Guidelines",   sectionId: "cards" },
+          { id: "card-accessibility", label: "Card Accessibility", sectionId: "cards" },
+          { id: "card-tokens",        label: "Card Tokens",        sectionId: "cards" },
         ],
       },
       { id: "data", label: "Data Display", icon: TableProperties,
@@ -368,6 +395,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   tokens:      <TokensShowcase />,
   integration: <IntegrationShowcase />,
   buttons:   <FormShowcase />,
+  cards:     <CardShowcase />,
   data:      <DataShowcase />,
   feedback:  <FeedbackShowcase />,
   badges:    <FeedbackShowcase />,
@@ -388,6 +416,7 @@ const sectionLabels: Record<string, string> = {
   brand:     "Brand Identity",
   colors:    "Foundation",
   buttons:   "Form Controls",
+  cards:     "Cards",
   data:      "Data Display",
   feedback:  "Feedback & Status",
   badges:    "Labels & Patterns",
@@ -411,6 +440,7 @@ function AppShell() {
     templates: false,
     colors:    false,
     buttons:   false,
+    cards:     false,
     data:      false,
     feedback:  false,
     badges:    false,
@@ -421,7 +451,10 @@ function AppShell() {
   });
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({});
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const [hovered, setHovered] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const collapsed = !hovered;
   // Anchor to scroll to after a section switch
   const [pendingAnchor, setPendingAnchor] = useState<string | null>(null);
@@ -430,6 +463,26 @@ function AppShell() {
     if (dark) document.documentElement.classList.add("dark");
     else document.documentElement.classList.remove("dark");
   }, [dark]);
+
+  useEffect(() => {
+    const handleSearchShortcut = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        setSearchOpen(open => !open);
+      }
+      if (event.key === "Escape") setSearchOpen(false);
+    };
+
+    document.addEventListener("keydown", handleSearchShortcut);
+    return () => document.removeEventListener("keydown", handleSearchShortcut);
+  }, []);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    setSearchQuery("");
+    const timer = window.setTimeout(() => searchInputRef.current?.focus(), 0);
+    return () => window.clearTimeout(timer);
+  }, [searchOpen]);
 
   // After activeSection changes and the new content renders, scroll to the pending anchor
   useEffect(() => {
@@ -480,6 +533,42 @@ function AppShell() {
     setMobileSidebarOpen(false);
     if (!anchor) window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const selectSearchResult = (sectionId: string, anchor?: string) => {
+    navigateTo(sectionId, anchor);
+    setSearchOpen(false);
+  };
+
+  const normalizeSearch = (value: string) =>
+    value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  const normalizedQuery = normalizeSearch(searchQuery.trim());
+  const searchResults = navGroups.flatMap(group =>
+    group.items.flatMap(item => {
+      const itemKeywords = [group.group, ptLabels[group.group], item.label, ptLabels[item.label]]
+        .filter(Boolean)
+        .join(" ");
+      return [
+        {
+          key: item.id,
+          label: tl(item.label),
+          group: tl(group.group),
+          icon: item.icon,
+          sectionId: item.id,
+          anchor: undefined as string | undefined,
+          keywords: `${item.id} ${itemKeywords}`,
+        },
+        ...(item.items ?? []).map(sub => ({
+          key: sub.id,
+          label: tl(sub.label),
+          group: tl(item.label),
+          icon: item.icon,
+          sectionId: sub.sectionId,
+          anchor: sub.id,
+          keywords: `${sub.id} ${sub.label} ${ptLabels[sub.label] ?? ""} ${itemKeywords}`,
+        })),
+      ];
+    }),
+  ).filter(result => !normalizedQuery || normalizeSearch(result.keywords).includes(normalizedQuery));
 
   const currentContent =
     activeSection === "get-started"
@@ -567,8 +656,13 @@ function AppShell() {
 
         <div className="flex-1" />
 
-        {/* Search hint */}
-        <button className="hidden md:flex items-center gap-2 h-7 px-3 rounded-[8px] border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors">
+        {/* Global search */}
+        <button
+          type="button"
+          onClick={() => setSearchOpen(true)}
+          aria-label={t("Search the design system", "Buscar no design system")}
+          className="hidden md:flex items-center gap-2 h-7 px-3 rounded-[8px] border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors"
+        >
           <Search className="h-3 w-3" />
           <span>{t("Search", "Buscar")}</span>
           <kbd className="ml-1.5 px-1 py-0.5 text-[0.5625rem] rounded-[3px] bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
@@ -785,6 +879,86 @@ function AppShell() {
           </footer>
         </main>
       </div>
+
+      {searchOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-start justify-center bg-foreground/35 px-4 pt-[12vh] backdrop-blur-sm"
+          onMouseDown={event => {
+            if (event.target === event.currentTarget) setSearchOpen(false);
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="global-search-title"
+            aria-describedby="global-search-description"
+            className="w-full max-w-xl overflow-hidden rounded-[var(--radius)] border border-border bg-popover text-popover-foreground shadow-[var(--shadow-xl)]"
+          >
+            <div className="sr-only">
+              <h2 id="global-search-title">{t("Search the design system", "Buscar no design system")}</h2>
+              <p id="global-search-description">
+                {t(
+                  "Search pages and sections, then choose a result to navigate.",
+                  "Busque páginas e seções e escolha um resultado para navegar.",
+                )}
+              </p>
+            </div>
+            <div className="flex h-12 items-center gap-3 border-b border-border px-4">
+              <Search className="h-4 w-4 shrink-0 text-muted-foreground" aria-hidden />
+              <input
+                ref={searchInputRef}
+                value={searchQuery}
+                onChange={event => setSearchQuery(event.target.value)}
+                placeholder={t("Search pages and sections...", "Buscar páginas e seções...")}
+                aria-label={t("Search pages and sections", "Buscar páginas e seções")}
+                className="h-full min-w-0 flex-1 bg-transparent text-[0.875rem] text-foreground outline-none placeholder:text-muted-foreground"
+              />
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                aria-label={t("Close search", "Fechar busca")}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="max-h-[min(60vh,28rem)] overflow-y-auto p-2">
+              {searchResults.length === 0 ? (
+                <div className="px-4 py-10 text-center">
+                  <Search className="mx-auto mb-3 h-6 w-6 text-muted-foreground/50" aria-hidden />
+                  <p className="text-[0.875rem] font-medium text-foreground">{t("No results found", "Nenhum resultado encontrado")}</p>
+                  <p className="mt-1 text-[0.75rem] text-muted-foreground">{t("Try another page or section name.", "Tente outro nome de página ou seção.")}</p>
+                </div>
+              ) : (
+                searchResults.map(result => {
+                  const ResultIcon = result.icon;
+                  return (
+                    <button
+                      key={`${result.sectionId}-${result.key}`}
+                      type="button"
+                      onClick={() => selectSearchResult(result.sectionId, result.anchor)}
+                      className="flex w-full items-center gap-3 rounded-[9px] px-3 py-2.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-muted text-muted-foreground">
+                        <ResultIcon className="h-4 w-4" aria-hidden />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[0.875rem] font-medium text-foreground">{result.label}</span>
+                        <span className="block truncate text-[0.6875rem] text-muted-foreground">{result.group}</span>
+                      </span>
+                      <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50" aria-hidden />
+                    </button>
+                  );
+                })
+              )}
+            </div>
+            <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2 text-[0.6875rem] text-muted-foreground">
+              <span>{t(`${searchResults.length} results`, `${searchResults.length} resultados`)}</span>
+              <span>{t("Esc to close", "Esc para fechar")}</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── DARK MODE BG EFFECT ── */}
       {dark && (

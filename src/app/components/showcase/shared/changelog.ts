@@ -14,6 +14,51 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Oct 2026", kind: "New", title: { en: "Shine Border for highlighted cards", pt: "Shine Border para cards em destaque" },
+    desc: { en: "A Magic UI-inspired Shine Border primitive is now available as an opt-in Card decoration, with timing and reduced-motion guidance documented under Motion.", pt: "Um primitive Shine Border inspirado no Magic UI agora está disponível como decoração opcional de Card, com orientações de timing e movimento reduzido documentadas em Motion." },
+    page: "cards", anchor: "card-shine",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Ghost, link and card button patterns", pt: "Padrões de botões ghost, link e em cards" },
+    desc: { en: "Buttons now documents Ghost and Link usage, while Cards covers header, content, footer, navigation and destructive action patterns.", pt: "Botões agora documenta o uso de Ghost e Link, enquanto Cards contempla padrões no cabeçalho, conteúdo, rodapé, navegação e ações destrutivas." },
+    page: "cards", anchor: "card-actions",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Nested card elevation rule", pt: "Regra de elevação para cards aninhados" },
+    desc: { en: "The Cards specification now covers nested cards: the parent owns elevation, while every inner card uses shadow-none.", pt: "A especificação de Cards agora contempla cards aninhados: o card pai define a elevação, enquanto todo card interno usa shadow-none." },
+    page: "cards", anchor: "card-nested",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Global search no longer depends on forwarded refs", pt: "Busca global não depende mais de refs encaminhadas" },
+    desc: { en: "The search palette now uses a local React dialog, preserving bilingual filtering, keyboard shortcuts, focus and navigation without the unstable cmdk/Radix forwardRef path.", pt: "A paleta de busca agora usa um diálogo React local, preservando filtro bilíngue, atalhos, foco e navegação sem o caminho instável de forwardRef do cmdk/Radix." },
+    page: "overview",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Dialog composition stabilized for hot reload", pt: "Composição do diálogo estabilizada no hot reload" },
+    desc: { en: "The Radix overlay now renders directly inside the portal, preserving function component identity while keeping SlotClone refs on the primitive.", pt: "O overlay Radix agora é renderizado diretamente no portal, preservando a identidade dos function components e mantendo as refs do SlotClone no primitive." },
+    page: "overview",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Dialog refs now reach Radix primitives", pt: "Refs do diálogo agora chegam aos primitives Radix" },
+    desc: { en: "Dialog wrappers now forward refs correctly, removing SlotClone warnings from global search and every shared dialog.", pt: "Os wrappers de diálogo agora encaminham refs corretamente, removendo warnings do SlotClone na busca global e em todos os diálogos compartilhados." },
+    page: "overview",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Complete Cards specification restored", pt: "Especificação completa de Cards restaurada" },
+    desc: { en: "Cards is back under Components with anatomy, variants, layout, interactive states, usage guidance, accessibility and semantic tokens.", pt: "Cards voltou para Componentes com anatomia, variantes, layout, estados interativos, diretrizes de uso, acessibilidade e tokens semânticos." },
+    page: "cards",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Stable search dialog runtime", pt: "Runtime estável no diálogo de busca" },
+    desc: { en: "React is now deduplicated by the Vite resolver, preventing the global search dialog from loading hooks from a second runtime instance.", pt: "O React agora é deduplicado pelo resolver do Vite, evitando que o diálogo de busca global carregue hooks de uma segunda instância do runtime." },
+    page: "overview",
+  },
+  {
+    date: "Oct 2026", kind: "Updated", title: { en: "Global search is now functional", pt: "Busca global agora funciona" },
+    desc: { en: "Open search from the header or with Command/Ctrl + K to find and navigate to any page or section in English or Portuguese.", pt: "Abra a busca pelo cabeçalho ou com Command/Ctrl + K para encontrar e acessar qualquer página ou seção em inglês ou português." },
+    page: "overview",
+  },
+  {
     date: "Oct 2026", kind: "Updated", title: { en: "Caption for the sidebar menu icon", pt: "Legenda no ícone de menu da sidebar" },
     desc: { en: "The menu icon at the top of the sidebar now has a tooltip and shows a \"Menu\" label when the sidebar is expanded.", pt: "O ícone de menu no topo da sidebar agora tem tooltip e exibe o rótulo \"Menu\" quando a sidebar está expandida." },
     page: "overview",

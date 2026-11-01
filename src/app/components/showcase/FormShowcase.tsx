@@ -44,7 +44,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 const btnBase = "inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-40 cursor-pointer select-none font-semibold";
 
 function Btn({ variant = "primary", size = "md", children, loading = false, disabled = false, icon, iconOnly = false, className = "" }:
-  { variant?: "primary"|"outline"|"ghost"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; loading?: boolean; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; className?: string }) {
+  { variant?: "primary"|"outline"|"ghost"|"link"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; loading?: boolean; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; className?: string }) {
 
   const sizes: Record<string, string> = {
     sm:      "h-8 px-3 text-[0.8125rem] rounded-[8px]",
@@ -60,6 +60,7 @@ function Btn({ variant = "primary", size = "md", children, loading = false, disa
     primary:         "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] active:scale-[0.98] shadow-sm",
     outline:         "border border-[var(--border-strong)] bg-transparent text-foreground hover:bg-accent",
     ghost:           "bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
+    link:            "bg-transparent text-primary underline-offset-4 hover:underline !px-0",
     secondary:       "bg-secondary text-secondary-foreground hover:bg-[var(--secondary-hover)]",
     destructive:     "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)]",
     "crimson-outline":"border border-primary text-primary bg-transparent hover:bg-[var(--primary-muted)]",
@@ -138,11 +139,38 @@ export function FormShowcase() {
               <Btn variant="outline">{t("Outline", "Contorno")}</Btn>
               <Btn variant="secondary">{t("Secondary", "Secundário")}</Btn>
               <Btn variant="ghost">Ghost</Btn>
+              <Btn variant="link">{t("Link button", "Botão link")}</Btn>
               <Btn variant="crimson-outline">{t("Crimson Outline", "Contorno Crimson")}</Btn>
               <Btn variant="primary" disabled>{t("Disabled", "Desabilitado")}</Btn>
               <Btn variant="primary" loading onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}>{t("Loading", "Carregando")}</Btn>
             </div>
           </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Ghost and Link Buttons", "Botões Ghost e Link")}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <ShowcaseCard>
+              <p className="text-[0.875rem] font-semibold text-foreground mb-1">{t("Ghost button", "Botão ghost")}</p>
+              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+                {t("Use for tertiary or contextual actions that should remain available without competing with the primary action.", "Use para ações terciárias ou contextuais que devem continuar disponíveis sem competir com a ação principal.")}
+              </p>
+              <div className="flex flex-wrap items-center gap-2">
+                <Btn variant="ghost">{t("Dismiss", "Dispensar")}</Btn>
+                <Btn variant="ghost" icon={<Star className="h-4 w-4" />}>{t("Favorite", "Favoritar")}</Btn>
+                <Btn variant="ghost" size="icon" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly />
+              </div>
+            </ShowcaseCard>
+            <ShowcaseCard>
+              <p className="text-[0.875rem] font-semibold text-foreground mb-1">{t("Link button", "Botão link")}</p>
+              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+                {t("Use for low-emphasis navigation. Keep mutation, submission and destructive actions in standard button variants.", "Use para navegação de baixa ênfase. Mantenha ações de alteração, envio e exclusão nas variantes padrão de botão.")}
+              </p>
+              <div className="flex flex-wrap items-center gap-5">
+                <Btn variant="link">{t("View documentation", "Ver documentação")}</Btn>
+                <Btn variant="link" icon={<ArrowRight className="h-4 w-4" />}>{t("Learn more", "Saiba mais")}</Btn>
+              </div>
+            </ShowcaseCard>
+          </div>
         </SubSection>
 
         <SubSection title={t("Sizes", "Tamanhos")}>
