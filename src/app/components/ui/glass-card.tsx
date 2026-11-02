@@ -119,11 +119,11 @@ export function GlassCard({ finish = "padrao", intensity = "media", tone = "clar
 
 export type GlassBackdrop = "blocos" | "texto" | "textura";
 
-/** Cenário de demonstração neutro, só com cores do design system e sem gradientes,
- *  para avaliar opacidade (quanto da cor de trás aparece) e desfoque (quão nítido fica o que está atrás).
- *  blocos: faixas sólidas de cores da paleta com uma linha de texto nítido; texto: linhas de título nítidas;
- *  textura: a textura doodle do sistema sobre o fundo da página. Segue o tema. */
-export function GlassScene({ backdrop = "blocos", dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { backdrop?: GlassBackdrop; /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
+/** Cenário de demonstração neutro, só com cores do design system e sem gradientes. Segue o tema.
+ *  textura (padrão): a textura doodle do sistema sobre o fundo da página — para exemplos com conteúdo, legíveis.
+ *  blocos: faixas sólidas da paleta com texto nítido atrás — só para amostras de vidro SEM texto, para comparar
+ *  opacidade (quanta cor atravessa) e desfoque (quão nítido fica o que está atrás). texto: linhas de título nítidas. */
+export function GlassScene({ backdrop = "textura", dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { backdrop?: GlassBackdrop; /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
   return (
     <div
       className={cn("relative isolate overflow-hidden rounded-[24px] border border-border bg-background p-6 sm:p-8", dark && "dark bg-[var(--graphite-950)]", className)}
@@ -152,7 +152,7 @@ export function GlassScene({ backdrop = "blocos", dark, className, children, ...
           ))}
         </div>
       )}
-      {backdrop === "textura" && <DoodleTexture scale="p" color="var(--graphite-400)" className="-z-10 dark:[background-color:var(--graphite-600)]" />}
+      {backdrop === "textura" && <DoodleTexture scale="p" color="var(--graphite-300)" className="-z-10 dark:[background-color:var(--graphite-700)]" />}
       {children}
     </div>
   );

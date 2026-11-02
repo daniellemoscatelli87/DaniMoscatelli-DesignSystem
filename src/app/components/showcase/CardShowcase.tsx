@@ -13,7 +13,7 @@ import {
 import { Button } from "../ui/button";
 import { ShineBorder } from "../ui/shine-border";
 import { PartnerCard } from "../ui/partner-card";
-import { GlassCard, GlassScene, type GlassFinish, type GlassBackdrop } from "../ui/glass-card";
+import { GlassCard, GlassScene, type GlassFinish } from "../ui/glass-card";
 import { SegmentedControl } from "../ui/segmented-control";
 import { Slider } from "../ui/slider";
 import { AvatarCircles } from "../ui/avatar-circles";
@@ -64,7 +64,6 @@ function GlassFinishPicker() {
   const [finish, setFinish] = useState<GlassFinish>("translucido");
   const [tone, setTone] = useState<"clara" | "escura">("clara");
   const [intensity, setIntensity] = useState<"leve" | "media" | "forte">("media");
-  const [backdrop, setBackdrop] = useState<GlassBackdrop>("blocos");
   // controle livre: null = segue o acabamento
   const [opacidade, setOpacidade] = useState<number | null>(null);
   const [desfoque, setDesfoque] = useState<number | null>(null);
@@ -90,10 +89,6 @@ function GlassFinishPicker() {
         <div className="flex flex-col gap-1.5">
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Tone", "Tom")}</span>
           <SegmentedControl size="sm" aria-label={t("Tone", "Tom")} value={tone} onValueChange={setTone} options={[{ value: "clara", label: t("Light", "Claro") }, { value: "escura", label: t("Dark", "Escuro") }]} />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Backdrop", "Fundo")}</span>
-          <SegmentedControl size="sm" aria-label={t("Backdrop", "Fundo")} value={backdrop} onValueChange={setBackdrop} options={[{ value: "blocos", label: t("Color blocks", "Blocos de cor") }, { value: "texto", label: t("Text", "Texto") }, { value: "textura", label: t("Texture", "Textura") }]} />
         </div>
         <div className="flex flex-col gap-1.5">
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Opacity", "Opacidade")}</span>
@@ -122,8 +117,10 @@ function GlassFinishPicker() {
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
-      <GlassScene backdrop={backdrop}>
-        <div className="grid gap-5 md:grid-cols-[1fr_1fr] items-start">
+      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] items-stretch">
+        <div className="space-y-2">
+          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Application — legible content", "Aplicação — conteúdo legível")}</p>
+          <GlassScene className="h-full">
           <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} interactive tabIndex={0}>
             <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${sub}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
             <p className={`${display} mt-2 text-[1.25rem] font-semibold tracking-[-0.01em]`}>{t("Clínica Horizonte", "Clínica Horizonte")}</p>
@@ -134,21 +131,24 @@ function GlassFinishPicker() {
             </div>
             <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>finish="{finish}" tone="{tone}" intensity="{intensity}"{opacidade !== null ? ` opacity={${opacidade}}` : ""}{desfoque !== null ? ` blur={${desfoque}}` : ""}</p>
           </GlassCard>
-          <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} tint>
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--primary-text,var(--primary))]">{current.label}</p>
-            <p className="mt-2 text-[0.875rem] leading-relaxed">{current.desc}</p>
-            <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>+ tint</p>
-          </GlassCard>
+          </GlassScene>
         </div>
-      </GlassScene>
+        <div className="space-y-2">
+          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Sample — opacity and blur", "Amostra — opacidade e desfoque")}</p>
+          <GlassScene backdrop="blocos" className="h-full min-h-[220px] p-5 sm:p-6">
+            <GlassCard aria-label={t("Glass sample without content", "Amostra de vidro sem conteúdo")} finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} className="h-full min-h-[170px]" />
+          </GlassScene>
+          <p className="text-[0.75rem] leading-relaxed text-muted-foreground">{current.desc}</p>
+        </div>
+      </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {finishes.filter(x => x.value !== "padrao").map(x => (
-          <GlassScene key={x.value} className="p-4 sm:p-4">
-            <GlassCard finish={x.value} intensity="media" className="p-4">
-              <p className="text-[0.875rem] font-bold">{x.label}</p>
-              <p className="mt-1 text-[0.75rem] leading-relaxed text-muted-foreground dark:text-white/70">finish="{x.value}"</p>
-            </GlassCard>
-          </GlassScene>
+          <div key={x.value} className="space-y-2">
+            <GlassScene backdrop="blocos" className="p-4 sm:p-4">
+              <GlassCard aria-label={x.label} finish={x.value} intensity="media" className="h-24 p-0" />
+            </GlassScene>
+            <p className="text-[0.875rem] font-bold text-foreground">{x.label} <span className="ml-1 font-mono text-[0.6875rem] font-normal text-muted-foreground">finish="{x.value}"</span></p>
+          </div>
         ))}
       </div>
     </div>
@@ -330,7 +330,7 @@ export function CardShowcase() {
         <div className="space-y-6">
           <div>
             <SubTitle>{t("Finishes — degrees of transparency", "Acabamentos — graus de transparência")}</SubTitle>
-            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Choose how transparent the glass is: translucent, frosted, with a light focus or crystal. Combine with the tone (light or dark glass) and the opacity level. The backdrops are neutral on purpose: solid color blocks and sharp text show how much color passes through and how blurred it gets.", "Escolha o quanto o vidro é transparente: translúcido, fosco, com foco de luz ou cristal. Combine com o tom (vidro claro ou escuro) e o nível de opacidade. Os fundos são neutros de propósito: blocos de cor sólida e texto nítido mostram quanta cor atravessa e quanto o fundo fica desfocado.")}</p>
+            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Choose how transparent the glass is: translucent, frosted, with a light focus or crystal. Combine with the tone (light or dark glass) and the opacity level. On the left, the application with legible content over the system texture; on the right, a content-free sample over solid color blocks and sharp text, to compare how much color passes through and how blurred the background gets.", "Escolha o quanto o vidro é transparente: translúcido, fosco, com foco de luz ou cristal. Combine com o tom (vidro claro ou escuro) e o nível de opacidade. À esquerda, a aplicação com conteúdo legível sobre a textura do sistema; à direita, uma amostra sem conteúdo sobre blocos de cor sólida e texto nítido, para comparar quanta cor atravessa e quanto o fundo desfoca.")}</p>
             <GlassFinishPicker />
           </div>
           <div>
@@ -395,7 +395,7 @@ export function CardShowcase() {
             <DataTable
               head={[t("Rule", "Regra"), t("Guidance", "Orientação")]}
               rows={[
-                [t("Background", "Fundo"), t("Only over color, image or texture. The demo backdrops (color blocks, text, texture) are neutral on purpose, to judge opacity and blur; in the product, the hero, a photo or a brand surface does this job.", "Só sobre cor, imagem ou textura. Os fundos de demonstração (blocos de cor, texto, textura) são neutros de propósito, para avaliar opacidade e desfoque; no produto, o hero, uma foto ou uma superfície da marca fazem esse papel.")],
+                [t("Background", "Fundo"), t("Only over color, image or texture. In the docs, examples with content sit over the system texture (legible) and content-free samples sit over color blocks (to judge opacity and blur); in the product, the hero, a photo or a brand surface does this job.", "Só sobre cor, imagem ou textura. Na documentação, os exemplos com conteúdo ficam sobre a textura do sistema (legíveis) e as amostras sem conteúdo sobre blocos de cor (para avaliar opacidade e desfoque); no produto, o hero, uma foto ou uma superfície da marca fazem esse papel.")],
                 [t("Quantity", "Quantidade"), t("One to three per view. Glass loses meaning when everything is glass.", "De um a três por tela. O vidro perde sentido quando tudo é vidro.")],
                 [t("Contrast", "Contraste"), t("Light glass at 55% or more for body text; dark glass at 50% or more. Check contrast against the busiest part of the background.", "Vidro claro com 55% ou mais para texto corrido; vidro escuro com 50% ou mais. Confira o contraste contra a parte mais movimentada do fundo.")],
                 [t("Content", "Conteúdo"), t("Short content: a number, a title, one sentence, one action. Long reading goes on a solid card.", "Conteúdo curto: um número, um título, uma frase, uma ação. Leitura longa vai em card sólido.")],
