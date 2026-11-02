@@ -22,6 +22,10 @@ export type GlassCardProps = React.HTMLAttributes<HTMLDivElement> & {
   finish?: GlassFinish;
   /** Quantidade de opacidade dentro do acabamento (e de desfoque no acabamento padrão). */
   intensity?: "leve" | "media" | "forte";
+  /** Opacidade do fundo do vidro em %, de 0 (totalmente transparente) a 100 (sólido). Sobrepõe o acabamento. */
+  opacity?: number;
+  /** Desfoque do fundo em px, de 0 a 80. Sobrepõe o acabamento. */
+  blur?: number;
   /** clara: vidro branco (texto escuro). escura: vidro grafite (texto branco). */
   tone?: "clara" | "escura";
   /** Leve tingimento na cor primária. */
@@ -65,14 +69,27 @@ const finishes: Record<Exclude<GlassFinish, "padrao">, { blur: string; clara: Re
   },
 };
 
-export function GlassCard({ finish = "padrao", intensity = "media", tone = "clara", tint = false, interactive = false, className, children, ...props }: GlassCardProps) {
+export function GlassCard({ finish = "padrao", intensity = "media", tone = "clara", tint = false, interactive = false, opacity, blur: blurPx, className, style, children, ...props }: GlassCardProps) {
   const escura = tone === "escura";
   const f = finish === "padrao" ? null : finishes[finish];
+  // controle livre: opacidade e desfoque numéricos vencem as classes do acabamento
+  const clamp = (v: number, max: number) => Math.min(max, Math.max(0, v));
+  const livre: React.CSSProperties = {};
+  if (opacity !== undefined) {
+    const pct = clamp(opacity, 100);
+    livre.backgroundColor = escura ? `color-mix(in srgb, var(--graphite-950) ${pct}%, transparent)` : `color-mix(in srgb, #fff ${pct}%, transparent)`;
+  }
+  if (blurPx !== undefined) {
+    const px = clamp(blurPx, 80);
+    livre.backdropFilter = `blur(${px}px) saturate(150%)`;
+    (livre as Record<string, string>).WebkitBackdropFilter = `blur(${px}px) saturate(150%)`;
+  }
   return (
     <div
       data-slot="glass-card"
       data-tone={tone}
       data-finish={finish}
+      style={{ ...livre, ...style }}
       className={cn(
         "relative isolate overflow-hidden rounded-[20px] border p-6 backdrop-saturate-150",
         f ? f.blur : blur[intensity],

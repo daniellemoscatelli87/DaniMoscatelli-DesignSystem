@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Glass card with free opacity and blur control", pt: "Card de vidro com controle livre de opacidade e desfoque" },
+    desc: { en: "Numeric props opacity (0–100 %) and blur (0–80 px) override the finish; sliders in the glassmorphism picker show the result and the code live.", pt: "Props numéricas opacity (0–100 %) e blur (0–80 px) sobrepõem o acabamento; sliders no seletor da seção Cards glassmorphism mostram o resultado e o código na hora." },
+    page: "cards", anchor: "card-glass",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Glassmorphism cards with finishes", pt: "Cards glassmorphism com acabamentos" },
     desc: { en: "New finish prop with degrees of transparency: translucent, frosted, light focus and crystal, combinable with tone and opacity. Interactive picker in the glassmorphism cards section; finish tokens.", pt: "Nova prop finish com graus de transparência: translúcido, fosco, foco de luz e cristal, combináveis com tom e opacidade. Seletor interativo na seção de cards glassmorphism; tokens dos acabamentos." },
     page: "cards", anchor: "card-glass",

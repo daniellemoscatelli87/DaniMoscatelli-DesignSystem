@@ -15,6 +15,7 @@ import { ShineBorder } from "../ui/shine-border";
 import { PartnerCard } from "../ui/partner-card";
 import { GlassCard, GlassScene, type GlassFinish } from "../ui/glass-card";
 import { SegmentedControl } from "../ui/segmented-control";
+import { Slider } from "../ui/slider";
 import { AvatarCircles } from "../ui/avatar-circles";
 import { ArrowUpRight, MapPin, Heart } from "lucide-react";
 import { Handshake, Store } from "lucide-react";
@@ -63,6 +64,10 @@ function GlassFinishPicker() {
   const [finish, setFinish] = useState<GlassFinish>("translucido");
   const [tone, setTone] = useState<"clara" | "escura">("clara");
   const [intensity, setIntensity] = useState<"leve" | "media" | "forte">("media");
+  // controle livre: null = segue o acabamento
+  const [opacidade, setOpacidade] = useState<number | null>(null);
+  const [desfoque, setDesfoque] = useState<number | null>(null);
+  const livre = opacidade !== null || desfoque !== null;
   const finishes: { value: GlassFinish; label: string; desc: string }[] = [
     { value: "translucido", label: t("Translucent", "Translúcido"), desc: t("Very transparent, almost no blur: the background shows through whole. For short labels over calm images.", "Bem transparente, quase sem desfoque: o fundo aparece inteiro. Para rótulos curtos sobre imagens calmas.") },
     { value: "fosco", label: t("Frosted", "Fosco"), desc: t("Sandblasted glass: heavy blur, more opaque, no reflection. The most legible; works over busy photos.", "Vidro jateado: muito desfoque, mais opaco, sem reflexo. O mais legível; funciona sobre fotos movimentadas.") },
@@ -90,9 +95,31 @@ function GlassFinishPicker() {
           <SegmentedControl size="sm" aria-label={t("Opacity", "Opacidade")} value={intensity} onValueChange={setIntensity} options={[{ value: "leve", label: t("Light", "Leve") }, { value: "media", label: t("Medium", "Média") }, { value: "forte", label: t("Strong", "Forte") }]} />
         </div>
       </div>
+      <div className="grid gap-x-8 gap-y-4 rounded-[14px] border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[0.75rem]">
+            <span className="font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Background opacity", "Opacidade do fundo")}</span>
+            <span className="font-mono text-foreground">{opacidade === null ? t("by finish", "do acabamento") : `${opacidade}%`}</span>
+          </div>
+          <Slider aria-label={t("Background opacity", "Opacidade do fundo")} min={0} max={100} step={1} value={[opacidade ?? 55]} onValueChange={([v]) => setOpacidade(v)} />
+          <p className="text-[0.6875rem] text-muted-foreground">{t("0% = fully transparent · 100% = solid", "0% = totalmente transparente · 100% = sólido")}</p>
+        </div>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[0.75rem]">
+            <span className="font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Blur", "Desfoque")}</span>
+            <span className="font-mono text-foreground">{desfoque === null ? t("by finish", "do acabamento") : `${desfoque} px`}</span>
+          </div>
+          <Slider aria-label={t("Blur", "Desfoque")} min={0} max={80} step={1} value={[desfoque ?? 24]} onValueChange={([v]) => setDesfoque(v)} />
+          <p className="text-[0.6875rem] text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
+        </div>
+        <button type="button" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}
+          className="h-9 rounded-full border border-border bg-card px-4 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none">
+          {t("Back to finish", "Voltar ao acabamento")}
+        </button>
+      </div>
       <GlassScene>
         <div className="grid gap-5 md:grid-cols-[1fr_1fr] items-start">
-          <GlassCard finish={finish} tone={tone} intensity={intensity} interactive tabIndex={0}>
+          <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} interactive tabIndex={0}>
             <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${sub}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
             <p className={`${display} mt-2 text-[1.25rem] font-semibold tracking-[-0.01em]`}>{t("Clínica Horizonte", "Clínica Horizonte")}</p>
             <p className={`mt-2 text-[0.8125rem] leading-relaxed ${sub}`}>{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
@@ -100,9 +127,9 @@ function GlassFinishPicker() {
               <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{t("Open challenge", "Abrir desafio")}</span>
               <ArrowUpRight className="h-5 w-5 text-primary" aria-hidden />
             </div>
-            <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>finish="{finish}" tone="{tone}" intensity="{intensity}"</p>
+            <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>finish="{finish}" tone="{tone}" intensity="{intensity}"{opacidade !== null ? ` opacity={${opacidade}}` : ""}{desfoque !== null ? ` blur={${desfoque}}` : ""}</p>
           </GlassCard>
-          <GlassCard finish={finish} tone={tone} intensity={intensity} tint>
+          <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} tint>
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--primary-text,var(--primary))]">{current.label}</p>
             <p className="mt-2 text-[0.875rem] leading-relaxed">{current.desc}</p>
             <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>+ tint</p>
@@ -388,7 +415,8 @@ export function CardShowcase() {
 
 <GlassCard finish="fosco" tone="clara" interactive>…</GlassCard>
 <GlassCard finish="luz" intensity="forte">…</GlassCard>
-<GlassCard finish="cristal" tone="escura" tint>…</GlassCard>`}</code></pre>
+<GlassCard finish="cristal" tone="escura" tint>…</GlassCard>
+<GlassCard opacity={35} blur={10}>…</GlassCard>   {/* controle livre */}`}</code></pre>
             </div>
           </div>
           <TokenTable groups={[{
@@ -399,6 +427,7 @@ export function CardShowcase() {
               { name: "finish luz", description: t("Light spot top-left", "Foco de luz no canto"), light: "blur 24 px · white 35/48/62% + radial 55%", dark: "radial 28%" },
               { name: "finish cristal", description: t("Bright edge, diagonal sheen", "Borda brilhante, reflexo diagonal"), light: "blur 12 px · white 22/32/44% · border 90%", dark: "border 30%" },
               { name: "intensity leve / media / forte", description: t("Backdrop blur (default finish)", "Desfoque do fundo (acabamento padrão)"), light: "blur 12 px · 24 px · 40 px" },
+              { name: "opacity / blur", description: t("Free control, overrides the finish", "Controle livre, sobrepõe o acabamento"), light: "opacity 0–100 % · blur 0–80 px" },
               { name: "clara — bg", description: t("Light glass background", "Fundo do vidro claro"), light: "white 40% · 55% · 70%", dark: "white 8% · 12% · 16%" },
               { name: "escura — bg", description: t("Dark glass background", "Fundo do vidro escuro"), light: "graphite-950 35% · 50% · 65%" },
               { name: "border", description: t("Glass edge", "Borda do vidro"), light: "white 60% (clara) · white 15% (escura)", dark: "white 15%" },
