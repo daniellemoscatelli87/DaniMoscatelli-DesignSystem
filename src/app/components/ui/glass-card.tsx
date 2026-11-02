@@ -117,22 +117,25 @@ export function GlassCard({ finish = "padrao", intensity = "media", tone = "clar
   );
 }
 
-/** Cenário de demonstração: cores e textura do próprio design system, seguindo o tema (claro/escuro). */
+/** Cenário de demonstração: cores e textura do próprio design system, seguindo o tema (claro/escuro).
+ *  No claro o fundo é contrastado de propósito (manchas fortes da primária, do grafite e do âmbar, textura em grafite-500)
+ *  para o vidro ter o que desfocar e clarear; sem isso o efeito não aparece. */
 export function GlassScene({ dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
   return (
     <div
       className={cn(
         "relative isolate overflow-hidden rounded-[24px] border border-border p-6 sm:p-8",
-        dark ? "dark bg-[var(--graphite-950)]" : "bg-[var(--surface-tint,var(--primary-muted))] dark:bg-[var(--graphite-950)]",
+        dark ? "dark bg-[var(--graphite-950)]" : "bg-[var(--primary-muted)] dark:bg-[var(--graphite-950)]",
         className,
       )}
       {...props}
     >
-      <span aria-hidden className="pointer-events-none absolute -left-10 -top-16 -z-10 h-72 w-72 rounded-full bg-primary/35 blur-3xl dark:bg-primary/50" />
-      <span aria-hidden className="pointer-events-none absolute right-[-3rem] top-1/3 -z-10 h-64 w-64 rounded-full bg-[var(--warning)]/45 blur-3xl dark:bg-[var(--warning)]/35" />
-      <span aria-hidden className="pointer-events-none absolute bottom-[-4rem] left-1/3 -z-10 h-72 w-72 rounded-full bg-[var(--chart-2)]/35 blur-3xl dark:bg-[var(--chart-2)]/40" />
+      <span aria-hidden className="pointer-events-none absolute -left-12 -top-20 -z-10 h-80 w-80 rounded-full bg-primary/80 blur-2xl dark:bg-primary/50 dark:blur-3xl" />
+      <span aria-hidden className="pointer-events-none absolute right-[-4rem] top-[10%] -z-10 h-72 w-72 rounded-full bg-[var(--warning)]/90 blur-2xl dark:bg-[var(--warning)]/35 dark:blur-3xl" />
+      <span aria-hidden className="pointer-events-none absolute bottom-[-5rem] left-[28%] -z-10 h-80 w-80 rounded-full bg-[var(--graphite-800)]/70 blur-2xl dark:bg-[var(--chart-2)]/40 dark:blur-3xl" />
+      <span aria-hidden className="pointer-events-none absolute bottom-[10%] right-[22%] -z-10 h-48 w-48 rounded-full bg-[var(--chart-2)]/70 blur-2xl dark:hidden" />
       {/* textura doodle do design system, para o vidro ter o que desfocar */}
-      <DoodleTexture scale="p" className="-z-10 opacity-70" />
+      <DoodleTexture scale="p" color="var(--graphite-500)" className="-z-10 opacity-80 dark:opacity-70 dark:[background-color:var(--graphite-800)]" />
       {children}
     </div>
   );
