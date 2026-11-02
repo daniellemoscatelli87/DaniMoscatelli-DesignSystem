@@ -32,7 +32,7 @@ const custom = {
   // moda
   "cabide": [P("M12 3a2 2 0 0 1 2 2c0 1.5-2 1.7-2 3.5V10"), P("M12 10 3.4 15.7A1.6 1.6 0 0 0 4.3 18.6h15.4a1.6 1.6 0 0 0 .9-2.9z")],
   "calca": [P("M7 3h10l1 18h-5l-1-9-1 9H6z"), P("M7 7h10")],
-  "saia": [P("M8 4h8l4 17H4z"), P("M8 4c0 1.2 2 1.5 4 1.5s4-.3 4-1.5"), P("M10 9l-1 12"), P("M14 9l1 12")],
+  "saia": [P("M7 3h10v3H7z"), P("M7 6 4 21h16L17 6"), P("M10 6l-1 15"), P("M14 6l1 15")],
   "cropped": [P("M6 4l3-1c1 1.5 2 2 3 2s2-.5 3-2l3 1v4l-2 1v4H8V9L6 8z"), P("M8 13h8")],
   "vestido": [P("M9 2h1.5L12 5l1.5-3H15l1 5-2 3 5 11H5l5-11-2-3z")],
   "salto": [P("M3 19h18v2H3z"), P("M21 19c0-4-5-6-9-5l-6 1-2 4"), P("M15 12l3-6 2.5 1.2L18 13"), P("M7 19v-3.5")],
@@ -66,11 +66,11 @@ const sets = {
     custom: ["duplo-diamante", "jornada", "wireframe", "persona", "post-it", "post-its", "teste-ab", "balao-ideia", "fluxo", "protótipo", "cursor-botao", "mapa-empatia", "checklist"],
   },
   fl: {
-    arquivo: "doodle-moda", claro: "#D4D4D9", escuro: "#2B2B31", primaria: "#F8BCC6",
-    lucide: ["shirt", "glasses", "watch", "gem", "crown", "scissors", "ruler", "tag", "shopping-bag", "umbrella", "backpack", "heart", "sparkles", "store", "camera", "star", "footprints", "wallet", "gift", "sun", "shopping-cart", "badge-percent"],
-    custom: ["cabide", "calca", "saia", "cropped", "vestido", "salto", "anel", "colar", "brinco", "bolsa", "chapeu", "bota", "tenis", "batom", "perfume", "laco", "shorts", "gravata", "jaqueta", "cinto", "meia", "biquini", "pulseira", "oculos-sol", "clutch", "camisa", "bone", "sandalia"],
-    // itens obrigatórios (pedido da dona do produto): aparecem com o dobro da frequência
-    destaque: ["vestido", "calca", "bone", "oculos-sol", "sandalia", "tenis", "shirt"],
+    arquivo: "doodle-moda", claro: "#D4D4D9", escuro: "#2C2C33", primaria: "#F8BCC6",
+    // só peças de moda, por decisão da dona do produto: nada além destas oito, e sem enfeites soltos
+    lucide: ["shirt"],
+    custom: ["vestido", "calca", "saia", "bone", "oculos-sol", "sandalia", "tenis"],
+    fillers: false,
   },
 };
 // preenchimentos pequenos entre os ícones
@@ -111,6 +111,7 @@ function tile(set, seed) {
     if (cx - size < 0) out += g(cx + W);
   });
   for (let i = 0; i < cols * cols; i++) {
+    if (set.fillers === false) break;
     if (rand() < 0.4) continue;
     const f = fillers[Math.floor(rand() * fillers.length)];
     const row = Math.floor(i / cols), col = i % cols;
