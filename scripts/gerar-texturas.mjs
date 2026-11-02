@@ -42,7 +42,7 @@ const custom = {
   "bolsa": [P("M6 9h12l1.2 11H4.8z"), P("M9 9V7a3 3 0 0 1 6 0v2"), P("M10 13h4")],
   "chapeu": [P("M3 16c0-1.2 4-2 9-2s9 .8 9 2-4 2-9 2-9-.8-9-2z"), P("M7 15V9a5 5 0 0 1 10 0v6")],
   "bota": [P("M8 3h6v10l4 3v3H5v-3l3-2z"), P("M8 13h6"), P("M5 19h13")],
-  "tenis": [P("M3 17c0-3 2-4 5-5l4-3c2 2 4 3 8 3 1 0 1 1 1 3v2H3z"), P("M8 17v-3"), P("M11 17v-4"), P("M3 17h18")],
+  "tenis": [P("M3 17c0-3 2-4 5-5l4-3c2 2 4 3 8 3 1 0 1 1 1 3v2H3z"), P("M8 17v-3"), P("M11 17v-4"), P("M3 17h18"), P("M9 11l1.5 1.5"), P("M11 9.5l1.5 1.5")],
   "batom": [P("M9 21h6v-7H9z"), P("M10 14V8l2-5 2 5v6")],
   "perfume": [P("M8 21h8l1-9H7z"), P("M10 12V9h4v3"), P("M10 6h4v3h-4z"), P("M14 7h3")],
   "laco": [P("M12 12 4 7v10z"), P("M12 12l8-5v10z"), P("M10.5 10.5h3v3h-3z")],
@@ -55,6 +55,8 @@ const custom = {
   "pulseira": [["ellipse", { cx: 12, cy: 13, rx: 8, ry: 5 }], C(4.5, 11.5, 1), C(19.5, 11.5, 1), C(12, 18, 1)],
   "oculos-sol": [P("M2 10h20"), P("M3 10l1 5a3 3 0 0 0 3 2h1a3 3 0 0 0 3-2.5V10"), P("M21 10l-1 5a3 3 0 0 1-3 2h-1a3 3 0 0 1-3-2.5V10"), P("M11 12h2")],
   "clutch": [P("M3 8h18v10H3z"), P("M3 12h18"), C(12, 12, 1.5)],
+  "bone": [P("M4 14a7 7 0 0 1 14 0v1"), P("M3 15h15c2.6 0 4.6 1 4.6 2.2S20.6 19.2 18 19.2H4a1 1 0 0 1-1-1z"), P("M11 7V5.5"), P("M11 10v5")],
+  "sandalia": [P("M9 2c3.3 0 5.5 3.2 5.5 8.5S13 22 9 22s-5.5-6.2-5.5-11.5S5.7 2 9 2z"), P("M9 8.5 5.5 14"), P("M9 8.5l3.5 5.5"), P("M9 8.5V6.5")],
   "camisa": [P("M8 3 4 6v12l4 1v-6h8v6l4-1V6l-4-3"), P("M8 3c1 2 2.5 3 4 3s3-1 4-3"), P("M12 9v5")],
 };
 const sets = {
@@ -66,7 +68,9 @@ const sets = {
   fl: {
     arquivo: "doodle-moda", claro: "#D4D4D9", escuro: "#2B2B31", primaria: "#F8BCC6",
     lucide: ["shirt", "glasses", "watch", "gem", "crown", "scissors", "ruler", "tag", "shopping-bag", "umbrella", "backpack", "heart", "sparkles", "store", "camera", "star", "footprints", "wallet", "gift", "sun", "shopping-cart", "badge-percent"],
-    custom: ["cabide", "calca", "saia", "cropped", "vestido", "salto", "anel", "colar", "brinco", "bolsa", "chapeu", "bota", "tenis", "batom", "perfume", "laco", "shorts", "gravata", "jaqueta", "cinto", "meia", "biquini", "pulseira", "oculos-sol", "clutch", "camisa"],
+    custom: ["cabide", "calca", "saia", "cropped", "vestido", "salto", "anel", "colar", "brinco", "bolsa", "chapeu", "bota", "tenis", "batom", "perfume", "laco", "shorts", "gravata", "jaqueta", "cinto", "meia", "biquini", "pulseira", "oculos-sol", "clutch", "camisa", "bone", "sandalia"],
+    // itens obrigatórios (pedido da dona do produto): aparecem com o dobro da frequência
+    destaque: ["vestido", "calca", "bone", "oculos-sol", "sandalia", "tenis", "shirt"],
   },
 };
 // preenchimentos pequenos entre os ícones
@@ -80,6 +84,9 @@ function renderNode([tag, a]) {
 function tile(set, seed) {
   const W = 800, cols = 10, cell = W / cols, rand = rng(seed);
   const icons = [...set.lucide.map(lucide), ...set.custom.map((n) => custom[n])];
+  // itens em destaque entram duas vezes no sorteio
+  const nomes = [...set.lucide, ...set.custom];
+  for (const n of set.destaque ?? []) { const k = nomes.indexOf(n); if (k < 0) throw new Error("destaque não encontrado: " + n); icons.push(icons[k]); }
   const order = [];
   let pool = [];
   for (let i = 0; i < cols * cols; i++) {
