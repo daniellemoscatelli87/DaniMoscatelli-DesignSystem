@@ -117,25 +117,42 @@ export function GlassCard({ finish = "padrao", intensity = "media", tone = "clar
   );
 }
 
-/** Cenário de demonstração: cores e textura do próprio design system, seguindo o tema (claro/escuro).
- *  No claro o fundo é contrastado de propósito (manchas fortes da primária, do grafite e do âmbar, textura em grafite-500)
- *  para o vidro ter o que desfocar e clarear; sem isso o efeito não aparece. */
-export function GlassScene({ dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
+export type GlassBackdrop = "blocos" | "texto" | "textura";
+
+/** Cenário de demonstração neutro, só com cores do design system e sem gradientes,
+ *  para avaliar opacidade (quanto da cor de trás aparece) e desfoque (quão nítido fica o que está atrás).
+ *  blocos: faixas sólidas de cores da paleta com uma linha de texto nítido; texto: linhas de título nítidas;
+ *  textura: a textura doodle do sistema sobre o fundo da página. Segue o tema. */
+export function GlassScene({ backdrop = "blocos", dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { backdrop?: GlassBackdrop; /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
   return (
     <div
-      className={cn(
-        "relative isolate overflow-hidden rounded-[24px] border border-border p-6 sm:p-8",
-        dark ? "dark bg-[var(--graphite-950)]" : "bg-[var(--primary-muted)] dark:bg-[var(--graphite-950)]",
-        className,
-      )}
+      className={cn("relative isolate overflow-hidden rounded-[24px] border border-border bg-background p-6 sm:p-8", dark && "dark bg-[var(--graphite-950)]", className)}
       {...props}
     >
-      <span aria-hidden className="pointer-events-none absolute -left-12 -top-20 -z-10 h-80 w-80 rounded-full bg-primary/80 blur-2xl dark:bg-primary/50 dark:blur-3xl" />
-      <span aria-hidden className="pointer-events-none absolute right-[-4rem] top-[10%] -z-10 h-72 w-72 rounded-full bg-[var(--warning)]/90 blur-2xl dark:bg-[var(--warning)]/35 dark:blur-3xl" />
-      <span aria-hidden className="pointer-events-none absolute bottom-[-5rem] left-[28%] -z-10 h-80 w-80 rounded-full bg-[var(--graphite-800)]/70 blur-2xl dark:bg-[var(--chart-2)]/40 dark:blur-3xl" />
-      <span aria-hidden className="pointer-events-none absolute bottom-[10%] right-[22%] -z-10 h-48 w-48 rounded-full bg-[var(--chart-2)]/70 blur-2xl dark:hidden" />
-      {/* textura doodle do design system, para o vidro ter o que desfocar */}
-      <DoodleTexture scale="p" color="var(--graphite-500)" className="-z-10 opacity-80 dark:opacity-70 dark:[background-color:var(--graphite-800)]" />
+      {backdrop === "blocos" && (
+        <>
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 grid grid-cols-4">
+            <div className="bg-primary" />
+            <div className="bg-[var(--graphite-900)] dark:bg-[var(--graphite-100)]" />
+            <div className="bg-[var(--warning)]" />
+            <div className="bg-[var(--graphite-300)] dark:bg-[var(--graphite-600)]" />
+          </div>
+          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 space-y-1 overflow-hidden whitespace-nowrap px-4 text-center font-mono text-[0.8125rem] font-semibold">
+            <p className="text-white">Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123</p>
+            <p className="text-[var(--graphite-950)]">Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123</p>
+          </div>
+        </>
+      )}
+      {backdrop === "texto" && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-center gap-1 overflow-hidden px-6 text-foreground">
+          {[0, 1, 2, 3, 4].map((i) => (
+            <p key={i} className="whitespace-nowrap text-[2.25rem] font-bold leading-none tracking-[-0.03em]" style={{ fontFamily: "var(--font-sans)" }}>
+              {i % 2 ? "0123456789 · Aa Bb Cc Dd Ee Ff Gg Hh" : "Aa Bb Cc Dd Ee Ff Gg Hh · 0123456789"}
+            </p>
+          ))}
+        </div>
+      )}
+      {backdrop === "textura" && <DoodleTexture scale="p" color="var(--graphite-400)" className="-z-10 dark:[background-color:var(--graphite-600)]" />}
       {children}
     </div>
   );
