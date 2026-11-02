@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "./utils";
 import { DoodleTexture } from "./doodle-texture";
+import { over, contrastRatio, resolveCssColor, AA, type RGB } from "./contrast";
 
 /**
  * GlassCard (card glassmorphism)
@@ -117,43 +118,79 @@ export function GlassCard({ finish = "padrao", intensity = "media", tone = "clar
   );
 }
 
-export type GlassBackdrop = "blocos" | "texto" | "textura";
+/** Cenário de demonstração: fundo da página com a textura doodle do sistema em ícones pequenos. Segue o tema.
+ *  Cores da textura expostas para o cálculo de contraste: grafite-300 no claro, grafite-700 no escuro. */
+export const glassSceneTexture = { light: "var(--graphite-300)", dark: "var(--graphite-700)", coverage: 0.08 } as const;
 
-/** Cenário de demonstração neutro, só com cores do design system e sem gradientes. Segue o tema.
- *  textura (padrão): a textura doodle do sistema sobre o fundo da página — para exemplos com conteúdo, legíveis.
- *  blocos: faixas sólidas da paleta com texto nítido atrás — só para amostras de vidro SEM texto, para comparar
- *  opacidade (quanta cor atravessa) e desfoque (quão nítido fica o que está atrás). texto: linhas de título nítidas. */
-export function GlassScene({ backdrop = "textura", dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { backdrop?: GlassBackdrop; /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
+export function GlassScene({ dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
   return (
     <div
       className={cn("relative isolate overflow-hidden rounded-[24px] border border-border bg-background p-6 sm:p-8", dark && "dark bg-[var(--graphite-950)]", className)}
       {...props}
     >
-      {backdrop === "blocos" && (
-        <>
-          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 grid grid-cols-4">
-            <div className="bg-primary" />
-            <div className="bg-[var(--graphite-900)] dark:bg-[var(--graphite-100)]" />
-            <div className="bg-[var(--warning)]" />
-            <div className="bg-[var(--graphite-300)] dark:bg-[var(--graphite-600)]" />
-          </div>
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 -translate-y-1/2 space-y-1 overflow-hidden whitespace-nowrap px-4 text-center font-mono text-[0.8125rem] font-semibold">
-            <p className="text-white">Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123</p>
-            <p className="text-[var(--graphite-950)]">Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123 · texto nítido atrás do vidro · Aa Bb 0123</p>
-          </div>
-        </>
-      )}
-      {backdrop === "texto" && (
-        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 flex flex-col justify-center gap-1 overflow-hidden px-6 text-foreground">
-          {[0, 1, 2, 3, 4].map((i) => (
-            <p key={i} className="whitespace-nowrap text-[2.25rem] font-bold leading-none tracking-[-0.03em]" style={{ fontFamily: "var(--font-sans)" }}>
-              {i % 2 ? "0123456789 · Aa Bb Cc Dd Ee Ff Gg Hh" : "Aa Bb Cc Dd Ee Ff Gg Hh · 0123456789"}
-            </p>
-          ))}
-        </div>
-      )}
-      {backdrop === "textura" && <DoodleTexture scale="p" color="var(--graphite-300)" className="-z-10 dark:[background-color:var(--graphite-700)]" />}
+      <DoodleTexture scale="xs" color={glassSceneTexture.light} className="-z-10 dark:[background-color:var(--graphite-700)]" />
       {children}
     </div>
   );
+}
+
+/* ── Avaliação de contraste do texto sobre o vidro ─────────────────────────────── */
+
+/** Opacidade (%) do fundo do vidro por acabamento, tom, intensidade e tema. Espelha as classes acima. */
+export const glassOpacityTable: Record<GlassFinish, { clara: [number, number, number]; claraDark: [number, number, number]; escura: [number, number, number]; escuraDark: [number, number, number] }> = {
+  padrao:      { clara: [40, 55, 70], claraDark: [8, 12, 16],  escura: [55, 70, 85], escuraDark: [35, 50, 65] },
+  translucido: { clara: [10, 18, 28], claraDark: [4, 6, 9],    escura: [32, 42, 52], escuraDark: [12, 22, 32] },
+  fosco:       { clara: [60, 72, 84], claraDark: [14, 18, 22], escura: [80, 90, 90], escuraDark: [60, 72, 84] },
+  luz:         { clara: [35, 48, 62], claraDark: [8, 12, 16],  escura: [50, 65, 80], escuraDark: [30, 45, 60] },
+  cristal:     { clara: [22, 32, 44], claraDark: [6, 9, 12],   escura: [42, 54, 66], escuraDark: [22, 34, 46] },
+};
+
+export type GlassContrastInput = {
+  finish?: GlassFinish;
+  tone?: "clara" | "escura";
+  intensity?: "leve" | "media" | "forte";
+  opacity?: number;
+  tint?: boolean;
+  /** Tema escuro ativo. */
+  darkTheme: boolean;
+  /** Cor de fundo da cena (resolvida) e cor da textura com sua cobertura aproximada (0–1). */
+  sceneBg: RGB;
+  texture?: { color: RGB; coverage: number };
+  /** Cores do texto já resolvidas. */
+  title: RGB;
+  subtitle: RGB;
+};
+
+export type GlassContrastResult = {
+  /** Cor efetiva atrás do texto (fundo + textura + vidro + tingimento). */
+  surface: RGB;
+  title: number;
+  subtitle: number;
+  /** Título grande (3:1) e subtítulo normal (4,5:1). */
+  titleOk: boolean;
+  subtitleOk: boolean;
+};
+
+/**
+ * Estima o contraste do título e do subtítulo sobre o vidro, compondo as camadas:
+ * fundo da cena → textura (cobertura média) → vidro (branco ou grafite-950 na opacidade) → tingimento.
+ * O desfoque não muda a luminância média, então não entra na conta.
+ */
+export function glassTextContrast(i: GlassContrastInput): GlassContrastResult {
+  const finish = i.finish ?? "padrao", tone = i.tone ?? "clara", intensity = i.intensity ?? "media";
+  const idx = intensity === "leve" ? 0 : intensity === "media" ? 1 : 2;
+  const t = glassOpacityTable[finish];
+  const pct = i.opacity ?? (tone === "escura" ? (i.darkTheme ? t.escuraDark : t.escura) : (i.darkTheme ? t.claraDark : t.clara))[idx];
+  let surface = i.sceneBg;
+  if (i.texture) surface = over(i.texture.color, surface, i.texture.coverage);
+  const glass: RGB = tone === "escura" ? resolveCssColor("var(--graphite-950)") ?? { r: 0, g: 0, b: 0, a: 1 } : { r: 255, g: 255, b: 255, a: 1 };
+  surface = over(glass, surface, Math.min(100, Math.max(0, pct)) / 100);
+  if (i.tint) {
+    const primary = resolveCssColor("var(--primary)");
+    if (primary) surface = over(primary, surface, tone === "escura" ? 0.2 : i.darkTheme ? 0.15 : 0.1);
+  }
+  // arredonda a uma casa, como é exibido, para o veredito bater com o número mostrado
+  const r1 = (v: number) => Math.round(v * 10) / 10;
+  const title = r1(contrastRatio(i.title, surface)), subtitle = r1(contrastRatio(i.subtitle, surface));
+  return { surface, title, subtitle, titleOk: title >= AA.large, subtitleOk: subtitle >= AA.normal };
 }

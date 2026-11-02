@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Glassmorphism cards: test area with contrast alert", pt: "Cards glassmorphism: área de teste com alerta de contraste" },
+    desc: { en: "Examples over the system texture with small icons; each test card measures title and subtitle contrast against the effective glass surface (WCAG AA) and alerts when accessibility is compromised. glassTextContrast helper and contrast utilities exported.", pt: "Exemplos sobre a textura do sistema em ícones pequenos; cada card de teste mede o contraste de título e subtítulo contra a superfície efetiva do vidro (WCAG AA) e alerta quando a acessibilidade fica comprometida. Helper glassTextContrast e utilitários de contraste exportados." },
+    page: "cards", anchor: "card-glass",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Glass card with free opacity and blur control", pt: "Card de vidro com controle livre de opacidade e desfoque" },
     desc: { en: "Numeric props opacity (0–100 %) and blur (0–80 px) override the finish; sliders in the glassmorphism picker show the result and the code live.", pt: "Props numéricas opacity (0–100 %) e blur (0–80 px) sobrepõem o acabamento; sliders no seletor da seção Cards glassmorphism mostram o resultado e o código na hora." },
     page: "cards", anchor: "card-glass",

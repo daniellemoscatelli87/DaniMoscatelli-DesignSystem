@@ -13,7 +13,9 @@ import {
 import { Button } from "../ui/button";
 import { ShineBorder } from "../ui/shine-border";
 import { PartnerCard } from "../ui/partner-card";
-import { GlassCard, GlassScene, type GlassFinish } from "../ui/glass-card";
+import { GlassCard, GlassScene, glassTextContrast, glassSceneTexture, type GlassFinish, type GlassCardProps } from "../ui/glass-card";
+import { resolveCssColor, formatRatio, AA } from "../ui/contrast";
+import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { SegmentedControl } from "../ui/segmented-control";
 import { Slider } from "../ui/slider";
 import { AvatarCircles } from "../ui/avatar-circles";
@@ -21,6 +23,7 @@ import { ArrowUpRight, MapPin, Heart } from "lucide-react";
 import { Handshake, Store } from "lucide-react";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, SubTitle, display } from "./shared/Guidance";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { cn } from "../ui/utils";
 
 function SectionHeader({ title, description }: { title: string; description: string }) {
   return (
@@ -59,6 +62,72 @@ function SpecCard({
   );
 }
 
+
+/** Observa o tema (classe .dark no html). */
+function useIsDark() {
+  const [dark, setDark] = useState(() => typeof document !== "undefined" && document.documentElement.classList.contains("dark"));
+  React.useEffect(() => {
+    const obs = new MutationObserver(() => setDark(document.documentElement.classList.contains("dark")));
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => obs.disconnect();
+  }, []);
+  return dark;
+}
+
+/**
+ * Card de teste: título e subtítulo reais sobre o vidro, com avaliação de contraste (WCAG AA)
+ * e alerta dentro do card quando a configuração compromete a acessibilidade.
+ */
+function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, blur, tint, interactive, compact = false, eyebrow, title, subtitle, cta, className }: Pick<GlassCardProps, "finish" | "tone" | "intensity" | "opacity" | "blur" | "tint" | "interactive" | "className"> & { compact?: boolean; eyebrow?: string; title: string; subtitle: string; cta?: string }) {
+  const { t } = useI18n();
+  const dark = useIsDark();
+  const escura = tone === "escura";
+  const result = React.useMemo(() => {
+    const sceneBg = resolveCssColor("var(--background)");
+    const texture = resolveCssColor(dark ? glassSceneTexture.dark : glassSceneTexture.light);
+    const titleColor = resolveCssColor(escura ? "#FFFFFF" : dark ? "#FFFFFF" : "var(--foreground)");
+    const subColor = escura || dark ? resolveCssColor("rgba(255,255,255,0.7)") : resolveCssColor("var(--muted-foreground)");
+    if (!sceneBg || !texture || !titleColor || !subColor) return null;
+    // subtítulo a 70% de branco: compõe sobre a superfície dentro do cálculo
+    // pior caso: o texto cruzando um traço da textura (a cor do traço é o fundo), não a média da cena
+    void sceneBg;
+    const base = glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg: texture, title: titleColor, subtitle: subColor });
+    if (escura || dark) {
+      const sub70 = { r: 255 * 0.7 + base.surface.r * 0.3, g: 255 * 0.7 + base.surface.g * 0.3, b: 255 * 0.7 + base.surface.b * 0.3, a: 1 };
+      const r = glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg: texture, title: titleColor, subtitle: sub70 });
+      return r;
+    }
+    return base;
+  }, [finish, tone, intensity, opacity, tint, dark, escura]);
+  const ok = result ? result.titleOk && result.subtitleOk : true;
+  const subCls = escura ? "text-white/70" : "text-muted-foreground dark:text-white/70";
+  const monoCls = escura ? "text-white/60" : "text-muted-foreground dark:text-white/60";
+  return (
+    <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacity} blur={blur} tint={tint} interactive={interactive} tabIndex={interactive ? 0 : undefined} className={cn(compact && "p-4", className)} aria-describedby={undefined}>
+      {eyebrow && <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${subCls}`}><MapPin className="h-3 w-3" aria-hidden /> {eyebrow}</p>}
+      <p className={`${display} ${compact ? "mt-1 text-[1.0625rem]" : "mt-2 text-[1.25rem]"} font-semibold tracking-[-0.01em]`}>{title}</p>
+      <p className={`${compact ? "mt-1 text-[0.75rem]" : "mt-2 text-[0.8125rem]"} leading-relaxed ${subCls}`}>{subtitle}</p>
+      {cta && !compact && (
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{cta}</span>
+          <ArrowUpRight className="h-5 w-5 text-primary" aria-hidden />
+        </div>
+      )}
+      {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
+      {result && (
+        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-[10px] border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
+          {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning)]" aria-hidden />}
+          <span>
+            {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({t("worst case: text over a texture stroke", "pior caso: texto sobre um traço da textura")})</span>
+            {" · "}{t("title", "título")} <strong className={result.titleOk ? "" : "text-[var(--error,var(--destructive))]"}>{formatRatio(result.title)}</strong> ({t("min.", "mín.")} {AA.large}:1)
+            {" · "}{t("subtitle", "subtítulo")} <strong className={result.subtitleOk ? "" : "text-[var(--error,var(--destructive))]"}>{formatRatio(result.subtitle)}</strong> ({t("min.", "mín.")} {String(AA.normal).replace(".", ",")}:1)
+          </span>
+        </div>
+      )}
+      {!compact && <p className={`mt-3 text-[0.6875rem] font-mono ${monoCls}`}>finish="{finish ?? "padrao"}" tone="{tone}" intensity="{intensity}"{opacity !== undefined ? ` opacity={${opacity}}` : ""}{blur !== undefined ? ` blur={${blur}}` : ""}{tint ? " tint" : ""}</p>}
+    </GlassCard>
+  );
+}
 function GlassFinishPicker() {
   const { t } = useI18n();
   const [finish, setFinish] = useState<GlassFinish>("translucido");
@@ -76,9 +145,6 @@ function GlassFinishPicker() {
     { value: "padrao", label: t("Default", "Padrão"), desc: t("Balanced glass, the one used in the intensities above.", "Vidro equilibrado, o mesmo das intensidades acima.") },
   ];
   const current = finishes.find(x => x.value === finish)!;
-  // textos secundários: brancos no vidro escuro em qualquer tema
-  const sub = tone === "escura" ? "text-white/70" : "text-muted-foreground dark:text-white/70";
-  const mono = tone === "escura" ? "text-white/60" : "text-muted-foreground dark:text-white/60";
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -117,40 +183,19 @@ function GlassFinishPicker() {
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
-      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] items-stretch">
-        <div className="space-y-2">
-          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Application — legible content", "Aplicação — conteúdo legível")}</p>
-          <GlassScene className="h-full">
-          <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} interactive tabIndex={0}>
-            <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${sub}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
-            <p className={`${display} mt-2 text-[1.25rem] font-semibold tracking-[-0.01em]`}>{t("Clínica Horizonte", "Clínica Horizonte")}</p>
-            <p className={`mt-2 text-[0.8125rem] leading-relaxed ${sub}`}>{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
-            <div className="mt-4 flex items-center justify-between">
-              <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{t("Open challenge", "Abrir desafio")}</span>
-              <ArrowUpRight className="h-5 w-5 text-primary" aria-hidden />
-            </div>
-            <p className={`mt-4 text-[0.6875rem] font-mono ${mono}`}>finish="{finish}" tone="{tone}" intensity="{intensity}"{opacidade !== null ? ` opacity={${opacidade}}` : ""}{desfoque !== null ? ` blur={${desfoque}}` : ""}</p>
-          </GlassCard>
-          </GlassScene>
+      <GlassScene>
+        <div className="grid gap-5 md:grid-cols-2 items-start">
+          <GlassTestCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} interactive eyebrow={t("Organization · Health", "Organização · Saúde")} title={t("Clínica Horizonte", "Clínica Horizonte")} subtitle={t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")} cta={t("Open challenge", "Abrir desafio")} />
+          <GlassTestCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} tint title={current.label} subtitle={current.desc} />
         </div>
-        <div className="space-y-2">
-          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Sample — opacity and blur", "Amostra — opacidade e desfoque")}</p>
-          <GlassScene backdrop="blocos" className="h-full min-h-[220px] p-5 sm:p-6">
-            <GlassCard aria-label={t("Glass sample without content", "Amostra de vidro sem conteúdo")} finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} className="h-full min-h-[170px]" />
-          </GlassScene>
-          <p className="text-[0.75rem] leading-relaxed text-muted-foreground">{current.desc}</p>
+      </GlassScene>
+      <GlassScene className="p-4 sm:p-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {finishes.filter(x => x.value !== "padrao").map(x => (
+            <GlassTestCard key={x.value} compact finish={x.value} intensity="media" title={x.label} subtitle={`finish="${x.value}"`} />
+          ))}
         </div>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {finishes.filter(x => x.value !== "padrao").map(x => (
-          <div key={x.value} className="space-y-2">
-            <GlassScene backdrop="blocos" className="p-4 sm:p-4">
-              <GlassCard aria-label={x.label} finish={x.value} intensity="media" className="h-24 p-0" />
-            </GlassScene>
-            <p className="text-[0.875rem] font-bold text-foreground">{x.label} <span className="ml-1 font-mono text-[0.6875rem] font-normal text-muted-foreground">finish="{x.value}"</span></p>
-          </div>
-        ))}
-      </div>
+      </GlassScene>
     </div>
   );
 }
@@ -330,7 +375,7 @@ export function CardShowcase() {
         <div className="space-y-6">
           <div>
             <SubTitle>{t("Finishes — degrees of transparency", "Acabamentos — graus de transparência")}</SubTitle>
-            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Choose how transparent the glass is: translucent, frosted, with a light focus or crystal. Combine with the tone (light or dark glass) and the opacity level. On the left, the application with legible content over the system texture; on the right, a content-free sample over solid color blocks and sharp text, to compare how much color passes through and how blurred the background gets.", "Escolha o quanto o vidro é transparente: translúcido, fosco, com foco de luz ou cristal. Combine com o tom (vidro claro ou escuro) e o nível de opacidade. À esquerda, a aplicação com conteúdo legível sobre a textura do sistema; à direita, uma amostra sem conteúdo sobre blocos de cor sólida e texto nítido, para comparar quanta cor atravessa e quanto o fundo desfoca.")}</p>
+            <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground max-w-3xl">{t("Test area: choose the finish, tone and opacity, or set free values, and read title and subtitle inside the cards over the system texture. Each card measures the contrast of its texts in the worst case, where text crosses a texture stroke through the glass (WCAG AA: 3:1 for the title, 4.5:1 for the subtitle), and shows an alert when the configuration compromises accessibility.", "Área de teste: escolha acabamento, tom e opacidade, ou valores livres, e leia título e subtítulo dentro dos cards sobre a textura do sistema. Cada card mede o contraste dos seus textos no pior caso, onde o texto cruza um traço da textura através do vidro (WCAG AA: 3:1 no título, 4,5:1 no subtítulo), e mostra um alerta quando a configuração compromete a acessibilidade.")}</p>
             <GlassFinishPicker />
           </div>
           <div>
@@ -395,7 +440,7 @@ export function CardShowcase() {
             <DataTable
               head={[t("Rule", "Regra"), t("Guidance", "Orientação")]}
               rows={[
-                [t("Background", "Fundo"), t("Only over color, image or texture. In the docs, examples with content sit over the system texture (legible) and content-free samples sit over color blocks (to judge opacity and blur); in the product, the hero, a photo or a brand surface does this job.", "Só sobre cor, imagem ou textura. Na documentação, os exemplos com conteúdo ficam sobre a textura do sistema (legíveis) e as amostras sem conteúdo sobre blocos de cor (para avaliar opacidade e desfoque); no produto, o hero, uma foto ou uma superfície da marca fazem esse papel.")],
+                [t("Background", "Fundo"), t("Only over color, image or texture. In the docs the examples sit over the system texture with small icons; in the product, the hero, a photo or a brand surface does this job. Check the contrast against the busiest area of the real background.", "Só sobre cor, imagem ou textura. Na documentação os exemplos ficam sobre a textura do sistema com ícones pequenos; no produto, o hero, uma foto ou uma superfície da marca fazem esse papel. Confira o contraste contra a área mais movimentada do fundo real.")],
                 [t("Quantity", "Quantidade"), t("One to three per view. Glass loses meaning when everything is glass.", "De um a três por tela. O vidro perde sentido quando tudo é vidro.")],
                 [t("Contrast", "Contraste"), t("Light glass at 55% or more for body text; dark glass at 50% or more. Check contrast against the busiest part of the background.", "Vidro claro com 55% ou mais para texto corrido; vidro escuro com 50% ou mais. Confira o contraste contra a parte mais movimentada do fundo.")],
                 [t("Content", "Conteúdo"), t("Short content: a number, a title, one sentence, one action. Long reading goes on a solid card.", "Conteúdo curto: um número, um título, uma frase, uma ação. Leitura longa vai em card sólido.")],

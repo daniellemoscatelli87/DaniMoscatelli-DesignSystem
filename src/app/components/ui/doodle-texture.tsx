@@ -20,15 +20,15 @@ export const doodleTextureFiles = {
 } as const;
 
 export type DoodleTextureProps = React.HTMLAttributes<HTMLDivElement> & {
-  /** Tamanho do ladrilho: p 480 px, m 640 px, g 800 px. */
-  scale?: "p" | "m" | "g";
+  /** Tamanho do ladrilho: xs 320 px (ícones pequenos), p 480 px, m 640 px, g 800 px. */
+  scale?: "xs" | "p" | "m" | "g";
   /** Cor do traço (qualquer cor CSS ou token). Sem ela, grafite-200 no claro e grafite-800 no escuro. */
   color?: string;
   /** Posição do ladrilho, para alinhar com outro fundo. */
   position?: string;
 };
 
-const tile = { p: "480px", m: "640px", g: "800px" } as const;
+const tile = { xs: "320px", p: "480px", m: "640px", g: "800px" } as const;
 
 export function DoodleTexture({ scale = "m", color, position = "0 0", className, style, ...props }: DoodleTextureProps) {
   const url = `url(${import.meta.env.BASE_URL}${doodleTextureFiles.traco})`;
