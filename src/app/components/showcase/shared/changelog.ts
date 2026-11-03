@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Section seal", pt: "Selo de seção" },
+    desc: { en: "The coloured pill from the site's sections (light primary fill, primary border, primary uppercase text with wide tracking), naming the subject above each section title. Next to the hero tag, under Components › Badges.", pt: "Pílula colorida das seções do site (tom claro da primária, borda na primária, texto na primária em caixa alta com espaçamento largo), para nomear o assunto acima do título de cada seção. Ao lado do selo do hero, em Componentes › Rótulos." },
+    page: "badges", anchor: "selo-secao",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Timeline", pt: "Linha do tempo" },
     desc: { en: "Ported from the studio site's \"How it works\" section: steps with a round marker and a card, rail on the left on phones and centred with alternating cards from 768 px, plus the scroll-driven Step Indicator animation (current step grows, done steps fill the rail, cards slide in once). Honours reduced motion. Under Components.", pt: "Portada da seção \"Como funciona\" do site do estúdio: etapas com marcador redondo e card, linha à esquerda no celular e no centro com cards alternados a partir de 768 px, e a animação Step Indicator na rolagem (etapa atual cresce, feitas preenchem a linha, cards entram uma vez). Respeita movimento reduzido. Em Componentes." },
     page: "timeline", anchor: "timeline-demo",

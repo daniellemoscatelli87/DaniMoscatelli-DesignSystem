@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Selo } from "@/app/components/ui/selo";
+import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
 import { MapPin, Sparkles } from "lucide-react";
 import {
@@ -440,6 +441,35 @@ export function FeedbackShowcase() {
             <pre className="mt-4 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Selo } from "@/app/components/ui/selo";
 <Selo>DM | Experience Intelligence</Selo>
 <Selo icon={<MapPin />}>Moda local em Curitiba</Selo>`}</code></pre>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Section seal", "Selo de seção")}>
+          <div id="selo-secao" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <p className="mb-5 text-[0.8125rem] leading-relaxed text-muted-foreground">
+              {t("From the sections of the studio site's Experience Intelligence 2 page (\"Cenário Atual\", \"O Desafio\", \"Método\"): a filled pill in the light primary tint with a thin primary border and the primary text color, uppercase with wide tracking, no dot. It sits centred above a section title and names the subject of the section. The hero tag stays neutral (card surface, dot); this one is coloured.", "Das seções da página Experience Intelligence 2 do site do estúdio (\"Cenário Atual\", \"O Desafio\", \"Método\"): pílula preenchida com o tom claro da primária, borda fina na primária e texto na cor primária de texto, em caixa alta com espaçamento largo, sem ponto. Fica centralizada acima do título da seção e nomeia o assunto dela. O selo do hero continua neutro (fundo de card, ponto); este é colorido.")}
+            </p>
+            <div className="rounded-[16px] border border-border bg-background px-6 py-10 text-center">
+              <SeloSecao className="mb-4">{t("Current scenario", "Cenário atual")}</SeloSecao>
+              <h3 className="mx-auto max-w-[32ch] text-[1.5rem] font-bold leading-tight tracking-[-0.02em] text-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Experience stopped being a differentiator. It became a competitive advantage.", "A experiência deixou de ser um diferencial. Ela se tornou uma vantagem competitiva.")}</h3>
+            </div>
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <SeloSecao>{t("The challenge", "O desafio")}</SeloSecao>
+              <SeloSecao>{t("Method", "Método")}</SeloSecao>
+              <SeloSecao size="sm">{t("Compact", "Compacto")} · sm</SeloSecao>
+              <SeloSecao icon={<Sparkles />}>{t("With icon", "Com ícone")}</SeloSecao>
+            </div>
+            <pre className="mt-4 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { SeloSecao } from "@/app/components/ui/selo-secao";
+
+<SeloSecao>Cenário atual</SeloSecao>
+<h2>…</h2>`}</code></pre>
+            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("One per section, above the title, centred when the title is centred.", "Um por seção, acima do título, centralizado quando o título é centralizado.")}</li>
+              <li>• {t("One to three words naming the subject; never status, count or action.", "De uma a três palavras nomeando o assunto; nunca status, contagem ou ação.")}</li>
+              <li>• {t("Tokens: --primary-muted (fill), primary at 25 % (border), --primary-text (text), --shadow-xs.", "Tokens: --primary-muted (fundo), primária a 25 % (borda), --primary-text (texto), --shadow-xs.")}</li>
+              <li>• {t("Hero of a page: use the hero tag (Selo); sections inside the page: this one.", "Hero de uma página: use o selo do hero (Selo); seções dentro da página: este.")}</li>
+            </ul>
           </ShowcaseCard>
         </SubSection>
       </section>

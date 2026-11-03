@@ -147,6 +147,7 @@ const ptLabels: Record<string, string> = {
   "Hero tag (selo)": "Selo (tag do hero)",
   "Avatar": "Avatar",
   "Avatar Circles": "Avatar Circles",
+  "Section seal": "Selo de seção",
   "Empty States": "Estados vazios",
   "Timeline": "Linha do tempo",
   "Icons": "Ícones",
@@ -386,6 +387,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
         items: [
           { id: "badges",        label: "Badges & Tags", sectionId: "badges" },
           { id: "selo",          label: "Hero tag (selo)", sectionId: "badges" },
+          { id: "selo-secao",    label: "Section seal",   sectionId: "badges" },
           { id: "avatar",        label: "Avatar",        sectionId: "badges" },
           { id: "avatar-circles", label: "Avatar Circles", sectionId: "badges" },
           { id: "empty-states",  label: "Empty States",  sectionId: "badges" },
