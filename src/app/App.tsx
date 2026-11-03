@@ -7,7 +7,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight, UploadCloud,
+  PanelRight, UploadCloud, Milestone,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -30,6 +30,7 @@ import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 import { CardShowcase } from "./components/showcase/CardShowcase";
 import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
+import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
@@ -162,6 +163,11 @@ const ptLabels: Record<string, string> = {
   "Labels & Patterns": "Rótulos e padrões",
   "Overlays & Navigation": "Overlays e navegação",
   "Side Panel": "Painel lateral",
+  "Timeline": "Linha do tempo",
+  "Demo": "Demonstração",
+  "Anatomy": "Anatomia",
+  "Motion: Step Indicator": "Movimento: Step Indicator",
+  "Usage": "Uso",
   "Upload": "Upload",
   "Drop area": "Área de soltar",
   "File list": "Lista de arquivos",
@@ -415,6 +421,14 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "sidepanel-tokens",   label: "Tokens",                  sectionId: "sidepanel" },
         ],
       },
+      { id: "timeline", label: "Timeline", icon: Milestone,
+        items: [
+          { id: "timeline-demo",    label: "Demo",                   sectionId: "timeline" },
+          { id: "timeline-anatomy", label: "Anatomy",                sectionId: "timeline" },
+          { id: "timeline-motion",  label: "Motion: Step Indicator", sectionId: "timeline" },
+          { id: "timeline-usage",   label: "Usage",                  sectionId: "timeline" },
+        ],
+      },
       { id: "upload", label: "Upload", icon: UploadCloud,
         items: [
           { id: "upload-dropzone", label: "Drop area",               sectionId: "upload" },
@@ -454,6 +468,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
   sidepanel: <SidePanelShowcase />,
+  timeline:  <TimelineShowcase />,
   upload:    <UploadShowcase />,
   motion:      <MotionShowcase />,
   backgrounds: <BackgroundsShowcase />,
@@ -477,6 +492,7 @@ const sectionLabels: Record<string, string> = {
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
   sidepanel: "Side Panel",
+  timeline:  "Timeline",
   upload:    "Upload",
   motion:      "Motion Design",
   backgrounds: "Backgrounds",

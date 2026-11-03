@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Timeline", pt: "Linha do tempo" },
+    desc: { en: "Ported from the studio site's \"How it works\" section: steps with a round marker and a card, rail on the left on phones and centred with alternating cards from 768 px, plus the scroll-driven Step Indicator animation (current step grows, done steps fill the rail, cards slide in once). Honours reduced motion. Under Components.", pt: "Portada da seção \"Como funciona\" do site do estúdio: etapas com marcador redondo e card, linha à esquerda no celular e no centro com cards alternados a partir de 768 px, e a animação Step Indicator na rolagem (etapa atual cresce, feitas preenchem a linha, cards entram uma vez). Respeita movimento reduzido. Em Componentes." },
+    page: "timeline", anchor: "timeline-demo",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Glassmorphism cards: test area with contrast alert", pt: "Cards glassmorphism: área de teste com alerta de contraste" },
     desc: { en: "Examples over the system texture with small icons; each test card measures title and subtitle contrast against the effective glass surface (WCAG AA) and alerts when accessibility is compromised. glassTextContrast helper and contrast utilities exported.", pt: "Exemplos sobre a textura do sistema em ícones pequenos; cada card de teste mede o contraste de título e subtítulo contra a superfície efetiva do vidro (WCAG AA) e alerta quando a acessibilidade fica comprometida. Helper glassTextContrast e utilitários de contraste exportados." },
     page: "cards", anchor: "card-glass",
