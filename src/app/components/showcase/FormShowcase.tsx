@@ -10,6 +10,7 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
+import { PasswordConfirm, regrasPadrao, textosPadrao } from "@/app/components/ui/password-field";
 import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
 
 /* ── Shared helpers ── */
@@ -120,6 +121,9 @@ export function FormShowcase() {
   const formTokenGroups = getFormTokenGroups(t);
   const [showPwd, setShowPwd] = useState(false);
   const [condicao, setCondicao] = useState("nova");
+  const [senha, setSenha] = useState("");
+  const [confirmacao, setConfirmacao] = useState("");
+  const [senhaUnica, setSenhaUnica] = useState("Sucesso@20234");
   const [checkA, setCheckA] = useState<boolean | "indeterminate">(true);
   const [checkB, setCheckB] = useState<boolean | "indeterminate">(false);
   const [checkC, setCheckC] = useState<boolean | "indeterminate">("indeterminate");
@@ -237,6 +241,43 @@ export function FormShowcase() {
               <InputField label={t("Error State", "Estado de erro")} placeholder={t("Enter value...", "Digite um valor...")} error={t("This field is required.", "Este campo é obrigatório.")} />
               <InputField label={t("Disabled", "Desabilitado")} placeholder={t("Disabled input...", "Campo desabilitado...")} disabled />
             </div>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Password", "Senha")}>
+          <div id="password" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <p className="mb-5 text-[0.8125rem] leading-relaxed text-muted-foreground">
+              {t("Password and confirmation fields, each with a show/hide button. Strength in four bars plus a text label, calculated from the requirements met. The hint list gives each requirement a green check as soon as it is met; the icon changes shape and screen readers hear \"met\", so colour is never the only signal. The confirmation shows whether the passwords match after the person types.", "Campos de senha e de confirmação, cada um com botão de exibir/ocultar. Força em quatro barras mais um rótulo em texto, calculada pelos requisitos atendidos. A lista de dicas dá um check verde a cada requisito assim que ele é atendido; o ícone muda de forma e o leitor de tela ouve \"atendido\", então a cor nunca é o único sinal. A confirmação mostra se as senhas coincidem depois que a pessoa digita.")}
+            </p>
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it: create and confirm", "Experimente: criar e confirmar")}</p>
+                <PasswordConfirm senha={senha} confirmacao={confirmacao} onSenhaChange={setSenha} onConfirmacaoChange={setConfirmacao} regras={regrasPadrao.map((r) => ({ ...r, label: ({ tamanho: t("8 characters or more", "8 caracteres ou mais"), caixa: t("Upper and lower case", "Maiúsculas e minúsculas"), numero: t("At least one number", "Pelo menos um número"), simbolo: t("A special symbol", "Um símbolo especial") } as Record<string, string>)[r.id] }))} textos={{ senha: t("Password", "Senha"), confirmar: t("Confirm password", "Confirmar senha"), mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha"), forca: t("Password strength", "Força da senha"), niveis: ["—", t("Weak", "Fraca"), t("Fair", "Razoável"), t("Good", "Boa"), t("Strong", "Forte")], dicaTitulo: t("To create your password, use:", "Para criar sua senha, use:"), atendido: t("met", "atendido"), naoAtendido: t("not met", "não atendido"), naoCoincidem: t("Passwords do not match", "As senhas não coincidem"), coincidem: t("Passwords match", "As senhas coincidem") }} />
+              </div>
+              <div>
+                <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("All requirements met (single field)", "Todos os requisitos atendidos (campo único)")}</p>
+                <PasswordConfirm semConfirmacao senha={senhaUnica} confirmacao="" onSenhaChange={setSenhaUnica} onConfirmacaoChange={() => {}} regras={regrasPadrao.map((r) => ({ ...r, label: ({ tamanho: t("8 characters or more", "8 caracteres ou mais"), caixa: t("Upper and lower case", "Maiúsculas e minúsculas"), numero: t("At least one number", "Pelo menos um número"), simbolo: t("A special symbol", "Um símbolo especial") } as Record<string, string>)[r.id] }))} textos={{ senha: t("Password", "Senha"), confirmar: t("Confirm password", "Confirmar senha"), mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha"), forca: t("Password strength", "Força da senha"), niveis: ["—", t("Weak", "Fraca"), t("Fair", "Razoável"), t("Good", "Boa"), t("Strong", "Forte")], dicaTitulo: t("To create your password, use:", "Para criar sua senha, use:"), atendido: t("met", "atendido"), naoAtendido: t("not met", "não atendido"), naoCoincidem: t("Passwords do not match", "As senhas não coincidem"), coincidem: t("Passwords match", "As senhas coincidem") }} />
+              </div>
+            </div>
+            <pre className="mt-6 overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { PasswordConfirm } from "@/app/components/ui/password-field";
+
+const [senha, setSenha] = useState("");
+const [confirmacao, setConfirmacao] = useState("");
+
+<PasswordConfirm
+  senha={senha} onSenhaChange={setSenha}
+  confirmacao={confirmacao} onConfirmacaoChange={setConfirmacao}
+/>
+
+// Campo único (troca de senha em etapas, por exemplo):
+<PasswordConfirm semConfirmacao … />`}</code></pre>
+            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+              <li>• {t("Requirements: 8+ characters, upper and lower case, a number, a special symbol. Override with the regras prop (id, label, test).", "Requisitos: 8 ou mais caracteres, maiúsculas e minúsculas, um número, um símbolo especial. Troque com a prop regras (id, label, test).")}</li>
+              <li>• {t("Strength = requirements met (0–4): Weak, Fair, Good, Strong. Bars in the primary colour, label in text.", "Força = requisitos atendidos (0–4): Fraca, Razoável, Boa, Forte. Barras na cor primária, rótulo em texto.")}</li>
+              <li>• {t("Show/hide: 36 px button inside the field, aria-pressed and \"Show/Hide password\" label; each field toggles on its own.", "Exibir/ocultar: botão de 36 px dentro do campo, aria-pressed e rótulo \"Mostrar/Ocultar senha\"; cada campo alterna sozinho.")}</li>
+              <li>• {t("Accessibility: the field points to the strength and hints (aria-describedby); strength and match messages are announced (aria-live); autocomplete=\"new-password\".", "Acessibilidade: o campo aponta para a força e as dicas (aria-describedby); força e coincidência são anunciadas (aria-live); autocomplete=\"new-password\".")}</li>
+            </ul>
           </ShowcaseCard>
         </SubSection>
 

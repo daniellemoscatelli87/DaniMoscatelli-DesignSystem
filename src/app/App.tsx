@@ -119,6 +119,7 @@ const ptLabels: Record<string, string> = {
   "Buttons": "Botões",
   "Button Variants": "Variantes de botão",
   "Segmented Control": "Controle segmentado",
+  "Password": "Senha",
   "Form Controls": "Controles de formulário",
   "Cards": "Cards",
   "Card Anatomy": "Anatomia do card",
@@ -345,6 +346,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
         items: [
           { id: "buttons",        label: "Button Variants", sectionId: "buttons" },
           { id: "inputs",         label: "Form Controls",   sectionId: "buttons" },
+          { id: "password",       label: "Password",        sectionId: "buttons" },
           { id: "segmented",      label: "Segmented Control", sectionId: "buttons" },
           { id: "buttons-tokens", label: "Tokens",          sectionId: "buttons" },
         ],

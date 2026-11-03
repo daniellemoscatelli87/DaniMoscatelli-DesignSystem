@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Password field with confirmation", pt: "Campo de senha com confirmação" },
+    desc: { en: "Password and confirmation with show/hide, strength in four bars with a label, hints that get a green check as each requirement is met, and a match message. Under Components › Buttons › Password.", pt: "Senha e confirmação com exibir/ocultar, força da senha em quatro barras com rótulo, dicas de preenchimento que ganham check verde conforme os requisitos são atendidos e aviso de coincidência. Em Componentes › Botões › Senha." },
+    page: "buttons", anchor: "password",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Section seal", pt: "Selo de seção" },
     desc: { en: "The coloured pill from the site's sections (light primary fill, primary border, primary uppercase text with wide tracking), naming the subject above each section title. Next to the hero tag, under Components › Badges.", pt: "Pílula colorida das seções do site (tom claro da primária, borda na primária, texto na primária em caixa alta com espaçamento largo), para nomear o assunto acima do título de cada seção. Ao lado do selo do hero, em Componentes › Rótulos." },
     page: "badges", anchor: "selo-secao",
