@@ -177,15 +177,15 @@ export function FoundationShowcase() {
 
         <SubSection title={t("Headline with highlight (hero pattern)", "Título com destaque (padrão do hero)")}>
           <div className="bg-card rounded-[16px] border border-border p-6 sm:p-8 space-y-6" style={{ boxShadow: "var(--shadow-xs)" }}>
-            <Heading level={2} size="hero">Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>
+            <Heading level={2} size="hero">{t("Turn people's experience into a **strategic asset** for your business.", "Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.")}</Heading>
             <div className="h-px bg-border" />
             <div className="grid gap-6 md:grid-cols-2">
-              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">Princípios de **design**</Heading></div>
-              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">Faça parte da **Rede de Parceiros**</Heading></div>
+              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">{t("Design **principles**", "Princípios de **design**")}</Heading></div>
+              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">{t("Join the **Partner Network**", "Faça parte da **Rede de Parceiros**")}</Heading></div>
             </div>
             <ul className="grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
               <li>• {t("One highlight per title, one to three words, in the primary color; never the whole title.", "Um destaque por título, de uma a três palavras, na cor primária; nunca o título inteiro.")}</li>
-              <li>• {t("Highlight the expression that carries the value (“ativo estratégico”), not a connector.", "Destaque a expressão que carrega o valor (“ativo estratégico”), não um conectivo.")}</li>
+              <li>• {t("Highlight the expression that carries the value (“strategic asset”), not a connector.", "Destaque a expressão que carrega o valor (“ativo estratégico”), não um conectivo.")}</li>
               <li>• {t("Plus Jakarta Sans Bold (700), as on the site hero. Hero: tracking -0.03em, line height 1.1. Page: -0.035em. Section: -0.02em.", "Plus Jakarta Sans Bold (700), como no hero do site. Hero: tracking -0,03em, entrelinha 1,1. Página: -0,035em. Seção: -0,02em.")}</li>
               <li>• {t("Large text, so the primary color passes contrast on light and dark backgrounds.", "Texto grande, então a cor primária passa no contraste nos fundos claro e escuro.")}</li>
             </ul>

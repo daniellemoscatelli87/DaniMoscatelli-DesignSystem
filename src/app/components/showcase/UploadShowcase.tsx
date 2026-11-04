@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Check, UploadCloud, Camera } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
-import { UploadDropzone, UploadList, ImageUpload, ImageGrid, formatBytes, type UploadFile, type GalleryImage } from "@/app/components/ui/upload";
+import { UploadDropzone, UploadList, ImageUpload, ImageGrid, formatBytes, UploadTextsProvider, uploadTextosEn, uploadTextosPt, type UploadFile, type GalleryImage } from "@/app/components/ui/upload";
 
 /* Troque para true no FindLook Design System: muda só os exemplos. */
 const FINDLOOK = false;
@@ -25,6 +25,7 @@ function SubTitle({ children }: { children: React.ReactNode }) {
 
 /* Simulação de envio só para a demonstração: o produto troca por sua API. */
 function useSimulatedUpload() {
+  const { t } = useI18n();
   const [items, setItems] = useState<UploadFile[]>([]);
   const timers = useRef<Record<string, number>>({});
   const start = (id: string, failAt?: number) => {
@@ -34,7 +35,7 @@ function useSimulatedUpload() {
       setItems(prev => prev.map(i => {
         if (i.id !== id || i.status !== "enviando") return i;
         const p = Math.min(100, (i.progress ?? 0) + 6 + Math.random() * 10);
-        if (failAt && p >= failAt) { window.clearInterval(timers.current[id]); return { ...i, status: "erro", progress: p, error: "Conexão interrompida" }; }
+        if (failAt && p >= failAt) { window.clearInterval(timers.current[id]); return { ...i, status: "erro", progress: p, error: t("Connection lost", "Conexão interrompida") }; }
         if (p >= 100) { window.clearInterval(timers.current[id]); return { ...i, status: "concluido", progress: 100 }; }
         return { ...i, progress: p };
       }));
@@ -52,6 +53,15 @@ function useSimulatedUpload() {
 }
 
 export function UploadShowcase() {
+  const { lang } = useI18n();
+  return (
+    <UploadTextsProvider textos={lang === "pt" ? uploadTextosPt : uploadTextosEn}>
+      <UploadShowcaseConteudo />
+    </UploadTextsProvider>
+  );
+}
+
+function UploadShowcaseConteudo() {
   const { t } = useI18n();
   const docs = useSimulatedUpload();
   const [docsError, setDocsError] = useState<string | null>(null);
@@ -226,10 +236,10 @@ export function UploadShowcase() {
             [t("Hover / dragging", "Hover / arrastando"), t("Border turns primary, background gets the primary tint, the area grows 1% and the title changes to “Drop to upload”.", "A borda vira primária, o fundo ganha o tom primário, a área cresce 1% e o título muda para “Solte para enviar”.")],
             [t("Invalid file", "Arquivo inválido"), t("The area is outlined in error color and a message says exactly what is wrong: format, size or count. Nothing is added.", "A área ganha contorno na cor de erro e uma mensagem diz exatamente o que está errado: formato, tamanho ou quantidade. Nada é adicionado.")],
             [t("Uploading", "Enviando"), t("Item with 6 px progress bar, spinner and percentage. The remove button cancels.", "Item com barra de 6 px, indicador girando e porcentagem. O botão remover cancela.")],
-            [t("Done", "Concluído"), t("Green check and “Concluído”; the thumbnail shows the image when there is one.", "Check verde e “Concluído”; a miniatura mostra a imagem quando houver.")],
-            [t("Failed", "Falha"), t("Error border, short reason (“Conexão interrompida”) and a “try again” button; the file stays in the list.", "Borda de erro, motivo curto (“Conexão interrompida”) e botão “tentar de novo”; o arquivo fica na lista.")],
+            [t("Done", "Concluído"), t("Green check and “Done”; the thumbnail shows the image when there is one.", "Check verde e “Concluído”; a miniatura mostra a imagem quando houver.")],
+            [t("Failed", "Falha"), t("Error border, short reason (“Connection lost”) and a “try again” button; the file stays in the list.", "Borda de erro, motivo curto (“Conexão interrompida”) e botão “tentar de novo”; o arquivo fica na lista.")],
             [t("Disabled", "Desabilitado"), t("60% opacity, no hover, cursor not-allowed; explain why nearby.", "Opacidade 60%, sem hover, cursor de proibido; explique o motivo ao lado.")],
-            [t("Messages", "Mensagens"), t("“… não é um formato aceito.” · “… passa de 10 MB.” · “Envie no máximo 8 arquivos.” Always with the file name.", "“… não é um formato aceito.” · “… passa de 10 MB.” · “Envie no máximo 8 arquivos.” Sempre com o nome do arquivo.")],
+            [t("Messages", "Mensagens"), t("“… is not an accepted format.” · “… is larger than 10 MB.” · “Upload at most 8 files.” Always with the file name.", "“… não é um formato aceito.” · “… passa de 10 MB.” · “Envie no máximo 8 arquivos.” Sempre com o nome do arquivo.")],
           ].map(([title, desc]) => (
             <div key={title} className="rounded-[14px] border border-border bg-card p-4">
               <p className="mb-1 text-[0.875rem] font-semibold text-foreground">{title}</p>

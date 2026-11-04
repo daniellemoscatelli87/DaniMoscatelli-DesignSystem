@@ -321,7 +321,7 @@ export function SidePanelShowcase() {
             {[
               [t("Fields", "Campos"), t("Full name, corporate e-mail, phone/WhatsApp with mask, company, role, “My business is…” accordion (digital, physical, both, other), subject, message, best weekday (multiple) and period.", "Nome completo, e-mail corporativo, telefone/WhatsApp com máscara, empresa, cargo, acordeão “Meu negócio é…” (digital, físico, ambos, outro), assunto, mensagem, melhor dia da semana (múltiplos) e período.")],
               [t("Validation", "Validação"), t("All required; e-mail format; phone with at least 10 digits. One message under the form, invalid fields highlighted, the first one brought into view. Re-validates on input after the first attempt.", "Todos obrigatórios; formato do e-mail; telefone com pelo menos 10 dígitos. Uma mensagem abaixo do formulário, campos inválidos destacados e o primeiro deles trazido à vista. Revalida ao digitar depois da primeira tentativa.")],
-              [t("States", "Estados"), t("Idle → “Sending…” (button disabled) → success replaces header, form and action bar inside the panel, with a Close button. On failure: “Não foi possível enviar sua mensagem. Verifique sua conexão e tente novamente.”", "Parado → “Enviando…” (botão desabilitado) → sucesso substitui cabeçalho, formulário e barra de ação dentro do painel, com botão Fechar. Em falha: “Não foi possível enviar sua mensagem. Verifique sua conexão e tente novamente.”")],
+              [t("States", "Estados"), t("Idle → “Sending…” (button disabled) → success replaces header, form and action bar inside the panel, with a Close button. On failure: “Your message could not be sent. Check your connection and try again.”", "Parado → “Enviando…” (botão desabilitado) → sucesso substitui cabeçalho, formulário e barra de ação dentro do painel, com botão Fechar. Em falha: “Não foi possível enviar sua mensagem. Verifique sua conexão e tente novamente.”")],
             ].map(([title, desc]) => (
               <div key={title} className="rounded-[12px] border border-border bg-muted/30 p-4">
                 <p className="mb-1 text-[0.8125rem] font-semibold text-foreground">{title}</p>
@@ -338,7 +338,7 @@ export function SidePanelShowcase() {
           <ul className="grid gap-2 sm:grid-cols-2">
             {[
               t("role=\"dialog\" with aria-modal, aria-labelledby (title) and aria-describedby (description).", "role=\"dialog\" com aria-modal, aria-labelledby (título) e aria-describedby (descrição)."),
-              t("Close button with an explicit accessible name (“Fechar formulário de contato”).", "Botão fechar com nome acessível explícito (“Fechar formulário de contato”)."),
+              t("Close button with an explicit accessible name (“Close contact form”).", "Botão fechar com nome acessível explícito (“Fechar formulário de contato”)."),
               t("Focus trapped while open and returned to the trigger on close.", "Foco preso enquanto aberto e devolvido ao gatilho ao fechar."),
               t("Esc closes; Tab and Shift+Tab cycle inside.", "Esc fecha; Tab e Shift+Tab circulam por dentro."),
               t("Every field has a visible or aria label; placeholders are not the only label.", "Todo campo tem rótulo visível ou aria; o placeholder não é o único rótulo."),

@@ -14,6 +14,101 @@ import { cn } from "./utils";
 
 export type UploadStatus = "pendente" | "enviando" | "concluido" | "erro";
 
+/* ── Textos ──
+   Português por padrão (o produto). Para outro idioma, envolva os componentes em <UploadTextsProvider textos={…}>. */
+export type UploadTexts = {
+  arrasteOu: string;
+  escolhaArquivos: string;
+  escolhaArquivo: string;
+  solteParaEnviar: string;
+  ate: (tamanho: string) => string;
+  maximo: (n: number) => string;
+  tirarFoto: string;
+  enviando: (pct: number) => string;
+  concluido: string;
+  falhaNoEnvio: string;
+  aguardando: string;
+  envioDe: (nome: string) => string;
+  tentarDeNovo: (nome: string) => string;
+  remover: (nome: string) => string;
+  trocarRotulo: (rotulo: string) => string;
+  adicionarRotulo: (rotulo: string) => string;
+  trocar: string;
+  removerBotao: string;
+  imagem: string;
+  capa: string;
+  definirCapa: string;
+  removerFoto: string;
+  adicionarFotos: string;
+  erroQuantidade: (max: number) => string;
+  erroFormato: (nome: string) => string;
+  erroTamanho: (nome: string, tamanho: string) => string;
+};
+
+export const uploadTextosPt: UploadTexts = {
+  arrasteOu: "Arraste e solte ou",
+  escolhaArquivos: "escolha arquivos",
+  escolhaArquivo: "escolha um arquivo",
+  solteParaEnviar: "Solte para enviar",
+  ate: (t) => `até ${t}`,
+  maximo: (n) => `máx. ${n}`,
+  tirarFoto: "Tirar foto",
+  enviando: (p) => `Enviando… ${p}%`,
+  concluido: "Concluído",
+  falhaNoEnvio: "Falha no envio",
+  aguardando: "Aguardando",
+  envioDe: (n) => `Envio de ${n}`,
+  tentarDeNovo: (n) => `Tentar de novo: ${n}`,
+  remover: (n) => `Remover ${n}`,
+  trocarRotulo: (r) => `Trocar ${r.toLowerCase()}`,
+  adicionarRotulo: (r) => `Adicionar ${r.toLowerCase()}`,
+  trocar: "Trocar",
+  removerBotao: "Remover",
+  imagem: "Imagem",
+  capa: "Capa",
+  definirCapa: "Definir como capa",
+  removerFoto: "Remover foto",
+  adicionarFotos: "Adicionar fotos",
+  erroQuantidade: (m) => `Envie no máximo ${m} ${m === 1 ? "arquivo" : "arquivos"}.`,
+  erroFormato: (n) => `“${n}” não é um formato aceito.`,
+  erroTamanho: (n, t) => `“${n}” passa de ${t}.`,
+};
+
+export const uploadTextosEn: UploadTexts = {
+  arrasteOu: "Drag and drop or",
+  escolhaArquivos: "choose files",
+  escolhaArquivo: "choose a file",
+  solteParaEnviar: "Drop to upload",
+  ate: (t) => `up to ${t}`,
+  maximo: (n) => `max. ${n}`,
+  tirarFoto: "Take a photo",
+  enviando: (p) => `Uploading… ${p}%`,
+  concluido: "Done",
+  falhaNoEnvio: "Upload failed",
+  aguardando: "Waiting",
+  envioDe: (n) => `Uploading ${n}`,
+  tentarDeNovo: (n) => `Try again: ${n}`,
+  remover: (n) => `Remove ${n}`,
+  trocarRotulo: (r) => `Replace ${r.toLowerCase()}`,
+  adicionarRotulo: (r) => `Add ${r.toLowerCase()}`,
+  trocar: "Replace",
+  removerBotao: "Remove",
+  imagem: "Image",
+  capa: "Cover",
+  definirCapa: "Set as cover",
+  removerFoto: "Remove photo",
+  adicionarFotos: "Add photos",
+  erroQuantidade: (m) => `Upload at most ${m} ${m === 1 ? "file" : "files"}.`,
+  erroFormato: (n) => `“${n}” is not an accepted format.`,
+  erroTamanho: (n, t) => `“${n}” is larger than ${t}.`,
+};
+
+const UploadTextsContext = React.createContext<UploadTexts>(uploadTextosPt);
+export function UploadTextsProvider({ textos, children }: { textos: UploadTexts; children: React.ReactNode }) {
+  return <UploadTextsContext.Provider value={textos}>{children}</UploadTextsContext.Provider>;
+}
+export const useUploadTexts = () => React.useContext(UploadTextsContext);
+
 export type UploadFile = {
   id: string;
   file?: File;
@@ -52,19 +147,19 @@ function KindIcon({ type, name, className }: { type: string; name?: string; clas
   return <Icon className={className} aria-hidden />;
 }
 
-/** Valida tipo, tamanho e quantidade. Retorna a mensagem de erro em português ou null. */
+/** Valida tipo, tamanho e quantidade. Retorna a mensagem de erro (português por padrão; passe `textos` para outro idioma) ou null. */
 export function validateFiles(
   files: File[],
-  opts: { accept?: string[]; maxSize?: number; maxFiles?: number; current?: number },
+  opts: { accept?: string[]; maxSize?: number; maxFiles?: number; current?: number; textos?: UploadTexts },
 ): string | null {
-  const { accept, maxSize, maxFiles, current = 0 } = opts;
-  if (maxFiles && current + files.length > maxFiles) return `Envie no máximo ${maxFiles} ${maxFiles === 1 ? "arquivo" : "arquivos"}.`;
+  const { accept, maxSize, maxFiles, current = 0, textos = uploadTextosPt } = opts;
+  if (maxFiles && current + files.length > maxFiles) return textos.erroQuantidade(maxFiles);
   for (const f of files) {
     if (accept && accept.length) {
       const ok = accept.some(a => (a.endsWith("/*") ? f.type.startsWith(a.slice(0, -1)) : a.startsWith(".") ? f.name.toLowerCase().endsWith(a.toLowerCase()) : f.type === a));
-      if (!ok) return `“${f.name}” não é um formato aceito.`;
+      if (!ok) return textos.erroFormato(f.name);
     }
-    if (maxSize && f.size > maxSize) return `“${f.name}” passa de ${formatBytes(maxSize)}.`;
+    if (maxSize && f.size > maxSize) return textos.erroTamanho(f.name, formatBytes(maxSize));
   }
   return null;
 }
@@ -98,19 +193,20 @@ export function UploadDropzone({
   const captureRef = React.useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = React.useState(false);
   const id = React.useId();
+  const tx = useUploadTexts();
 
   const handle = (list: FileList | null) => {
     if (!list || disabled) return;
     const files = Array.from(list);
-    const msg = validateFiles(files, { accept, maxSize, maxFiles });
+    const msg = validateFiles(files, { accept, maxSize, maxFiles, textos: tx });
     if (msg) { onError?.(msg); return; }
     onFiles(multiple ? files : files.slice(0, 1));
   };
 
   const hint = [
     accept?.length ? accept.map(a => (a.endsWith("/*") ? a.replace("/*", "") : a.replace(".", "").toUpperCase())).join(", ") : null,
-    maxSize ? `até ${formatBytes(maxSize)}` : null,
-    maxFiles && multiple ? `máx. ${maxFiles}` : null,
+    maxSize ? tx.ate(formatBytes(maxSize)) : null,
+    maxFiles && multiple ? tx.maximo(maxFiles) : null,
   ].filter(Boolean).join(" · ");
 
   const pad = size === "lg" ? "p-10 sm:p-14" : size === "compact" ? "p-4" : "p-8";
@@ -146,7 +242,7 @@ export function UploadDropzone({
         </span>
         <div className="min-w-0">
           <p className={cn("font-semibold text-foreground", size === "compact" ? "text-[0.875rem]" : "text-[1rem]")}>
-            {title ?? (dragging ? "Solte para enviar" : <>Arraste e solte ou <span className={cn(primaryText, "underline-offset-4 group-hover:underline")}>escolha {multiple ? "arquivos" : "um arquivo"}</span></>)}
+            {title ?? (dragging ? tx.solteParaEnviar : <>{tx.arrasteOu} <span className={cn(primaryText, "underline-offset-4 group-hover:underline")}>{multiple ? tx.escolhaArquivos : tx.escolhaArquivo}</span></>)}
           </p>
           {(description || hint) && (
             <p id={`${id}-hint`} className="mt-1 text-[0.8125rem] text-muted-foreground">{description ?? hint}</p>
@@ -158,7 +254,7 @@ export function UploadDropzone({
             onClick={e => { e.stopPropagation(); captureRef.current?.click(); }}
             className="mt-1 inline-flex h-9 items-center gap-2 rounded-full border border-border bg-background px-4 text-[0.8125rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <Camera className="h-4 w-4" aria-hidden /> {actionLabel ?? "Tirar foto"}
+            <Camera className="h-4 w-4" aria-hidden /> {actionLabel ?? tx.tirarFoto}
           </button>
         )}
         <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} multiple={multiple} accept={accept?.join(",")} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />
@@ -177,8 +273,9 @@ export function UploadDropzone({
 export function UploadItem({
   item, onRemove, onRetry, className,
 }: { item: UploadFile; onRemove?: (id: string) => void; onRetry?: (id: string) => void; className?: string }) {
+  const tx = useUploadTexts();
   const isImg = fileKind(item.type, item.name) === "image" && item.url;
-  const statusLabel = item.status === "enviando" ? `Enviando… ${Math.round(item.progress ?? 0)}%` : item.status === "concluido" ? "Concluído" : item.status === "erro" ? (item.error ?? "Falha no envio") : "Aguardando";
+  const statusLabel = item.status === "enviando" ? tx.enviando(Math.round(item.progress ?? 0)) : item.status === "concluido" ? tx.concluido : item.status === "erro" ? (item.error ?? tx.falhaNoEnvio) : tx.aguardando;
   return (
     <li className={cn("flex items-center gap-3 rounded-[14px] border bg-card p-3 transition-colors", item.status === "erro" ? "border-error/50" : "border-border", className)}>
       <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[10px] bg-muted">
@@ -191,7 +288,7 @@ export function UploadItem({
         </div>
         <div className="mt-1.5 flex items-center gap-2">
           {item.status === "enviando" && (
-            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(item.progress ?? 0)} aria-label={`Envio de ${item.name}`}>
+            <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(item.progress ?? 0)} aria-label={tx.envioDe(item.name)}>
               <div className="h-full rounded-full bg-primary transition-[width] duration-200" style={{ width: `${item.progress ?? 0}%` }} />
             </div>
           )}
@@ -206,10 +303,10 @@ export function UploadItem({
       </div>
       <div className="flex shrink-0 items-center gap-1">
         {item.status === "erro" && onRetry && (
-          <button type="button" onClick={() => onRetry(item.id)} aria-label={`Tentar de novo: ${item.name}`} className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><RotateCcw className="h-4 w-4" aria-hidden /></button>
+          <button type="button" onClick={() => onRetry(item.id)} aria-label={tx.tentarDeNovo(item.name)} className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><RotateCcw className="h-4 w-4" aria-hidden /></button>
         )}
         {onRemove && (
-          <button type="button" onClick={() => onRemove(item.id)} aria-label={`Remover ${item.name}`} className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><X className="h-4 w-4" aria-hidden /></button>
+          <button type="button" onClick={() => onRemove(item.id)} aria-label={tx.remover(item.name)} className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><X className="h-4 w-4" aria-hidden /></button>
         )}
       </div>
     </li>
@@ -223,7 +320,7 @@ export function UploadList({ items, onRemove, onRetry, className }: { items: Upl
 
 /* ── Imagem única com prévia ── */
 export function ImageUpload({
-  value, onChange, shape = "square", size = 120, label = "Imagem", accept = ["image/*"], maxSize, onError, className, capture,
+  value, onChange, shape = "square", size = 120, label: labelProp, accept = ["image/*"], maxSize, onError, className, capture,
 }: {
   value?: string | null;
   onChange: (file: File | null, url: string | null) => void;
@@ -238,10 +335,12 @@ export function ImageUpload({
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = React.useState(false);
+  const tx = useUploadTexts();
+  const label = labelProp ?? tx.imagem;
   const pick = (list: FileList | null) => {
     if (!list?.length) return;
     const f = list[0];
-    const msg = validateFiles([f], { accept, maxSize });
+    const msg = validateFiles([f], { accept, maxSize, textos: tx });
     if (msg) { onError?.(msg); return; }
     onChange(f, URL.createObjectURL(f));
   };
@@ -249,7 +348,7 @@ export function ImageUpload({
   return (
     <div className={cn("inline-flex flex-col items-start gap-2", shape === "wide" && "w-full", className)}>
       <div
-        role="button" tabIndex={0} aria-label={value ? `Trocar ${label.toLowerCase()}` : `Adicionar ${label.toLowerCase()}`}
+        role="button" tabIndex={0} aria-label={value ? tx.trocarRotulo(label) : tx.adicionarRotulo(label)}
         onClick={() => inputRef.current?.click()}
         onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inputRef.current?.click(); } }}
         onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
@@ -266,21 +365,21 @@ export function ImageUpload({
           <>
             <img src={value} alt={label} className="h-full w-full object-cover" />
             <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-all group-hover:bg-foreground/45 group-hover:opacity-100 group-focus-visible:bg-foreground/45 group-focus-visible:opacity-100">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[0.75rem] font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> Trocar</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[0.75rem] font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> {tx.trocar}</span>
             </span>
           </>
         ) : (
           <span className="flex flex-col items-center gap-1.5 px-3 text-center">
             {capture ? <Camera className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden /> : <ImagePlus className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden />}
             <span className="text-[0.75rem] font-medium text-foreground">{label}</span>
-            {maxSize && <span className="text-[0.6875rem]">até {formatBytes(maxSize)}</span>}
+            {maxSize && <span className="text-[0.6875rem]">{tx.ate(formatBytes(maxSize))}</span>}
           </span>
         )}
         <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} accept={accept.join(",")} capture={capture} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
       </div>
       {value && (
         <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 text-[0.75rem] font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
-          <Trash2 className="h-3.5 w-3.5" aria-hidden /> Remover
+          <Trash2 className="h-3.5 w-3.5" aria-hidden /> {tx.removerBotao}
         </button>
       )}
     </div>
@@ -291,7 +390,7 @@ export function ImageUpload({
 export type GalleryImage = { id: string; url: string; name?: string; status?: UploadStatus; progress?: number };
 
 export function ImageGrid({
-  images, onAdd, onRemove, onSetCover, coverId, max = 8, accept = ["image/*"], maxSize, onError, className, addLabel = "Adicionar fotos",
+  images, onAdd, onRemove, onSetCover, coverId, max = 8, accept = ["image/*"], maxSize, onError, className, addLabel: addLabelProp,
 }: {
   images: GalleryImage[];
   onAdd: (files: File[]) => void;
@@ -306,10 +405,12 @@ export function ImageGrid({
   addLabel?: string;
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const tx = useUploadTexts();
+  const addLabel = addLabelProp ?? tx.adicionarFotos;
   const pick = (list: FileList | null) => {
     if (!list?.length) return;
     const files = Array.from(list);
-    const msg = validateFiles(files, { accept, maxSize, maxFiles: max, current: images.length });
+    const msg = validateFiles(files, { accept, maxSize, maxFiles: max, current: images.length, textos: tx });
     if (msg) { onError?.(msg); return; }
     onAdd(files);
   };
@@ -323,15 +424,15 @@ export function ImageGrid({
             <li key={img.id} className="group relative aspect-square overflow-hidden rounded-[14px] border border-border bg-muted">
               <img src={img.url} alt={img.name ?? ""} className="h-full w-full object-cover" />
               {img.status === "enviando" && (
-                <span className="absolute inset-0 flex items-end bg-foreground/35 p-2" aria-label={`Enviando ${Math.round(img.progress ?? 0)}%`}>
+                <span className="absolute inset-0 flex items-end bg-foreground/35 p-2" aria-label={tx.enviando(Math.round(img.progress ?? 0))}>
                   <span className="h-1.5 w-full overflow-hidden rounded-full bg-white/40"><span className="block h-full rounded-full bg-primary transition-[width]" style={{ width: `${img.progress ?? 0}%` }} /></span>
                 </span>
               )}
               {img.status === "erro" && <span className="absolute inset-0 flex items-center justify-center bg-error/70 text-white"><AlertCircle className="h-6 w-6" aria-hidden /></span>}
-              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary" aria-hidden /> Capa</span>}
+              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary" aria-hidden /> {tx.capa}</span>}
               <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label="Definir como capa" className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
-                {onRemove && <button type="button" onClick={() => onRemove(img.id)} aria-label="Remover foto" className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Trash2 className="h-3.5 w-3.5" aria-hidden /></button>}
+                {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label={tx.definirCapa} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
+                {onRemove && <button type="button" onClick={() => onRemove(img.id)} aria-label={tx.removerFoto} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Trash2 className="h-3.5 w-3.5" aria-hidden /></button>}
               </span>
             </li>
           );

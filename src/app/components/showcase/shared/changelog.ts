@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "English review", pt: "Revisão do inglês" },
+    desc: { en: "Texts that showed in Portuguese in English mode are now in English: the upload components (drop area, file list, single image and gallery, including validation and status messages), the Heading examples in Typography, the section seal description, the side panel rules and the glass card contrast numbers.", pt: "Textos que apareciam em português no modo inglês agora estão em inglês: componentes de upload (área de soltar, lista de arquivos, imagem única e galeria, incluindo mensagens de validação e de estado), exemplos do Heading em Tipografia, descrição do selo de seção, regras do painel lateral e números de contraste do card de vidro." },
+    page: "upload", anchor: "upload-dropzone",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Password field with confirmation", pt: "Campo de senha com confirmação" },
     desc: { en: "Password and confirmation with show/hide, strength in four bars with a label, hints that get a green check as each requirement is met, and a match message. Under Components › Buttons › Password.", pt: "Senha e confirmação com exibir/ocultar, força da senha em quatro barras com rótulo, dicas de preenchimento que ganham check verde conforme os requisitos são atendidos e aviso de coincidência. Em Componentes › Botões › Senha." },
     page: "buttons", anchor: "password",
