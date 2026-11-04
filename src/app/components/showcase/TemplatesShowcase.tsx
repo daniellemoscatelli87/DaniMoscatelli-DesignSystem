@@ -12,7 +12,7 @@ import {
   Moon, Sun, ChevronDown, Package,
   Phone, MapPin, MessageSquare, Send, AtSign,
   Globe, Sparkles, Layers, ArrowRight, PlayCircle,
-  ShieldCheck, Rocket, BarChart, Layout,
+  ShieldCheck, Rocket, BarChart, Layout, Minus,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart as ReBarChart, Bar,
@@ -20,6 +20,7 @@ import {
   ResponsiveContainer, Tooltip as ReTooltip,
 } from "recharts";
 import { useI18n } from "../../i18n";
+import { SeloSecao } from "../ui/selo-secao";
 
 type L = { en: string; pt: string };
 
@@ -828,45 +829,50 @@ function InboxTemplate() {
 /* ─────────────────────────────────────────────
    6. Pricing / Plans Template
 ───────────────────────────────────────────── */
+const pricingFeatures = [
+  { en: "Searchable public storefront", pt: "Vitrine pública pesquisável" },
+  { en: "Product, variant and stock management", pt: "Gestão de produtos, variantes e estoque" },
+  { en: "Catalog import and updates", pt: "Importação e atualização do catálogo" },
+  { en: "Promotions and contact requests", pt: "Promoções e solicitações de contato" },
+  { en: "Findability tasks", pt: "Tarefas de encontrabilidade" },
+  { en: "Interest indicators per product", pt: "Indicadores de interesse por produto" },
+  { en: "Store discovery funnel", pt: "Funil de descoberta da loja" },
+  { en: "Performance-based recommendations", pt: "Recomendações baseadas no desempenho" },
+  { en: "Searches with no results and regional gaps", pt: "Buscas sem resultado e lacunas regionais" },
+  { en: "Market trends and comparisons", pt: "Tendências e comparativos de mercado" },
+];
+
 const plans = [
   {
-    name: "Starter",
-    price: "Free",
-    period: { en: "", pt: "" },
-    desc: { en: "For freelancers and personal projects.", pt: "Para freelancers e projetos pessoais." },
-    features: [
-      { en: "3 projects", pt: "3 projetos" }, { en: "2 users", pt: "2 usuários" },
-      { en: "1GB storage", pt: "1GB de armazenamento" }, { en: "Email support", pt: "Suporte por email" },
-    ],
-    cta: { en: "Get Started", pt: "Começar" },
+    id: "basico",
+    seal: { en: "Start being found", pt: "Comece a ser encontrado" },
+    name: { en: "Basic", pt: "Básico" },
+    price: 79,
+    forWhom: { en: "For stores and brands that want to expand their local presence.", pt: "Para lojas e marcas que desejam ampliar a presença local." },
+    desc: { en: "Your searchable storefront, organized products and more ways to be contacted.", pt: "Sua vitrine pesquisável, produtos organizados e mais possibilidades de contato." },
+    included: 5,
     highlight: false,
     icon: Package,
   },
   {
-    name: "Pro",
-    price: "$49",
-    period: { en: "/month", pt: "/mês" },
-    desc: { en: "For growing teams.", pt: "Para equipes em crescimento." },
-    features: [
-      { en: "Unlimited projects", pt: "Projetos ilimitados" }, { en: "10 users", pt: "10 usuários" },
-      { en: "50GB storage", pt: "50GB de armazenamento" }, { en: "Priority support", pt: "Suporte prioritário" },
-      { en: "Advanced analytics", pt: "Análises avançadas" },
-    ],
-    cta: { en: "Upgrade to Pro", pt: "Fazer upgrade para Pro" },
+    id: "intermediario",
+    seal: { en: "Know your performance", pt: "Conheça seu desempenho" },
+    name: { en: "Intermediate", pt: "Intermediário" },
+    price: 149,
+    forWhom: { en: "For businesses that want to understand how people find their products.", pt: "Para negócios que querem entender como o público encontra seus produtos." },
+    desc: { en: "Everything in Basic, plus interest and performance analysis and recommendations for your store.", pt: "Todos os recursos do Básico, com análise de interesse, desempenho e recomendações para a sua loja." },
+    included: 8,
     highlight: true,
     icon: Zap,
   },
   {
-    name: "Enterprise",
-    price: "$199",
-    period: { en: "/month", pt: "/mês" },
-    desc: { en: "For large companies.", pt: "Para grandes empresas." },
-    features: [
-      { en: "Everything in Pro", pt: "Tudo do Pro" }, { en: "Unlimited users", pt: "Usuários ilimitados" },
-      { en: "500GB storage", pt: "500GB de armazenamento" }, { en: "99.99% SLA", pt: "SLA de 99,99%" },
-      { en: "Dedicated manager", pt: "Gerente dedicado" },
-    ],
-    cta: { en: "Contact Sales", pt: "Falar com vendas" },
+    id: "premium",
+    seal: { en: "Anticipate opportunities", pt: "Antecipe oportunidades" },
+    name: { en: "Premium", pt: "Premium" },
+    price: 299,
+    forWhom: { en: "For brands that plan their assortment and growth with intelligence.", pt: "Para marcas que planejam sortimento e crescimento com inteligência." },
+    desc: { en: "All the store's intelligence, with an aggregated view of searches and of offer gaps in the local market.", pt: "Toda a inteligência da loja, com visão agregada das buscas e das lacunas de oferta do mercado local." },
+    included: 10,
     highlight: false,
     icon: Building2,
   },
@@ -879,15 +885,19 @@ function PricingTemplate() {
   return (
     <TemplateFrame>
       <div className="bg-background min-h-[480px] p-6">
-        <div className="text-center mb-6">
+        <div className="text-center mb-8">
           <h2 className="text-[1.25rem] font-bold text-foreground mb-1">{t("Plans & Pricing", "Planos e preços")}</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Start for free. Scale as you grow.", "Comece grátis. Escale conforme você cresce.")}</p>
+          <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Choose the plan that fits your store. Change whenever you need.", "Escolha o plano que combina com a sua loja. Troque quando precisar.")}</p>
           {/* Toggle */}
           <div className="inline-flex items-center gap-3">
             <span className={`text-[0.75rem] font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>{t("Monthly", "Mensal")}</span>
             <button
+              type="button"
+              role="switch"
+              aria-checked={annual}
+              aria-label={t("Yearly billing", "Cobrança anual")}
               onClick={() => setAnnual(v => !v)}
-              className={`w-10 h-5.5 rounded-full transition-colors relative flex items-center ${annual ? "bg-primary" : "bg-muted-foreground/30"}`}
+              className={`w-10 rounded-full transition-colors relative flex items-center ${annual ? "bg-primary" : "bg-muted-foreground/30"}`}
               style={{ height: "22px" }}
             >
               <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${annual ? "left-[22px]" : "left-0.5"}`} />
@@ -899,54 +909,72 @@ function PricingTemplate() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {plans.map(plan => {
             const Icon = plan.icon;
-            const price = annual && plan.price !== "Free"
-              ? `$${Math.round(parseInt(plan.price.replace("$", "")) * 0.8)}`
-              : plan.price === "Free" ? t("Free", "Grátis") : plan.price;
+            const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
+            const forWhom = bi(plan.forWhom);
             return (
               <div
-                key={plan.name}
-                className={`relative rounded-[14px] border p-4 flex flex-col transition-all
-                  ${plan.highlight
-                    ? "border-primary/40 bg-primary/5 shadow-md"
-                    : "border-border bg-card"
-                  }`}
+                key={plan.id}
+                className={`relative rounded-[16px] bg-card p-5 flex flex-col
+                  ${plan.highlight ? "border-2 border-primary" : "border border-border"}`}
                 style={{ boxShadow: plan.highlight ? "var(--shadow-md)" : "var(--shadow-xs)" }}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-primary text-primary-foreground text-[0.5625rem] font-bold whitespace-nowrap">
-                    {t("Most Popular", "Mais popular")}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-sm bg-primary text-primary-foreground text-[0.6875rem] font-bold whitespace-nowrap">
+                    {t("Recommended", "Recomendado")}
                   </div>
                 )}
-                <div className="flex items-center gap-2 mb-3">
-                  <div className={`h-8 w-8 rounded-[9px] flex items-center justify-center ${plan.highlight ? "bg-primary/15" : "bg-muted"}`}>
-                    <Icon className={`h-4 w-4 ${plan.highlight ? "text-primary" : "text-muted-foreground"}`} />
+
+                <SeloSecao size="sm" className="mb-3 tracking-[0.12em]">{bi(plan.seal)}</SeloSecao>
+
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-8 w-8 rounded-[9px] flex items-center justify-center bg-[var(--primary-muted)] shrink-0">
+                    <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))]" />
                   </div>
-                  <div>
-                    <div className="text-[0.8125rem] font-bold text-foreground">{plan.name}</div>
-                    <div className="text-[0.5625rem] text-muted-foreground">{bi(plan.desc)}</div>
-                  </div>
+                  <h3 className="text-[1.375rem] font-bold leading-tight text-[var(--primary-text,var(--primary))]">{bi(plan.name)}</h3>
                 </div>
-                <div className="mb-4">
-                  <span className="text-[1.5rem] font-extrabold text-foreground">{price}</span>
-                  <span className="text-[0.75rem] text-muted-foreground">{bi(plan.period)}</span>
+
+                <div className="mb-4 flex items-baseline gap-1">
+                  <span className="text-[1.875rem] font-extrabold leading-none text-[var(--primary-text,var(--primary))]">R$ {valor}</span>
+                  <span className="text-[0.8125rem] text-muted-foreground">{t("/ month", "/ mês")}</span>
                 </div>
-                <div className="space-y-1.5 flex-1 mb-4">
-                  {plan.features.map(f => (
-                    <div key={f.en} className="flex items-center gap-2 text-[0.6875rem] text-muted-foreground">
-                      <CheckCircle className={`h-3 w-3 shrink-0 ${plan.highlight ? "text-primary" : "text-success"}`} />
-                      {bi(f)}
-                    </div>
-                  ))}
+
+                <div className="mb-4 flex gap-2.5 rounded-[12px] border border-primary/15 bg-[var(--primary-muted)] px-3 py-2.5">
+                  <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" />
+                  <p className="line-clamp-2 text-[0.8125rem] leading-snug text-foreground" title={forWhom}>
+                    <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
+                  </p>
                 </div>
-                <button className={`w-full h-8 rounded-[8px] text-[0.75rem] font-semibold transition-all
-                  ${plan.highlight
-                    ? "bg-primary text-primary-foreground hover:opacity-90"
-                    : "border border-border bg-card text-foreground hover:bg-accent"
-                  }`}>
-                  {bi(plan.cta)}
+
+                <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{bi(plan.desc)}</p>
+
+                <div className="my-4 border-t border-border" />
+
+                <ul className="space-y-2.5 flex-1 mb-5">
+                  {pricingFeatures.map((f, i) => {
+                    const inclui = i < plan.included;
+                    return (
+                      <li key={f.en} className={`flex items-start gap-2.5 text-[0.8125rem] leading-snug ${inclui ? "text-foreground" : "text-muted-foreground"}`}>
+                        {inclui
+                          ? <Check aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--primary-text,var(--primary))]" />
+                          : <Minus aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
+                        <span>
+                          <span className="sr-only">{inclui ? t("Included: ", "Incluído: ") : t("Not included: ", "Não incluído: ")}</span>
+                          {bi(f)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <button
+                  type="button"
+                  aria-label={`${t("Select", "Selecionar")} ${bi(plan.name)}`}
+                  className="w-full h-10 rounded-[10px] border border-primary bg-card text-[0.875rem] font-semibold text-[var(--primary-text,var(--primary))] transition-colors hover:bg-[var(--primary-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                >
+                  {t("Select", "Selecionar")}
                 </button>
               </div>
             );

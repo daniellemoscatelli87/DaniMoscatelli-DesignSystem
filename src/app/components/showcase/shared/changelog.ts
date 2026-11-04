@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Pricing template", pt: "Template de preços" },
+    desc: { en: "Plan cards now have a section seal above the name, name and price in the primary colour with \"/ month\", a \"Who it's for\" box limited to two lines, a description, a divider, included items with a check and not-included items with a dash, a \"Recommended\" tag on the highlighted plan and an outlined \"Select\" button. Equal heights; one column on phones. Under Templates › Pricing.", pt: "Os cards de plano ganharam selo de seção acima do nome, nome e preço na cor primária com \"/ mês\", caixa \"Para quem\" com no máximo duas linhas, descrição, divisor, itens incluídos com check e não incluídos com traço, etiqueta \"Recomendado\" no plano em destaque e botão \"Selecionar\" em contorno. Mesma altura; uma coluna no celular. Em Templates › Preços." },
+    page: "templates", anchor: "template-pricing",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "English review", pt: "Revisão do inglês" },
     desc: { en: "Texts that showed in Portuguese in English mode are now in English: the upload components (drop area, file list, single image and gallery, including validation and status messages), the Heading examples in Typography, the section seal description, the side panel rules and the glass card contrast numbers.", pt: "Textos que apareciam em português no modo inglês agora estão em inglês: componentes de upload (área de soltar, lista de arquivos, imagem única e galeria, incluindo mensagens de validação e de estado), exemplos do Heading em Tipografia, descrição do selo de seção, regras do painel lateral e números de contraste do card de vidro." },
     page: "upload", anchor: "upload-dropzone",
