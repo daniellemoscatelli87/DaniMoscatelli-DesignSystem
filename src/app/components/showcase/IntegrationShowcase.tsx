@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import {
-  Copy, Check, Paintbrush, Code2, ChevronRight,
-  FolderOpen, Package, FileCode, Layers, RefreshCw,
-  CheckCircle2, Circle, ArrowRight, GitBranch, Figma,
-} from "lucide-react";
+import { Copy, Check, Paintbrush, Code2, ChevronRight, FolderOpen, Package, FileCode, Layers, RefreshCw, CheckCircle2, Circle, ArrowRight, GitBranch } from "lucide-react";
+import { Figma } from "../ui/icones-preservados";
 import { useI18n } from "../../i18n";
 
 /* ── helpers ── */
