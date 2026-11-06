@@ -846,7 +846,7 @@ const plans = [
     id: "basico",
     name: { en: "Visibility", pt: "Visibilidade" },
     price: 79,
-    forWhom: { en: "For stores and brands that want more local presence.", pt: "Para lojas e marcas que desejam ampliar a presença local." },
+    forWhom: { en: "Stores and brands that want to showcase their products and win more customers in their area.", pt: "Lojas e marcas que querem destacar seus produtos e conquistar mais clientes na região." },
     desc: { en: "Your searchable storefront, organized products and more ways to be contacted.", pt: "Sua vitrine pesquisável, produtos organizados e mais possibilidades de contato." },
     included: 5,
     highlight: false,
@@ -856,7 +856,7 @@ const plans = [
     id: "intermediario",
     name: { en: "Performance", pt: "Desempenho" },
     price: 149,
-    forWhom: { en: "For businesses that want to measure performance.", pt: "Para negócios que querem medir o desempenho." },
+    forWhom: { en: "Businesses that want to understand consumer interest and improve their results.", pt: "Negócios que desejam entender o interesse dos consumidores e melhorar seus resultados." },
     desc: { en: "Everything in the Visibility plan, plus interest and performance analysis and recommendations for your store.", pt: "Todos os recursos do plano Visibilidade, com análise de interesse, desempenho e recomendações para a sua loja." },
     included: 8,
     highlight: true,
@@ -866,7 +866,7 @@ const plans = [
     id: "premium",
     name: { en: "Opportunities", pt: "Oportunidades" },
     price: 299,
-    forWhom: { en: "For brands that plan assortment and growth.", pt: "Para marcas que planejam sortimento e crescimento." },
+    forWhom: { en: "Brands that want to identify market demand and discover growth opportunities.", pt: "Marcas que querem identificar demandas do mercado e descobrir oportunidades de crescimento." },
     desc: { en: "All the store's intelligence, with an aggregated view of searches and of offer gaps in the local market.", pt: "Toda a inteligência da loja, com visão agregada das buscas e das lacunas de oferta do mercado local." },
     included: 10,
     highlight: false,
@@ -927,21 +927,21 @@ function PricingTemplate() {
                 )}
 
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="h-8 w-8 rounded-[9px] flex items-center justify-center bg-[var(--primary-muted)] shrink-0">
-                    <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))]" />
+                  <div className="h-8 w-8 rounded-[9px] flex items-center justify-center bg-[var(--primary-muted)] dark:bg-muted shrink-0">
+                    <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))] dark:text-muted-foreground" />
                   </div>
-                  <h3 className="text-[1.375rem] font-bold leading-tight text-[var(--primary-text,var(--primary))]">{bi(plan.name)}</h3>
+                  <h3 className="text-[1.375rem] font-bold leading-tight text-[var(--primary-text,var(--primary))] dark:text-foreground">{bi(plan.name)}</h3>
                 </div>
 
                 <div className="mb-4 flex items-baseline gap-1">
-                  <span className="text-[1.875rem] font-extrabold leading-none text-[var(--primary-text,var(--primary))]">R$ {valor}</span>
+                  <span className="text-[1.875rem] font-extrabold leading-none text-[var(--primary-text,var(--primary))] dark:text-foreground">R$ {valor}</span>
                   <span className="text-[0.8125rem] text-muted-foreground">{t("/ month", "/ mês")}</span>
                 </div>
 
-                {/* "Para quem": no máximo 3 linhas, sem reticências; altura fixa de 3 linhas em todos os cards */}
-                <div className="mb-4 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] px-2.5 sm:px-3 py-2.5">
+                {/* "Para quem": no máximo 4 linhas, sem reticências; altura fixa de 4 linhas em todos os cards. No escuro, caixa neutra e só a lâmpada em amarelo */}
+                <div className="mb-4 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
                   <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-                  <p className="h-[4.125em] text-[0.8125rem] leading-snug text-foreground">
+                  <p className="h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
                 </div>
