@@ -20,7 +20,6 @@ import {
   ResponsiveContainer, Tooltip as ReTooltip,
 } from "recharts";
 import { useI18n } from "../../i18n";
-import { SeloSecao } from "../ui/selo-secao";
 
 type L = { en: string; pt: string };
 
@@ -845,8 +844,7 @@ const pricingFeatures = [
 const plans = [
   {
     id: "basico",
-    seal: { en: "Start being found", pt: "Comece a ser encontrado" },
-    name: { en: "Basic", pt: "Básico" },
+    name: { en: "Visibility", pt: "Visibilidade" },
     price: 79,
     forWhom: { en: "For stores and brands that want to expand their local presence.", pt: "Para lojas e marcas que desejam ampliar a presença local." },
     desc: { en: "Your searchable storefront, organized products and more ways to be contacted.", pt: "Sua vitrine pesquisável, produtos organizados e mais possibilidades de contato." },
@@ -856,19 +854,17 @@ const plans = [
   },
   {
     id: "intermediario",
-    seal: { en: "Know your performance", pt: "Conheça seu desempenho" },
-    name: { en: "Intermediate", pt: "Intermediário" },
+    name: { en: "Performance", pt: "Desempenho" },
     price: 149,
     forWhom: { en: "For businesses that want to understand how people find their products.", pt: "Para negócios que querem entender como o público encontra seus produtos." },
-    desc: { en: "Everything in Basic, plus interest and performance analysis and recommendations for your store.", pt: "Todos os recursos do Básico, com análise de interesse, desempenho e recomendações para a sua loja." },
+    desc: { en: "Everything in the Visibility plan, plus interest and performance analysis and recommendations for your store.", pt: "Todos os recursos do plano Visibilidade, com análise de interesse, desempenho e recomendações para a sua loja." },
     included: 8,
     highlight: true,
     icon: Zap,
   },
   {
     id: "premium",
-    seal: { en: "Anticipate opportunities", pt: "Antecipe oportunidades" },
-    name: { en: "Premium", pt: "Premium" },
+    name: { en: "Opportunities", pt: "Oportunidades" },
     price: 299,
     forWhom: { en: "For brands that plan their assortment and growth with intelligence.", pt: "Para marcas que planejam sortimento e crescimento com inteligência." },
     desc: { en: "All the store's intelligence, with an aggregated view of searches and of offer gaps in the local market.", pt: "Toda a inteligência da loja, com visão agregada das buscas e das lacunas de oferta do mercado local." },
@@ -881,6 +877,7 @@ const plans = [
 function PricingTemplate() {
   const { t, bi } = useI18n();
   const [annual, setAnnual] = useState(false);
+  const [selecionado, setSelecionado] = useState<string | null>(null);
 
   return (
     <TemplateFrame>
@@ -914,11 +911,13 @@ function PricingTemplate() {
             const Icon = plan.icon;
             const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
             const forWhom = bi(plan.forWhom);
+            const ativo = selecionado === plan.id;
             return (
               <div
                 key={plan.id}
-                className={`relative rounded-[16px] bg-card p-5 flex flex-col
-                  ${plan.highlight ? "border-2 border-primary" : "border border-border"}`}
+                className={`relative rounded-[16px] bg-card p-5 flex flex-col transition-shadow
+                  ${plan.highlight || ativo ? "border-2 border-primary" : "border border-border"}
+                  ${ativo ? "ring-4 ring-primary/20" : ""}`}
                 style={{ boxShadow: plan.highlight ? "var(--shadow-md)" : "var(--shadow-xs)" }}
               >
                 {plan.highlight && (
@@ -926,8 +925,6 @@ function PricingTemplate() {
                     {t("Recommended", "Recomendado")}
                   </div>
                 )}
-
-                <SeloSecao size="sm" className="mb-3 tracking-[0.12em]">{bi(plan.seal)}</SeloSecao>
 
                 <div className="flex items-center gap-2 mb-2">
                   <div className="h-8 w-8 rounded-[9px] flex items-center justify-center bg-[var(--primary-muted)] shrink-0">
@@ -971,10 +968,18 @@ function PricingTemplate() {
 
                 <button
                   type="button"
-                  aria-label={`${t("Select", "Selecionar")} ${bi(plan.name)}`}
-                  className="w-full h-10 rounded-[10px] border border-primary bg-card text-[0.875rem] font-semibold text-[var(--primary-text,var(--primary))] transition-colors hover:bg-[var(--primary-muted)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  aria-pressed={ativo}
+                  aria-label={ativo
+                    ? `${t("Plan selected", "Plano selecionado")}: ${bi(plan.name)}`
+                    : `${t("Select Plan", "Selecionar Plano")} ${bi(plan.name)}`}
+                  onClick={() => setSelecionado(plan.id)}
+                  className={`w-full h-10 rounded-[10px] border border-primary text-[0.875rem] font-semibold transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                    ${ativo
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)]"}`}
                 >
-                  {t("Select", "Selecionar")}
+                  {ativo && <Check aria-hidden className="h-4 w-4" />}
+                  {ativo ? t("Plan selected", "Plano selecionado") : t("Select Plan", "Selecionar Plano")}
                 </button>
               </div>
             );
