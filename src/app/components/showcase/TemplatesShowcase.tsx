@@ -12,7 +12,7 @@ import {
   Moon, Sun, ChevronDown, Package,
   Phone, MapPin, MessageSquare, Send, AtSign,
   Globe, Sparkles, Layers, ArrowRight, PlayCircle,
-  ShieldCheck, Rocket, BarChart, Layout, Minus,
+  ShieldCheck, Rocket, BarChart, Layout, Minus, Lightbulb,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart as ReBarChart, Bar,
@@ -856,7 +856,7 @@ const plans = [
     id: "intermediario",
     name: { en: "Performance", pt: "Desempenho" },
     price: 149,
-    forWhom: { en: "For businesses that want to understand how people find their products.", pt: "Para negócios que querem entender como o público encontra seus produtos." },
+    forWhom: { en: "For businesses that want to understand how people find them.", pt: "Para negócios que querem entender como o público os encontra." },
     desc: { en: "Everything in the Visibility plan, plus interest and performance analysis and recommendations for your store.", pt: "Todos os recursos do plano Visibilidade, com análise de interesse, desempenho e recomendações para a sua loja." },
     included: 8,
     highlight: true,
@@ -881,7 +881,7 @@ function PricingTemplate() {
 
   return (
     <TemplateFrame>
-      <div className="bg-background min-h-[480px] p-6">
+      <div className="bg-background min-h-[480px] p-4 sm:p-6">
         <div className="text-center mb-8">
           <h2 className="text-[1.25rem] font-bold text-foreground mb-1">{t("Plans & Pricing", "Planos e preços")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Choose the plan that fits your store. Change whenever you need.", "Escolha o plano que combina com a sua loja. Troque quando precisar.")}</p>
@@ -906,7 +906,7 @@ function PricingTemplate() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {plans.map(plan => {
             const Icon = plan.icon;
             const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
@@ -915,7 +915,7 @@ function PricingTemplate() {
             return (
               <div
                 key={plan.id}
-                className={`relative rounded-[16px] bg-card p-5 flex flex-col transition-shadow
+                className={`relative rounded-[16px] bg-card p-4 sm:p-5 flex flex-col transition-shadow
                   ${plan.highlight || ativo ? "border-2 border-primary" : "border border-border"}
                   ${ativo ? "ring-4 ring-primary/20" : ""}`}
                 style={{ boxShadow: plan.highlight ? "var(--shadow-md)" : "var(--shadow-xs)" }}
@@ -938,9 +938,10 @@ function PricingTemplate() {
                   <span className="text-[0.8125rem] text-muted-foreground">{t("/ month", "/ mês")}</span>
                 </div>
 
-                <div className="mb-4 flex gap-2.5 rounded-[12px] border border-primary/15 bg-[var(--primary-muted)] px-3 py-2.5">
-                  <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" />
-                  <p className="line-clamp-2 text-[0.8125rem] leading-snug text-foreground" title={forWhom}>
+                {/* "Para quem": no máximo 3 linhas, sem reticências; altura fixa de 3 linhas em todos os cards */}
+                <div className="mb-4 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] px-2.5 sm:px-3 py-2.5">
+                  <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+                  <p className="h-[4.125em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
                 </div>
