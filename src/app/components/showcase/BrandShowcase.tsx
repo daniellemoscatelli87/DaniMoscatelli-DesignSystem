@@ -726,10 +726,16 @@ export function BrandShowcase() {
               <span className="text-[0.6875rem] font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded">1×</span>
               <div className="h-px w-8 bg-primary/40" />
             </div>
+            {/* Versão de texto escuro no tema claro e de texto branco no tema escuro */}
             <ImageWithFallback
               src={logoHorizontalDark}
               alt={t("Logo with minimum clear space", "Logo com área de respiro mínima")}
-              className="h-16 w-auto object-contain"
+              className="h-16 w-auto object-contain dark:hidden"
+            />
+            <ImageWithFallback
+              src={logoHorizontalLight}
+              alt={t("Logo with minimum clear space", "Logo com área de respiro mínima")}
+              className="hidden h-16 w-auto object-contain dark:block"
             />
           </div>
         </div>
