@@ -35,7 +35,7 @@ import { UploadShowcase } from "./components/showcase/UploadShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
-  "Start": "Início",
+  "Start": "Comece aqui",
   "Brand": "Marca",
   "Foundation": "Fundamentos",
   "Concepts": "Conceitos",
