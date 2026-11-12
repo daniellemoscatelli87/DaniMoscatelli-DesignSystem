@@ -1,4 +1,5 @@
 import React from "react";
+import { rotuloVersao } from "../../versao";
 import {
   ArrowRight, BookOpen, Compass, Palette, Code2, Fingerprint, Layers, Coins,
   Component, Type, PenTool, SunMoon, Braces, ArrowLeftRight, FileCode2,
@@ -246,7 +247,7 @@ export function GetStartedShowcase({ onNavigate }: { onNavigate: Navigate }) {
       </PageSection>
 
       <p className="pt-6 border-t border-border text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-        {t("Version", "Versão")} 1.0 · 2024
+        {rotuloVersao(t)}
       </p>
     </div>
   );

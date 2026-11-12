@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { rotuloVersao } from "../../versao";
 import { CheckCircle, XCircle, Copy, Check, Download, Monitor, Tablet, Smartphone, Globe, Share2, Image as ImageIcon, UserCircle2, LayoutDashboard } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
@@ -617,7 +618,7 @@ export function BrandShowcase() {
             { sample: "Dani Moscatelli", size: "text-[2.5rem]", weight: "font-bold",     label: { en: "Display / Logotype", pt: "Display / Logotipo" },  tracking: "tracking-[-0.03em]" },
             { sample: "Experience Design Studio", size: "text-[1.5rem]", weight: "font-medium",  label: { en: "Tagline", pt: "Slogan" },  tracking: "tracking-[0.01em]", font: "font-['Space_Grotesk',_sans-serif]" },
             { sample: "Design System · Components · Patterns", size: "text-[1.125rem]", weight: "font-normal", label: { en: "Body / Descriptive", pt: "Corpo / Descritivo" }, tracking: "" },
-            { sample: "VERSION 1.0 · 2024", size: "text-[0.75rem]", weight: "font-semibold", label: { en: "Label / Caption", pt: "Rótulo / Legenda" }, tracking: "tracking-[0.12em]" },
+            { sample: rotuloVersao(t).toUpperCase(), size: "text-[0.75rem]", weight: "font-semibold", label: { en: "Label / Caption", pt: "Rótulo / Legenda" }, tracking: "tracking-[0.12em]" },
           ].map(({ sample, size, weight, label, tracking, font }: { sample: string; size: string; weight: string; label: { en: string; pt: string }; tracking: string; font?: string }, i, arr) => (
             <div
               key={label.en}

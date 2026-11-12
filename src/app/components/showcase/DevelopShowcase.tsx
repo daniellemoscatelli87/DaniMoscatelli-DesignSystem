@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { rotuloVersao } from "../../versao";
 import { Check, Copy, ArrowRight, Megaphone, Layers, Sparkles } from "lucide-react";
 import { useI18n, type Bi } from "../../i18n";
 import { Navigate, PageHeader, PageSection, useGo } from "./GetStartedShowcase";
@@ -319,7 +320,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
       </PageSection>
 
       <p className="pt-6 border-t border-border text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-        {t("Version", "Versão")} 1.0 · 2024
+        {rotuloVersao(t)}
       </p>
     </div>
   );

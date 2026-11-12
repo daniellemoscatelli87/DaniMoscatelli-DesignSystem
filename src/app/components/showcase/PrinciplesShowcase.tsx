@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { rotuloVersao } from "../../versao";
 import { useI18n, type Bi } from "../../i18n";
 import { PageHeader, SectionLabel, useGo, type Navigate, type Target } from "./GetStartedShowcase";
 
@@ -178,7 +179,7 @@ export function PrinciplesShowcase({ onNavigate }: { onNavigate: Navigate }) {
       </section>
 
       <p className="text-[0.75rem] text-muted-foreground uppercase tracking-[0.08em] pt-2">
-        {t("Version", "Versão")} 1.0 · 2024
+        {rotuloVersao(t)}
       </p>
     </div>
   );
