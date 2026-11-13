@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Pricing cards: collapsible features and optional “Who it's for”", pt: "Cards de preço: recursos recolhíveis e “Para quem” opcional" },
+    desc: { en: "The feature list starts collapsed, with a “Show plan features” button and the count (for example, 5 of 10). Opening or closing applies to every card, so they stay aligned; the button uses aria-expanded. The “Who it's for” box is optional: a plan without that text does not show it, and a switch in the demo shows the card with and without it.", pt: "A lista de recursos começa recolhida, com o botão “Ver recursos do plano” e a contagem (por exemplo, 5 de 10). Abrir ou fechar vale para todos os cards, que ficam sempre alinhados; o botão usa aria-expanded. O bloco “Para quem” é opcional: plano sem esse texto não mostra o bloco, e um interruptor na demonstração mostra o card com e sem ele." },
+    page: "templates", anchor: "template-pricing",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Pricing cards in the wobble card style", pt: "Cards de preço no estilo do card com wobble" },
     desc: { en: "The pricing template now borrows the wobble card's look: larger rounding, round icon, “Recommended” chip with a star, bold plan name, checks in tinted circles and a footer with price and action. It keeps the Monthly/Yearly switch, the “Who it's for” box, included and not-included features and the selected state. Columns now follow the available width, and the “Who it's for” box grows instead of overflowing when the card is too narrow.", pt: "O template de preços passou a usar o visual do card com wobble: cantos mais arredondados, ícone em círculo, selo “Recomendado” com estrela, nome do plano em destaque, checks em círculo colorido e rodapé com preço e ação. Continuam o seletor Mensal/Anual, o bloco “Para quem”, os recursos incluídos e não incluídos e o estado selecionado. As colunas agora seguem a largura disponível, e o bloco “Para quem” cresce em vez de vazar quando o card fica estreito demais." },
     page: "templates", anchor: "template-pricing",

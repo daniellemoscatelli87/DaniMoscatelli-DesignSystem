@@ -841,7 +841,10 @@ const pricingFeatures = [
   { en: "Market trends and comparisons", pt: "Tendências e comparativos de mercado" },
 ];
 
-const plans = [
+// "Para quem" (forWhom) é opcional: plano sem esse texto não mostra o bloco.
+type Plano = { id: string; name: L; price: number; forWhom?: L; desc: L; included: number; highlight: boolean; icon: typeof Package };
+
+const plans: Plano[] = [
   {
     id: "basico",
     name: { en: "Visibility", pt: "Visibilidade" },
@@ -874,10 +877,43 @@ const plans = [
   },
 ];
 
-function PricingTemplate() {
+/* Controle só da demonstração: liga e desliga o bloco opcional "Para quem" nos cards de preço */
+function ChaveParaQuem({ ligado, onChange }: { ligado: boolean; onChange: (v: boolean) => void }) {
+  const { t } = useI18n();
+  return (
+    <div className="mb-4 flex items-center gap-2.5">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={ligado}
+        aria-labelledby="rotulo-chave-para-quem"
+        onClick={() => onChange(!ligado)}
+        className={`w-10 shrink-0 rounded-full transition-colors relative flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${ligado ? "bg-primary" : "bg-muted-foreground/30"}`}
+        style={{ height: "22px" }}
+      >
+        <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${ligado ? "left-[22px]" : "left-0.5"}`} />
+      </button>
+      <span id="rotulo-chave-para-quem" className="text-[0.8125rem] font-medium text-foreground">{t("Show “Who it's for”", "Mostrar “Para quem”")}</span>
+    </div>
+  );
+}
+
+function PricingDemo() {
+  const [mostrarParaQuem, setMostrarParaQuem] = useState(true);
+  return (
+    <>
+      <ChaveParaQuem ligado={mostrarParaQuem} onChange={setMostrarParaQuem} />
+      <PricingTemplate mostrarParaQuem={mostrarParaQuem} />
+    </>
+  );
+}
+
+function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean }) {
   const { t, bi } = useI18n();
   const [annual, setAnnual] = useState(false);
   const [selecionado, setSelecionado] = useState<string | null>(null);
+  // Lista de recursos começa recolhida; abrir ou fechar vale para todos os cards, que ficam sempre alinhados
+  const [recursosAbertos, setRecursosAbertos] = useState(false);
 
   return (
     <TemplateFrame>
@@ -912,7 +948,8 @@ function PricingTemplate() {
           {plans.map(plan => {
             const Icon = plan.icon;
             const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
-            const forWhom = bi(plan.forWhom);
+            const forWhom = mostrarParaQuem && plan.forWhom ? bi(plan.forWhom) : null;
+            const idLista = `recursos-${plan.id}`;
             const ativo = selecionado === plan.id;
             return (
               <div
@@ -939,14 +976,32 @@ function PricingTemplate() {
                 <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground">{bi(plan.desc)}</p>
 
                 {/* "Para quem": no máximo 4 linhas, sem reticências; altura de 4 linhas em todos os cards (só cresce, em vez de vazar, quando o card fica estreito demais). No escuro, caixa neutra e só a lâmpada em amarelo */}
+                {forWhom && (
                 <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
                   <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
                   <p className="min-h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
                 </div>
+                )}
 
-                <ul className="space-y-2.5 flex-1 mb-5">
+                {/* Ocultar / expandir os recursos do plano */}
+                <button
+                  type="button"
+                  aria-expanded={recursosAbertos}
+                  aria-controls={idLista}
+                  onClick={() => setRecursosAbertos(v => !v)}
+                  className="mb-3 -mx-1 flex items-center justify-between gap-2 rounded-[8px] px-1 py-1.5 text-left text-[0.8125rem] font-semibold text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <span>{recursosAbertos ? t("Hide plan features", "Ocultar recursos do plano") : t("Show plan features", "Ver recursos do plano")}</span>
+                  <span className="flex items-center gap-1.5 text-[0.75rem] font-medium text-muted-foreground whitespace-nowrap">
+                    {t(`${plan.included} of ${pricingFeatures.length}`, `${plan.included} de ${pricingFeatures.length}`)}
+                    <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${recursosAbertos ? "rotate-180" : ""}`} />
+                  </span>
+                </button>
+
+                {recursosAbertos ? (
+                <ul id={idLista} className="space-y-2.5 flex-1 mb-5">
                   {pricingFeatures.map((f, i) => {
                     const inclui = i < plan.included;
                     return (
@@ -964,6 +1019,9 @@ function PricingTemplate() {
                     );
                   })}
                 </ul>
+                ) : (
+                  <div id={idLista} className="flex-1 mb-2" />
+                )}
 
                 <div className="mb-4 border-t border-border" />
 
@@ -1285,7 +1343,7 @@ export function TemplatesShowcase() {
       {/* 6 — Pricing */}
       <section id="template-pricing">
         <TemplateLabel icon={CreditCard} label={t("Pricing & Plans", "Preços e planos")} />
-        <PricingTemplate />
+        <PricingDemo />
       </section>
 
       {/* 7 — Contact */}
