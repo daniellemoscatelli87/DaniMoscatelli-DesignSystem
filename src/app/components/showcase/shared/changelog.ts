@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Pricing cards in the wobble card style", pt: "Cards de preço no estilo do card com wobble" },
+    desc: { en: "The pricing template now borrows the wobble card's look: larger rounding, round icon, “Recommended” chip with a star, bold plan name, checks in tinted circles and a footer with price and action. It keeps the Monthly/Yearly switch, the “Who it's for” box, included and not-included features and the selected state. Columns now follow the available width, and the “Who it's for” box grows instead of overflowing when the card is too narrow.", pt: "O template de preços passou a usar o visual do card com wobble: cantos mais arredondados, ícone em círculo, selo “Recomendado” com estrela, nome do plano em destaque, checks em círculo colorido e rodapé com preço e ação. Continuam o seletor Mensal/Anual, o bloco “Para quem”, os recursos incluídos e não incluídos e o estado selecionado. As colunas agora seguem a largura disponível, e o bloco “Para quem” cresce em vez de vazar quando o card fica estreito demais." },
+    page: "templates", anchor: "template-pricing",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Cards on white: border, no shadow", pt: "Card sobre fundo branco: borda, sem sombra" },
     desc: { en: "New rule in Cards: on a white background, a card has no shadow and uses a light gray border (--border); shadows are for hover and overlays.", pt: "Nova regra em Cards: sobre fundo branco, o card não tem sombra e usa borda cinza clara (--border); a sombra fica para o hover e para sobreposições." },
     page: "cards", anchor: "card-guidelines",

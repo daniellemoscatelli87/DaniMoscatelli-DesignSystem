@@ -12,7 +12,7 @@ import {
   Moon, Sun, ChevronDown, Package,
   Phone, MapPin, MessageSquare, Send, AtSign,
   Globe, Sparkles, Layers, ArrowRight, PlayCircle,
-  ShieldCheck, Rocket, BarChart, Layout, Minus, Lightbulb,
+  ShieldCheck, Rocket, BarChart, Layout, Minus, Lightbulb, Star, ArrowRight,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart as ReBarChart, Bar,
@@ -906,7 +906,9 @@ function PricingTemplate() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        {/* Colunas pela largura disponível (não pela tela): dentro do protótipo do painel, os 3 cards só ficam lado a lado se couberem */}
+        <div className="@container/precos">
+        <div className="grid grid-cols-1 @4xl/precos:grid-cols-3 gap-5 max-w-md @4xl/precos:max-w-5xl mx-auto">
           {plans.map(plan => {
             const Icon = plan.icon;
             const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
@@ -915,49 +917,45 @@ function PricingTemplate() {
             return (
               <div
                 key={plan.id}
-                className={`relative rounded-[16px] bg-card p-4 sm:p-5 flex flex-col transition-shadow
+                className={`@container relative rounded-[20px] bg-card p-4 sm:p-6 flex flex-col transition-shadow
                   ${plan.highlight || ativo ? "border-2 border-primary" : "border border-border"}
                   ${ativo ? "ring-4 ring-primary/20" : ""}`}
                 style={{ boxShadow: plan.highlight ? "var(--shadow-md)" : "var(--shadow-xs)" }}
               >
-                {plan.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-sm bg-primary text-primary-foreground text-[0.6875rem] font-bold whitespace-nowrap">
-                    {t("Recommended", "Recomendado")}
-                  </div>
-                )}
-
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="h-8 w-8 rounded-[9px] flex items-center justify-center bg-[var(--primary-muted)] dark:bg-muted shrink-0">
+                {/* Topo: ícone do plano e, no destacado, o selo no estilo do card com wobble */}
+                <div className="mb-4 flex items-center justify-between gap-2">
+                  <div className="h-8 w-8 rounded-full flex items-center justify-center bg-[var(--primary-muted)] dark:bg-muted shrink-0">
                     <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))] dark:text-muted-foreground" />
                   </div>
-                  <h3 className="text-[1.375rem] font-bold leading-tight text-[var(--primary-text,var(--primary))] dark:text-foreground">{bi(plan.name)}</h3>
+                  {plan.highlight && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.06em] text-[var(--primary-text,var(--primary))] whitespace-nowrap">
+                      <Star aria-hidden className="h-3 w-3 fill-current" />
+                      {t("Recommended", "Recomendado")}
+                    </span>
+                  )}
                 </div>
 
-                <div className="mb-4 flex items-baseline gap-1">
-                  <span className="text-[1.875rem] font-extrabold leading-none text-[var(--primary-text,var(--primary))] dark:text-foreground">R$ {valor}</span>
-                  <span className="text-[0.8125rem] text-muted-foreground">{t("/ month", "/ mês")}</span>
-                </div>
+                <h3 className="mb-2 text-[1.5rem] font-black leading-tight tracking-[-0.03em] text-foreground">{bi(plan.name)}</h3>
+                <p className="mb-4 text-[0.8125rem] leading-relaxed text-muted-foreground">{bi(plan.desc)}</p>
 
-                {/* "Para quem": no máximo 4 linhas, sem reticências; altura fixa de 4 linhas em todos os cards. No escuro, caixa neutra e só a lâmpada em amarelo */}
-                <div className="mb-4 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
+                {/* "Para quem": no máximo 4 linhas, sem reticências; altura de 4 linhas em todos os cards (só cresce, em vez de vazar, quando o card fica estreito demais). No escuro, caixa neutra e só a lâmpada em amarelo */}
+                <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
                   <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
-                  <p className="h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
+                  <p className="min-h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
                 </div>
-
-                <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{bi(plan.desc)}</p>
-
-                <div className="my-4 border-t border-border" />
 
                 <ul className="space-y-2.5 flex-1 mb-5">
                   {pricingFeatures.map((f, i) => {
                     const inclui = i < plan.included;
                     return (
                       <li key={f.en} className={`flex items-start gap-2.5 text-[0.8125rem] leading-snug ${inclui ? "text-foreground" : "text-muted-foreground"}`}>
-                        {inclui
-                          ? <Check aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--primary-text,var(--primary))]" />
-                          : <Minus aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />}
+                        <span aria-hidden className={`mt-px h-4 w-4 shrink-0 rounded-full flex items-center justify-center ${inclui ? "bg-[var(--primary-muted)]" : "bg-muted"}`}>
+                          {inclui
+                            ? <Check className="h-2.5 w-2.5 text-[var(--primary-text,var(--primary))]" strokeWidth={3} />
+                            : <Minus className="h-2.5 w-2.5 text-muted-foreground" strokeWidth={3} />}
+                        </span>
                         <span>
                           <span className="sr-only">{inclui ? t("Included: ", "Incluído: ") : t("Not included: ", "Não incluído: ")}</span>
                           {bi(f)}
@@ -967,24 +965,35 @@ function PricingTemplate() {
                   })}
                 </ul>
 
-                <button
-                  type="button"
-                  aria-pressed={ativo}
-                  aria-label={ativo
-                    ? `${t("Plan selected", "Plano selecionado")}: ${bi(plan.name)}`
-                    : `${t("Select Plan", "Selecionar Plano")} ${bi(plan.name)}`}
-                  onClick={() => setSelecionado(plan.id)}
-                  className={`w-full h-10 rounded-[10px] border border-primary text-[0.875rem] font-semibold transition-colors inline-flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
-                    ${ativo
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)]"}`}
-                >
-                  {ativo && <Check aria-hidden className="h-4 w-4" />}
-                  {ativo ? t("Plan selected", "Plano selecionado") : t("Select Plan", "Selecionar Plano")}
-                </button>
+                <div className="mb-4 border-t border-border" />
+
+                {/* Rodapé no estilo do card com wobble: preço à esquerda e ação à direita; empilha quando o card é estreito */}
+                <div className="flex flex-col gap-3 @[19rem]:flex-row @[19rem]:items-center @[19rem]:justify-between">
+                  <div className="flex items-baseline gap-1 whitespace-nowrap">
+                    <span className="text-[1.625rem] font-black leading-none tracking-[-0.03em] text-foreground">R$ {valor}</span>
+                    <span className="text-[0.75rem] text-muted-foreground">{t("/ month", "/ mês")}</span>
+                  </div>
+                  <button
+                    type="button"
+                    aria-pressed={ativo}
+                    aria-label={ativo
+                      ? `${t("Plan selected", "Plano selecionado")}: ${bi(plan.name)}`
+                      : `${t("Select Plan", "Selecionar Plano")} ${bi(plan.name)}`}
+                    onClick={() => setSelecionado(plan.id)}
+                    className={`h-10 w-full @[19rem]:w-auto px-4 rounded-[10px] border border-primary text-[0.8125rem] font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                      ${ativo
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)]"}`}
+                  >
+                    {ativo && <Check aria-hidden className="h-4 w-4" />}
+                    {ativo ? t("Plan selected", "Plano selecionado") : t("Select Plan", "Selecionar Plano")}
+                    {!ativo && <ArrowRight aria-hidden className="h-4 w-4" />}
+                  </button>
+                </div>
               </div>
             );
           })}
+        </div>
         </div>
       </div>
     </TemplateFrame>
