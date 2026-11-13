@@ -169,6 +169,7 @@ const ptLabels: Record<string, string> = {
   "Timeline": "Linha do tempo",
   "Demo": "Demonstração",
   "Header & Menus": "Header e menus",
+  "Models": "Modelos",
   "Scroll behaviours": "Comportamentos de rolagem",
   "Phone menus": "Menus no celular",
   "Backgrounds behind the header": "Fundos por trás do header",
@@ -423,6 +424,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
       { id: "header", label: "Header & Menus", icon: PanelTop,
         items: [
           { id: "header-demo",        label: "Demo",                          sectionId: "header" },
+          { id: "header-models",      label: "Models",                        sectionId: "header" },
           { id: "header-scroll",      label: "Scroll behaviours",             sectionId: "header" },
           { id: "header-mobile",      label: "Phone menus",                   sectionId: "header" },
           { id: "header-backgrounds", label: "Backgrounds behind the header", sectionId: "header" },

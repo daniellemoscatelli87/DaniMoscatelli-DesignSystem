@@ -1,20 +1,23 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
-  ArrowRight, ArrowUpDown, BarChart2, Check, Eye, FileText, Image as ImageIcon, LayoutDashboard, Maximize2,
-  Menu, Minimize2, Monitor, Moon, PanelBottom, PanelRight, Palette, Settings, Smartphone, Sun, Users, X,
+  ArrowRight, BarChart2, Check, ChevronRight, Eye, EyeOff, FileText, Image as ImageIcon, LayoutDashboard, Mail,
+  Maximize2, Menu, Minimize2, Monitor, Moon, PanelBottom, PanelRight, PanelTop, Palette, Pill, Settings,
+  Smartphone, Sun, SunDim, Users, X,
 } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
-import { DoDont, Panel } from "./shared/Guidance";
+import { Callout, DoDont, Panel } from "./shared/Guidance";
 import { FundoGradienteDaMarca } from "./BackgroundsShowcase";
 import logoSobreClaro from "../../../imports/Logo-Horizontal-DarkMode.png";
 import logoSobreEscuro from "../../../imports/Logo-Horizontal-LightMode.png";
+import logoIcone from "../../../imports/IconeLogo-red.png";
 
 /* ─────────────────────────────────────────────────────────────
    Header e menus
-   Base: header do site (Experience Intelligence 3: fixo, links no
-   centro e botão de contato em pílula) e header do próprio DS
-   (fundo translúcido com desfoque, gaveta no celular).
+   Modelo atual: cabeçalho compartilhado do site (src/compartilhado/
+   partes.ts, menu.ts e menu.css): pílula clara flutuando no desktop,
+   faixa que fica grafite ao rolar no celular, logo que vira ícone,
+   some ao descer e volta ao subir, menu do celular em folha inferior.
    ───────────────────────────────────────────────────────────── */
 
 type L = { en: string; pt: string };
@@ -24,26 +27,25 @@ const MARCA = {
   nome: "Dani Moscatelli Experience Design Studio",
   logoSobreClaro,
   logoSobreEscuro,
-  endereco: "danimoscatelli.com.br",
+  logoIcone,
+  endereco: "danimoscatelli.com.br/projeto-piloto",
+  // Links do cabeçalho do site: são páginas; a atual fica marcada
+  tipoLinks: "paginas" as "paginas" | "secoes",
   links: [
-    { id: "problema", rotulo: { en: "The Problem", pt: "O Problema" } },
-    { id: "contexto", rotulo: { en: "Context", pt: "Contexto" } },
-    { id: "abordagem", rotulo: { en: "Approach", pt: "Abordagem" } },
-    { id: "metodo", rotulo: { en: "Method", pt: "Método" } },
-    { id: "solucoes", rotulo: { en: "Solutions", pt: "Soluções" } },
-    { id: "artigos", rotulo: { en: "Articles", pt: "Artigos" } },
+    { id: "inicio", rotulo: { en: "Home", pt: "Home" } },
+    { id: "projeto", rotulo: { en: "Projeto Piloto", pt: "Projeto Piloto" } },
+    { id: "parceiros", rotulo: { en: "Seja Parceiro", pt: "Seja Parceiro" } },
   ] as { id: string; rotulo: L }[],
+  atualInicial: "projeto" as string | null,
   entrar: null as L | null,
-  cta: { en: "Contact", pt: "Contato" } as L,
-  heroTitulo: {
-    en: "I turn business goals into high-value experiences for your customers.",
-    pt: "Transformo objetivos de negócio em experiências de alto valor para os seus clientes.",
-  } as L,
+  acao: { en: "Contato", pt: "Contato" } as L,
+  acaoIcone: Mail as React.ElementType,
+  heroTitulo: { en: "Programa Projeto Piloto", pt: "Programa Projeto Piloto" } as L,
   heroTexto: {
-    en: "20+ years designing experience ecosystems that connect strategy, people, operations and technology.",
-    pt: "+ de 20 anos projetando ecossistemas de experiência que conectam estratégia, pessoas, operação e tecnologia.",
+    en: "Uma nova perspectiva sobre os desafios de experiência do seu negócio.",
+    pt: "Uma nova perspectiva sobre os desafios de experiência do seu negócio.",
   } as L,
-  foto: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=70&auto=format&fit=crop",
+  foto: `${import.meta.env.BASE_URL}fotos/projeto-piloto-hero.webp`,
   app: [
     { id: "dashboard", rotulo: { en: "Dashboard", pt: "Dashboard" }, Icone: LayoutDashboard },
     { id: "analises", rotulo: { en: "Analytics", pt: "Análises" }, Icone: BarChart2 },
@@ -54,14 +56,14 @@ const MARCA = {
 };
 
 type Tela = "desktop" | "celular";
-type Rolagem = "transparente" | "some" | "compacto";
+type Modelo = "pilula" | "faixa";
 type Fundo = "pagina" | "foto" | "gradiente" | "escuro";
-type MenuCel = "gaveta" | "tela-cheia" | "barra";
+type MenuCel = "folha" | "gaveta" | "tela-cheia" | "barra";
+type Superficie = "clara" | "escura" | "imagem";
+type Opcoes = { transparenteNoTopo: boolean; iconeAoRolar: boolean; someAoRolar: boolean };
 
-/* Limites de rolagem (px) */
-const SOLIDO_APOS = 24;
-const COMPACTO_APOS = 40;
-const SOME_APOS = 96;
+/* Limites de rolagem (os mesmos do site) */
+const ROLADO_APOS = 8;
 const SENSIBILIDADE = 6;
 
 function useTemaEscuro() {
@@ -74,6 +76,12 @@ function useTemaEscuro() {
   return escuro;
 }
 
+/* Regra do logo completo: a versão depende do que está atrás dele.
+   Superfície clara → texto escuro; superfície escura ou foto (com véu) → texto claro. */
+function versaoDoLogo(s: Superficie) {
+  return s === "clara" ? MARCA.logoSobreClaro : MARCA.logoSobreEscuro;
+}
+
 function SectionHeader({ title, description }: { title: string; description?: string }) {
   return (
     <div className="mb-6">
@@ -84,10 +92,10 @@ function SectionHeader({ title, description }: { title: string; description?: st
   );
 }
 
-const foco = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+const foco = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 const textoMarca = "text-[var(--primary-text,var(--primary))]";
 
-/* ── Controle segmentado da demonstração ── */
+/* ── Controles da demonstração ── */
 function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
   rotulo: string; valor: T; opcoes: { id: T; rotulo: string; Icone: React.ElementType }[]; onChange: (v: T) => void;
 }) {
@@ -116,61 +124,115 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
   );
 }
 
-/* ── Linhas neutras no lugar de texto, para dar rolagem sem inventar conteúdo ── */
-function Linhas({ n = 3, claro = false }: { n?: number; claro?: boolean }) {
-  const larguras = ["w-full", "w-11/12", "w-4/5", "w-2/3", "w-3/4"];
+function Chave({ id, rotulo, ligado, onChange }: { id: string; rotulo: string; ligado: boolean; onChange: (v: boolean) => void }) {
   return (
-    <div aria-hidden className="space-y-2">
-      {Array.from({ length: n }).map((_, i) => (
-        <div key={i} className={`h-2.5 rounded-full ${larguras[i % larguras.length]} ${claro ? "bg-white/25" : "bg-muted"}`} />
-      ))}
+    <div className="flex items-center gap-2.5">
+      <button
+        type="button"
+        role="switch"
+        aria-checked={ligado}
+        aria-labelledby={id}
+        onClick={() => onChange(!ligado)}
+        className={`relative flex w-10 shrink-0 items-center rounded-full transition-colors ${foco} ${ligado ? "bg-primary" : "bg-muted-foreground/30"}`}
+        style={{ height: "22px" }}
+      >
+        <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${ligado ? "left-[22px]" : "left-0.5"}`} />
+      </button>
+      <span id={id} className="text-[0.8125rem] font-medium text-foreground">{rotulo}</span>
     </div>
   );
 }
 
+/* ── Linhas neutras no lugar de texto, para dar rolagem sem inventar conteúdo ── */
+function Linhas({ n = 3 }: { n?: number }) {
+  const larguras = ["w-full", "w-11/12", "w-4/5", "w-2/3", "w-3/4"];
+  return (
+    <div aria-hidden className="space-y-2">
+      {Array.from({ length: n }).map((_, i) => <div key={i} className={`h-2.5 rounded-full bg-muted ${larguras[i % larguras.length]}`} />)}
+    </div>
+  );
+}
+
+/* ── Fundos por trás do header ── */
+function Capa({ fundo, escuro, children }: { fundo: Fundo; escuro: boolean; children: React.ReactNode }) {
+  if (fundo === "foto") {
+    return (
+      <div data-testid="demo-capa" className="relative overflow-hidden bg-[var(--graphite-950)]">
+        <img src={MARCA.foto} alt="" className="absolute inset-0 h-full w-full object-cover object-[30%_center]" />
+        {/* Véu: escurece a foto toda e reforça o topo, onde ficam o logo e os links */}
+        <div aria-hidden className="absolute inset-0 bg-black/45" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/60 to-transparent" />
+        <div className="relative">{children}</div>
+      </div>
+    );
+  }
+  if (fundo === "gradiente") {
+    return (
+      <div data-testid="demo-capa" className="relative">
+        <div className="absolute inset-0"><FundoGradienteDaMarca dark={escuro}><span /></FundoGradienteDaMarca></div>
+        <div className="relative">{children}</div>
+      </div>
+    );
+  }
+  return <div data-testid="demo-capa" className="border-b border-border bg-background">{children}</div>;
+}
+
 /* ── Demonstração: janela com rolagem própria ── */
-function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Rolagem; fundo: Fundo; menuCel: MenuCel }) {
+function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; modelo: Modelo; fundo: Fundo; menuCel: MenuCel; opcoes: Opcoes }) {
   const { t, bi } = useI18n();
   const temaEscuro = useTemaEscuro();
   const escuro = fundo === "escuro" || temaEscuro;
+  const areaRef = useRef<HTMLDivElement>(null);
   const rolagemRef = useRef<HTMLDivElement>(null);
   const botaoMenuRef = useRef<HTMLButtonElement>(null);
   const painelRef = useRef<HTMLDivElement>(null);
   const ultimoY = useRef(0);
+  const [largura, setLargura] = useState(1000);
   const [y, setY] = useState(0);
   const [escondido, setEscondido] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
-  const [ativo, setAtivo] = useState(MARCA.app[0].id);
+  const [atual, setAtual] = useState<string | null>(MARCA.atualInicial);
+  const [atualApp, setAtualApp] = useState(MARCA.app[0].id);
+
+  useLayoutEffect(() => {
+    const el = areaRef.current; if (!el) return;
+    const medir = () => setLargura(el.clientWidth);
+    medir();
+    const obs = new ResizeObserver(medir); obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   // Ao trocar de opção, volta ao topo e fecha o menu
   useEffect(() => {
     rolagemRef.current?.scrollTo({ top: 0 });
     setY(0); setEscondido(false); setMenuAberto(false); ultimoY.current = 0;
-  }, [tela, rolagem, fundo, menuCel]);
+  }, [tela, modelo, fundo, menuCel, opcoes.transparenteNoTopo, opcoes.iconeAoRolar, opcoes.someAoRolar]);
+
+  const desktop = tela === "desktop" && largura >= 720;
+  const comBarra = !desktop && menuCel === "barra";        // menu embaixo: o header fica sem menu
+  const pilula = modelo === "pilula" && desktop;
+  const alturaHeader = pilula ? 97 : desktop ? 72 : 64;
 
   const aoRolar = useCallback(() => {
-    const atual = rolagemRef.current?.scrollTop ?? 0;
-    const delta = atual - ultimoY.current;
-    if (rolagem === "some") {
-      if (atual < SOME_APOS) setEscondido(false);
-      else if (delta > SENSIBILIDADE) setEscondido(true);
-      else if (delta < -SENSIBILIDADE) setEscondido(false);
-    }
-    if (Math.abs(delta) > SENSIBILIDADE || atual < SOME_APOS) ultimoY.current = atual;
-    setY(atual);
-  }, [rolagem]);
+    const atualY = rolagemRef.current?.scrollTop ?? 0;
+    const delta = atualY - ultimoY.current;
+    if (!opcoes.someAoRolar || atualY < alturaHeader) setEscondido(false);
+    else if (delta > SENSIBILIDADE) setEscondido(true);
+    else if (delta < -SENSIBILIDADE) setEscondido(false);
+    if (Math.abs(delta) > SENSIBILIDADE || atualY < alturaHeader) ultimoY.current = atualY;
+    setY(atualY);
+  }, [opcoes.someAoRolar, alturaHeader]);
 
   const fecharMenu = useCallback(() => {
     setMenuAberto(false);
     requestAnimationFrame(() => botaoMenuRef.current?.focus());
   }, []);
 
-  // Menu aberto: foco no primeiro item, Esc fecha, Tab circula dentro do menu
+  // Menu aberto: foco no primeiro link, Esc fecha, Tab circula dentro do menu
   useEffect(() => {
     if (!menuAberto) return;
     const painel = painelRef.current;
     const focaveis = () => Array.from(painel?.querySelectorAll<HTMLElement>("button, a[href]") ?? []);
-    // Foco no primeiro link do menu (o X continua alcançável com Shift+Tab)
     requestAnimationFrame(() => (painel?.querySelector<HTMLElement>("nav a") ?? focaveis()[0])?.focus());
     const aoTeclar = (e: KeyboardEvent) => {
       if (e.key === "Escape") { e.preventDefault(); fecharMenu(); return; }
@@ -184,22 +246,66 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
     return () => document.removeEventListener("keydown", aoTeclar);
   }, [menuAberto, fecharMenu]);
 
+  // Link de página: marca a página atual e volta ao topo; link de seção: rola até ela
   const irPara = (id: string) => {
-    const alvo = rolagemRef.current?.querySelector<HTMLElement>(`[data-secao="${id}"]`);
     setMenuAberto(false);
-    if (alvo && rolagemRef.current) rolagemRef.current.scrollTo({ top: alvo.offsetTop - 64, behavior: "smooth" });
+    const area = rolagemRef.current; if (!area) return;
+    if (MARCA.tipoLinks === "paginas") { setAtual(id); area.scrollTo({ top: 0, behavior: "smooth" }); return; }
+    const alvo = area.querySelector<HTMLElement>(`[data-secao="${id}"]`);
+    if (alvo) area.scrollTo({ top: alvo.offsetTop - alturaHeader, behavior: "smooth" });
   };
 
-  const sobreCapa = rolagem === "transparente" && y < SOLIDO_APOS && !menuAberto;
-  const compacto = rolagem === "compacto" && y >= COMPACTO_APOS;
-  const textoClaro = sobreCapa && fundo === "foto";
-  const logo = textoClaro || escuro ? MARCA.logoSobreEscuro : MARCA.logoSobreClaro;
-  const comBarra = tela === "celular" && menuCel === "barra";
+  const rolado = y > ROLADO_APOS;
+  const transparente = opcoes.transparenteNoTopo && !rolado && !menuAberto;
+
+  // O que fica atrás do logo e dos links
+  const superficie: Superficie = pilula
+    ? (escuro ? "escura" : "clara")                                  // pílula: superfície do card
+    : !transparente
+      ? (modelo === "pilula" ? "escura" : escuro ? "escura" : "clara") // faixa do site fica grafite ao rolar
+      : fundo === "foto" ? "imagem" : escuro ? "escura" : "clara";
+  const sobreEscuro = superficie !== "clara";
+
+  // Logo: a pílula usa sempre o ícone; no celular, o modelo do site também; ao rolar, vira ícone se a opção estiver ligada
+  const soIcone = pilula || (modelo === "pilula" && !desktop) || (opcoes.iconeAoRolar && rolado);
+  const corLink = sobreEscuro ? "text-white/90 hover:text-white" : "text-foreground hover:text-[var(--primary-text,var(--primary))]";
+  const sombraTexto = superficie === "imagem" ? { textShadow: "0 1px 2px rgb(0 0 0 / .35)" } : undefined;
+  const mostraLinks = desktop && !comBarra;
   const idPainel = "demo-header-menu";
 
-  const corLink = textoClaro
-    ? "text-white/85 hover:text-white"
-    : "text-muted-foreground hover:text-[var(--primary-text,var(--primary))]";
+  const Logo = (
+    <a
+      href="#"
+      onClick={e => { e.preventDefault(); rolagemRef.current?.scrollTo({ top: 0, behavior: "smooth" }); }}
+      aria-label={MARCA.nome}
+      data-testid="demo-logo"
+      data-logo={soIcone ? "icone" : "completo"}
+      data-superficie={superficie}
+      className={`flex shrink-0 items-center rounded-[6px] ${foco}`}
+    >
+      {soIcone
+        ? <img src={MARCA.logoIcone} alt="" className="h-10 w-auto object-contain motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95" />
+        : <img src={versaoDoLogo(superficie)} alt="" className={`w-auto object-contain ${desktop ? "h-11" : "h-9"}`} />}
+    </a>
+  );
+
+  const Links = (
+    <nav aria-label={t("Main", "Principal")} className={`flex items-center ${pilula ? "gap-11" : "gap-6"}`}>
+      {MARCA.links.map(l => (
+        <a
+          key={l.id}
+          href={`#${l.id}`}
+          aria-current={atual === l.id ? "page" : undefined}
+          onClick={e => { e.preventDefault(); irPara(l.id); }}
+          style={sombraTexto}
+          className={`whitespace-nowrap rounded-[4px] text-[0.875rem] font-semibold decoration-2 underline-offset-[6px] transition-colors aria-[current=page]:underline aria-[current=page]:decoration-primary ${foco}
+            ${pilula ? "font-medium text-[0.9375rem] text-foreground hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))]" : corLink}`}
+        >
+          {bi(l.rotulo)}
+        </a>
+      ))}
+    </nav>
+  );
 
   return (
     <div className={escuro && !temaEscuro ? "dark" : ""}>
@@ -221,86 +327,98 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
           </div>
         </div>
 
-        {/* Área da página: header, conteúdo com rolagem própria e menus por cima */}
-        <div className="@container/quadro relative h-[560px]">
-          <div
-            ref={rolagemRef}
-            onScroll={aoRolar}
-            data-testid="demo-header-rolagem"
-            className={`h-full ${menuAberto ? "overflow-hidden" : "overflow-y-auto"} bg-background`}
-          >
-            {/* Header fixo: altura zero no fluxo, para a capa passar por trás dele */}
+        <div ref={areaRef} className="relative h-[560px]">
+          <div ref={rolagemRef} onScroll={aoRolar} data-testid="demo-header-rolagem" className={`h-full bg-background ${menuAberto ? "overflow-hidden" : "overflow-y-auto"}`}>
+            {/* Header fixo com altura zero no fluxo: a capa passa por trás dele */}
             <div className="sticky top-0 z-20 h-0">
-              <header
+              <div
                 data-testid="demo-header"
-                data-estado={sobreCapa ? "transparente" : "solido"}
-                data-escondido={escondido ? "sim" : "nao"}
-                data-compacto={compacto ? "sim" : "nao"}
+                data-modelo={pilula ? "pilula" : "faixa"}
+                data-estado={transparente ? "transparente" : "solido"}
+                data-escondido={escondido && !menuAberto ? "sim" : "nao"}
                 onFocusCapture={() => setEscondido(false)}
-                className={`absolute inset-x-0 top-0 flex items-center justify-between gap-3 px-4 @3xl/quadro:px-6 transition-[height,transform,background-color,border-color,box-shadow] duration-200 ease-out motion-reduce:transition-none
-                  ${compacto ? "h-14" : "h-16 @3xl/quadro:h-[72px]"}
+                className={`absolute inset-x-0 top-0 transition-[translate,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none
                   ${escondido && !menuAberto ? "-translate-y-full" : "translate-y-0"}
-                  ${sobreCapa ? "border-b border-transparent bg-transparent" : "border-b border-border bg-card/85 backdrop-blur-xl"}`}
-                style={{ boxShadow: !sobreCapa && y > 0 ? "var(--shadow-sm)" : "none" }}
+                  ${pilula ? "pt-[37px] pb-1" : ""}
+                  ${!pilula && !transparente ? (modelo === "pilula" ? "bg-[var(--graphite-900)]/92 backdrop-blur-xl" : "border-b border-border bg-card/85 backdrop-blur-xl") : !pilula ? "border-b border-transparent" : ""}`}
+                style={{ boxShadow: !pilula && !transparente ? (modelo === "pilula" ? "0 8px 24px -16px rgb(0 0 0 / .45)" : "var(--shadow-sm)") : "none" }}
               >
-                <a href="#" onClick={e => { e.preventDefault(); rolagemRef.current?.scrollTo({ top: 0, behavior: "smooth" }); }} aria-label={MARCA.nome} className={`flex shrink-0 items-center rounded-[6px] ${foco}`}>
-                  <img src={logo} alt="" className={`w-auto object-contain transition-[height] duration-200 motion-reduce:transition-none ${compacto ? "h-7" : "h-8 @3xl/quadro:h-10"}`} />
-                </a>
-
-                {!comBarra && (
-                  <nav aria-label={t("Main", "Principal")} className="hidden @3xl/quadro:flex items-center gap-6 text-[0.8125rem] font-medium">
-                    {MARCA.links.map(l => (
-                      <a key={l.id} href={`#${l.id}`} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`rounded-[4px] transition-colors ${corLink} ${foco}`}>{bi(l.rotulo)}</a>
-                    ))}
-                  </nav>
+                {/* Pílula: faixa translúcida que aparece por trás ao rolar e some em degradê */}
+                {pilula && (
+                  <div
+                    aria-hidden
+                    className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-[calc(100%+2.5rem)] bg-gradient-to-b from-background/85 via-background/55 to-transparent backdrop-blur-[10px] transition-opacity duration-300 ${rolado ? "opacity-100" : "opacity-0"}`}
+                    style={{ maskImage: "linear-gradient(to bottom, #000 45%, transparent 100%)", WebkitMaskImage: "linear-gradient(to bottom, #000 45%, transparent 100%)" }}
+                  />
                 )}
 
-                <div className="flex items-center gap-2">
-                  {MARCA.entrar && !comBarra && (
-                    <a href="#" onClick={e => e.preventDefault()} className={`hidden @3xl/quadro:inline-flex h-9 items-center rounded-full px-3 text-[0.8125rem] font-medium transition-colors ${corLink} ${foco}`}>{bi(MARCA.entrar)}</a>
+                <header
+                  className={pilula
+                    ? "mx-auto flex w-fit items-center gap-12 rounded-full border border-border bg-card/95 py-2 pl-8 pr-11"
+                    : `flex items-center justify-between gap-3 px-4 ${desktop ? "h-[72px] px-6" : "h-16"}`}
+                  style={pilula ? { boxShadow: rolado ? "0 10px 30px -10px rgb(13 17 25 / .35)" : "0 8px 24px -12px rgb(13 17 25 / .35)" } : undefined}
+                >
+                  {Logo}
+                  {pilula ? (
+                    <>
+                      {Links}
+                      {MARCA.entrar && (
+                        <a href="#" onClick={e => e.preventDefault()} className={`-mr-6 whitespace-nowrap rounded-[4px] text-[0.9375rem] font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.entrar)}</a>
+                      )}
+                      <a href="#" onClick={e => e.preventDefault()} className={`whitespace-nowrap rounded-[4px] text-[0.9375rem] font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.acao)}</a>
+                    </>
+                  ) : (
+                    <>
+                      {mostraLinks && Links}
+                      <div className="flex items-center gap-2">
+                        {mostraLinks && MARCA.entrar && (
+                          <a href="#" onClick={e => e.preventDefault()} style={sombraTexto} className={`inline-flex h-9 items-center rounded-full px-3 text-[0.875rem] font-medium transition-colors ${corLink} ${foco}`}>{bi(MARCA.entrar)}</a>
+                        )}
+                        {mostraLinks && (
+                          modelo === "pilula"
+                            ? <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full border px-6 text-[0.875rem] font-semibold transition-colors ${foco} ${sobreEscuro ? "border-white/85 text-white hover:bg-white hover:text-[var(--graphite-900)]" : "border-foreground text-foreground hover:bg-foreground hover:text-background"}`}>{bi(MARCA.acao)}</a>
+                            : <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-opacity hover:opacity-90 whitespace-nowrap ${foco}`}>{bi(MARCA.acao)}</a>
+                        )}
+                        {!desktop && !comBarra && (
+                          <button
+                            ref={botaoMenuRef}
+                            type="button"
+                            aria-expanded={menuAberto}
+                            aria-controls={idPainel}
+                            aria-label={t("Open menu", "Abrir menu")}
+                            onClick={() => setMenuAberto(true)}
+                            className={`-mr-1 flex h-11 w-11 items-center justify-center rounded-full transition-colors ${foco} ${sobreEscuro ? "text-white hover:bg-white/15" : "text-foreground hover:bg-muted"}`}
+                          >
+                            <Menu aria-hidden className="h-6 w-6" />
+                          </button>
+                        )}
+                      </div>
+                    </>
                   )}
-                  {!comBarra && (
-                    <a href="#" onClick={e => e.preventDefault()} className={`hidden @md/quadro:inline-flex h-9 items-center justify-center rounded-full bg-primary px-4 text-[0.8125rem] font-semibold text-primary-foreground transition-opacity hover:opacity-90 whitespace-nowrap ${foco}`}>
-                      {bi(MARCA.cta)}
-                    </a>
-                  )}
-                  {!comBarra && (
-                    <button
-                      ref={botaoMenuRef}
-                      type="button"
-                      aria-expanded={menuAberto}
-                      aria-controls={idPainel}
-                      aria-label={t("Open menu", "Abrir menu")}
-                      onClick={() => setMenuAberto(true)}
-                      className={`@3xl/quadro:hidden flex h-10 w-10 items-center justify-center rounded-[10px] transition-colors ${foco}
-                        ${textoClaro ? "text-white hover:bg-white/15" : "text-foreground hover:bg-muted"}`}
-                    >
-                      <Menu aria-hidden className="h-5 w-5" />
-                    </button>
-                  )}
-                </div>
-              </header>
+                </header>
+              </div>
             </div>
 
-            {/* Capa (o fundo escolhido passa por trás do header) */}
             <Capa fundo={fundo} escuro={escuro}>
-              <div className="mx-auto max-w-2xl px-5 pb-14 pt-[104px] text-center @3xl/quadro:pt-[120px]">
-                <h1 className={`text-[1.5rem] @3xl/quadro:text-[2.125rem] font-bold leading-[1.18] tracking-tight ${fundo === "foto" ? "text-white" : "text-foreground"}`}>
+              <div className={`mx-auto max-w-2xl px-5 pb-14 text-center ${pilula ? "pt-[150px]" : desktop ? "pt-[120px]" : "pt-[104px]"}`}>
+                <h1 className={`text-[1.625rem] font-extrabold leading-tight tracking-tight ${desktop ? "text-[2.25rem]" : ""} ${fundo === "foto" ? "text-white" : "text-foreground"}`}>
                   {bi(MARCA.heroTitulo)}
                 </h1>
-                <p className={`mx-auto mt-4 max-w-xl text-[0.875rem] @3xl/quadro:text-[0.9375rem] leading-relaxed ${fundo === "foto" ? "text-white/85" : "text-muted-foreground"}`}>
+                <p className={`mx-auto mt-3 max-w-xl text-[0.9375rem] font-semibold leading-snug ${fundo === "foto" ? "text-white/90" : "text-muted-foreground"}`}>
                   {bi(MARCA.heroTexto)}
                 </p>
               </div>
             </Capa>
 
-            {/* Seções da página: o título é o link do menu; as linhas neutras só dão altura */}
+            {/* Conteúdo neutro só para dar rolagem */}
             <div className={`mx-auto max-w-3xl space-y-12 px-5 py-12 ${comBarra ? "pb-24" : ""}`}>
-              {MARCA.links.map(l => (
-                <section key={l.id} data-secao={l.id} aria-label={bi(l.rotulo)}>
-                  <h2 className="mb-4 text-[1.125rem] font-bold tracking-tight text-foreground">{bi(l.rotulo)}</h2>
+              {(MARCA.tipoLinks === "secoes" ? MARCA.links.map(l => ({ id: l.id, titulo: bi(l.rotulo) })) : [0, 1, 2, 3].map(i => ({ id: `bloco-${i}`, titulo: "" }))).map(s => (
+                <section key={s.id} data-secao={s.id} aria-label={s.titulo || undefined}>
+                  {s.titulo
+                    ? <h2 className="mb-4 text-[1.125rem] font-bold tracking-tight text-foreground">{s.titulo}</h2>
+                    : <div aria-hidden className="mb-4 h-4 w-40 rounded-full bg-muted" />}
                   <Linhas n={3} />
-                  <div aria-hidden className="mt-5 grid grid-cols-1 gap-3 @md/quadro:grid-cols-3">
+                  <div aria-hidden className={`mt-5 grid gap-3 ${desktop ? "grid-cols-3" : "grid-cols-1"}`}>
                     {[0, 1, 2].map(i => <div key={i} className="h-20 rounded-[12px] border border-border bg-card" />)}
                   </div>
                 </section>
@@ -308,20 +426,20 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
             </div>
           </div>
 
-          {/* Celular: barra inferior de app */}
+          {/* Barra inferior de app: com ela, o menu sai do header (o menu fica em um lugar só) */}
           {comBarra && (
             <nav aria-label={t("Main", "Principal")} data-testid="demo-barra" className="absolute inset-x-0 bottom-0 z-20 grid h-16 grid-cols-5 border-t border-border bg-card/90 backdrop-blur-xl">
               {MARCA.app.map(item => {
-                const atual = item.id === ativo;
+                const ehAtual = item.id === atualApp;
                 return (
                   <button
                     key={item.id}
                     type="button"
-                    aria-current={atual ? "page" : undefined}
-                    onClick={() => setAtivo(item.id)}
-                    className={`relative flex flex-col items-center justify-center gap-1 text-[0.625rem] font-medium transition-colors ${foco} ${atual ? textoMarca : "text-muted-foreground hover:text-foreground"}`}
+                    aria-current={ehAtual ? "page" : undefined}
+                    onClick={() => setAtualApp(item.id)}
+                    className={`relative flex flex-col items-center justify-center gap-1 text-[0.625rem] font-medium transition-colors ${foco} ${ehAtual ? textoMarca : "text-muted-foreground hover:text-foreground"}`}
                   >
-                    {atual && <span aria-hidden className="absolute top-0 h-0.5 w-8 rounded-full bg-primary" />}
+                    {ehAtual && <span aria-hidden className="absolute top-0 h-0.5 w-8 rounded-full bg-primary" />}
                     <item.Icone aria-hidden className="h-5 w-5" />
                     <span className="max-w-full truncate px-0.5">{bi(item.rotulo)}</span>
                   </button>
@@ -330,56 +448,87 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
             </nav>
           )}
 
-          {/* Celular: gaveta lateral */}
-          {menuAberto && (menuCel === "gaveta" || tela === "desktop") && (
-            <div className="absolute inset-0 z-30">
-              <div aria-hidden className="absolute inset-0 bg-foreground/40 backdrop-blur-sm motion-safe:animate-in motion-safe:fade-in" onClick={fecharMenu} />
-              <div
-                ref={painelRef}
-                id={idPainel}
-                role="dialog"
-                aria-modal="true"
-                aria-label={t("Menu", "Menu")}
-                className="absolute inset-y-0 right-0 flex w-[min(84%,320px)] flex-col border-l border-border bg-card motion-safe:animate-in motion-safe:slide-in-from-right"
-                style={{ boxShadow: "var(--shadow-xl)" }}
-              >
-                <div className="flex h-16 items-center justify-between border-b border-border px-4">
-                  <img src={escuro ? MARCA.logoSobreEscuro : MARCA.logoSobreClaro} alt="" className="h-7 w-auto object-contain" />
-                  <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-[10px] text-foreground hover:bg-muted ${foco}`}>
-                    <X aria-hidden className="h-5 w-5" />
-                  </button>
-                </div>
-                <nav aria-label={t("Main", "Principal")} className="flex-1 overflow-y-auto p-3">
-                  {MARCA.links.map(l => (
-                    <a key={l.id} href={`#${l.id}`} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-[10px] px-3 text-[0.9375rem] font-medium text-foreground transition-colors hover:bg-muted ${foco}`}>
-                      {bi(l.rotulo)}
-                    </a>
-                  ))}
-                </nav>
-                <div className="space-y-2 border-t border-border p-4">
-                  {MARCA.entrar && (
-                    <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center rounded-full border border-border text-[0.875rem] font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
-                  )}
-                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-[0.875rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
-                    {bi(MARCA.cta)} <ArrowRight aria-hidden className="h-4 w-4" />
-                  </a>
-                </div>
-              </div>
-            </div>
+          {/* Menus do celular (abertos pelo botão do header) */}
+          {menuAberto && menuCel !== "tela-cheia" && (
+            <div aria-hidden className="absolute inset-0 z-30 bg-[var(--graphite-950)]/55 motion-safe:animate-in motion-safe:fade-in" onClick={fecharMenu} />
           )}
 
-          {/* Celular: menu em tela cheia */}
-          {menuAberto && menuCel === "tela-cheia" && tela === "celular" && (
+          {menuAberto && menuCel === "folha" && (
             <div
               ref={painelRef}
               id={idPainel}
               role="dialog"
               aria-modal="true"
               aria-label={t("Menu", "Menu")}
-              className="absolute inset-0 z-30 flex flex-col bg-background motion-safe:animate-in motion-safe:fade-in"
+              className="absolute inset-x-0 bottom-0 z-40 max-h-[85%] overflow-y-auto rounded-t-[24px] border-t border-border bg-card px-4 pb-4 pt-2 motion-safe:animate-in motion-safe:slide-in-from-bottom"
+              style={{ boxShadow: "0 -12px 36px rgb(13 17 25 / .12)" }}
             >
+              <div className="relative mb-1 flex h-10 items-center justify-center">
+                <span aria-hidden className="h-[5px] w-10 rounded-full bg-border" />
+                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`absolute right-0 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground ${foco}`}>
+                  <X aria-hidden className="h-5 w-5" />
+                </button>
+              </div>
+              <nav aria-label={t("Main", "Principal")}>
+                {MARCA.links.map(l => (
+                  <a
+                    key={l.id}
+                    href={`#${l.id}`}
+                    aria-current={atual === l.id ? "page" : undefined}
+                    onClick={e => { e.preventDefault(); irPara(l.id); }}
+                    className={`flex items-center justify-between rounded-[12px] px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}
+                  >
+                    {bi(l.rotulo)} <ChevronRight aria-hidden className={`h-4 w-4 ${textoMarca}`} />
+                  </a>
+                ))}
+              </nav>
+              {MARCA.entrar && (
+                <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center rounded-[12px] border border-border px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+              )}
+              <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center gap-2 rounded-[12px] bg-primary px-4 py-3.5 text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+                <MARCA.acaoIcone aria-hidden className="h-4 w-4" /> {bi(MARCA.acao)}
+              </a>
+            </div>
+          )}
+
+          {menuAberto && menuCel === "gaveta" && (
+            <div
+              ref={painelRef}
+              id={idPainel}
+              role="dialog"
+              aria-modal="true"
+              aria-label={t("Menu", "Menu")}
+              className="absolute inset-y-0 right-0 z-40 flex w-[min(84%,320px)] flex-col border-l border-border bg-card motion-safe:animate-in motion-safe:slide-in-from-right"
+              style={{ boxShadow: "var(--shadow-xl)" }}
+            >
+              <div className="flex h-16 items-center justify-between border-b border-border px-4">
+                <img src={versaoDoLogo(escuro ? "escura" : "clara")} alt="" data-testid="demo-logo-menu" className="h-8 w-auto object-contain" />
+                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-[10px] text-foreground hover:bg-muted ${foco}`}>
+                  <X aria-hidden className="h-5 w-5" />
+                </button>
+              </div>
+              <nav aria-label={t("Main", "Principal")} className="flex-1 overflow-y-auto p-3">
+                {MARCA.links.map(l => (
+                  <a key={l.id} href={`#${l.id}`} aria-current={atual === l.id ? "page" : undefined} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-[10px] px-3 text-[0.9375rem] font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}>
+                    {bi(l.rotulo)}
+                  </a>
+                ))}
+              </nav>
+              <div className="space-y-2 border-t border-border p-4">
+                {MARCA.entrar && (
+                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center rounded-full border border-border text-[0.875rem] font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+                )}
+                <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-[0.875rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+                  {bi(MARCA.acao)} <ArrowRight aria-hidden className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          )}
+
+          {menuAberto && menuCel === "tela-cheia" && (
+            <div ref={painelRef} id={idPainel} role="dialog" aria-modal="true" aria-label={t("Menu", "Menu")} className="absolute inset-0 z-40 flex flex-col bg-background motion-safe:animate-in motion-safe:fade-in">
               <div className="flex h-16 items-center justify-between px-4">
-                <img src={escuro ? MARCA.logoSobreEscuro : MARCA.logoSobreClaro} alt="" className="h-8 w-auto object-contain" />
+                <img src={versaoDoLogo(escuro ? "escura" : "clara")} alt="" data-testid="demo-logo-menu" className="h-9 w-auto object-contain" />
                 <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-[10px] text-foreground hover:bg-muted ${foco}`}>
                   <X aria-hidden className="h-5 w-5" />
                 </button>
@@ -389,8 +538,9 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
                   <a
                     key={l.id}
                     href={`#${l.id}`}
+                    aria-current={atual === l.id ? "page" : undefined}
                     onClick={e => { e.preventDefault(); irPara(l.id); }}
-                    className={`block rounded-[8px] py-2.5 text-[1.625rem] font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
+                    className={`block rounded-[8px] py-2.5 text-[1.625rem] font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
                     style={{ animationDelay: `${i * 40}ms`, animationFillMode: "both" }}
                   >
                     {bi(l.rotulo)}
@@ -402,7 +552,7 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
                   <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center rounded-full border border-border text-[0.9375rem] font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
                 )}
                 <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center gap-2 rounded-full bg-primary text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
-                  {bi(MARCA.cta)} <ArrowRight aria-hidden className="h-4 w-4" />
+                  {bi(MARCA.acao)} <ArrowRight aria-hidden className="h-4 w-4" />
                 </a>
               </div>
             </div>
@@ -413,38 +563,18 @@ function DemoHeader({ tela, rolagem, fundo, menuCel }: { tela: Tela; rolagem: Ro
   );
 }
 
-/* ── Fundos por trás do header ── */
-function Capa({ fundo, escuro, children }: { fundo: Fundo; escuro: boolean; children: React.ReactNode }) {
-  if (fundo === "foto") {
-    return (
-      <div data-testid="demo-capa" className="relative overflow-hidden bg-[var(--graphite-950,#0D1119)]">
-        <img src={MARCA.foto} alt="" className="absolute inset-0 h-full w-full object-cover" />
-        {/* Véu escuro: garante contraste do header transparente e do texto branco */}
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-black/70" />
-        <div className="relative">{children}</div>
-      </div>
-    );
-  }
-  if (fundo === "gradiente") {
-    return (
-      <div data-testid="demo-capa" className="relative">
-        <div className="absolute inset-0"><FundoGradienteDaMarca dark={escuro}><span /></FundoGradienteDaMarca></div>
-        <div className="relative">{children}</div>
-      </div>
-    );
-  }
-  return <div data-testid="demo-capa" className="border-b border-border bg-background">{children}</div>;
-}
-
 /* ── Cards de explicação, com atalho para a demonstração ── */
-function CardOpcao({ Icone, titulo, desc, quando, ativo, onVer }: {
-  Icone: React.ElementType; titulo: string; desc: string; quando: string; ativo: boolean; onVer: () => void;
+function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAcao }: {
+  Icone: React.ElementType; titulo: string; selo?: string; desc: string; quando: string; ativo: boolean; rotuloAcao: [string, string]; onAcao: () => void;
 }) {
   const { t } = useI18n();
   return (
     <div className={`flex flex-col rounded-[16px] border bg-card p-5 ${ativo ? "border-primary" : "border-border"}`} style={{ boxShadow: "var(--shadow-xs)" }}>
-      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-muted)]">
-        <Icone aria-hidden className={`h-4 w-4 ${textoMarca}`} />
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-muted)]">
+          <Icone aria-hidden className={`h-4 w-4 ${textoMarca}`} />
+        </div>
+        {selo && <span className={`rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.06em] ${textoMarca}`}>{selo}</span>}
       </div>
       <h3 className="text-[1rem] font-bold tracking-tight text-foreground">{titulo}</h3>
       <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
@@ -454,11 +584,12 @@ function CardOpcao({ Icone, titulo, desc, quando, ativo, onVer }: {
       <button
         type="button"
         aria-pressed={ativo}
-        onClick={onVer}
+        onClick={onAcao}
         className={`mt-4 inline-flex h-9 items-center justify-center gap-1.5 self-start rounded-[10px] border border-primary px-3.5 text-[0.8125rem] font-semibold transition-colors ${foco}
           ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-[var(--primary-muted)]`}`}
       >
-        {ativo ? <><Check aria-hidden className="h-4 w-4" /> {t("Showing in the demo", "Na demonstração")}</> : <><Eye aria-hidden className="h-4 w-4" /> {t("See in the demo", "Ver na demonstração")}</>}
+        {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}
+        {ativo ? rotuloAcao[1] : rotuloAcao[0]}
       </button>
     </div>
   );
@@ -467,91 +598,115 @@ function CardOpcao({ Icone, titulo, desc, quando, ativo, onVer }: {
 export function HeaderShowcase() {
   const { t } = useI18n();
   const [tela, setTela] = useState<Tela>("desktop");
-  const [rolagem, setRolagem] = useState<Rolagem>("transparente");
+  const [modelo, setModelo] = useState<Modelo>("pilula");
   const [fundo, setFundo] = useState<Fundo>("foto");
-  const [menuCel, setMenuCel] = useState<MenuCel>("gaveta");
+  const [menuCel, setMenuCel] = useState<MenuCel>("folha");
+  const [opcoes, setOpcoes] = useState<Opcoes>({ transparenteNoTopo: true, iconeAoRolar: true, someAoRolar: true });
   const demoRef = useRef<HTMLDivElement>(null);
   const verNaDemo = (f: () => void) => { f(); demoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); };
+  const ver: [string, string] = [t("See in the demo", "Ver na demonstração"), t("In the demo", "Na demonstração")];
+  const atual = t("Current site", "Atual do site");
 
-  const opRolagem: { id: Rolagem; rotulo: string; Icone: React.ElementType; desc: string; quando: string }[] = [
+  const opModelo: { id: Modelo; rotulo: string; Icone: React.ElementType; selo?: string; desc: string; quando: string }[] = [
     {
-      id: "transparente", rotulo: t("Transparent → solid", "Transparente → sólido"), Icone: ArrowUpDown,
-      desc: t(`No background over the cover; after ${SOLIDO_APOS}px of scrolling it gets the translucent surface, blur, border and a light shadow.`, `Sem fundo sobre a capa; depois de ${SOLIDO_APOS}px de rolagem ganha a superfície translúcida, o desfoque, a borda e uma sombra leve.`),
-      quando: t("Pages with a cover (photo or gradient) at the top: home and landing pages.", "Páginas com capa (foto ou gradiente) no topo: página inicial e landing pages."),
+      id: "pilula", rotulo: t("Floating pill", "Pílula flutuante"), Icone: Pill, selo: atual,
+      desc: t(
+        "Desktop: light pill centred at the top, with the logo icon, the links and the main action; when scrolling, a translucent band appears behind it and fades out downwards. Phone: full-width bar, transparent at the top and graphite when scrolling, with the menu button.",
+        "Desktop: pílula clara centralizada no topo, com o ícone do logo, os links e a ação principal; ao rolar, uma faixa translúcida aparece por trás e some em degradê. Celular: faixa de largura inteira, transparente no topo e grafite ao rolar, com o botão de menu.",
+      ),
+      quando: t("Site pages (Home, Projeto Piloto, Rede de Parceiros). It is the default.", "Páginas do site (Home, Projeto Piloto e Rede de Parceiros). É o padrão."),
     },
     {
-      id: "some", rotulo: t("Hide and return", "Some e volta"), Icone: Eye,
-      desc: t(`Hides when scrolling down (after ${SOME_APOS}px) and comes back as soon as the person scrolls up. Opening the menu always shows it.`, `Esconde ao rolar para baixo (depois de ${SOME_APOS}px) e volta assim que a pessoa rola para cima. Abrir o menu sempre mostra o header.`),
-      quando: t("Long reading pages (articles, case studies), especially on phones, where every pixel of height counts.", "Páginas longas de leitura (artigos, cases), principalmente no celular, onde cada pixel de altura conta."),
-    },
-    {
-      id: "compacto", rotulo: t("Compact on scroll", "Compacto ao rolar"), Icone: Minimize2,
-      desc: t(`After ${COMPACTO_APOS}px the header goes from 72px to 56px and the logo shrinks; links and button stay in place.`, `Depois de ${COMPACTO_APOS}px o header passa de 72px para 56px e o logo diminui; links e botão continuam no lugar.`),
-      quando: t("Pages where the menu must always be at hand, such as product pages and documentation.", "Páginas em que o menu precisa estar sempre à mão, como páginas de produto e documentação."),
+      id: "faixa", rotulo: t("Full-width bar", "Faixa inteira"), Icone: PanelTop,
+      desc: t("Bar across the whole width, with the full logo, links in the centre and the main action as a filled pill; when solid, it uses the translucent card surface with blur.", "Barra de ponta a ponta, com o logo completo, os links no centro e a ação principal em pílula preenchida; quando sólida, usa a superfície do card translúcida com desfoque."),
+      quando: t("Landing pages with more links or two actions (for example, Sign in and Sign up).", "Landing pages com mais links ou duas ações (por exemplo, Entrar e Cadastrar)."),
     },
   ];
 
-  const opMenu: { id: MenuCel; rotulo: string; Icone: React.ElementType; desc: string; quando: string }[] = [
+  const opRolagem: { id: keyof Opcoes; rotulo: string; Icone: React.ElementType; desc: string; quando: string }[] = [
+    {
+      id: "transparenteNoTopo", rotulo: t("Transparent at the top", "Transparente no topo"), Icone: SunDim,
+      desc: t(`No background over the cover; after ${ROLADO_APOS}px of scrolling it gets its surface. Off: always solid.`, `Sem fundo sobre a capa; depois de ${ROLADO_APOS}px de rolagem ganha a superfície. Desligado: sempre sólido.`),
+      quando: t("Pages with a cover (photo or gradient) at the top.", "Páginas com capa (foto ou gradiente) no topo."),
+    },
+    {
+      id: "iconeAoRolar", rotulo: t("Logo becomes the icon", "Logo vira ícone ao rolar"), Icone: Minimize2,
+      desc: t("Compact version: when scrolling, the full logo gives way to the icon only. The pill and the phone header of the site always use the icon.", "Versão compacta: ao rolar, o logo completo dá lugar só ao ícone. A pílula e o header do site no celular usam sempre o ícone."),
+      quando: t("Whenever the header stays on screen while scrolling.", "Sempre que o header fica na tela durante a rolagem."),
+    },
+    {
+      id: "someAoRolar", rotulo: t("Hides on scroll down", "Some ao descer e volta ao subir"), Icone: EyeOff,
+      desc: t("Configurable: hides when scrolling down and comes back as soon as the person scrolls up. It is always visible at the top, with the menu open and when keyboard focus reaches it.", "Configurável: esconde ao rolar para baixo e volta assim que a pessoa rola para cima. Fica sempre visível no topo, com o menu aberto e quando o foco do teclado chega nele."),
+      quando: t("Long pages, especially on phones. Turn it off where the menu must always be at hand.", "Páginas longas, principalmente no celular. Desligue onde o menu precisa estar sempre à mão."),
+    },
+  ];
+
+  const opMenu: { id: MenuCel; rotulo: string; Icone: React.ElementType; selo?: string; desc: string; quando: string }[] = [
+    {
+      id: "folha", rotulo: t("Bottom sheet", "Folha inferior"), Icone: PanelBottom, selo: atual,
+      desc: t("The menu button opens a sheet that rises from the bottom of the screen, with a handle, links with an arrow, the current page highlighted and the main action at the end.", "O botão de menu abre uma folha que sobe do rodapé da tela, com alça, links com seta, a página atual destacada e a ação principal no fim."),
+      quando: t("Site pages. It is the default: everything stays within thumb reach.", "Páginas do site. É o padrão: tudo fica ao alcance do polegar."),
+    },
     {
       id: "gaveta", rotulo: t("Side drawer", "Gaveta lateral"), Icone: PanelRight,
-      desc: t("The menu button opens a panel from the right over a darkened background; tapping outside, the X or Esc closes it.", "O botão de menu abre um painel pela direita sobre o fundo escurecido; tocar fora, no X ou o Esc fecham."),
-      quando: t("Sites with up to about 8 links and one main action. It is the default.", "Sites com até uns 8 links e uma ação principal. É o padrão."),
+      desc: t("Panel from the right over the darkened background, with the logo, the links and the main action.", "Painel pela direita sobre o fundo escurecido, com o logo, os links e a ação principal."),
+      quando: t("Sites with more links than fit comfortably in the sheet.", "Sites com mais links do que cabem bem na folha."),
     },
     {
       id: "tela-cheia", rotulo: t("Full screen", "Tela cheia"), Icone: Maximize2,
-      desc: t("The menu takes the whole screen, with large links and the main action at the bottom, within thumb reach.", "O menu ocupa a tela toda, com links grandes e a ação principal embaixo, ao alcance do polegar."),
-      quando: t("Institutional and campaign pages with few links, where the menu is also a brand moment.", "Páginas institucionais e de campanha com poucos links, em que o menu também é um momento de marca."),
+      desc: t("The menu takes the whole screen, with large links and the main action at the bottom.", "O menu ocupa a tela toda, com links grandes e a ação principal embaixo."),
+      quando: t("Campaign pages with few links, where the menu is also a brand moment.", "Páginas de campanha com poucos links, em que o menu também é um momento de marca."),
     },
     {
       id: "barra", rotulo: t("Bottom bar (app)", "Barra inferior (app)"), Icone: PanelBottom,
-      desc: t("Up to 5 destinations fixed at the bottom of the screen, with icon and name; the current one is marked in the primary colour and with aria-current.", "Até 5 destinos fixos no rodapé da tela, com ícone e nome; o atual fica marcado na cor primária e com aria-current."),
-      quando: t("Logged-in areas used every day (panels and apps). It does not replace the menu of public sites.", "Áreas logadas de uso diário (painéis e apps). Não substitui o menu de sites públicos."),
+      desc: t("Up to 5 destinations fixed at the bottom, with icon and name. With it, the header has no links and no menu button: the menu is in one place only.", "Até 5 destinos fixos no rodapé, com ícone e nome. Com ela, o header fica sem links e sem botão de menu: o menu fica em um lugar só."),
+      quando: t("Logged-in areas used every day (panels and apps).", "Áreas logadas de uso diário (painéis e apps)."),
     },
   ];
 
   const opFundo: { id: Fundo; rotulo: string; Icone: React.ElementType; desc: string; quando: string }[] = [
     {
       id: "pagina", rotulo: t("Page background", "Fundo da página"), Icone: Sun,
-      desc: t("Header over the default background of the theme; dark text and the logo for light backgrounds.", "Header sobre o fundo padrão do tema; texto escuro e logo para fundo claro."),
+      desc: t("Light background of the theme: logo version with dark text; links in the text colour.", "Fundo claro do tema: logo na versão de texto escuro; links na cor do texto."),
       quando: t("Most internal pages.", "A maioria das páginas internas."),
     },
     {
       id: "foto", rotulo: t("Dark photo", "Foto escura"), Icone: ImageIcon,
-      desc: t("Transparent header over the photo, with white logo and links. A dark veil over the photo (black from 70% to 45%) guarantees contrast whatever the image.", "Header transparente sobre a foto, com logo e links em branco. Um véu escuro sobre a foto (preto de 70% a 45%) garante o contraste com qualquer imagem."),
-      quando: t("Covers with photos of people and places. Never put white text straight on a photo without the veil.", "Capas com foto de pessoas e lugares. Nunca use texto branco direto na foto, sem o véu."),
+      desc: t("Photo with a dark veil (45% over the whole image and 60% more at the top, where the header is): logo version with light text and white links with a soft shadow.", "Foto com véu escuro (45% em toda a imagem e mais 60% no topo, onde fica o header): logo na versão de texto claro e links em branco com sombra suave."),
+      quando: t("Covers with photos, like the Projeto Piloto page.", "Capas com foto, como a página do Projeto Piloto."),
     },
     {
       id: "gradiente", rotulo: t("Brand gradient", "Gradiente da marca"), Icone: Palette,
-      desc: t("The Gradient Animation from Backgrounds behind the header, with the default palette of the theme; text stays in the theme colours.", "O Gradient Animation da seção Backgrounds por trás do header, com a paleta padrão do tema; o texto continua nas cores do tema."),
+      desc: t("Gradient Animation from Backgrounds with the theme palette: it is light in light mode, so the logo uses the dark-text version.", "Gradient Animation da seção Backgrounds com a paleta do tema: no modo claro ele é claro, então o logo usa a versão de texto escuro."),
       quando: t("Product and campaign covers without a photo.", "Capas de produto e de campanha sem foto."),
     },
     {
       id: "escuro", rotulo: t("Dark mode", "Modo escuro"), Icone: Moon,
-      desc: t("Same rules in the dark theme: translucent dark surface, light text and the logo version for dark backgrounds.", "As mesmas regras no tema escuro: superfície escura translúcida, texto claro e a versão do logo para fundo escuro."),
+      desc: t("Dark surfaces: logo version with light text, also inside the pill and in the menus.", "Superfícies escuras: logo na versão de texto claro, também dentro da pílula e nos menus."),
       quando: t("Whenever the person chooses the dark theme.", "Sempre que a pessoa escolher o tema escuro."),
     },
   ];
 
   const tokenGroups: TokenGroup[] = [
     {
-      group: t("Header — surface", "Header — superfície"),
+      group: t("Header — surfaces", "Header — superfícies"),
       tokens: [
-        { name: "--card / 85%", description: t("Solid header background (translucent)", "Fundo do header sólido (translúcido)"), light: "bg-card/85", dark: "bg-card/85" },
-        { name: "backdrop-blur", description: t("Blur of what passes behind", "Desfoque do que passa por trás"), light: "24px (backdrop-blur-xl)" },
-        { name: "--border", description: t("Bottom border when solid", "Borda inferior quando sólido"), light: "rgba(19,26,39,.09)", dark: "rgba(255,255,255,.07)", isColor: true },
-        { name: "--shadow-sm", description: t("Only after scrolling, when content passes underneath", "Só depois de rolar, quando o conteúdo passa por baixo"), light: "0 1px 3px …" },
-        { name: t("Photo veil", "Véu da foto"), description: t("Gradient over the photo cover", "Gradiente sobre a capa com foto"), light: "black 70% → 45% → 70%" },
+        { name: t("Pill", "Pílula"), description: t("Card surface at 95%, border, rounded-full", "Superfície do card a 95%, borda, rounded-full"), light: "bg-card/95", dark: "bg-card/95" },
+        { name: t("Pill shadow", "Sombra da pílula"), description: t("At rest / after scrolling", "Parada / depois de rolar"), light: "0 8px 24px -12px · 0 10px 30px -10px" },
+        { name: t("Band behind the pill", "Faixa atrás da pílula"), description: t("Background 85% → 55% → 0, blur 10px, mask fading downwards", "Fundo 85% → 55% → 0, desfoque de 10px, máscara em degradê"), light: "from-background/85" },
+        { name: "--graphite-900 / 92%", description: t("Phone bar of the site when scrolled", "Faixa do site no celular ao rolar"), light: "#131A27", isColor: true },
+        { name: t("Photo veil", "Véu da foto"), description: t("Whole image + top", "Imagem toda + topo"), light: "black 45% + 60% → 0" },
       ],
     },
     {
       group: t("Header — sizes and motion", "Header — tamanhos e movimento"),
       tokens: [
-        { name: t("Height", "Altura"), description: t("Desktop / phone / compact", "Desktop / celular / compacto"), light: "72px / 64px / 56px" },
-        { name: t("Logo", "Logo"), description: t("Desktop / phone / compact", "Desktop / celular / compacto"), light: "40px / 32px / 28px" },
-        { name: t("Touch target", "Área de toque"), description: t("Menu and close buttons", "Botões de menu e de fechar"), light: "40 × 40px" },
-        { name: t("Thresholds", "Limites"), description: t("Solid / compact / hide", "Sólido / compacto / some"), light: `${SOLIDO_APOS}px / ${COMPACTO_APOS}px / ${SOME_APOS}px` },
-        { name: t("Transition", "Transição"), description: t("Height, position and background; off with reduced motion", "Altura, posição e fundo; desligada com movimento reduzido"), light: "200ms ease-out" },
-        { name: "z-index", description: t("Header / menus over the page", "Header / menus sobre a página"), light: "20 / 30" },
+        { name: t("Height", "Altura"), description: t("Pill (with top space) / bar desktop / phone", "Pílula (com o respiro) / faixa desktop / celular"), light: "97px / 72px / 64px" },
+        { name: t("Logo", "Logo"), description: t("Full desktop / full phone / icon", "Completo desktop / completo celular / ícone"), light: "44px / 36px / 40px" },
+        { name: t("Touch target", "Área de toque"), description: t("Menu button", "Botão de menu"), light: "44 × 44px" },
+        { name: t("Thresholds", "Limites"), description: t("Scrolled / hide sensitivity", "Rolado / sensibilidade do sumir"), light: `${ROLADO_APOS}px / ${SENSIBILIDADE}px` },
+        { name: t("Transition", "Transição"), description: t("Hide and return; off with reduced motion", "Sumir e voltar; desligada com movimento reduzido"), light: "300ms cubic-bezier(0.16, 1, 0.3, 1)" },
+        { name: t("Bottom sheet", "Folha inferior"), description: t("Top radius / max height / backdrop", "Raio do topo / altura máxima / fundo"), light: "24px / 85% / graphite-950 55%" },
       ],
     },
   ];
@@ -562,47 +717,69 @@ export function HeaderShowcase() {
         <SectionHeader
           title={t("Header & menus", "Header e menus")}
           description={t(
-            "Site header pattern, based on the studio site header (links in the centre and a pill contact button) and on this DS header (translucent background with blur). Scroll inside the window to see each behaviour.",
-            "Padrão de header de site, a partir do header do site do estúdio (links no centro e botão de contato em pílula) e do header deste DS (fundo translúcido com desfoque). Role dentro da janela para ver cada comportamento.",
+            "Site header pattern. The default is the current header of the studio site (Home, Projeto Piloto and Rede de Parceiros). Scroll inside the window and combine the options.",
+            "Padrão de header de site. O padrão é o header atual do site do estúdio (Home, Projeto Piloto e Rede de Parceiros). Role dentro da janela e combine as opções.",
           )}
         />
-        <div className="mb-5 flex flex-wrap gap-x-6 gap-y-4">
+        <div className="mb-4 flex flex-wrap gap-x-6 gap-y-4">
           <Segmentado rotulo={t("Screen", "Tela")} valor={tela} onChange={setTela} opcoes={[
             { id: "desktop", rotulo: "Desktop", Icone: Monitor },
             { id: "celular", rotulo: t("Phone", "Celular"), Icone: Smartphone },
           ]} />
-          <Segmentado rotulo={t("Scroll", "Rolagem")} valor={rolagem} onChange={setRolagem} opcoes={opRolagem.map(({ id, rotulo, Icone }) => ({ id, rotulo, Icone }))} />
+          <Segmentado rotulo={t("Model", "Modelo")} valor={modelo} onChange={setModelo} opcoes={opModelo.map(({ id, rotulo, Icone }) => ({ id, rotulo, Icone }))} />
           <Segmentado rotulo={t("Background", "Fundo")} valor={fundo} onChange={setFundo} opcoes={opFundo.map(({ id, rotulo, Icone }) => ({ id, rotulo, Icone }))} />
           {tela === "celular" && (
             <Segmentado rotulo={t("Phone menu", "Menu no celular")} valor={menuCel} onChange={setMenuCel} opcoes={opMenu.map(({ id, rotulo, Icone }) => ({ id, rotulo, Icone }))} />
           )}
         </div>
-        <DemoHeader tela={tela} rolagem={rolagem} fundo={fundo} menuCel={menuCel} />
+        <div role="group" aria-label={t("Scroll", "Rolagem")} className="mb-5 flex flex-wrap gap-x-6 gap-y-3">
+          {opRolagem.map(o => (
+            <Chave key={o.id} id={`chave-${o.id}`} rotulo={o.rotulo} ligado={opcoes[o.id]} onChange={v => setOpcoes(p => ({ ...p, [o.id]: v }))} />
+          ))}
+        </div>
+        <DemoHeader tela={tela} modelo={modelo} fundo={fundo} menuCel={menuCel} opcoes={opcoes} />
+      </section>
+
+      <section id="header-models">
+        <SectionHeader title={t("Models", "Modelos")} description={t("Two header models. Both follow the scroll options and the logo rule.", "Dois modelos de header. Os dois seguem as opções de rolagem e a regra do logo.")} />
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          {opModelo.map(o => (
+            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} selo={o.selo} desc={o.desc} quando={o.quando} ativo={modelo === o.id} rotuloAcao={ver} onAcao={() => verNaDemo(() => setModelo(o.id))} />
+          ))}
+        </div>
       </section>
 
       <section id="header-scroll">
-        <SectionHeader title={t("Scroll behaviours", "Comportamentos de rolagem")} description={t("The same header, three ways of reacting to scrolling. They work on desktop and on phones.", "O mesmo header, três formas de reagir à rolagem. Valem para desktop e celular.")} />
+        <SectionHeader title={t("Scroll behaviours", "Comportamentos de rolagem")} description={t("Three independent options: turn each one on or off according to the page. In the site, all three are on.", "Três opções independentes: ligue ou desligue cada uma conforme a página. No site, as três estão ligadas.")} />
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           {opRolagem.map(o => (
-            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} desc={o.desc} quando={o.quando} ativo={rolagem === o.id} onVer={() => verNaDemo(() => setRolagem(o.id))} />
+            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} desc={o.desc} quando={o.quando} ativo={opcoes[o.id]} rotuloAcao={[t("Turn on in the demo", "Ligar na demonstração"), t("On in the demo", "Ligado na demonstração")]} onAcao={() => verNaDemo(() => setOpcoes(p => ({ ...p, [o.id]: !p[o.id] })))} />
           ))}
         </div>
       </section>
 
       <section id="header-mobile">
-        <SectionHeader title={t("Phone menus", "Menus no celular")} description={t("Below 768px of width the links leave the header and go into the menu. The header keeps the logo and the menu button.", "Abaixo de 768px de largura os links saem do header e vão para o menu. O header fica com o logo e o botão de menu.")} />
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+        <SectionHeader title={t("Phone menus", "Menus no celular")} description={t("On phones the links leave the header and go into the menu. The menu is in one place only: at the top (menu button in the header) or at the bottom (app bar), never both.", "No celular os links saem do header e vão para o menu. O menu fica em um lugar só: no topo (botão de menu no header) ou embaixo (barra de app), nunca nos dois.")} />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {opMenu.map(o => (
-            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} desc={o.desc} quando={o.quando} ativo={tela === "celular" && menuCel === o.id} onVer={() => verNaDemo(() => { setTela("celular"); setMenuCel(o.id); })} />
+            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} selo={o.selo} desc={o.desc} quando={o.quando} ativo={tela === "celular" && menuCel === o.id} rotuloAcao={ver} onAcao={() => verNaDemo(() => { setTela("celular"); setMenuCel(o.id); })} />
           ))}
         </div>
       </section>
 
       <section id="header-backgrounds">
-        <SectionHeader title={t("Backgrounds behind the header", "Fundos por trás do header")} description={t("What passes behind the header defines the logo version and the text colour.", "O que passa por trás do header define a versão do logo e a cor do texto.")} />
+        <SectionHeader title={t("Backgrounds behind the header", "Fundos por trás do header")} description={t("What is behind the logo defines its version.", "O que está atrás do logo define a versão dele.")} />
+        <div className="mb-4">
+          <Callout title={t("Full logo rule", "Regra do logo completo")}>
+            {t(
+              "Whenever the full logo appears, check what is directly behind it: on a light surface, the dark-text version; on a dark surface or on a photo, the light-text version, and the photo needs the veil. Otherwise “Experience Design Studio” becomes illegible. The icon works on any background.",
+              "Sempre que o logo completo aparecer, confira o que está logo atrás dele: sobre superfície clara, a versão de texto escuro; sobre superfície escura ou foto, a versão de texto claro, e a foto precisa do véu. Senão o “Experience Design Studio” fica ilegível. O ícone funciona em qualquer fundo.",
+            )}
+          </Callout>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
           {opFundo.map(o => (
-            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} desc={o.desc} quando={o.quando} ativo={fundo === o.id} onVer={() => verNaDemo(() => setFundo(o.id))} />
+            <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} desc={o.desc} quando={o.quando} ativo={fundo === o.id} rotuloAcao={ver} onAcao={() => verNaDemo(() => setFundo(o.id))} />
           ))}
         </div>
       </section>
@@ -613,14 +790,14 @@ export function HeaderShowcase() {
           <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 md:grid-cols-2">
             {[
               t("The menu button has aria-expanded, aria-controls and a name (“Open menu”).", "O botão de menu tem aria-expanded, aria-controls e nome (“Abrir menu”)."),
-              t("When the menu opens, focus goes to the first item; Tab stays inside the menu.", "Ao abrir o menu, o foco vai para o primeiro item; o Tab fica dentro do menu."),
+              t("When the menu opens, focus goes to the first link; Tab stays inside the menu.", "Ao abrir o menu, o foco vai para o primeiro link; o Tab fica dentro do menu."),
               t("Esc, the X and tapping outside close the menu, and focus returns to the menu button.", "Esc, o X e tocar fora fecham o menu, e o foco volta para o botão de menu."),
-              t("The page does not scroll behind an open menu.", "A página não rola por trás do menu aberto."),
-              t("Header that hides comes back when the menu opens or when keyboard focus reaches it.", "Header que some volta quando o menu abre ou quando o foco do teclado chega nele."),
+              t("The current page has aria-current=\"page\", in one place only.", "A página atual tem aria-current=\"page\", em um lugar só."),
+              t("A header that hides comes back at the top, with the menu open and when keyboard focus reaches it.", "O header que some volta no topo, com o menu aberto e quando o foco do teclado chega nele."),
               t("Transitions are turned off with reduced motion.", "As transições são desligadas com movimento reduzido."),
-              t("White text over a photo only with the dark veil (minimum contrast 4.5:1).", "Texto branco sobre foto só com o véu escuro (contraste mínimo de 4,5:1)."),
-              t("Bottom bar: icon always with a name; current item with aria-current=\"page\".", "Barra inferior: ícone sempre com nome; item atual com aria-current=\"page\"."),
-              t("Touch targets of at least 40 × 40px.", "Áreas de toque de pelo menos 40 × 40px."),
+              t("White text over a photo only with the veil (minimum contrast 4.5:1).", "Texto branco sobre foto só com o véu (contraste mínimo de 4,5:1)."),
+              t("Bottom bar: icon always with a name.", "Barra inferior: ícone sempre com nome."),
+              t("Touch targets of at least 44 × 44px.", "Áreas de toque de pelo menos 44 × 44px."),
               t("Links in a nav with a name (“Main”).", "Links dentro de um nav com nome (“Principal”)."),
             ].map(item => (
               <li key={item} className="flex gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground">
@@ -635,14 +812,14 @@ export function HeaderShowcase() {
         <SectionHeader title={t("Usage", "Uso")} />
         <DoDont
           dos={[
-            t("Use one scroll behaviour per page and keep it in every page of the same type.", "Use um comportamento de rolagem por página e mantenha o mesmo em todas as páginas do mesmo tipo."),
-            t("Keep the main action (for example, Contact) visible in the header and repeat it in the phone menu.", "Mantenha a ação principal (por exemplo, Contato) visível no header e repita no menu do celular."),
-            t("Swap the logo version according to the background behind it.", "Troque a versão do logo conforme o fundo por trás dele."),
+            t("Keep the menu in one place: header (top) or app bar (bottom).", "Mantenha o menu em um lugar só: header (topo) ou barra de app (embaixo)."),
+            t("Choose the logo version by what is behind it, every time the background changes.", "Escolha a versão do logo pelo que está atrás dele, toda vez que o fundo mudar."),
+            t("Keep the main action in the header and repeat it in the phone menu.", "Mantenha a ação principal no header e repita no menu do celular."),
           ]}
           donts={[
-            t("Do not combine “hide and return” with the bottom bar: the person loses both navigations.", "Não combine “some e volta” com a barra inferior: a pessoa perde as duas navegações."),
-            t("Do not leave a transparent header over content after scrolling: it must become solid.", "Não deixe o header transparente sobre o conteúdo depois da rolagem: ele precisa ficar sólido."),
-            t("Do not put more than 5 items in the bottom bar or links without a name.", "Não coloque mais de 5 itens na barra inferior nem ícones sem nome."),
+            t("Do not show the menu button in the header and the bottom bar at the same time.", "Não mostre o botão de menu no header e a barra inferior ao mesmo tempo."),
+            t("Do not put the full logo with light text on a light background, or with dark text on a dark one or on a photo.", "Não use o logo completo de texto claro sobre fundo claro, nem o de texto escuro sobre fundo escuro ou foto."),
+            t("Do not leave a transparent header over content after scrolling.", "Não deixe o header transparente sobre o conteúdo depois da rolagem."),
           ]}
         />
       </section>

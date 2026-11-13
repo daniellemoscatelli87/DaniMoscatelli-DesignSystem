@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Header & menus: current site model", pt: "Header e menus: modelo atual do site" },
+    desc: { en: "The default is now the current header of the studio site: floating light pill on desktop, bar that turns graphite on phones, bottom-sheet menu. Scrolling became three independent switches (transparent at the top, logo becomes the icon, hides on scroll down). The full logo version is chosen by what is behind it (light, dark or photo). The menu stays in one place only: header or bottom bar.", pt: "O padrão agora é o header atual do site do estúdio: pílula clara flutuando no desktop, faixa que fica grafite no celular e menu em folha inferior. A rolagem virou três chaves independentes (transparente no topo, logo vira ícone ao rolar, some ao descer e volta ao subir). A versão do logo completo é escolhida pelo que está atrás dele (claro, escuro ou foto). O menu fica em um lugar só: header ou barra inferior." },
+    page: "header", anchor: "header-demo",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Header & menus", pt: "Header e menus" },
     desc: { en: "New section with the site header pattern, based on the studio site and this DS header. Interactive demo in a window with its own scroll: three scroll behaviours (transparent → solid, hide and return, compact on scroll), three phone menus (side drawer, full screen, bottom bar for apps) and four backgrounds behind the header (page background, dark photo with veil, brand gradient, dark mode). Includes accessibility checklist, usage and tokens.", pt: "Nova seção com o padrão de header de site, a partir do site do estúdio e do header deste DS. Demonstração em uma janela com rolagem própria: três comportamentos de rolagem (transparente → sólido, some e volta, compacto ao rolar), três menus no celular (gaveta lateral, tela cheia e barra inferior para apps) e quatro fundos por trás do header (fundo da página, foto escura com véu, gradiente da marca e modo escuro). Inclui checklist de acessibilidade, uso e tokens." },
     page: "header", anchor: "header-demo",
