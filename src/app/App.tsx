@@ -7,7 +7,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight, UploadCloud, Milestone,
+  PanelRight, PanelTop, UploadCloud, Milestone,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -30,6 +30,7 @@ import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 import { CardShowcase } from "./components/showcase/CardShowcase";
 import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
+import { HeaderShowcase } from "./components/showcase/HeaderShowcase";
 import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 
@@ -167,6 +168,10 @@ const ptLabels: Record<string, string> = {
   "Side Panel": "Painel lateral",
   "Timeline": "Linha do tempo",
   "Demo": "Demonstração",
+  "Header & Menus": "Header e menus",
+  "Scroll behaviours": "Comportamentos de rolagem",
+  "Phone menus": "Menus no celular",
+  "Backgrounds behind the header": "Fundos por trás do header",
   "Anatomy": "Anatomia",
   "Motion: Step Indicator": "Movimento: Step Indicator",
   "Usage": "Uso",
@@ -415,6 +420,17 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "overlays-tokens",  label: "Tokens",     sectionId: "overlays" },
         ],
       },
+      { id: "header", label: "Header & Menus", icon: PanelTop,
+        items: [
+          { id: "header-demo",        label: "Demo",                          sectionId: "header" },
+          { id: "header-scroll",      label: "Scroll behaviours",             sectionId: "header" },
+          { id: "header-mobile",      label: "Phone menus",                   sectionId: "header" },
+          { id: "header-backgrounds", label: "Backgrounds behind the header", sectionId: "header" },
+          { id: "header-a11y",        label: "Accessibility checklist",       sectionId: "header" },
+          { id: "header-usage",       label: "Usage",                         sectionId: "header" },
+          { id: "header-tokens",      label: "Tokens",                        sectionId: "header" },
+        ],
+      },
       { id: "sidepanel", label: "Side Panel", icon: PanelRight,
         items: [
           { id: "sidepanel-anatomy",  label: "Anatomy",                 sectionId: "sidepanel" },
@@ -471,6 +487,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   badges:    <FeedbackShowcase />,
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
+  header:    <HeaderShowcase />,
   sidepanel: <SidePanelShowcase />,
   timeline:  <TimelineShowcase />,
   upload:    <UploadShowcase />,
@@ -495,6 +512,7 @@ const sectionLabels: Record<string, string> = {
   badges:    "Labels & Patterns",
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
+  header:    "Header & Menus",
   sidepanel: "Side Panel",
   timeline:  "Timeline",
   upload:    "Upload",
@@ -522,6 +540,7 @@ function AppShell() {
     badges:    false,
     icons:     false,
     overlays:  false,
+    header:    false,
     sidepanel: false,
     upload:    false,
     motion:      false,

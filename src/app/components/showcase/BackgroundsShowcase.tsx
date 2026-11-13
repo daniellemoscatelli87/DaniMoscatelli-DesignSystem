@@ -1929,3 +1929,12 @@ export function BackgroundsShowcase() {
     </div>
   );
 }
+
+/* Gradiente da marca pronto para reuso (ex.: fundo por trás do header na seção Header e menus) */
+export function FundoGradienteDaMarca({ dark, children }: { dark: boolean; children: React.ReactNode }) {
+  const palette = dark ? DARK_PALETTE : LIGHT_PALETTE;
+  const blobColors = (dark ? DEFAULT_DARK : DEFAULT_LIGHT)
+    .map(id => palette.find(e => e.id === id)?.blob)
+    .filter(Boolean) as string[];
+  return <GradientAnimBg dark={dark} blobColors={blobColors}>{children}</GradientAnimBg>;
+}

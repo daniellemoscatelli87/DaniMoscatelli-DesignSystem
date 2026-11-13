@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Header & menus", pt: "Header e menus" },
+    desc: { en: "New section with the site header pattern, based on the studio site and this DS header. Interactive demo in a window with its own scroll: three scroll behaviours (transparent → solid, hide and return, compact on scroll), three phone menus (side drawer, full screen, bottom bar for apps) and four backgrounds behind the header (page background, dark photo with veil, brand gradient, dark mode). Includes accessibility checklist, usage and tokens.", pt: "Nova seção com o padrão de header de site, a partir do site do estúdio e do header deste DS. Demonstração em uma janela com rolagem própria: três comportamentos de rolagem (transparente → sólido, some e volta, compacto ao rolar), três menus no celular (gaveta lateral, tela cheia e barra inferior para apps) e quatro fundos por trás do header (fundo da página, foto escura com véu, gradiente da marca e modo escuro). Inclui checklist de acessibilidade, uso e tokens." },
+    page: "header", anchor: "header-demo",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Pricing cards: collapsible features and optional “Who it's for”", pt: "Cards de preço: recursos recolhíveis e “Para quem” opcional" },
     desc: { en: "The feature list starts collapsed, with a “Show plan features” button and the count (for example, 5 of 10). Opening or closing applies to every card, so they stay aligned; the button uses aria-expanded. The “Who it's for” box is optional: a plan without that text does not show it, and a switch in the demo shows the card with and without it.", pt: "A lista de recursos começa recolhida, com o botão “Ver recursos do plano” e a contagem (por exemplo, 5 de 10). Abrir ou fechar vale para todos os cards, que ficam sempre alinhados; o botão usa aria-expanded. O bloco “Para quem” é opcional: plano sem esse texto não mostra o bloco, e um interruptor na demonstração mostra o card com e sem ele." },
     page: "templates", anchor: "template-pricing",
