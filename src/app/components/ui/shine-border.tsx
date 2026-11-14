@@ -32,7 +32,7 @@ export type ShineBorderProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export function ShineBorder({
   borderWidth = 1,
-  duration = 14,
+  duration = 8,
   shineColor,
   preset,
   className,

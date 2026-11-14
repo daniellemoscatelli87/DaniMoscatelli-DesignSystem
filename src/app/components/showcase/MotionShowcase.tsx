@@ -2032,19 +2032,19 @@ export function ShineBorderConteudo() {
     {
       label: t("Slow emphasis", "Ênfase lenta"),
       use: t("Persistent premium or recommended card", "Card premium ou recomendado persistente"),
-      duration: 18,
+      duration: 11,
       colors: ["var(--primary)", "var(--chart-2)", "var(--primary)"],
     },
     {
       label: t("Standard", "Padrão"),
       use: t("Short decision flow or feature highlight", "Fluxo curto de decisão ou destaque de recurso"),
-      duration: 14,
+      duration: 8,
       colors: ["var(--primary)", "var(--foreground)", "var(--primary)"],
     },
     {
       label: t("Fast preview", "Prévia rápida"),
       use: t("Documentation demos only—not persistent UI", "Apenas demos de documentação — não para UI persistente"),
-      duration: 8,
+      duration: 5,
       colors: ["var(--chart-2)", "var(--primary)", "var(--chart-2)"],
     },
   ];
@@ -2081,7 +2081,7 @@ export function ShineBorderConteudo() {
             };
             return (
               <div key={name} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
-                <ShineBorder preset={name} duration={12} borderWidth={name === "dourada" || name === "ouro" ? 2 : 1} />
+                <ShineBorder preset={name} duration={7} borderWidth={name === "dourada" || name === "ouro" ? 2 : 1} />
                 <div className="mb-3 flex gap-1.5">
                   {shinePresets[name].slice(0, 2).map((c, i) => (
                     <span key={i} className="h-3 w-3 rounded-full border border-border" style={{ background: c }} />
@@ -2099,7 +2099,7 @@ export function ShineBorderConteudo() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         <Token name="borderWidth" value="1px default" />
-        <Token name="duration" value="14s default" />
+        <Token name="duration" value="8s default" />
         <Token name="easing" value="linear · infinite" />
       </div>
       <div className="rounded-[14px] border border-border bg-muted/40 p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">

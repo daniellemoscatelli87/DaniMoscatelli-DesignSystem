@@ -884,7 +884,7 @@ export function CardShowcase() {
         <div className="space-y-8">
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
             <Card className="relative gap-5 overflow-hidden border-border">
-              <ShineBorder borderWidth={1} duration={12} shineColor={["var(--primary)", "var(--chart-2)", "var(--primary)"]} />
+              <ShineBorder borderWidth={1} duration={7} shineColor={["var(--primary)", "var(--chart-2)", "var(--primary)"]} />
               <CardHeader>
                 <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-primary">{t("Recommended", "Recomendado")}</span>
                 <CardTitle className={`${display} text-[1.125rem] font-semibold`}>{t("Studio plan", "Plano Studio")}</CardTitle>

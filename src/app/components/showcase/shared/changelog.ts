@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Faster Shine Border", pt: "Shine Border mais ligeiro" },
+    desc: { en: "The shine loop is about 40% faster: component default from 14 s to 8 s; slow, standard and fast examples at 11, 8 and 5 s; highlight card and colour combinations at 7 s.", pt: "A volta do brilho ficou cerca de 40% mais rápida: padrão do componente de 14 s para 8 s; exemplos lento, padrão e rápido em 11, 8 e 5 s; card de destaque e combinações de cor em 7 s." },
+    page: "cards", anchor: "card-shine",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Shine Border: the light now travels around the whole border", pt: "Shine Border: a luz agora dá a volta pela borda inteira" },
     desc: { en: "Before, a radial gradient slid back and forth on the diagonal: the border only changed tone and the shine did not travel through the corners. Now a beam (conic gradient) goes around the card every duration and passes through every corner. Colours, presets, duration and reduced motion stay the same.", pt: "Antes, um gradiente radial ia e voltava na diagonal: a borda só mudava de tom e o brilho não percorria os cantos. Agora um feixe (gradiente cônico) gira em volta do card a cada duration e passa por todos os cantos. Cores, presets, duração e movimento reduzido continuam iguais." },
     page: "cards", anchor: "card-shine",
