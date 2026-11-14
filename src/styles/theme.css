@@ -204,21 +204,26 @@
   --sidebar-ring:              rgba(212, 77, 77, 0.4);
 }
 
+/* Ângulo do Shine Border: registrado para poder ser animado */
+@property --shine-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
 /* ── Tailwind v4 theme mapping ── */
 @theme inline {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --animate-shine: shine var(--duration) infinite linear;
 
+  /* Shine Border: o feixe dá uma volta completa pela borda a cada --duration */
   @keyframes shine {
-    0% {
-      background-position: 0% 0%;
-    }
-    50% {
-      background-position: 100% 100%;
+    from {
+      --shine-angle: 0deg;
     }
     to {
-      background-position: 0% 0%;
+      --shine-angle: 360deg;
     }
   }
 

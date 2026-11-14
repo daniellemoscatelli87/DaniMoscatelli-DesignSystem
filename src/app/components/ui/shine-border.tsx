@@ -40,6 +40,10 @@ export function ShineBorder({
   ...props
 }: ShineBorderProps) {
   const colors = shineColor ?? (preset ? shinePresets[preset] : "var(--primary)");
+  // Feixe de luz: as cores ocupam um arco de ~30% da volta; o resto é transparente.
+  // O ângulo (--shine-angle) gira de 0 a 360°, então o brilho percorre a borda inteira, cantos incluídos.
+  const lista = Array.isArray(colors) ? colors : [colors];
+  const paradas = lista.map((c, i) => `${c} ${Math.round(6 + (i * 18) / Math.max(1, lista.length - 1))}%`).join(", ");
   return (
     <div
       aria-hidden
@@ -47,10 +51,7 @@ export function ShineBorder({
         {
           "--border-width": `${borderWidth}px`,
           "--duration": `${duration}s`,
-          backgroundImage: `radial-gradient(transparent, transparent, ${
-            Array.isArray(colors) ? colors.join(", ") : colors
-          }, transparent, transparent)`,
-          backgroundSize: "300% 300%",
+          backgroundImage: `conic-gradient(from var(--shine-angle, 0deg), transparent 0%, ${paradas}, transparent 30%, transparent 100%)`,
           mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
@@ -60,7 +61,7 @@ export function ShineBorder({
         } as React.CSSProperties
       }
       className={cn(
-        "pointer-events-none absolute inset-0 size-full rounded-[inherit] motion-safe:animate-shine will-change-[background-position]",
+        "pointer-events-none absolute inset-0 size-full rounded-[inherit] motion-safe:animate-shine",
         className,
       )}
       {...props}
