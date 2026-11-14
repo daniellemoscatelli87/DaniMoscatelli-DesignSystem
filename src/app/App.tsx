@@ -124,11 +124,23 @@ const ptLabels: Record<string, string> = {
   "Form Controls": "Controles de formulário",
   "Cards": "Cards",
   "Card Anatomy": "Anatomia do card",
+  "How to choose": "Como escolher",
+  "By background": "Por fundo",
+  "Border, shadow and radius": "Borda, sombra e raio",
+  "Vertical and horizontal": "Vertical e horizontal",
+  "Photo and button": "Foto e botão",
+  "Information architecture": "Arquitetura de informação",
+  "Card animation": "Animação",
+  "Glass: finishes": "Vidro: acabamentos",
+  "Glass by background": "Vidro por fundo",
+  "Glass with content": "Vidro com conteúdo",
+  "Test the glass": "Testar o vidro",
+  "What to avoid": "O que evitar",
   "Variants": "Variantes",
   "Layout & Sizing": "Layout e dimensionamento",
   "Nested Cards": "Cards aninhados",
   "Buttons in Cards": "Botões em cards",
-  "Interactive States": "Estados interativos",
+  "Interactive States": "Estados",
   "Usage Guidelines": "Diretrizes de uso",
   "Partner invitation card": "Card de convite ao parceiro",
   "Glassmorphism cards": "Cards glassmorphism",
@@ -359,18 +371,26 @@ const navGroups: { group: string; items: NavItem[] }[] = [
       },
       { id: "cards", label: "Cards", icon: Grid3X3,
         items: [
-          { id: "card-anatomy",       label: "Card Anatomy",       sectionId: "cards" },
-          { id: "card-variants",      label: "Variants",           sectionId: "cards" },
-          { id: "card-shine",         label: "Shine Border",       sectionId: "cards" },
-          { id: "card-glass",         label: "Glassmorphism cards", sectionId: "cards" },
-          { id: "card-layout",        label: "Layout & Sizing",    sectionId: "cards" },
-          { id: "card-nested",        label: "Nested Cards",       sectionId: "cards" },
-          { id: "card-actions",       label: "Buttons in Cards",   sectionId: "cards" },
-          { id: "card-states",        label: "Interactive States", sectionId: "cards" },
-          { id: "card-partner",       label: "Partner invitation card", sectionId: "cards" },
-          { id: "card-guidelines",    label: "Usage Guidelines",   sectionId: "cards" },
-          { id: "card-accessibility", label: "Card Accessibility", sectionId: "cards" },
-          { id: "card-tokens",        label: "Card Tokens",        sectionId: "cards" },
+          { id: "card-escolher",       label: "How to choose",                 sectionId: "cards" },
+          { id: "card-anatomy",        label: "Card Anatomy",                  sectionId: "cards" },
+          { id: "card-fundos",         label: "By background",                 sectionId: "cards" },
+          { id: "card-layout",         label: "Border, shadow and radius",     sectionId: "cards" },
+          { id: "card-orientacao",     label: "Vertical and horizontal",       sectionId: "cards" },
+          { id: "card-variants",       label: "Photo and button",              sectionId: "cards" },
+          { id: "card-actions",        label: "Buttons in Cards",              sectionId: "cards" },
+          { id: "card-ia",             label: "Information architecture",      sectionId: "cards" },
+          { id: "card-states",         label: "Interactive States",            sectionId: "cards" },
+          { id: "card-animacao",       label: "Card animation",                sectionId: "cards" },
+          { id: "card-shine",          label: "Shine Border",                  sectionId: "cards" },
+          { id: "card-nested",         label: "Nested Cards",                  sectionId: "cards" },
+          { id: "card-partner",        label: "Partner invitation card",       sectionId: "cards" },
+          { id: "card-glass",          label: "Glass: finishes",               sectionId: "cards" },
+          { id: "card-glass-fundos",   label: "Glass by background",           sectionId: "cards" },
+          { id: "card-glass-conteudo", label: "Glass with content",            sectionId: "cards" },
+          { id: "card-glass-teste",    label: "Test the glass",                sectionId: "cards" },
+          { id: "card-guidelines",     label: "What to avoid",                 sectionId: "cards" },
+          { id: "card-accessibility",  label: "Card Accessibility",            sectionId: "cards" },
+          { id: "card-tokens",         label: "Card Tokens",                   sectionId: "cards" },
         ],
       },
       { id: "data", label: "Data Display", icon: TableProperties,
@@ -632,6 +652,16 @@ function AppShell() {
     setMobileSidebarOpen(false);
     if (!anchor) window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  // Links entre páginas (ex.: "Ver em Cards"): os showcases pedem a navegação por evento
+  useEffect(() => {
+    const ouvir = (e: Event) => {
+      const d = (e as CustomEvent<{ secao: string; ancora?: string }>).detail;
+      if (d?.secao) navigateTo(d.secao, d.ancora);
+    };
+    window.addEventListener("ds:navegar", ouvir);
+    return () => window.removeEventListener("ds:navegar", ouvir);
+  });
 
   const selectSearchResult = (sectionId: string, anchor?: string) => {
     navigateTo(sectionId, anchor);

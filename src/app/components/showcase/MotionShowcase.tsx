@@ -6,6 +6,7 @@ import {
   Wind, Layers, Activity, Clock, Move, Users,
 } from "lucide-react";
 import { useI18n } from "../../i18n";
+import { VejaEm } from "./shared/VejaEm";
 import { ShineBorder, shinePresets, type ShinePreset } from "../ui/shine-border";
 
 /* ── Section wrapper ── */
@@ -599,6 +600,7 @@ function HoverSection() {
           <p className="text-[0.625rem] text-muted-foreground font-mono">{t("staggered slide reveal", "revelação deslizante em sequência")}</p>
         </div>
       </div>
+      <VejaEm secao="cards" ancora="card-animacao" titulo={t("Animations applied to cards", "Animações aplicadas a cards")} texto={t("Lift on hover, 3D tilt, wobble, shine border and reveal on whole cards, with where to apply each one, are in Cards › Animation.", "Elevação no hover, inclinação 3D, wobble, borda brilhante e revelação aplicados a cards inteiros, com onde usar cada um, estão em Cards › Animação.")} />
     </Section>
   );
 }
@@ -1919,7 +1921,8 @@ function WobbleCardDemo({
   );
 }
 
-function WobbleCardSection() {
+/** Card com wobble: demonstração com controles (usada na página Cards). */
+export function WobbleCardConteudo() {
   const { t, bi } = useI18n();
   const dark = useDarkMode();
   const [spotlightId,   setSpotlightId]   = useState("crimson");
@@ -1930,11 +1933,6 @@ function WobbleCardSection() {
   const idleColor   = dark ? "#8898B0" : "#627288";
 
   return (
-    <Section
-      id="wobble-card"
-      title={t("Wobble Card", "Card com wobble")}
-      sub={t("Card with 3D perspective that tilts as the mouse moves. Configure the spotlight and motion below.", "Card com perspectiva 3D que inclina conforme o mouse se move. Configure o spotlight e o movimento abaixo.")}
-    >
       <div className="rounded-[20px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
         {/* Preview */}
         <div
@@ -1991,7 +1989,7 @@ function WobbleCardSection() {
         </div>
 
         {/* Docs */}
-        <div className="border-t border-border bg-card p-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="border-t border-border bg-card p-5 grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Technique", "Técnica")}</p>
             <p className="text-[0.75rem] text-foreground leading-relaxed">
@@ -2008,23 +2006,27 @@ function WobbleCardSection() {
               ))}
             </ul>
           </div>
-          <div>
-            <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Avoid when", "Evitar quando")}</p>
-            <ul className="space-y-1">
-              {[t("Mobile — without a cursor the effect is static.", "Mobile — sem cursor o efeito fica estático."), t("Many wobble cards in the same grid.", "Vários cards com wobble no mesmo grid."), t("Content with tables or nested grids.", "Conteúdo com tabelas ou grids aninhados.")].map(w => (
-                <li key={w} className="flex items-start gap-1.5 text-[0.75rem] text-muted-foreground">
-                  <span className="shrink-0 mt-0.5 text-destructive font-bold">×</span>{w}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </div>
+  );
+}
+
+/** O que evitar no card com wobble (mostrado em Cards › O que evitar). */
+export function evitarWobble(t: (en: string, pt: string) => string) {
+  return [t("Mobile — without a cursor the effect is static.", "Mobile — sem cursor o efeito fica estático."), t("Many wobble cards in the same grid.", "Vários cards com wobble no mesmo grid."), t("Content with tables or nested grids.", "Conteúdo com tabelas ou grids aninhados.")];
+}
+
+function WobbleCardSection() {
+  const { t } = useI18n();
+  return (
+    <Section id="wobble-card" title={t("Wobble Card", "Card com wobble")} sub={t("Card with 3D perspective that tilts as the mouse moves.", "Card com perspectiva 3D que inclina conforme o mouse se move.")}>
+      <VejaEm secao="cards" ancora="card-animacao" titulo={t("Moved to Cards", "Agora fica em Cards")} texto={t("Everything about cards is in one page: the wobble card is in Cards › Animation, next to the other card animations.", "Tudo sobre cards fica numa página só: o card com wobble está em Cards › Animação, junto com as outras animações de card.")} />
     </Section>
   );
 }
 
-function ShineBorderSection() {
+/** Shine Border: velocidades, combinações de cor, tokens e acessibilidade (usado na página Cards). */
+export function ShineBorderConteudo() {
   const { t } = useI18n();
   const examples = [
     {
@@ -2048,14 +2050,7 @@ function ShineBorderSection() {
   ];
 
   return (
-    <Section
-      id="shine-border"
-      title="Shine Border"
-      sub={t(
-        "A looping decorative border for opt-in emphasis. Motion owns its timing and accessibility; Cards owns its composition and usage hierarchy.",
-        "Uma borda decorativa em loop para ênfase opcional. Motion define timing e acessibilidade; Cards define composição e hierarquia de uso.",
-      )}
-    >
+    <div className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {examples.map(example => (
           <div key={example.label} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
@@ -2114,6 +2109,15 @@ function ShineBorderSection() {
           "a implementação usa motion-safe; assim, prefers-reduced-motion mantém a borda visual, mas remove o loop. Não use Shine Border como único indicador de seleção ou status.",
         )}
       </div>
+    </div>
+  );
+}
+
+function ShineBorderSection() {
+  const { t } = useI18n();
+  return (
+    <Section id="shine-border" title="Shine Border" sub={t("A looping decorative border for opt-in emphasis.", "Uma borda decorativa em loop para ênfase opcional.")}>
+      <VejaEm secao="cards" ancora="card-shine" titulo={t("Moved to Cards", "Agora fica em Cards")} texto={t("Shine Border is a card border: speeds, colour combinations, tokens and accessibility are in Cards › Shine Border.", "O Shine Border é uma borda de card: velocidades, combinações de cor, tokens e acessibilidade estão em Cards › Shine Border.")} />
     </Section>
   );
 }

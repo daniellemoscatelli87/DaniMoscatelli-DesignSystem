@@ -6,6 +6,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { DoodleTexture, doodleTextureFiles } from "@/app/components/ui/doodle-texture";
 import { Download } from "lucide-react";
 import { useI18n } from "../../i18n";
+import { VejaEm } from "./shared/VejaEm";
 import {
   Zap, Shield, BarChart2, TrendingUp, Package,
   Check, ArrowRight,
@@ -305,16 +306,6 @@ function GradientAnimCard() {
                 ))}
               </ul>
             </div>
-            <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
-                {avoidWhen.map((w, i) => (
-                  <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
-                    <span className="text-destructive shrink-0 mt-0.5 text-[0.75rem]">✕</span>{w}
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         )}
       </div>
@@ -503,7 +494,8 @@ function RevealCardItem({
 }
 
 /* Dedicated card with color, size and speed controls */
-function CanvasRevealCard() {
+/** Cards com revelação em canvas (usado na página Cards › Animação). */
+export function CanvasRevealCard() {
   const { t, bi, lang } = useI18n();
   const dark = useDarkMode();
   const [presetId,  setPresetId]  = useState("crimson");
@@ -1762,7 +1754,7 @@ export function BackgroundsShowcase() {
 
       {/* Canvas Reveal — dedicated card with color and size controls */}
       <section id="canvas-reveal-bg">
-        <CanvasRevealCard />
+        <VejaEm secao="cards" ancora="card-animacao" titulo={t("Canvas Reveal moved to Cards", "O Canvas Reveal agora fica em Cards")} texto={t("It is an effect applied to cards: the demo, the controls and when to use it are in Cards › Animation.", "É um efeito aplicado a cards: a demonstração, os controles e quando usar estão em Cards › Animação.")} />
       </section>
 
       {/* Big Bang — dedicated card with speed and palette controls */}
@@ -1937,4 +1929,9 @@ export function FundoGradienteDaMarca({ dark, children }: { dark: boolean; child
     .map(id => palette.find(e => e.id === id)?.blob)
     .filter(Boolean) as string[];
   return <GradientAnimBg dark={dark} blobColors={blobColors}>{children}</GradientAnimBg>;
+}
+
+/** O que evitar no Canvas Reveal (mostrado em Cards › O que evitar). */
+export function evitarCanvasReveal(t: (en: string, pt: string) => string) {
+  return [t("Mobile — hover doesn't exist on touch.", "Mobile — hover não existe em telas touch."), t("Cards with a lot of internal information.", "Cards com muita informação interna."), t("Contexts with a reduced-motion preference.", "Contextos com preferência por movimento reduzido.")];
 }
