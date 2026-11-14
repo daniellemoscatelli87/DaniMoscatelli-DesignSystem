@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Glass cards: test background", pt: "Cards de vidro: fundo de teste" },
+    desc: { en: "The finish picker gained a “Test background” control: default, dense texture, open texture, dark texture, light and subtle, and solid colour (light grey, mid grey, graphite or primary). The contrast check of each card uses the chosen background (worst case between the background and a texture stroke). The default glass now also appears in the finish gallery. On phones, the finish control and the rules table no longer push the page sideways.", pt: "O seletor de acabamentos ganhou o controle “Fundo de teste”: padrão, textura fechada, textura aberta, textura escura, clara e discreta e cor sólida (cinza claro, cinza médio, grafite ou primária). A conferência de contraste de cada card usa o fundo escolhido (pior caso entre o fundo e um traço da textura). O vidro padrão passou a aparecer também na galeria de acabamentos. No celular, o seletor de acabamento e a tabela de regras não empurram mais a página para o lado." },
+    page: "cards", anchor: "card-glass",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Header & menus: current site model", pt: "Header e menus: modelo atual do site" },
     desc: { en: "The default is now the current header of the studio site: floating light pill on desktop, bar that turns graphite on phones, bottom-sheet menu. Scrolling became three independent switches (transparent at the top, logo becomes the icon, hides on scroll down). The full logo version is chosen by what is behind it (light, dark or photo). The menu stays in one place only: header or bottom bar.", pt: "O padrão agora é o header atual do site do estúdio: pílula clara flutuando no desktop, faixa que fica grafite no celular e menu em folha inferior. A rolagem virou três chaves independentes (transparente no topo, logo vira ícone ao rolar, some ao descer e volta ao subir). A versão do logo completo é escolhida pelo que está atrás dele (claro, escuro ou foto). O menu fica em um lugar só: header ou barra inferior." },
     page: "header", anchor: "header-demo",

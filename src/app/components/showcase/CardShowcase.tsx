@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { ShineBorder } from "../ui/shine-border";
 import { PartnerCard } from "../ui/partner-card";
 import { GlassCard, GlassScene, glassTextContrast, glassSceneTexture, type GlassFinish, type GlassCardProps } from "../ui/glass-card";
+import { DoodleTexture } from "../ui/doodle-texture";
 import { resolveCssColor, formatRatio, AA } from "../ui/contrast";
 import { AlertTriangle, CheckCircle2 } from "lucide-react";
 import { SegmentedControl } from "../ui/segmented-control";
@@ -74,6 +75,47 @@ function useIsDark() {
   return dark;
 }
 
+/* ── Fundo de teste dos cards de vidro ──
+   O seletor de acabamentos deixa trocar o que fica atrás dos cards, para testar o vidro
+   (e o contraste do texto) sobre texturas mais fechadas, mais abertas, mais escuras ou mais claras e sobre cores sólidas. */
+type FundoDeTeste = "padrao" | "fechada" | "aberta" | "escura" | "clara" | "solida";
+type CorSolida = "cinza-claro" | "cinza-medio" | "grafite" | "primaria";
+const coresSolidas: Record<CorSolida, string> = {
+  "cinza-claro": "var(--graphite-100)",
+  "cinza-medio": "var(--graphite-500)",
+  grafite: "var(--graphite-950)",
+  primaria: "var(--primary)",
+};
+type CenaDeTeste = { fundo: FundoDeTeste; cor: CorSolida };
+const CenaDeTesteCtx = React.createContext<CenaDeTeste | null>(null);
+
+/** Fundo e traço da textura (null = sem textura) e tamanho do ladrilho da cena, em px. */
+function coresDaCena(c: CenaDeTeste | null, dark: boolean): { bg: string; traco: string | null; ladrilho: number } {
+  const tracoDoTema = dark ? glassSceneTexture.dark : glassSceneTexture.light;
+  switch (c?.fundo ?? "padrao") {
+    case "fechada": return { bg: "var(--background)", traco: tracoDoTema, ladrilho: 200 };
+    case "aberta": return { bg: "var(--background)", traco: tracoDoTema, ladrilho: 640 };
+    case "escura": return { bg: "var(--graphite-950)", traco: "var(--graphite-700)", ladrilho: 320 };
+    case "clara": return { bg: "var(--graphite-50)", traco: "var(--graphite-100)", ladrilho: 320 };
+    case "solida": return { bg: coresSolidas[c!.cor], traco: null, ladrilho: 0 };
+    default: return { bg: "var(--background)", traco: tracoDoTema, ladrilho: 320 };
+  }
+}
+
+/** Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene). */
+function CenaDoVidro({ className, children }: { className?: string; children: React.ReactNode }) {
+  const cena = React.useContext(CenaDeTesteCtx);
+  const dark = useIsDark();
+  if (!cena) return <GlassScene className={className}>{children}</GlassScene>;
+  const c = coresDaCena(cena, dark);
+  return (
+    <div data-testid="cena-vidro" data-fundo={cena.fundo} className={cn("relative isolate overflow-hidden rounded-[24px] border border-border p-6 sm:p-8 transition-colors", className)} style={{ backgroundColor: c.bg }}>
+      {c.traco && <DoodleTexture color={c.traco} className="-z-10" style={{ WebkitMaskSize: `${c.ladrilho}px`, maskSize: `${c.ladrilho}px` }} />}
+      {children}
+    </div>
+  );
+}
+
 /**
  * Card de teste: título e subtítulo reais sobre o vidro, com avaliação de contraste (WCAG AA)
  * e alerta dentro do card quando a configuração compromete a acessibilidade.
@@ -82,23 +124,26 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
   const { t } = useI18n();
   const dark = useIsDark();
   const escura = tone === "escura";
+  const cena = React.useContext(CenaDeTesteCtx);
+  const comTextura = coresDaCena(cena, dark).traco !== null;
   const result = React.useMemo(() => {
-    const sceneBg = resolveCssColor("var(--background)");
-    const texture = resolveCssColor(dark ? glassSceneTexture.dark : glassSceneTexture.light);
+    const c = coresDaCena(cena, dark);
+    const fundos = [c.bg, c.traco].filter((x): x is string => !!x).map(x => resolveCssColor(x));
     const titleColor = resolveCssColor(escura ? "#FFFFFF" : dark ? "#FFFFFF" : "var(--foreground)");
     const subColor = escura || dark ? resolveCssColor("rgba(255,255,255,0.7)") : resolveCssColor("var(--muted-foreground)");
-    if (!sceneBg || !texture || !titleColor || !subColor) return null;
-    // subtítulo a 70% de branco: compõe sobre a superfície dentro do cálculo
-    // pior caso: o texto cruzando um traço da textura (a cor do traço é o fundo), não a média da cena
-    void sceneBg;
-    const base = glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg: texture, title: titleColor, subtitle: subColor });
-    if (escura || dark) {
+    if (fundos.some(x => !x) || !titleColor || !subColor) return null;
+    // pior caso: o texto sobre o fundo ou sobre um traço da textura, o que der menos contraste
+    const calc = (sceneBg: NonNullable<ReturnType<typeof resolveCssColor>>) => {
+      const base = glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg, title: titleColor, subtitle: subColor });
+      if (!(escura || dark)) return base;
+      // subtítulo a 70% de branco: compõe sobre a superfície dentro do cálculo
       const sub70 = { r: 255 * 0.7 + base.surface.r * 0.3, g: 255 * 0.7 + base.surface.g * 0.3, b: 255 * 0.7 + base.surface.b * 0.3, a: 1 };
-      const r = glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg: texture, title: titleColor, subtitle: sub70 });
-      return r;
-    }
-    return base;
-  }, [finish, tone, intensity, opacity, tint, dark, escura]);
+      return glassTextContrast({ finish, tone, intensity, opacity, tint, darkTheme: dark, sceneBg, title: titleColor, subtitle: sub70 });
+    };
+    const rs = fundos.map(x => calc(x!));
+    const title = Math.min(...rs.map(r => r.title)), subtitle = Math.min(...rs.map(r => r.subtitle));
+    return { ...rs[0], title, subtitle, titleOk: title >= AA.large, subtitleOk: subtitle >= AA.normal };
+  }, [finish, tone, intensity, opacity, tint, dark, escura, cena]);
   const ok = result ? result.titleOk && result.subtitleOk : true;
   const subCls = escura ? "text-white/70" : "text-muted-foreground dark:text-white/70";
   const monoCls = escura ? "text-white/60" : "text-muted-foreground dark:text-white/60";
@@ -118,7 +163,7 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
         <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-[10px] border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
           {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning)]" aria-hidden />}
           <span>
-            {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({t("worst case: text over a texture stroke", "pior caso: texto sobre um traço da textura")})</span>
+            {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({comTextura ? t("worst case: text over the background or a texture stroke", "pior caso: texto sobre o fundo ou um traço da textura") : t("solid background", "fundo sólido")})</span>
             {" · "}{t("title", "título")} <strong className={result.titleOk ? "" : "text-[var(--error,var(--destructive))]"}>{t(`${result.title.toFixed(1)}:1`, formatRatio(result.title))}</strong> ({t("min.", "mín.")} {AA.large}:1)
             {" · "}{t("subtitle", "subtítulo")} <strong className={result.subtitleOk ? "" : "text-[var(--error,var(--destructive))]"}>{t(`${result.subtitle.toFixed(1)}:1`, formatRatio(result.subtitle))}</strong> ({t("min.", "mín.")} {t(String(AA.normal), String(AA.normal).replace(".", ","))}:1)
           </span>
@@ -137,6 +182,21 @@ function GlassFinishPicker() {
   const [opacidade, setOpacidade] = useState<number | null>(null);
   const [desfoque, setDesfoque] = useState<number | null>(null);
   const livre = opacidade !== null || desfoque !== null;
+  const [cena, setCena] = useState<CenaDeTeste>({ fundo: "padrao", cor: "grafite" });
+  const fundos: { value: FundoDeTeste; label: string }[] = [
+    { value: "padrao", label: t("Default", "Padrão") },
+    { value: "fechada", label: t("Dense texture", "Textura fechada") },
+    { value: "aberta", label: t("Open texture", "Textura aberta") },
+    { value: "escura", label: t("Dark texture", "Textura escura") },
+    { value: "clara", label: t("Light and subtle", "Clara e discreta") },
+    { value: "solida", label: t("Solid colour", "Cor sólida") },
+  ];
+  const cores: { value: CorSolida; label: string }[] = [
+    { value: "cinza-claro", label: t("Light grey", "Cinza claro") },
+    { value: "cinza-medio", label: t("Mid grey", "Cinza médio") },
+    { value: "grafite", label: t("Graphite", "Grafite") },
+    { value: "primaria", label: t("Primary", "Primária") },
+  ];
   const finishes: { value: GlassFinish; label: string; desc: string }[] = [
     { value: "translucido", label: t("Translucent", "Translúcido"), desc: t("Very transparent, almost no blur: the background shows through whole. For short labels over calm images.", "Bem transparente, quase sem desfoque: o fundo aparece inteiro. Para rótulos curtos sobre imagens calmas.") },
     { value: "fosco", label: t("Frosted", "Fosco"), desc: t("Sandblasted glass: heavy blur, more opaque, no reflection. The most legible; works over busy photos.", "Vidro jateado: muito desfoque, mais opaco, sem reflexo. O mais legível; funciona sobre fotos movimentadas.") },
@@ -148,7 +208,7 @@ function GlassFinishPicker() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <div className="flex flex-col gap-1.5">
+        <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Finish", "Acabamento")}</span>
           <SegmentedControl size="sm" aria-label={t("Finish", "Acabamento")} value={finish} onValueChange={setFinish} options={finishes.map(x => ({ value: x.value, label: x.label }))} />
         </div>
@@ -160,6 +220,19 @@ function GlassFinishPicker() {
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Opacity", "Opacidade")}</span>
           <SegmentedControl size="sm" aria-label={t("Opacity", "Opacidade")} value={intensity} onValueChange={setIntensity} options={[{ value: "leve", label: t("Light", "Leve") }, { value: "media", label: t("Medium", "Média") }, { value: "forte", label: t("Strong", "Forte") }]} />
         </div>
+      </div>
+      <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
+        <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
+          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Test background", "Fundo de teste")}</span>
+          <SegmentedControl size="sm" aria-label={t("Test background", "Fundo de teste")} value={cena.fundo} onValueChange={v => setCena(c => ({ ...c, fundo: v }))} options={fundos} />
+        </div>
+        {cena.fundo === "solida" && (
+          <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
+            <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Colour", "Cor")}</span>
+            <SegmentedControl size="sm" aria-label={t("Colour", "Cor")} value={cena.cor} onValueChange={v => setCena(c => ({ ...c, cor: v }))}
+              options={cores.map(x => ({ value: x.value, label: <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-3 w-3 rounded-full border border-border" style={{ backgroundColor: coresSolidas[x.value] }} />{x.label}</span> }))} />
+          </div>
+        )}
       </div>
       <div className="grid gap-x-8 gap-y-4 rounded-[14px] border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <div className="space-y-2">
@@ -183,19 +256,21 @@ function GlassFinishPicker() {
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
-      <GlassScene>
+      <CenaDeTesteCtx.Provider value={cena}>
+      <CenaDoVidro>
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <GlassTestCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} interactive eyebrow={t("Organization · Health", "Organização · Saúde")} title={t("Clínica Horizonte", "Clínica Horizonte")} subtitle={t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")} cta={t("Open challenge", "Abrir desafio")} />
           <GlassTestCard finish={finish} tone={tone} intensity={intensity} opacity={opacidade ?? undefined} blur={desfoque ?? undefined} tint title={current.label} subtitle={current.desc} />
         </div>
-      </GlassScene>
-      <GlassScene className="p-4 sm:p-5">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {finishes.filter(x => x.value !== "padrao").map(x => (
+      </CenaDoVidro>
+      <CenaDoVidro className="p-4 sm:p-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {finishes.map(x => (
             <GlassTestCard key={x.value} compact finish={x.value} intensity="media" title={x.label} subtitle={`finish="${x.value}"`} />
           ))}
         </div>
-      </GlassScene>
+      </CenaDoVidro>
+      </CenaDeTesteCtx.Provider>
     </div>
   );
 }
@@ -436,7 +511,7 @@ export function CardShowcase() {
               </div>
             </GlassScene>
           </div>
-          <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
             <DataTable
               head={[t("Rule", "Regra"), t("Guidance", "Orientação")]}
               rows={[
