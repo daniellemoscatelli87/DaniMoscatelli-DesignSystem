@@ -53,25 +53,25 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     icon: CheckCircle, title: { en: "Changes saved", pt: "Alterações salvas" },
     msg: { en: "Your configuration has been updated successfully.", pt: "Sua configuração foi atualizada com sucesso." },
     bg: "bg-[var(--success-muted,rgba(21,128,61,0.07))]",
-    border: "border-success/20", iconColor: "text-success", titleColor: "text-success",
+    border: "border-success/20", iconColor: "text-success", titleColor: "text-foreground",
   },
   info: {
     icon: Info, title: { en: "New features available", pt: "Novos recursos disponíveis" },
     msg: { en: "We've shipped several improvements to the dashboard.", pt: "Lançamos várias melhorias no painel." },
     bg: "bg-[var(--info-muted,rgba(29,78,216,0.07))]",
-    border: "border-info/20", iconColor: "text-info", titleColor: "text-info",
+    border: "border-info/20", iconColor: "text-info", titleColor: "text-foreground",
   },
   warning: {
     icon: AlertTriangle, title: { en: "Subscription expiring", pt: "Assinatura prestes a expirar" },
     msg: { en: "Your plan renews in 3 days. Update billing to avoid interruptions.", pt: "Seu plano renova em 3 dias. Atualize o pagamento para evitar interrupções." },
     bg: "bg-[var(--warning-muted,rgba(180,83,9,0.07))]",
-    border: "border-warning/20", iconColor: "text-warning", titleColor: "text-warning",
+    border: "border-warning/20", iconColor: "text-warning", titleColor: "text-foreground",
   },
   error: {
     icon: AlertCircle, title: { en: "Deployment failed", pt: "Falha no deploy" },
     msg: { en: "Build #1042 failed due to a type error in src/app/App.tsx.", pt: "O build #1042 falhou por um erro de tipo em src/app/App.tsx." },
     bg: "bg-[var(--error-muted,rgba(140,27,27,0.07))]",
-    border: "border-error/20", iconColor: "text-error", titleColor: "text-error",
+    border: "border-error/20", iconColor: "text-error", titleColor: "text-foreground",
   },
 };
 
