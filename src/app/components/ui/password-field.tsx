@@ -7,7 +7,7 @@ import { cn } from "./utils";
  *
  * - Exibir/ocultar senha em cada campo (botão com aria-pressed e rótulo).
  * - Força da senha em 4 barras + rótulo em texto (Fraca, Razoável, Boa, Forte), calculada pelos requisitos atendidos.
- * - Dica de preenchimento: cada requisito ganha um check verde (--success) quando atendido; o ícone muda de forma
+ * - Dica de preenchimento: cada requisito ganha um check na cor primária da marca quando atendido; o ícone muda de forma
  *   (círculo → check) e o leitor de tela ouve "atendido", então a cor nunca é o único sinal.
  * - Confirmação: avisa "As senhas não coincidem" (erro) ou "As senhas coincidem" (sucesso) depois que a pessoa digita.
  */
@@ -50,7 +50,7 @@ export const textosPadrao: PasswordTexts = {
 };
 
 const inputCls =
-  "w-full rounded-[10px] border bg-card py-2.5 pl-3 pr-11 text-[0.9375rem] text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 w-full rounded-md border border-input bg-card pl-3 pr-11 text-[0.9375rem] text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "onChange"> & {
   label: string;
@@ -151,13 +151,13 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
         </p>
 
         {/* Dicas de preenchimento */}
-        <div id={dicasId} className="rounded-[12px] border border-primary/20 bg-[var(--primary-muted)] p-4">
+        <div id={dicasId} className="rounded-[12px] border border-primary/15 bg-primary/5 p-4">
           <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{textos.dicaTitulo}</p>
           <ul className="flex flex-col gap-1.5">
             {regras.map((r, i) => (
               <li key={r.id} className={cn("flex items-center gap-2 text-[0.8125rem] transition-colors duration-200", atendidas[i] ? "text-foreground" : "text-muted-foreground")}>
                 {atendidas[i] ? (
-                  <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--success)] text-[var(--success-foreground,#fff)] animate-in zoom-in-50 duration-200"><Check className="h-3 w-3" strokeWidth={3} aria-hidden /></span>
+                  <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground animate-in zoom-in-50 duration-200"><Check className="h-3 w-3" strokeWidth={3} aria-hidden /></span>
                 ) : (
                   <Circle className="h-4 w-4 shrink-0 text-muted-foreground/60" aria-hidden />
                 )}
@@ -183,7 +183,7 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
           />
           <p id={confId} aria-live="polite" className="min-h-[1.25rem] text-[0.8125rem]">
             {mostrarConf && (coincidem ? (
-              <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--success)]" aria-hidden />{textos.coincidem}</span>
+              <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--primary-text,var(--primary))]" aria-hidden />{textos.coincidem}</span>
             ) : (
               <span className="inline-flex items-center gap-1 text-[var(--error)]"><AlertCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
             ))}
