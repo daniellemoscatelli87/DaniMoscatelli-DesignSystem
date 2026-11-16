@@ -4,13 +4,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "./utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
+  "relative w-full rounded-[12px] border px-4 py-3.5 text-[0.875rem] grid has-[>svg]:grid-cols-[calc(var(--spacing)*5)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-5 [&>svg]:text-current",
   {
     variants: {
       variant: {
         default: "bg-card text-card-foreground",
         destructive:
           "text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+        // Estados (padrão do DS): fundo suave, borda e ícone na cor do estado; título em grafite (contraste)
+        success: "bg-[var(--success-muted)] border-success/20 text-foreground [&>svg]:text-success",
+        info: "bg-[var(--info-muted)] border-info/20 text-foreground [&>svg]:text-info",
+        warning: "bg-[var(--warning-muted)] border-warning/20 text-foreground [&>svg]:text-warning",
+        error: "bg-[var(--error-muted)] border-error/20 text-foreground [&>svg]:text-error",
       },
     },
     defaultVariants: {
@@ -39,7 +44,7 @@ function AlertTitle({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="alert-title"
       className={cn(
-        "col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight",
+        "col-start-2 min-h-4 text-[0.9rem] font-semibold tracking-tight",
         className,
       )}
       {...props}
