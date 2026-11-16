@@ -3,6 +3,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Heading } from "@/app/components/ui/heading";
 import { Check, X } from "lucide-react";
 import { useI18n } from "../../i18n";
+import { VejaEm } from "./shared/VejaEm";
 
 const graphiteScale = [
   { name: "50",  var: "--graphite-50",  hex: "#EDF0F5" },
@@ -486,20 +487,7 @@ export function FoundationShowcase() {
 
       {/* ── SPACING ── */}
       <section id="spacing">
-        <SectionHeader title={t("Spacing Scale", "Escala de espaçamento")} description={t("8-point grid system with 4px base unit. Consistent spacing creates rhythm and visual harmony.", "Sistema de grid de 8 pontos com unidade base de 4px. Espaçamento consistente cria ritmo e harmonia visual.")} />
-
-        <div className="space-y-3">
-          {spacingScale.map((sp) => (
-            <div key={sp} className="flex items-center gap-4">
-              <span className="w-12 text-right text-[0.8125rem] font-mono text-muted-foreground shrink-0">{sp}px</span>
-              <div
-                className="bg-primary/80 rounded-[4px] h-5"
-                style={{ width: `${sp * 2}px`, minWidth: "4px" }}
-              />
-              <span className="text-[0.75rem] text-muted-foreground/70">--space-{sp / 4}</span>
-            </div>
-          ))}
-        </div>
+        <VejaEm secao="grid" ancora="grid-escala" rotuloBotao={t("See Grid and spacing", "Ver Grid e espaçamento")} titulo={t("Spacing now lives in Grid and spacing", "O espaçamento agora fica em Grid e espaçamento")} texto={t("The 4 px scale, the column grid, maximum widths and the rhythm between sections are on one page, with tokens and how to use them.", "A escala de 4 px, o grid de colunas, as larguras máximas e o ritmo entre seções ficam numa página só, com tokens e como usar.")} />
       </section>
 
       {/* ── RADIUS ── */}

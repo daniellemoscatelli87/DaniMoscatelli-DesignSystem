@@ -422,3 +422,73 @@
     font-weight: var(--font-weight-normal);
   }
 }
+
+/* ── Grid e espaçamento ──
+   Escala de 4 px (--space-*), grid de colunas que muda por tela, larguras máximas do conteúdo
+   e ritmo vertical entre seções. Pontos de quebra iguais aos do Tailwind: 640 px (sm) e 1024 px (lg). */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* celular: 4 colunas */
+  --grid-columns: 4;
+  --grid-margin: 16px;
+  --grid-gutter: 16px;
+
+  --content-reading: 768px;
+  --content-default: 1152px;
+  --content-wide: 1280px;
+
+  --section-space: 64px;
+  --section-space-hero: 96px;
+}
+/* tablet: 8 colunas */
+@media (min-width: 640px) {
+  :root {
+    --grid-columns: 8;
+    --grid-margin: 24px;
+    --grid-gutter: 24px;
+  }
+}
+/* desktop: 12 colunas */
+@media (min-width: 1024px) {
+  :root {
+    --grid-columns: 12;
+    --grid-margin: 32px;
+    --section-space: 80px;
+  }
+}
+
+/* Container: centraliza o conteúdo na largura máxima, com a margem do grid nas laterais */
+.ds-container,
+.ds-container-reading,
+.ds-container-wide {
+  box-sizing: border-box;
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--grid-margin);
+}
+.ds-container { max-width: calc(var(--content-default) + 2 * var(--grid-margin)); }
+.ds-container-reading { max-width: calc(var(--content-reading) + 2 * var(--grid-margin)); }
+.ds-container-wide { max-width: calc(var(--content-wide) + 2 * var(--grid-margin)); }
+
+/* Grid de colunas: 4, 8 ou 12 conforme a tela; os filhos usam col-span-* */
+.ds-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--grid-gutter);
+}
+
+/* Ritmo vertical entre seções de página */
+.ds-section { padding-block: var(--section-space); }
+.ds-section-hero { padding-block: var(--section-space-hero); }

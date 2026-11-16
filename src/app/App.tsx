@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import logoVermelho from "../imports/LogoVermelho.png";
 import logoIconRed from "../imports/IconeLogo-red.png";
 import {
+  LayoutGrid,
   Sun, Moon, Palette, Type, Layers, MousePointer2,
   BarChart2, Bell, Grid3X3,
   ChevronRight, Zap,
@@ -31,6 +32,7 @@ import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowca
 import { CardShowcase } from "./components/showcase/CardShowcase";
 import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
 import { HeaderShowcase } from "./components/showcase/HeaderShowcase";
+import { GridShowcase } from "./components/showcase/GridShowcase";
 import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 
@@ -124,6 +126,13 @@ const ptLabels: Record<string, string> = {
   "Form Controls": "Controles de formulário",
   "Cards": "Cards",
   "Card Anatomy": "Anatomia do card",
+  "Grid & Spacing": "Grid e espaçamento",
+  "Overview": "Visão geral",
+  "Spacing scale": "Escala de espaçamento",
+  "Column grid": "Grid de colunas",
+  "Maximum widths": "Larguras máximas",
+  "Vertical rhythm": "Ritmo vertical",
+  "How to use": "Como usar",
   "How to choose": "Como escolher",
   "By background": "Por fundo",
   "Border, shadow and radius": "Borda, sombra e raio",
@@ -252,6 +261,18 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "radius",          label: "Radius",           sectionId: "colors" },
           { id: "shadows",         label: "Shadows",          sectionId: "colors" },
           { id: "colors-tokens",   label: "Tokens",           sectionId: "colors" },
+        ],
+      },
+      { id: "grid", label: "Grid & Spacing", icon: LayoutGrid,
+        items: [
+          { id: "grid-visao", label: "Overview", sectionId: "grid" },
+          { id: "grid-escala", label: "Spacing scale", sectionId: "grid" },
+          { id: "grid-colunas", label: "Column grid", sectionId: "grid" },
+          { id: "grid-larguras", label: "Maximum widths", sectionId: "grid" },
+          { id: "grid-ritmo", label: "Vertical rhythm", sectionId: "grid" },
+          { id: "grid-uso", label: "How to use", sectionId: "grid" },
+          { id: "grid-evitar", label: "What to avoid", sectionId: "grid" },
+          { id: "grid-tokens", label: "Tokens", sectionId: "grid" },
         ],
       },
     ],
@@ -510,6 +531,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
   header:    <HeaderShowcase />,
+  grid:      <GridShowcase />,
   sidepanel: <SidePanelShowcase />,
   timeline:  <TimelineShowcase />,
   upload:    <UploadShowcase />,
@@ -535,6 +557,7 @@ const sectionLabels: Record<string, string> = {
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
   header:    "Header & Menus",
+  grid:      "Grid & Spacing",
   sidepanel: "Side Panel",
   timeline:  "Timeline",
   upload:    "Upload",
@@ -563,6 +586,7 @@ function AppShell() {
     icons:     false,
     overlays:  false,
     header:    false,
+    grid:      false,
     sidepanel: false,
     upload:    false,
     motion:      false,
