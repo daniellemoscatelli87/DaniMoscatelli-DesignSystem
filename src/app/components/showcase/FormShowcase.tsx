@@ -272,7 +272,7 @@ const [confirmacao, setConfirmacao] = useState("");
                 <textarea
                   placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
               </div>
@@ -281,7 +281,7 @@ const [confirmacao, setConfirmacao] = useState("");
                 <textarea
                   placeholder={t("Add notes...", "Adicione notas...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
                   disabled
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
@@ -297,7 +297,7 @@ const [confirmacao, setConfirmacao] = useState("");
                 <div key={i} className="flex flex-col gap-1.5">
                   <label className="text-[0.875rem] font-medium text-foreground">{lbl}</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus:ring-2 focus:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
+                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
                       <option>{t("Select an option...", "Selecione uma opção...")}</option>
                       <option>{t("Option Alpha", "Opção Alfa")}</option>
                       <option>{t("Option Beta", "Opção Beta")}</option>
@@ -464,7 +464,7 @@ const [confirmacao, setConfirmacao] = useState("");
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input
                   placeholder={t("Search anything...", "Busque qualquer coisa...")}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[12px] pl-10 pr-4 py-3 text-[0.9375rem] outline-none transition-all duration-150 focus:ring-2 focus:ring-ring focus:border-primary/60"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[12px] pl-10 pr-4 py-3 text-[0.9375rem] outline-none transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60"
                   style={{ boxShadow: "var(--shadow-sm)" }}
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">

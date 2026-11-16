@@ -345,11 +345,11 @@ export function OverlaysShowcase() {
             <div className="space-y-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
-                <input className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus:ring-2 focus:ring-ring transition-all" placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
+                <input className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all" placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Description", "Descrição")}</label>
-                <textarea className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus:ring-2 focus:ring-ring transition-all resize-none" rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
+                <textarea className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all resize-none" rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
               </div>
             </div>
             <div className="flex justify-end gap-2 mt-6">

@@ -50,7 +50,7 @@ export const textosPadrao: PasswordTexts = {
 };
 
 const inputCls =
-  "h-10 w-full rounded-md border border-input bg-card pl-3 pr-11 text-[0.9375rem] text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 w-full rounded-md border border-input bg-card pl-3 pr-11 text-[0.9375rem] text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "onChange"> & {
   label: string;
@@ -79,7 +79,7 @@ export function PasswordInput({ label, value, onValueChange, textos, invalido, d
           aria-describedby={describedBy}
           spellCheck={false}
           autoCapitalize="none"
-          className={cn(inputCls, invalido ? "border-[var(--error)] focus:ring-[var(--error)]/30" : "border-border hover:border-[var(--border-strong)]")}
+          className={cn(inputCls, invalido ? "border-[var(--error)] focus-visible:ring-[var(--error)]/30" : "border-border hover:border-[var(--border-strong)]")}
           style={{ boxShadow: "var(--shadow-xs)" }}
           {...props}
         />

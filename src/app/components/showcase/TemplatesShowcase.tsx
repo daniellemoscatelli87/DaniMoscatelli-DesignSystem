@@ -343,7 +343,7 @@ function SettingsTemplate() {
                     <input
                       type={f.type}
                       defaultValue={f.val}
-                      className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 ))}
@@ -503,7 +503,7 @@ function AuthTemplate() {
                   <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Full Name", "Nome completo")}</label>
                   <div className="relative">
                     <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                    <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
+                    <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   </div>
                 </div>
               )}
@@ -511,7 +511,7 @@ function AuthTemplate() {
                 <label className="block text-[0.75rem] font-medium text-foreground mb-1">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type="email" placeholder="dani@moscatelli.co" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
+                  <input type="email" placeholder="dani@moscatelli.co" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                 </div>
               </div>
               <div>
@@ -521,7 +521,7 @@ function AuthTemplate() {
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type={showPass ? "text" : "password"} placeholder="••••••••" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-8 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
+                  <input type={showPass ? "text" : "password"} placeholder="••••••••" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-8 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   <button onClick={() => setShowPass(v => !v)} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
                     {showPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                   </button>
@@ -623,7 +623,7 @@ function TeamTemplate() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder={t("Search members...", "Buscar membros...")}
-              className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-1.5 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
+              className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-1.5 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
             />
           </div>
           <button className="h-8 px-3 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-muted-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
@@ -1192,7 +1192,7 @@ function ContactTemplate() {
                       required
                       type="text"
                       placeholder={t("Your name", "Seu nome")}
-                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 </div>
@@ -1204,7 +1204,7 @@ function ContactTemplate() {
                       required
                       type="email"
                       placeholder={t("you@email.com", "voce@email.com")}
-                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 </div>
@@ -1220,7 +1220,7 @@ function ContactTemplate() {
                   <input
                     type="tel"
                     placeholder="+55 (11) 9 0000-0000"
-                    className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all"
+                    className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                   />
                 </div>
               </div>
@@ -1232,7 +1232,7 @@ function ContactTemplate() {
                   <button
                     type="button"
                     onClick={() => setSubjectOpen(v => !v)}
-                    className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground text-left flex items-center justify-between outline-none focus:ring-1 focus:ring-ring transition-all"
+                    className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground text-left flex items-center justify-between outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                   >
                     {bi(subjects.find(x => x.en === subject) ?? subjects[0])}
                     <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
@@ -1263,7 +1263,7 @@ function ContactTemplate() {
                   required
                   rows={4}
                   placeholder={t("Describe your question or request in detail...", "Descreva sua dúvida ou solicitação em detalhes...")}
-                  className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all resize-none"
+                  className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all resize-none"
                 />
               </div>
 
@@ -1564,7 +1564,7 @@ function LandingTemplate() {
                   <div className="relative flex-1">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
                     <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder={t("you@email.com", "voce@email.com")}
-                      className="w-full bg-card border border-border rounded-[9px] pl-9 pr-3 py-2.5 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring transition-all" />
+                      className="w-full bg-card border border-border rounded-[9px] pl-9 pr-3 py-2.5 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   </div>
                   <button type="submit" className="h-10 px-4 rounded-[9px] bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity whitespace-nowrap flex items-center gap-1.5">
                     <Rocket className="h-3.5 w-3.5" /> {t("Get started free", "Comece grátis")}
@@ -2075,7 +2075,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input required type="text" placeholder={t("Your name", "Seu nome")}
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                         <div className="space-y-1">
@@ -2085,7 +2085,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input required type="email" placeholder={t("you@email.com", "voce@email.com")}
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                       </div>
@@ -2097,7 +2097,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Building2 className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="text" placeholder="DaniMS Co."
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                         <div className="space-y-1">
@@ -2105,7 +2105,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="tel" placeholder="+55 11 9 0000-0000"
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                       </div>
@@ -2129,7 +2129,7 @@ function LandingTemplate() {
                           {t("Message", "Mensagem")} <span className="text-primary">*</span>
                         </label>
                         <textarea required rows={3} placeholder={t("Describe your question or project in detail...", "Descreva sua dúvida ou projeto em detalhes...")}
-                          className="w-full bg-background border border-border rounded-[8px] px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus:ring-1 focus:ring-ring focus:border-primary/50 transition-all resize-none" />
+                          className="w-full bg-background border border-border rounded-[8px] px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all resize-none" />
                       </div>
 
                       {/* Footer: consent + submit */}

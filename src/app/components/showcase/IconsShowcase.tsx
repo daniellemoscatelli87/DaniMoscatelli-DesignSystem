@@ -245,7 +245,7 @@ export function IconsShowcase() {
               onChange={e => setSearch(e.target.value)}
               placeholder={t("Search icon...", "Buscar ícone...")}
               aria-label={t("Search icon", "Buscar ícone")}
-              className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] pl-9 pr-3 py-2 text-[0.875rem] outline-none focus:ring-2 focus:ring-ring focus:border-primary/60 transition-all"
+              className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] pl-9 pr-3 py-2 text-[0.875rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 transition-all"
             />
           </div>
         </div>
