@@ -71,7 +71,7 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     icon: AlertCircle, title: { en: "Deployment failed", pt: "Falha no deploy" },
     msg: { en: "Build #1042 failed due to a type error in src/app/App.tsx.", pt: "O build #1042 falhou por um erro de tipo em src/app/App.tsx." },
     bg: "bg-[var(--error-muted,rgba(140,27,27,0.07))]",
-    border: "border-primary/20", iconColor: "text-primary", titleColor: "text-primary",
+    border: "border-error/20", iconColor: "text-error", titleColor: "text-error",
   },
 };
 
@@ -100,7 +100,7 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
 /* ── Toast ── */
 const toastTypes = [
   { label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
-  { label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-primary", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
+  { label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
   { label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
   { label: "Loading", icon: Loader2,     color: "text-info",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
 ];
@@ -132,7 +132,7 @@ const badgeVariants = [
   { label: { en: "Primary", pt: "Primário" },  cls: "bg-primary/10 text-primary border-primary/20" },
   { label: { en: "Success", pt: "Sucesso" },  cls: "bg-success/10 text-success border-success/20" },
   { label: { en: "Warning", pt: "Aviso" },  cls: "bg-warning/10 text-warning border-warning/20" },
-  { label: { en: "Error", pt: "Erro" },    cls: "bg-primary/10 text-primary border-primary/20" },
+  { label: { en: "Error", pt: "Erro" },    cls: "bg-error/10 text-error border-error/20" },
   { label: { en: "Info", pt: "Info" },     cls: "bg-info/10 text-info border-info/20" },
 ];
 
@@ -664,7 +664,7 @@ const feedbackTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--success",              description: t("Positive / confirmed action", "Ação positiva / confirmada"),    light: "#4fb57b", dark: "#22C55E", isColor: true },
       { name: "--success-foreground",   description: t("Text on success", "Texto sobre sucesso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--success-muted",        description: t("Success tinted background", "Fundo com tom de sucesso"),      light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
-      { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#e5a94e", dark: "#f5b320", isColor: true },
+      { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#C2410C", dark: "#f5b320", isColor: true },
       { name: "--warning-foreground",   description: t("Text on warning", "Texto sobre aviso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--warning-muted",        description: t("Warning tinted background", "Fundo com tom de aviso"),      light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
       { name: "--error",                description: t("Error / failure state", "Estado de erro / falha"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
@@ -696,7 +696,7 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--primary-muted",description: t("Primary badge tinted", "Badge primário com tom"), light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
       { name: "--success",      description: t("Success badge", "Badge de sucesso"),        light: "#4fb57b", dark: "#22C55E", isColor: true },
       { name: "--success-muted",description: t("Success badge tinted", "Badge de sucesso com tom"), light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
-      { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#e5a94e", dark: "#f5b320", isColor: true },
+      { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#C2410C", dark: "#f5b320", isColor: true },
       { name: "--warning-muted",description: t("Warning badge tinted", "Badge de aviso com tom"), light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
       { name: "--info",         description: t("Info badge", "Badge de info"),           light: "#448abc", dark: "#3B82F6", isColor: true },
       { name: "--info-muted",   description: t("Info badge tinted", "Badge de info com tom"),    light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },

@@ -371,7 +371,7 @@ export function CardShowcase() {
     {
       group: t("Shape and elevation", "Forma e elevação"),
       tokens: [
-        { name: "--radius", description: t("Default card radius", "Raio padrão do card"), light: "0.75rem (12 px)" },
+        { name: "--radius", description: t("Base radius. The card uses rounded-xl = --radius + 12 px = 24 px", "Raio base. O card usa rounded-xl = --radius + 12 px = 24 px"), light: "0.75rem (12 px)" },
         { name: t("Highlight radius", "Raio de destaque"), description: t("Media, highlight and partner cards", "Cards com mídia, destaque e convite"), light: "16 px" },
         { name: t("Glass radius", "Raio do vidro"), description: t("Glass cards", "Cards de vidro"), light: "20 px" },
         { name: "--shadow-sm", description: t("Soft shadow: card on a light grey background", "Sombra suave: card sobre fundo cinza claro"), light: "0 1px 3px …", dark: "0 1px 3px …" },
@@ -541,7 +541,7 @@ export function CardShowcase() {
           </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              { raio: "rounded-xl", valor: "12 px · var(--radius)", uso: t("Default card, lists, forms and data.", "Card padrão, listas, formulários e dados.") },
+              { raio: "rounded-xl", valor: "24 px · rounded-xl", uso: t("Default card, lists, forms and data.", "Card padrão, listas, formulários e dados.") },
               { raio: "rounded-[16px]", valor: "16 px", uso: t("Media, highlight and partner cards.", "Cards com mídia, de destaque e de convite.") },
               { raio: "rounded-[20px]", valor: "20 px", uso: t("Glass cards.", "Cards de vidro.") },
             ].map(x => (
@@ -558,7 +558,7 @@ export function CardShowcase() {
                 {[
                   [t("Padding", "Padding"), "24px", t("16px for compact cards", "16px para cards compactos")],
                   [t("Section gap", "Espaço entre seções"), "24px", t("Use 12–16px in dense layouts", "Use 12–16px em layouts densos")],
-                  [t("Radius", "Raio"), "var(--radius)", t("Keep consistent within the same grid", "Mantenha consistente no mesmo grid")],
+                  [t("Radius", "Raio"), "24px · rounded-xl", t("Keep consistent within the same grid", "Mantenha consistente no mesmo grid")],
                   [t("Border", "Borda"), "1px", t("Use border-border", "Use border-border")],
                   [t("Elevation", "Elevação"), t("By background", "Pelo fundo"), t("See the table at the top of the page", "Veja a tabela no topo da página")],
                 ].map(([label, value, note]) => (

@@ -65,7 +65,7 @@ function Btn({ variant = "primary", size = "md", children, loading = false, disa
     ghost:           "bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
     link:            "bg-transparent text-primary underline-offset-4 hover:underline !px-0",
     secondary:       "bg-secondary text-secondary-foreground hover:bg-[var(--secondary-hover)]",
-    destructive:     "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)]",
+    destructive:     "bg-destructive text-destructive-foreground hover:bg-destructive/90",
     "crimson-outline":"border border-primary text-primary bg-transparent hover:bg-[var(--primary-muted)]",
   };
 
@@ -100,7 +100,7 @@ function InputField({
           className={`w-full bg-card border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150
             focus:ring-2 focus:ring-ring focus:border-primary/60
             disabled:opacity-50 disabled:cursor-not-allowed
-            ${error ? "border-primary/60 focus:ring-primary/30" : "border-border hover:border-[var(--border-strong)]"}
+            ${error ? "border-error/60 focus:ring-error/30" : "border-border hover:border-[var(--border-strong)]"}
             ${leftIcon ? "pl-10" : ""}
             ${rightElement ? "pr-10" : ""}
           `}
@@ -110,7 +110,7 @@ function InputField({
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{rightElement}</span>
         )}
       </div>
-      {error && <p className="text-[0.8125rem] text-primary flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
+      {error && <p className="text-[0.8125rem] text-error flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
       {hint && !error && <p className="text-[0.8125rem] text-muted-foreground">{hint}</p>}
     </div>
   );

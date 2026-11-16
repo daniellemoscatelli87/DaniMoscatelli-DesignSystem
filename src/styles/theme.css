@@ -72,9 +72,9 @@
   --success:            #4fb57b;
   --success-foreground: #FFFFFF;
   --success-muted:      rgba(79, 181, 123, 0.1);
-  --warning:            #e5a94e;
+  --warning:            #C2410C;   /* laranja queimado: texto branco atinge 5,2:1 (decisão de 16/11/2026) */
   --warning-foreground: #FFFFFF;
-  --warning-muted:      rgba(229, 169, 78, 0.1);
+  --warning-muted:      rgba(194, 65, 12, 0.1);
   --error:              var(--crimson-400);
   --error-foreground:   #FFFFFF;
   --error-muted:        rgba(212, 77, 77, 0.1);
@@ -215,6 +215,13 @@
 @theme inline {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+
+  /* Sombras: as classes shadow-* usam os tokens do DS (não as sombras padrão do Tailwind) */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
   --animate-shine: shine var(--duration) infinite linear;
 
   /* Shine Border: o feixe dá uma volta completa pela borda a cada --duration */
