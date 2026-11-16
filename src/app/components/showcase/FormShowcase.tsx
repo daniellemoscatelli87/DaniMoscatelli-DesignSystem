@@ -10,6 +10,8 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
+import { Button } from "@/app/components/ui/button";
+import { Input } from "@/app/components/ui/input";
 import { PasswordConfirm, regrasPadrao, textosPadrao } from "@/app/components/ui/password-field";
 import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
 
@@ -44,39 +46,26 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 }
 
 /* ── Button variants ── */
-const btnBase = "inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-40 cursor-pointer select-none font-semibold";
+// As demonstrações usam o componente real (ui/button), o mesmo que o produto copia.
+const variantesUi: Record<string, "default" | "outline" | "ghost" | "link" | "secondary" | "destructive"> = {
+  primary: "default", outline: "outline", ghost: "ghost", link: "link", secondary: "secondary", destructive: "destructive", "crimson-outline": "outline",
+};
+const tamanhosUi: Record<string, "sm" | "default" | "lg" | "icon"> = { sm: "sm", md: "default", lg: "lg", xl: "lg", "icon-sm": "icon", icon: "icon", "icon-lg": "icon" };
+const tamanhoExtra: Record<string, string> = { xl: "h-13 px-7 rounded-[16px]", "icon-sm": "size-8 rounded-sm", "icon-lg": "size-11" };
 
 function Btn({ variant = "primary", size = "md", children, loading = false, disabled = false, icon, iconOnly = false, className = "" }:
   { variant?: "primary"|"outline"|"ghost"|"link"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; loading?: boolean; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; className?: string }) {
-
-  const sizes: Record<string, string> = {
-    sm:      "h-8 px-3 text-[0.8125rem] rounded-[8px]",
-    md:      "h-10 px-4 text-[0.9375rem] rounded-[12px]",
-    lg:      "h-11 px-5 text-[1rem] rounded-[12px]",
-    xl:      "h-13 px-7 text-[1rem] rounded-[16px]",
-    "icon-sm":"h-8 w-8 rounded-[8px]",
-    icon:    "h-10 w-10 rounded-[12px]",
-    "icon-lg":"h-11 w-11 rounded-[12px]",
-  };
-
-  const variants: Record<string, string> = {
-    primary:         "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] active:scale-[0.98] shadow-sm",
-    outline:         "border border-[var(--border-strong)] bg-transparent text-foreground hover:bg-accent",
-    ghost:           "bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground",
-    link:            "bg-transparent text-primary underline-offset-4 hover:underline !px-0",
-    secondary:       "bg-secondary text-secondary-foreground hover:bg-[var(--secondary-hover)]",
-    destructive:     "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-    "crimson-outline":"border border-primary text-primary bg-transparent hover:bg-[var(--primary-muted)]",
-  };
-
+  const contorno = variant === "crimson-outline" ? "border-primary text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)] hover:text-[var(--primary-text,var(--primary))]" : "";
   return (
-    <button
-      className={`${btnBase} ${sizes[size] || sizes.md} ${variants[variant]} ${className}`}
+    <Button
+      variant={variantesUi[variant]}
+      size={tamanhosUi[size] ?? "default"}
+      className={`${contorno} ${tamanhoExtra[size] ?? ""} ${variant === "link" ? "!px-0" : ""} ${className}`}
       disabled={loading || disabled}
     >
       {loading ? <Loader2 className="h-4 w-4 animate-spin shrink-0" /> : icon && <span className="shrink-0">{icon}</span>}
       {!iconOnly && children}
-    </button>
+    </Button>
   );
 }
 
@@ -93,18 +82,12 @@ function InputField({
         {leftIcon && (
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">{leftIcon}</span>
         )}
-        <input
+        <Input
           type={type}
           placeholder={placeholder}
           disabled={disabled}
-          className={`w-full bg-card border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150
-            focus:ring-2 focus:ring-ring focus:border-primary/60
-            disabled:opacity-50 disabled:cursor-not-allowed
-            ${error ? "border-error/60 focus:ring-error/30" : "border-border hover:border-[var(--border-strong)]"}
-            ${leftIcon ? "pl-10" : ""}
-            ${rightElement ? "pr-10" : ""}
-          `}
-          style={{ boxShadow: "var(--shadow-xs)" }}
+          aria-invalid={error ? true : undefined}
+          className={`${error ? "border-error/60 aria-invalid:border-error/60" : ""} ${leftIcon ? "pl-10" : ""} ${rightElement ? "pr-10" : ""}`}
         />
         {rightElement && (
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{rightElement}</span>
