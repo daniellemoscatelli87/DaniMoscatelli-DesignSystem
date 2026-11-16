@@ -88,7 +88,7 @@ const rows: [string, string, string, string][] = [
   ["Typography", "Font/Display", "--font-display", "font-display"],
   ["Radius", "Radius/Base", "--radius", "rounded-[var(--radius)]"],
   ["Shadow", "Shadow/SM", "--shadow-sm", "shadow-sm"],
-  ["Motion", "Duration/Base", "--duration-base", "duration-[var(--duration-base)]"],
+  ["Motion", "Duration/Normal", "--duration-normal", "duration-[var(--duration-normal)]"],
 ];
 
 const dos: Bi[] = [

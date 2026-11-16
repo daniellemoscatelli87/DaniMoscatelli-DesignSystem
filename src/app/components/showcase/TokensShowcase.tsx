@@ -83,8 +83,8 @@ const bridgeRows = [
   { category: "Shadow",     intent: { en: "Card shadow", pt: "Sombra de card" },             design: "Shadow/SM",            dev: "--shadow-sm",             tw: "shadow-sm" },
   { category: "Shadow",     intent: { en: "Modal shadow", pt: "Sombra de modal" },            design: "Shadow/MD",            dev: "--shadow-md",             tw: "shadow-md" },
   { category: "Motion",     intent: { en: "Fast duration", pt: "Duração rápida" },             design: "Duration/Fast",        dev: "--duration-fast",         tw: "duration-[var(--duration-fast)]" },
-  { category: "Motion",     intent: { en: "Default duration", pt: "Duração padrão" },             design: "Duration/Base",        dev: "--duration-base",         tw: "duration-[var(--duration-base)]" },
-  { category: "Motion",     intent: { en: "Default animation curve", pt: "Curva de animação padrão" },   design: "Easing/Default",       dev: "--ease-default",          tw: "ease-[var(--ease-default)]" },
+  { category: "Motion",     intent: { en: "Default duration", pt: "Duração padrão" },             design: "Duration/Normal",      dev: "--duration-normal",       tw: "duration-[var(--duration-normal)]" },
+  { category: "Motion",     intent: { en: "Default animation curve", pt: "Curva de animação padrão" },   design: "Easing/Out",           dev: "--ease-out",              tw: "ease-[var(--ease-out)]" },
 ];
 
 const categories = ["All", "Color", "Typography", "Radius", "Shadow", "Motion"] as const;

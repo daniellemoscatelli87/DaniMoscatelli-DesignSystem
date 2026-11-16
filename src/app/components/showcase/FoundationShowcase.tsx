@@ -1,5 +1,6 @@
 import React from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { valorDoToken } from "./shared/temaTokens";
 import { Heading } from "@/app/components/ui/heading";
 import { Check, X } from "lucide-react";
 import { useI18n } from "../../i18n";
@@ -158,11 +159,11 @@ export function FoundationShowcase() {
                   <div className="mt-1.5 space-y-0.5 font-mono text-[0.625rem]">
                     <div className="flex items-center justify-between gap-2 text-muted-foreground">
                       <span className="uppercase tracking-[0.08em] opacity-70">{t("Light", "Claro")}</span>
-                      <span className="text-foreground/80">{c.light}</span>
+                      <span className="text-foreground/80">{valorDoToken(c.token)?.claro ?? c.light}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 text-muted-foreground">
                       <span className="uppercase tracking-[0.08em] opacity-70">{t("Dark", "Escuro")}</span>
-                      <span className="text-foreground/80">{c.dark}</span>
+                      <span className="text-foreground/80">{valorDoToken(c.token)?.escuro ?? c.dark}</span>
                     </div>
                   </div>
                 </div>

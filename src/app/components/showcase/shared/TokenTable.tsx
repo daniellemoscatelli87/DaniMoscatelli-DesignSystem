@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useI18n } from "../../../i18n";
+import { valorDoToken } from "./temaTokens";
 
 export type TokenRow = {
   name: string;
@@ -45,8 +46,11 @@ function Swatch({ value }: { value: string }) {
   );
 }
 
-function TokenRowItem({ token, isDark }: { token: TokenRow; isDark: boolean }) {
+function TokenRowItem({ token: digitado, isDark }: { token: TokenRow; isDark: boolean }) {
   const { t } = useI18n();
+  // O valor vem do theme.css quando o token existe lá; o digitado só vale para o que não é token global
+  const real = valorDoToken(digitado.name);
+  const token = real ? { ...digitado, light: real.claro, dark: real.escuro } : digitado;
   const value = isDark ? (token.dark ?? token.light) : token.light;
   const hasDarkVariant = !!token.dark && token.dark !== token.light;
 
@@ -57,7 +61,7 @@ function TokenRowItem({ token, isDark }: { token: TokenRow; isDark: boolean }) {
 
       <div className="flex items-center gap-1.5 justify-end">
         {token.isColor && <Swatch value={value} />}
-        <code className="text-[0.6875rem] font-mono text-foreground/70 whitespace-nowrap">{value}</code>
+        <code title={value} className="max-w-[16rem] truncate text-[0.6875rem] font-mono text-foreground/70 whitespace-nowrap">{value}</code>
         {/* Dot indicator when a dark variant exists but isn't currently shown */}
         {hasDarkVariant && (
           <span
