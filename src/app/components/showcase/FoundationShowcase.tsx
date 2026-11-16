@@ -544,6 +544,7 @@ function getFoundationTokenGroups(t: (en: string, pt: string) => string): TokenG
     group: t("Brand", "Marca"),
     tokens: [
       { name: "--primary",            description: t("Brand accent — crimson", "Acento da marca — carmim"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--primary-text",       description: t("Crimson for text and links only (6.2:1 on white)", "Carmim só para texto e links (6,2:1 no branco)"), light: "#B82828", dark: "#E88080", isColor: true },
       { name: "--primary-foreground", description: t("Text on primary", "Texto sobre primária"),                 light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--primary-muted",      description: t("Tinted primary background", "Fundo com tom da primária"),       light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
     ],

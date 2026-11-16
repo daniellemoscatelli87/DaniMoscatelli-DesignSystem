@@ -56,6 +56,7 @@
   --primary-foreground:        #FFFFFF;
   --primary-muted:             rgba(212, 77, 77, 0.1);
   --primary-muted-foreground:  var(--crimson-400);
+  --primary-text:              var(--crimson-500);   /* vermelho só para texto: 6,2:1 no branco (decisão de 16/11/2026) */
 
   --secondary:            #E4E9F0;
   --secondary-hover:      var(--graphite-100);
@@ -137,6 +138,7 @@
   --primary-foreground:        #FFFFFF;
   --primary-muted:             rgba(212, 77, 77, 0.15);
   --primary-muted-foreground:  var(--crimson-300);
+  --primary-text:              var(--crimson-300);
 
   --secondary:            rgba(40, 48, 67, 0.8);
   --secondary-hover:      rgba(40, 48, 67, 1);
@@ -242,6 +244,7 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
