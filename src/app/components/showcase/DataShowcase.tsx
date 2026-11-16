@@ -407,7 +407,7 @@ function getDataTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
   {
     group: t("KPI Semantic", "Semântica de KPI"),
     tokens: [
-      { name: "--success",  description: t("Positive delta / up trend", "Variação positiva / tendência de alta"),  light: "#4fb57b", dark: "#22C55E", isColor: true },
+      { name: "--success",  description: t("Positive delta / up trend", "Variação positiva / tendência de alta"),  light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--error",    description: t("Negative delta / down trend", "Variação negativa / tendência de queda"), light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--warning",  description: t("Caution / neutral trend", "Atenção / tendência neutra"),    light: "#C2410C", dark: "#f5b320", isColor: true },
       { name: "--primary",  description: t("Highlighted KPI accent", "Acento de KPI em destaque"),     light: "#D44D4D", dark: "#D44D4D", isColor: true },

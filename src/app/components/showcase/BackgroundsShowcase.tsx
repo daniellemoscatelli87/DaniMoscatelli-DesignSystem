@@ -297,11 +297,11 @@ function GradientAnimCard() {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {useWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#4fb57b" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>
@@ -640,11 +640,11 @@ export function CanvasRevealCard() {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {[t("Feature cards or product differentiators.", "Cards de funcionalidades ou diferenciais do produto."), t("Exploration sections where the user has time.", "Seções de exploração em que o usuário tem tempo."), t("When you want to create a wow moment without distraction.", "Quando você quer criar um momento uau sem distração.")].map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#4fb57b" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>
@@ -1442,7 +1442,7 @@ function LinesContent({ dark }: { dark: boolean }) {
               <item.icon style={{ width: 14, height: 14, color: "#D44D4D" }} />
             </div>
             <span style={{ flex: 1, fontSize: "0.75rem", fontWeight: 600, color: dark ? "#E4E9F0" : "#131A27" }}>{item.label}</span>
-            <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: item.status === "active" ? "#4fb57b" : dark ? "#627288" : "#8898B0" }}>● {item.status === "active" ? t("Active", "Ativo") : t("Setting up", "Configurando")}</span>
+            <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: item.status === "active" ? "#388459" : dark ? "#627288" : "#8898B0" }}>● {item.status === "active" ? t("Active", "Ativo") : t("Setting up", "Configurando")}</span>
           </div>
         ))}
       </div>
@@ -1546,11 +1546,11 @@ function EffectCard({ ef }: { ef: EffectDef }) {
         {tab === "usage" && (
           <div className="space-y-3">
             <div>
-              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#4fb57b" }}>✓ {t("Use when", "Usar quando")}</p>
+              <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
               <ul className="mt-1.5 space-y-1">
                 {ef.useWhen.map((w, i) => (
                   <li key={i} className="text-[0.8125rem] text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#4fb57b" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>

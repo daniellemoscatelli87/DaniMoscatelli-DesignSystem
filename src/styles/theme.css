@@ -69,18 +69,18 @@
   --border:       rgba(19, 26, 39, 0.09);
   --border-strong: rgba(19, 26, 39, 0.16);
 
-  --success:            #4fb57b;
+  --success:            #388459;   /* texto branco atinge 4,5:1 (decisão de 16/11/2026) */
   --success-foreground: #FFFFFF;
-  --success-muted:      rgba(79, 181, 123, 0.1);
+  --success-muted:      rgba(56, 132, 89, 0.1);
   --warning:            #C2410C;   /* laranja queimado: texto branco atinge 5,2:1 (decisão de 16/11/2026) */
   --warning-foreground: #FFFFFF;
   --warning-muted:      rgba(194, 65, 12, 0.1);
   --error:              var(--crimson-400);
   --error-foreground:   #FFFFFF;
   --error-muted:        rgba(212, 77, 77, 0.1);
-  --info:               #448abc;
+  --info:               #3D7CAA;   /* texto branco atinge 4,5:1 (decisão de 16/11/2026) */
   --info-foreground:    #FFFFFF;
-  --info-muted:         rgba(68, 138, 188, 0.1);
+  --info-muted:         rgba(61, 124, 170, 0.1);
   --violet:             #ba69dc;
   --violet-foreground:  #FFFFFF;
   --violet-muted:       rgba(186, 105, 220, 0.1);

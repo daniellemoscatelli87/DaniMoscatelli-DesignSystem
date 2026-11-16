@@ -48,7 +48,7 @@ const lightPairs: Pair[] = [
   { name: "primary-foreground / primary", usage: { en: "Label on primary button", pt: "Rótulo no botão primário" }, fg: "#FFFFFF", bg: "#D44D4D" },
   { name: "primary / card", usage: { en: "Primary as text or icon", pt: "Primário como texto ou ícone" }, fg: "#D44D4D", bg: "#FFFFFF" },
   { name: "crimson-500 / card", usage: { en: "Small primary text", pt: "Texto primário pequeno" }, fg: "#B82828", bg: "#FFFFFF" },
-  { name: "success / card", usage: { en: "Status color alone", pt: "Cor de status isolada" }, fg: "#4FB57B", bg: "#FFFFFF" },
+  { name: "success / card", usage: { en: "Status color alone", pt: "Cor de status isolada" }, fg: "#388459", bg: "#FFFFFF" },
 ];
 const darkPairs: Pair[] = [
   { name: "foreground / background", usage: { en: "Body text on page", pt: "Texto do corpo na página" }, fg: "#E4E9F0", bg: "#0D1119" },

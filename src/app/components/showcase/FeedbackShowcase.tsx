@@ -661,7 +661,7 @@ const feedbackTokenGroups = (t: TFn): TokenGroup[] => [
   {
     group: t("Status Colors", "Cores de status"),
     tokens: [
-      { name: "--success",              description: t("Positive / confirmed action", "Ação positiva / confirmada"),    light: "#4fb57b", dark: "#22C55E", isColor: true },
+      { name: "--success",              description: t("Positive / confirmed action", "Ação positiva / confirmada"),    light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--success-foreground",   description: t("Text on success", "Texto sobre sucesso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--success-muted",        description: t("Success tinted background", "Fundo com tom de sucesso"),      light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
       { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#C2410C", dark: "#f5b320", isColor: true },
@@ -670,7 +670,7 @@ const feedbackTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--error",                description: t("Error / failure state", "Estado de erro / falha"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--error-foreground",     description: t("Text on error", "Texto sobre erro"),                 light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--error-muted",          description: t("Error tinted background", "Fundo com tom de erro"),        light: "rgba(212,77,77,0.10)",  dark: "rgba(212,77,77,0.15)",  isColor: true },
-      { name: "--info",                 description: t("Informational notice", "Aviso informativo"),           light: "#448abc", dark: "#3B82F6", isColor: true },
+      { name: "--info",                 description: t("Informational notice", "Aviso informativo"),           light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--info-foreground",      description: t("Text on info", "Texto sobre info"),                  light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--info-muted",           description: t("Info tinted background", "Fundo com tom de info"),         light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },
       { name: "--destructive",          description: t("Destructive / irreversible", "Destrutivo / irreversível"),     light: "#D44D4D", dark: "#D44D4D", isColor: true },
@@ -694,11 +694,11 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
     tokens: [
       { name: "--primary",      description: t("Primary badge fill", "Preenchimento do badge primário"),   light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--primary-muted",description: t("Primary badge tinted", "Badge primário com tom"), light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
-      { name: "--success",      description: t("Success badge", "Badge de sucesso"),        light: "#4fb57b", dark: "#22C55E", isColor: true },
+      { name: "--success",      description: t("Success badge", "Badge de sucesso"),        light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--success-muted",description: t("Success badge tinted", "Badge de sucesso com tom"), light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
       { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#C2410C", dark: "#f5b320", isColor: true },
       { name: "--warning-muted",description: t("Warning badge tinted", "Badge de aviso com tom"), light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
-      { name: "--info",         description: t("Info badge", "Badge de info"),           light: "#448abc", dark: "#3B82F6", isColor: true },
+      { name: "--info",         description: t("Info badge", "Badge de info"),           light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--info-muted",   description: t("Info badge tinted", "Badge de info com tom"),    light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },
       { name: "--violet",       description: t("Violet accent badge", "Badge de destaque violeta"),  light: "#ba69dc", dark: "#eb6cff", isColor: true },
       { name: "--violet-muted", description: t("Violet badge tinted", "Badge violeta com tom"),  light: "rgba(186,105,220,0.10)", dark: "rgba(235,108,255,0.12)", isColor: true },
