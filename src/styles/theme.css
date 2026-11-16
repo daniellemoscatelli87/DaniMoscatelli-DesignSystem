@@ -92,7 +92,7 @@
   --card-foreground:  var(--graphite-900);
   --popover:          #FFFFFF;
   --popover-foreground: var(--graphite-900);
-  --input:            transparent;
+  --input:            var(--border-strong);   /* borda clara dos campos (decisão de 16/11/2026) */
   --input-background: #FFFFFF;
   --switch-background: var(--graphite-200);
   --ring:             rgba(212, 77, 77, 0.35);

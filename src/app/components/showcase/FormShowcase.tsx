@@ -523,7 +523,7 @@ function getFormTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
   {
     group: t("Input & Form", "Input e formulário"),
     tokens: [
-      { name: "--input",            description: t("Input border color", "Cor da borda do input"),          light: "transparent",         dark: "rgba(19,26,39,0.60)", isColor: true },
+      { name: "--input",            description: t("Input border color", "Cor da borda do input"),          light: "var(--border-strong)",         dark: "rgba(19,26,39,0.60)", isColor: true },
       { name: "--input-background", description: t("Input field background", "Fundo do campo de input"),      light: "#FFFFFF",             dark: "rgba(19,26,39,0.60)", isColor: true },
       { name: "--ring",             description: t("Focus ring", "Anel de foco"),                  light: "rgba(212,77,77,0.35)",dark: "rgba(212,77,77,0.40)", isColor: true },
       { name: "--border",           description: t("Default border", "Borda padrão"),              light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.07)", isColor: true },
