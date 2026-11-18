@@ -5,6 +5,7 @@ import { Heading } from "@/app/components/ui/heading";
 import { Check, X } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { VejaEm } from "./shared/VejaEm";
+import { SectionHeader } from "./shared/SectionHeader";
 
 const graphiteScale = [
   { name: "50",  var: "--graphite-50",  hex: "#EDF0F5" },
@@ -70,11 +71,11 @@ const displayScaleItems = [
 ];
 
 const radiusScale = [
-  { name: "XS — 6px",   value: "6px",   cls: "rounded-[6px]" },
-  { name: "SM — 8px",   value: "8px",   cls: "rounded-[8px]" },
-  { name: "MD — 12px",  value: "12px",  cls: "rounded-[12px]" },
-  { name: "LG — 16px",  value: "16px",  cls: "rounded-[16px]" },
-  { name: "XL — 24px",  value: "24px",  cls: "rounded-[24px]" },
+  { name: "XS — 6px",   value: "6px",   cls: "rounded-sm" },
+  { name: "SM — 8px",   value: "8px",   cls: "rounded-sm" },
+  { name: "MD — 12px",  value: "12px",  cls: "rounded-md" },
+  { name: "LG — 16px",  value: "16px",  cls: "rounded-lg" },
+  { name: "XL — 24px",  value: "24px",  cls: "rounded-xl" },
   { name: "2XL — 32px", value: "32px",  cls: "rounded-[32px]" },
   { name: "Full",       value: "9999px",cls: "rounded-full" },
 ];
@@ -90,14 +91,6 @@ const shadowTokens = [
   { name: "shadow-xl",  label: "XL", pt: "XL",        css: "0 16px 48px rgba(13,17,25,0.10), 0 40px 96px rgba(13,17,25,0.08)" },
 ];
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{title}</h2>
-      {description && <p className="text-[0.9375rem] text-muted-foreground leading-relaxed">{description}</p>}
-    </div>
-  );
-}
 
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -123,7 +116,7 @@ export function FoundationShowcase() {
             {graphiteScale.map((c) => (
               <div key={c.name} className="flex flex-col gap-1.5">
                 <div
-                  className="h-14 rounded-[8px] border border-border/40"
+                  className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
                 />
                 <span className="text-[0.6875rem] font-medium text-muted-foreground text-center">{c.name}</span>
@@ -138,7 +131,7 @@ export function FoundationShowcase() {
             {crimsonScale.map((c) => (
               <div key={c.name} className="flex flex-col gap-1.5">
                 <div
-                  className="h-14 rounded-[8px] border border-border/40"
+                  className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
                 />
                 <span className="text-[0.6875rem] font-medium text-muted-foreground text-center">{c.name}</span>
@@ -152,7 +145,7 @@ export function FoundationShowcase() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
             {semanticColors.map((c) => (
               <div key={c.name} className="flex flex-col gap-2">
-                <div className={`h-12 rounded-[10px] border border-border/40 ${c.swatch}`} />
+                <div className={`h-12 rounded-md border border-border/40 ${c.swatch}`} />
                 <div>
                   <div className="text-[0.8125rem] font-medium text-foreground">{bi({ en: c.name, pt: c.pt })}</div>
                   <div className="text-[0.6875rem] text-muted-foreground font-mono">{c.token}</div>
@@ -178,7 +171,7 @@ export function FoundationShowcase() {
         <SectionHeader title={t("Typography", "Tipografia")} description={t("Three-family system with complementary roles: clarity, impact and emotion.", "Sistema de três famílias com papéis complementares: clareza, impacto e emoção.")} />
 
         <SubSection title={t("Headline with highlight (hero pattern)", "Título com destaque (padrão do hero)")}>
-          <div className="bg-card rounded-[16px] border border-border p-6 sm:p-8 space-y-6" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="bg-card rounded-lg border border-border p-6 sm:p-8 space-y-6" style={{ boxShadow: "var(--shadow-xs)" }}>
             <Heading level={2} size="hero">{t("Turn people's experience into a **strategic asset** for your business.", "Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.")}</Heading>
             <div className="h-px bg-border" />
             <div className="grid gap-6 md:grid-cols-2">
@@ -191,7 +184,7 @@ export function FoundationShowcase() {
               <li>• {t("Plus Jakarta Sans Bold (700), as on the site hero. Hero: tracking -0.03em, line height 1.1. Page: -0.035em. Section: -0.02em.", "Plus Jakarta Sans Bold (700), como no hero do site. Hero: tracking -0,03em, entrelinha 1,1. Página: -0,035em. Seção: -0,02em.")}</li>
               <li>• {t("Large text, so the primary color passes contrast on light and dark backgrounds.", "Texto grande, então a cor primária passa no contraste nos fundos claro e escuro.")}</li>
             </ul>
-            <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Heading } from "@/app/components/ui/heading";
+            <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Heading } from "@/app/components/ui/heading";
 <Heading level={1} size="hero">Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>`}</code></pre>
           </div>
         </SubSection>
@@ -239,10 +232,10 @@ export function FoundationShowcase() {
               specimenStyle: { fontFamily: "var(--font-accent)", fontStyle: "italic", fontWeight: 400, fontSize: "1.5rem" },
             },
           ].map(f => (
-            <div key={f.role} className="rounded-[16px] border border-border bg-card p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <div key={f.role} className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
               <div className="flex items-start justify-between gap-2">
                 <div>
-                  <span className={`inline-block px-2 py-0.5 rounded-[5px] border text-[0.5625rem] font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
+                  <span className={`inline-block px-2 py-0.5 rounded-sm border text-[0.5625rem] font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
                   <p className="mt-1.5 text-[0.9375rem] font-bold text-foreground leading-tight">{f.family}</p>
                   <p className="text-[0.625rem] font-mono text-muted-foreground mt-0.5">{f.token}</p>
                 </div>
@@ -260,12 +253,12 @@ export function FoundationShowcase() {
               {/* Traits */}
               <div className="flex flex-wrap gap-1">
                 {f.traits.map((tr, ti) => (
-                  <span key={ti} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.5625rem] font-semibold text-muted-foreground">{tr}</span>
+                  <span key={ti} className="px-2 py-0.5 rounded-sm bg-muted text-[0.5625rem] font-semibold text-muted-foreground">{tr}</span>
                 ))}
               </div>
 
               {/* Specimen */}
-              <div className="rounded-[10px] bg-muted/40 border border-border/60 px-4 py-3 min-h-[52px] flex items-center">
+              <div className="rounded-md bg-muted/40 border border-border/60 px-4 py-3 min-h-[52px] flex items-center">
                 <span style={f.specimenStyle} className="text-foreground leading-tight">{f.specimen}</span>
               </div>
 
@@ -284,7 +277,7 @@ export function FoundationShowcase() {
             <h3 className="text-[0.8125rem] font-bold text-foreground uppercase tracking-[0.07em]">Plus Jakarta Sans — {t("Type scale", "Escala tipográfica")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
-          <div className="bg-card rounded-[16px] border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             {typeScaleItems.map((item, i) => (
               <div
                 key={item.label}
@@ -312,7 +305,7 @@ export function FoundationShowcase() {
             <h3 className="text-[0.8125rem] font-bold text-foreground uppercase tracking-[0.07em]">Space Grotesk — {t("Display Scale", "Escala display")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
-          <div className="bg-card rounded-[16px] border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             {displayScaleItems.map((item, i) => (
               <div
                 key={item.label}
@@ -343,7 +336,7 @@ export function FoundationShowcase() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Specimen cards */}
-            <div className="bg-card rounded-[16px] border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <div className="bg-card rounded-lg border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
               <span className="text-[0.5625rem] font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Italic contrast", "Contraste itálico")}</span>
               <p className="text-foreground leading-snug" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "2rem", letterSpacing: "-0.025em" }}>
                 {t("Design what's", "Projete o que vem")}{" "}
@@ -354,7 +347,7 @@ export function FoundationShowcase() {
               </p>
             </div>
 
-            <div className="bg-card rounded-[16px] border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <div className="bg-card rounded-lg border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
               <span className="text-[0.5625rem] font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Editorial statement", "Declaração editorial")}</span>
               <div className="space-y-1">
                 <p className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-primary" style={{ fontFamily: "var(--font-sans)" }}>{t("HUMAN EXPERIENCE", "EXPERIÊNCIA HUMANA")}</p>
@@ -371,7 +364,7 @@ export function FoundationShowcase() {
             <div className="md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-3">
 
               {/* ✓ Use as an accent */}
-              <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border" style={{ background: "var(--success-muted)" }}>
                   <div className="flex items-center gap-2">
                     <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "color-mix(in srgb, var(--success) 18%, transparent)" }}>
@@ -391,7 +384,7 @@ export function FoundationShowcase() {
               </div>
 
               {/* ✕ Evitar */}
-              <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border" style={{ background: "rgba(212,77,77,0.06)" }}>
                   <div className="flex items-center gap-2">
                     <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(212,77,77,0.15)" }}>
@@ -411,7 +404,7 @@ export function FoundationShowcase() {
               </div>
 
               {/* Peso preferencial */}
-              <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border bg-muted/20">
                   <p className="text-[0.6875rem] font-bold text-foreground">{t("Preferred weight", "Peso preferencial")}</p>
                 </div>
@@ -423,7 +416,7 @@ export function FoundationShowcase() {
                     { label: "Extra 800",   specimen: "Aa", italic: false, allowed: false },
                   ].map(w => (
                     <div key={w.label} className="flex items-center gap-2.5">
-                      <div className={`h-7 w-7 rounded-[7px] flex items-center justify-center shrink-0 ${w.allowed ? "bg-muted/50" : "bg-muted/20"}`}>
+                      <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 ${w.allowed ? "bg-muted/50" : "bg-muted/20"}`}>
                         <span style={{
                           fontFamily: "var(--font-accent)",
                           fontStyle: w.italic ? "italic" : "normal",
@@ -444,7 +437,7 @@ export function FoundationShowcase() {
               </div>
 
               {/* Recommended proportion */}
-              <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border bg-muted/20">
                   <p className="text-[0.6875rem] font-bold text-foreground">{t("Proportion in layout", "Proporção no layout")}</p>
                 </div>
@@ -518,7 +511,7 @@ export function FoundationShowcase() {
           {shadowTokens.map((s) => (
             <div key={s.name} className="flex flex-col gap-3">
               <div
-                className="h-20 bg-card rounded-[12px]"
+                className="h-20 bg-card rounded-md"
                 style={{ boxShadow: s.css }}
               />
               <div>

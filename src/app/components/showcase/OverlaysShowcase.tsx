@@ -16,26 +16,19 @@ import { Pagination as UiPagination, PaginationContent, PaginationItem, Paginati
 import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "../ui/sheet";
 import { Button } from "../ui/button";
+import { SectionHeader } from "./shared/SectionHeader";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`bg-card rounded-[16px] border border-border p-6 ${className}`} style={{ boxShadow: "var(--shadow)" }}>
+    <div className={`bg-card rounded-lg border border-border p-6 ${className}`} style={{ boxShadow: "var(--shadow)" }}>
       {children}
     </div>
   );
 }
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{title}</h2>
-      {description && <p className="text-[0.9375rem] text-muted-foreground">{description}</p>}
-    </div>
-  );
-}
 
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -142,7 +135,7 @@ function DrawerDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
           <p className="text-[0.9rem] text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
           <div className="space-y-3">
             {[["Profile Settings", "Configurações do perfil"], ["Notifications", "Notificações"], ["Store data", "Dados da loja"], ["Opening hours", "Horário de funcionamento"]].map(([en, pt]) => (
-              <button key={en} className="flex w-full items-center justify-between rounded-[10px] px-3 py-2.5 text-[0.9rem] font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <button key={en} className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-[0.9rem] font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 {t(en, pt)}
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </button>
@@ -216,9 +209,9 @@ export function OverlaysShowcase() {
         <SubSection title={t("Tooltip Variants", "Variantes de tooltip")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-4">
-              <TooltipDemo content={{ en: "View notifications", pt: "Ver notificações" }}><button className="h-10 w-10 rounded-[12px] border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Bell className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
-              <TooltipDemo content={{ en: "Open settings", pt: "Abrir configurações" }}><button className="h-10 w-10 rounded-[12px] border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Settings className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
-              <TooltipDemo content={{ en: "Get help and documentation", pt: "Obter ajuda e documentação" }}><button className="h-10 w-10 rounded-[12px] border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><HelpCircle className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
+              <TooltipDemo content={{ en: "View notifications", pt: "Ver notificações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Bell className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
+              <TooltipDemo content={{ en: "Open settings", pt: "Abrir configurações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Settings className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
+              <TooltipDemo content={{ en: "Get help and documentation", pt: "Obter ajuda e documentação" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><HelpCircle className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
               <TooltipDemo content={{ en: "Important information about this field", pt: "Informação importante sobre este campo" }}><button className="inline-flex items-center gap-1.5 text-[0.875rem] text-muted-foreground underline underline-offset-2 decoration-dashed hover:text-foreground transition-colors"><Info className="h-4 w-4" />{t("Learn more", "Saiba mais")}</button></TooltipDemo>
             </div>
           </ShowcaseCard>
@@ -232,7 +225,7 @@ export function OverlaysShowcase() {
           <ShowcaseCard>
             <DropdownMenuPrimitive.Root>
               <DropdownMenuPrimitive.Trigger asChild>
-                <button className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-[12px] border border-border bg-card hover:bg-accent text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <button className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
                   {t("Actions", "Ações")}
                   <svg className="h-4 w-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="m6 9 6 6 6-6"/></svg>
                 </button>
@@ -241,7 +234,7 @@ export function OverlaysShowcase() {
                 <DropdownMenuPrimitive.Content
                   sideOffset={6}
                   align="start"
-                  className="z-50 min-w-[180px] bg-card border border-border rounded-[12px] p-1.5 shadow-lg animate-in fade-in-0 zoom-in-95"
+                  className="z-50 min-w-[180px] bg-card border border-border rounded-md p-1.5 shadow-lg animate-in fade-in-0 zoom-in-95"
                   style={{ boxShadow: "var(--shadow-lg)" }}
                 >
                   {[
@@ -253,7 +246,7 @@ export function OverlaysShowcase() {
                     return (
                       <DropdownMenuPrimitive.Item
                         key={item.label.en}
-                        className="flex items-center justify-between gap-2 px-3 py-2 text-[0.875rem] font-medium text-foreground rounded-[8px] hover:bg-accent cursor-pointer outline-none"
+                        className="flex items-center justify-between gap-2 px-3 py-2 text-[0.875rem] font-medium text-foreground rounded-sm hover:bg-accent cursor-pointer outline-none"
                       >
                         <span className="flex items-center gap-2">
                           <Icon className="h-4 w-4 text-muted-foreground" />
@@ -264,7 +257,7 @@ export function OverlaysShowcase() {
                     );
                   })}
                   <DropdownMenuPrimitive.Separator className="my-1 h-px bg-border" />
-                  <DropdownMenuPrimitive.Item className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary rounded-[8px] hover:bg-primary/10 cursor-pointer outline-none">
+                  <DropdownMenuPrimitive.Item className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
                     <Trash2 className="h-4 w-4" />
                     {t("Delete", "Excluir")}
                   </DropdownMenuPrimitive.Item>
@@ -283,19 +276,19 @@ export function OverlaysShowcase() {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setDialogOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-[12px] bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors"
               >
                 {t("Open Dialog", "Abrir diálogo")}
               </button>
               <button
                 onClick={() => setConfirmOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-[12px] border border-border bg-card hover:bg-accent text-foreground transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
               >
                 {t("Confirm Dialog", "Diálogo de confirmação")}
               </button>
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-[12px] border border-border bg-card hover:bg-accent text-foreground transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
               >
                 {t("Open Drawer", "Abrir painel lateral")}
               </button>
@@ -317,23 +310,23 @@ export function OverlaysShowcase() {
                 <DialogPrimitive.Title className="text-[1.125rem] font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogPrimitive.Title>
                 <DialogPrimitive.Description className="text-[0.875rem] text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogPrimitive.Description>
               </div>
-              <DialogPrimitive.Close aria-label={t("Close", "Fechar")} className="h-8 w-8 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
+              <DialogPrimitive.Close aria-label={t("Close", "Fechar")} className="h-8 w-8 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
                 <X className="h-4 w-4" />
               </DialogPrimitive.Close>
             </div>
             <div className="space-y-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
-                <input className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all" placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
+                <input className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all" placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Description", "Descrição")}</label>
-                <textarea className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all resize-none" rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
+                <textarea className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all resize-none" rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
               </div>
             </div>
             <div className="flex justify-end gap-2 mt-6">
-              <DialogPrimitive.Close className="h-10 px-4 text-[0.9375rem] font-semibold rounded-[10px] border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
-              <button className="h-10 px-5 text-[0.9375rem] font-semibold rounded-[10px] bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Create Project", "Criar projeto")}</button>
+              <DialogPrimitive.Close className="h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
+              <button className="h-10 px-5 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Create Project", "Criar projeto")}</button>
             </div>
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
@@ -356,8 +349,8 @@ export function OverlaysShowcase() {
               </div>
             </div>
             <div className="flex gap-2">
-              <DialogPrimitive.Close className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-[10px] border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
-              <button className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-[10px] bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Delete", "Excluir")}</button>
+              <DialogPrimitive.Close className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
+              <button className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Delete", "Excluir")}</button>
             </div>
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
@@ -376,7 +369,7 @@ export function OverlaysShowcase() {
           {/* Variant 1 — Default (bordered, single open) */}
           <ShowcaseCard>
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Default — Single open", "Padrão — Um aberto por vez")}</p>
-            <AccordionPrimitive.Root type="single" collapsible className="w-full divide-y divide-border rounded-[12px] border border-border overflow-hidden">
+            <AccordionPrimitive.Root type="single" collapsible className="w-full divide-y divide-border rounded-md border border-border overflow-hidden">
               {defaultItems.map(item => (
                 <AccordionPrimitive.Item key={item.value} value={item.value}>
                   <AccordionPrimitive.Header>
@@ -431,7 +424,7 @@ export function OverlaysShowcase() {
                 <AccordionPrimitive.Item
                   key={item.value}
                   value={item.value}
-                  className="rounded-[10px] border border-border bg-background overflow-hidden data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03] transition-colors"
+                  className="rounded-md border border-border bg-background overflow-hidden data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03] transition-colors"
                 >
                   <AccordionPrimitive.Header>
                     <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between px-4 py-3.5 text-[0.875rem] font-semibold text-foreground">

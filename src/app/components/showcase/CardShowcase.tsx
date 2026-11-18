@@ -30,15 +30,8 @@ import { X } from "lucide-react";
 import { CardsDeKpi } from "./DataShowcase";
 import { WobbleCardConteudo, ShineBorderConteudo, evitarWobble } from "./MotionShowcase";
 import { CanvasRevealCard, evitarCanvasReveal } from "./BackgroundsShowcase";
+import { SectionHeader } from "./shared/SectionHeader";
 
-function SectionHeader({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className={`${display} text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1`}>{title}</h2>
-      <p className="text-[0.9375rem] leading-relaxed text-muted-foreground max-w-3xl">{description}</p>
-    </div>
-  );
-}
 
 function SpecCard({
   title,
@@ -117,14 +110,14 @@ function CenaDoVidro({ className, children }: { className?: string; children: Re
   const c = coresDaCena(cena, dark);
   if (cena.fundo === "foto") {
     return (
-      <div data-testid="cena-vidro" data-fundo="foto" className={cn("relative isolate overflow-hidden rounded-[24px] border border-border bg-[var(--graphite-950)] p-6 sm:p-8", className)}>
+      <div data-testid="cena-vidro" data-fundo="foto" className={cn("relative isolate overflow-hidden rounded-xl border border-border bg-[var(--graphite-950)] p-6 sm:p-8", className)}>
         <img src={FOTO.src} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
         {children}
       </div>
     );
   }
   return (
-    <div data-testid="cena-vidro" data-fundo={cena.fundo} className={cn("relative isolate overflow-hidden rounded-[24px] border border-border p-6 sm:p-8 transition-colors", className)} style={{ backgroundColor: c.bg }}>
+    <div data-testid="cena-vidro" data-fundo={cena.fundo} className={cn("relative isolate overflow-hidden rounded-xl border border-border p-6 sm:p-8 transition-colors", className)} style={{ backgroundColor: c.bg }}>
       {c.traco && <DoodleTexture color={c.traco} className="-z-10" style={{ WebkitMaskSize: `${c.ladrilho}px`, maskSize: `${c.ladrilho}px` }} />}
       {children}
     </div>
@@ -197,7 +190,7 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
       )}
       {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
       {result && (
-        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-[10px] border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
+        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
           {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning)]" aria-hidden />}
           <span>
             {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({naFoto ? t("worst case: any area of the photo, from black to white", "pior caso: qualquer área da foto, do preto ao branco") : comTextura ? t("worst case: text over the background or a texture stroke", "pior caso: texto sobre o fundo ou um traço da textura") : t("solid background", "fundo sólido")})</span>
@@ -271,7 +264,7 @@ function GlassFinishPicker() {
           </div>
         )}
       </div>
-      <div className="grid gap-x-8 gap-y-4 rounded-[14px] border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+      <div className="grid gap-x-8 gap-y-4 rounded-lg border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <div className="space-y-2">
           <div className="flex items-center justify-between text-[0.75rem]">
             <span className="font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Background opacity", "Opacidade do fundo")}</span>
@@ -339,7 +332,7 @@ function CardPorFundo({ fundo }: { fundo: FundoSolido }) {
   };
   const r = regras[fundo];
   return (
-    <div data-fundo-solido={fundo} className={cn("rounded-[16px] border border-border p-6", r.painel)}>
+    <div data-fundo-solido={fundo} className={cn("rounded-lg border border-border p-6", r.painel)}>
       <div className={cn("rounded-xl bg-white p-5 text-[var(--graphite-900)]", r.card)} style={{ boxShadow: r.sombra }}>
         <p className={`${display} text-[1rem] font-semibold`}>{t("Card title", "Título do card")}</p>
         <p className="mt-1 text-[0.8125rem] leading-relaxed text-[var(--graphite-500)]">{t("Short description of the content.", "Descrição curta do conteúdo.")}</p>
@@ -542,7 +535,7 @@ export function CardShowcase() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
               { raio: "rounded-xl", valor: "24 px · rounded-xl", uso: t("Default card, lists, forms and data.", "Card padrão, listas, formulários e dados.") },
-              { raio: "rounded-[16px]", valor: "16 px", uso: t("Media, highlight and partner cards.", "Cards com mídia, de destaque e de convite.") },
+              { raio: "rounded-lg", valor: "16 px", uso: t("Media, highlight and partner cards.", "Cards com mídia, de destaque e de convite.") },
               { raio: "rounded-[20px]", valor: "20 px", uso: t("Glass cards.", "Cards de vidro.") },
             ].map(x => (
               <div key={x.valor} className={cn("border border-border bg-card p-5", x.raio)}>
@@ -587,7 +580,7 @@ export function CardShowcase() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
           <div>
             <Rotulo>{t("Vertical", "Vertical")}</Rotulo>
-            <Card className="gap-0 overflow-hidden rounded-[16px] border-border">
+            <Card className="gap-0 overflow-hidden rounded-lg border-border">
               <img src={FOTO.src} alt={bi(FOTO.alt)} className="h-40 w-full object-cover" />
               <CardHeader className="pt-5">
                 <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")}</CardTitle>
@@ -598,7 +591,7 @@ export function CardShowcase() {
           </div>
           <div>
             <Rotulo>{t("Horizontal", "Horizontal")}</Rotulo>
-            <Card className="gap-0 overflow-hidden rounded-[16px] border-border sm:flex-row">
+            <Card className="gap-0 overflow-hidden rounded-lg border-border sm:flex-row">
               <img src={FOTO.src} alt={bi(FOTO.alt)} className="h-40 w-full object-cover sm:h-auto sm:w-2/5" />
               <div className="flex flex-1 flex-col justify-center gap-4 p-6">
                 <div>
@@ -632,8 +625,8 @@ export function CardShowcase() {
           </div>
           <div>
             <Rotulo>{t("With photo, no button (whole card clickable)", "Com foto, sem botão (card inteiro clicável)")}</Rotulo>
-            <a href="#card-variants" onClick={e => e.preventDefault()} className="group block rounded-[16px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-              <Card className="gap-0 overflow-hidden rounded-[16px] border-border transition-all group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+            <a href="#card-variants" onClick={e => e.preventDefault()} className="group block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <Card className="gap-0 overflow-hidden rounded-lg border-border transition-all group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
                 <img src={FOTO.src} alt="" className="h-32 w-full object-cover" />
                 <CardHeader className="pb-6 pt-5">
                   <CardTitle className={`${display} flex items-center justify-between gap-2 text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")} <ArrowUpRight className="h-4 w-4 text-primary" aria-hidden /></CardTitle>
@@ -644,7 +637,7 @@ export function CardShowcase() {
           </div>
           <div>
             <Rotulo>{t("With photo and button", "Com foto e botão")}</Rotulo>
-            <Card className="gap-0 overflow-hidden rounded-[16px] border-border">
+            <Card className="gap-0 overflow-hidden rounded-lg border-border">
               <img src={FOTO.src} alt={bi(FOTO.alt)} className="h-32 w-full object-cover" />
               <CardHeader className="pt-5">
                 <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Media card", "Card com mídia")}</CardTitle>
@@ -817,7 +810,7 @@ export function CardShowcase() {
                 <Skeleton className="h-4 w-2/5" />
                 <Skeleton className="h-3 w-4/5" />
                 <Skeleton className="h-3 w-3/5" />
-                <Skeleton className="mt-2 h-9 w-28 rounded-[10px]" />
+                <Skeleton className="mt-2 h-9 w-28 rounded-md" />
               </Card>
             </div>
             <DataTable
@@ -976,10 +969,10 @@ export function CardShowcase() {
               [t("Surfaces", "Superfícies"), t("card (default), tint (support surface) and dark (graphite, for contrast bands). The primary glow in the corner echoes the hero background.", "card (padrão), tint (superfície de apoio) e dark (grafite, para faixas de contraste). O brilho primário no canto ecoa o fundo do hero.")],
               [t("Content", "Conteúdo"), t("One headline with one highlight, one benefit sentence, one primary action (verb first) and at most one secondary link.", "Um título com um destaque, uma frase de benefício, uma ação principal (verbo primeiro) e no máximo um link secundário.")],
             ].map(([a, b]) => (
-              <div key={a} className="rounded-[14px] border border-border bg-card p-4"><p className="mb-1 text-[0.875rem] font-semibold text-foreground">{a}</p><p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{b}</p></div>
+              <div key={a} className="rounded-lg border border-border bg-card p-4"><p className="mb-1 text-[0.875rem] font-semibold text-foreground">{a}</p><p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{b}</p></div>
             ))}
           </div>
-          <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { PartnerCard } from "@/app/components/ui/partner-card";
+          <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { PartnerCard } from "@/app/components/ui/partner-card";
 <PartnerCard orientation="horizontal" size="m" eyebrow="…" title="… **destaque** …" description="…" cta={{ label: "…", href: "/…" }} />`}</code></pre>
         </div>
       </section>
@@ -1018,7 +1011,7 @@ export function CardShowcase() {
               [t("Reduced transparency", "Transparência reduzida"), t("With prefers-reduced-transparency the card becomes solid (card or graphite).", "Com prefers-reduced-transparency o card vira sólido (card ou grafite).")],
             ]}
           />
-          <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { GlassCard } from "@/app/components/ui/glass-card";
+          <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { GlassCard } from "@/app/components/ui/glass-card";
 
 <GlassCard finish="padrao" intensity="forte">…</GlassCard>   {/* Vidro */}
 <GlassCard finish="fosco" tone="clara" interactive>…</GlassCard>`}</code></pre>
@@ -1042,7 +1035,7 @@ export function CardShowcase() {
                 <CenaDoVidro className="p-4 sm:p-5">
                   {cfg
                     ? <GlassTestCard compact {...cfg} title={nome} subtitle={propsDoVidro(cfg)} />
-                    : <p className="rounded-[12px] bg-card p-4 text-[0.8125rem] text-foreground">{t("No approved glass on this background in the current theme: use a solid card.", "Sem vidro aprovado neste fundo no tema atual: use card sólido.")}</p>}
+                    : <p className="rounded-md bg-card p-4 text-[0.8125rem] text-foreground">{t("No approved glass on this background in the current theme: use a solid card.", "Sem vidro aprovado neste fundo no tema atual: use card sólido.")}</p>}
                 </CenaDoVidro>
               </CenaDeTesteCtx.Provider>
             </div>

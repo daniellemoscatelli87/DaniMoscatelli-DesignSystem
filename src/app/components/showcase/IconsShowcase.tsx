@@ -5,6 +5,7 @@ import * as IconesPreservados from "../ui/icones-preservados";
 import { nomesIconesPreservados } from "../ui/icones-preservados";
 import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { SectionHeader } from "./shared/SectionHeader";
 
 const {
   Zap, Bell, Settings, Search, Check, Plus, Download, Filter,
@@ -61,14 +62,6 @@ const colorVariants = [
   { label: "Info",        cls: "text-info" },
 ];
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{title}</h2>
-      {description && <p className="text-[0.9375rem] text-muted-foreground">{description}</p>}
-    </div>
-  );
-}
 
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -82,7 +75,7 @@ function SubSection({ title, children }: { title: string; children: React.ReactN
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <div
-      className={`bg-card rounded-[16px] border border-border p-6 ${className}`}
+      className={`bg-card rounded-lg border border-border p-6 ${className}`}
       style={{ boxShadow: "var(--shadow)" }}
     >
       {children}
@@ -195,30 +188,30 @@ export function IconsShowcase() {
         <SubSection title={t("In context", "Em contexto")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3">
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] bg-primary text-primary-foreground text-[0.9375rem] font-semibold hover:opacity-90 transition-opacity">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md bg-primary text-primary-foreground text-[0.9375rem] font-semibold hover:opacity-90 transition-opacity">
                 <Plus className="w-4 h-4" strokeWidth={2} /> {t("New", "Novo")}
               </button>
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
                 <Download className="w-4 h-4" strokeWidth={1.75} /> {t("Export", "Exportar")}
               </button>
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-[12px] border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md border border-border bg-card text-foreground text-[0.9375rem] font-semibold hover:bg-accent transition-colors">
                 <Filter className="w-4 h-4" strokeWidth={1.75} /> {t("Filter", "Filtrar")}
               </button>
               {([Search, Settings, Bell, MoreHorizontal] as React.ElementType[]).map((Icon, i) => (
                 <button
                   key={i}
-                  className="h-10 w-10 rounded-[12px] border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                  className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
                 >
                   <Icon className="w-4 h-4" strokeWidth={1.75} />
                 </button>
               ))}
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-success/10 text-success border border-success/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-success/10 text-success border border-success/20">
                 <CheckCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Active", "Ativo")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-primary/10 text-primary border border-primary/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-primary/10 text-primary border border-primary/20">
                 <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Alert", "Alerta")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[8px] text-[0.8125rem] font-medium bg-warning/10 text-warning border border-warning/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-warning/10 text-warning border border-warning/20">
                 <Clock className="w-3.5 h-3.5" strokeWidth={2} /> {t("Pending", "Pendente")}
               </span>
             </div>
@@ -245,7 +238,7 @@ export function IconsShowcase() {
               onChange={e => setSearch(e.target.value)}
               placeholder={t("Search icon...", "Buscar ícone...")}
               aria-label={t("Search icon", "Buscar ícone")}
-              className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-[10px] pl-9 pr-3 py-2 text-[0.875rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 transition-all"
+              className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md pl-9 pr-3 py-2 text-[0.875rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 transition-all"
             />
           </div>
         </div>
@@ -267,7 +260,7 @@ export function IconsShowcase() {
                     key={`${cat.name}-${label}`}
                     onClick={() => handleCopy(label)}
                     title={label}
-                    className={`flex flex-col items-center gap-2 p-3 rounded-[10px] border transition-all duration-150 cursor-pointer
+                    className={`flex flex-col items-center gap-2 p-3 rounded-md border transition-all duration-150 cursor-pointer
                       ${copied === label
                         ? "border-primary/40 bg-primary/5 text-primary"
                         : "border-transparent hover:border-border hover:bg-accent text-muted-foreground hover:text-foreground"

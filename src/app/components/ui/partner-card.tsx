@@ -52,7 +52,7 @@ export function PartnerCard({
     <div
       data-slot="partner-card"
       className={cn(
-        "relative isolate overflow-hidden rounded-[24px] border transition-shadow duration-200 hover:shadow-[var(--shadow-lg)]",
+        "relative isolate overflow-hidden rounded-xl border transition-shadow duration-200 hover:shadow-[var(--shadow-lg)]",
         surface === "card" && "border-border bg-card text-card-foreground shadow-[var(--shadow-sm)]",
         surface === "tint" && "border-primary/15 bg-[var(--surface-tint,var(--primary-muted))] text-foreground shadow-[var(--shadow-sm)]",
         dark && "border-white/10 bg-[var(--graphite-950)] text-white shadow-[var(--shadow-md)]",
@@ -67,7 +67,7 @@ export function PartnerCard({
       <span aria-hidden className="pointer-events-none absolute -bottom-20 -left-10 -z-10 h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
 
       {visual && (
-        <div className={cn("flex shrink-0 items-center justify-center rounded-[18px]", dark ? "bg-white/10" : "bg-[var(--primary-muted)]", visualBox[size], horizontal ? "sm:order-last" : "")}>
+        <div className={cn("flex shrink-0 items-center justify-center rounded-lg", dark ? "bg-white/10" : "bg-[var(--primary-muted)]", visualBox[size], horizontal ? "sm:order-last" : "")}>
           <span className={cn("flex items-center justify-center text-primary", size === "p" ? "[&>svg]:h-6 [&>svg]:w-6 [&>img]:h-7" : size === "m" ? "[&>svg]:h-8 [&>svg]:w-8 [&>img]:h-10" : "[&>svg]:h-12 [&>svg]:w-12 [&>img]:h-14")}>{visual}</span>
         </div>
       )}

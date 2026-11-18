@@ -54,12 +54,12 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
         aria-expanded={aberto}
         aria-controls={idDetalhes}
         onClick={() => setAberto(v => !v)}
-        className="mt-4 inline-flex items-center gap-1 rounded-[8px] text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="mt-4 inline-flex items-center gap-1 rounded-sm text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         {aberto ? t("Hide details", "Ocultar detalhes") : t("See details", "Ver detalhes")}
         <ChevronDown className={`h-4 w-4 transition-transform ${aberto ? "rotate-180" : ""}`} aria-hidden />
       </button>
-      <dl id={idDetalhes} hidden={!aberto} className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 rounded-[12px] bg-muted/50 p-4 sm:grid-cols-2">
+      <dl id={idDetalhes} hidden={!aberto} className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 rounded-md bg-muted/50 p-4 sm:grid-cols-2">
         {card.detalhes.map(d => (
           <div key={d.rotulo}>
             <dt className="text-[0.75rem] text-muted-foreground">{d.rotulo}</dt>
@@ -166,12 +166,12 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
             <div key={ex.regra} className="rounded-[var(--radius)] border border-border bg-card p-4 sm:p-5">
               <p className="mb-3 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{ex.regra}</p>
               <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                <div className="rounded-[12px] border border-border bg-muted/40 p-4">
+                <div className="rounded-md border border-border bg-muted/40 p-4">
                   <p className="mb-1.5 flex items-center gap-1.5 text-[0.75rem] font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
                   <p className="text-[0.9375rem] font-semibold text-foreground/70 line-through decoration-error/40">{ex.evitar.titulo}</p>
                   {ex.evitar.texto && <p className="mt-1 text-[0.8125rem] text-muted-foreground">{ex.evitar.texto}</p>}
                 </div>
-                <div className="rounded-[12px] border border-success/25 bg-[var(--success-muted)] p-4">
+                <div className="rounded-md border border-success/25 bg-[var(--success-muted)] p-4">
                   <p className="mb-1.5 flex items-center gap-1.5 text-[0.75rem] font-semibold text-foreground"><CheckCircle className="h-4 w-4 text-success" aria-hidden />{t("Prefer", "Preferir")}</p>
                   <p className="text-[0.9375rem] font-semibold text-foreground">{ex.recomendado.titulo}</p>
                   {ex.recomendado.texto && <p className="mt-1 text-[0.8125rem] text-foreground/80">{ex.recomendado.texto}</p>}

@@ -125,7 +125,7 @@ export const glassSceneTexture = { light: "var(--graphite-300)", dark: "var(--gr
 export function GlassScene({ dark, className, children, ...props }: React.HTMLAttributes<HTMLDivElement> & { /** Força a cena escura; sem a prop, segue o tema. */ dark?: boolean }) {
   return (
     <div
-      className={cn("relative isolate overflow-hidden rounded-[24px] border border-border bg-background p-6 sm:p-8", dark && "dark bg-[var(--graphite-950)]", className)}
+      className={cn("relative isolate overflow-hidden rounded-xl border border-border bg-background p-6 sm:p-8", dark && "dark bg-[var(--graphite-950)]", className)}
       {...props}
     >
       <DoodleTexture scale="xs" color={glassSceneTexture.light} className="-z-10 dark:[background-color:var(--graphite-700)]" />

@@ -14,8 +14,8 @@ function Section({ id, title, sub, children }: { id: string; title: string; sub:
   return (
     <section id={id} className="space-y-5">
       <div>
-        <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{title}</h2>
-        <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{sub}</p>
+        <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{title}</h2>
+        <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{sub}</p>
       </div>
       {children}
     </section>
@@ -25,7 +25,7 @@ function Section({ id, title, sub, children }: { id: string; title: string; sub:
 /* ── Token pill ── */
 function Token({ name, value }: { name: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-[10px] border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className="flex items-center justify-between gap-4 rounded-md border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
       <code className="text-[0.75rem] font-mono text-primary">{name}</code>
       <span className="text-[0.6875rem] text-muted-foreground font-mono">{value}</span>
     </div>
@@ -141,20 +141,20 @@ function EnterPresets() {
   return (
     <Section id="enter-presets" title={t("Enter & Exit Presets", "Presets de entrada e saída")} sub={t("Ready-made animation variants for mounting components into the DOM. Click «Replay all» to watch them in sequence.", "Variantes de animação prontas para montar componentes no DOM. Clique em «Repetir todos» para vê-los em sequência.")}>
       <div className="flex justify-end">
-        <button onClick={replayAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
+        <button onClick={replayAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
           <RefreshCw className="h-3.5 w-3.5" /> {t("Replay all", "Repetir todos")}
         </button>
       </div>
       <div className="grid grid-cols-4 gap-3">
         {enterPresets.map((preset, i) => (
-          <div key={preset.label} className="rounded-[14px] border border-border bg-card p-4 flex flex-col items-center gap-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div key={preset.label} className="rounded-lg border border-border bg-card p-4 flex flex-col items-center gap-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center justify-center w-full" style={{ minHeight: 96 }}>
               <motion.div
                 key={keys[i]}
                 initial={preset.initial}
                 animate={preset.animate}
                 transition={preset.transition as any}
-                className="h-14 w-14 rounded-[14px] bg-primary/15 border border-primary/30 flex items-center justify-center"
+                className="h-14 w-14 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center"
                 style={{ perspective: 400 }}
               >
                 <Sparkles className="text-primary" style={{ height: 22, width: 22 }} />
@@ -201,7 +201,7 @@ function EasingReference() {
     <Section id="easing" title={t("Easing Reference", "Referência de easing")} sub={t("Visual comparison of cubic-bezier curves used across the design system.", "Comparação visual das curvas cubic-bezier usadas em todo o design system.")}>
       <div className="grid grid-cols-4 gap-3">
         {easings.map((e, i) => (
-          <div key={e.label} className="rounded-[14px] border border-border bg-card p-4 space-y-3 cursor-pointer hover:border-primary/30 transition-colors group" style={{ boxShadow: "var(--shadow-xs)" }} onClick={() => run(i)}>
+          <div key={e.label} className="rounded-lg border border-border bg-card p-4 space-y-3 cursor-pointer hover:border-primary/30 transition-colors group" style={{ boxShadow: "var(--shadow-xs)" }} onClick={() => run(i)}>
             {/* Curve SVG */}
             <div className="flex items-center justify-center">
               <svg width="80" height="80" viewBox="0 0 80 80" className="overflow-visible">
@@ -266,14 +266,14 @@ function SpringPhysics() {
   return (
     <Section id="spring" title={t("Spring Physics", "Física de spring")} sub={t("Physics-based animation presets. Click a card to see the spring in action.", "Presets de animação baseados em física. Clique em um card para ver o spring em ação.")}>
       <div className="flex justify-end">
-        <button onClick={triggerAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
+        <button onClick={triggerAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
           <Play className="h-3.5 w-3.5" /> {t("Play all", "Tocar todos")}
         </button>
       </div>
       <div className="grid grid-cols-3 gap-3">
         {springPresets.map((p, i) => (
           <div key={p.label} onClick={() => trigger(i)}
-            className="rounded-[14px] border border-border bg-card p-5 flex flex-col gap-4 cursor-pointer hover:border-primary/30 transition-all group" style={{ boxShadow: "var(--shadow-xs)" }}>
+            className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4 cursor-pointer hover:border-primary/30 transition-all group" style={{ boxShadow: "var(--shadow-xs)" }}>
             {/* Ball track */}
             <div className="relative h-10 bg-muted/40 rounded-full overflow-hidden border border-border">
               <motion.div
@@ -288,7 +288,7 @@ function SpringPhysics() {
               <div className="text-[0.8125rem] font-bold text-foreground group-hover:text-primary transition-colors mb-1">{t(p.label, p.labelPt)}</div>
               <div className="grid grid-cols-3 gap-1">
                 {[["s", p.stiffness], ["d", p.damping], ["m", p.mass]].map(([k, v]) => (
-                  <div key={k as string} className="text-center rounded-[6px] bg-muted/50 py-1 px-1">
+                  <div key={k as string} className="text-center rounded-sm bg-muted/50 py-1 px-1">
                     <div className="text-[0.5rem] text-muted-foreground uppercase tracking-wide">{k}</div>
                     <div className="text-[0.6875rem] font-bold text-foreground">{v}</div>
                   </div>
@@ -315,13 +315,13 @@ function SpringPlayground() {
   const run = () => setKey(k => k + 1);
 
   return (
-    <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
+    <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
       <div className="flex items-center justify-between">
         <div>
           <div className="text-[0.875rem] font-bold text-foreground">{t("Spring Playground", "Playground de spring")}</div>
           <div className="text-[0.6875rem] text-muted-foreground">{t("Tune stiffness, damping, and mass live.", "Ajuste rigidez, amortecimento e massa em tempo real.")}</div>
         </div>
-        <button onClick={run} className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
+        <button onClick={run} className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
           <Play className="h-3.5 w-3.5" /> {t("Play", "Tocar")}
         </button>
       </div>
@@ -404,7 +404,7 @@ function StaggerSection() {
 
   return (
     <Section id="stagger" title={t("Stagger & Sequences", "Stagger e sequências")} sub={t("Cascade children into view with configurable stagger delays.", "Faça os filhos entrarem em cascata com atrasos de stagger configuráveis.")}>
-      <div className="rounded-[16px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
+      <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-4">
             <label className="text-[0.6875rem] font-semibold text-foreground">{t("Stagger delay", "Atraso do stagger")}</label>
@@ -414,7 +414,7 @@ function StaggerSection() {
             <span className="text-[0.6875rem] font-mono text-primary">{staggerDelay}s</span>
           </div>
           <button onClick={() => setKey(k => k + 1)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-[8px] border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
             <RefreshCw className="h-3.5 w-3.5" /> {t("Replay", "Repetir")}
           </button>
         </div>
@@ -422,8 +422,8 @@ function StaggerSection() {
         <motion.div key={key} variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-2">
           {staggerItems.map((item, i) => (
             <motion.div key={item} variants={staggerChild}
-              className="flex items-center gap-2.5 rounded-[10px] border border-border bg-muted/30 px-3 py-2.5 hover:bg-accent transition-colors">
-              <div className="h-6 w-6 rounded-[7px] bg-primary/12 flex items-center justify-center shrink-0">
+              className="flex items-center gap-2.5 rounded-md border border-border bg-muted/30 px-3 py-2.5 hover:bg-accent transition-colors">
+              <div className="h-6 w-6 rounded-sm bg-primary/12 flex items-center justify-center shrink-0">
                 <span className="text-[0.5rem] font-black text-primary">{String(i + 1).padStart(2, "0")}</span>
               </div>
               <span className="text-[0.75rem] font-medium text-foreground">{t(item, staggerItemsPt[i])}</span>
@@ -467,13 +467,13 @@ function HoverSection() {
       <div className="grid grid-cols-4 gap-3">
 
         {/* Lift */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Lift", "Elevação")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               whileHover={{ y: -6, boxShadow: "0 16px 40px -8px rgba(0,0,0,0.35)" }}
               transition={{ type: "spring", stiffness: 400, damping: 20 }}
-              className="h-14 w-24 rounded-[12px] bg-card border border-border flex items-center justify-center cursor-pointer"
+              className="h-14 w-24 rounded-md bg-card border border-border flex items-center justify-center cursor-pointer"
               style={{ boxShadow: "var(--shadow-sm)" }}
             >
               <Layers className="h-5 w-5 text-muted-foreground" />
@@ -483,7 +483,7 @@ function HoverSection() {
         </div>
 
         {/* Scale */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Scale", "Escala")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
@@ -499,13 +499,13 @@ function HoverSection() {
         </div>
 
         {/* Glow */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Glow", "Brilho")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.button
               whileHover={{ boxShadow: "0 0 24px 6px var(--primary)" }}
               transition={{ duration: 0.25 }}
-              className="px-4 py-2 rounded-[10px] bg-primary text-primary-foreground text-[0.75rem] font-bold"
+              className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-[0.75rem] font-bold"
             >
               {t("Get started", "Começar")}
             </motion.button>
@@ -514,7 +514,7 @@ function HoverSection() {
         </div>
 
         {/* 3D Tilt */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("3D Tilt", "Inclinação 3D")}</div>
           <div className="flex items-center justify-center py-2" style={{ perspective: 500 }}>
             <motion.div
@@ -522,12 +522,12 @@ function HoverSection() {
               onMouseLeave={resetTilt}
               style={{ rotateX, rotateY, boxShadow: tiltShadow, transformStyle: "preserve-3d" }}
               transition={{ type: "spring", stiffness: 280, damping: 22 }}
-              className="relative h-24 w-36 rounded-[16px] overflow-hidden cursor-pointer select-none"
+              className="relative h-24 w-36 rounded-lg overflow-hidden cursor-pointer select-none"
             >
               {/* Base gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-muted border border-primary/25 rounded-[16px]" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/5 to-muted border border-primary/25 rounded-lg" />
               {/* Specular sheen that follows cursor */}
-              <motion.div className="absolute inset-0 rounded-[16px]" style={{ background: sheenBg }} />
+              <motion.div className="absolute inset-0 rounded-lg" style={{ background: sheenBg }} />
               {/* Floating content layer (raised via translateZ) */}
               <div
                 className="absolute inset-0 flex flex-col items-center justify-center gap-1.5"
@@ -542,7 +542,7 @@ function HoverSection() {
         </div>
 
         {/* Border sweep */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Border Sweep", "Varredura de borda")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
@@ -562,13 +562,13 @@ function HoverSection() {
         <MagneticButton />
 
         {/* Color shift */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Color Shift", "Mudança de cor")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               whileHover={{ backgroundColor: "var(--primary)", color: "var(--primary-foreground)" }}
               transition={{ duration: 0.2 }}
-              className="px-4 py-2 rounded-[10px] border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer"
+              className="px-4 py-2 rounded-md border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer"
             >
               {t("Fill on hover", "Preenche no hover")}
             </motion.div>
@@ -577,13 +577,13 @@ function HoverSection() {
         </div>
 
         {/* Reveal */}
-        <div className="rounded-[14px] border border-border bg-card p-4 space-y-3 group overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-4 space-y-3 group overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Icon Reveal", "Ícone revelado")}</div>
           <div className="flex items-center justify-center py-3">
             <motion.div
               initial={false}
               whileHover="hover"
-              className="flex items-center gap-2 px-4 py-2 rounded-[10px] bg-muted border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer overflow-hidden"
+              className="flex items-center gap-2 px-4 py-2 rounded-md bg-muted border border-border text-[0.75rem] font-semibold text-foreground cursor-pointer overflow-hidden"
             >
               <motion.span variants={{ hover: { x: -4 } }} transition={{ type: "spring", stiffness: 400, damping: 20 }}>
                 {t("Learn more", "Saiba mais")}
@@ -622,13 +622,13 @@ function MagneticButton() {
   const reset = () => { x.set(0); y.set(0); };
 
   return (
-    <div className="rounded-[14px] border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className="rounded-lg border border-border bg-card p-4 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
       <div className="text-[0.75rem] font-bold text-foreground">{t("Magnetic", "Magnético")}</div>
       <div className="flex items-center justify-center py-3">
         <div onMouseMove={handleMouse} onMouseLeave={reset} className="flex items-center justify-center w-24 h-14">
           <motion.button
             style={{ x: springX, y: springY }}
-            className="px-4 py-2 rounded-[10px] bg-card border border-border text-[0.75rem] font-semibold text-foreground"
+            className="px-4 py-2 rounded-md bg-card border border-border text-[0.75rem] font-semibold text-foreground"
           >
             <MousePointer2 className="h-4 w-4 text-muted-foreground mx-auto" />
           </motion.button>
@@ -656,7 +656,7 @@ function MicroInteractions() {
       <div className="grid grid-cols-3 gap-3">
 
         {/* Like */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Like Button", "Botão de curtir")}</div>
           <motion.button onClick={() => setLiked(l => !l)} whileTap={{ scale: 0.85 }} className="relative">
             <motion.div
@@ -681,13 +681,13 @@ function MicroInteractions() {
         </div>
 
         {/* Checkbox */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Checkbox", "Checkbox")}</div>
           <motion.button
             onClick={() => setChecked(c => !c)}
             animate={{ backgroundColor: checked ? "var(--primary)" : "rgba(0, 0, 0, 0)" }}
             transition={{ duration: 0.2 }}
-            className="h-8 w-8 rounded-[8px] border-2 flex items-center justify-center"
+            className="h-8 w-8 rounded-sm border-2 flex items-center justify-center"
             style={{ borderColor: checked ? "var(--primary)" : "var(--border)" }}
           >
             <AnimatePresence>
@@ -707,7 +707,7 @@ function MicroInteractions() {
         </div>
 
         {/* Toggle */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Toggle Switch", "Toggle switch")}</div>
           <motion.button
             onClick={() => setToggled(v => !v)}
@@ -725,7 +725,7 @@ function MicroInteractions() {
         </div>
 
         {/* Star Rating */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Star Rating", "Avaliação por estrelas")}</div>
           <div className="flex gap-1">
             {[1, 2, 3, 4, 5].map(n => (
@@ -741,7 +741,7 @@ function MicroInteractions() {
         </div>
 
         {/* Bell notification */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Notification Bell", "Sino de notificação")}</div>
           <motion.button
             onClick={() => { setNotified(true); setTimeout(() => setNotified(false), 1500); }}
@@ -767,7 +767,7 @@ function MicroInteractions() {
         </div>
 
         {/* Counter */}
-        <div className="rounded-[14px] border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 flex flex-col items-center gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Counter", "Contador")}</div>
           <div className="flex items-center gap-3">
             <motion.button whileTap={{ scale: 0.85 }} onClick={() => setCounter(c => Math.max(0, c - 1))}
@@ -815,7 +815,7 @@ function LoadersSection() {
       <div className="grid grid-cols-3 gap-3">
 
         {/* Spinner variants */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Spinners", "Spinners")}</div>
           <div className="flex items-center justify-around">
             {/* CSS border spin */}
@@ -843,7 +843,7 @@ function LoadersSection() {
         </div>
 
         {/* Progress bar */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Progress Bars", "Barras de progresso")}</div>
           <div className="space-y-3">
             <div className="space-y-1">
@@ -871,7 +871,7 @@ function LoadersSection() {
         </div>
 
         {/* Skeleton */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Skeleton", "Skeleton")}</div>
           <div className="flex items-center gap-3">
             <motion.div
@@ -896,13 +896,13 @@ function LoadersSection() {
         </div>
 
         {/* Step indicator */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Step Indicator", "Indicador de etapas")}</div>
           <StepIndicator />
         </div>
 
         {/* Circular */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-4 flex flex-col items-start" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4 flex flex-col items-start" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Circular Progress", "Progresso circular")}</div>
           <div className="flex-1 flex items-center justify-center w-full">
             <svg width="72" height="72" viewBox="0 0 72 72">
@@ -925,12 +925,12 @@ function LoadersSection() {
         </div>
 
         {/* Typing dots */}
-        <div className="rounded-[14px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Chat States", "Estados de chat")}</div>
           <div className="space-y-3">
             <div className="flex items-end gap-2">
               <div className="h-6 w-6 rounded-full bg-muted shrink-0" />
-              <div className="rounded-[10px] rounded-bl-[2px] bg-muted px-3 py-2 flex gap-1 items-center">
+              <div className="rounded-md rounded-bl-[2px] bg-muted px-3 py-2 flex gap-1 items-center">
                 {[0, 1, 2].map(i => (
                   <motion.div key={i}
                     animate={{ y: [0, -4, 0] }}
@@ -944,7 +944,7 @@ function LoadersSection() {
               <motion.div
                 animate={{ opacity: [0, 1], y: [6, 0] }}
                 transition={{ duration: 0.3 }}
-                className="rounded-[10px] rounded-br-[2px] bg-primary px-3 py-2 max-w-[140px]"
+                className="rounded-md rounded-br-[2px] bg-primary px-3 py-2 max-w-[140px]"
               >
                 <p className="text-[0.6875rem] text-primary-foreground">{t("Message sent ✓", "Mensagem enviada ✓")}</p>
               </motion.div>
@@ -1000,13 +1000,13 @@ function StepIndicator() {
       <div className="flex gap-1.5 justify-center mt-1">
         {step > 1 && (
           <button onClick={() => setStep(s => s - 1)}
-            className="px-2.5 py-1 rounded-[7px] border border-border bg-muted text-[0.625rem] font-medium text-foreground hover:bg-accent transition-colors">
+            className="px-2.5 py-1 rounded-sm border border-border bg-muted text-[0.625rem] font-medium text-foreground hover:bg-accent transition-colors">
             {t("Back", "Voltar")}
           </button>
         )}
         {step < steps.length && (
           <button onClick={() => setStep(s => s + 1)}
-            className="px-2.5 py-1 rounded-[7px] bg-primary text-primary-foreground text-[0.625rem] font-semibold hover:opacity-90 transition-opacity">
+            className="px-2.5 py-1 rounded-sm bg-primary text-primary-foreground text-[0.625rem] font-semibold hover:opacity-90 transition-opacity">
             {t("Next", "Próximo")}
           </button>
         )}
@@ -1032,15 +1032,15 @@ function LayoutTransitions() {
       <div className="grid grid-cols-2 gap-3">
 
         {/* Grid / List switch */}
-        <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between">
             <div className="text-[0.75rem] font-bold text-foreground">{t("Grid ↔ List", "Grade ↔ Lista")}</div>
-            <div className="flex gap-1 p-0.5 bg-muted rounded-[8px]">
+            <div className="flex gap-1 p-0.5 bg-muted rounded-sm">
               {(["grid", "list"] as const).map(v => (
                 <button key={v} onClick={() => setView(v)}
-                  className={`relative px-2.5 py-1 rounded-[6px] text-[0.625rem] font-semibold transition-colors ${view === v ? "text-foreground" : "text-muted-foreground"}`}>
+                  className={`relative px-2.5 py-1 rounded-sm text-[0.625rem] font-semibold transition-colors ${view === v ? "text-foreground" : "text-muted-foreground"}`}>
                   {view === v && (
-                    <motion.div layoutId="view-pill" className="absolute inset-0 bg-card rounded-[6px]" style={{ boxShadow: "var(--shadow-xs)" }} />
+                    <motion.div layoutId="view-pill" className="absolute inset-0 bg-card rounded-sm" style={{ boxShadow: "var(--shadow-xs)" }} />
                   )}
                   <span className="relative z-10">{v === "grid" ? t("grid", "grade") : t("list", "lista")}</span>
                 </button>
@@ -1050,8 +1050,8 @@ function LayoutTransitions() {
           <motion.div layout className={`gap-2 ${view === "grid" ? "grid grid-cols-3" : "flex flex-col"}`}>
             {items.map((item, idx) => (
               <motion.div key={item} layout
-                className={`bg-muted/40 border border-border rounded-[8px] flex items-center gap-2 ${view === "grid" ? "flex-col p-2.5 text-center" : "px-3 py-2"}`}>
-                <div className="h-5 w-5 rounded-[5px] bg-primary/15 shrink-0" />
+                className={`bg-muted/40 border border-border rounded-sm flex items-center gap-2 ${view === "grid" ? "flex-col p-2.5 text-center" : "px-3 py-2"}`}>
+                <div className="h-5 w-5 rounded-sm bg-primary/15 shrink-0" />
                 <span className="text-[0.625rem] font-medium text-foreground">{t(item, itemsPt[idx])}</span>
               </motion.div>
             ))}
@@ -1059,7 +1059,7 @@ function LayoutTransitions() {
         </div>
 
         {/* Tab underline */}
-        <div className="rounded-[16px] border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Animated Tabs", "Abas animadas")}</div>
           <div className="border-b border-border flex gap-0">
             {tabs.map((tabName, i) => (
@@ -1076,7 +1076,7 @@ function LayoutTransitions() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="rounded-[10px] bg-muted/30 border border-border p-4 min-h-[80px] flex items-center justify-center">
+              className="rounded-md bg-muted/30 border border-border p-4 min-h-[80px] flex items-center justify-center">
               <span className="text-[0.75rem] text-muted-foreground">{t(tabs[tab], tabsPt[tab])} {t("content", "conteúdo")}</span>
             </motion.div>
           </AnimatePresence>
@@ -1113,7 +1113,7 @@ function TokensSection() {
       </div>
 
       {/* Duration visual reference */}
-      <div className="rounded-[14px] border border-border bg-card p-5 space-y-3 mt-2" style={{ boxShadow: "var(--shadow-xs)" }}>
+      <div className="rounded-lg border border-border bg-card p-5 space-y-3 mt-2" style={{ boxShadow: "var(--shadow-xs)" }}>
         <div className="text-[0.75rem] font-bold text-foreground mb-4">{t("Duration Reference", "Referência de duração")}</div>
         <DurationBars />
       </div>
@@ -1211,8 +1211,8 @@ function MarqueeSection() {
   const featureCards = marqueeFeatures.map((f, i) => {
     const Icon = f.icon;
     return (
-      <div key={i} className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-[12px] border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
-        <div className="h-7 w-7 rounded-[8px] bg-primary/10 flex items-center justify-center shrink-0">
+      <div key={i} className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="h-7 w-7 rounded-sm bg-primary/10 flex items-center justify-center shrink-0">
           <Icon className="h-3.5 w-3.5 text-primary" />
         </div>
         <div>
@@ -1224,7 +1224,7 @@ function MarqueeSection() {
   });
 
   const reviewCards = marqueeReviews.map((r, i) => (
-    <div key={i} className="flex flex-col gap-1.5 px-4 py-3 rounded-[12px] border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)", width: 220 }}>
+    <div key={i} className="flex flex-col gap-1.5 px-4 py-3 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)", width: 220 }}>
       <div className="flex gap-0.5">
         {Array.from({ length: r.stars }).map((_, j) => <Star key={j} className="h-2.5 w-2.5 fill-warning text-warning" />)}
       </div>
@@ -1248,7 +1248,7 @@ function MarqueeSection() {
         @keyframes marquee-right { from { transform: translateX(-50%); } to { transform: translateX(0); }    }
       `}</style>
       <div
-        className="rounded-[16px] border border-border bg-card overflow-hidden py-5 space-y-3"
+        className="rounded-lg border border-border bg-card overflow-hidden py-5 space-y-3"
         style={{
           boxShadow: "var(--shadow-sm)",
           WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
@@ -1314,7 +1314,7 @@ function AnimatedListSection() {
   return (
     <Section id="animated-list" title={t("Animated List", "Lista animada")} sub={t("New items appear at the top and push existing ones down — ideal for activity feeds, inboxes, and live alerts.", "Novos itens aparecem no topo e empurram os existentes para baixo — ideal para feeds de atividade, caixas de entrada e alertas em tempo real.")}>
       <div className="max-w-lg mx-auto">
-        <div className="rounded-[16px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
+        <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
           {/* Header */}
           <div className="px-4 py-3 border-b border-border flex items-center justify-between bg-muted/20">
             <div className="flex items-center gap-2">
@@ -1327,7 +1327,7 @@ function AnimatedListSection() {
             </div>
             <button
               onClick={() => setPaused(p => !p)}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-[7px] border border-border bg-muted text-[0.625rem] font-semibold text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm border border-border bg-muted text-[0.625rem] font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
               {paused
                 ? <><Play className="h-2.5 w-2.5" /> {t("Resume", "Retomar")}</>
@@ -1349,10 +1349,10 @@ function AnimatedListSection() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, x: 60, scale: 0.9, transition: { duration: 0.2 } }}
                     transition={{ type: "spring", stiffness: 340, damping: 28 }}
-                    className="flex items-center gap-2.5 rounded-[10px] border border-border bg-background/60 px-3 py-2.5 mb-2 last:mb-0"
+                    className="flex items-center gap-2.5 rounded-md border border-border bg-background/60 px-3 py-2.5 mb-2 last:mb-0"
                     style={{ boxShadow: "var(--shadow-xs)" }}
                   >
-                    <div className={`h-8 w-8 rounded-[9px] flex items-center justify-center shrink-0 ${item.iconCls}`}>
+                    <div className={`h-8 w-8 rounded-sm flex items-center justify-center shrink-0 ${item.iconCls}`}>
                       <Icon className="h-4 w-4" />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -1363,7 +1363,7 @@ function AnimatedListSection() {
                       <p className="text-[0.6875rem] text-muted-foreground mt-0.5 truncate">{t(item.desc, item.descPt)}</p>
                     </div>
                     {item.action && (
-                      <button className="shrink-0 px-2 py-1 rounded-[6px] bg-primary/10 text-[0.5625rem] font-bold text-primary hover:bg-primary/20 transition-colors whitespace-nowrap">
+                      <button className="shrink-0 px-2 py-1 rounded-sm bg-primary/10 text-[0.5625rem] font-bold text-primary hover:bg-primary/20 transition-colors whitespace-nowrap">
                         {t(item.action, item.actionPt ?? item.action)}
                       </button>
                     )}
@@ -1679,7 +1679,7 @@ function AvatarOrbitCanvas() {
             }}
           >
             <div
-              className="whitespace-nowrap rounded-[9px] border border-border bg-popover text-popover-foreground px-3 py-2"
+              className="whitespace-nowrap rounded-sm border border-border bg-popover text-popover-foreground px-3 py-2"
               style={{ boxShadow: "var(--shadow-md)" }}
             >
               <div className="text-[0.75rem] font-bold leading-tight">{hovered.person.name}</div>
@@ -1703,7 +1703,7 @@ function OrbitingCirclesSection() {
       <div className="grid grid-cols-2 gap-4">
 
         {/* Forward orbit */}
-        <div className="rounded-[16px] border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Clockwise", "Sentido horário")}</div>
           <OrbitCanvas
             center={
@@ -1720,7 +1720,7 @@ function OrbitingCirclesSection() {
         </div>
 
         {/* Reverse orbit */}
-        <div className="rounded-[16px] border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Counterclockwise", "Sentido anti-horário")}</div>
           <OrbitCanvas
             reverse
@@ -1738,7 +1738,7 @@ function OrbitingCirclesSection() {
         </div>
 
         {/* Solid variant — full width */}
-        <div className="col-span-2 rounded-[16px] border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="col-span-2 rounded-lg border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between w-full mb-1">
             <div className="text-[0.75rem] font-bold text-foreground">{t("Solid icons", "Ícones sólidos")}</div>
             <span className="text-[0.625rem] text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">{t("solid background", "fundo sólido")}</span>
@@ -1759,7 +1759,7 @@ function OrbitingCirclesSection() {
         </div>
 
         {/* Avatar variant — full width */}
-        <div className="col-span-2 rounded-[16px] border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="col-span-2 rounded-lg border border-border bg-card flex flex-col items-center gap-1 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between w-full mb-2">
             <div>
               <div className="text-[0.75rem] font-bold text-foreground">{t("Avatars with tooltip", "Avatares com tooltip")}</div>
@@ -1954,7 +1954,7 @@ export function WobbleCardConteudo() {
                   key={opt.id}
                   onClick={() => setSpotlightId(opt.id)}
                   title={t(opt.label, opt.labelPt)}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                   style={spotlightId === opt.id
                     ? activeStyle
                     : { border: `1.5px solid ${ctrl}`, background: "transparent", color: idleColor }}
@@ -1977,7 +1977,7 @@ export function WobbleCardConteudo() {
               <button
                 key={String(opt.id)}
                 onClick={() => setWobbleEnabled(opt.id)}
-                className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={wobbleEnabled === opt.id
                   ? activeStyle
                   : { border: `1.5px solid ${ctrl}`, background: "transparent", color: idleColor }}
@@ -2053,7 +2053,7 @@ export function ShineBorderConteudo() {
     <div className="space-y-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {examples.map(example => (
-          <div key={example.label} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
+          <div key={example.label} className="relative overflow-hidden rounded-lg border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
             <ShineBorder duration={example.duration} shineColor={example.colors} />
             <Sparkles className="mb-4 h-5 w-5 text-primary" aria-hidden />
             <p className="text-[0.875rem] font-bold text-foreground">{example.label}</p>
@@ -2080,7 +2080,7 @@ export function ShineBorderConteudo() {
               contraste: t("Primary with the text color: more contrast, less color.", "Vermelho com a cor do texto: mais contraste, menos cor."),
             };
             return (
-              <div key={name} className="relative overflow-hidden rounded-[16px] border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
+              <div key={name} className="relative overflow-hidden rounded-lg border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
                 <ShineBorder preset={name} duration={7} borderWidth={name === "dourada" || name === "ouro" ? 2 : 1} />
                 <div className="mb-3 flex gap-1.5">
                   {shinePresets[name].slice(0, 2).map((c, i) => (
@@ -2094,7 +2094,7 @@ export function ShineBorderConteudo() {
             );
           })}
         </div>
-        <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`<ShineBorder preset="dourada" borderWidth={2} />
+        <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`<ShineBorder preset="dourada" borderWidth={2} />
 <ShineBorder shineColor={["var(--warning)", "var(--primary)", "var(--warning)"]} />`}</code></pre>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -2102,7 +2102,7 @@ export function ShineBorderConteudo() {
         <Token name="duration" value="8s default" />
         <Token name="easing" value="linear · infinite" />
       </div>
-      <div className="rounded-[14px] border border-border bg-muted/40 p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
+      <div className="rounded-lg border border-border bg-muted/40 p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
         <span className="font-semibold text-foreground">{t("Accessibility:", "Acessibilidade:")}</span>{" "}
         {t(
           "the implementation uses motion-safe, so prefers-reduced-motion keeps the visual border but removes the loop. Do not use Shine Border as the only indicator of selection or status.",
@@ -2137,7 +2137,7 @@ export function MotionShowcase() {
           <motion.div
             animate={{ rotate: [0, 360] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="h-14 w-14 rounded-[14px] bg-primary/12 border border-primary/20 flex items-center justify-center shrink-0"
+            className="h-14 w-14 rounded-lg bg-primary/12 border border-primary/20 flex items-center justify-center shrink-0"
           >
             <Wind className="h-7 w-7 text-primary" />
           </motion.div>
@@ -2164,7 +2164,7 @@ export function MotionShowcase() {
           ].map(p => {
             const Icon = p.icon;
             return (
-              <div key={p.label} className="rounded-[12px] border border-border bg-muted/30 p-3.5">
+              <div key={p.label} className="rounded-md border border-border bg-muted/30 p-3.5">
                 <Icon className="h-4 w-4 text-primary mb-2" />
                 <div className="text-[0.75rem] font-bold text-foreground mb-0.5">{t(p.label, p.labelPt)}</div>
                 <div className="text-[0.6125rem] text-muted-foreground leading-snug">{t(p.desc, p.descPt)}</div>

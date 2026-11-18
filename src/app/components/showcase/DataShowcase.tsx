@@ -12,23 +12,16 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip as RechartTooltip,
   ResponsiveContainer, PieChart, Pie, Cell,
 } from "recharts";
+import { SectionHeader } from "./shared/SectionHeader";
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`bg-card rounded-[16px] border border-border p-6 ${className}`} style={{ boxShadow: "var(--shadow)" }}>
+    <div className={`bg-card rounded-lg border border-border p-6 ${className}`} style={{ boxShadow: "var(--shadow)" }}>
       {children}
     </div>
   );
 }
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-8">
-      <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{title}</h2>
-      {description && <p className="text-[0.9375rem] text-muted-foreground">{description}</p>}
-    </div>
-  );
-}
 
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -135,7 +128,7 @@ type SortDir = "asc" | "desc" | null;
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-card border border-border rounded-[10px] px-3 py-2 text-[0.8125rem] shadow-lg">
+      <div className="bg-card border border-border rounded-md px-3 py-2 text-[0.8125rem] shadow-lg">
         <p className="font-medium text-foreground mb-1">{label}</p>
         {payload.map((p: any, i: number) => (
           <p key={i} style={{ color: p.color }} className="font-medium">
@@ -284,10 +277,10 @@ export function DataShowcase() {
               <p className="text-[0.8125rem] text-muted-foreground">{tableData.length} {t("total users", "usuários no total")}</p>
             </div>
             <div className="flex items-center gap-2">
-              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-[9px] border border-border bg-card hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-sm border border-border bg-card hover:bg-accent transition-colors">
                 <Filter className="h-4 w-4" /> {t("Filter", "Filtrar")}
               </button>
-              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-[9px] border border-border bg-card hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-sm border border-border bg-card hover:bg-accent transition-colors">
                 <Download className="h-4 w-4" /> {t("Export", "Exportar")}
               </button>
             </div>
@@ -335,12 +328,12 @@ export function DataShowcase() {
                       </div>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-[6px] text-[0.75rem] font-medium border ${planStyles[row.plan]}`}>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-[0.75rem] font-medium border ${planStyles[row.plan]}`}>
                         {planPt[row.plan] && t(row.plan, planPt[row.plan])}
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-[6px] text-[0.75rem] font-medium border ${statusStyles[row.status]}`}>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-[0.75rem] font-medium border ${statusStyles[row.status]}`}>
                         <span className={`h-1.5 w-1.5 rounded-full mr-1.5 ${row.status === "Active" ? "bg-success" : row.status === "Trial" ? "bg-warning" : "bg-muted-foreground"}`} />
                         {t(row.status, statusPt[row.status])}
                       </span>
@@ -348,7 +341,7 @@ export function DataShowcase() {
                     <td className="px-6 py-4 text-[0.9rem] font-semibold text-foreground">{row.mrr}</td>
                     <td className="px-6 py-4 text-[0.8125rem] text-muted-foreground">{t(row.joined, row.joinedPt)}</td>
                     <td className="px-6 py-4">
-                      <button className="h-8 w-8 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+                      <button className="h-8 w-8 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
                         <MoreHorizontal className="h-4 w-4" />
                       </button>
                     </td>
@@ -361,7 +354,7 @@ export function DataShowcase() {
             <span className="text-[0.8125rem] text-muted-foreground">{t("Showing", "Exibindo")} 1–{tableData.length} {t("of", "de")} {tableData.length}</span>
             <div className="flex items-center gap-1">
               {[1, 2, 3].map(p => (
-                <button key={p} className={`h-8 w-8 rounded-[8px] text-[0.875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>
+                <button key={p} className={`h-8 w-8 rounded-sm text-[0.875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>
                   {p}
                 </button>
               ))}
@@ -434,13 +427,13 @@ export function CardsDeKpi() {
         const TrendIcon = kpi.trend === "up" ? ArrowUpRight : ArrowDownRight;
         const trendColor = kpi.trend === "up" ? "text-success" : "text-primary";
         return (
-          <div key={kpi.label} className="bg-card rounded-[16px] border border-border p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow)" }}>
+          <div key={kpi.label} className="bg-card rounded-lg border border-border p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow)" }}>
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-[0.8125rem] font-medium text-muted-foreground mb-1">{t(kpi.label, kpi.pt)}</p>
                 <p className="text-[1.625rem] font-bold text-foreground tracking-[-0.025em] leading-none">{kpi.value}</p>
               </div>
-              <div className="h-9 w-9 rounded-[10px] bg-muted flex items-center justify-center">
+              <div className="h-9 w-9 rounded-md bg-muted flex items-center justify-center">
                 <Icon className="h-4.5 w-4.5 text-muted-foreground" style={{ height: "18px", width: "18px" }} />
               </div>
             </div>

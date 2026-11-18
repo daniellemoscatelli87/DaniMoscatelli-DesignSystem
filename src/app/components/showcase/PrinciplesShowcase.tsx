@@ -120,7 +120,7 @@ function PrincipleCard({ p, onGo }: { p: PrincipleItem; onGo: (t: Target) => voi
       <button
         type="button"
         onClick={() => onGo(p.target)}
-        className="group mt-auto self-start inline-flex items-center gap-1.5 rounded-[6px] text-[0.8125rem] font-semibold text-primary hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="group mt-auto self-start inline-flex items-center gap-1.5 rounded-sm text-[0.8125rem] font-semibold text-primary hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span>
           {t("Learn more", "Saiba mais")}

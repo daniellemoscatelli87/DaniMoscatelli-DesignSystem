@@ -75,8 +75,8 @@ function DownloadButtons({ asset }: { asset: DownloadAsset }) {
 function SectionBlock({ id, title, subtitle }: { id: string; title: string; subtitle?: string }) {
   return (
     <div id={id} className="mb-8">
-      <h2 className="text-[1.375rem] font-bold tracking-[-0.02em] text-foreground">{title}</h2>
-      {subtitle && <p className="mt-1 text-[0.9375rem] text-muted-foreground">{subtitle}</p>}
+      <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{title}</h2>
+      {subtitle && <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{subtitle}</p>}
       <div className="mt-4 h-px bg-border" />
     </div>
   );

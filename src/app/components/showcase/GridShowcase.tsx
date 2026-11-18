@@ -4,6 +4,7 @@ import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { DataTable, DoDont, Mono, Panel } from "./shared/Guidance";
 import { cn } from "../ui/utils";
+import { SectionHeader } from "./shared/SectionHeader";
 
 /* ─────────────────────────────────────────────────────────────
    Grid e espaçamento
@@ -12,15 +13,6 @@ import { cn } from "../ui/utils";
    classes .ds-container(-reading/-wide), .ds-grid e .ds-section(-hero).
    ───────────────────────────────────────────────────────────── */
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-6">
-      <h2 className="text-[1.375rem] font-bold tracking-[-0.02em] text-foreground">{title}</h2>
-      {description && <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{description}</p>}
-      <div className="mt-4 h-px bg-border" />
-    </div>
-  );
-}
 
 function Rotulo({ children }: { children: React.ReactNode }) {
   return <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</p>;
@@ -39,14 +31,14 @@ function DemoDoGrid({ tela }: { tela: Tela }) {
   const { t } = useI18n();
   const g = GRID[tela];
   return (
-    <div className="overflow-x-auto rounded-[16px] border border-border bg-card p-4">
+    <div className="overflow-x-auto rounded-lg border border-border bg-card p-4">
       <div className="mx-auto" style={{ width: "100%", maxWidth: g.largura }}>
         <div className="mb-2 flex items-center justify-between text-[0.6875rem] font-mono text-muted-foreground">
           <span>{t("margin", "margem")} {g.margem}px</span>
           <span>{g.colunas} {t("columns", "colunas")} · {t("gutter", "calha")} {g.calha}px</span>
           <span>{t("margin", "margem")} {g.margem}px</span>
         </div>
-        <div data-testid="demo-grid" data-colunas={g.colunas} className="rounded-[8px] bg-[var(--primary-muted)]/40" style={{ paddingInline: g.margem }}>
+        <div data-testid="demo-grid" data-colunas={g.colunas} className="rounded-sm bg-[var(--primary-muted)]/40" style={{ paddingInline: g.margem }}>
           <div className="grid h-40" style={{ gridTemplateColumns: `repeat(${g.colunas}, minmax(0, 1fr))`, columnGap: g.calha }}>
             {Array.from({ length: g.colunas }).map((_, i) => (
               <div key={i} className="flex items-end justify-center rounded-[4px] bg-primary/20 pb-1 text-[0.625rem] font-mono text-[var(--primary-text,var(--primary))]">{i + 1}</div>
@@ -61,7 +53,7 @@ function DemoDoGrid({ tela }: { tela: Tela }) {
 /** Exemplo de composição sobre o grid: blocos com span por tela. */
 function Bloco({ span, rotulo, className }: { span: string; rotulo: string; className?: string }) {
   return (
-    <div className={cn("flex min-h-16 items-center justify-center rounded-[10px] border border-border bg-card p-3 text-center text-[0.75rem] text-muted-foreground", span, className)}>
+    <div className={cn("flex min-h-16 items-center justify-center rounded-md border border-border bg-card p-3 text-center text-[0.75rem] text-muted-foreground", span, className)}>
       <span><span className="block font-semibold text-foreground">{rotulo}</span><span className="font-mono text-[0.6875rem]">{span}</span></span>
     </div>
   );
@@ -148,14 +140,14 @@ export function GridShowcase() {
           title={t("Column grid", "Grid de colunas")}
           description={t("The page is divided into columns with a fixed margin at the sides and a fixed gutter between them. Content occupies whole columns (col-span), never half a column.", "A página é dividida em colunas, com margem fixa nas laterais e calha fixa entre elas. O conteúdo ocupa colunas inteiras (col-span), nunca meia coluna.")}
         />
-        <div role="group" aria-label={t("Screen", "Tela")} className="mb-4 inline-flex flex-wrap gap-1 rounded-[12px] bg-muted p-1">
+        <div role="group" aria-label={t("Screen", "Tela")} className="mb-4 inline-flex flex-wrap gap-1 rounded-md bg-muted p-1">
           {([
             ["celular", t("Phone", "Celular"), Smartphone],
             ["tablet", t("Tablet", "Tablet"), Tablet],
             ["desktop", "Desktop", Monitor],
           ] as [Tela, string, React.ElementType][]).map(([id, rotulo, Icone]) => (
             <button key={id} type="button" aria-pressed={tela === id} onClick={() => setTela(id)}
-              className={cn("inline-flex h-8 items-center gap-1.5 rounded-[9px] px-2.5 text-[0.75rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              className={cn("inline-flex h-8 items-center gap-1.5 rounded-sm px-2.5 text-[0.75rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 tela === id ? "bg-card text-foreground shadow-[var(--shadow-xs)]" : "text-muted-foreground hover:text-foreground")}>
               <Icone aria-hidden className="h-3.5 w-3.5" />{rotulo}
             </button>
@@ -193,7 +185,7 @@ export function GridShowcase() {
           description={t("Sections of a page are separated by the same space, so the page reads as a sequence. The hero gets more air.", "As seções de uma página ficam separadas pelo mesmo espaço, para a página ser lida em sequência. O hero ganha mais respiro.")}
         />
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="rounded-[16px] border border-border bg-card p-4">
+          <div className="rounded-lg border border-border bg-card p-4">
             {[
               [t("Hero", "Hero"), "96 px", "--section-space-hero"],
               [t("Section", "Seção"), "64 / 80 px", "--section-space"],
@@ -205,7 +197,7 @@ export function GridShowcase() {
                     <span aria-hidden className="h-6 w-px bg-primary" /> {valor} · {token}
                   </div>
                 )}
-                <div className={cn("flex items-center justify-center rounded-[10px] bg-muted text-[0.75rem] font-semibold text-muted-foreground", i === 0 ? "h-24" : "h-16")}>{nome}</div>
+                <div className={cn("flex items-center justify-center rounded-md bg-muted text-[0.75rem] font-semibold text-muted-foreground", i === 0 ? "h-24" : "h-16")}>{nome}</div>
               </div>
             ))}
           </div>
@@ -229,20 +221,20 @@ export function GridShowcase() {
         <div className="space-y-8">
           <div>
             <Rotulo>{t("Three cards: full width on phone, two per row on tablet, three on desktop", "Três cards: largura toda no celular, dois por linha no tablet, três no desktop")}</Rotulo>
-            <div className="ds-grid rounded-[16px] border border-border bg-muted/40 p-[var(--grid-margin)]">
+            <div className="ds-grid rounded-lg border border-border bg-muted/40 p-[var(--grid-margin)]">
               {[1, 2, 3].map(i => <Bloco key={i} span="col-span-4 lg:col-span-4" rotulo={`Card ${i}`} />)}
             </div>
           </div>
           <div>
             <Rotulo>{t("Side menu and content: stacks on phone and tablet", "Menu lateral e conteúdo: empilha no celular e no tablet")}</Rotulo>
-            <div className="ds-grid rounded-[16px] border border-border bg-muted/40 p-[var(--grid-margin)]">
+            <div className="ds-grid rounded-lg border border-border bg-muted/40 p-[var(--grid-margin)]">
               <Bloco span="col-span-4 sm:col-span-8 lg:col-span-3" rotulo={t("Menu", "Menu")} />
               <Bloco span="col-span-4 sm:col-span-8 lg:col-span-9" rotulo={t("Content", "Conteúdo")} className="min-h-28" />
             </div>
           </div>
           <div>
             <Rotulo>{t("Text and image: half and half on desktop", "Texto e imagem: meio a meio no desktop")}</Rotulo>
-            <div className="ds-grid rounded-[16px] border border-border bg-muted/40 p-[var(--grid-margin)]">
+            <div className="ds-grid rounded-lg border border-border bg-muted/40 p-[var(--grid-margin)]">
               <Bloco span="col-span-4 sm:col-span-8 lg:col-span-6" rotulo={t("Text", "Texto")} className="min-h-28" />
               <Bloco span="col-span-4 sm:col-span-8 lg:col-span-6" rotulo={t("Image", "Imagem")} className="min-h-28" />
             </div>

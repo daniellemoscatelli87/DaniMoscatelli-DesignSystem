@@ -101,7 +101,7 @@ export function CopyLinkButton({ id }: { id: string }) {
       </button>
       <span
         role="tooltip"
-        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 whitespace-nowrap rounded-[6px] bg-foreground px-2 py-1 text-[0.6875rem] font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 whitespace-nowrap rounded-sm bg-foreground px-2 py-1 text-[0.6875rem] font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
       >
         {copied ? t("Copied", "Copiado") : t("Copy link", "Copiar link")}
       </span>

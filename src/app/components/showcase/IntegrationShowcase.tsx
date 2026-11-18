@@ -17,7 +17,7 @@ function CopyBtn({ text }: { text: string }) {
 
 function CodeBlock({ filename, label, children }: { filename: string; label?: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className="rounded-md border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/30">
         <div className="flex items-center gap-2">
           <div className="h-2 w-2 rounded-full bg-red-400/60" />
@@ -89,9 +89,9 @@ export function IntegrationShowcase() {
 
         {/* Two paths */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="rounded-[14px] border border-violet-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-violet-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-[9px] bg-violet-500/10 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-sm bg-violet-500/10 flex items-center justify-center">
                 <Figma className="h-4 w-4 text-violet-400" />
               </div>
               <div>
@@ -108,9 +108,9 @@ export function IntegrationShowcase() {
             </div>
           </div>
 
-          <div className="rounded-[14px] border border-blue-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-blue-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-[9px] bg-blue-500/10 flex items-center justify-center">
+              <div className="h-8 w-8 rounded-sm bg-blue-500/10 flex items-center justify-center">
                 <Code2 className="h-4 w-4 text-blue-400" />
               </div>
               <div>
@@ -132,7 +132,7 @@ export function IntegrationShowcase() {
       {/* ── Designer path ── */}
       <section className="space-y-5">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-[9px] bg-violet-500/10 flex items-center justify-center shrink-0">
+          <div className="h-8 w-8 rounded-sm bg-violet-500/10 flex items-center justify-center shrink-0">
             <Paintbrush className="h-4 w-4 text-violet-400" />
           </div>
           <div>
@@ -144,7 +144,7 @@ export function IntegrationShowcase() {
         <div className="space-y-3">
 
           {/* Step 1 */}
-          <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={1} />
               <div className="space-y-2 flex-1">
@@ -152,7 +152,7 @@ export function IntegrationShowcase() {
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
                   {t("The design system lives as a shared Figma file with the component and variable library enabled. Ask your Figma admin to add it to your team under ", "O design system vive em um arquivo Figma compartilhado, com a biblioteca de componentes e variáveis ativada. Peça ao admin do Figma para adicioná-lo ao seu time em ")}<strong className="text-foreground">{t("Team → Libraries", "Team → Libraries")}</strong>.
                 </p>
-                <div className="rounded-[8px] bg-muted/40 border border-border px-3 py-2.5 space-y-1">
+                <div className="rounded-sm bg-muted/40 border border-border px-3 py-2.5 space-y-1">
                   <p className="text-[0.5625rem] font-bold uppercase tracking-[0.07em] text-muted-foreground/60">{t("In Figma", "No Figma")}</p>
                   <div className="flex flex-wrap gap-1.5 text-[0.6875rem]">
                     {[t("Main Menu", "Menu principal"), "Libraries", t("Design System — [Project Name]", "Design System — [Nome do Projeto]"), t("Enable", "Ativar")].map((s, i, arr) => (
@@ -168,7 +168,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 2 */}
-          <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={2} />
               <div className="space-y-2 flex-1">
@@ -181,7 +181,7 @@ export function IntegrationShowcase() {
                     { name: "Primitives", desc: t("Full palette of raw colors. Do not use directly in components.", "Paleta completa de cores brutas. Não use diretamente nos componentes."), color: "bg-muted/50 border-border" },
                     { name: "Semantics", desc: t("Intent tokens: Primary, Background, Muted. Use these in components.", "Tokens de intenção: Primary, Background, Muted. Use estes nos componentes."), color: "bg-primary/5 border-primary/20" },
                   ].map(c => (
-                    <div key={c.name} className={`rounded-[8px] border p-2.5 space-y-1 ${c.color}`}>
+                    <div key={c.name} className={`rounded-sm border p-2.5 space-y-1 ${c.color}`}>
                       <p className="text-[0.6875rem] font-bold text-foreground">{c.name}</p>
                       <p className="text-[0.5625rem] text-muted-foreground leading-snug">{c.desc}</p>
                     </div>
@@ -192,7 +192,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 3 */}
-          <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={3} />
               <div className="space-y-2 flex-1">
@@ -200,7 +200,7 @@ export function IntegrationShowcase() {
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
                   {t("The Semantics collection has two modes. To switch in your file: select a frame or component, go to ", "A coleção Semantics tem dois modos. Para alternar no seu arquivo: selecione um frame ou componente, vá em ")}<strong className="text-foreground">Variables → Semantics</strong>{t(" and choose the desired mode. This switches all linked tokens at once — no need to adjust color by color.", " e escolha o modo desejado. Isso troca todos os tokens vinculados de uma vez — sem precisar ajustar cor por cor.")}
                 </p>
-                <div className="rounded-[8px] bg-muted/40 border border-border p-2.5 flex items-center gap-4 text-[0.6875rem]">
+                <div className="rounded-sm bg-muted/40 border border-border p-2.5 flex items-center gap-4 text-[0.6875rem]">
                   <div className="flex items-center gap-2">
                     <div className="h-5 w-5 rounded-md border border-border bg-card flex items-center justify-center">
                       <div className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--graphite-50)" }} />
@@ -221,7 +221,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 4 */}
-          <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={4} />
               <div className="space-y-2 flex-1">
@@ -229,7 +229,7 @@ export function IntegrationShowcase() {
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
                   {t("If the project already has components, use the ", "Se o projeto já tem componentes, use o plugin ")}<strong className="text-foreground">Variable Inspector</strong>{t(" plugin to find layers with raw colors (manual hex) and replace them with the matching semantic tokens. This is what keeps design and code speaking the same language.", " para encontrar camadas com cores brutas (hex manual) e trocá-las pelos tokens semânticos correspondentes. É isso que mantém design e código falando a mesma língua.")}
                 </p>
-                <div className="rounded-[8px] bg-amber-500/8 border border-amber-500/20 px-3 py-2">
+                <div className="rounded-sm bg-amber-500/8 border border-amber-500/20 px-3 py-2">
                   <p className="text-[0.6875rem] text-amber-500/90 leading-snug">
                     <strong>{t("Warning:", "Atenção:")}</strong> {t("components copied from the internet or generated by AI often have hardcoded hex. Always audit before using in the project.", "componentes copiados da internet ou gerados por IA costumam ter hex fixo no código. Sempre audite antes de usar no projeto.")}
                   </p>
@@ -243,7 +243,7 @@ export function IntegrationShowcase() {
       {/* ── Developer path ── */}
       <section className="space-y-5">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-[9px] bg-blue-500/10 flex items-center justify-center shrink-0">
+          <div className="h-8 w-8 rounded-sm bg-blue-500/10 flex items-center justify-center shrink-0">
             <Code2 className="h-4 w-4 text-blue-400" />
           </div>
           <div>
@@ -255,7 +255,7 @@ export function IntegrationShowcase() {
         <div className="space-y-3">
 
           {/* Step 1 */}
-          <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={1} />
               <div className="space-y-1">
@@ -276,7 +276,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 2 */}
-          <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={2} />
               <div className="space-y-1">
@@ -286,7 +286,7 @@ export function IntegrationShowcase() {
                 </p>
               </div>
             </div>
-            <div className="rounded-[10px] border border-border bg-muted/20 overflow-hidden">
+            <div className="rounded-md border border-border bg-muted/20 overflow-hidden">
               {[
                 { file: "theme.css",   desc: t("Primitives, semantics, dark mode — the source of truth for tokens", "Primitivos, semânticos, dark mode — a fonte da verdade dos tokens"), icon: FileCode, color: "text-violet-400" },
                 { file: "fonts.css",   desc: t("Google Fonts import (Plus Jakarta Sans, Space Grotesk, Fraunces)", "Import do Google Fonts (Plus Jakarta Sans, Space Grotesk, Fraunces)"), icon: FileCode, color: "text-amber-400" },
@@ -305,7 +305,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 3 */}
-          <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={3} />
               <div className="space-y-1">
@@ -350,7 +350,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 4 */}
-          <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={4} />
               <div className="space-y-1">
@@ -382,7 +382,7 @@ export function IntegrationShowcase() {
           </div>
 
           {/* Step 5 */}
-          <div className="rounded-[14px] border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-border bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-start gap-3">
               <StepBadge n={5} />
               <div className="space-y-1">
@@ -442,7 +442,7 @@ export function IntegrationShowcase() {
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How to organize token files in a React project.", "Como organizar os arquivos de tokens em um projeto React.")}</p>
         </div>
 
-        <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="px-4 py-3 border-b border-border bg-muted/30 flex items-center gap-2">
             <FolderOpen className="h-3.5 w-3.5 text-muted-foreground" />
             <span className="text-[0.625rem] font-mono text-muted-foreground">{t("project structure", "estrutura do projeto")}</span>
@@ -485,7 +485,7 @@ export function IntegrationShowcase() {
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How a design decision becomes code, step by step.", "Como uma decisão de design vira código, passo a passo.")}</p>
         </div>
 
-        <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="divide-y divide-border">
             {[
               {
@@ -585,7 +585,7 @@ export function IntegrationShowcase() {
             const teamLabel = item.team === "design" ? "Design" : item.team === "dev" ? "Dev" : t("Both", "Ambos");
             return (
               <button key={item.id} onClick={() => toggle(item.id)}
-                className={`w-full rounded-[10px] border px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+                className={`w-full rounded-md border px-4 py-3 flex items-center gap-3 text-left transition-colors ${
                   done ? "border-success/30 bg-success/5" : "border-border bg-card hover:bg-muted/30"
                 }`}
                 style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -604,7 +604,7 @@ export function IntegrationShowcase() {
         </div>
 
         {doneCount === visible.length && visible.length > 0 && (
-          <div className="rounded-[12px] border border-success/30 bg-success/8 px-5 py-4 flex items-center gap-3">
+          <div className="rounded-md border border-success/30 bg-success/8 px-5 py-4 flex items-center gap-3">
             <CheckCircle2 className="h-5 w-5 text-success shrink-0" />
             <p className="text-[0.8125rem] font-bold text-foreground">
               {t("All done! The design system is correctly integrated into the project.", "Tudo pronto! O design system está integrado corretamente ao projeto.")}

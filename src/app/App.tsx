@@ -763,7 +763,7 @@ function AppShell() {
         {/* Menu toggle: collapses the sidebar on desktop, opens the drawer on mobile */}
         <button
           type="button"
-          className="lg:hidden h-9 w-9 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors shrink-0"
+          className="lg:hidden h-9 w-9 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors shrink-0"
           onClick={() => setMobileSidebarOpen(v => !v)}
           aria-label={t("Toggle menu", "Abrir/fechar menu")}
           title={t("Toggle menu", "Abrir/fechar menu")}
@@ -835,7 +835,7 @@ function AppShell() {
           type="button"
           onClick={() => setSearchOpen(true)}
           aria-label={t("Search the design system", "Buscar no design system")}
-          className="hidden md:flex items-center gap-2 h-7 px-3 rounded-[8px] border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors"
+          className="hidden md:flex items-center gap-2 h-7 px-3 rounded-sm border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors"
         >
           <Search className="h-3 w-3" />
           <span>{t("Search", "Buscar")}</span>
@@ -844,7 +844,7 @@ function AppShell() {
 
 
         {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-0.5 rounded-[10px] bg-muted border border-border gap-0.5">
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
           {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
             <button
               key={code}
@@ -853,7 +853,7 @@ function AppShell() {
               aria-pressed={lang === code}
               title={full}
               aria-label={full}
-              className={`flex items-center gap-1.5 h-7 px-2.5 rounded-[8px] text-[0.75rem] font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
                 lang === code
                   ? "bg-card text-foreground shadow-sm border border-border"
                   : "text-muted-foreground hover:text-foreground"
@@ -865,10 +865,10 @@ function AppShell() {
         </div>
 
         {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-8 p-0.5 rounded-[10px] bg-muted border border-border gap-0.5">
+        <div className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
           <button
             onClick={() => setDark(false)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-[8px] text-[0.75rem] font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
               !dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -879,7 +879,7 @@ function AppShell() {
           </button>
           <button
             onClick={() => setDark(true)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-[8px] text-[0.75rem] font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
               dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -940,7 +940,7 @@ function AppShell() {
                         title={collapsed ? tl(label) : undefined}
                         aria-label={tl(label)}
                         aria-expanded={item.items ? !!isExpanded : undefined}
-                        className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                        className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
                           ${collapsed ? "lg:justify-center lg:px-0" : ""}
                           ${isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                       >
@@ -963,7 +963,7 @@ function AppShell() {
                               <button
                                 key={sub.id}
                                 onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
-                                className={`w-full text-left px-3 py-1.5 rounded-[7px] text-[0.8125rem] transition-colors
+                                className={`w-full text-left px-3 py-1.5 rounded-sm text-[0.8125rem] transition-colors
                                   ${isSubActive
                                     ? "text-primary font-medium bg-primary/8"
                                     : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
@@ -993,7 +993,7 @@ function AppShell() {
                       title={collapsed ? tl(group.group) : undefined}
                       aria-label={tl(group.group)}
                       aria-expanded={groupOpen}
-                      className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                      className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
                         ${collapsed ? "lg:justify-center lg:px-0" : ""}
                         ${groupActive && !groupOpen ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                     >
@@ -1090,7 +1090,7 @@ function AppShell() {
                 type="button"
                 onClick={() => setSearchOpen(false)}
                 aria-label={t("Close search", "Fechar busca")}
-                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -1110,9 +1110,9 @@ function AppShell() {
                       key={`${result.sectionId}-${result.key}`}
                       type="button"
                       onClick={() => selectSearchResult(result.sectionId, result.anchor)}
-                      className="flex w-full items-center gap-3 rounded-[9px] px-3 py-2.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
+                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
                     >
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-muted text-muted-foreground">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground">
                         <ResultIcon className="h-4 w-4" aria-hidden />
                       </span>
                       <span className="min-w-0 flex-1">

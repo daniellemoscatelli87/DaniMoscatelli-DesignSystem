@@ -230,7 +230,7 @@ export function UploadDropzone({
           dragging ? "border-primary bg-[var(--primary-muted)] scale-[1.01] shadow-[var(--shadow-md)]" :
           error ? "border-error/60 bg-error/5" :
           "border-border bg-card hover:border-primary/60 hover:bg-[var(--primary-muted)]/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          size === "compact" && "flex-row justify-start gap-4 text-left rounded-[14px]",
+          size === "compact" && "flex-row justify-start gap-4 text-left rounded-lg",
         )}
       >
         <span className={cn(
@@ -277,8 +277,8 @@ export function UploadItem({
   const isImg = fileKind(item.type, item.name) === "image" && item.url;
   const statusLabel = item.status === "enviando" ? tx.enviando(Math.round(item.progress ?? 0)) : item.status === "concluido" ? tx.concluido : item.status === "erro" ? (item.error ?? tx.falhaNoEnvio) : tx.aguardando;
   return (
-    <li className={cn("flex items-center gap-3 rounded-[14px] border bg-card p-3 transition-colors", item.status === "erro" ? "border-error/50" : "border-border", className)}>
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[10px] bg-muted">
+    <li className={cn("flex items-center gap-3 rounded-lg border bg-card p-3 transition-colors", item.status === "erro" ? "border-error/50" : "border-border", className)}>
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-md bg-muted">
         {isImg ? <img src={item.url} alt="" className="h-full w-full object-cover" /> : <KindIcon type={item.type} name={item.name} className="h-5 w-5 text-muted-foreground" />}
       </span>
       <div className="min-w-0 flex-1">
@@ -356,7 +356,7 @@ export function ImageUpload({
         style={dims}
         className={cn(
           "group relative flex cursor-pointer items-center justify-center overflow-hidden border-2 bg-muted/40 text-muted-foreground transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          shape === "circle" ? "rounded-full" : "rounded-[16px]",
+          shape === "circle" ? "rounded-full" : "rounded-lg",
           value ? "border-solid border-border" : "border-dashed border-border hover:border-primary/60 hover:bg-[var(--primary-muted)]/60",
           dragging && "border-primary bg-[var(--primary-muted)]",
         )}
@@ -421,7 +421,7 @@ export function ImageGrid({
         {images.map(img => {
           const cover = coverId ? img.id === coverId : images[0]?.id === img.id;
           return (
-            <li key={img.id} className="group relative aspect-square overflow-hidden rounded-[14px] border border-border bg-muted">
+            <li key={img.id} className="group relative aspect-square overflow-hidden rounded-lg border border-border bg-muted">
               <img src={img.url} alt={img.name ?? ""} className="h-full w-full object-cover" />
               {img.status === "enviando" && (
                 <span className="absolute inset-0 flex items-end bg-foreground/35 p-2" aria-label={tx.enviando(Math.round(img.progress ?? 0))}>
@@ -442,7 +442,7 @@ export function ImageGrid({
             <button
               type="button" onClick={() => inputRef.current?.click()}
               onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); pick(e.dataTransfer.files); }}
-              className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-[14px] border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-primary/60 hover:bg-[var(--primary-muted)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-primary/60 hover:bg-[var(--primary-muted)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ImagePlus className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden />
               <span className="px-2 text-center text-[0.6875rem] font-semibold leading-tight text-foreground">{addLabel}</span>

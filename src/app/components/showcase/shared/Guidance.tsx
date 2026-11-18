@@ -6,7 +6,7 @@ export const display = "font-[family-name:var(--font-display)]";
 
 export function Mono({ children }: { children: React.ReactNode }) {
   return (
-    <code className="text-[0.8125rem] font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-[5px] bg-muted text-foreground border border-border">
+    <code className="text-[0.8125rem] font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-sm bg-muted text-foreground border border-border">
       {children}
     </code>
   );

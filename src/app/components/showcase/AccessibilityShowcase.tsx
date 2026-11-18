@@ -65,14 +65,14 @@ function ContrastTable() {
   const pairs = mode === "light" ? lightPairs : darkPairs;
   return (
     <div className="space-y-3">
-      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-0.5 rounded-[10px] bg-muted border border-border gap-0.5">
+      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-0.5 rounded-md bg-muted border border-border gap-0.5">
         {(["light", "dark"] as const).map(m => (
           <button
             key={m}
             type="button"
             aria-pressed={mode === m}
             onClick={() => setMode(m)}
-            className={`h-8 px-3 rounded-[8px] text-[0.75rem] font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-8 px-3 rounded-sm text-[0.75rem] font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               mode === m ? "bg-card text-foreground border border-border shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -87,7 +87,7 @@ function ContrastTable() {
             return (
               <li key={p.name} className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 px-4 py-3 border-b border-border last:border-0">
                 <span
-                  className="h-10 w-24 rounded-[8px] border border-border flex items-center justify-center text-[0.9375rem] font-semibold"
+                  className="h-10 w-24 rounded-sm border border-border flex items-center justify-center text-[0.9375rem] font-semibold"
                   style={{ color: p.fg, background: p.bg }}
                   aria-hidden
                 >
@@ -129,7 +129,7 @@ function ContrastChecker() {
           aria-label={t(`${label} color picker`, `Seletor de cor: ${label}`)}
           value={luminance(v) === null ? "#000000" : v.length === 4 ? "#" + v.slice(1).split("").map(c => c + c).join("") : v}
           onChange={e => set(e.target.value.toUpperCase())}
-          className="h-9 w-9 rounded-[8px] border border-border bg-transparent p-0.5 cursor-pointer"
+          className="h-9 w-9 rounded-sm border border-border bg-transparent p-0.5 cursor-pointer"
         />
         <input
           id={id}
@@ -138,7 +138,7 @@ function ContrastChecker() {
           maxLength={7}
           spellCheck={false}
           aria-invalid={luminance(v) === null}
-          className="h-9 w-28 rounded-[8px] border border-border bg-[var(--input-background)] px-3 text-[0.8125rem] font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-9 w-28 rounded-sm border border-border bg-[var(--input-background)] px-3 text-[0.8125rem] font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
       </div>
     </div>
@@ -184,10 +184,10 @@ function FocusDemo() {
         {t("Press", "Pressione")} <kbd className="px-1.5 py-0.5 rounded-[4px] border border-border bg-muted text-[0.6875rem] font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
       </p>
       <div className="flex flex-wrap items-center gap-3">
-        <button className="h-10 px-4 rounded-[10px] bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Primary", "Primário")}
         </button>
-        <button className="h-10 px-4 rounded-[10px] border border-border bg-card text-foreground text-[0.875rem] font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-md border border-border bg-card text-foreground text-[0.875rem] font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Secondary", "Secundário")}
         </button>
         <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-[0.875rem] font-medium text-primary underline underline-offset-4 rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -196,7 +196,7 @@ function FocusDemo() {
         <input
           aria-label={t("Sample input", "Campo de exemplo")}
           placeholder={t("Input", "Campo")}
-          className="h-10 w-36 rounded-[10px] border border-border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
+          className="h-10 w-36 rounded-md border border-border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
         />
       </div>
     </Panel>
@@ -223,7 +223,7 @@ function TabsDemo() {
   };
   return (
     <Panel className="p-5">
-      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-0.5 rounded-[10px] bg-muted border border-border">
+      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-0.5 rounded-md bg-muted border border-border">
         {tabs.map((tab, i) => (
           <button
             key={tab.en}
@@ -235,7 +235,7 @@ function TabsDemo() {
             tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
             onKeyDown={e => onKey(e, i)}
-            className={`h-8 px-3 rounded-[8px] text-[0.8125rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-8 px-3 rounded-sm text-[0.8125rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               active === i ? "bg-card text-foreground border border-border shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -243,7 +243,7 @@ function TabsDemo() {
           </button>
         ))}
       </div>
-      <div role="tabpanel" id={`${base}-p${active}`} aria-labelledby={`${base}-t${active}`} tabIndex={0} className="mt-4 text-[0.8125rem] text-muted-foreground rounded-[6px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <div role="tabpanel" id={`${base}-p${active}`} aria-labelledby={`${base}-t${active}`} tabIndex={0} className="mt-4 text-[0.8125rem] text-muted-foreground rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
         {t("Panel for", "Painel de")} <span className="text-foreground font-medium">{bi(tabs[active])}</span>. {t("Only the active tab is in the Tab order; arrows, Home and End move between tabs.", "Apenas a aba ativa entra na ordem do Tab; setas, Home e End alternam entre as abas.")}
       </div>
     </Panel>
@@ -289,7 +289,7 @@ function FormDemo() {
             aria-required="true"
             aria-invalid={show}
             aria-describedby={`${id}-hint ${show ? `${id}-err` : ""}`.trim()}
-            className={`h-10 w-full rounded-[10px] border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-10 w-full rounded-md border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               show ? "border-[var(--error)]" : "border-border focus-visible:border-primary"
             }`}
           />
@@ -298,7 +298,7 @@ function FormDemo() {
             {show && (<><AlertCircle className="h-3.5 w-3.5 text-[var(--error)] shrink-0" aria-hidden />{error}</>)}
           </p>
         </div>
-        <button type="submit" className="h-10 px-4 rounded-[10px] bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button type="submit" className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Send invite", "Enviar convite")}
         </button>
         <p role="status" className="text-[0.8125rem] text-foreground min-h-[1.25rem]">{sent ? t("Invite sent to ", "Convite enviado para ") + email : ""}</p>
@@ -343,9 +343,9 @@ function MotionDemo() {
         />
         {t("Simulate “Reduce motion” OS setting", "Simular a configuração “Reduzir movimento” do sistema")}
       </label>
-      <div className={`${reduced ? "a11y-reduced" : ""} rounded-[10px] border border-border bg-muted/50 p-3`}>
+      <div className={`${reduced ? "a11y-reduced" : ""} rounded-md border border-border bg-muted/50 p-3`}>
         <div className="w-1/5">
-          <div className="a11y-mover h-8 rounded-[8px] bg-primary" />
+          <div className="a11y-mover h-8 rounded-sm bg-primary" />
         </div>
       </div>
       <p className="mt-3 text-[0.75rem] text-muted-foreground">
@@ -393,7 +393,7 @@ function Checklist() {
       <ul className="space-y-1">
         {checklistItems.map((item, i) => (
           <li key={item.en}>
-            <label className="flex items-start gap-3 rounded-[8px] px-2 py-2 cursor-pointer hover:bg-muted/60 transition-colors">
+            <label className="flex items-start gap-3 rounded-sm px-2 py-2 cursor-pointer hover:bg-muted/60 transition-colors">
               <input
                 type="checkbox"
                 checked={!!done[i]}

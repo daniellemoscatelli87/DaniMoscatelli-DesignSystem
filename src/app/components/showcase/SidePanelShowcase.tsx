@@ -5,6 +5,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import {
   SidePanel, SidePanelTrigger, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelActions, SidePanelFooter,
 } from "@/app/components/ui/side-panel";
+import { SectionHeader } from "./shared/SectionHeader";
 
 /* ─────────────────────────────────────────────────────────────
    Painel lateral (gaveta)
@@ -12,26 +13,17 @@ import {
    (index.html + src/em-breve.ts), documentado e reaproveitável.
    ───────────────────────────────────────────────────────────── */
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-6">
-      <h2 className="text-[1.375rem] font-bold tracking-[-0.02em] text-foreground">{title}</h2>
-      {description && <p className="mt-1 max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground">{description}</p>}
-      <div className="mt-4 h-px bg-border" />
-    </div>
-  );
-}
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-[16px] border border-border bg-card p-6 ${className}`} style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className={`rounded-lg border border-border bg-card p-6 ${className}`} style={{ boxShadow: "var(--shadow-xs)" }}>
       {children}
     </div>
   );
 }
 
 const field =
-  "w-full rounded-[12px] border border-border bg-muted/40 px-4 py-2.5 text-[0.8125rem] leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
+  "w-full rounded-md border border-border bg-muted/40 px-4 py-2.5 text-[0.8125rem] leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function maskPhone(v: string) {
@@ -87,7 +79,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
     <SidePanel open={open} onOpenChange={o => { setOpen(o); if (!o) setTimeout(reset, 300); }}>
       <SidePanelTrigger asChild>
         <button className={outline
-          ? "inline-flex h-10 items-center gap-2 rounded-[12px] border border-border bg-card px-4 text-[0.9375rem] font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          ? "inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-4 text-[0.9375rem] font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           : "inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"}>
           {triggerLabel ?? t("Contact", "Contato")}
         </button>
@@ -124,7 +116,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
               </div>
 
               {/* Acordeão "Meu negócio é..." */}
-              <div className={`overflow-hidden rounded-[12px] border bg-muted/40 ${invalid.tipo ? "border-error" : "border-border"}`}>
+              <div className={`overflow-hidden rounded-md border bg-muted/40 ${invalid.tipo ? "border-error" : "border-border"}`}>
                 <button type="button" aria-expanded={bizOpen} aria-controls="ds-biz-body" onClick={() => setBizOpen(o => !o)} className="flex w-full items-center justify-between p-3 text-left text-[0.8125rem] font-medium text-foreground transition-colors hover:bg-accent/60">
                   <span>{values.tipo ? (values.tipo === "Outro" && values.outro ? values.outro : values.tipo) : t("My business is... *", "Meu negócio é... *")}</span>
                   <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${bizOpen ? "rotate-180" : ""}`} aria-hidden />
@@ -136,17 +128,17 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                       [t("A physical business", "Um Negócio Físico"), t("(Clinics, salons, pet shops, hotels, restaurants, stores)", "(Clínicas, Salões, Petshops, Hotéis, Restaurantes, Lojas)")],
                       [t("A physical and digital business", "Um Negócio Físico e Digital"), ""],
                     ].map(([label, hint]) => (
-                      <label key={label} className="flex cursor-pointer items-start gap-2.5 rounded-[10px] border border-border/60 bg-card/70 p-2 transition-colors hover:bg-card">
+                      <label key={label} className="flex cursor-pointer items-start gap-2.5 rounded-md border border-border/60 bg-card/70 p-2 transition-colors hover:bg-card">
                         <input type="radio" name="ds-tipo" className="mt-0.5 h-4 w-4 accent-[var(--primary)]" checked={values.tipo === label} onChange={() => setValues(v => ({ ...v, tipo: label }))} />
                         <span className="flex-1"><span className="block text-[0.8125rem] font-medium leading-snug text-foreground">{label}</span>{hint && <span className="mt-0.5 block text-[0.6875rem] leading-snug text-muted-foreground">{hint}</span>}</span>
                       </label>
                     ))}
-                    <div className="flex items-center gap-2 rounded-[10px] border border-border/60 bg-card/70 p-2">
+                    <div className="flex items-center gap-2 rounded-md border border-border/60 bg-card/70 p-2">
                       <label className="flex shrink-0 cursor-pointer items-center gap-2.5">
                         <input type="radio" name="ds-tipo" className="h-4 w-4 accent-[var(--primary)]" checked={values.tipo === "Outro"} onChange={() => setValues(v => ({ ...v, tipo: "Outro" }))} />
                         <span className="text-[0.8125rem] font-medium text-foreground">{t("Other:", "Outro:")}</span>
                       </label>
-                      <input className="min-w-0 flex-1 rounded-[8px] border border-border bg-card px-2.5 py-1 text-[0.8125rem] text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
+                      <input className="min-w-0 flex-1 rounded-sm border border-border bg-card px-2.5 py-1 text-[0.8125rem] text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
                     </div>
                   </div>
                 )}
@@ -163,7 +155,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
               <textarea className={`${field} h-[90px] resize-none`} aria-invalid={!!invalid.mensagem} rows={3} aria-label={t("Tell us about your challenge", "Conte um pouco sobre seu desafio")} placeholder={t("Tell us a bit about your challenge (which goals, pains or ideas would you like to work on with us?) *", "Conte um pouco sobre seu desafio (Quais objetivos, dores ou ideias você gostaria de trabalhar conosco?) *")} value={values.mensagem} onChange={set("mensagem")} />
 
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-                <div className={`flex flex-col justify-center rounded-[12px] border bg-muted/40 px-3 py-2 ${invalid.dias ? "border-error" : "border-border"}`}>
+                <div className={`flex flex-col justify-center rounded-md border bg-muted/40 px-3 py-2 ${invalid.dias ? "border-error" : "border-border"}`}>
                   <div className="mb-1 flex items-center justify-between">
                     <span className="text-[0.75rem] font-semibold text-foreground">{t("Best weekday *", "Melhor dia da semana *")}</span>
                     <span className="text-[0.625rem] text-muted-foreground">{t("multiple", "múltiplos")}</span>
@@ -174,7 +166,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                       return (
                         <label key={d} className="flex-1 text-center">
                           <input type="checkbox" className="peer sr-only" checked={on} onChange={() => setDias(x => on ? x.filter(y => y !== d) : [...x, d])} />
-                          <span className={`block rounded-[8px] py-1 text-[0.75rem] font-semibold transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${on ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>{d}</span>
+                          <span className={`block rounded-sm py-1 text-[0.75rem] font-semibold transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${on ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>{d}</span>
                         </label>
                       );
                     })}
@@ -294,7 +286,7 @@ export function SidePanelShowcase() {
                 const I = Icon as React.ElementType;
                 return (
                   <li key={i} className="flex items-start gap-3 text-[0.875rem] leading-relaxed text-muted-foreground">
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-[8px] bg-[var(--primary-muted)] text-primary"><I className="h-3.5 w-3.5" aria-hidden /></span>
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary"><I className="h-3.5 w-3.5" aria-hidden /></span>
                     <span>{text as string}</span>
                   </li>
                 );
@@ -323,7 +315,7 @@ export function SidePanelShowcase() {
               [t("Validation", "Validação"), t("All required; e-mail format; phone with at least 10 digits. One message under the form, invalid fields highlighted, the first one brought into view. Re-validates on input after the first attempt.", "Todos obrigatórios; formato do e-mail; telefone com pelo menos 10 dígitos. Uma mensagem abaixo do formulário, campos inválidos destacados e o primeiro deles trazido à vista. Revalida ao digitar depois da primeira tentativa.")],
               [t("States", "Estados"), t("Idle → “Sending…” (button disabled) → success replaces header, form and action bar inside the panel, with a Close button. On failure: “Your message could not be sent. Check your connection and try again.”", "Parado → “Enviando…” (botão desabilitado) → sucesso substitui cabeçalho, formulário e barra de ação dentro do painel, com botão Fechar. Em falha: “Não foi possível enviar sua mensagem. Verifique sua conexão e tente novamente.”")],
             ].map(([title, desc]) => (
-              <div key={title} className="rounded-[12px] border border-border bg-muted/30 p-4">
+              <div key={title} className="rounded-md border border-border bg-muted/30 p-4">
                 <p className="mb-1 text-[0.8125rem] font-semibold text-foreground">{title}</p>
                 <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
               </div>

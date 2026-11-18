@@ -259,7 +259,7 @@ function GradientAnimCard() {
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
                 {bi(TAG_LABEL[tg])}
               </span>
@@ -267,10 +267,10 @@ function GradientAnimCard() {
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
+        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
           {(["spec", "usage"] as const).map(k => (
             <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors
+              className={`px-3 py-1 rounded-sm text-[0.75rem] font-semibold transition-colors
                 ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
               {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
@@ -287,7 +287,7 @@ function GradientAnimCard() {
               <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {components.map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-[0.75rem] text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -540,7 +540,7 @@ export function CanvasRevealCard() {
           <div className="flex flex-wrap gap-1.5">
             {CANVAS_PRESETS.map(p => (
               <button key={p.id} onClick={() => setPresetId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${presetId === p.id ? "#D44D4D" : ctrl}`,
                   background: presetId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -562,7 +562,7 @@ export function CanvasRevealCard() {
           <div className="flex gap-1">
             {DOT_SIZES.map(s => (
               <button key={s.id} onClick={() => setDotSizeId(s.id)}
-                className="w-9 py-1.5 rounded-[7px] text-[0.6875rem] font-bold transition-all"
+                className="w-9 py-1.5 rounded-sm text-[0.6875rem] font-bold transition-all"
                 style={{
                   border: `1.5px solid ${dotSizeId === s.id ? "#D44D4D" : ctrl}`,
                   background: dotSizeId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -579,7 +579,7 @@ export function CanvasRevealCard() {
           <div className="flex gap-1">
             {ANIM_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -603,16 +603,16 @@ export function CanvasRevealCard() {
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
+        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
           {(["spec", "usage"] as const).map(k => (
             <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
+              className={`px-3 py-1 rounded-sm text-[0.75rem] font-semibold transition-colors ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
               {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
           ))}
@@ -630,7 +630,7 @@ export function CanvasRevealCard() {
               <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {[t("Feature cards", "Cards de funcionalidades"), t("Pricing cards", "Cards de preços"), t("Testimonials", "Depoimentos"), t("Product showcase", "Vitrine de produto")].map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-[0.75rem] text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -1174,7 +1174,7 @@ function BigBangCard() {
           <div className="flex gap-1">
             {BB_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1191,7 +1191,7 @@ function BigBangCard() {
           <div className="flex flex-wrap gap-1.5">
             {BB_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
                   background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1220,7 +1220,7 @@ function BigBangCard() {
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -1268,7 +1268,7 @@ function BgLinesCard() {
           <div className="flex gap-1">
             {BGL_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1285,7 +1285,7 @@ function BgLinesCard() {
           <div className="flex gap-1">
             {BGL_DENSITIES.map(d => (
               <button key={d.id} onClick={() => setDensityId(d.id)}
-                className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${densityId === d.id ? "#D44D4D" : ctrl}`,
                   background: densityId === d.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1302,7 +1302,7 @@ function BgLinesCard() {
           <div className="flex flex-wrap gap-1.5">
             {BGL_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
                   background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1331,7 +1331,7 @@ function BgLinesCard() {
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -1508,7 +1508,7 @@ function EffectCard({ ef }: { ef: EffectDef }) {
           </div>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
                 {bi(TAG_LABEL[tg])}
               </span>
@@ -1516,10 +1516,10 @@ function EffectCard({ ef }: { ef: EffectDef }) {
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-[10px] bg-muted w-fit">
+        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
           {(["spec", "usage"] as const).map(k => (
             <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-[8px] text-[0.75rem] font-semibold transition-colors
+              className={`px-3 py-1 rounded-sm text-[0.75rem] font-semibold transition-colors
                 ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
               {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
             </button>
@@ -1536,7 +1536,7 @@ function EffectCard({ ef }: { ef: EffectDef }) {
               <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
               <div className="flex flex-wrap gap-1.5 mt-1.5">
                 {ef.components.map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-[5px] bg-muted text-[0.75rem] text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-[0.75rem] text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -1654,7 +1654,7 @@ function DoodleTextureCard() {
     [t("PNG light 1600 px", "PNG claro 1600 px"), doodleTextureFiles.pngClaro], [t("PNG dark 1600 px", "PNG escuro 1600 px"), doodleTextureFiles.pngEscuro],
   ];
   const Btn = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
-    <button onClick={onClick} className="px-3 py-1.5 rounded-[7px] text-[0.6875rem] font-semibold transition-all"
+    <button onClick={onClick} className="px-3 py-1.5 rounded-sm text-[0.6875rem] font-semibold transition-all"
       style={{ border: `1.5px solid ${active ? "var(--primary)" : ctrl}`, background: active ? "var(--primary-muted)" : "transparent", color: active ? "var(--primary-text, var(--primary))" : idle }}>
       {children}
     </button>
@@ -1685,7 +1685,7 @@ function DoodleTextureCard() {
           <h3 className="text-[0.9375rem] font-black text-foreground tracking-[-0.025em]">{t("Doodle Texture", "Textura doodle")}</h3>
           <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
             {(["SVG"] as EffectTag[]).map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-[5px] text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-0.5 rounded-sm text-[0.5625rem] font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -1698,7 +1698,7 @@ function DoodleTextureCard() {
             </a>
           ))}
         </div>
-        <pre className="overflow-x-auto rounded-[10px] bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { DoodleTexture } from "@/app/components/ui/doodle-texture";
+        <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { DoodleTexture } from "@/app/components/ui/doodle-texture";
 
 <section className="relative isolate">
   <DoodleTexture scale="m" />              {/* grafite-200 / grafite-800 */}
@@ -1739,7 +1739,7 @@ export function BackgroundsShowcase() {
         {/* Legend */}
         <div className="flex flex-wrap gap-2">
           {(Object.entries(tagColors) as [EffectTag, { bg: string; color: string }][]).map(([tag, style]) => (
-            <span key={tag} className="px-2.5 py-1 rounded-[6px] text-[0.6875rem] font-semibold"
+            <span key={tag} className="px-2.5 py-1 rounded-sm text-[0.6875rem] font-semibold"
               style={{ background: style.bg, color: style.color }}>
               {bi(TAG_LABEL[tag])}
             </span>
@@ -1825,7 +1825,7 @@ export function BackgroundsShowcase() {
               ],
             },
           ].map(guide => (
-            <div key={guide.title} className="rounded-[14px] border border-border bg-card overflow-hidden"
+            <div key={guide.title} className="rounded-lg border border-border bg-card overflow-hidden"
               style={{ boxShadow: "var(--shadow-xs)" }}>
               {/* Card header */}
               <div className="px-4 py-3 border-b border-border flex items-center justify-between">
@@ -1864,7 +1864,7 @@ export function BackgroundsShowcase() {
         </div>
 
         {/* Palette × Effect — compatibility table */}
-        <div className="rounded-[14px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+        <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="px-4 py-3 border-b border-border">
             <p className="text-[0.8125rem] font-bold text-foreground">{t("Palettes × Usage context", "Paletas × Contexto de uso")}</p>
             <p className="text-[0.6875rem] text-muted-foreground mt-0.5">{t("Quick guide to which palette to use for each section type.", "Guia rápido de qual paleta usar em cada tipo de seção.")}</p>

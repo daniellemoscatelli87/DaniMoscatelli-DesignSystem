@@ -19,7 +19,7 @@ function CopyBtn({ text }: { text: string }) {
       type="button"
       onClick={copy}
       aria-label={t("Copy code", "Copiar código")}
-      className="h-6 w-6 rounded-[6px] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
       {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
     </button>
@@ -105,7 +105,7 @@ const catPt: Record<string, string> = { Color: "Cor", Typography: "Tipografia", 
 
 function Mono({ children }: { children: React.ReactNode }) {
   return (
-    <code className="text-[0.8125rem] font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-[5px] bg-muted text-foreground border border-border">
+    <code className="text-[0.8125rem] font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-sm bg-muted text-foreground border border-border">
       {children}
     </code>
   );

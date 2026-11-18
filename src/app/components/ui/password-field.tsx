@@ -89,7 +89,7 @@ export function PasswordInput({ label, value, onValueChange, textos, invalido, d
           aria-pressed={visivel}
           aria-label={visivel ? textos.ocultar : textos.mostrar}
           aria-controls={inputId}
-          className="absolute right-1.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-[8px] text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute right-1.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {visivel ? <EyeOff className="h-5 w-5" aria-hidden /> : <Eye className="h-5 w-5" aria-hidden />}
         </button>
@@ -151,7 +151,7 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
         </p>
 
         {/* Dicas de preenchimento */}
-        <div id={dicasId} className="rounded-[12px] border border-primary/15 bg-primary/5 p-4">
+        <div id={dicasId} className="rounded-md border border-primary/15 bg-primary/5 p-4">
           <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{textos.dicaTitulo}</p>
           <ul className="flex flex-col gap-1.5">
             {regras.map((r, i) => (

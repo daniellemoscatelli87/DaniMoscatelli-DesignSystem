@@ -11,6 +11,7 @@ import { FundoGradienteDaMarca } from "./BackgroundsShowcase";
 import logoSobreClaro from "../../../imports/Logo-Horizontal-DarkMode.png";
 import logoSobreEscuro from "../../../imports/Logo-Horizontal-LightMode.png";
 import logoIcone from "../../../imports/IconeLogo-red.png";
+import { SectionHeader } from "./shared/SectionHeader";
 
 /* ─────────────────────────────────────────────────────────────
    Header e menus
@@ -82,15 +83,6 @@ function versaoDoLogo(s: Superficie) {
   return s === "clara" ? MARCA.logoSobreClaro : MARCA.logoSobreEscuro;
 }
 
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-6">
-      <h2 className="text-[1.375rem] font-bold tracking-[-0.02em] text-foreground">{title}</h2>
-      {description && <p className="mt-1 max-w-2xl text-[0.9375rem] leading-relaxed text-muted-foreground">{description}</p>}
-      <div className="mt-4 h-px bg-border" />
-    </div>
-  );
-}
 
 const foco = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 const textoMarca = "text-[var(--primary-text,var(--primary))]";
@@ -102,7 +94,7 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
   return (
     <div className="min-w-0">
       <p className="mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{rotulo}</p>
-      <div role="group" aria-label={rotulo} className="inline-flex max-w-full flex-wrap gap-1 rounded-[12px] bg-muted p-1">
+      <div role="group" aria-label={rotulo} className="inline-flex max-w-full flex-wrap gap-1 rounded-md bg-muted p-1">
         {opcoes.map(o => {
           const ativo = o.id === valor;
           return (
@@ -111,7 +103,7 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
               type="button"
               aria-pressed={ativo}
               onClick={() => onChange(o.id)}
-              className={`inline-flex h-8 items-center gap-1.5 rounded-[9px] px-2.5 text-[0.75rem] font-medium transition-colors ${foco}
+              className={`inline-flex h-8 items-center gap-1.5 rounded-sm px-2.5 text-[0.75rem] font-medium transition-colors ${foco}
                 ${ativo ? "bg-card text-foreground shadow-[var(--shadow-xs)]" : "text-muted-foreground hover:text-foreground"}`}
             >
               <o.Icone aria-hidden className="h-3.5 w-3.5" />
@@ -281,7 +273,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
       data-testid="demo-logo"
       data-logo={soIcone ? "icone" : "completo"}
       data-superficie={superficie}
-      className={`flex shrink-0 items-center rounded-[6px] ${foco}`}
+      className={`flex shrink-0 items-center rounded-sm ${foco}`}
     >
       {soIcone
         ? <img src={MARCA.logoIcone} alt="" className="h-10 w-auto object-contain motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95" />
@@ -310,7 +302,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
   return (
     <div className={escuro && !temaEscuro ? "dark" : ""}>
       <div
-        className={`mx-auto overflow-hidden rounded-[16px] border border-border bg-background transition-[max-width] duration-300 ${tela === "celular" ? "max-w-[390px]" : "max-w-full"}`}
+        className={`mx-auto overflow-hidden rounded-lg border border-border bg-background transition-[max-width] duration-300 ${tela === "celular" ? "max-w-[390px]" : "max-w-full"}`}
         style={{ boxShadow: "var(--shadow-lg)" }}
       >
         {/* Barra do navegador */}
@@ -321,7 +313,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
             <div className="h-2.5 w-2.5 rounded-full bg-success/50" />
           </div>
           <div className="mx-4 flex-1">
-            <div className="mx-auto flex h-5 max-w-[280px] items-center rounded-[6px] bg-background/70 px-3">
+            <div className="mx-auto flex h-5 max-w-[280px] items-center rounded-sm bg-background/70 px-3">
               <span className="truncate text-[0.625rem] text-muted-foreground">{MARCA.endereco}</span>
             </div>
           </div>
@@ -419,7 +411,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     : <div aria-hidden className="mb-4 h-4 w-40 rounded-full bg-muted" />}
                   <Linhas n={3} />
                   <div aria-hidden className={`mt-5 grid gap-3 ${desktop ? "grid-cols-3" : "grid-cols-1"}`}>
-                    {[0, 1, 2].map(i => <div key={i} className="h-20 rounded-[12px] border border-border bg-card" />)}
+                    {[0, 1, 2].map(i => <div key={i} className="h-20 rounded-md border border-border bg-card" />)}
                   </div>
                 </section>
               ))}
@@ -460,7 +452,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
               role="dialog"
               aria-modal="true"
               aria-label={t("Menu", "Menu")}
-              className="absolute inset-x-0 bottom-0 z-40 max-h-[85%] overflow-y-auto rounded-t-[24px] border-t border-border bg-card px-4 pb-4 pt-2 motion-safe:animate-in motion-safe:slide-in-from-bottom"
+              className="absolute inset-x-0 bottom-0 z-40 max-h-[85%] overflow-y-auto rounded-t-xl border-t border-border bg-card px-4 pb-4 pt-2 motion-safe:animate-in motion-safe:slide-in-from-bottom"
               style={{ boxShadow: "0 -12px 36px rgb(13 17 25 / .12)" }}
             >
               <div className="relative mb-1 flex h-10 items-center justify-center">
@@ -476,16 +468,16 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     href={`#${l.id}`}
                     aria-current={atual === l.id ? "page" : undefined}
                     onClick={e => { e.preventDefault(); irPara(l.id); }}
-                    className={`flex items-center justify-between rounded-[12px] px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}
+                    className={`flex items-center justify-between rounded-md px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}
                   >
                     {bi(l.rotulo)} <ChevronRight aria-hidden className={`h-4 w-4 ${textoMarca}`} />
                   </a>
                 ))}
               </nav>
               {MARCA.entrar && (
-                <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center rounded-[12px] border border-border px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+                <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center rounded-md border border-border px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
               )}
-              <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center gap-2 rounded-[12px] bg-primary px-4 py-3.5 text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+              <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3.5 text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
                 <MARCA.acaoIcone aria-hidden className="h-4 w-4" /> {bi(MARCA.acao)}
               </a>
             </div>
@@ -503,13 +495,13 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
             >
               <div className="flex h-16 items-center justify-between border-b border-border px-4">
                 <img src={versaoDoLogo(escuro ? "escura" : "clara")} alt="" data-testid="demo-logo-menu" className="h-8 w-auto object-contain" />
-                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-[10px] text-foreground hover:bg-muted ${foco}`}>
+                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted ${foco}`}>
                   <X aria-hidden className="h-5 w-5" />
                 </button>
               </div>
               <nav aria-label={t("Main", "Principal")} className="flex-1 overflow-y-auto p-3">
                 {MARCA.links.map(l => (
-                  <a key={l.id} href={`#${l.id}`} aria-current={atual === l.id ? "page" : undefined} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-[10px] px-3 text-[0.9375rem] font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}>
+                  <a key={l.id} href={`#${l.id}`} aria-current={atual === l.id ? "page" : undefined} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-md px-3 text-[0.9375rem] font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}>
                     {bi(l.rotulo)}
                   </a>
                 ))}
@@ -529,7 +521,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
             <div ref={painelRef} id={idPainel} role="dialog" aria-modal="true" aria-label={t("Menu", "Menu")} className="absolute inset-0 z-40 flex flex-col bg-background motion-safe:animate-in motion-safe:fade-in">
               <div className="flex h-16 items-center justify-between px-4">
                 <img src={versaoDoLogo(escuro ? "escura" : "clara")} alt="" data-testid="demo-logo-menu" className="h-9 w-auto object-contain" />
-                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-[10px] text-foreground hover:bg-muted ${foco}`}>
+                <button type="button" onClick={fecharMenu} aria-label={t("Close menu", "Fechar menu")} className={`flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted ${foco}`}>
                   <X aria-hidden className="h-5 w-5" />
                 </button>
               </div>
@@ -540,7 +532,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     href={`#${l.id}`}
                     aria-current={atual === l.id ? "page" : undefined}
                     onClick={e => { e.preventDefault(); irPara(l.id); }}
-                    className={`block rounded-[8px] py-2.5 text-[1.625rem] font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
+                    className={`block rounded-sm py-2.5 text-[1.625rem] font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
                     style={{ animationDelay: `${i * 40}ms`, animationFillMode: "both" }}
                   >
                     {bi(l.rotulo)}
@@ -569,7 +561,7 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
 }) {
   const { t } = useI18n();
   return (
-    <div className={`flex flex-col rounded-[16px] border bg-card p-5 ${ativo ? "border-primary" : "border-border"}`} style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className={`flex flex-col rounded-lg border bg-card p-5 ${ativo ? "border-primary" : "border-border"}`} style={{ boxShadow: "var(--shadow-xs)" }}>
       <div className="mb-3 flex items-center justify-between gap-2">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-muted)]">
           <Icone aria-hidden className={`h-4 w-4 ${textoMarca}`} />
@@ -585,7 +577,7 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
         type="button"
         aria-pressed={ativo}
         onClick={onAcao}
-        className={`mt-4 inline-flex h-9 items-center justify-center gap-1.5 self-start rounded-[10px] border border-primary px-3.5 text-[0.8125rem] font-semibold transition-colors ${foco}
+        className={`mt-4 inline-flex h-9 items-center justify-center gap-1.5 self-start rounded-md border border-primary px-3.5 text-[0.8125rem] font-semibold transition-colors ${foco}
           ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-[var(--primary-muted)]`}`}
       >
         {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}

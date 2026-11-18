@@ -20,25 +20,18 @@ import {
   ResponsiveContainer, Tooltip as ReTooltip,
 } from "recharts";
 import { useI18n } from "../../i18n";
+import { SectionHeader } from "./shared/SectionHeader";
 
 type L = { en: string; pt: string };
 
 /* ─────────────────────────────────────────────
    Shared helpers
 ───────────────────────────────────────────── */
-function SectionHeader({ title, description }: { title: string; description?: string }) {
-  return (
-    <div className="mb-10">
-      <h2 className="text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground mb-1">{title}</h2>
-      {description && <p className="text-[0.9375rem] text-muted-foreground">{description}</p>}
-    </div>
-  );
-}
 
 function TemplateLabel({ icon: Icon, label }: { icon: React.ElementType; label: string }) {
   return (
     <div className="flex items-center gap-2 mb-4">
-      <div className="h-7 w-7 rounded-[8px] bg-muted flex items-center justify-center">
+      <div className="h-7 w-7 rounded-sm bg-muted flex items-center justify-center">
         <Icon className="h-3.5 w-3.5 text-muted-foreground" />
       </div>
       <span className="text-[0.8125rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">{label}</span>
@@ -49,7 +42,7 @@ function TemplateLabel({ icon: Icon, label }: { icon: React.ElementType; label: 
 /* Wraps each template in a browser-chrome frame */
 function TemplateFrame({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`rounded-[16px] border border-border overflow-hidden ${className}`} style={{ boxShadow: "var(--shadow-lg)" }}>
+    <div className={`rounded-lg border border-border overflow-hidden ${className}`} style={{ boxShadow: "var(--shadow-lg)" }}>
       {/* Browser chrome */}
       <div className="h-9 bg-muted/60 border-b border-border flex items-center px-4 gap-2 shrink-0">
         <div className="flex gap-1.5">
@@ -58,7 +51,7 @@ function TemplateFrame({ children, className = "" }: { children: React.ReactNode
           <div className="h-2.5 w-2.5 rounded-full bg-success/50" />
         </div>
         <div className="flex-1 mx-4">
-          <div className="h-5 bg-background/70 rounded-[6px] max-w-[280px] mx-auto flex items-center px-3">
+          <div className="h-5 bg-background/70 rounded-sm max-w-[280px] mx-auto flex items-center px-3">
             <span className="text-[0.625rem] text-muted-foreground/60 truncate">app.danimos.co</span>
           </div>
         </div>
@@ -106,7 +99,7 @@ function DashboardTemplate() {
         {/* Sidebar */}
         <aside className="w-[188px] shrink-0 border-r border-border bg-card/50 flex flex-col py-3 px-2.5">
           <div className="flex items-center gap-2 px-2 mb-5">
-            <div className="h-6 w-6 rounded-[6px] bg-primary/15 flex items-center justify-center">
+            <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
               <Zap className="h-3.5 w-3.5 text-primary" />
             </div>
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
@@ -123,7 +116,7 @@ function DashboardTemplate() {
             return (
               <button
                 key={item.label.en}
-                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-[7px] text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors
+                className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors
                   ${item.active
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:bg-accent hover:text-foreground"
@@ -156,10 +149,10 @@ function DashboardTemplate() {
               <p className="text-[0.6875rem] text-muted-foreground">{t("July 29, 2026", "29 de julho de 2026")}</p>
             </div>
             <div className="flex items-center gap-2">
-              <button className="h-7 w-7 rounded-[7px] border border-border bg-card flex items-center justify-center text-muted-foreground">
+              <button className="h-7 w-7 rounded-sm border border-border bg-card flex items-center justify-center text-muted-foreground">
                 <Bell className="h-3.5 w-3.5" />
               </button>
-              <button className="h-7 px-2.5 rounded-[7px] bg-primary text-primary-foreground text-[0.6875rem] font-semibold flex items-center gap-1">
+              <button className="h-7 px-2.5 rounded-sm bg-primary text-primary-foreground text-[0.6875rem] font-semibold flex items-center gap-1">
                 <Plus className="h-3 w-3" /> {t("New Report", "Novo relatório")}
               </button>
             </div>
@@ -171,7 +164,7 @@ function DashboardTemplate() {
               {kpis.map(k => {
                 const Icon = k.icon;
                 return (
-                  <div key={k.label.en} className="bg-card rounded-[12px] border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+                  <div key={k.label.en} className="bg-card rounded-md border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-[0.6875rem] text-muted-foreground font-medium">{bi(k.label)}</span>
                       <Icon className="h-3.5 w-3.5 text-muted-foreground" />
@@ -189,7 +182,7 @@ function DashboardTemplate() {
             {/* Chart + Activity */}
             <div className="grid grid-cols-[1fr_220px] gap-3">
               {/* Chart */}
-              <div className="bg-card rounded-[12px] border border-border p-4" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="bg-card rounded-md border border-border p-4" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="flex items-center justify-between mb-3">
                   <div>
                     <div className="text-[0.8125rem] font-semibold text-foreground">{t("Revenue Overview", "Visão geral da receita")}</div>
@@ -219,7 +212,7 @@ function DashboardTemplate() {
               </div>
 
               {/* Activity */}
-              <div className="bg-card rounded-[12px] border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div className="bg-card rounded-md border border-border p-3" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="text-[0.8125rem] font-semibold text-foreground mb-3">{t("Recent Activity", "Atividade recente")}</div>
                 <div className="space-y-2.5">
                   {recentActivity.map((a, i) => (
@@ -274,7 +267,7 @@ function SettingsTemplate() {
         {/* Sidebar */}
         <aside className="w-[188px] shrink-0 border-r border-border bg-card/50 py-3 px-2.5">
           <div className="flex items-center gap-2 px-2 mb-5">
-            <div className="h-6 w-6 rounded-[6px] bg-primary/15 flex items-center justify-center">
+            <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
               <Zap className="h-3.5 w-3.5 text-primary" />
             </div>
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
@@ -287,7 +280,7 @@ function SettingsTemplate() {
           ].map(item => {
             const Icon = item.icon;
             return (
-              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-[7px] text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
+              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
                 <Icon className="h-3.5 w-3.5 shrink-0" />
                 {item.label}
               </button>
@@ -343,12 +336,12 @@ function SettingsTemplate() {
                     <input
                       type={f.type}
                       defaultValue={f.val}
-                      className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-sm px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 ))}
                 <div className="flex justify-end pt-1">
-                  <button className="h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
+                  <button className="h-8 px-4 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
                     {t("Save Changes", "Salvar alterações")}
                   </button>
                 </div>
@@ -361,7 +354,7 @@ function SettingsTemplate() {
                   { label: t("Email notifications", "Notificações por email"), desc: t("Receive updates via email", "Receba atualizações por email"), val: notifEmail, set: setNotifEmail },
                   { label: t("Push notifications", "Notificações push"),  desc: t("Receive browser push alerts", "Receba alertas push no navegador"), val: notifPush, set: setNotifPush },
                 ].map(item => (
-                  <div key={item.label} className="flex items-center justify-between p-3 rounded-[10px] border border-border bg-card">
+                  <div key={item.label} className="flex items-center justify-between p-3 rounded-md border border-border bg-card">
                     <div>
                       <div className="text-[0.8125rem] font-medium text-foreground">{item.label}</div>
                       <div className="text-[0.6875rem] text-muted-foreground">{item.desc}</div>
@@ -394,7 +387,7 @@ function SettingsTemplate() {
                           const newDark = th.id === "dark";
                           document.documentElement.classList.toggle("dark", newDark);
                         }}
-                        className={`p-3 rounded-[10px] border-2 flex flex-col items-center gap-2 transition-all
+                        className={`p-3 rounded-md border-2 flex flex-col items-center gap-2 transition-all
                           ${th.active ? "border-primary bg-primary/5" : "border-border bg-card"}`}
                       >
                         <Icon className={`h-5 w-5 ${th.active ? "text-primary" : "text-muted-foreground"}`} />
@@ -409,16 +402,16 @@ function SettingsTemplate() {
 
             {activeTab === "billing" && (
               <div className="space-y-3 max-w-md">
-                <div className="p-3 rounded-[10px] border border-primary/30 bg-primary/5 flex items-center justify-between">
+                <div className="p-3 rounded-md border border-primary/30 bg-primary/5 flex items-center justify-between">
                   <div>
                     <div className="text-[0.8125rem] font-semibold text-foreground flex items-center gap-1.5">
                       <Star className="h-3.5 w-3.5 text-primary" /> {t("Pro Plan", "Plano Pro")}
                     </div>
                     <div className="text-[0.6875rem] text-muted-foreground">{t("$49/month · Renews Aug 1, 2026", "$49/mês · Renova em 1 de ago de 2026")}</div>
                   </div>
-                  <button className="h-7 px-3 rounded-[7px] border border-border bg-card text-[0.6875rem] font-medium text-foreground">{t("Manage", "Gerenciar")}</button>
+                  <button className="h-7 px-3 rounded-sm border border-border bg-card text-[0.6875rem] font-medium text-foreground">{t("Manage", "Gerenciar")}</button>
                 </div>
-                <div className="p-3 rounded-[10px] border border-border bg-card flex items-center justify-between">
+                <div className="p-3 rounded-md border border-border bg-card flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CreditCard className="h-4 w-4 text-muted-foreground" />
                     <div>
@@ -453,7 +446,7 @@ function AuthTemplate() {
           <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-primary/8 blur-3xl" />
           <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-info/6 blur-3xl" />
           <div className="relative z-10 text-center">
-            <div className="h-14 w-14 rounded-[16px] bg-primary/12 flex items-center justify-center mx-auto mb-5">
+            <div className="h-14 w-14 rounded-lg bg-primary/12 flex items-center justify-center mx-auto mb-5">
               <Zap className="h-7 w-7 text-primary" />
             </div>
             <h2 className="text-[1.125rem] font-bold text-foreground mb-2">DaniMoscatelli</h2>
@@ -475,12 +468,12 @@ function AuthTemplate() {
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="w-full max-w-[280px]">
             {/* Toggle */}
-            <div className="flex rounded-[10px] border border-border bg-muted/40 p-0.5 mb-6">
+            <div className="flex rounded-md border border-border bg-muted/40 p-0.5 mb-6">
               {(["login", "signup"] as const).map(tb => (
                 <button
                   key={tb}
                   onClick={() => setTab(tb)}
-                  className={`flex-1 py-1.5 rounded-[8px] text-[0.75rem] font-semibold transition-all
+                  className={`flex-1 py-1.5 rounded-sm text-[0.75rem] font-semibold transition-all
                     ${tab === tb ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
                 >
                   {tb === "login" ? t("Sign In", "Entrar") : t("Sign Up", "Cadastrar")}
@@ -503,7 +496,7 @@ function AuthTemplate() {
                   <label className="block text-[0.75rem] font-medium text-foreground mb-1">{t("Full Name", "Nome completo")}</label>
                   <div className="relative">
                     <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                    <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
+                    <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   </div>
                 </div>
               )}
@@ -511,7 +504,7 @@ function AuthTemplate() {
                 <label className="block text-[0.75rem] font-medium text-foreground mb-1">Email</label>
                 <div className="relative">
                   <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type="email" placeholder="dani@moscatelli.co" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
+                  <input type="email" placeholder="dani@moscatelli.co" className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                 </div>
               </div>
               <div>
@@ -521,14 +514,14 @@ function AuthTemplate() {
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type={showPass ? "text" : "password"} placeholder="••••••••" className="w-full bg-background border border-border rounded-[8px] pl-8 pr-8 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
+                  <input type={showPass ? "text" : "password"} placeholder="••••••••" className="w-full bg-background border border-border rounded-sm pl-8 pr-8 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   <button onClick={() => setShowPass(v => !v)} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
                     {showPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                   </button>
                 </div>
               </div>
 
-              <button className="w-full h-9 rounded-[8px] bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 mt-1">
+              <button className="w-full h-9 rounded-sm bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 mt-1">
                 <LogIn className="h-3.5 w-3.5" />
                 {tab === "login" ? t("Sign In", "Entrar") : t("Create Account", "Criar conta")}
               </button>
@@ -538,7 +531,7 @@ function AuthTemplate() {
                 <div className="relative text-center"><span className="bg-background px-2 text-[0.625rem] text-muted-foreground">{t("or continue with", "ou continue com")}</span></div>
               </div>
 
-              <button className="w-full h-9 rounded-[8px] border border-border bg-card text-[0.8125rem] font-medium text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-2">
+              <button className="w-full h-9 rounded-sm border border-border bg-card text-[0.8125rem] font-medium text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-2">
                 <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 Google
               </button>
@@ -606,10 +599,10 @@ function TeamTemplate() {
             <p className="text-[0.6875rem] text-muted-foreground">{teamMembers.length} {t("members in your workspace", "membros no seu workspace")}</p>
           </div>
           <div className="flex items-center gap-2">
-            <button className="h-8 px-3 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
+            <button className="h-8 px-3 rounded-sm border border-border bg-card text-[0.75rem] font-medium text-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
               <Download className="h-3.5 w-3.5" /> {t("Export", "Exportar")}
             </button>
-            <button className="h-8 px-3 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+            <button className="h-8 px-3 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-semibold flex items-center gap-1.5 hover:opacity-90 transition-opacity">
               <UserPlus className="h-3.5 w-3.5" /> {t("Invite", "Convidar")}
             </button>
           </div>
@@ -623,10 +616,10 @@ function TeamTemplate() {
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder={t("Search members...", "Buscar membros...")}
-              className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-1.5 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+              className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-1.5 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
             />
           </div>
-          <button className="h-8 px-3 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-muted-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
+          <button className="h-8 px-3 rounded-sm border border-border bg-card text-[0.75rem] font-medium text-muted-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
             <Filter className="h-3.5 w-3.5" /> {t("Filter", "Filtrar")}
           </button>
         </div>
@@ -669,10 +662,10 @@ function TeamTemplate() {
                   <td className="px-6 py-3 text-[0.75rem] text-muted-foreground">{t("Jul 2026", "jul de 2026")}</td>
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-1 justify-end">
-                      <button className="h-6 w-6 rounded-[6px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
+                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
                         <Edit2 className="h-3 w-3" />
                       </button>
-                      <button className="h-6 w-6 rounded-[6px] flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors">
                         <Trash2 className="h-3 w-3" />
                       </button>
                     </div>
@@ -695,7 +688,7 @@ function TeamTemplate() {
           <span className="text-[0.6875rem] text-muted-foreground">{filtered.length} {t("of", "de")} {teamMembers.length} {t("results", "resultados")}</span>
           <div className="flex items-center gap-1">
             {[1, 2, 3].map(p => (
-              <button key={p} className={`h-6 w-6 rounded-[6px] text-[0.6875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>{p}</button>
+              <button key={p} className={`h-6 w-6 rounded-sm text-[0.6875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>{p}</button>
             ))}
           </div>
         </div>
@@ -747,7 +740,7 @@ function InboxTemplate() {
                 )}
               </h1>
             </div>
-            <button className="h-6 w-6 rounded-[6px] flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
+            <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
               <MoreHorizontal className="h-3.5 w-3.5" />
             </button>
           </div>
@@ -761,7 +754,7 @@ function InboxTemplate() {
                   className={`w-full text-left px-4 py-3 border-b border-border transition-colors flex gap-3
                     ${selected === n.id ? "bg-primary/5 border-l-2 border-l-primary" : "hover:bg-muted/40 border-l-2 border-l-transparent"}`}
                 >
-                  <div className={`h-7 w-7 rounded-[8px] flex items-center justify-center shrink-0 mt-0.5 ${notifColor[n.type]}`}>
+                  <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 mt-0.5 ${notifColor[n.type]}`}>
                     <Icon className="h-3.5 w-3.5" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -790,7 +783,7 @@ function InboxTemplate() {
               <div className="p-6">
                 <div className="flex items-start justify-between mb-5">
                   <div className="flex items-center gap-3">
-                    <div className={`h-10 w-10 rounded-[12px] flex items-center justify-center ${notifColor[n.type]}`}>
+                    <div className={`h-10 w-10 rounded-md flex items-center justify-center ${notifColor[n.type]}`}>
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
@@ -798,16 +791,16 @@ function InboxTemplate() {
                       <span className="text-[0.75rem] text-muted-foreground">{bi(n.time)}</span>
                     </div>
                   </div>
-                  <button className="h-7 w-7 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
+                  <button className="h-7 w-7 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
                     <X className="h-4 w-4" />
                   </button>
                 </div>
                 <p className="text-[0.875rem] text-muted-foreground leading-relaxed mb-6">{bi(n.body)}</p>
                 <div className="flex gap-2">
-                  <button className="h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
+                  <button className="h-8 px-4 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
                     {t("View Details", "Ver detalhes")}
                   </button>
-                  <button className="h-8 px-4 rounded-[8px] border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
+                  <button className="h-8 px-4 rounded-sm border border-border bg-card text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
                     {t("Dismiss", "Dispensar")}
                   </button>
                 </div>
@@ -977,7 +970,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
 
                 {/* "Para quem": no máximo 4 linhas, sem reticências; altura de 4 linhas em todos os cards (só cresce, em vez de vazar, quando o card fica estreito demais). No escuro, caixa neutra e só a lâmpada em amarelo */}
                 {forWhom && (
-                <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-[12px] border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
+                <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-md border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
                   <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
                   <p className="min-h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
@@ -991,7 +984,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                   aria-expanded={recursosAbertos}
                   aria-controls={idLista}
                   onClick={() => setRecursosAbertos(v => !v)}
-                  className="mb-3 -mx-1 flex items-center justify-between gap-2 rounded-[8px] px-1 py-1.5 text-left text-[0.8125rem] font-semibold text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="mb-3 -mx-1 flex items-center justify-between gap-2 rounded-sm px-1 py-1.5 text-left text-[0.8125rem] font-semibold text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <span>{recursosAbertos ? t("Hide plan features", "Ocultar recursos do plano") : t("Show plan features", "Ver recursos do plano")}</span>
                   <span className="flex items-center gap-1.5 text-[0.75rem] font-medium text-muted-foreground whitespace-nowrap">
@@ -1038,7 +1031,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                       ? `${t("Plan selected", "Plano selecionado")}: ${bi(plan.name)}`
                       : `${t("Select Plan", "Selecionar Plano")} ${bi(plan.name)}`}
                     onClick={() => setSelecionado(plan.id)}
-                    className={`h-10 w-full @[19rem]:w-auto px-4 rounded-[10px] border border-primary text-[0.8125rem] font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                    className={`h-10 w-full @[19rem]:w-auto px-4 rounded-md border border-primary text-[0.8125rem] font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                       ${ativo
                         ? "bg-primary text-primary-foreground"
                         : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)]"}`}
@@ -1115,7 +1108,7 @@ function ContactTemplate() {
           <div className="absolute bottom-0 left-0 w-32 h-32 rounded-full bg-info/6 blur-3xl pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="h-10 w-10 rounded-[12px] bg-primary/12 flex items-center justify-center mb-4">
+            <div className="h-10 w-10 rounded-md bg-primary/12 flex items-center justify-center mb-4">
               <MessageSquare className="h-5 w-5 text-primary" />
             </div>
             <h2 className="text-[1rem] font-bold text-foreground mb-1">{t("Contact us", "Fale conosco")}</h2>
@@ -1128,8 +1121,8 @@ function ContactTemplate() {
             {contactChannels.map(ch => {
               const Icon = ch.icon;
               return (
-                <div key={ch.label.en} className="flex items-start gap-3 p-3 rounded-[10px] border border-border bg-background/60">
-                  <div className={`h-8 w-8 rounded-[8px] flex items-center justify-center shrink-0 ${ch.color}`}>
+                <div key={ch.label.en} className="flex items-start gap-3 p-3 rounded-md border border-border bg-background/60">
+                  <div className={`h-8 w-8 rounded-sm flex items-center justify-center shrink-0 ${ch.color}`}>
                     <Icon className="h-4 w-4" />
                   </div>
                   <div>
@@ -1148,7 +1141,7 @@ function ContactTemplate() {
               {["LinkedIn", "Twitter", "GitHub"].map(s => (
                 <button
                   key={s}
-                  className="h-7 px-2.5 rounded-[7px] border border-border bg-background text-[0.625rem] font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                  className="h-7 px-2.5 rounded-sm border border-border bg-background text-[0.625rem] font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
                 >
                   {s}
                 </button>
@@ -1170,7 +1163,7 @@ function ContactTemplate() {
               </p>
               <button
                 onClick={() => setSent(false)}
-                className="h-9 px-5 rounded-[10px] border border-border bg-card text-[0.875rem] font-medium text-foreground hover:bg-accent transition-colors"
+                className="h-9 px-5 rounded-md border border-border bg-card text-[0.875rem] font-medium text-foreground hover:bg-accent transition-colors"
               >
                 {t("Send another message", "Enviar outra mensagem")}
               </button>
@@ -1192,7 +1185,7 @@ function ContactTemplate() {
                       required
                       type="text"
                       placeholder={t("Your name", "Seu nome")}
-                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 </div>
@@ -1204,7 +1197,7 @@ function ContactTemplate() {
                       required
                       type="email"
                       placeholder={t("you@email.com", "voce@email.com")}
-                      className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+                      className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                     />
                   </div>
                 </div>
@@ -1220,7 +1213,7 @@ function ContactTemplate() {
                   <input
                     type="tel"
                     placeholder="+55 (11) 9 0000-0000"
-                    className="w-full bg-background border border-border rounded-[8px] pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+                    className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                   />
                 </div>
               </div>
@@ -1232,13 +1225,13 @@ function ContactTemplate() {
                   <button
                     type="button"
                     onClick={() => setSubjectOpen(v => !v)}
-                    className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground text-left flex items-center justify-between outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
+                    className="w-full bg-background border border-border rounded-sm px-3 py-2 text-[0.8125rem] text-foreground text-left flex items-center justify-between outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
                   >
                     {bi(subjects.find(x => x.en === subject) ?? subjects[0])}
                     <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
                   </button>
                   {subjectOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-1 z-20 bg-popover border border-border rounded-[10px] py-1 shadow-lg" style={{ boxShadow: "var(--shadow-md)" }}>
+                    <div className="absolute top-full left-0 right-0 mt-1 z-20 bg-popover border border-border rounded-md py-1 shadow-lg" style={{ boxShadow: "var(--shadow-md)" }}>
                       {subjects.map(s => (
                         <button
                           key={s.en}
@@ -1263,7 +1256,7 @@ function ContactTemplate() {
                   required
                   rows={4}
                   placeholder={t("Describe your question or request in detail...", "Descreva sua dúvida ou solicitação em detalhes...")}
-                  className="w-full bg-background border border-border rounded-[8px] px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all resize-none"
+                  className="w-full bg-background border border-border rounded-sm px-3 py-2 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all resize-none"
                 />
               </div>
 
@@ -1283,7 +1276,7 @@ function ContactTemplate() {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full h-10 rounded-[10px] bg-primary text-primary-foreground text-[0.875rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+                className="w-full h-10 rounded-md bg-primary text-primary-foreground text-[0.875rem] font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
               >
                 <Send className="h-4 w-4" />
                 {t("Send message", "Enviar mensagem")}
@@ -1519,7 +1512,7 @@ function LandingTemplate() {
         {/* ══ NAVBAR ══ */}
         <nav className="sticky top-0 z-20 bg-background/90 backdrop-blur-xl border-b border-border px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-7 w-7 rounded-[8px] bg-primary/15 flex items-center justify-center">
+            <div className="h-7 w-7 rounded-sm bg-primary/15 flex items-center justify-center">
               <Zap className="h-4 w-4 text-primary" />
             </div>
             <span className="text-[0.875rem] font-extrabold text-foreground tracking-tight">DaniMS</span>
@@ -1531,7 +1524,7 @@ function LandingTemplate() {
           </div>
           <div className="flex items-center gap-2">
             <button className="h-7 px-3 text-[0.75rem] font-medium text-muted-foreground hover:text-foreground transition-colors">{t("Sign in", "Entrar")}</button>
-            <button className="h-7 px-3 rounded-[7px] bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
+            <button className="h-7 px-3 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-semibold hover:opacity-90 transition-opacity">
               {t("Get started free", "Comece grátis")}
             </button>
           </div>
@@ -1556,7 +1549,7 @@ function LandingTemplate() {
             </p>
             <div className="flex items-center justify-center gap-3 mb-5">
               {subscribed ? (
-                <div className="flex items-center gap-2 px-4 py-2 rounded-[10px] bg-success/10 border border-success/20 text-success text-[0.8125rem] font-medium">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-md bg-success/10 border border-success/20 text-success text-[0.8125rem] font-medium">
                   <CheckCircle className="h-4 w-4" /> {t("Great! We will be in touch soon.", "Ótimo! Entraremos em contato em breve.")}
                 </div>
               ) : (
@@ -1564,9 +1557,9 @@ function LandingTemplate() {
                   <div className="relative flex-1">
                     <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
                     <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder={t("you@email.com", "voce@email.com")}
-                      className="w-full bg-card border border-border rounded-[9px] pl-9 pr-3 py-2.5 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
+                      className="w-full bg-card border border-border rounded-sm pl-9 pr-3 py-2.5 text-[0.8125rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
                   </div>
-                  <button type="submit" className="h-10 px-4 rounded-[9px] bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity whitespace-nowrap flex items-center gap-1.5">
+                  <button type="submit" className="h-10 px-4 rounded-sm bg-primary text-primary-foreground text-[0.8125rem] font-semibold hover:opacity-90 transition-opacity whitespace-nowrap flex items-center gap-1.5">
                     <Rocket className="h-3.5 w-3.5" /> {t("Get started free", "Comece grátis")}
                   </button>
                 </form>
@@ -1603,7 +1596,7 @@ function LandingTemplate() {
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Platform", "Plataforma")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Everything your team needs, in one place", "Tudo o que sua equipe precisa, em um só lugar")}</h2>
           </div>
-          <div className="max-w-2xl mx-auto rounded-[16px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xl)" }}>
+          <div className="max-w-2xl mx-auto rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xl)" }}>
             <div className="h-8 bg-muted/60 border-b border-border flex items-center px-4 gap-2 shrink-0">
               <div className="flex gap-1.5"><div className="h-2 w-2 rounded-full bg-primary/50" /><div className="h-2 w-2 rounded-full bg-warning/50" /><div className="h-2 w-2 rounded-full bg-success/50" /></div>
               <div className="flex-1 mx-6"><div className="h-4 bg-background/60 rounded-[4px] max-w-[200px] mx-auto flex items-center px-2"><span className="text-[0.5rem] text-muted-foreground/50">app.danimos.co/dashboard</span></div></div>
@@ -1617,7 +1610,7 @@ function LandingTemplate() {
                   { label: t("Conversion", "Conversão"),   value: "3.4%",  delta: "+0.5%",  up: true  },
                   { label: "Churn",        value: "1.8%",  delta: "-0.3%",  up: false },
                 ].map(k => (
-                  <div key={k.label} className="rounded-[9px] border border-border bg-background p-2.5">
+                  <div key={k.label} className="rounded-sm border border-border bg-background p-2.5">
                     <div className="text-[0.5625rem] text-muted-foreground mb-1">{k.label}</div>
                     <div className="text-[0.9375rem] font-black text-foreground leading-none">{k.value}</div>
                     <div className={`text-[0.5rem] flex items-center gap-0.5 mt-1 font-medium ${k.up ? "text-success" : "text-primary"}`}>
@@ -1627,7 +1620,7 @@ function LandingTemplate() {
                 ))}
               </div>
               {/* Chart */}
-              <div className="rounded-[9px] border border-border bg-background p-3 mb-3">
+              <div className="rounded-sm border border-border bg-background p-3 mb-3">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-[0.625rem] font-semibold text-foreground">{t("Revenue — last 12 months", "Receita — últimos 12 meses")}</span>
                   <span className="text-[0.5rem] px-1.5 py-0.5 rounded-full bg-success/10 text-success font-semibold">+12.5%</span>
@@ -1649,7 +1642,7 @@ function LandingTemplate() {
                 </div>
               </div>
               {/* Table preview */}
-              <div className="rounded-[9px] border border-border bg-background overflow-hidden">
+              <div className="rounded-sm border border-border bg-background overflow-hidden">
                 <div className="grid grid-cols-4 gap-0 border-b border-border bg-muted/40 px-3 py-1.5">
                   {[t("Customer", "Cliente"), t("Plan", "Plano"), "MRR", "Status"].map(h => (
                     <div key={h} className="text-[0.5rem] font-semibold uppercase tracking-wide text-muted-foreground">{h}</div>
@@ -1680,9 +1673,9 @@ function LandingTemplate() {
           </div>
           <div className="max-w-2xl mx-auto grid grid-cols-3 grid-rows-2 gap-3" style={{ gridTemplateRows: "auto auto" }}>
             {/* Large card - spans 2 cols */}
-            <div className="col-span-2 rounded-[14px] border border-border bg-card p-5 relative overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
+            <div className="col-span-2 rounded-lg border border-border bg-card p-5 relative overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-primary/8 blur-2xl pointer-events-none" />
-              <div className="h-8 w-8 rounded-[10px] bg-primary/10 flex items-center justify-center mb-3">
+              <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center mb-3">
                 <Sparkles className="h-4 w-4 text-primary" />
               </div>
               <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("AI that works for you", "IA que trabalha para você")}</div>
@@ -1694,7 +1687,7 @@ function LandingTemplate() {
               </div>
             </div>
             {/* Small card */}
-            <div className="rounded-[14px] border border-border bg-card p-4 flex flex-col justify-between" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <div className="rounded-lg border border-border bg-card p-4 flex flex-col justify-between" style={{ boxShadow: "var(--shadow-xs)" }}>
               <ShieldCheck className="h-5 w-5 text-success mb-2" />
               <div>
                 <div className="text-[0.8125rem] font-bold text-foreground mb-1">SOC 2 Type II</div>
@@ -1702,7 +1695,7 @@ function LandingTemplate() {
               </div>
             </div>
             {/* Small card */}
-            <div className="rounded-[14px] border border-border bg-card p-4 flex flex-col justify-between" style={{ boxShadow: "var(--shadow-xs)" }}>
+            <div className="rounded-lg border border-border bg-card p-4 flex flex-col justify-between" style={{ boxShadow: "var(--shadow-xs)" }}>
               <Globe className="h-5 w-5 text-info mb-2" />
               <div>
                 <div className="text-[0.8125rem] font-bold text-foreground mb-1">{t("20 CDN regions", "20 regiões de CDN")}</div>
@@ -1710,9 +1703,9 @@ function LandingTemplate() {
               </div>
             </div>
             {/* Medium card - spans 2 cols */}
-            <div className="col-span-2 rounded-[14px] border border-border bg-card p-5 relative overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
+            <div className="col-span-2 rounded-lg border border-border bg-card p-5 relative overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
               <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-info/6 blur-2xl pointer-events-none" />
-              <div className="h-8 w-8 rounded-[10px] bg-info/10 flex items-center justify-center mb-3">
+              <div className="h-8 w-8 rounded-md bg-info/10 flex items-center justify-center mb-3">
                 <Layers className="h-4 w-4 text-info" />
               </div>
               <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("200+ Native integrations", "Mais de 200 integrações nativas")}</div>
@@ -1739,7 +1732,7 @@ function LandingTemplate() {
                 <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-info inline-block" />{t("Users (×10)", "Usuários (×10)")}</span>
               </div>
             </div>
-            <div className="rounded-[14px] border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
+            <div className="rounded-lg border border-border bg-card p-5" style={{ boxShadow: "var(--shadow-sm)" }}>
               <div className="h-[130px]">
                 <ResponsiveContainer width="100%" height="100%">
                   <ReBarChart data={revData} margin={{ top: 4, right: 0, left: -20, bottom: 0 }} barGap={3}>
@@ -1794,7 +1787,7 @@ function LandingTemplate() {
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Plans", "Planos")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Compare and choose your plan", "Compare e escolha seu plano")}</h2>
           </div>
-          <div className="max-w-2xl mx-auto rounded-[14px] border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
+          <div className="max-w-2xl mx-auto rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
             {/* Header */}
             <div className="grid grid-cols-4 border-b border-border bg-muted/40">
               <div className="px-4 py-3 text-[0.6875rem] font-semibold text-muted-foreground">{t("Feature", "Recurso")}</div>
@@ -1822,13 +1815,13 @@ function LandingTemplate() {
             <div className="grid grid-cols-4 border-t border-border bg-muted/20 px-0 py-3">
               <div />
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Get started", "Começar")}</button>
+                <button className="h-7 px-4 rounded-sm border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Get started", "Começar")}</button>
               </div>
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] bg-primary text-primary-foreground text-[0.6875rem] font-semibold hover:opacity-90 transition-opacity">{t("Upgrade", "Fazer upgrade")}</button>
+                <button className="h-7 px-4 rounded-sm bg-primary text-primary-foreground text-[0.6875rem] font-semibold hover:opacity-90 transition-opacity">{t("Upgrade", "Fazer upgrade")}</button>
               </div>
               <div className="px-4 flex justify-center">
-                <button className="h-7 px-4 rounded-[7px] border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Talk to sales", "Falar com vendas")}</button>
+                <button className="h-7 px-4 rounded-sm border border-border bg-card text-[0.6875rem] font-semibold text-foreground hover:bg-accent transition-colors">{t("Talk to sales", "Falar com vendas")}</button>
               </div>
             </div>
           </div>
@@ -1843,7 +1836,7 @@ function LandingTemplate() {
           <div className="max-w-2xl mx-auto">
             <div className="grid grid-cols-3 gap-3 mb-4">
               {visibleTestimonials.map((tm, i) => (
-                <div key={`${tm.name}-${slide}-${i}`} className="p-4 rounded-[12px] border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
+                <div key={`${tm.name}-${slide}-${i}`} className="p-4 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
                   <div className="flex gap-0.5 mb-3">
                     {Array.from({ length: tm.stars }).map((_, si) => <Star key={si} className="h-3 w-3 text-warning" />)}
                   </div>
@@ -1885,7 +1878,7 @@ function LandingTemplate() {
           </div>
           <div className="max-w-xl mx-auto space-y-2">
             {faqItems.map((item, i) => (
-              <div key={i} className="rounded-[12px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
+              <div key={i} className="rounded-md border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-muted/30 transition-colors"
@@ -1957,9 +1950,9 @@ function LandingTemplate() {
               ].map(ch => {
                 const Icon = ch.icon;
                 return (
-                  <div key={ch.label} className="group relative rounded-[14px] border border-border bg-card p-4 flex flex-col gap-3 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer" style={{ boxShadow: "var(--shadow-xs)" }}>
+                  <div key={ch.label} className="group relative rounded-lg border border-border bg-card p-4 flex flex-col gap-3 hover:border-primary/30 hover:shadow-md transition-all cursor-pointer" style={{ boxShadow: "var(--shadow-xs)" }}>
                     <div className="flex items-start justify-between">
-                      <div className={`h-9 w-9 rounded-[10px] flex items-center justify-center ${ch.iconBg}`}>
+                      <div className={`h-9 w-9 rounded-md flex items-center justify-center ${ch.iconBg}`}>
                         <Icon className="h-4.5 w-4.5" style={{ height: 18, width: 18 }} />
                       </div>
                       <span className={`text-[0.5625rem] font-bold px-1.5 py-0.5 rounded-full border ${ch.badgeColor}`}>{ch.badge}</span>
@@ -2013,7 +2006,7 @@ function LandingTemplate() {
                 </div>
 
                 {/* Testimonial snippet */}
-                <div className="rounded-[12px] border border-border bg-card p-3.5" style={{ boxShadow: "var(--shadow-xs)" }}>
+                <div className="rounded-md border border-border bg-card p-3.5" style={{ boxShadow: "var(--shadow-xs)" }}>
                   <div className="flex gap-0.5 mb-2">
                     {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-2.5 w-2.5 text-warning" />)}
                   </div>
@@ -2033,10 +2026,10 @@ function LandingTemplate() {
               </div>
 
               {/* Right — form */}
-              <div className="rounded-[16px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
+              <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
                 {/* Form header stripe */}
                 <div className="px-5 py-4 border-b border-border bg-muted/30 flex items-center gap-3">
-                  <div className="h-8 w-8 rounded-[9px] bg-primary/12 flex items-center justify-center">
+                  <div className="h-8 w-8 rounded-sm bg-primary/12 flex items-center justify-center">
                     <Send className="h-4 w-4 text-primary" />
                   </div>
                   <div>
@@ -2059,7 +2052,7 @@ function LandingTemplate() {
                       </div>
                       <button
                         onClick={() => setContactSent(false)}
-                        className="mt-1 h-8 px-4 rounded-[8px] border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors"
+                        className="mt-1 h-8 px-4 rounded-sm border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors"
                       >
                         {t("Send another message", "Enviar outra mensagem")}
                       </button>
@@ -2075,7 +2068,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input required type="text" placeholder={t("Your name", "Seu nome")}
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-sm pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                         <div className="space-y-1">
@@ -2085,7 +2078,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input required type="email" placeholder={t("you@email.com", "voce@email.com")}
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-sm pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                       </div>
@@ -2097,7 +2090,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Building2 className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="text" placeholder="DaniMS Co."
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-sm pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                         <div className="space-y-1">
@@ -2105,7 +2098,7 @@ function LandingTemplate() {
                           <div className="relative">
                             <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
                             <input type="tel" placeholder="+55 11 9 0000-0000"
-                              className="w-full bg-background border border-border rounded-[8px] pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
+                              className="w-full bg-background border border-border rounded-sm pl-7 pr-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all" />
                           </div>
                         </div>
                       </div>
@@ -2129,7 +2122,7 @@ function LandingTemplate() {
                           {t("Message", "Mensagem")} <span className="text-primary">*</span>
                         </label>
                         <textarea required rows={3} placeholder={t("Describe your question or project in detail...", "Descreva sua dúvida ou projeto em detalhes...")}
-                          className="w-full bg-background border border-border rounded-[8px] px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all resize-none" />
+                          className="w-full bg-background border border-border rounded-sm px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all resize-none" />
                       </div>
 
                       {/* Footer: consent + submit */}
@@ -2141,7 +2134,7 @@ function LandingTemplate() {
                           </span>
                         </label>
                         <button type="submit"
-                          className="shrink-0 h-8 px-4 rounded-[8px] bg-primary text-primary-foreground text-[0.75rem] font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5 whitespace-nowrap">
+                          className="shrink-0 h-8 px-4 rounded-sm bg-primary text-primary-foreground text-[0.75rem] font-bold hover:opacity-90 transition-opacity flex items-center gap-1.5 whitespace-nowrap">
                           <Send className="h-3 w-3" /> {t("Send", "Enviar")}
                         </button>
                       </div>
@@ -2158,7 +2151,7 @@ function LandingTemplate() {
           <div className="max-w-2xl mx-auto">
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
-                <div className="h-6 w-6 rounded-[6px] bg-primary/15 flex items-center justify-center">
+                <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
                   <Zap className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <span className="text-[0.875rem] font-extrabold text-foreground">DaniMS</span>

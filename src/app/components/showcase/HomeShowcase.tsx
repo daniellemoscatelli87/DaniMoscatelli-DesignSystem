@@ -62,7 +62,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
 
   return (
     <div className="space-y-14">
-      <div className="relative overflow-hidden rounded-[24px] border border-border p-6 sm:p-10 bg-card shadow-[var(--shadow-lg)]">
+      <div className="relative overflow-hidden rounded-xl border border-border p-6 sm:p-10 bg-card shadow-[var(--shadow-lg)]">
         <div className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
         <div className="relative flex items-start gap-8">
           <img src={logoVermelho} alt="" className="hidden sm:block h-24 w-24 object-contain shrink-0 opacity-90" />
@@ -168,7 +168,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
 
       <section>
         <SectionLabel>{t("Palette preview", "Prévia da paleta")}</SectionLabel>
-        <div className="flex rounded-[16px] overflow-hidden h-16 border border-border/40 shadow-[var(--shadow-sm)]" role="img" aria-label={t("Graphite and Crimson scales, 50 to 950", "Escalas Graphite e Crimson, de 50 a 950")}>
+        <div className="flex rounded-lg overflow-hidden h-16 border border-border/40 shadow-[var(--shadow-sm)]" role="img" aria-label={t("Graphite and Crimson scales, 50 to 950", "Escalas Graphite e Crimson, de 50 a 950")}>
           {graphite.map(c => <div key={c} className="flex-1" style={{ backgroundColor: c }} />)}
           <div className="w-px bg-background/20" />
           {crimson.map(c => <div key={c} className="flex-1" style={{ backgroundColor: c }} />)}
