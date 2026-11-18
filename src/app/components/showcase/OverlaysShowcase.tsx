@@ -11,6 +11,11 @@ import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { useI18n } from "../../i18n";
+import { Breadcrumb as UiBreadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
+import { Pagination as UiPagination, PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis } from "../ui/pagination";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "../ui/sheet";
+import { Button } from "../ui/button";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -49,19 +54,24 @@ const breadcrumbPaths: Bi[][] = [
   [bc("Analytics", "Análises"), bc("Reports", "Relatórios")],
 ];
 
+// As demonstrações usam os componentes reais de ui/, os mesmos que o produto copia.
 function Breadcrumb({ path }: { path: Bi[] }) {
   const { bi } = useI18n();
   return (
-    <nav className="flex items-center gap-1.5 text-[0.875rem]">
-      {path.map((item, i) => (
-        <React.Fragment key={item.en}>
-          {i > 0 && <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50 shrink-0" />}
-          <span className={i === path.length - 1 ? "font-medium text-foreground" : "text-muted-foreground hover:text-foreground cursor-pointer transition-colors"}>
-            {bi(item)}
-          </span>
-        </React.Fragment>
-      ))}
-    </nav>
+    <UiBreadcrumb>
+      <BreadcrumbList>
+        {path.map((item, i) => (
+          <React.Fragment key={item.en}>
+            {i > 0 && <BreadcrumbSeparator />}
+            <BreadcrumbItem>
+              {i === path.length - 1
+                ? <BreadcrumbPage>{bi(item)}</BreadcrumbPage>
+                : <BreadcrumbLink href="#" onClick={e => e.preventDefault()}>{bi(item)}</BreadcrumbLink>}
+            </BreadcrumbItem>
+          </React.Fragment>
+        ))}
+      </BreadcrumbList>
+    </UiBreadcrumb>
   );
 }
 
@@ -80,37 +90,30 @@ function Pagination({ total = 12, current = 4, onChange }: { total?: number; cur
     if (current < total - 2) visible.push("...");
     visible.push(total);
   }
+  const ir = (p: number) => (e: React.MouseEvent) => { e.preventDefault(); if (p >= 1 && p <= total) onChange?.(p); };
 
   return (
-    <div className="flex items-center gap-1">
-      <button
-        className="h-9 w-9 rounded-[9px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors disabled:opacity-40 disabled:pointer-events-none"
-        disabled={current === 1}
-        aria-label={t("Previous page", "Página anterior")}
-      >
-        <ChevronRight className="h-4 w-4 rotate-180" />
-      </button>
-      {visible.map((p, i) => (
-        <button
-          key={`${p}-${i}`}
-          onClick={() => typeof p === "number" && onChange?.(p)}
-          className={`h-9 min-w-9 px-2 rounded-[9px] text-[0.875rem] font-medium transition-all duration-150
-            ${p === current ? "bg-primary text-primary-foreground" : ""}
-            ${p === "..." ? "text-muted-foreground pointer-events-none" : ""}
-            ${typeof p === "number" && p !== current ? "text-muted-foreground hover:bg-accent hover:text-foreground" : ""}
-          `}
-        >
-          {p}
-        </button>
-      ))}
-      <button
-        className="h-9 w-9 rounded-[9px] flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors disabled:opacity-40 disabled:pointer-events-none"
-        disabled={current === total}
-        aria-label={t("Next page", "Próxima página")}
-      >
-        <ChevronRight className="h-4 w-4" />
-      </button>
-    </div>
+    <UiPagination className="mx-0 w-auto justify-start">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationLink href="#" onClick={ir(current - 1)} aria-label={t("Previous page", "Página anterior")} aria-disabled={current === 1} className={current === 1 ? "pointer-events-none opacity-40" : ""}>
+            <ChevronRight className="h-4 w-4 rotate-180" />
+          </PaginationLink>
+        </PaginationItem>
+        {visible.map((p, i) => (
+          <PaginationItem key={`${p}-${i}`}>
+            {p === "..."
+              ? <PaginationEllipsis />
+              : <PaginationLink href="#" onClick={ir(p)} isActive={p === current}>{p}</PaginationLink>}
+          </PaginationItem>
+        ))}
+        <PaginationItem>
+          <PaginationLink href="#" onClick={ir(current + 1)} aria-label={t("Next page", "Próxima página")} aria-disabled={current === total} className={current === total ? "pointer-events-none opacity-40" : ""}>
+            <ChevronRight className="h-4 w-4" />
+          </PaginationLink>
+        </PaginationItem>
+      </PaginationContent>
+    </UiPagination>
   );
 }
 
@@ -118,21 +121,10 @@ function Pagination({ total = 12, current = 4, onChange }: { total?: number; cur
 function TooltipDemo({ content, children }: { content: Bi; children: React.ReactNode }) {
   const { bi } = useI18n();
   return (
-    <TooltipPrimitive.Provider>
-      <TooltipPrimitive.Root>
-        <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
-        <TooltipPrimitive.Portal>
-          <TooltipPrimitive.Content
-            sideOffset={6}
-            className="z-50 px-3 py-1.5 text-[0.8125rem] font-medium bg-popover text-popover-foreground border border-border rounded-[8px] animate-in fade-in-0 zoom-in-95"
-            style={{ boxShadow: "var(--shadow-md)" }}
-          >
-            {bi(content)}
-            <TooltipPrimitive.Arrow className="fill-popover" />
-          </TooltipPrimitive.Content>
-        </TooltipPrimitive.Portal>
-      </TooltipPrimitive.Root>
-    </TooltipPrimitive.Provider>
+    <Tooltip>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent sideOffset={6}>{bi(content)}</TooltipContent>
+    </Tooltip>
   );
 }
 
@@ -140,41 +132,28 @@ function TooltipDemo({ content, children }: { content: Bi; children: React.React
 function DrawerDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { t } = useI18n();
   return (
-    <>
-      {open && (
-        <div className="fixed inset-0 z-50 flex justify-end" onClick={onClose}>
-          <div className="absolute inset-0 bg-foreground/20 backdrop-blur-sm" />
-          <div
-            className="relative z-10 w-80 h-full bg-card border-l border-border flex flex-col"
-            style={{ boxShadow: "var(--shadow-xl)" }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between px-6 py-5 border-b border-border">
-              <h3 className="text-[1rem] font-semibold text-foreground">{t("Drawer Panel", "Painel lateral")}</h3>
-              <button aria-label={t("Close", "Fechar")} onClick={onClose} className="h-8 w-8 rounded-[8px] flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
-                <X className="h-4 w-4" />
+    <Sheet open={open} onOpenChange={v => { if (!v) onClose(); }}>
+      <SheetContent side="right" className="w-80 gap-0 p-0 sm:max-w-80">
+        <SheetHeader className="border-b border-border px-6 py-5">
+          <SheetTitle className="text-[1rem] font-semibold">{t("Drawer Panel", "Painel lateral")}</SheetTitle>
+          <SheetDescription className="sr-only">{t("Example of a side panel", "Exemplo de painel lateral")}</SheetDescription>
+        </SheetHeader>
+        <div className="flex-1 space-y-4 px-6 py-5">
+          <p className="text-[0.9rem] text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
+          <div className="space-y-3">
+            {[["Profile Settings", "Configurações do perfil"], ["Notifications", "Notificações"], ["Store data", "Dados da loja"], ["Opening hours", "Horário de funcionamento"]].map(([en, pt]) => (
+              <button key={en} className="flex w-full items-center justify-between rounded-[10px] px-3 py-2.5 text-[0.9rem] font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                {t(en, pt)}
+                <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </button>
-            </div>
-            <div className="flex-1 px-6 py-5 space-y-4">
-              <p className="text-[0.9rem] text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
-              <div className="space-y-3">
-                {[["Profile Settings", "Configurações do perfil"], ["Notifications", "Notificações"], ["API Keys", "Chaves de API"], ["Integrations", "Integrações"]].map(([en, pt]) => (
-                  <button key={en} className="w-full flex items-center justify-between px-3 py-2.5 rounded-[10px] text-[0.9rem] font-medium text-foreground hover:bg-accent transition-colors">
-                    {t(en, pt)}
-                    <ChevronRight className="h-4 w-4 text-muted-foreground" />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="px-6 py-5 border-t border-border">
-              <button onClick={onClose} className="w-full h-10 rounded-[10px] bg-primary text-primary-foreground text-[0.9375rem] font-semibold hover:bg-[var(--primary-hover)] transition-colors">
-                {t("Done", "Concluído")}
-              </button>
-            </div>
+            ))}
           </div>
         </div>
-      )}
-    </>
+        <SheetFooter className="border-t border-border px-6 py-5">
+          <Button className="w-full" onClick={onClose}>{t("Done", "Concluído")}</Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 }
 
