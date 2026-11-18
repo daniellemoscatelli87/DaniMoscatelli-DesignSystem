@@ -8,7 +8,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight, PanelTop, UploadCloud, Milestone, MessageCircle,
+  PanelRight, PanelTop, UploadCloud, Milestone, MessageCircle, LibraryBig,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -37,6 +37,7 @@ import { GridShowcase } from "./components/showcase/GridShowcase";
 import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 import { Toaster } from "./components/ui/sonner";
+import { CatalogoShowcase } from "./components/showcase/CatalogoShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -185,6 +186,8 @@ const ptLabels: Record<string, string> = {
   "Icons": "Ícones",
   "Sizes & Colors": "Tamanhos e cores",
   "Library": "Biblioteca",
+  "Component catalog": "Catálogo de componentes",
+  "All components": "Todos os componentes",
   "Overlays": "Overlays",
   "Breadcrumb": "Breadcrumb",
   "Pagination": "Paginação",
@@ -396,6 +399,11 @@ const navGroups: { group: string; items: NavItem[] }[] = [
   {
     group: "Components",
     items: [
+      { id: "catalogo", label: "Component catalog", icon: LibraryBig,
+        items: [
+          { id: "catalogo-lista", label: "All components", sectionId: "catalogo" },
+        ],
+      },
       { id: "buttons", label: "Buttons", icon: MousePointer2,
         items: [
           { id: "buttons",        label: "Button Variants", sectionId: "buttons" },
@@ -537,6 +545,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   colors:    <FoundationShowcase />,
   tokens:      <TokensShowcase />,
   integration: <IntegrationShowcase />,
+  catalogo:  <CatalogoShowcase />,
   buttons:   <FormShowcase />,
   cards:     <CardShowcase />,
   data:      <DataShowcase />,
@@ -564,6 +573,7 @@ const sectionLabels: Record<string, string> = {
   accessibility: "Accessibility",
   brand:     "Brand Identity",
   colors:    "Foundation",
+  catalogo:  "Component catalog",
   buttons:   "Form Controls",
   cards:     "Cards",
   data:      "Data Display",
