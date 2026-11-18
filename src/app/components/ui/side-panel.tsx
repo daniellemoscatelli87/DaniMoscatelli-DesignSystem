@@ -100,7 +100,7 @@ function SidePanelHeader({
   return (
     <div data-slot="side-panel-header" className={cn("relative z-10 shrink-0 border-b border-border bg-card px-6 pb-3.5 pt-5 pr-14 sm:px-8 sm:pr-16", className)}>
       {eyebrow && (
-        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-primary">
+        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-primary-text">
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />
           {eyebrow}
         </div>

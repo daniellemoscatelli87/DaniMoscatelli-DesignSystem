@@ -32,7 +32,7 @@ function Result({ ok, label }: { ok: boolean; label: string }) {
   const { t } = useI18n();
   return (
     <span className={`inline-flex items-center gap-1 text-[0.75rem] font-medium whitespace-nowrap ${ok ? "text-foreground" : "text-muted-foreground"}`}>
-      {ok ? <Check className="h-3.5 w-3.5 text-primary" aria-hidden /> : <X className="h-3.5 w-3.5" aria-hidden />}
+      {ok ? <Check className="h-3.5 w-3.5 text-primary-text" aria-hidden /> : <X className="h-3.5 w-3.5" aria-hidden />}
       {label}: {ok ? t("Pass", "Aprovado") : t("Fail", "Reprovado")}
     </span>
   );
@@ -190,7 +190,7 @@ function FocusDemo() {
         <button className="h-10 px-4 rounded-md border border-border bg-card text-foreground text-[0.875rem] font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Secondary", "Secundário")}
         </button>
-        <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-[0.875rem] font-medium text-primary underline underline-offset-4 rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-[0.875rem] font-medium text-primary-text underline underline-offset-4 rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           {t("Text link", "Link de texto")}
         </a>
         <input

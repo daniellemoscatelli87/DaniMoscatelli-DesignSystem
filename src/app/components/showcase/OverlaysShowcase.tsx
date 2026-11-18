@@ -257,7 +257,7 @@ export function OverlaysShowcase() {
                     );
                   })}
                   <DropdownMenuPrimitive.Separator className="my-1 h-px bg-border" />
-                  <DropdownMenuPrimitive.Item className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
+                  <DropdownMenuPrimitive.Item className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
                     <Trash2 className="h-4 w-4" />
                     {t("Delete", "Excluir")}
                   </DropdownMenuPrimitive.Item>
@@ -341,7 +341,7 @@ export function OverlaysShowcase() {
           >
             <div className="flex flex-col items-center text-center gap-4 mb-5">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                <Trash2 className="h-6 w-6 text-primary" />
+                <Trash2 className="h-6 w-6 text-primary-text" />
               </div>
               <div>
                 <DialogPrimitive.Title className="text-[1.125rem] font-semibold text-foreground">{t("Delete Project", "Excluir projeto")}</DialogPrimitive.Title>
@@ -395,9 +395,9 @@ export function OverlaysShowcase() {
               {flushItems.map(item => (
                 <AccordionPrimitive.Item key={item.value} value={item.value}>
                   <AccordionPrimitive.Header>
-                    <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between py-4 text-[0.9375rem] font-semibold text-foreground hover:text-primary transition-colors">
+                    <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between py-4 text-[0.9375rem] font-semibold text-foreground hover:text-primary-text transition-colors">
                       <span className="flex items-center gap-3">
-                        <item.icon className="h-4 w-4 text-primary shrink-0" />
+                        <item.icon className="h-4 w-4 text-primary-text shrink-0" />
                         {bi(item.label)}
                       </span>
                       <span className="h-5 w-5 rounded-full border border-border flex items-center justify-center shrink-0 transition-colors group-data-[state=open]:bg-primary group-data-[state=open]:border-primary">
@@ -429,7 +429,7 @@ export function OverlaysShowcase() {
                   <AccordionPrimitive.Header>
                     <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between px-4 py-3.5 text-[0.875rem] font-semibold text-foreground">
                       <span className="text-left">{bi(item.label)}</span>
-                      <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary ml-4" />
+                      <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary-text ml-4" />
                     </AccordionPrimitive.Trigger>
                   </AccordionPrimitive.Header>
                   <AccordionPrimitive.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">

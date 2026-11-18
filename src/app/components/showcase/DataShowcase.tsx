@@ -117,7 +117,7 @@ const statusStyles: Record<string, string> = {
 };
 
 const planStyles: Record<string, string> = {
-  Enterprise: "bg-primary/10 text-primary border-primary/20",
+  Enterprise: "bg-primary/10 text-primary-text border-primary/20",
   Pro:        "bg-info/10 text-info border-info/20",
   Team:       "bg-muted text-foreground border-border",
   Starter:    "bg-muted text-muted-foreground border-border",
@@ -164,8 +164,8 @@ export function DataShowcase() {
   const SortIcon = ({ col }: { col: string }) => {
     if (sortCol !== col) return <ChevronsUpDown className="h-3.5 w-3.5 text-muted-foreground/40" />;
     return sortDir === "asc"
-      ? <ChevronUp className="h-3.5 w-3.5 text-primary" />
-      : <ChevronDown className="h-3.5 w-3.5 text-primary" />;
+      ? <ChevronUp className="h-3.5 w-3.5 text-primary-text" />
+      : <ChevronDown className="h-3.5 w-3.5 text-primary-text" />;
   };
 
   return (
@@ -425,7 +425,7 @@ export function CardsDeKpi() {
       {kpis.map((kpi) => {
         const Icon = kpi.icon;
         const TrendIcon = kpi.trend === "up" ? ArrowUpRight : ArrowDownRight;
-        const trendColor = kpi.trend === "up" ? "text-success" : "text-primary";
+        const trendColor = kpi.trend === "up" ? "text-success" : "text-primary-text";
         return (
           <div key={kpi.label} className="bg-card rounded-lg border border-border p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow)" }}>
             <div className="flex items-start justify-between">

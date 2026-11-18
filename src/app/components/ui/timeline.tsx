@@ -118,7 +118,7 @@ export function Timeline({ etapas, alternar = true, limite = 0.6, checkNasFeitas
               className={cn(
                 "relative z-[1] col-start-1 row-start-1 flex h-[var(--marco)] w-[var(--marco)] items-center justify-center rounded-full border-2 bg-card [&_svg]:h-[22px] [&_svg]:w-[22px] md:col-start-2 md:[&_svg]:h-6 md:[&_svg]:w-6",
                 "transition-[background-color,border-color,color,transform,box-shadow] duration-300 [transition-timing-function:cubic-bezier(0.34,1.56,0.64,1)]",
-                feita || ehAtual ? "border-primary bg-primary text-primary-foreground shadow-[var(--shadow-md)]" : ativo ? "border-[var(--graphite-200)] text-[var(--graphite-400)] dark:border-[var(--graphite-700)]" : "border-primary text-primary shadow-[var(--shadow-md)]",
+                feita || ehAtual ? "border-primary bg-primary text-primary-foreground shadow-[var(--shadow-md)]" : ativo ? "border-[var(--graphite-200)] text-[var(--graphite-400)] dark:border-[var(--graphite-700)]" : "border-primary text-primary-text shadow-[var(--shadow-md)]",
                 ehAtual && "scale-[1.15]",
               )}
             >

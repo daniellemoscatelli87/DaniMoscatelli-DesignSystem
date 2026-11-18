@@ -27,7 +27,7 @@ export function SubTitle({ children }: { children: React.ReactNode }) {
 export function Callout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-3 rounded-[var(--radius)] border border-border bg-muted/60 p-4">
-      <Info className="h-4 w-4 mt-0.5 text-primary shrink-0" aria-hidden />
+      <Info className="h-4 w-4 mt-0.5 text-primary-text shrink-0" aria-hidden />
       <div className="text-[0.875rem] leading-relaxed text-muted-foreground">
         <p className="font-semibold text-foreground mb-0.5">{title}</p>
         {children}
@@ -46,7 +46,7 @@ export function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
       ].map(col => (
         <Panel key={col.title} className="p-5">
           <p className="flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-foreground mb-3">
-            <col.Icon className="h-3.5 w-3.5 text-primary" aria-hidden /> {col.label}
+            <col.Icon className="h-3.5 w-3.5 text-primary-text" aria-hidden /> {col.label}
           </p>
           <ul className="space-y-2">
             {col.items.map(i => (
@@ -69,7 +69,7 @@ export function PrincipleGrid({ items, cols = "lg:grid-cols-3" }: { items: Princ
     <div className={`grid grid-cols-1 md:grid-cols-2 ${cols} gap-3`}>
       {items.map(p => (
         <Panel key={p.title} className="p-5">
-          <p.icon className="h-5 w-5 text-primary mb-4" strokeWidth={1.75} aria-hidden />
+          <p.icon className="h-5 w-5 text-primary-text mb-4" strokeWidth={1.75} aria-hidden />
           <h3 className={`${display} text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>{p.title}</h3>
           <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{p.desc}</p>
         </Panel>

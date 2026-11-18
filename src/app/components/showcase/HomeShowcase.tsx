@@ -8,7 +8,7 @@ import { changelog, type ChangeKind } from "./shared/changelog";
 const display = "font-[family-name:var(--font-display)]";
 
 const kindStyle: Record<ChangeKind, string> = {
-  New: "bg-primary/12 text-primary border-primary/25",
+  New: "bg-primary/12 text-primary-text border-primary/25",
   Updated: "bg-muted text-foreground border-border",
   Removed: "bg-transparent text-muted-foreground border-border border-dashed",
 };
@@ -68,7 +68,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
           <img src={logoVermelho} alt="" className="hidden sm:block h-24 w-24 object-contain shrink-0 opacity-90" />
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/12 text-primary border border-primary/25 text-[0.75rem] font-semibold uppercase tracking-[0.08em]">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/12 text-primary-text border border-primary/25 text-[0.75rem] font-semibold uppercase tracking-[0.08em]">
                 Design System
               </span>
               <span className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">v1.0</span>
@@ -94,7 +94,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
                 onClick={() => go({ scroll: "whats-new" })}
                 className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border text-[0.875rem] font-medium text-foreground hover:border-[var(--border-strong)] hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Sparkles className="h-4 w-4 text-primary" />
+                <Sparkles className="h-4 w-4 text-primary-text" />
                 {t("What's new", "Novidades")}
               </button>
             </div>
@@ -105,7 +105,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
                 { en: "Radix UI primitives", pt: "Primitivos Radix UI" },
                 { en: "Usability and a11y guidelines", pt: "Diretrizes de usabilidade e a11y" },
               ].map((tag, i) => (
-                <span key={tag.en} className={`inline-flex items-center px-3 py-1 rounded-full text-[0.8125rem] font-medium ${i === 0 ? "bg-primary/12 text-primary" : "bg-muted text-foreground"}`}>
+                <span key={tag.en} className={`inline-flex items-center px-3 py-1 rounded-full text-[0.8125rem] font-medium ${i === 0 ? "bg-primary/12 text-primary-text" : "bg-muted text-foreground"}`}>
                   {bi(tag)}
                 </span>
               ))}

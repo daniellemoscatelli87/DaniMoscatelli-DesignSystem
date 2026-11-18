@@ -20,8 +20,8 @@ function CodeBlock({ filename, label, children }: { filename: string; label?: st
     <div className="rounded-md border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
       <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-muted/30">
         <div className="flex items-center gap-2">
-          <div className="h-2 w-2 rounded-full bg-red-400/60" />
-          <div className="h-2 w-2 rounded-full bg-amber-400/60" />
+          <div className="h-2 w-2 rounded-full bg-error/60" />
+          <div className="h-2 w-2 rounded-full bg-warning/60" />
           <div className="h-2 w-2 rounded-full bg-success/60" />
           <span className="text-[0.625rem] font-mono text-muted-foreground ml-2">{filename}</span>
         </div>
@@ -37,7 +37,7 @@ function CodeBlock({ filename, label, children }: { filename: string; label?: st
 function StepBadge({ n }: { n: number }) {
   return (
     <div className="h-7 w-7 rounded-full bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0">
-      <span className="text-[0.625rem] font-black text-primary">{n}</span>
+      <span className="text-[0.625rem] font-black text-primary-text">{n}</span>
     </div>
   );
 }
@@ -78,7 +78,7 @@ export function IntegrationShowcase() {
       {/* ── Hero ── */}
       <section className="space-y-4">
         <div>
-          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-primary">{t("Concepts", "Conceitos")}</p>
+          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-primary-text">{t("Concepts", "Conceitos")}</p>
           <h1 className="text-[2.25rem] font-black text-foreground tracking-[-0.04em] leading-none mt-1">
             {t("Connecting to your project", "Conectando ao seu projeto")}
           </h1>
@@ -89,39 +89,39 @@ export function IntegrationShowcase() {
 
         {/* Two paths */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="rounded-lg border border-violet-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-violet/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-sm bg-violet-500/10 flex items-center justify-center">
-                <Figma className="h-4 w-4 text-violet-400" />
+              <div className="h-8 w-8 rounded-sm bg-violet/10 flex items-center justify-center">
+                <Figma className="h-4 w-4 text-violet" />
               </div>
               <div>
                 <p className="text-[0.875rem] font-bold text-foreground">{t("Designer path", "Caminho do designer")}</p>
-                <p className="text-[0.5625rem] font-semibold uppercase tracking-[0.07em] text-violet-400">Figma Variables</p>
+                <p className="text-[0.5625rem] font-semibold uppercase tracking-[0.07em] text-violet">Figma Variables</p>
               </div>
             </div>
             <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
               {t("Connect the Figma library to your project file and enable the semantic Variables so all components use the right tokens automatically.", "Conecte a biblioteca do Figma ao arquivo do seu projeto e ative as Variables semânticas para que todos os componentes usem os tokens certos automaticamente.")}
             </p>
-            <div className="flex items-center gap-1 text-[0.6875rem] text-violet-400 font-semibold">
+            <div className="flex items-center gap-1 text-[0.6875rem] text-violet font-semibold">
               <span>{t("View step by step", "Ver passo a passo")}</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </div>
           </div>
 
-          <div className="rounded-lg border border-blue-500/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
+          <div className="rounded-lg border border-info/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center gap-2.5">
-              <div className="h-8 w-8 rounded-sm bg-blue-500/10 flex items-center justify-center">
-                <Code2 className="h-4 w-4 text-blue-400" />
+              <div className="h-8 w-8 rounded-sm bg-info/10 flex items-center justify-center">
+                <Code2 className="h-4 w-4 text-info" />
               </div>
               <div>
                 <p className="text-[0.875rem] font-bold text-foreground">{t("Developer path", "Caminho do desenvolvedor")}</p>
-                <p className="text-[0.5625rem] font-semibold uppercase tracking-[0.07em] text-blue-400">CSS + Tailwind v4</p>
+                <p className="text-[0.5625rem] font-semibold uppercase tracking-[0.07em] text-info">CSS + Tailwind v4</p>
               </div>
             </div>
             <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
               {t("Copy the token files into the project, configure Tailwind to read the custom properties, and use semantic classes in all components.", "Copie os arquivos de tokens para o projeto, configure o Tailwind para ler as custom properties e use classes semânticas em todos os componentes.")}
             </p>
-            <div className="flex items-center gap-1 text-[0.6875rem] text-blue-400 font-semibold">
+            <div className="flex items-center gap-1 text-[0.6875rem] text-info font-semibold">
               <span>{t("View step by step", "Ver passo a passo")}</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </div>
@@ -132,8 +132,8 @@ export function IntegrationShowcase() {
       {/* ── Designer path ── */}
       <section className="space-y-5">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-sm bg-violet-500/10 flex items-center justify-center shrink-0">
-            <Paintbrush className="h-4 w-4 text-violet-400" />
+          <div className="h-8 w-8 rounded-sm bg-violet/10 flex items-center justify-center shrink-0">
+            <Paintbrush className="h-4 w-4 text-violet" />
           </div>
           <div>
             <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("For the design team", "Para o time de design")}</h2>
@@ -229,8 +229,8 @@ export function IntegrationShowcase() {
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
                   {t("If the project already has components, use the ", "Se o projeto já tem componentes, use o plugin ")}<strong className="text-foreground">Variable Inspector</strong>{t(" plugin to find layers with raw colors (manual hex) and replace them with the matching semantic tokens. This is what keeps design and code speaking the same language.", " para encontrar camadas com cores brutas (hex manual) e trocá-las pelos tokens semânticos correspondentes. É isso que mantém design e código falando a mesma língua.")}
                 </p>
-                <div className="rounded-sm bg-amber-500/8 border border-amber-500/20 px-3 py-2">
-                  <p className="text-[0.6875rem] text-amber-500/90 leading-snug">
+                <div className="rounded-sm bg-warning/8 border border-warning/20 px-3 py-2">
+                  <p className="text-[0.6875rem] text-warning/90 leading-snug">
                     <strong>{t("Warning:", "Atenção:")}</strong> {t("components copied from the internet or generated by AI often have hardcoded hex. Always audit before using in the project.", "componentes copiados da internet ou gerados por IA costumam ter hex fixo no código. Sempre audite antes de usar no projeto.")}
                   </p>
                 </div>
@@ -243,8 +243,8 @@ export function IntegrationShowcase() {
       {/* ── Developer path ── */}
       <section className="space-y-5">
         <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-sm bg-blue-500/10 flex items-center justify-center shrink-0">
-            <Code2 className="h-4 w-4 text-blue-400" />
+          <div className="h-8 w-8 rounded-sm bg-info/10 flex items-center justify-center shrink-0">
+            <Code2 className="h-4 w-4 text-info" />
           </div>
           <div>
             <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("For the development team", "Para o time de desenvolvimento")}</h2>
@@ -288,9 +288,9 @@ export function IntegrationShowcase() {
             </div>
             <div className="rounded-md border border-border bg-muted/20 overflow-hidden">
               {[
-                { file: "theme.css",   desc: t("Primitives, semantics, dark mode — the source of truth for tokens", "Primitivos, semânticos, dark mode — a fonte da verdade dos tokens"), icon: FileCode, color: "text-violet-400" },
-                { file: "fonts.css",   desc: t("Google Fonts import (Plus Jakarta Sans, Space Grotesk, Fraunces)", "Import do Google Fonts (Plus Jakarta Sans, Space Grotesk, Fraunces)"), icon: FileCode, color: "text-amber-400" },
-                { file: "index.css",   desc: t("@import of the three files + @theme inline that exposes tokens to Tailwind", "@import dos três arquivos + @theme inline que expõe os tokens ao Tailwind"), icon: FileCode, color: "text-blue-400" },
+                { file: "theme.css",   desc: t("Primitives, semantics, dark mode — the source of truth for tokens", "Primitivos, semânticos, dark mode — a fonte da verdade dos tokens"), icon: FileCode, color: "text-violet" },
+                { file: "fonts.css",   desc: t("Google Fonts import (Plus Jakarta Sans, Space Grotesk, Fraunces)", "Import do Google Fonts (Plus Jakarta Sans, Space Grotesk, Fraunces)"), icon: FileCode, color: "text-warning" },
+                { file: "index.css",   desc: t("@import of the three files + @theme inline that exposes tokens to Tailwind", "@import dos três arquivos + @theme inline que expõe os tokens ao Tailwind"), icon: FileCode, color: "text-info" },
               ].map((f, i, arr) => (
                 <div key={f.file} className={`flex items-center gap-3 px-4 py-3 ${i < arr.length - 1 ? "border-b border-border" : ""}`}>
                   <f.icon className={`h-4 w-4 shrink-0 ${f.color}`} />
@@ -397,7 +397,7 @@ export function IntegrationShowcase() {
                 <span style={{ color: "#D44D4D" }}>{"className"}</span>
                 {"="}
                 <span style={{ color: "var(--muted-foreground)" }}>"</span>
-                <span style={{ color: "#D44D4D" }}>bg-red-500 text-white</span>
+                <span style={{ color: "#D44D4D" }}>bg-error text-white</span>
                 <span style={{ color: "var(--muted-foreground)" }}>"</span>
                 {"\n"}
                 <span style={{ color: "#D44D4D" }}>{"style"}</span>
@@ -451,9 +451,9 @@ export function IntegrationShowcase() {
             {[
               { indent: 0, name: "src/",            type: "dir" },
               { indent: 1, name: "styles/",          type: "dir" },
-              { indent: 2, name: "index.css",        type: "file", note: { en: "entry point — imports everything", pt: "ponto de entrada — importa tudo" }, color: "text-blue-400" },
-              { indent: 2, name: "theme.css",        type: "file", note: { en: "primitive + semantic tokens", pt: "tokens primitivos + semânticos" }, color: "text-violet-400" },
-              { indent: 2, name: "fonts.css",        type: "file", note: { en: "font imports", pt: "imports de fontes" }, color: "text-amber-400" },
+              { indent: 2, name: "index.css",        type: "file", note: { en: "entry point — imports everything", pt: "ponto de entrada — importa tudo" }, color: "text-info" },
+              { indent: 2, name: "theme.css",        type: "file", note: { en: "primitive + semantic tokens", pt: "tokens primitivos + semânticos" }, color: "text-violet" },
+              { indent: 2, name: "fonts.css",        type: "file", note: { en: "font imports", pt: "imports de fontes" }, color: "text-warning" },
               { indent: 1, name: "app/",             type: "dir" },
               { indent: 2, name: "components/",      type: "dir" },
               { indent: 3, name: "Button.tsx",       type: "file", note: { en: "uses bg-primary, text-primary-foreground", pt: "usa bg-primary, text-primary-foreground" } },
@@ -462,7 +462,7 @@ export function IntegrationShowcase() {
             ].map((row, i) => (
               <div key={i} className="flex items-center gap-0" style={{ paddingLeft: row.indent * 16 }}>
                 {row.type === "dir" ? (
-                  <span className="text-amber-400/80">{"📁 "}</span>
+                  <span className="text-warning/80">{"📁 "}</span>
                 ) : (
                   <span className="text-muted-foreground/40">{"  └─ "}</span>
                 )}
@@ -490,40 +490,40 @@ export function IntegrationShowcase() {
             {[
               {
                 who: t("Designer", "Designer"),
-                whoColor: "text-violet-400",
-                whoBg: "bg-violet-500/10",
+                whoColor: "text-violet",
+                whoBg: "bg-violet/10",
                 action: t("Defines crimson-400 as the brand's primary color", "Define crimson-400 como a cor primária da marca"),
                 tool: "Figma Variables → Semantics → Primary = crimson-400",
                 output: t('Variable "Primary" available across the whole library', 'Variable "Primary" disponível em toda a biblioteca'),
               },
               {
                 who: "Dev",
-                whoColor: "text-blue-400",
-                whoBg: "bg-blue-500/10",
+                whoColor: "text-info",
+                whoBg: "bg-info/10",
                 action: t("Declares the same mapping in CSS", "Declara o mesmo mapeamento no CSS"),
                 tool: "theme.css: --primary: var(--crimson-400)",
                 output: t("--primary token available via CSS custom property", "Token --primary disponível via CSS custom property"),
               },
               {
                 who: "Dev",
-                whoColor: "text-blue-400",
-                whoBg: "bg-blue-500/10",
+                whoColor: "text-info",
+                whoBg: "bg-info/10",
                 action: t("Exposes the token as a Tailwind class", "Expõe o token como classe do Tailwind"),
                 tool: "index.css @theme inline: --color-primary: var(--primary)",
-                output: t("bg-primary and text-primary classes available", "Classes bg-primary e text-primary disponíveis"),
+                output: t("bg-primary and text-primary-text classes available", "Classes bg-primary e text-primary-text disponíveis"),
               },
               {
                 who: "Dev",
-                whoColor: "text-blue-400",
-                whoBg: "bg-blue-500/10",
+                whoColor: "text-info",
+                whoBg: "bg-info/10",
                 action: t("Uses the class in the component", "Usa a classe no componente"),
                 tool: 'Button.tsx: className="bg-primary text-primary-foreground"',
                 output: t("Button with primary color that responds to theme switching", "Button com cor primária que responde à troca de tema"),
               },
               {
                 who: t("Designer", "Designer"),
-                whoColor: "text-violet-400",
-                whoBg: "bg-violet-500/10",
+                whoColor: "text-violet",
+                whoBg: "bg-violet/10",
                 action: t("Swaps crimson-400 for a softer tone in the rebrand", "Troca crimson-400 por um tom mais suave no rebrand"),
                 tool: "Figma Variables: Primary → crimson-300",
                 output: t("The whole interface — design AND code — updates together", "A interface inteira — design E código — se atualiza junta"),
@@ -581,7 +581,7 @@ export function IntegrationShowcase() {
         <div className="space-y-1.5">
           {visible.map(item => {
             const done = checked.has(item.id);
-            const teamColor = item.team === "design" ? "text-violet-400 bg-violet-500/10" : item.team === "dev" ? "text-blue-400 bg-blue-500/10" : "text-amber-400 bg-amber-500/10";
+            const teamColor = item.team === "design" ? "text-violet bg-violet/10" : item.team === "dev" ? "text-info bg-info/10" : "text-warning bg-warning/10";
             const teamLabel = item.team === "design" ? "Design" : item.team === "dev" ? "Dev" : t("Both", "Ambos");
             return (
               <button key={item.id} onClick={() => toggle(item.id)}

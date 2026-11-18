@@ -185,7 +185,7 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
       {cta && !compact && (
         <div className="mt-4 flex items-center justify-between">
           <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{cta}</span>
-          <ArrowUpRight className="h-5 w-5 text-primary" aria-hidden />
+          <ArrowUpRight className="h-5 w-5 text-primary-text" aria-hidden />
         </div>
       )}
       {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
@@ -282,7 +282,7 @@ function GlassFinishPicker() {
           <p className="text-[0.6875rem] text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
         </div>
         <button type="button" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}
-          className="h-9 rounded-full border border-border bg-card px-4 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary disabled:opacity-40 disabled:pointer-events-none">
+          className="h-9 rounded-full border border-border bg-card px-4 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text disabled:opacity-40 disabled:pointer-events-none">
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
@@ -629,7 +629,7 @@ export function CardShowcase() {
               <Card className="gap-0 overflow-hidden rounded-lg border-border transition-all group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
                 <img src={FOTO.src} alt="" className="h-32 w-full object-cover" />
                 <CardHeader className="pb-6 pt-5">
-                  <CardTitle className={`${display} flex items-center justify-between gap-2 text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")} <ArrowUpRight className="h-4 w-4 text-primary" aria-hidden /></CardTitle>
+                  <CardTitle className={`${display} flex items-center justify-between gap-2 text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></CardTitle>
                   <CardDescription>{t("The whole surface is the link; there is no other control inside.", "A superfície inteira é o link; não há outro controle dentro.")}</CardDescription>
                 </CardHeader>
               </Card>
@@ -789,7 +789,7 @@ export function CardShowcase() {
                     <CardHeader>
                       <CardTitle className={`${display} text-[1rem] font-semibold flex items-center gap-2`}>
                         {labels[index][0]}
-                        {isSelected && <Check className="h-4 w-4 text-primary" aria-label={t("Selected", "Selecionado")} />}
+                        {isSelected && <Check className="h-4 w-4 text-primary-text" aria-label={t("Selected", "Selecionado")} />}
                       </CardTitle>
                       <CardDescription>{labels[index][1]}</CardDescription>
                     </CardHeader>
@@ -848,7 +848,7 @@ export function CardShowcase() {
               {[t("Store", "Loja"), t("Article", "Artigo"), t("Project", "Projeto")].map(x => (
                 <a key={x} href="#card-animacao" onClick={e => e.preventDefault()} className="group block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                   <Card className="gap-2 border-border p-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
-                    <p className="flex items-center justify-between text-[0.875rem] font-semibold text-foreground">{x} <ArrowUpRight className="h-4 w-4 text-primary" aria-hidden /></p>
+                    <p className="flex items-center justify-between text-[0.875rem] font-semibold text-foreground">{x} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></p>
                     <p className="text-[0.8125rem] text-muted-foreground">{t("Hover: rises 2 px, stronger border, medium shadow.", "Hover: sobe 2 px, borda mais forte, sombra média.")}</p>
                   </Card>
                 </a>
@@ -879,7 +879,7 @@ export function CardShowcase() {
             <Card className="relative gap-5 overflow-hidden border-border">
               <ShineBorder borderWidth={1} duration={7} shineColor={["var(--primary)", "var(--chart-2)", "var(--primary)"]} />
               <CardHeader>
-                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-primary">{t("Recommended", "Recomendado")}</span>
+                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-primary-text">{t("Recommended", "Recomendado")}</span>
                 <CardTitle className={`${display} text-[1.125rem] font-semibold`}>{t("Studio plan", "Plano Studio")}</CardTitle>
                 <CardDescription>{t("Use Shine Border to call attention to one exceptional option.", "Use Shine Border para chamar atenção para uma única opção excepcional.")}</CardDescription>
               </CardHeader>
@@ -1065,7 +1065,7 @@ export function CardShowcase() {
                       <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
                       <p className={`${display} mt-2 text-[1.125rem] font-semibold tracking-[-0.01em]`}>Clínica Horizonte</p>
                     </div>
-                    <ArrowUpRight className="h-5 w-5 shrink-0 text-primary" aria-hidden />
+                    <ArrowUpRight className="h-5 w-5 shrink-0 text-primary-text" aria-hidden />
                   </div>
                   <p className={`mt-2 text-[0.8125rem] leading-relaxed ${corSub(vidroConteudo)}`}>{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
                   <div className="mt-4"><AvatarCircles size="sm" numPeople={12} avatarUrls={[1, 2, 3].map(i => ({ imageUrl: `${import.meta.env.BASE_URL}avatares/avatar-${i}.svg`, profileUrl: "#card-glass-conteudo", name: `Pessoa ${i}` }))} /></div>
@@ -1138,7 +1138,7 @@ export function CardShowcase() {
               [t("Shine Border", "Shine Border"), [t("More than one per decision group.", "Mais de um por grupo de decisão."), t("As the only indicator of selection.", "Como único indicador de seleção.")]],
             ].map(([nome, itens]) => (
               <Panel key={nome as string} className="p-5">
-                <p className="mb-3 flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-foreground"><X className="h-3.5 w-3.5 text-primary" aria-hidden /> {nome as string}</p>
+                <p className="mb-3 flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-foreground"><X className="h-3.5 w-3.5 text-primary-text" aria-hidden /> {nome as string}</p>
                 <ul className="space-y-2">
                   {(itens as string[]).map(i => (
                     <li key={i} className="flex gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />{i}</li>

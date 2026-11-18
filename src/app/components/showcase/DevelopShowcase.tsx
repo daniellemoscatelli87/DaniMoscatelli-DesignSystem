@@ -21,7 +21,7 @@ function CopyBtn({ text }: { text: string }) {
       aria-label={t("Copy code", "Copiar código")}
       className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background transition-colors shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
+      {copied ? <Check className="h-3.5 w-3.5 text-primary-text" /> : <Copy className="h-3.5 w-3.5" />}
     </button>
   );
 }
@@ -80,7 +80,7 @@ The component must work in light and dark mode automatically.`;
 const rows: [string, string, string, string][] = [
   ["Color", "Background", "--background", "bg-background"],
   ["Color", "Foreground", "--foreground", "text-foreground"],
-  ["Color", "Primary", "--primary", "bg-primary / text-primary"],
+  ["Color", "Primary", "--primary", "bg-primary / text-primary-text"],
   ["Color", "Card", "--card", "bg-card"],
   ["Color", "Muted", "--muted", "bg-muted"],
   ["Color", "Border", "--border", "border-border"],
@@ -116,7 +116,7 @@ function TextLink({ children, onClick }: { children: React.ReactNode; onClick: (
     <button
       type="button"
       onClick={onClick}
-      className="group inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-primary hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-[4px]"
+      className="group inline-flex items-center gap-1.5 text-[0.875rem] font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-[4px]"
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -147,7 +147,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
       >
         <article className="bg-card border border-border border-l-4 border-l-primary rounded-[var(--radius)] shadow-[var(--shadow-sm)] p-5 max-w-2xl">
           <div className="flex items-center gap-2 mb-2">
-            <Megaphone className="h-4 w-4 text-primary" aria-hidden />
+            <Megaphone className="h-4 w-4 text-primary-text" aria-hidden />
             <time className="text-[0.75rem] font-medium text-muted-foreground">{t("October 22, 2026", "22 de outubro de 2026")}</time>
           </div>
           <h3 className={`${display} text-[1.0625rem] font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
@@ -170,7 +170,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex flex-col bg-card border border-border rounded-[var(--radius)] shadow-[var(--shadow-sm)] p-5">
-            <span className="self-start mb-3 rounded-full bg-primary-muted text-primary text-[0.6875rem] font-semibold uppercase tracking-[0.06em] px-2.5 py-1">
+            <span className="self-start mb-3 rounded-full bg-primary-muted text-primary-text text-[0.6875rem] font-semibold uppercase tracking-[0.06em] px-2.5 py-1">
               {t("Recommended", "Recomendado")}
             </span>
             <h3 className={`${display} text-[1.0625rem] font-semibold tracking-[-0.01em] text-foreground mb-2`}>
@@ -213,9 +213,9 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
             <CodeBlock file="src/styles/index.css" tag={t("Tailwind mapping", "Mapeamento Tailwind")} code={indexCode} />
           </div>
           <div className="bg-primary-muted rounded-[var(--radius)] px-5 py-4 flex items-start gap-3">
-            <Layers className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden />
+            <Layers className="h-5 w-5 text-primary-text shrink-0 mt-0.5" aria-hidden />
             <p className="text-[0.875rem] leading-relaxed text-foreground">
-              <strong className="font-semibold">{t("Golden rule", "Regra de ouro")}</strong> — {t("In components, always use semantic Tailwind classes (", "Nos componentes, use sempre classes semânticas do Tailwind (")}<Mono>bg-primary</Mono>, <Mono>text-foreground</Mono>, <Mono>border-border</Mono>{t(") — never literal colors (", ") — nunca cores literais (")}<Mono>bg-red-500</Mono>, <Mono>bg-[#D44D4D]</Mono>{t("). This ensures the component works in any theme, now and in the future.", "). Assim o componente funciona em qualquer tema, agora e no futuro.")}
+              <strong className="font-semibold">{t("Golden rule", "Regra de ouro")}</strong> — {t("In components, always use semantic Tailwind classes (", "Nos componentes, use sempre classes semânticas do Tailwind (")}<Mono>bg-primary</Mono>, <Mono>text-foreground</Mono>, <Mono>border-border</Mono>{t(") — never literal colors (", ") — nunca cores literais (")}<Mono>bg-error</Mono>, <Mono>bg-[#D44D4D]</Mono>{t("). This ensures the component works in any theme, now and in the future.", "). Assim o componente funciona em qualquer tema, agora e no futuro.")}
             </p>
           </div>
         </div>
@@ -250,7 +250,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
                 <tr key={css} className="border-b border-border last:border-b-0">
                   <td className="px-4 py-2.5 text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t(cat, catPt[cat] ?? cat)}</td>
                   <td className="px-4 py-2.5 text-[0.8125rem] text-foreground">{design}</td>
-                  <td className="px-4 py-2.5 text-[0.75rem] font-[family-name:var(--font-mono)] text-primary">{css}</td>
+                  <td className="px-4 py-2.5 text-[0.75rem] font-[family-name:var(--font-mono)] text-primary-text">{css}</td>
                   <td className="px-4 py-2.5 text-[0.75rem] font-[family-name:var(--font-mono)] text-foreground">{tw}</td>
                 </tr>
               ))}
@@ -277,7 +277,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
-            { title: "✓ DO", label: t("✓ DO", "✓ FAÇA"), items: dos, tone: "text-primary", border: "border-t-primary" },
+            { title: "✓ DO", label: t("✓ DO", "✓ FAÇA"), items: dos, tone: "text-primary-text", border: "border-t-primary" },
             { title: "✕ DON'T", label: t("✕ DON'T", "✕ NÃO FAÇA"), items: donts, tone: "text-muted-foreground", border: "border-t-[var(--border-strong)]" },
           ].map(col => (
             <div
@@ -313,7 +313,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
         <div className="space-y-4">
           <CodeBlock file="prompt.txt" tag={t("Example AI prompt", "Exemplo de prompt de IA")} code={promptCode} />
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-primary" aria-hidden />
+            <Sparkles className="h-4 w-4 text-primary-text" aria-hidden />
             <TextLink onClick={() => go({ page: "tokens", anchor: "tokens-ia" })}>{t("AI and tokens", "IA e tokens")}</TextLink>
           </div>
         </div>

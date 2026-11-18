@@ -125,7 +125,7 @@ const tabItems = [
 /* ── Badges ── */
 const badgeVariants = [
   { label: { en: "Default", pt: "Padrão" },  cls: "bg-muted text-foreground border-border" },
-  { label: { en: "Primary", pt: "Primário" },  cls: "bg-primary/10 text-primary border-primary/20" },
+  { label: { en: "Primary", pt: "Primário" },  cls: "bg-primary/10 text-primary-text border-primary/20" },
   { label: { en: "Success", pt: "Sucesso" },  cls: "bg-success/10 text-success border-success/20" },
   { label: { en: "Warning", pt: "Aviso" },  cls: "bg-warning/10 text-warning border-warning/20" },
   { label: { en: "Error", pt: "Erro" },    cls: "bg-error/10 text-error border-error/20" },
@@ -141,9 +141,9 @@ const chipVariants = [
 ];
 
 const tagVariants = [
-  { label: "react", color: "bg-blue-500/10 text-blue-600 border-blue-500/20 dark:text-blue-400" },
-  { label: "typescript", color: "bg-indigo-500/10 text-indigo-600 border-indigo-500/20 dark:text-indigo-400" },
-  { label: "ui-design", color: "bg-primary/10 text-primary border-primary/20" },
+  { label: "react", color: "bg-info/10 text-info border-info/20 dark:text-info" },
+  { label: "typescript", color: "bg-violet/10 text-violet border-violet/20 dark:text-violet" },
+  { label: "ui-design", color: "bg-primary/10 text-primary-text border-primary/20" },
   { label: "performance", color: "bg-success/10 text-success border-success/20" },
   { label: "api", color: "bg-muted text-muted-foreground border-border" },
 ];
@@ -204,7 +204,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                   key={tab.id}
                   onClick={() => setUnderlineTab(tab.id)}
                   className={`px-4 py-2.5 text-[0.875rem] font-medium transition-all duration-150 border-b-2 -mb-px outline-none
-                    ${underlineTab === tab.id ? "border-primary text-primary" : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"}`}
+                    ${underlineTab === tab.id ? "border-primary text-primary-text" : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"}`}
                 >
                   {bi(tab.label)}
                 </button>
@@ -321,7 +321,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                 />
               </div>
               <div className="flex items-center gap-2 text-[0.875rem] text-muted-foreground">
-                <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                <Loader2 className="h-4 w-4 animate-spin text-primary-text" />
                 {t("Processing your request...", "Processando sua solicitação...")}
               </div>
             </div>
@@ -391,7 +391,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                   {bi(b.label)}
                 </span>
               ))}
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[0.75rem] font-semibold border bg-primary/10 text-primary border-primary/20">
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-[0.75rem] font-semibold border bg-primary/10 text-primary-text border-primary/20">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {t("Live", "Ao vivo")}
               </span>
@@ -523,7 +523,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
               ].map(({ size, label }) => (
                 <div key={label} className="flex flex-col items-center gap-2">
                   <div className="relative">
-                    <div className={`${size} rounded-full bg-primary/15 text-primary font-semibold flex items-center justify-center border-2 border-background`}>
+                    <div className={`${size} rounded-full bg-primary/15 text-primary-text font-semibold flex items-center justify-center border-2 border-background`}>
                       AN
                     </div>
                     {label === "MD" && (
@@ -624,7 +624,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
           <ShowcaseCard>
             <div className="flex flex-col items-center text-center py-8 gap-4">
               <div className="h-16 w-16 rounded-[20px] bg-primary/10 flex items-center justify-center">
-                <svg className="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <svg className="h-8 w-8 text-primary-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
               </div>

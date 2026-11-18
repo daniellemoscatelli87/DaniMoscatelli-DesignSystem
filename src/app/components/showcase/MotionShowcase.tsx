@@ -26,7 +26,7 @@ function Section({ id, title, sub, children }: { id: string; title: string; sub:
 function Token({ name, value }: { name: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-4 rounded-md border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
-      <code className="text-[0.75rem] font-mono text-primary">{name}</code>
+      <code className="text-[0.75rem] font-mono text-primary-text">{name}</code>
       <span className="text-[0.6875rem] text-muted-foreground font-mono">{value}</span>
     </div>
   );
@@ -37,7 +37,7 @@ function ReplayBtn({ onClick }: { onClick: () => void }) {
   const { t, bi } = useI18n();
   return (
     <button onClick={onClick}
-      className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary transition-colors mt-2">
+      className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary-text transition-colors mt-2">
       <RefreshCw className="h-3 w-3" /> {t("replay", "repetir")}
     </button>
   );
@@ -157,7 +157,7 @@ function EnterPresets() {
                 className="h-14 w-14 rounded-lg bg-primary/15 border border-primary/30 flex items-center justify-center"
                 style={{ perspective: 400 }}
               >
-                <Sparkles className="text-primary" style={{ height: 22, width: 22 }} />
+                <Sparkles className="text-primary-text" style={{ height: 22, width: 22 }} />
               </motion.div>
             </div>
             <div className="text-center w-full">
@@ -224,7 +224,7 @@ function EasingReference() {
               </svg>
             </div>
             <div className="text-center">
-              <div className="text-[0.75rem] font-bold text-foreground group-hover:text-primary transition-colors">{t(e.label, e.labelPt)}</div>
+              <div className="text-[0.75rem] font-bold text-foreground group-hover:text-primary-text transition-colors">{t(e.label, e.labelPt)}</div>
               <div className="text-[0.5625rem] font-mono text-muted-foreground mt-0.5">
                 {typeof e.value === "string" ? e.value : `[${e.value.join(", ")}]`}
               </div>
@@ -242,7 +242,7 @@ function EasingReference() {
 ══════════════════════════════════════ */
 const springPresets = [
   { label: "Gentle", labelPt: "Suave",   stiffness: 120,  damping: 14,  mass: 1,   color: "bg-info/15 border-info/25 text-info" },
-  { label: "Default", labelPt: "Padrão",  stiffness: 260,  damping: 20,  mass: 1,   color: "bg-primary/15 border-primary/25 text-primary" },
+  { label: "Default", labelPt: "Padrão",  stiffness: 260,  damping: 20,  mass: 1,   color: "bg-primary/15 border-primary/25 text-primary-text" },
   { label: "Snappy", labelPt: "Ágil",   stiffness: 400,  damping: 25,  mass: 1,   color: "bg-warning/15 border-warning/25 text-warning" },
   { label: "Bouncy", labelPt: "Elástica",   stiffness: 600,  damping: 8,   mass: 1,   color: "bg-success/15 border-success/25 text-success" },
   { label: "Stiff", labelPt: "Rígida",    stiffness: 900,  damping: 40,  mass: 1,   color: "bg-destructive/15 border-destructive/25 text-destructive" },
@@ -285,7 +285,7 @@ function SpringPhysics() {
               />
             </div>
             <div>
-              <div className="text-[0.8125rem] font-bold text-foreground group-hover:text-primary transition-colors mb-1">{t(p.label, p.labelPt)}</div>
+              <div className="text-[0.8125rem] font-bold text-foreground group-hover:text-primary-text transition-colors mb-1">{t(p.label, p.labelPt)}</div>
               <div className="grid grid-cols-3 gap-1">
                 {[["s", p.stiffness], ["d", p.damping], ["m", p.mass]].map(([k, v]) => (
                   <div key={k as string} className="text-center rounded-sm bg-muted/50 py-1 px-1">
@@ -335,7 +335,7 @@ function SpringPlayground() {
           <div key={ctrl.label} className="space-y-1.5">
             <div className="flex items-center justify-between">
               <label className="text-[0.6875rem] font-semibold text-foreground">{t(ctrl.label, ctrl.labelPt)}</label>
-              <span className="text-[0.6875rem] font-mono text-primary">{ctrl.value}</span>
+              <span className="text-[0.6875rem] font-mono text-primary-text">{ctrl.value}</span>
             </div>
             <input type="range" min={ctrl.min} max={ctrl.max} step={ctrl.step} value={ctrl.value}
               onChange={e => ctrl.set(Number(e.target.value))}
@@ -411,7 +411,7 @@ function StaggerSection() {
             <input type="range" min={0.02} max={0.2} step={0.01} value={staggerDelay}
               onChange={e => setStaggerDelay(Number(e.target.value))}
               className="w-28 accent-[var(--primary)] h-1 rounded-full cursor-pointer" />
-            <span className="text-[0.6875rem] font-mono text-primary">{staggerDelay}s</span>
+            <span className="text-[0.6875rem] font-mono text-primary-text">{staggerDelay}s</span>
           </div>
           <button onClick={() => setKey(k => k + 1)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-muted text-[0.75rem] font-medium text-foreground hover:bg-accent transition-colors">
@@ -424,7 +424,7 @@ function StaggerSection() {
             <motion.div key={item} variants={staggerChild}
               className="flex items-center gap-2.5 rounded-md border border-border bg-muted/30 px-3 py-2.5 hover:bg-accent transition-colors">
               <div className="h-6 w-6 rounded-sm bg-primary/12 flex items-center justify-center shrink-0">
-                <span className="text-[0.5rem] font-black text-primary">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[0.5rem] font-black text-primary-text">{String(i + 1).padStart(2, "0")}</span>
               </div>
               <span className="text-[0.75rem] font-medium text-foreground">{t(item, staggerItemsPt[i])}</span>
             </motion.div>
@@ -492,7 +492,7 @@ function HoverSection() {
               transition={{ type: "spring", stiffness: 400, damping: 18 }}
               className="h-12 w-12 rounded-full bg-primary/12 border border-primary/25 flex items-center justify-center cursor-pointer"
             >
-              <Zap className="h-5 w-5 text-primary" />
+              <Zap className="h-5 w-5 text-primary-text" />
             </motion.div>
           </div>
           <p className="text-[0.625rem] text-muted-foreground font-mono">whileHover: scale 1.12</p>
@@ -533,7 +533,7 @@ function HoverSection() {
                 className="absolute inset-0 flex flex-col items-center justify-center gap-1.5"
                 style={{ transform: "translateZ(20px)" }}
               >
-                <Move className="text-primary" style={{ height: 20, width: 20 }} />
+                <Move className="text-primary-text" style={{ height: 20, width: 20 }} />
                 <span className="text-[0.5625rem] font-semibold text-primary/70 tracking-wide">{t("MOVE CURSOR", "MOVA O CURSOR")}</span>
               </div>
             </motion.div>
@@ -593,7 +593,7 @@ function HoverSection() {
                 initial={{ x: -12, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                <ArrowRight className="h-3.5 w-3.5 text-primary" />
+                <ArrowRight className="h-3.5 w-3.5 text-primary-text" />
               </motion.div>
             </motion.div>
           </div>
@@ -992,7 +992,7 @@ function StepIndicator() {
       </div>
       <div className="flex justify-between gap-2">
         {steps.map((s, i) => (
-          <span key={s} className={`text-[0.5625rem] font-semibold transition-colors duration-200 ${i + 1 <= step ? "text-primary" : "text-muted-foreground"}`}>
+          <span key={s} className={`text-[0.5625rem] font-semibold transition-colors duration-200 ${i + 1 <= step ? "text-primary-text" : "text-muted-foreground"}`}>
             {t(s, stepsPt[i])}
           </span>
         ))}
@@ -1136,7 +1136,7 @@ function DurationBars() {
   return (
     <div className="space-y-2">
       <div className="flex justify-end mb-3">
-        <button onClick={() => setKey(k => k + 1)} className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary transition-colors">
+        <button onClick={() => setKey(k => k + 1)} className="flex items-center gap-1 text-[0.625rem] font-semibold text-muted-foreground hover:text-primary-text transition-colors">
           <RefreshCw className="h-3 w-3" /> {t("replay", "repetir")}
         </button>
       </div>
@@ -1213,7 +1213,7 @@ function MarqueeSection() {
     return (
       <div key={i} className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
         <div className="h-7 w-7 rounded-sm bg-primary/10 flex items-center justify-center shrink-0">
-          <Icon className="h-3.5 w-3.5 text-primary" />
+          <Icon className="h-3.5 w-3.5 text-primary-text" />
         </div>
         <div>
           <div className="text-[0.6875rem] font-bold text-foreground whitespace-nowrap">{t(f.label, f.labelPt)}</div>
@@ -1231,7 +1231,7 @@ function MarqueeSection() {
       <p className="text-[0.6875rem] text-foreground italic leading-snug">"{t(r.quote, r.quotePt)}"</p>
       <div className="flex items-center gap-1.5 mt-0.5">
         <div className="h-5 w-5 rounded-full bg-primary/12 flex items-center justify-center shrink-0">
-          <span className="text-[0.375rem] font-black text-primary">{r.name.split(" ").map(w => w[0]).join("")}</span>
+          <span className="text-[0.375rem] font-black text-primary-text">{r.name.split(" ").map(w => w[0]).join("")}</span>
         </div>
         <div>
           <div className="text-[0.5625rem] font-bold text-foreground whitespace-nowrap">{r.name}</div>
@@ -1283,11 +1283,11 @@ type NotifItem = {
 const notifPool: Omit<NotifItem, "id">[] = [
   { icon: Star,       iconCls: "bg-warning/12 text-warning",     title: "New review",     desc: "Ana Souza gave the project 5 stars.", titlePt: "Nova avaliação", descPt: "Ana Souza deu 5 estrelas ao projeto.",    time: "now",  action: "View", actionPt: "Ver"      },
   { icon: Check,      iconCls: "bg-success/12 text-success",     title: "Deploy complete",   desc: "v2.4.1 in production with no errors.", titlePt: "Deploy concluído", descPt: "v2.4.1 em produção sem erros.",         time: "2s"                        },
-  { icon: Bell,       iconCls: "bg-primary/12 text-primary",     title: "Payment received", desc: "$1,290 from Company X confirmed.", titlePt: "Pagamento recebido", descPt: "US$ 1.290 da Empresa X confirmados.",           time: "5s",     action: "View", actionPt: "Ver"      },
+  { icon: Bell,       iconCls: "bg-primary/12 text-primary-text",     title: "Payment received", desc: "$1,290 from Company X confirmed.", titlePt: "Pagamento recebido", descPt: "US$ 1.290 da Empresa X confirmados.",           time: "5s",     action: "View", actionPt: "Ver"      },
   { icon: ArrowRight, iconCls: "bg-info/12 text-info",           title: "New user",       desc: "Pedro Lima joined the Pro plan.", titlePt: "Novo usuário", descPt: "Pedro Lima entrou no plano Pro.",             time: "8s"                        },
   { icon: Activity,   iconCls: "bg-chart-4/12 text-chart-4",     title: "Goal reached",      desc: "100 conversions today — monthly record!", titlePt: "Meta atingida", descPt: "100 conversões hoje — recorde do mês!",       time: "12s",    action: "Celebrate", actionPt: "Comemorar" },
   { icon: Zap,        iconCls: "bg-destructive/12 text-destructive", title: "Usage alert",  desc: "API rate limit at 80% — check now.", titlePt: "Alerta de uso", descPt: "Limite de requisições da API em 80% — confira agora.",   time: "16s"                       },
-  { icon: Layers,     iconCls: "bg-primary/12 text-primary",     title: "Integration active",   desc: "Slack connected successfully.", titlePt: "Integração ativa", descPt: "Slack conectado com sucesso.",                time: "20s"                       },
+  { icon: Layers,     iconCls: "bg-primary/12 text-primary-text",     title: "Integration active",   desc: "Slack connected successfully.", titlePt: "Integração ativa", descPt: "Slack conectado com sucesso.",                time: "20s"                       },
   { icon: Sparkles,   iconCls: "bg-warning/12 text-warning",     title: "Report ready",   desc: "Q4 analysis available for download.", titlePt: "Relatório pronto", descPt: "Análise do T4 disponível para download.",     time: "25s",    action: "Download", actionPt: "Baixar"   },
 ];
 
@@ -1363,7 +1363,7 @@ function AnimatedListSection() {
                       <p className="text-[0.6875rem] text-muted-foreground mt-0.5 truncate">{t(item.desc, item.descPt)}</p>
                     </div>
                     {item.action && (
-                      <button className="shrink-0 px-2 py-1 rounded-sm bg-primary/10 text-[0.5625rem] font-bold text-primary hover:bg-primary/20 transition-colors whitespace-nowrap">
+                      <button className="shrink-0 px-2 py-1 rounded-sm bg-primary/10 text-[0.5625rem] font-bold text-primary-text hover:bg-primary/20 transition-colors whitespace-nowrap">
                         {t(item.action, item.actionPt ?? item.action)}
                       </button>
                     )}
@@ -1404,7 +1404,7 @@ const orbitRings: OrbitRingDef[] = [
     radius: 68, duration: 8,
     icons: [
       { icon: Zap,  bg: "bg-warning/15", border: "border-warning/40", color: "text-warning", angleOffset: 0,   size: 32 },
-      { icon: Star, bg: "bg-primary/15", border: "border-primary/40", color: "text-primary", angleOffset: 180, size: 32 },
+      { icon: Star, bg: "bg-primary/15", border: "border-primary/40", color: "text-primary-text", angleOffset: 180, size: 32 },
     ],
   },
   {
@@ -1713,7 +1713,7 @@ function OrbitingCirclesSection() {
                 className="h-16 w-16 rounded-full bg-primary/12 border border-primary/30 flex items-center justify-center"
                 style={{ boxShadow: "0 0 30px 6px color-mix(in srgb, var(--primary) 15%, transparent), var(--shadow-lg)" }}
               >
-                <Wind className="h-8 w-8 text-primary" />
+                <Wind className="h-8 w-8 text-primary-text" />
               </motion.div>
             }
           />
@@ -1887,22 +1887,22 @@ function WobbleCardDemo({
       <div ref={glowRef} style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: "none", borderRadius: 18 }} />
       <div style={{ position: "relative", zIndex: 1, padding: "24px 24px 20px" }}>
         <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 10px", borderRadius: 99, border: `1px solid ${dark ? "rgba(212,77,77,0.30)" : "rgba(212,77,77,0.20)"}`, background: dark ? "rgba(212,77,77,0.10)" : "rgba(212,77,77,0.07)", marginBottom: 12 }}>
-          <Star style={{ width: 10, height: 10, color: "#D44D4D" }} />
-          <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: "#D44D4D", textTransform: "uppercase", letterSpacing: "0.06em" }}>Enterprise</span>
+          <Star style={{ width: 10, height: 10, color: "var(--primary)" }} />
+          <span style={{ fontSize: "0.5625rem", fontWeight: 700, color: "var(--primary)", textTransform: "uppercase", letterSpacing: "0.06em" }}>Enterprise</span>
         </div>
         <h3 style={{ fontSize: "1.1rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27", lineHeight: 1.2, letterSpacing: "-0.03em", marginBottom: 8 }}>
           {t("Bank-grade", "Segurança")}<br />{t("security.", "nível bancário.")}
         </h3>
-        <p style={{ fontSize: "0.75rem", color: dark ? "#627288" : "#8898B0", lineHeight: 1.6, marginBottom: 16 }}>
+        <p style={{ fontSize: "0.75rem", color: "var(--muted-foreground)", lineHeight: 1.6, marginBottom: 16 }}>
           {t("SOC 2 Type II, end-to-end encryption and complete access auditing.", "SOC 2 Tipo II, criptografia de ponta a ponta e auditoria completa de acessos.")}
         </p>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 18 }}>
           {[t("SSO & mandatory MFA", "SSO e MFA obrigatório"), t("Real-time audit log", "Log de auditoria em tempo real"), t("RBAC per workspace", "RBAC por workspace")].map(item => (
             <div key={item} style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div style={{ width: 16, height: 16, borderRadius: 8, background: "rgba(212,77,77,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Check style={{ width: 9, height: 9, color: "#D44D4D" }} />
+                <Check style={{ width: 9, height: 9, color: "var(--primary)" }} />
               </div>
-              <span style={{ fontSize: "0.6875rem", color: dark ? "#8898B0" : "#627288", fontWeight: 500 }}>{item}</span>
+              <span style={{ fontSize: "0.6875rem", color: "var(--muted-foreground)", fontWeight: 500 }}>{item}</span>
             </div>
           ))}
         </div>
@@ -1912,7 +1912,7 @@ function WobbleCardDemo({
             <span style={{ fontSize: "1.375rem", fontWeight: 900, color: dark ? "#E4E9F0" : "#131A27" }}>R$499</span>
             <span style={{ fontSize: "0.625rem", color: dark ? "#495669" : "#8898B0" }}>{t("/mo", "/mês")}</span>
           </div>
-          <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 9, background: "#D44D4D", color: "#fff", fontSize: "0.6875rem", fontWeight: 700, border: "none", cursor: "pointer" }}>
+          <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "7px 14px", borderRadius: 9, background: "var(--primary)", color: "#fff", fontSize: "0.6875rem", fontWeight: 700, border: "none", cursor: "pointer" }}>
             {t("Subscribe", "Contratar")} <ArrowRight style={{ width: 12, height: 12 }} />
           </button>
         </div>
@@ -1928,16 +1928,16 @@ export function WobbleCardConteudo() {
   const [spotlightId,   setSpotlightId]   = useState("crimson");
   const [wobbleEnabled, setWobbleEnabled] = useState(true);
 
-  const ctrl = dark ? "rgba(255,255,255,0.07)" : "rgba(19,26,39,0.08)";
-  const activeStyle = { border: "1.5px solid #D44D4D", background: "rgba(212,77,77,0.08)", color: "#D44D4D" };
-  const idleColor   = dark ? "#8898B0" : "#627288";
+  const ctrl = "var(--border)";
+  const activeStyle = { border: "1.5px solid #D44D4D", background: "rgba(212,77,77,0.08)", color: "var(--primary)" };
+  const idleColor   = "var(--muted-foreground)";
 
   return (
       <div className="rounded-[20px] border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
         {/* Preview */}
         <div
           className="flex items-center justify-center p-12"
-          style={{ background: dark ? "#0D1119" : "#ECF0F5", minHeight: 300 }}
+          style={{ background: "var(--muted)", minHeight: 300 }}
         >
           <WobbleCardDemo dark={dark} spotlightId={spotlightId} wobbleEnabled={wobbleEnabled} />
         </div>
@@ -1993,7 +1993,7 @@ export function WobbleCardConteudo() {
           <div>
             <p className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Technique", "Técnica")}</p>
             <p className="text-[0.75rem] text-foreground leading-relaxed">
-              <code className="text-primary text-[0.6875rem]">useMotionValue</code> + <code className="text-primary text-[0.6875rem]">useSpring</code> {t("for", "para")} <code className="text-primary text-[0.6875rem]">rotateX/Y</code> {t("with damping. Spotlight via dynamic", "com amortecimento. Spotlight via")} <code className="text-primary text-[0.6875rem]">radial-gradient</code> {t("in the DOM.", "dinâmico no DOM.")}
+              <code className="text-primary-text text-[0.6875rem]">useMotionValue</code> + <code className="text-primary-text text-[0.6875rem]">useSpring</code> {t("for", "para")} <code className="text-primary-text text-[0.6875rem]">rotateX/Y</code> {t("with damping. Spotlight via dynamic", "com amortecimento. Spotlight via")} <code className="text-primary-text text-[0.6875rem]">radial-gradient</code> {t("in the DOM.", "dinâmico no DOM.")}
             </p>
           </div>
           <div>
@@ -2001,7 +2001,7 @@ export function WobbleCardConteudo() {
             <ul className="space-y-1">
               {[t("Pricing card for a recommended plan.", "Card de preço para um plano recomendado."), t("Feature card that needs to stand out.", "Card de recurso que precisa se destacar."), t("Premium product or testimonial card.", "Card de produto premium ou depoimento.")].map(w => (
                 <li key={w} className="flex items-start gap-1.5 text-[0.75rem] text-foreground">
-                  <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 text-green-500" />{w}
+                  <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 text-success" />{w}
                 </li>
               ))}
             </ul>
@@ -2055,11 +2055,11 @@ export function ShineBorderConteudo() {
         {examples.map(example => (
           <div key={example.label} className="relative overflow-hidden rounded-lg border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
             <ShineBorder duration={example.duration} shineColor={example.colors} />
-            <Sparkles className="mb-4 h-5 w-5 text-primary" aria-hidden />
+            <Sparkles className="mb-4 h-5 w-5 text-primary-text" aria-hidden />
             <p className="text-[0.875rem] font-bold text-foreground">{example.label}</p>
             <p className="mt-1 min-h-10 text-[0.75rem] leading-relaxed text-muted-foreground">{example.use}</p>
             <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-              <code className="text-[0.6875rem] font-mono text-primary">duration</code>
+              <code className="text-[0.6875rem] font-mono text-primary-text">duration</code>
               <span className="text-[0.6875rem] font-mono text-muted-foreground">{example.duration}s</span>
             </div>
           </div>
@@ -2139,10 +2139,10 @@ export function MotionShowcase() {
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="h-14 w-14 rounded-lg bg-primary/12 border border-primary/20 flex items-center justify-center shrink-0"
           >
-            <Wind className="h-7 w-7 text-primary" />
+            <Wind className="h-7 w-7 text-primary-text" />
           </motion.div>
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary text-[0.75rem] font-semibold mb-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary-text text-[0.75rem] font-semibold mb-3">
               <Activity className="h-3 w-3" /> {t("Motion Design", "Motion design")}
             </div>
             <h1 className="text-[1.375rem] font-black text-foreground tracking-[-0.03em] mb-2">
@@ -2165,7 +2165,7 @@ export function MotionShowcase() {
             const Icon = p.icon;
             return (
               <div key={p.label} className="rounded-md border border-border bg-muted/30 p-3.5">
-                <Icon className="h-4 w-4 text-primary mb-2" />
+                <Icon className="h-4 w-4 text-primary-text mb-2" />
                 <div className="text-[0.75rem] font-bold text-foreground mb-0.5">{t(p.label, p.labelPt)}</div>
                 <div className="text-[0.6125rem] text-muted-foreground leading-snug">{t(p.desc, p.descPt)}</div>
               </div>

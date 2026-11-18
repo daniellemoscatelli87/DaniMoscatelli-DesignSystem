@@ -100,7 +100,7 @@ function DashboardTemplate() {
         <aside className="w-[188px] shrink-0 border-r border-border bg-card/50 flex flex-col py-3 px-2.5">
           <div className="flex items-center gap-2 px-2 mb-5">
             <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
-              <Zap className="h-3.5 w-3.5 text-primary" />
+              <Zap className="h-3.5 w-3.5 text-primary-text" />
             </div>
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
           </div>
@@ -118,7 +118,7 @@ function DashboardTemplate() {
                 key={item.label.en}
                 className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors
                   ${item.active
-                    ? "bg-primary/10 text-primary"
+                    ? "bg-primary/10 text-primary-text"
                     : "text-muted-foreground hover:bg-accent hover:text-foreground"
                   }`}
               >
@@ -130,7 +130,7 @@ function DashboardTemplate() {
           <div className="mt-auto pt-3 border-t border-border">
             <div className="flex items-center gap-2 px-2">
               <div className="h-6 w-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
-                <User className="h-3 w-3 text-primary" />
+                <User className="h-3 w-3 text-primary-text" />
               </div>
               <div>
                 <div className="text-[0.6875rem] font-semibold text-foreground leading-none">Dani M.</div>
@@ -170,7 +170,7 @@ function DashboardTemplate() {
                       <Icon className="h-3.5 w-3.5 text-muted-foreground" />
                     </div>
                     <div className="text-[1.0625rem] font-bold text-foreground mb-1">{k.value}</div>
-                    <div className={`flex items-center gap-0.5 text-[0.6875rem] font-medium ${k.up ? "text-success" : "text-primary"}`}>
+                    <div className={`flex items-center gap-0.5 text-[0.6875rem] font-medium ${k.up ? "text-success" : "text-primary-text"}`}>
                       {k.up ? <TrendingUp className="h-3 w-3" /> : <TrendingDown className="h-3 w-3" />}
                       {k.delta} {t("vs last month", "vs. mês passado")}
                     </div>
@@ -268,7 +268,7 @@ function SettingsTemplate() {
         <aside className="w-[188px] shrink-0 border-r border-border bg-card/50 py-3 px-2.5">
           <div className="flex items-center gap-2 px-2 mb-5">
             <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
-              <Zap className="h-3.5 w-3.5 text-primary" />
+              <Zap className="h-3.5 w-3.5 text-primary-text" />
             </div>
             <span className="text-[0.8125rem] font-bold text-foreground">DaniMS</span>
           </div>
@@ -280,7 +280,7 @@ function SettingsTemplate() {
           ].map(item => {
             const Icon = item.icon;
             return (
-              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
+              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-primary/10 text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
                 <Icon className="h-3.5 w-3.5 shrink-0" />
                 {item.label}
               </button>
@@ -303,7 +303,7 @@ function SettingsTemplate() {
                 onClick={() => setActiveTab(tb.id)}
                 className={`px-3 py-2.5 text-[0.75rem] font-medium border-b-2 transition-colors -mb-px
                   ${activeTab === tb.id
-                    ? "border-primary text-primary"
+                    ? "border-primary text-primary-text"
                     : "border-transparent text-muted-foreground hover:text-foreground"
                   }`}
               >
@@ -317,12 +317,12 @@ function SettingsTemplate() {
               <div className="space-y-4 max-w-md">
                 <div className="flex items-center gap-4 mb-5">
                   <div className="h-14 w-14 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                    <User className="h-7 w-7 text-primary" />
+                    <User className="h-7 w-7 text-primary-text" />
                   </div>
                   <div>
                     <div className="text-[0.875rem] font-semibold text-foreground">Dani Moscatelli</div>
                     <div className="text-[0.75rem] text-muted-foreground">dani@moscatelli.co</div>
-                    <button className="mt-1 text-[0.6875rem] text-primary font-medium hover:underline">{t("Change photo", "Alterar foto")}</button>
+                    <button className="mt-1 text-[0.6875rem] text-primary-text font-medium hover:underline">{t("Change photo", "Alterar foto")}</button>
                   </div>
                 </div>
                 {[
@@ -390,9 +390,9 @@ function SettingsTemplate() {
                         className={`p-3 rounded-md border-2 flex flex-col items-center gap-2 transition-all
                           ${th.active ? "border-primary bg-primary/5" : "border-border bg-card"}`}
                       >
-                        <Icon className={`h-5 w-5 ${th.active ? "text-primary" : "text-muted-foreground"}`} />
-                        <span className={`text-[0.75rem] font-medium ${th.active ? "text-primary" : "text-muted-foreground"}`}>{th.label}</span>
-                        {th.active && <Check className="h-3 w-3 text-primary" />}
+                        <Icon className={`h-5 w-5 ${th.active ? "text-primary-text" : "text-muted-foreground"}`} />
+                        <span className={`text-[0.75rem] font-medium ${th.active ? "text-primary-text" : "text-muted-foreground"}`}>{th.label}</span>
+                        {th.active && <Check className="h-3 w-3 text-primary-text" />}
                       </button>
                     );
                   })}
@@ -405,7 +405,7 @@ function SettingsTemplate() {
                 <div className="p-3 rounded-md border border-primary/30 bg-primary/5 flex items-center justify-between">
                   <div>
                     <div className="text-[0.8125rem] font-semibold text-foreground flex items-center gap-1.5">
-                      <Star className="h-3.5 w-3.5 text-primary" /> {t("Pro Plan", "Plano Pro")}
+                      <Star className="h-3.5 w-3.5 text-primary-text" /> {t("Pro Plan", "Plano Pro")}
                     </div>
                     <div className="text-[0.6875rem] text-muted-foreground">{t("$49/month · Renews Aug 1, 2026", "$49/mês · Renova em 1 de ago de 2026")}</div>
                   </div>
@@ -419,7 +419,7 @@ function SettingsTemplate() {
                       <div className="text-[0.6875rem] text-muted-foreground">{t("Expires 09/27", "Expira em 09/27")}</div>
                     </div>
                   </div>
-                  <button className="text-[0.6875rem] text-primary font-medium hover:underline">{t("Update", "Atualizar")}</button>
+                  <button className="text-[0.6875rem] text-primary-text font-medium hover:underline">{t("Update", "Atualizar")}</button>
                 </div>
               </div>
             )}
@@ -447,7 +447,7 @@ function AuthTemplate() {
           <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-info/6 blur-3xl" />
           <div className="relative z-10 text-center">
             <div className="h-14 w-14 rounded-lg bg-primary/12 flex items-center justify-center mx-auto mb-5">
-              <Zap className="h-7 w-7 text-primary" />
+              <Zap className="h-7 w-7 text-primary-text" />
             </div>
             <h2 className="text-[1.125rem] font-bold text-foreground mb-2">DaniMoscatelli</h2>
             <p className="text-[0.8125rem] text-muted-foreground leading-relaxed max-w-[200px]">
@@ -510,7 +510,7 @@ function AuthTemplate() {
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <label className="text-[0.75rem] font-medium text-foreground">{t("Password", "Senha")}</label>
-                  {tab === "login" && <button className="text-[0.6875rem] text-primary hover:underline">{t("Forgot?", "Esqueceu?")}</button>}
+                  {tab === "login" && <button className="text-[0.6875rem] text-primary-text hover:underline">{t("Forgot?", "Esqueceu?")}</button>}
                 </div>
                 <div className="relative">
                   <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
@@ -556,7 +556,7 @@ const teamMembers = [
 ];
 
 const roleColor: Record<string, string> = {
-  Admin:     "bg-primary/10 text-primary",
+  Admin:     "bg-primary/10 text-primary-text",
   Editor:    "bg-info/10 text-info",
   Viewer:    "bg-muted text-muted-foreground",
   Developer: "bg-success/10 text-success",
@@ -640,7 +640,7 @@ function TeamTemplate() {
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-3">
                       <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                        <span className="text-[0.5625rem] font-bold text-primary">{m.avatar}</span>
+                        <span className="text-[0.5625rem] font-bold text-primary-text">{m.avatar}</span>
                       </div>
                       <div>
                         <div className="text-[0.8125rem] font-medium text-foreground">{m.name}</div>
@@ -665,7 +665,7 @@ function TeamTemplate() {
                       <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
                         <Edit2 className="h-3 w-3" />
                       </button>
-                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors">
+                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary-text transition-colors">
                         <Trash2 className="h-3 w-3" />
                       </button>
                     </div>
@@ -713,7 +713,7 @@ const notifications = [
 const notifColor: Record<string, string> = {
   success: "text-success bg-success/10",
   info:    "text-info bg-info/10",
-  error:   "text-primary bg-primary/10",
+  error:   "text-primary-text bg-primary/10",
   warning: "text-warning bg-warning/10",
 };
 
@@ -1109,7 +1109,7 @@ function ContactTemplate() {
 
           <div className="relative z-10">
             <div className="h-10 w-10 rounded-md bg-primary/12 flex items-center justify-center mb-4">
-              <MessageSquare className="h-5 w-5 text-primary" />
+              <MessageSquare className="h-5 w-5 text-primary-text" />
             </div>
             <h2 className="text-[1rem] font-bold text-foreground mb-1">{t("Contact us", "Fale conosco")}</h2>
             <p className="text-[0.8125rem] text-muted-foreground leading-relaxed">
@@ -1238,10 +1238,10 @@ function ContactTemplate() {
                           type="button"
                           onClick={() => { setSubject(s.en); setSubjectOpen(false); }}
                           className={`w-full text-left px-3 py-2 text-[0.8125rem] transition-colors flex items-center justify-between
-                            ${subject === s.en ? "text-primary font-medium bg-primary/5" : "text-foreground hover:bg-accent"}`}
+                            ${subject === s.en ? "text-primary-text font-medium bg-primary/5" : "text-foreground hover:bg-accent"}`}
                         >
                           {bi(s)}
-                          {subject === s.en && <Check className="h-3 w-3 text-primary" />}
+                          {subject === s.en && <Check className="h-3 w-3 text-primary-text" />}
                         </button>
                       ))}
                     </div>
@@ -1269,7 +1269,7 @@ function ContactTemplate() {
                   className="mt-0.5 h-3.5 w-3.5 rounded accent-[var(--primary)] shrink-0"
                 />
                 <label htmlFor="consent" className="text-[0.6875rem] text-muted-foreground leading-snug cursor-pointer">
-                  {t("I agree to the ", "Concordo com os ")}<span className="text-primary underline underline-offset-2 cursor-pointer">{t("Terms of Use", "Termos de Uso")}</span>{t(" and ", " e a ")}<span className="text-primary underline underline-offset-2 cursor-pointer">{t("Privacy Policy", "Política de Privacidade")}</span>.
+                  {t("I agree to the ", "Concordo com os ")}<span className="text-primary-text underline underline-offset-2 cursor-pointer">{t("Terms of Use", "Termos de Uso")}</span>{t(" and ", " e a ")}<span className="text-primary-text underline underline-offset-2 cursor-pointer">{t("Privacy Policy", "Política de Privacidade")}</span>.
                 </label>
               </div>
 
@@ -1513,7 +1513,7 @@ function LandingTemplate() {
         <nav className="sticky top-0 z-20 bg-background/90 backdrop-blur-xl border-b border-border px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="h-7 w-7 rounded-sm bg-primary/15 flex items-center justify-center">
-              <Zap className="h-4 w-4 text-primary" />
+              <Zap className="h-4 w-4 text-primary-text" />
             </div>
             <span className="text-[0.875rem] font-extrabold text-foreground tracking-tight">DaniMS</span>
           </div>
@@ -1536,7 +1536,7 @@ function LandingTemplate() {
           <div className="absolute top-10 left-1/5 w-[220px] h-[220px] rounded-full bg-info/5 blur-3xl pointer-events-none" />
           <div className="absolute top-10 right-1/5 w-[180px] h-[180px] rounded-full bg-warning/4 blur-3xl pointer-events-none" />
           <div className="relative z-10 text-center max-w-2xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary text-[0.6875rem] font-semibold mb-5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/25 bg-primary/8 text-primary-text text-[0.6875rem] font-semibold mb-5">
               <Sparkles className="h-3 w-3" /> {t("New — Built-in AI in the dashboard", "Novo — IA integrada ao dashboard")} <ArrowRight className="h-3 w-3" />
             </div>
             <h1 className="text-[2.25rem] font-black text-foreground tracking-[-0.04em] leading-[1.1] mb-4">
@@ -1593,7 +1593,7 @@ function LandingTemplate() {
         {/* ══ PRODUCT MOCKUP ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-6">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Platform", "Plataforma")}</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("Platform", "Plataforma")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Everything your team needs, in one place", "Tudo o que sua equipe precisa, em um só lugar")}</h2>
           </div>
           <div className="max-w-2xl mx-auto rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xl)" }}>
@@ -1613,7 +1613,7 @@ function LandingTemplate() {
                   <div key={k.label} className="rounded-sm border border-border bg-background p-2.5">
                     <div className="text-[0.5625rem] text-muted-foreground mb-1">{k.label}</div>
                     <div className="text-[0.9375rem] font-black text-foreground leading-none">{k.value}</div>
-                    <div className={`text-[0.5rem] flex items-center gap-0.5 mt-1 font-medium ${k.up ? "text-success" : "text-primary"}`}>
+                    <div className={`text-[0.5rem] flex items-center gap-0.5 mt-1 font-medium ${k.up ? "text-success" : "text-primary-text"}`}>
                       {k.up ? <TrendingUp className="h-2.5 w-2.5" /> : <TrendingDown className="h-2.5 w-2.5" />}{k.delta}
                     </div>
                   </div>
@@ -1668,7 +1668,7 @@ function LandingTemplate() {
         {/* ══ BENTO GRID ══ */}
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Why DaniMS", "Por que o DaniMS")}</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("Why DaniMS", "Por que o DaniMS")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Built for teams that scale fast", "Feito para equipes que crescem rápido")}</h2>
           </div>
           <div className="max-w-2xl mx-auto grid grid-cols-3 grid-rows-2 gap-3" style={{ gridTemplateRows: "auto auto" }}>
@@ -1676,13 +1676,13 @@ function LandingTemplate() {
             <div className="col-span-2 rounded-lg border border-border bg-card p-5 relative overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-primary/8 blur-2xl pointer-events-none" />
               <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center mb-3">
-                <Sparkles className="h-4 w-4 text-primary" />
+                <Sparkles className="h-4 w-4 text-primary-text" />
               </div>
               <div className="text-[0.875rem] font-bold text-foreground mb-1">{t("AI that works for you", "IA que trabalha para você")}</div>
               <div className="text-[0.75rem] text-muted-foreground leading-snug mb-3">{t("Proactive suggestions, natural-language automations and automatically generated reports.", "Sugestões proativas, automações em linguagem natural e relatórios gerados automaticamente.")}</div>
               <div className="flex gap-2">
                 {[t("Daily summaries", "Resumos diários"), t("Smart alerts", "Alertas inteligentes"), t("Auto-tagging", "Marcação automática")].map(chip => (
-                  <span key={chip} className="text-[0.5625rem] px-2 py-0.5 rounded-full bg-primary/8 text-primary font-medium border border-primary/15">{chip}</span>
+                  <span key={chip} className="text-[0.5625rem] px-2 py-0.5 rounded-full bg-primary/8 text-primary-text font-medium border border-primary/15">{chip}</span>
                 ))}
               </div>
             </div>
@@ -1724,7 +1724,7 @@ function LandingTemplate() {
           <div className="max-w-2xl mx-auto">
             <div className="flex items-end justify-between mb-6">
               <div>
-                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Analytics", "Análises")}</p>
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("Analytics", "Análises")}</p>
                 <h2 className="text-[1.125rem] font-black text-foreground tracking-tight">{t("Measurable results, month by month", "Resultados mensuráveis, mês a mês")}</h2>
               </div>
               <div className="flex gap-3 text-[0.625rem] text-muted-foreground">
@@ -1751,7 +1751,7 @@ function LandingTemplate() {
         {/* ══ ROADMAP TIMELINE ══ */}
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-8">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">Roadmap</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">Roadmap</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Where we are and where we are going", "Onde estamos e para onde vamos")}</h2>
           </div>
           <div className="max-w-lg mx-auto relative">
@@ -1769,7 +1769,7 @@ function LandingTemplate() {
                   </div>
                   <div className="pt-1.5 pb-2">
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-[0.6875rem] font-semibold text-primary">{item.date}</span>
+                      <span className="text-[0.6875rem] font-semibold text-primary-text">{item.date}</span>
                       {item.done && <span className="text-[0.5625rem] px-1.5 py-0.5 rounded-full bg-success/10 text-success border border-success/20 font-semibold">{t("Done", "Concluído")}</span>}
                     </div>
                     <div className="text-[0.875rem] font-bold text-foreground mb-0.5">{bi(item.label)}</div>
@@ -1784,7 +1784,7 @@ function LandingTemplate() {
         {/* ══ COMPARISON TABLE ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Plans", "Planos")}</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("Plans", "Planos")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Compare and choose your plan", "Compare e escolha seu plano")}</h2>
           </div>
           <div className="max-w-2xl mx-auto rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
@@ -1797,7 +1797,7 @@ function LandingTemplate() {
                 { name: "Enterprise", price: t("$199/month", "$199/mês"), highlight: false },
               ].map(p => (
                 <div key={p.name} className={`px-4 py-3 text-center ${p.highlight ? "bg-primary/5" : ""}`}>
-                  <div className={`text-[0.75rem] font-bold ${p.highlight ? "text-primary" : "text-foreground"}`}>{p.name}</div>
+                  <div className={`text-[0.75rem] font-bold ${p.highlight ? "text-primary-text" : "text-foreground"}`}>{p.name}</div>
                   <div className="text-[0.6875rem] text-muted-foreground">{p.price}</div>
                 </div>
               ))}
@@ -1830,7 +1830,7 @@ function LandingTemplate() {
         {/* ══ TESTIMONIALS CAROUSEL ══ */}
         <div className="px-6 py-10 bg-card/30 border-y border-border">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("Testimonials", "Depoimentos")}</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("Testimonials", "Depoimentos")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("What our customers say", "O que nossos clientes dizem")}</h2>
           </div>
           <div className="max-w-2xl mx-auto">
@@ -1843,7 +1843,7 @@ function LandingTemplate() {
                   <p className="text-[0.75rem] text-muted-foreground leading-snug mb-4 italic">"{bi(tm.text)}"</p>
                   <div className="flex items-center gap-2.5 mt-auto">
                     <div className="h-8 w-8 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                      <span className="text-[0.5625rem] font-black text-primary">{tm.avatar}</span>
+                      <span className="text-[0.5625rem] font-black text-primary-text">{tm.avatar}</span>
                     </div>
                     <div>
                       <div className="text-[0.75rem] font-bold text-foreground leading-none">{tm.name}</div>
@@ -1873,7 +1873,7 @@ function LandingTemplate() {
         {/* ══ FAQ ACCORDION ══ */}
         <div className="px-6 py-10">
           <div className="text-center mb-7">
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary mb-1">{t("FAQ", "FAQ")}</p>
+            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.1em] text-primary-text mb-1">{t("FAQ", "FAQ")}</p>
             <h2 className="text-[1.25rem] font-black text-foreground tracking-tight">{t("Frequently asked questions", "Perguntas frequentes")}</h2>
           </div>
           <div className="max-w-xl mx-auto space-y-2">
@@ -1908,7 +1908,7 @@ function LandingTemplate() {
           <div className="relative z-10 px-6 py-12">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary text-[0.6875rem] font-semibold mb-3">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-primary/20 bg-primary/8 text-primary-text text-[0.6875rem] font-semibold mb-3">
                 <MessageSquare className="h-3 w-3" /> {t("Contact", "Contato")}
               </div>
               <h2 className="text-[1.375rem] font-black text-foreground tracking-[-0.03em] mb-2">
@@ -1936,8 +1936,8 @@ function LandingTemplate() {
                   label: t("Book a demo", "Agendar demo"),
                   value: t("Calendar available", "Agenda disponível"),
                   badge: "30 min",
-                  badgeColor: "bg-primary/10 text-primary border-primary/20",
-                  iconBg: "bg-primary/10 text-primary",
+                  badgeColor: "bg-primary/10 text-primary-text border-primary/20",
+                  iconBg: "bg-primary/10 text-primary-text",
                 },
                 {
                   icon: MessageSquare,
@@ -1958,10 +1958,10 @@ function LandingTemplate() {
                       <span className={`text-[0.5625rem] font-bold px-1.5 py-0.5 rounded-full border ${ch.badgeColor}`}>{ch.badge}</span>
                     </div>
                     <div>
-                      <div className="text-[0.8125rem] font-bold text-foreground mb-0.5 group-hover:text-primary transition-colors">{ch.label}</div>
+                      <div className="text-[0.8125rem] font-bold text-foreground mb-0.5 group-hover:text-primary-text transition-colors">{ch.label}</div>
                       <div className="text-[0.6875rem] text-muted-foreground">{ch.value}</div>
                     </div>
-                    <div className="flex items-center gap-1 text-[0.6875rem] font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-1 text-[0.6875rem] font-medium text-primary-text opacity-0 group-hover:opacity-100 transition-opacity">
                       {t("Access", "Acessar")} <ArrowRight className="h-3 w-3" />
                     </div>
                   </div>
@@ -1993,7 +1993,7 @@ function LandingTemplate() {
                     { icon: CheckCircle, text: t("Guaranteed response within 2h", "Resposta garantida em até 2h"),  color: "text-success" },
                     { icon: ShieldCheck, text: t("100% data protection (SOC 2)", "100% de proteção de dados (SOC 2)"), color: "text-info"    },
                     { icon: Star,        text: t("4.9★ customer satisfaction", "4,9★ de satisfação dos clientes"), color: "text-warning" },
-                    { icon: Rocket,      text: t("Free guided onboarding", "Onboarding guiado gratuito"),  color: "text-primary" },
+                    { icon: Rocket,      text: t("Free guided onboarding", "Onboarding guiado gratuito"),  color: "text-primary-text" },
                   ].map(item => {
                     const Icon = item.icon;
                     return (
@@ -2015,7 +2015,7 @@ function LandingTemplate() {
                   </p>
                   <div className="flex items-center gap-2">
                     <div className="h-6 w-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                      <span className="text-[0.4375rem] font-black text-primary">FP</span>
+                      <span className="text-[0.4375rem] font-black text-primary-text">FP</span>
                     </div>
                     <div>
                       <div className="text-[0.625rem] font-bold text-foreground leading-none">Fernanda Paiva</div>
@@ -2030,7 +2030,7 @@ function LandingTemplate() {
                 {/* Form header stripe */}
                 <div className="px-5 py-4 border-b border-border bg-muted/30 flex items-center gap-3">
                   <div className="h-8 w-8 rounded-sm bg-primary/12 flex items-center justify-center">
-                    <Send className="h-4 w-4 text-primary" />
+                    <Send className="h-4 w-4 text-primary-text" />
                   </div>
                   <div>
                     <div className="text-[0.875rem] font-bold text-foreground">{t("Send your message", "Envie sua mensagem")}</div>
@@ -2063,7 +2063,7 @@ function LandingTemplate() {
                       <div className="grid grid-cols-2 gap-2.5">
                         <div className="space-y-1">
                           <label className="block text-[0.6875rem] font-semibold text-foreground">
-                            {t("Name", "Nome")} <span className="text-primary">*</span>
+                            {t("Name", "Nome")} <span className="text-primary-text">*</span>
                           </label>
                           <div className="relative">
                             <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
@@ -2073,7 +2073,7 @@ function LandingTemplate() {
                         </div>
                         <div className="space-y-1">
                           <label className="block text-[0.6875rem] font-semibold text-foreground">
-                            Email <span className="text-primary">*</span>
+                            Email <span className="text-primary-text">*</span>
                           </label>
                           <div className="relative">
                             <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground pointer-events-none" />
@@ -2109,7 +2109,7 @@ function LandingTemplate() {
                         <div className="flex flex-wrap gap-1.5">
                           {[t("Support", "Suporte"), t("Sales", "Vendas"), "Demo", t("Partnership", "Parcerias"), t("Other", "Outro")].map(s => (
                             <button key={s} type="button"
-                              className="px-2.5 py-1 rounded-full border border-border bg-muted text-[0.625rem] font-medium text-muted-foreground hover:border-primary/40 hover:bg-primary/5 hover:text-primary transition-all">
+                              className="px-2.5 py-1 rounded-full border border-border bg-muted text-[0.625rem] font-medium text-muted-foreground hover:border-primary/40 hover:bg-primary/5 hover:text-primary-text transition-all">
                               {s}
                             </button>
                           ))}
@@ -2119,7 +2119,7 @@ function LandingTemplate() {
                       {/* Message */}
                       <div className="space-y-1">
                         <label className="block text-[0.6875rem] font-semibold text-foreground">
-                          {t("Message", "Mensagem")} <span className="text-primary">*</span>
+                          {t("Message", "Mensagem")} <span className="text-primary-text">*</span>
                         </label>
                         <textarea required rows={3} placeholder={t("Describe your question or project in detail...", "Descreva sua dúvida ou projeto em detalhes...")}
                           className="w-full bg-background border border-border rounded-sm px-2.5 py-2 text-[0.75rem] text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring focus:border-primary/50 transition-all resize-none" />
@@ -2130,7 +2130,7 @@ function LandingTemplate() {
                         <label className="flex items-start gap-1.5 cursor-pointer flex-1">
                           <input type="checkbox" required className="mt-0.5 h-3 w-3 rounded accent-[var(--primary)] shrink-0" />
                           <span className="text-[0.5625rem] text-muted-foreground leading-snug">
-                            {t("I agree to the ", "Concordo com os ")}<span className="text-primary underline underline-offset-1">{t("Terms", "Termos")}</span>{t(" and ", " e a ")}<span className="text-primary underline underline-offset-1">{t("Privacy", "Privacidade")}</span>
+                            {t("I agree to the ", "Concordo com os ")}<span className="text-primary-text underline underline-offset-1">{t("Terms", "Termos")}</span>{t(" and ", " e a ")}<span className="text-primary-text underline underline-offset-1">{t("Privacy", "Privacidade")}</span>
                           </span>
                         </label>
                         <button type="submit"
@@ -2152,7 +2152,7 @@ function LandingTemplate() {
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
                 <div className="h-6 w-6 rounded-sm bg-primary/15 flex items-center justify-center">
-                  <Zap className="h-3.5 w-3.5 text-primary" />
+                  <Zap className="h-3.5 w-3.5 text-primary-text" />
                 </div>
                 <span className="text-[0.875rem] font-extrabold text-foreground">DaniMS</span>
               </div>

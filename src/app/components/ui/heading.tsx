@@ -26,7 +26,7 @@ export type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
 };
 
 /** Converte "texto **destaque** texto" em spans. Aceita também children já em JSX. */
-export function withHighlight(children: React.ReactNode, className = "text-primary"): React.ReactNode {
+export function withHighlight(children: React.ReactNode, className = "text-primary-text"): React.ReactNode {
   if (typeof children !== "string") return children;
   const parts = children.split(/\*\*(.+?)\*\*/g);
   if (parts.length === 1) return children;
@@ -43,12 +43,12 @@ export function Heading({ level = 2, size, tone = "primary", className, children
       style={{ fontFamily: "var(--font-sans)" }}
       {...props}
     >
-      {withHighlight(children, tone === "primary" ? "text-primary" : undefined)}
+      {withHighlight(children, tone === "primary" ? "text-primary-text" : undefined)}
     </Tag>
   );
 }
 
 /** Só o destaque, para usar dentro de um título já existente. */
 export function Destaque({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <span className={cn("text-primary", className)}>{children}</span>;
+  return <span className={cn("text-primary-text", className)}>{children}</span>;
 }

@@ -56,7 +56,7 @@ const colorLabelPt: Record<string, string> = {
 const colorVariants = [
   { label: "Foreground",  cls: "text-foreground" },
   { label: "Muted",       cls: "text-muted-foreground" },
-  { label: "Primary",     cls: "text-primary" },
+  { label: "Primary",     cls: "text-primary-text" },
   { label: "Success",     cls: "text-success" },
   { label: "Warning",     cls: "text-warning" },
   { label: "Info",        cls: "text-info" },
@@ -173,7 +173,7 @@ export function IconsShowcase() {
                   <span
                     className={`text-[0.75rem] ${
                       s.sw === 1.75
-                        ? "font-semibold text-primary"
+                        ? "font-semibold text-primary-text"
                         : "text-muted-foreground"
                     }`}
                   >
@@ -208,7 +208,7 @@ export function IconsShowcase() {
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-success/10 text-success border border-success/20">
                 <CheckCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Active", "Ativo")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-primary/10 text-primary border border-primary/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-primary/10 text-primary-text border border-primary/20">
                 <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Alert", "Alerta")}
               </span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-warning/10 text-warning border border-warning/20">
@@ -262,12 +262,12 @@ export function IconsShowcase() {
                     title={label}
                     className={`flex flex-col items-center gap-2 p-3 rounded-md border transition-all duration-150 cursor-pointer
                       ${copied === label
-                        ? "border-primary/40 bg-primary/5 text-primary"
+                        ? "border-primary/40 bg-primary/5 text-primary-text"
                         : "border-transparent hover:border-border hover:bg-accent text-muted-foreground hover:text-foreground"
                       }`}
                   >
                     {copied === label
-                      ? <Check className="w-5 h-5 text-primary" strokeWidth={2} />
+                      ? <Check className="w-5 h-5 text-primary-text" strokeWidth={2} />
                       : <Icon className="w-5 h-5" strokeWidth={1.75} />
                     }
                     <span className="text-[0.5625rem] font-medium text-center leading-tight w-full truncate">

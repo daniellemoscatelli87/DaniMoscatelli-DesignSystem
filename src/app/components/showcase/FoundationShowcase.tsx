@@ -197,7 +197,7 @@ export function FoundationShowcase() {
               family: "Plus Jakarta Sans",
               token: "--font-sans",
               proportion: "70%",
-              pillColor: "bg-primary/10 text-primary border-primary/20",
+              pillColor: "bg-primary/10 text-primary-text border-primary/20",
               barColor: "bg-primary",
               traits: [t("Human", "Humano"), t("Functional", "Funcional"), t("Clear", "Claro"), t("System", "Sistema")],
               uses: t("Body · Headings · UI · Navigation · Buttons · Forms", "Corpo · Títulos · UI · Navegação · Botões · Formulários"),
@@ -210,8 +210,8 @@ export function FoundationShowcase() {
               family: "Space Grotesk",
               token: "--font-display",
               proportion: "20%",
-              pillColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-              barColor: "bg-blue-500",
+              pillColor: "bg-info/10 text-info border-info/20",
+              barColor: "bg-info",
               traits: [t("Innovation", "Inovação"), t("Impact", "Impacto"), t("Technology", "Tecnologia"), t("Energy", "Energia")],
               uses: t("Hero headlines · Campaigns · Numbers · Statements · Strategic sections", "Títulos hero · Campanhas · Números · Declarações · Seções estratégicas"),
               weights: "500 · 600 · 700",
@@ -223,8 +223,8 @@ export function FoundationShowcase() {
               family: "Fraunces",
               token: "--font-accent",
               proportion: "10%",
-              pillColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-              barColor: "bg-amber-500",
+              pillColor: "bg-warning/10 text-warning border-warning/20",
+              barColor: "bg-warning",
               traits: [t("Emotion", "Emoção"), t("Editorial", "Editorial"), t("Personality", "Personalidade"), t("Humanity", "Humanidade")],
               uses: t("Manifestos · Quotes · Emotional statements · Editorial headings · Storytelling", "Manifestos · Citações · Declarações emocionais · Títulos editoriais · Storytelling"),
               weights: t("Regular · Italic", "Regular · Itálico"),
@@ -350,7 +350,7 @@ export function FoundationShowcase() {
             <div className="bg-card rounded-lg border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
               <span className="text-[0.5625rem] font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Editorial statement", "Declaração editorial")}</span>
               <div className="space-y-1">
-                <p className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-primary" style={{ fontFamily: "var(--font-sans)" }}>{t("HUMAN EXPERIENCE", "EXPERIÊNCIA HUMANA")}</p>
+                <p className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-primary-text" style={{ fontFamily: "var(--font-sans)" }}>{t("HUMAN EXPERIENCE", "EXPERIÊNCIA HUMANA")}</p>
                 <p className="text-foreground leading-none" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.75rem", letterSpacing: "-0.02em" }}>{t("MAKE IT MEANINGFUL.", "DÊ SIGNIFICADO.")}</p>
                 <p className="text-foreground" style={{ fontFamily: "var(--font-accent)", fontStyle: "italic", fontWeight: 400, fontSize: "1.25rem" }}>{t("But make it human.", "Mas faça humano.")}</p>
                 <p className="text-[0.8125rem] text-muted-foreground leading-relaxed pt-1" style={{ fontFamily: "var(--font-sans)" }}>

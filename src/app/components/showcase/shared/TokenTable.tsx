@@ -56,7 +56,7 @@ function TokenRowItem({ token: digitado, isDark }: { token: TokenRow; isDark: bo
 
   return (
     <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 py-2.5 border-b border-border last:border-0">
-      <code className="text-[0.75rem] font-mono text-primary truncate">{token.name}</code>
+      <code className="text-[0.75rem] font-mono text-primary-text truncate">{token.name}</code>
       <span className="text-[0.75rem] text-muted-foreground leading-tight">{token.description}</span>
 
       <div className="flex items-center gap-1.5 justify-end">
@@ -88,7 +88,7 @@ export function TokenTable({ groups }: { groups: TokenGroup[] }) {
           <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">
             {t("Value", "Valor")}
           </span>
-          <span className="inline-flex items-center px-1.5 py-0.5 rounded-[4px] text-[0.5625rem] font-semibold uppercase tracking-wide bg-primary/10 text-primary">
+          <span className="inline-flex items-center px-1.5 py-0.5 rounded-[4px] text-[0.5625rem] font-semibold uppercase tracking-wide bg-primary/10 text-primary-text">
             {isDark ? t("Dark", "Escuro") : t("Light", "Claro")}
           </span>
         </div>

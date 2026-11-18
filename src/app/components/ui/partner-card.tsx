@@ -68,7 +68,7 @@ export function PartnerCard({
 
       {visual && (
         <div className={cn("flex shrink-0 items-center justify-center rounded-lg", dark ? "bg-white/10" : "bg-[var(--primary-muted)]", visualBox[size], horizontal ? "sm:order-last" : "")}>
-          <span className={cn("flex items-center justify-center text-primary", size === "p" ? "[&>svg]:h-6 [&>svg]:w-6 [&>img]:h-7" : size === "m" ? "[&>svg]:h-8 [&>svg]:w-8 [&>img]:h-10" : "[&>svg]:h-12 [&>svg]:w-12 [&>img]:h-14")}>{visual}</span>
+          <span className={cn("flex items-center justify-center text-primary-text", size === "p" ? "[&>svg]:h-6 [&>svg]:w-6 [&>img]:h-7" : size === "m" ? "[&>svg]:h-8 [&>svg]:w-8 [&>img]:h-10" : "[&>svg]:h-12 [&>svg]:w-12 [&>img]:h-14")}>{visual}</span>
         </div>
       )}
 
@@ -83,7 +83,7 @@ export function PartnerCard({
           </div>
         )}
         <h3 className={cn("font-bold [text-wrap:balance]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
-          {withHighlight(title, "text-primary")}
+          {withHighlight(title, "text-primary-text")}
         </h3>
         {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : "text-muted-foreground")}>{description}</p>}
         <div className={cn("flex flex-wrap items-center gap-x-5 gap-y-3", size === "p" ? "mt-4" : "mt-6")}>

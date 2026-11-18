@@ -25,12 +25,12 @@ function CopyBtn({ text }: { text: string }) {
 function Pill({ children, color = "muted" }: { children: React.ReactNode; color?: string }) {
   const map: Record<string, string> = {
     muted:   "bg-muted/60 text-muted-foreground border-border",
-    primary: "bg-primary/10 text-primary border-primary/20",
-    violet:  "bg-violet-500/10 text-violet-400 border-violet-500/20",
-    blue:    "bg-blue-500/10 text-blue-400 border-blue-500/20",
-    amber:   "bg-amber-500/10 text-amber-400 border-amber-500/20",
+    primary: "bg-primary/10 text-primary-text border-primary/20",
+    violet:  "bg-violet/10 text-violet border-violet/20",
+    blue:    "bg-info/10 text-info border-info/20",
+    amber:   "bg-warning/10 text-warning border-warning/20",
     success: "bg-success/10 text-success border-success/20",
-    slate:   "bg-slate-500/10 text-slate-400 border-slate-500/20",
+    slate:   "bg-muted-foreground/10 text-muted-foreground border-border/20",
   };
   return (
     <span className={`inline-block text-[0.5625rem] font-bold uppercase tracking-[0.07em] px-2 py-0.5 rounded-full border ${map[color] ?? map.muted}`}>
@@ -50,7 +50,7 @@ function InlineCode({ children }: { children: React.ReactNode }) {
 function SectionTitle({ label, title, subtitle }: { label: string; title: string; subtitle?: string }) {
   return (
     <div className="space-y-1">
-      <p className="text-[0.5625rem] font-bold uppercase tracking-[0.1em] text-primary">{label}</p>
+      <p className="text-[0.5625rem] font-bold uppercase tracking-[0.1em] text-primary-text">{label}</p>
       <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{title}</h2>
       {subtitle && <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{subtitle}</p>}
     </div>
@@ -61,7 +61,7 @@ function SectionTitle({ label, title, subtitle }: { label: string; title: string
 const bridgeRows = [
   { category: "Color",        intent: { en: "Interface background", pt: "Fundo da interface" },         design: "Background",          dev: "--background",            tw: "bg-background" },
   { category: "Color",        intent: { en: "Primary text color", pt: "Cor do texto principal" },     design: "Foreground",           dev: "--foreground",            tw: "text-foreground" },
-  { category: "Color",        intent: { en: "Primary brand color", pt: "Cor principal da marca" },      design: "Primary",              dev: "--primary",               tw: "bg-primary / text-primary" },
+  { category: "Color",        intent: { en: "Primary brand color", pt: "Cor principal da marca" },      design: "Primary",              dev: "--primary",               tw: "bg-primary / text-primary-text" },
   { category: "Color",        intent: { en: "Text on primary color", pt: "Texto sobre a cor primária" },   design: "Primary Foreground",   dev: "--primary-foreground",    tw: "text-primary-foreground" },
   { category: "Color",        intent: { en: "Card surface", pt: "Superfície do card" },         design: "Card",                 dev: "--card",                  tw: "bg-card" },
   { category: "Color",        intent: { en: "Neutral surface", pt: "Superfície neutra" },          design: "Muted",                dev: "--muted",                 tw: "bg-muted" },
@@ -113,7 +113,7 @@ export function TokensShowcase() {
       ══════════════════════════════════════ */}
       <section className="space-y-5" id="tokens-intro">
         <div className="space-y-1">
-          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-primary">{t("Fundamentals", "Fundamentos")}</p>
+          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.1em] text-primary-text">{t("Fundamentals", "Fundamentos")}</p>
           <h1 className="text-[2.25rem] font-black text-foreground tracking-[-0.04em] leading-none">
             Design Tokens
           </h1>
@@ -125,7 +125,7 @@ export function TokensShowcase() {
         {/* Visual analogy */}
         <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="px-5 py-4 border-b border-border bg-muted/20 flex items-center gap-2">
-            <Lightbulb className="h-4 w-4 text-primary shrink-0" />
+            <Lightbulb className="h-4 w-4 text-primary-text shrink-0" />
             <p className="text-[0.8125rem] font-bold text-foreground">{t("The simple analogy", "A analogia simples")}</p>
           </div>
           <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -151,8 +151,8 @@ export function TokensShowcase() {
 
             <div className="hidden md:flex items-center justify-center">
               <div className="flex flex-col items-center gap-1">
-                <ChevronRight className="h-6 w-6 text-primary" />
-                <p className="text-[0.5625rem] font-bold uppercase tracking-[0.07em] text-primary">tokens</p>
+                <ChevronRight className="h-6 w-6 text-primary-text" />
+                <p className="text-[0.5625rem] font-bold uppercase tracking-[0.07em] text-primary-text">tokens</p>
               </div>
             </div>
 
@@ -168,7 +168,7 @@ export function TokensShowcase() {
                   {lang === "pt" ? <>No rebrand: altere <strong>um único valor</strong> no arquivo de tokens. A interface inteira se atualiza em segundos.</> : <>On rebrand: change <strong>a single value</strong> in the tokens file. The whole interface updates in seconds.</>}
                 </p>
                 <div className="mt-2 rounded-sm bg-muted/40 border border-border px-3 py-2 font-mono text-[0.6875rem]">
-                  <span className="text-violet-400">--primary</span>
+                  <span className="text-violet">--primary</span>
                   <span className="text-muted-foreground">: </span>
                   <span className="text-success">var(--crimson-400)</span>
                   <span className="text-muted-foreground">; </span>
@@ -182,9 +182,9 @@ export function TokensShowcase() {
         {/* 3 benefits */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {[
-            { icon: RefreshCw,  color: "text-primary",  bg: "bg-primary/10",  title: { en: "Rebrand in minutes", pt: "Rebrand em minutos" },   body: { en: "Changing the brand color across the entire product means changing a single token. No find-and-replace, nothing forgotten.", pt: "Mudar a cor da marca em todo o produto significa mudar um único token. Sem buscar e substituir, sem esquecer nada." } },
-            { icon: Layers,     color: "text-violet-400", bg: "bg-violet-500/10", title: { en: "Themes without rework", pt: "Temas sem retrabalho" }, body: { en: "Light mode, dark mode, high contrast — each theme is just a different set of values for the same token names.", pt: "Light mode, dark mode, alto contraste — cada tema é apenas um conjunto diferente de valores para os mesmos nomes de token." } },
-            { icon: Code2,      color: "text-blue-400",  bg: "bg-blue-500/10",  title: { en: "Design and code aligned", pt: "Design e código alinhados" }, body: { en: "The designer calls it 'Primary', the dev uses --primary. The same name in both places eliminates manual translation and errors.", pt: "O designer chama de 'Primary', o dev usa --primary. O mesmo nome nos dois lugares elimina tradução manual e erros." } },
+            { icon: RefreshCw,  color: "text-primary-text",  bg: "bg-primary/10",  title: { en: "Rebrand in minutes", pt: "Rebrand em minutos" },   body: { en: "Changing the brand color across the entire product means changing a single token. No find-and-replace, nothing forgotten.", pt: "Mudar a cor da marca em todo o produto significa mudar um único token. Sem buscar e substituir, sem esquecer nada." } },
+            { icon: Layers,     color: "text-violet", bg: "bg-violet/10", title: { en: "Themes without rework", pt: "Temas sem retrabalho" }, body: { en: "Light mode, dark mode, high contrast — each theme is just a different set of values for the same token names.", pt: "Light mode, dark mode, alto contraste — cada tema é apenas um conjunto diferente de valores para os mesmos nomes de token." } },
+            { icon: Code2,      color: "text-info",  bg: "bg-info/10",  title: { en: "Design and code aligned", pt: "Design e código alinhados" }, body: { en: "The designer calls it 'Primary', the dev uses --primary. The same name in both places eliminates manual translation and errors.", pt: "O designer chama de 'Primary', o dev usa --primary. O mesmo nome nos dois lugares elimina tradução manual e erros." } },
           ].map(p => (
             <div key={p.title.en} className="rounded-lg border border-border bg-card p-4 space-y-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
               <div className={`h-8 w-8 rounded-sm ${p.bg} flex items-center justify-center`}>
@@ -226,27 +226,27 @@ export function TokensShowcase() {
                 <div className="rounded-sm bg-background border border-border p-2.5 space-y-1.5 font-mono text-[0.625rem]">
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full shrink-0" style={{ background: "#D44D4D" }} />
-                    <span className="text-violet-400">--crimson-400</span>
+                    <span className="text-violet">--crimson-400</span>
                     <span className="text-muted-foreground ml-auto">#D44D4D</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full shrink-0" style={{ background: "#B82828" }} />
-                    <span className="text-violet-400">--crimson-500</span>
+                    <span className="text-violet">--crimson-500</span>
                     <span className="text-muted-foreground ml-auto">#B82828</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full shrink-0" style={{ background: "#0D1119" }} />
-                    <span className="text-violet-400">--graphite-950</span>
+                    <span className="text-violet">--graphite-950</span>
                     <span className="text-muted-foreground ml-auto">#0D1119</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="h-3 w-3 rounded-full shrink-0" style={{ background: "#EDF0F5", border: "1px solid var(--border)" }} />
-                    <span className="text-violet-400">--graphite-50</span>
+                    <span className="text-violet">--graphite-50</span>
                     <span className="text-muted-foreground ml-auto">#EDF0F5</span>
                   </div>
                 </div>
-                <div className="rounded-sm bg-amber-500/10 border border-amber-500/20 px-2.5 py-1.5">
-                  <p className="text-[0.5625rem] text-amber-500/80 leading-snug">
+                <div className="rounded-sm bg-warning/10 border border-warning/20 px-2.5 py-1.5">
+                  <p className="text-[0.5625rem] text-warning/80 leading-snug">
                     <strong>{t("Rule:", "Regra:")}</strong> {t("primitives are never applied directly to components.", "primitivos nunca são aplicados diretamente aos componentes.")}
                   </p>
                 </div>
@@ -272,10 +272,10 @@ export function TokensShowcase() {
                   {lang === "pt" ? <>Eles dão <strong className="text-foreground">intenção</strong> aos primitivos. Dizem "este primitivo É a cor primária da marca". O valor muda por tema — o nome continua o mesmo.</> : <>They give primitives <strong className="text-foreground">intent</strong>. They say "this primitive IS the brand's primary color". Their value changes per theme — the name stays the same.</>}
                 </p>
                 <div className="rounded-sm bg-background border border-border p-2.5 space-y-1.5 font-mono text-[0.625rem]">
-                  <div><span className="text-primary">--primary</span><span className="text-muted-foreground">: var(--crimson-400);</span></div>
-                  <div><span className="text-primary">--background</span><span className="text-muted-foreground">: var(--graphite-50);</span></div>
+                  <div><span className="text-primary-text">--primary</span><span className="text-muted-foreground">: var(--crimson-400);</span></div>
+                  <div><span className="text-primary-text">--background</span><span className="text-muted-foreground">: var(--graphite-50);</span></div>
                   <div className="border-t border-border/60 pt-1.5 text-muted-foreground/50 text-[0.5625rem]">.dark {"{"}</div>
-                  <div className="pl-2"><span className="text-primary">--background</span><span className="text-muted-foreground">: var(--graphite-950);</span></div>
+                  <div className="pl-2"><span className="text-primary-text">--background</span><span className="text-muted-foreground">: var(--graphite-950);</span></div>
                   <div className="text-muted-foreground/50 text-[0.5625rem">{"}"}</div>
                 </div>
                 <div className="rounded-sm bg-success/10 border border-success/20 px-2.5 py-1.5">
@@ -305,13 +305,13 @@ export function TokensShowcase() {
                   {t("Component-specific tokens that reference semantics. They let you tune one component without affecting the entire system.", "Tokens específicos de componente que referenciam semânticos. Permitem ajustar um componente sem afetar o sistema inteiro.")}
                 </p>
                 <div className="rounded-sm bg-background border border-border p-2.5 space-y-1.5 font-mono text-[0.625rem]">
-                  <div><span className="text-blue-400">button.bg</span><span className="text-muted-foreground">: var(--primary);</span></div>
-                  <div><span className="text-blue-400">button.radius</span><span className="text-muted-foreground">: var(--radius);</span></div>
-                  <div><span className="text-blue-400">card.border</span><span className="text-muted-foreground">: var(--border);</span></div>
-                  <div><span className="text-blue-400">input.bg</span><span className="text-muted-foreground">: var(--muted);</span></div>
+                  <div><span className="text-info">button.bg</span><span className="text-muted-foreground">: var(--primary);</span></div>
+                  <div><span className="text-info">button.radius</span><span className="text-muted-foreground">: var(--radius);</span></div>
+                  <div><span className="text-info">card.border</span><span className="text-muted-foreground">: var(--border);</span></div>
+                  <div><span className="text-info">input.bg</span><span className="text-muted-foreground">: var(--muted);</span></div>
                 </div>
-                <div className="rounded-sm bg-blue-500/10 border border-blue-500/20 px-2.5 py-1.5">
-                  <p className="text-[0.5625rem] text-blue-400/80 leading-snug">
+                <div className="rounded-sm bg-info/10 border border-info/20 px-2.5 py-1.5">
+                  <p className="text-[0.5625rem] text-info/80 leading-snug">
                     {lang === "pt" ? <>Esta camada é <strong>opcional</strong> — muitos sistemas vão direto do semântico para o componente.</> : <>This layer is <strong>optional</strong> — many systems skip straight from semantic to component.</>}
                   </p>
                 </div>
@@ -430,7 +430,7 @@ export function TokensShowcase() {
               {[
                 {
                   title: { en: "AI generates hardcoded hex", pt: "A IA gera hex fixo no código" },
-                  body: { en: "When you ask for \"create a red button\", the AI writes background: #D44D4D or bg-red-500. That code violates the token system and breaks when the theme changes.", pt: "Quando você pede \"crie um botão vermelho\", a IA escreve background: #D44D4D ou bg-red-500. Esse código viola o sistema de tokens e quebra quando o tema muda." },
+                  body: { en: "When you ask for \"create a red button\", the AI writes background: #D44D4D or bg-error. That code violates the token system and breaks when the theme changes.", pt: "Quando você pede \"crie um botão vermelho\", a IA escreve background: #D44D4D ou bg-error. Esse código viola o sistema de tokens e quebra quando o tema muda." },
                   fix: { en: "Always review the generated code and replace literal colors with the matching token.", pt: "Sempre revise o código gerado e troque as cores literais pelo token correspondente." },
                 },
                 {
@@ -503,10 +503,10 @@ export function TokensShowcase() {
             <p>{t("Generate a card component in React with Tailwind CSS.", "Gere um componente de card em React com Tailwind CSS.")}</p>
             <p>{lang === "pt" ? <>Use <strong className="text-foreground">APENAS</strong> os seguintes design tokens semânticos:</> : <>Use <strong className="text-foreground">ONLY</strong> the following semantic design tokens:</>}</p>
             <div className="mt-2 space-y-1 pl-3 border-l-2 border-primary/30">
-              <p><span className="text-violet-400">{t("Colors:", "Cores:")}</span> <span className="text-success">bg-background, bg-card, bg-muted, bg-primary,</span></p>
+              <p><span className="text-violet">{t("Colors:", "Cores:")}</span> <span className="text-success">bg-background, bg-card, bg-muted, bg-primary,</span></p>
               <p className="pl-10"><span className="text-success">text-foreground, text-muted-foreground, border-border</span></p>
-              <p><span className="text-violet-400">{t("Radius:", "Raio:")}</span> <span className="text-success">rounded-[var(--radius)]</span></p>
-              <p><span className="text-violet-400">{t("Shadow:", "Sombra:")}</span> <span className="text-success">var(--shadow-sm)</span></p>
+              <p><span className="text-violet">{t("Radius:", "Raio:")}</span> <span className="text-success">rounded-[var(--radius)]</span></p>
+              <p><span className="text-violet">{t("Shadow:", "Sombra:")}</span> <span className="text-success">var(--shadow-sm)</span></p>
             </div>
             <p className="mt-2"><span className="text-destructive">{t("DO NOT", "NÃO")}</span> {t("use literal Tailwind colors (red-500, gray-200) or hex (#...).", "use cores literais do Tailwind (red-500, gray-200) nem hex (#...).")}</p>
             <p>{lang === "pt" ? <>O componente deve funcionar em light e dark mode <strong className="text-foreground">automaticamente</strong>.</> : <>The component must work in light and dark mode <strong className="text-foreground">automatically</strong>.</>}</p>
@@ -530,8 +530,8 @@ export function TokensShowcase() {
               <thead>
                 <tr className="border-b border-border bg-muted/30">
                   <th className="text-left px-5 py-3 font-bold text-foreground w-52">{t("Action", "Ação")}</th>
-                  <th className="text-left px-4 py-3 font-bold text-violet-400">{t("Design (Figma)", "Design (Figma)")}</th>
-                  <th className="text-left px-4 py-3 font-bold text-blue-400">{t("Dev (CSS/Tailwind)", "Dev (CSS/Tailwind)")}</th>
+                  <th className="text-left px-4 py-3 font-bold text-violet">{t("Design (Figma)", "Design (Figma)")}</th>
+                  <th className="text-left px-4 py-3 font-bold text-info">{t("Dev (CSS/Tailwind)", "Dev (CSS/Tailwind)")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/50">
@@ -584,8 +584,8 @@ export function TokensShowcase() {
                 <tr className="border-b border-border bg-muted/30">
                   <th className="text-left px-4 py-2.5 font-bold text-muted-foreground w-28">{t("Category", "Categoria")}</th>
                   <th className="text-left px-3 py-2.5 font-bold text-muted-foreground">{t("Intent", "Intenção")}</th>
-                  <th className="text-left px-3 py-2.5 font-bold text-violet-400">Design Token</th>
-                  <th className="text-left px-3 py-2.5 font-bold text-blue-400">CSS / Dev</th>
+                  <th className="text-left px-3 py-2.5 font-bold text-violet">Design Token</th>
+                  <th className="text-left px-3 py-2.5 font-bold text-info">CSS / Dev</th>
                   <th className="text-left px-3 py-2.5 font-bold text-muted-foreground">Tailwind</th>
                 </tr>
               </thead>
@@ -598,7 +598,7 @@ export function TokensShowcase() {
                     <td className="px-3 py-2.5 text-muted-foreground">{bi(row.intent)}</td>
                     <td className="px-3 py-2.5">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-violet-400">{row.design}</span>
+                        <span className="font-mono text-violet">{row.design}</span>
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity">
                           <CopyBtn text={row.design} />
                         </span>
@@ -606,7 +606,7 @@ export function TokensShowcase() {
                     </td>
                     <td className="px-3 py-2.5">
                       <div className="flex items-center gap-1.5">
-                        <span className="font-mono text-blue-400">{row.dev}</span>
+                        <span className="font-mono text-info">{row.dev}</span>
                         <span className="opacity-0 group-hover:opacity-100 transition-opacity">
                           <CopyBtn text={row.dev} />
                         </span>
@@ -642,8 +642,8 @@ export function TokensShowcase() {
           <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/30">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-red-400/60" />
-                <div className="h-2 w-2 rounded-full bg-amber-400/60" />
+                <div className="h-2 w-2 rounded-full bg-error/60" />
+                <div className="h-2 w-2 rounded-full bg-warning/60" />
                 <div className="h-2 w-2 rounded-full bg-success/60" />
                 <span className="text-[0.625rem] font-mono text-muted-foreground ml-2">src/styles/theme.css</span>
               </div>
@@ -671,8 +671,8 @@ export function TokensShowcase() {
           <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-muted/30">
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-red-400/60" />
-                <div className="h-2 w-2 rounded-full bg-amber-400/60" />
+                <div className="h-2 w-2 rounded-full bg-error/60" />
+                <div className="h-2 w-2 rounded-full bg-warning/60" />
                 <div className="h-2 w-2 rounded-full bg-success/60" />
                 <span className="text-[0.625rem] font-mono text-muted-foreground ml-2">src/styles/index.css</span>
               </div>
@@ -696,12 +696,12 @@ export function TokensShowcase() {
 
         <div className="rounded-lg border border-primary/20 bg-primary/5 px-5 py-4 flex items-start gap-3">
           <div className="h-6 w-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
-            <Layers className="h-3.5 w-3.5 text-primary" />
+            <Layers className="h-3.5 w-3.5 text-primary-text" />
           </div>
           <div>
             <p className="text-[0.8125rem] font-bold text-foreground">{t("Golden rule", "Regra de ouro")}</p>
             <p className="text-[0.75rem] text-muted-foreground leading-relaxed mt-0.5">
-              {lang === "pt" ? <>Nos componentes, <strong className="text-foreground">use sempre classes Tailwind semânticas</strong> (<InlineCode>bg-primary</InlineCode>, <InlineCode>text-foreground</InlineCode>, <InlineCode>border-border</InlineCode>) — nunca cores literais (<InlineCode>bg-red-500</InlineCode>, <InlineCode>bg-[#D44D4D]</InlineCode>). Isso garante que o componente funcione em qualquer tema, agora e no futuro.</> : <>In components, <strong className="text-foreground">always use semantic Tailwind classes</strong> (<InlineCode>bg-primary</InlineCode>, <InlineCode>text-foreground</InlineCode>, <InlineCode>border-border</InlineCode>) — never literal colors (<InlineCode>bg-red-500</InlineCode>, <InlineCode>bg-[#D44D4D]</InlineCode>). This ensures the component works in any theme, now and in the future.</>}
+              {lang === "pt" ? <>Nos componentes, <strong className="text-foreground">use sempre classes Tailwind semânticas</strong> (<InlineCode>bg-primary</InlineCode>, <InlineCode>text-foreground</InlineCode>, <InlineCode>border-border</InlineCode>) — nunca cores literais (<InlineCode>bg-error</InlineCode>, <InlineCode>bg-[#D44D4D]</InlineCode>). Isso garante que o componente funcione em qualquer tema, agora e no futuro.</> : <>In components, <strong className="text-foreground">always use semantic Tailwind classes</strong> (<InlineCode>bg-primary</InlineCode>, <InlineCode>text-foreground</InlineCode>, <InlineCode>border-border</InlineCode>) — never literal colors (<InlineCode>bg-error</InlineCode>, <InlineCode>bg-[#D44D4D]</InlineCode>). This ensures the component works in any theme, now and in the future.</>}
             </p>
           </div>
         </div>

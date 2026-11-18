@@ -120,7 +120,7 @@ function PrincipleCard({ p, onGo }: { p: PrincipleItem; onGo: (t: Target) => voi
       <button
         type="button"
         onClick={() => onGo(p.target)}
-        className="group mt-auto self-start inline-flex items-center gap-1.5 rounded-sm text-[0.8125rem] font-semibold text-primary hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="group mt-auto self-start inline-flex items-center gap-1.5 rounded-sm text-[0.8125rem] font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span>
           {t("Learn more", "Saiba mais")}
@@ -161,7 +161,7 @@ export function PrinciplesShowcase({ onNavigate }: { onNavigate: Navigate }) {
               >
                 <span
                   aria-hidden
-                  className={`${display} absolute left-0 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 border-primary bg-background text-[0.8125rem] font-semibold tabular-nums text-primary md:static md:col-start-2 md:row-start-1 md:mt-5 md:justify-self-center`}
+                  className={`${display} absolute left-0 top-5 z-10 flex h-9 w-9 items-center justify-center rounded-full border-2 border-primary bg-background text-[0.8125rem] font-semibold tabular-nums text-primary-text md:static md:col-start-2 md:row-start-1 md:mt-5 md:justify-self-center`}
                 >
                   {p.n}
                 </span>

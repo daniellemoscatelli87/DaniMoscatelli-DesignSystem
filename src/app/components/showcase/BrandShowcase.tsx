@@ -46,7 +46,7 @@ function downloadSvg(markup: string, filename: string) {
 function DownloadButtons({ asset }: { asset: DownloadAsset }) {
   const { t } = useI18n();
   const btn =
-    "inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+    "inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   return (
     <div className="flex shrink-0 items-center gap-2">
       <button
@@ -222,7 +222,7 @@ export function BrandShowcase() {
             download={{ png: logoVerticalDark, svg: svgVerticalDark, filename: "dani-moscatelli-logo-vertical-dark" }}
             label={t("For Dark Backgrounds", "Para Fundos Escuros")}
             description={t("Light text — use on dark and colored backgrounds", "Texto claro — use em fundos escuros e coloridos")}
-            bg="bg-[#0D1119]"
+            bg="bg-[var(--graphite-950)]"
                       >
             <ImageWithFallback
               src={logoVerticalDark}
@@ -257,7 +257,7 @@ export function BrandShowcase() {
             download={{ png: logoHorizontalLight, svg: svgHorizontalOnDark, filename: "dani-moscatelli-logo-horizontal-on-dark" }}
             label={t("For Dark Backgrounds", "Para Fundos Escuros")}
             description={t("Light text — use on dark or textured backgrounds", "Texto claro — use em fundos escuros ou texturizados")}
-            bg="bg-[#0D1119]"
+            bg="bg-[var(--graphite-950)]"
                       >
             <ImageWithFallback
               src={logoHorizontalLight}
@@ -280,7 +280,7 @@ export function BrandShowcase() {
             download={{ png: iconeGrey, svg: svgSymbolGrey, filename: "dani-moscatelli-symbol-grey" }}
             label="Graphite"
             description={t("For light and neutral backgrounds", "Para fundos claros e neutros")}
-            bg="bg-[#F5F7FA]"
+            bg="bg-[var(--graphite-50)]"
           >
             <ImageWithFallback
               src={iconeGrey}
@@ -304,7 +304,7 @@ export function BrandShowcase() {
             download={{ png: iconeWhite, svg: svgSymbolWhite, filename: "dani-moscatelli-symbol-white" }}
             label={t("White", "Branco")}
             description={t("For dark and primary backgrounds", "Para fundos escuros e na cor primária")}
-            bg="bg-[#0D1119]"
+            bg="bg-[var(--graphite-950)]"
           >
             <ImageWithFallback
               src={iconeWhite}
@@ -338,7 +338,7 @@ export function BrandShowcase() {
               icon: Smartphone,
               label: { en: "App Icon", pt: "Ícone de App" },
               desc: { en: "Mobile app and PWA icon", pt: "Ícone de app mobile e PWA" },
-              bg: "bg-[#0D1119]",
+              bg: "bg-[var(--graphite-950)]",
               preview: iconeWhite,
               previewSize: "h-10",
             },
@@ -354,7 +354,7 @@ export function BrandShowcase() {
               icon: Share2,
               label: { en: "Social Media", pt: "Redes Sociais" },
               desc: { en: "Profile photo on social networks", pt: "Foto de perfil nas redes sociais" },
-              bg: "bg-[#0D1119]",
+              bg: "bg-[var(--graphite-950)]",
               preview: iconeWhite,
               previewSize: "h-10",
             },
@@ -370,7 +370,7 @@ export function BrandShowcase() {
               icon: ImageIcon,
               label: { en: "Watermark", pt: "Marca d'água" },
               desc: { en: "Watermark on images and videos", pt: "Marca d'água em imagens e vídeos" },
-              bg: "bg-[#283043]",
+              bg: "bg-[var(--graphite-700)]",
               preview: iconeWhite,
               previewSize: "h-8",
             },
@@ -378,7 +378,7 @@ export function BrandShowcase() {
               icon: Monitor,
               label: { en: "Loading Screen", pt: "Tela de Loading" },
               desc: { en: "Splash screen and loading screen", pt: "Splash screen e tela de carregamento" },
-              bg: "bg-[#0D1119]",
+              bg: "bg-[var(--graphite-950)]",
               preview: iconeRed,
               previewSize: "h-12",
             },
@@ -454,7 +454,7 @@ export function BrandShowcase() {
               <Monitor className="h-4 w-4 text-muted-foreground" />
               <span className="text-[0.8125rem] font-semibold text-foreground">Desktop</span>
               <span className="text-[0.75rem] text-muted-foreground">≥ 1024 px</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary">{t("Full Horizontal Logo", "Logo Horizontal Completo")}</span>
+              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Full Horizontal Logo", "Logo Horizontal Completo")}</span>
             </div>
             <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
               {/* Desktop navbar simulation */}
@@ -480,7 +480,7 @@ export function BrandShowcase() {
               <Tablet className="h-4 w-4 text-muted-foreground" />
               <span className="text-[0.8125rem] font-semibold text-foreground">Tablet</span>
               <span className="text-[0.75rem] text-muted-foreground">768 px – 1023 px</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary">{t("Vertical Logo or reduced Horizontal", "Logo Vertical ou Horizontal reduzido")}</span>
+              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Vertical Logo or reduced Horizontal", "Logo Vertical ou Horizontal reduzido")}</span>
             </div>
             <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
               <ImageWithFallback
@@ -505,7 +505,7 @@ export function BrandShowcase() {
               <Smartphone className="h-4 w-4 text-muted-foreground" />
               <span className="text-[0.8125rem] font-semibold text-foreground">Mobile</span>
               <span className="text-[0.75rem] text-muted-foreground">{"< 768 px"}</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary">{t("Standalone symbol", "Símbolo isolado")}</span>
+              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Standalone symbol", "Símbolo isolado")}</span>
             </div>
             <div className="px-6 py-5 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
               <ImageWithFallback
@@ -569,7 +569,7 @@ export function BrandShowcase() {
             { bg: "bg-background border border-border", label: { en: "Background", pt: "Fundo" }, useLight: true },
             { bg: "bg-card border border-border",       label: { en: "Card", pt: "Card" },       useLight: true },
             { bg: "bg-primary",                         label: { en: "Primary", pt: "Primária" },    useLight: false },
-            { bg: "bg-[#0D1119] border border-border",  label: { en: "Graphite 950", pt: "Graphite 950" }, useLight: false },
+            { bg: "bg-[var(--graphite-950)] border border-border",  label: { en: "Graphite 950", pt: "Graphite 950" }, useLight: false },
           ].map(({ bg, label, useLight }) => (
             <div key={label.en} className={`rounded-2xl flex flex-col items-center justify-center gap-4 p-6 min-h-[160px] ${bg}`}>
               <ImageWithFallback
@@ -652,7 +652,7 @@ export function BrandShowcase() {
           </RuleCard>
 
           {/* ── Incorrect 1: light-background version applied on a dark background ── */}
-          <RuleCard type="dont" bg="bg-[#0D1119]" label={t("Do not use the light-background version on a dark background", "Não use a versão para fundo claro em fundo escuro")}>
+          <RuleCard type="dont" bg="bg-[var(--graphite-950)]" label={t("Do not use the light-background version on a dark background", "Não use a versão para fundo claro em fundo escuro")}>
             <ImageWithFallback
               src={logoHorizontalDark}
               alt={t("Incorrect — light-background version on dark background", "Incorreto — versão para fundo claro em fundo escuro")}
@@ -661,7 +661,7 @@ export function BrandShowcase() {
           </RuleCard>
 
           {/* ── Correct 2: dark-background version applied correctly ── */}
-          <RuleCard type="do" bg="bg-[#0D1119]" label={t("Dark-background version on a dark background", "Versão para fundo escuro em fundo escuro")}>
+          <RuleCard type="do" bg="bg-[var(--graphite-950)]" label={t("Dark-background version on a dark background", "Versão para fundo escuro em fundo escuro")}>
             <ImageWithFallback
               src={logoHorizontalLight}
               alt={t("Correct — dark-background version on dark background", "Correto — versão para fundo escuro em fundo escuro")}
@@ -741,7 +741,7 @@ export function BrandShowcase() {
           </div>
         </div>
         <p className="mt-3 text-[0.8125rem] text-muted-foreground text-center">
-          {lang === "pt" ? <>Onde <span className="font-semibold text-primary">1×</span> = altura do "D" maiúsculo no logotipo</> : <>Where <span className="font-semibold text-primary">1×</span> = height of the uppercase "D" in the logotype</>}
+          {lang === "pt" ? <>Onde <span className="font-semibold text-primary-text">1×</span> = altura do "D" maiúsculo no logotipo</> : <>Where <span className="font-semibold text-primary-text">1×</span> = height of the uppercase "D" in the logotype</>}
         </p>
       </div>
 

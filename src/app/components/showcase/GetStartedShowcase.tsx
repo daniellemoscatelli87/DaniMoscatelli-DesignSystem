@@ -43,13 +43,13 @@ export function NavCard({
         compact ? "p-4" : "p-5"
       }`}
     >
-      <Icon className="h-5 w-5 text-primary mb-4 shrink-0" strokeWidth={1.75} />
+      <Icon className="h-5 w-5 text-primary-text mb-4 shrink-0" strokeWidth={1.75} />
       <h3 className={`${display} text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
         {txt(item.title)}
       </h3>
       <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">{txt(item.desc)}</p>
       <ArrowRight
-        className="mt-auto self-end h-4 w-4 text-muted-foreground transition-all duration-150 group-hover:text-primary group-hover:translate-x-0.5"
+        className="mt-auto self-end h-4 w-4 text-muted-foreground transition-all duration-150 group-hover:text-primary-text group-hover:translate-x-0.5"
         aria-hidden
       />
     </button>
@@ -73,7 +73,7 @@ export function PageHeader({
 }: { eyebrow: string; title: string; description: string }) {
   return (
     <header>
-      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-primary mb-3">{eyebrow}</p>
+      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-primary-text mb-3">{eyebrow}</p>
       <h1 className={`${display} text-[2rem] sm:text-[2.5rem] font-bold tracking-[-0.035em] leading-none text-foreground mb-4 [text-wrap:balance]`}>{withHighlight(title)}</h1>
       <p className="text-[1.0625rem] text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
     </header>
@@ -97,7 +97,7 @@ export function CopyLinkButton({ id }: { id: string }) {
         aria-label={t("Copy link", "Copiar link")}
         className="h-7 w-7 rounded-[var(--radius)] inline-flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
-        {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <LinkIcon className="h-3.5 w-3.5" />}
+        {copied ? <Check className="h-3.5 w-3.5 text-primary-text" /> : <LinkIcon className="h-3.5 w-3.5" />}
       </button>
       <span
         role="tooltip"

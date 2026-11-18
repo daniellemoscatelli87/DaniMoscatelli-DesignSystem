@@ -429,9 +429,9 @@ export function ImageGrid({
                 </span>
               )}
               {img.status === "erro" && <span className="absolute inset-0 flex items-center justify-center bg-error/70 text-white"><AlertCircle className="h-6 w-6" aria-hidden /></span>}
-              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary" aria-hidden /> {tx.capa}</span>}
+              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary-text" aria-hidden /> {tx.capa}</span>}
               <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
-                {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label={tx.definirCapa} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
+                {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label={tx.definirCapa} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
                 {onRemove && <button type="button" onClick={() => onRemove(img.id)} aria-label={tx.removerFoto} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Trash2 className="h-3.5 w-3.5" aria-hidden /></button>}
               </span>
             </li>

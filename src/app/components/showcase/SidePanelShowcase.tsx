@@ -98,7 +98,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
         <SidePanelBody>
           {sent ? (
             <div className="flex flex-col items-center space-y-4 px-4 py-8 text-center">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--primary-muted)] text-primary"><Check className="h-8 w-8" strokeWidth={2.5} aria-hidden /></div>
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--primary-muted)] text-primary-text"><Check className="h-8 w-8" strokeWidth={2.5} aria-hidden /></div>
               <div>
                 <h3 className="text-[1.25rem] font-bold text-foreground">{t("Message sent successfully!", "Mensagem enviada com sucesso!")}</h3>
                 <p className="mx-auto mt-2 max-w-xs text-[0.875rem] text-muted-foreground">{t("We will get in touch soon to schedule our conversation.", "Entraremos em contato em breve para agendarmos a nossa conversa.")}</p>
@@ -286,7 +286,7 @@ export function SidePanelShowcase() {
                 const I = Icon as React.ElementType;
                 return (
                   <li key={i} className="flex items-start gap-3 text-[0.875rem] leading-relaxed text-muted-foreground">
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary"><I className="h-3.5 w-3.5" aria-hidden /></span>
+                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary-text"><I className="h-3.5 w-3.5" aria-hidden /></span>
                     <span>{text as string}</span>
                   </li>
                 );

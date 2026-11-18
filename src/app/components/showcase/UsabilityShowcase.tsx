@@ -27,7 +27,7 @@ function TargetDemo() {
             <button
               type="button"
               aria-label={t(`${s.label} target`, `Alvo de ${s.label}`)}
-              className={`${s.cls} rounded-sm bg-primary/10 border border-primary/40 text-primary flex items-center justify-center transition-colors hover:bg-primary/20 ${ring}`}
+              className={`${s.cls} rounded-sm bg-primary/10 border border-primary/40 text-primary-text flex items-center justify-center transition-colors hover:bg-primary/20 ${ring}`}
             >
               <Check className="h-3.5 w-3.5" aria-hidden />
             </button>
@@ -218,7 +218,7 @@ function HierarchyDemo() {
       ].map(c => (
         <div key={String(c.good)}>
           <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3 flex items-center gap-1.5">
-            {c.good ? <Check className="h-3.5 w-3.5 text-primary" aria-hidden /> : <span aria-hidden className="text-[0.875rem] leading-none">×</span>}
+            {c.good ? <Check className="h-3.5 w-3.5 text-primary-text" aria-hidden /> : <span aria-hidden className="text-[0.875rem] leading-none">×</span>}
             {c.title}
           </p>
           <div className="rounded-md border border-border bg-background/40 p-4">
