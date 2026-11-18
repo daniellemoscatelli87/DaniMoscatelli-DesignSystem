@@ -12,6 +12,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useI18n } from "../../i18n";
 import { Alert as UiAlert, AlertTitle, AlertDescription } from "../ui/alert";
 import { SectionHeader } from "./shared/SectionHeader";
+import { VejaEm } from "./shared/VejaEm";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -154,7 +155,7 @@ const timelineItems = [
   { icon: CheckCircle,   color: "bg-success text-white",   title: { en: "PR #284 merged", pt: "PR #284 mesclado" },          desc: { en: "Feature: enhanced search indexing.", pt: "Funcionalidade: indexação de busca aprimorada." },            time: { en: "1 hr ago", pt: "há 1 h" } },
 ];
 
-export function FeedbackShowcase() {
+export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | "rotulos" }) {
   const { t, bi, lang } = useI18n();
   const [defaultTab,   setDefaultTab]   = useState("overview");
   const [underlineTab, setUnderlineTab] = useState("overview");
@@ -164,6 +165,7 @@ export function FeedbackShowcase() {
     <div className="space-y-16">
 
       {/* ── TABS ── */}
+      {parte === "feedback" && (
       <section id="tabs">
         <SectionHeader title={t("Tabs", "Abas")} description={t("Clean tab navigation for switching between content panels.", "Navegação limpa por abas para alternar entre painéis de conteúdo.")} />
         <SubSection title={t("Default Tabs", "Abas padrão")}>
@@ -212,8 +214,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── ALERTS ── */}
+      {parte === "feedback" && (
       <section id="alerts">
         <SectionHeader title={t("Alerts", "Alertas")} description={t("Status messages for feedback, warnings, and errors. Inline and dismissible variants.", "Mensagens de status para feedback, avisos e erros. Variantes inline e dispensáveis.")} />
         <SubSection title={t("Alert Variants", "Variantes de alerta")}>
@@ -236,8 +240,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── TOASTS ── */}
+      {parte === "feedback" && (
       <section id="toasts">
         <SectionHeader title={t("Toasts", "Toasts")} description={t("Floating notification toasts for transient feedback messages.", "Notificações flutuantes (toasts) para mensagens de feedback temporárias.")} />
         <SubSection title={t("Toast Variants", "Variantes de toast")}>
@@ -259,8 +265,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── PROGRESS ── */}
+      {parte === "feedback" && (
       <section id="progress">
         <SectionHeader title={t("Progress Bars", "Barras de progresso")} description={t("Visual feedback for task completion and resource utilization.", "Feedback visual para conclusão de tarefas e uso de recursos.")} />
         <SubSection title={t("Progress Variants", "Variantes de progresso")}>
@@ -300,8 +308,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── SKELETON ── */}
+      {parte === "feedback" && (
       <section id="skeleton">
         <SectionHeader title={t("Skeleton Loading", "Skeleton loading")} description={t("Placeholder content while data loads. Matches the shape of the actual content.", "Conteúdo provisório enquanto os dados carregam. Segue a forma do conteúdo real.")} />
         <SubSection title={t("Skeleton States", "Estados de skeleton")}>
@@ -346,8 +356,10 @@ export function FeedbackShowcase() {
           </div>
         </SubSection>
       </section>
+      )}
 
       {/* ── BADGES CHIPS TAGS ── */}
+      {parte === "rotulos" && (
       <section id="badges">
         <SectionHeader title={t("Badges, Chips & Tags", "Badges, chips e tags")} description={t("Compact informational labels for categorization and status indication.", "Rótulos informativos compactos para categorização e indicação de status.")} />
 
@@ -466,39 +478,17 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── TIMELINE ── */}
-      <section id="timeline">
-        <SectionHeader title={t("Timeline", "Linha do tempo")} description={t("Activity feed and event history with status indicators.", "Feed de atividades e histórico de eventos com indicadores de status.")} />
-        <SubSection title={t("Activity Timeline", "Linha do tempo de atividades")}>
-          <ShowcaseCard>
-            <div className="relative">
-              <div className="absolute left-5 top-0 bottom-0 w-px bg-border" />
-              <div className="space-y-5">
-                {timelineItems.map((item, i) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={i} className="relative flex gap-4 pl-12">
-                      <div className={`absolute left-5 -translate-x-1/2 h-6 w-6 rounded-full flex items-center justify-center shrink-0 ${item.color}`}>
-                        <Icon className="h-3.5 w-3.5" style={{ height: "14px", width: "14px" }} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2 mb-0.5">
-                          <p className="text-[0.9rem] font-semibold text-foreground">{bi(item.title)}</p>
-                          <span className="text-[0.75rem] text-muted-foreground shrink-0">{bi(item.time)}</span>
-                        </div>
-                        <p className="text-[0.8125rem] text-muted-foreground">{bi(item.desc)}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </ShowcaseCard>
-        </SubSection>
+      {parte === "rotulos" && (
+      <section id="rotulos-timeline">
+        <VejaEm secao="timeline" titulo={t("The timeline has its own page", "A linha do tempo tem página própria")} texto={t("Steps, states and accessibility of the timeline are in Components > Timeline.", "Etapas, estados e acessibilidade da linha do tempo ficam em Componentes > Linha do tempo.")} rotuloBotao={t("See Timeline", "Ver Linha do tempo")} />
       </section>
+      )}
 
       {/* ── AVATAR ── */}
+      {parte === "rotulos" && (
       <section id="avatar">
         <SectionHeader title={t("Avatar", "Avatar")} description={t("User identity representation in various sizes with presence indicators.", "Representação da identidade do usuário em vários tamanhos, com indicadores de presença.")} />
         <SubSection title={t("Avatar Sizes & States", "Tamanhos e estados de avatar")}>
@@ -586,8 +576,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </SubSection>
       </section>
+      )}
 
       {/* ── EMPTY STATE ── */}
+      {parte === "rotulos" && (
       <section id="empty-states">
         <SectionHeader title={t("Empty States", "Estados vazios")} description={t("Clear, actionable empty states that guide users forward.", "Estados vazios claros e acionáveis que orientam o usuário.")} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -628,8 +620,10 @@ export function FeedbackShowcase() {
           </ShowcaseCard>
         </div>
       </section>
+      )}
 
       {/* ── Feedback Tokens ── */}
+      {parte === "feedback" && (
       <section id="feedback-tokens" className="space-y-5">
         <div>
           <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Tokens — Feedback", "Tokens — Feedback")}</h2>
@@ -637,8 +631,10 @@ export function FeedbackShowcase() {
         </div>
         <TokenTable groups={feedbackTokenGroups(t)} />
       </section>
+      )}
 
       {/* ── Labels / Badges Tokens ── */}
+      {parte === "rotulos" && (
       <section id="badges-tokens" className="space-y-5">
         <div>
           <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Tokens — Labels & Badges", "Tokens — Rótulos e badges")}</h2>
@@ -646,6 +642,7 @@ export function FeedbackShowcase() {
         </div>
         <TokenTable groups={badgesTokenGroups(t)} />
       </section>
+      )}
     </div>
   );
 }

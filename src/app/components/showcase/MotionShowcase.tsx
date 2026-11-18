@@ -1092,7 +1092,7 @@ function LayoutTransitions() {
 function TokensSection() {
   const { t, bi } = useI18n();
   return (
-    <Section id="tokens" title={t("Motion Tokens", "Tokens de movimento")} sub={t("Consistent duration and easing values used across the design system.", "Valores consistentes de duração e easing usados em todo o design system.")}>
+    <Section id="motion-tokens" title={t("Motion Tokens", "Tokens de movimento")} sub={t("Consistent duration and easing values used across the design system.", "Valores consistentes de duração e easing usados em todo o design system.")}>
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-2">
           <div className="text-[0.6875rem] font-bold text-muted-foreground uppercase tracking-[0.08em] mb-3">{t("Duration", "Duração")}</div>
