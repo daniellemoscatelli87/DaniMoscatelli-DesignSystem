@@ -36,6 +36,7 @@ import { HeaderShowcase } from "./components/showcase/HeaderShowcase";
 import { GridShowcase } from "./components/showcase/GridShowcase";
 import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
+import { Toaster } from "./components/ui/sonner";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -1148,6 +1149,7 @@ export default function App() {
   return (
     <I18nProvider>
       <AppShell />
+      <Toaster />
     </I18nProvider>
   );
 }

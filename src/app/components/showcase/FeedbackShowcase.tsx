@@ -13,6 +13,8 @@ import { useI18n } from "../../i18n";
 import { Alert as UiAlert, AlertTitle, AlertDescription } from "../ui/alert";
 import { SectionHeader } from "./shared/SectionHeader";
 import { VejaEm } from "./shared/VejaEm";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -93,10 +95,10 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
 
 /* ── Toast ── */
 const toastTypes = [
-  { label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
-  { label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
-  { label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
-  { label: "Loading", icon: Loader2,     color: "text-info",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
+  { tipo: "success", label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
+  { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
+  { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
+  { tipo: "loading", label: "Loading", icon: Loader2,     color: "text-info",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
 ];
 
 /* ── Skeleton ── */
@@ -246,6 +248,24 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       {parte === "feedback" && (
       <section id="toasts">
         <SectionHeader title={t("Toasts", "Toasts")} description={t("Floating notification toasts for transient feedback messages.", "Notificações flutuantes (toasts) para mensagens de feedback temporárias.")} />
+        <SubSection title={t("Try it", "Experimente")}>
+          <ShowcaseCard>
+            <p className="mb-3 text-[0.875rem] text-muted-foreground">{t("Each button shows a real notification in the corner of the screen (ui/sonner).", "Cada botão mostra uma notificação de verdade no canto da tela (ui/sonner).")}</p>
+            <div className="flex flex-wrap gap-2">
+              {toastTypes.map(tt => (
+                <Button key={tt.tipo} variant="outline" onClick={() => {
+                  const msg = bi(tt.msg);
+                  if (tt.tipo === "success") toast.success(msg);
+                  else if (tt.tipo === "error") toast.error(msg);
+                  else if (tt.tipo === "warning") toast.warning(msg);
+                  else { const id = toast.loading(msg); setTimeout(() => toast.success(t("Done.", "Pronto."), { id }), 1800); }
+                }}>
+                  {typeof tt.label === "string" ? t("Loading", "Carregando") : bi(tt.label)}
+                </Button>
+              ))}
+            </div>
+          </ShowcaseCard>
+        </SubSection>
         <SubSection title={t("Toast Variants", "Variantes de toast")}>
           <ShowcaseCard>
             <div className="space-y-2 max-w-sm">
