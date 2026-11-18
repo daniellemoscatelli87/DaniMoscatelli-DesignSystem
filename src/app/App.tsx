@@ -8,7 +8,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight, PanelTop, UploadCloud, Milestone,
+  PanelRight, PanelTop, UploadCloud, Milestone, MessageCircle,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -28,6 +28,7 @@ import { GetStartedShowcase } from "./components/showcase/GetStartedShowcase";
 import { HomeShowcase } from "./components/showcase/HomeShowcase";
 import { PrinciplesShowcase } from "./components/showcase/PrinciplesShowcase";
 import { UsabilityShowcase } from "./components/showcase/UsabilityShowcase";
+import { VoiceShowcase } from "./components/showcase/VoiceShowcase";
 import { AccessibilityShowcase } from "./components/showcase/AccessibilityShowcase";
 import { CardShowcase } from "./components/showcase/CardShowcase";
 import { SidePanelShowcase } from "./components/showcase/SidePanelShowcase";
@@ -76,6 +77,13 @@ const ptLabels: Record<string, string> = {
   "Implementation in code": "Implementação em código",
   "Integration": "Integração",
   "Usability": "Usabilidade",
+  "Voice & UX writing": "Tom de voz e UX writing",
+  "Writing principles": "Princípios",
+  "Types of information": "Tipos de informação",
+  "Intelligence and data": "Inteligência e dados",
+  "Discovery structure": "Estrutura da descoberta",
+  "Avoid and prefer": "Evitar e preferir",
+  "Text review": "Revisão do texto",
   "Accessibility": "Acessibilidade",
   "Principles": "Princípios",
   "Action hierarchy": "Hierarquia de ações",
@@ -308,6 +316,16 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "ux-checklist",    label: "Quick review",       sectionId: "usability" },
         ],
       },
+      { id: "voice", label: "Voice & UX writing", icon: MessageCircle,
+        items: [
+          { id: "escrita-principios",   label: "Writing principles",     sectionId: "voice" },
+          { id: "escrita-tipos",        label: "Types of information",   sectionId: "voice" },
+          { id: "escrita-inteligencia", label: "Intelligence and data",  sectionId: "voice" },
+          { id: "escrita-estrutura",    label: "Discovery structure",    sectionId: "voice" },
+          { id: "escrita-exemplos",     label: "Avoid and prefer",       sectionId: "voice" },
+          { id: "escrita-revisao",      label: "Text review",            sectionId: "voice" },
+        ],
+      },
       { id: "accessibility", label: "Accessibility", icon: Accessibility,
         items: [
           { id: "a11y-principles", label: "Principles",         sectionId: "accessibility" },
@@ -518,6 +536,7 @@ const groupIcons: Record<string, React.ElementType> = {
 
 const sectionComponents: Record<string, React.ReactNode> = {
   usability:     <UsabilityShowcase />,
+  voice:         <VoiceShowcase />,
   accessibility: <AccessibilityShowcase />,
   brand:     <BrandShowcase />,
   colors:    <FoundationShowcase />,
@@ -546,6 +565,7 @@ const sectionLabels: Record<string, string> = {
   principles: "Design Principles",
   develop:   "Develop",
   usability:     "Usability",
+  voice:         "Voice & UX writing",
   accessibility: "Accessibility",
   brand:     "Brand Identity",
   colors:    "Foundation",
@@ -574,6 +594,7 @@ function AppShell() {
   const [sidebarExpanded, setSidebarExpanded] = useState<Record<string, boolean>>({
     brand:     false,
     usability: false,
+    voice:     false,
     accessibility: false,
     tokens:    false,
     templates: false,
