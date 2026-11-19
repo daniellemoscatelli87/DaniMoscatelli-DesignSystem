@@ -189,7 +189,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
 
         <SubSection title={t("Underline Tabs", "Abas sublinhadas")}>
           <ShowcaseCard>
-            <div className="flex items-center border-b border-border gap-1 mb-5">
+            <div className="flex flex-wrap items-center border-b border-border gap-1 mb-5">
               {tabItems.map(tab => (
                 <button
                   key={tab.id}

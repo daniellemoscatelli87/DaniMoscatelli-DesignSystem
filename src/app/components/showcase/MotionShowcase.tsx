@@ -1061,7 +1061,7 @@ function LayoutTransitions() {
         {/* Tab underline */}
         <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Animated Tabs", "Abas animadas")}</div>
-          <div className="border-b border-border flex gap-0">
+          <div className="border-b border-border flex flex-wrap gap-0">
             {tabs.map((tabName, i) => (
               <button key={tabName} onClick={() => setTab(i)}
                 className={`relative px-3 py-2 text-[0.75rem] font-semibold transition-colors ${tab === i ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}>
@@ -1700,10 +1700,10 @@ function OrbitingCirclesSection() {
   const { t, bi } = useI18n();
   return (
     <Section id="orbiting-circles" title={t("Orbiting Circles", "Círculos em órbita")} sub={t("Icons orbit a central element at different radii and speeds — great for feature showcases and product hero sections.", "Ícones orbitam um elemento central em raios e velocidades diferentes — ótimo para vitrines de recursos e seções hero de produto.")}>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
         {/* Forward orbit */}
-        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6 overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Clockwise", "Sentido horário")}</div>
           <OrbitCanvas
             center={
@@ -1720,7 +1720,7 @@ function OrbitingCirclesSection() {
         </div>
 
         {/* Reverse orbit */}
-        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6" style={{ boxShadow: "var(--shadow-sm)" }}>
+        <div className="rounded-lg border border-border bg-card flex flex-col items-center gap-3 p-6 overflow-hidden" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="text-[0.75rem] font-bold text-foreground self-start">{t("Counterclockwise", "Sentido anti-horário")}</div>
           <OrbitCanvas
             reverse

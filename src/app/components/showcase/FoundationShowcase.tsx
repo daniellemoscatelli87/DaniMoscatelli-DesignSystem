@@ -234,9 +234,9 @@ export function FoundationShowcase() {
           ].map(f => (
             <div key={f.role} className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
               <div className="flex items-start justify-between gap-2">
-                <div>
+                <div className="min-w-0">
                   <span className={`inline-block px-2 py-0.5 rounded-sm border text-[0.5625rem] font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
-                  <p className="mt-1.5 text-[0.9375rem] font-bold text-foreground leading-tight">{f.family}</p>
+                  <p className="mt-1.5 text-[0.9375rem] font-bold text-foreground leading-tight break-words">{f.family}</p>
                   <p className="text-[0.625rem] font-mono text-muted-foreground mt-0.5">{f.token}</p>
                 </div>
                 <div className="text-right shrink-0">
