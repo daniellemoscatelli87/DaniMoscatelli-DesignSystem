@@ -17,7 +17,7 @@ import { SectionHeader } from "./shared/SectionHeader";
    Header e menus
    Modelo atual: cabeçalho compartilhado do site (src/compartilhado/
    partes.ts, menu.ts e menu.css): pílula clara flutuando no desktop,
-   faixa que fica grafite ao rolar no celular, logo que vira ícone,
+   faixa clara no celular (também ao rolar), logo que vira ícone,
    some ao descer e volta ao subir, menu do celular em folha inferior.
    ───────────────────────────────────────────────────────────── */
 
@@ -254,7 +254,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
   const superficie: Superficie = pilula
     ? (escuro ? "escura" : "clara")                                  // pílula: superfície do card
     : !transparente
-      ? (modelo === "pilula" ? "escura" : escuro ? "escura" : "clara") // faixa do site fica grafite ao rolar
+      ? (escuro ? "escura" : "clara") // no celular, a faixa do site continua clara ao rolar (decisão de 19/11/2026)
       : fundo === "foto" ? "imagem" : escuro ? "escura" : "clara";
   const sobreEscuro = superficie !== "clara";
 
@@ -332,7 +332,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                 className={`absolute inset-x-0 top-0 transition-[translate,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none
                   ${escondido && !menuAberto ? "-translate-y-full" : "translate-y-0"}
                   ${pilula ? "pt-[37px] pb-1" : ""}
-                  ${!pilula && !transparente ? (modelo === "pilula" ? "bg-[var(--graphite-900)]/92 backdrop-blur-xl" : "border-b border-border bg-card/85 backdrop-blur-xl") : !pilula ? "border-b border-transparent" : ""}`}
+                  ${!pilula && !transparente ? (modelo === "pilula" ? "bg-background" : "border-b border-border bg-card/85 backdrop-blur-xl") : !pilula ? "border-b border-transparent" : ""}`}
                 style={{ boxShadow: !pilula && !transparente ? (modelo === "pilula" ? "0 8px 24px -16px rgb(0 0 0 / .45)" : "var(--shadow-sm)") : "none" }}
               >
                 {/* Pílula: faixa translúcida que aparece por trás ao rolar e some em degradê */}
@@ -603,8 +603,8 @@ export function HeaderShowcase() {
     {
       id: "pilula", rotulo: t("Floating pill", "Pílula flutuante"), Icone: Pill, selo: atual,
       desc: t(
-        "Desktop: light pill centred at the top, with the logo icon, the links and the main action; when scrolling, a translucent band appears behind it and fades out downwards. Phone: full-width bar, transparent at the top and graphite when scrolling, with the menu button.",
-        "Desktop: pílula clara centralizada no topo, com o ícone do logo, os links e a ação principal; ao rolar, uma faixa translúcida aparece por trás e some em degradê. Celular: faixa de largura inteira, transparente no topo e grafite ao rolar, com o botão de menu.",
+        "Desktop: light pill centred at the top, with the logo icon, the links and the main action; when scrolling, a translucent band appears behind it and fades out downwards. Phone: full-width bar, transparent at the top and in the page background colour when scrolling (no dark band), with the menu button.",
+        "Desktop: pílula clara centralizada no topo, com o ícone do logo, os links e a ação principal; ao rolar, uma faixa translúcida aparece por trás e some em degradê. Celular: faixa de largura inteira, transparente no topo e na cor de fundo da página ao rolar (sem faixa escura), com o botão de menu.",
       ),
       quando: t("Site pages (Home, Projeto Piloto, Rede de Parceiros). It is the default.", "Páginas do site (Home, Projeto Piloto e Rede de Parceiros). É o padrão."),
     },
@@ -686,7 +686,7 @@ export function HeaderShowcase() {
         { name: t("Pill", "Pílula"), description: t("Card surface at 95%, border, rounded-full", "Superfície do card a 95%, borda, rounded-full"), light: "bg-card/95", dark: "bg-card/95" },
         { name: t("Pill shadow", "Sombra da pílula"), description: t("At rest / after scrolling", "Parada / depois de rolar"), light: "0 8px 24px -12px · 0 10px 30px -10px" },
         { name: t("Band behind the pill", "Faixa atrás da pílula"), description: t("Background 85% → 55% → 0, blur 10px, mask fading downwards", "Fundo 85% → 55% → 0, desfoque de 10px, máscara em degradê"), light: "from-background/85" },
-        { name: "--graphite-900 / 92%", description: t("Phone bar of the site when scrolled", "Faixa do site no celular ao rolar"), light: "#131A27", isColor: true },
+        { name: "--background", description: t("Phone bar of the site when scrolled (stays light)", "Faixa do site no celular ao rolar (continua clara)"), light: "#EDF0F5", isColor: true },
         { name: t("Photo veil", "Véu da foto"), description: t("Whole image + top", "Imagem toda + topo"), light: "black 45% + 60% → 0" },
       ],
     },
