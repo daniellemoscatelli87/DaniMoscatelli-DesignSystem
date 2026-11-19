@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Check, RotateCcw } from "lucide-react";
+import { Building, Check, RotateCcw } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { PageHeader } from "./GetStartedShowcase";
 import { SectionHeader } from "./shared/SectionHeader";
@@ -8,6 +8,7 @@ import { RodapeSite } from "../ui/rodape-site";
 import { BotaoWhatsApp, linkWhatsApp } from "../ui/botao-whatsapp";
 import { AvisoProjeto } from "../ui/aviso-projeto";
 import { BotaoSubir } from "../ui/botao-subir";
+import { PilulaDeAcao } from "../ui/pilula-de-acao";
 import { AvisoCookies } from "../ui/aviso-cookies";
 import { SurgirAoRolar, TituloQueSurge } from "../ui/surgir-ao-rolar";
 import { CurvaSecao } from "../ui/curva-secao";
@@ -92,7 +93,7 @@ function PaginaFalsa() {
 
 function Moldura({ children, className = "", rotulo }: { children: React.ReactNode; className?: string; rotulo: string }) {
   return (
-    <div role="group" aria-label={rotulo} className={`relative overflow-hidden rounded-lg border border-border bg-background ${className}`}>
+    <div role="group" aria-label={rotulo} className={`relative isolate overflow-hidden rounded-lg border border-border bg-background ${className}`}>
       {children}
     </div>
   );
@@ -176,6 +177,11 @@ function SecaoFlutuantes() {
   const [chave, setChave] = useState(0);
   const raiz = useRef<HTMLDivElement>(null);
   const fim = useRef<HTMLDivElement>(null);
+  const raizCel = useRef<HTMLDivElement>(null);
+  const conviteCel = useRef<HTMLDivElement>(null);
+  const raizPc = useRef<HTMLDivElement>(null);
+  const heroPc = useRef<HTMLDivElement>(null);
+  const convitePc = useRef<HTMLDivElement>(null);
   const aviso = {
     titulo: t("Got a project?", "Tem um projeto?"),
     texto: t("Let's talk about it.", "Vamos conversar sobre ele."),
@@ -196,8 +202,8 @@ function SecaoFlutuantes() {
       <SectionHeader
         title={t("Floating elements", "Elementos flutuantes")}
         description={t(
-          "Fixed at the bottom right of every site page: the WhatsApp button; on Home, the “Got a project?” notice pointing to it; and, when the footer appears, the back-to-top button beside it.",
-          "Fixos no canto inferior direito de todas as páginas do site: o botão do WhatsApp; na Home, o aviso “Tem um projeto?” apontando para ele; e, quando o rodapé aparece, o botão de voltar ao topo ao lado dele.",
+          "Fixed at the bottom right of every site page: the WhatsApp button; on Home, the “Got a project?” notice pointing to it; on Seja Parceiro and Projeto Piloto, the action pill beside it; and, when the footer appears, the back-to-top button. The WhatsApp green is the only colour outside the DS (product owner's exception, 19/11/2026).",
+          "Fixos no canto inferior direito de todas as páginas do site: o botão do WhatsApp; na Home, o aviso “Tem um projeto?” apontando para ele; no Seja Parceiro e no Projeto Piloto, a pílula de ação ao lado dele; e, quando o rodapé aparece, o botão de voltar ao topo. O verde do WhatsApp é a única cor fora do DS (exceção da dona do produto, 19/11/2026).",
         )}
       />
       <div className="flex justify-end">
@@ -238,11 +244,54 @@ function SecaoFlutuantes() {
           <BotaoWhatsApp {...whats} />
         </Moldura>
       </div>
+      <div>
+        <Rotulo
+          titulo={t("Action pill", "Pílula de ação")}
+          desc={t(
+            "The page's main action, beside the WhatsApp button. Phone: it takes the width to the left of the button, with a graphite band behind; it stays visible and leaves only when the invitation button at the end of the page is on screen. Computer: it appears when the hero button leaves the screen. Scroll inside the boxes.",
+            "A ação principal da página, ao lado do botão do WhatsApp. Celular: ocupa a largura à esquerda do botão, com uma faixa grafite por trás; fica sempre visível e só sai quando o botão do convite, no fim da página, está na tela. Computador: aparece quando o botão do hero sai da tela. Role dentro das caixas.",
+          )}
+        />
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <Moldura className="mx-auto h-[340px] w-full max-w-[390px]" rotulo={t("Action pill on the phone (Seja Parceiro)", "Pílula de ação no celular (Seja Parceiro)")}>
+            <div ref={raizCel} id="pilula-celular-rolagem" tabIndex={0} aria-label={t("Scrollable demo page", "Página de demonstração com rolagem")} className="h-full overflow-y-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
+              <PaginaFalsa /><PaginaFalsa /><PaginaFalsa />
+              <div className="px-5 pb-28 pt-2">
+                <div aria-hidden className="space-y-3 rounded-lg bg-card p-5 shadow-sm">
+                  <div className="h-4 w-2/3 rounded-full bg-graphite-100 dark:bg-white/10" />
+                  <div ref={conviteCel} className="h-12 w-44 rounded-full bg-primary/80" />
+                </div>
+              </div>
+            </div>
+            <PilulaDeAcao fixo={false} layout="celular" raiz={raizCel} esconderCom={[conviteCel]} href="#site-flutuantes" rotulo={t("Become a partner", "Quero ser parceiro")} />
+            <BotaoWhatsApp {...whats} className="sm:bottom-5 sm:right-5" />
+          </Moldura>
+          <Moldura className="h-[340px] w-full" rotulo={t("Action pill on the computer (Projeto Piloto)", "Pílula de ação no computador (Projeto Piloto)")}>
+            <div ref={raizPc} id="pilula-computador-rolagem" tabIndex={0} aria-label={t("Scrollable demo page", "Página de demonstração com rolagem")} className="h-full overflow-y-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
+              <div aria-hidden className="space-y-3 bg-graphite-100 p-5 dark:bg-graphite-800">
+                <div className="h-5 w-1/2 rounded-full bg-graphite-200 dark:bg-white/10" />
+                <div className="h-3 w-3/4 rounded-full bg-graphite-200/70 dark:bg-white/5" />
+                <div ref={heroPc} className="h-12 w-44 rounded-full bg-primary/80" />
+              </div>
+              <PaginaFalsa /><PaginaFalsa /><PaginaFalsa />
+              <div className="px-5 pb-28 pt-2">
+                <div aria-hidden className="space-y-3 rounded-lg bg-card p-5 shadow-sm">
+                  <div className="h-4 w-2/3 rounded-full bg-graphite-100 dark:bg-white/10" />
+                  <div ref={convitePc} className="h-12 w-44 rounded-full bg-primary/80" />
+                </div>
+              </div>
+            </div>
+            <PilulaDeAcao fixo={false} layout="computador" raiz={raizPc} mostrarApos={heroPc} esconderCom={[convitePc]} href="#site-flutuantes" icone={<Building className="size-[1.125rem]" />} iconeAntes rotulo={t("Register company", "Cadastrar empresa")} />
+            <BotaoWhatsApp {...whats} className="bottom-6 right-6" />
+          </Moldura>
+        </div>
+      </div>
       <Orientacoes
         quando={[
           t("WhatsApp button: on every page of the site, always in the same place.", "Botão do WhatsApp: em todas as páginas do site, sempre no mesmo lugar."),
           t("“Got a project?” notice: only on the home page; once closed, it does not come back in the same session.", "Aviso “Tem um projeto?”: só na página inicial; depois de fechado, não volta na mesma sessão."),
           t("Back to top: long pages; it appears only when the footer enters the screen.", "Voltar ao topo: páginas longas; aparece só quando o rodapé entra na tela."),
+          t("Action pill: one main action per page (sign up, register). It never shows together with the same button on screen (hero or invitation).", "Pílula de ação: uma ação principal por página (cadastro, inscrição). Nunca aparece junto com o mesmo botão na tela (hero ou convite)."),
           t("On phones, keep 20 px from the edges and 12 px between the floating elements; reserve space at the end of the page so they do not cover the footer.", "No celular, mantenha 20 px das bordas e 12 px entre os flutuantes; reserve espaço no fim da página para eles não cobrirem o rodapé."),
         ]}
         a11y={[
@@ -251,16 +300,20 @@ function SecaoFlutuantes() {
           t("Hidden back-to-top leaves the Tab order; after going up, focus moves to the start of the content.", "O voltar ao topo escondido sai da ordem do Tab; depois de subir, o foco vai para o começo do conteúdo."),
           t("With reduced motion: no entrance, no floating and the return to the top is instant.", "Com movimento reduzido: sem entrada, sem flutuar e a volta ao topo é instantânea."),
           t("Touch areas of 56 × 56 px.", "Áreas de toque de 56 × 56 px."),
-          t("The WhatsApp green is the WhatsApp brand colour, only on that button; the icon is white.", "O verde do WhatsApp é a cor da marca do WhatsApp, só nesse botão; o ícone é branco."),
+          t("Hidden action pill also leaves the Tab order and screen readers; its text says the action.", "A pílula de ação escondida também sai da ordem do Tab e dos leitores de tela; o texto dela diz a ação."),
+          t("The WhatsApp green (#25D366) is the WhatsApp brand colour, only on that button, with a white icon: product owner's exception, 19/11/2026.", "O verde do WhatsApp (#25D366) é a cor da marca do WhatsApp, só nesse botão, com ícone branco: exceção da dona do produto, 19/11/2026."),
         ]}
       />
       <Codigo>{`import { BotaoWhatsApp, linkWhatsApp } from "@/app/components/ui/botao-whatsapp";
 import { AvisoProjeto } from "@/app/components/ui/aviso-projeto";
 import { BotaoSubir } from "@/app/components/ui/botao-subir";
+import { PilulaDeAcao } from "@/app/components/ui/pilula-de-acao";
 
 <BotaoWhatsApp numero="5541997485414" mensagem="Olá, Dani! ..." />
 <AvisoProjeto href={linkWhatsApp("5541997485414")} />   {/* só na Home */}
-<BotaoSubir />                                          {/* aparece com o rodapé */}`}</Codigo>
+<BotaoSubir />                                          {/* aparece com o rodapé */}
+<PilulaDeAcao rotulo="Quero ser parceiro" href="/rede-parceiros/cadastro/"
+  mostrarApos={botaoDoHero} esconderCom={[botaoDoConvite]} sempreAte={1023} />`}</Codigo>
     </section>
   );
 }

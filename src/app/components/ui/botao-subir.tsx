@@ -78,7 +78,7 @@ function BotaoSubir({
       onClick={subir}
       className={cn(
         fixo ? "fixed" : "absolute",
-        "z-40 inline-flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg",
+        "z-[44] inline-flex size-14 cursor-pointer items-center justify-center rounded-full border border-border bg-card text-foreground shadow-lg",
         "transition-[opacity,transform,background-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-graphite-50 dark:hover:bg-accent motion-reduce:transition-none",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         aoLadoDoWhatsApp ? "bottom-5 right-[5.5rem] sm:bottom-6 sm:right-[5.75rem]" : "bottom-5 right-5 sm:bottom-6 sm:right-6",
