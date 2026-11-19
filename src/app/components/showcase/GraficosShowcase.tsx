@@ -8,7 +8,7 @@ import {
   DescobertaVisual, GraficoDeRosca, BarrasOrdenadas, MapaDeCalorPorRegiao, GraficoDeHalteres, GraficoDeLinhas,
   GraficoDeInclinacao, Mosaico, BarrasEmpilhadas100, GraficoDeBolhas, MapaDeCalorMatricial, GraficoDeRanking, Funil,
   formatarNumero, type RegiaoDoMapa,
-} from "../ui/graficos";
+} from "../ui/graficos-inteligencia";
 
 /* Charts and visualizations (19/11/2026). Every number on this page is fictitious example data
    (neutral service examples): none describes real clients, units, regions or contacts. */

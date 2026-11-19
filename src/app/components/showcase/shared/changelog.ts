@@ -14,6 +14,16 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Charts and visualizations", pt: "Gráficos e visualizações" },
+    desc: { en: "New page and ui/graficos-inteligencia.tsx: how to choose a chart, chart colours, a redesigned donut, the recommended charts (ranked bars, regional heat map, dumbbell, lines and area, slope, treemap, 100% bars, bubbles, matrix heat map, bump chart, funnel), each as a discovery card (conclusion, chart, why it matters, next step), and the intelligence design principle. Chart tokens become tonal variations of the brand red; graphite only for non-highlighted or disabled information.", pt: "Página nova e ui/graficos-inteligencia.tsx: como escolher o gráfico, cores dos gráficos, rosca redesenhada, os gráficos recomendados (barras ordenadas, mapa de calor por região, dumbbell, linhas e área, slope, treemap, barras 100%, bolhas, heatmap matricial, bump, funil), cada um como um card de descoberta (conclusão, gráfico, por que importa, próximo passo), e o princípio do design de inteligência. Os tokens de gráfico passam a ser variações de tom do vermelho da marca; o grafite fica só para informação sem destaque ou desabilitada." },
+    page: "graficos", anchor: "graficos-recomendados",
+  },
+  {
+    date: "Nov 2026", kind: "New", title: { en: "Site patterns", pt: "Padrões do site" },
+    desc: { en: "New page with the site's patterns as components: footer (light, dark and compact), WhatsApp button, \"Tem um projeto?\" notice and back-to-top, cookie notice, reveal on scroll (slide up and blur, word by word), area-of-work card and curved dividers. Header: on phones the site bar stays light when scrolling.", pt: "Página nova com os padrões do site como componentes: rodapé (claro, escuro e compacto), botão do WhatsApp, aviso \"Tem um projeto?\" e voltar ao topo, aviso de cookies, entrada ao rolar (subir e desfoque, palavra por palavra), card de frente de atuação e divisores curvos. Header: no celular, a faixa do site continua clara ao rolar." },
+    page: "site", anchor: "site-rodape",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "No sideways scroll on phones", pt: "Celular sem rolagem lateral" },
     desc: { en: "Every page fits 390 px: pagination and tabs wrap instead of scrolling, typography cards break long text, and the orbiting circles stack on phones.", pt: "Todas as páginas cabem em 390 px: paginação e abas quebram linha em vez de rolar, os cards de tipografia quebram textos longos e os círculos em órbita ficam um embaixo do outro no celular." },
     page: "overlays", anchor: "pagination",
