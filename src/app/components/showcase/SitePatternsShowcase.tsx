@@ -568,8 +568,8 @@ function SecaoFrentes() {
       <SectionHeader
         title={t("Area of work card", "Card de frente de atuação")}
         description={t(
-          "The card of the “Onde podemos atuar” section of Projeto Piloto: icon, title, red subtitle, description and topics. Hover it: the card lifts, light runs around the border, a soft glow follows the pointer and the icon turns solid.",
-          "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda, um brilho suave segue o cursor e o ícone fica sólido.",
+          "The card of the “Onde podemos atuar” section of Projeto Piloto: icon, title, red subtitle, description and topics. Hover it: the card lifts, light runs around the border and a soft glow follows the pointer. On the glass card the icon and topics stay glass, because the card is not clickable.",
+          "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda e um brilho suave segue o cursor. No card de vidro, o ícone e os temas continuam em vidro, porque o card não é clicável.",
         )}
       />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
