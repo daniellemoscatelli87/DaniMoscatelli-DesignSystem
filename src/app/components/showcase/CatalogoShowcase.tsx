@@ -56,6 +56,7 @@ const itens: Item[] = [
   { nome: "dropdown-menu", en: "Menu of actions opened by a button.", pt: "Menu de ações aberto por um botão.", pagina: P.overlays },
   { nome: "fashion-icons", en: "Fashion icons (garments) that Lucide does not have.", pt: "Ícones de moda (peças) que o Lucide não tem.", pagina: P.icones },
   { nome: "form", en: "Form helpers (react-hook-form) with label, message and errors.", pt: "Base de formulário (react-hook-form) com rótulo, mensagem e erros." },
+  { nome: "graficos", en: "Charts: donut, ranked bars, regional heat map, dumbbell, lines, slope, treemap, 100% bars, bubbles, matrix heat map, bump chart, funnel and the discovery card.", pt: "Gráficos: rosca, barras ordenadas, mapa de calor por região, halteres, linhas, inclinação, mosaico, barras 100%, bolhas, mapa de calor em matriz, ranking, funil e o card de descoberta.", pagina: { secao: "graficos", rotulo: ["Charts", "Gráficos"] } },
   { nome: "glass-card", en: "Glass card in the approved finishes.", pt: "Card de vidro nos acabamentos aprovados.", pagina: P.cards },
   { nome: "heading", en: "Title with the highlighted word in the brand color.", pt: "Título com a palavra de destaque na cor da marca.", pagina: P.fundamentos },
   { nome: "hover-card", en: "Preview card that opens when hovering a link.", pt: "Card de prévia que abre ao passar o mouse num link." },
