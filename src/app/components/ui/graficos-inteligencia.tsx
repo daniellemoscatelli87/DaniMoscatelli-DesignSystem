@@ -36,13 +36,13 @@ export const ESCALA_SEQUENCIAL = [
 ] as const;
 
 /** Tons categóricos que aceitam texto por cima (mosaico); a cor do texto vem de cada DS (--chart-N-texto). */
-const TONS_COM_TEXTO = [
+export const TONS_COM_TEXTO = [
   { cor: "var(--chart-1)", texto: "var(--chart-1-texto)" },
   { cor: "var(--chart-2)", texto: "var(--chart-2-texto)" },
   { cor: "var(--chart-4)", texto: "var(--chart-4-texto)" },
   { cor: "var(--chart-5)", texto: "var(--chart-5-texto)" },
 ] as const;
-const NEUTRO_COM_TEXTO = { cor: COR_NEUTRA, texto: "var(--foreground)" };
+export const NEUTRO_COM_TEXTO = { cor: COR_NEUTRA, texto: "var(--foreground)" };
 
 /* ── Utilidades ────────────────────────────────────────────────────────────────────────────────────────── */
 
@@ -57,10 +57,10 @@ export function formatarPercentual(p: number, casas = 0, localidade = "pt-BR") {
   return `${formatarNumero(p, casas, localidade)}%`;
 }
 
-const soma = (xs: number[]) => xs.reduce((s, x) => s + x, 0);
+export const soma = (xs: number[]) => xs.reduce((s, x) => s + x, 0);
 
 /** Largura real do elemento, atualizada quando muda (0 até medir). */
-function useLargura<T extends HTMLElement>() {
+export function useLargura<T extends HTMLElement>() {
   const ref = React.useRef<T>(null);
   const [largura, setLargura] = React.useState(0);
   React.useLayoutEffect(() => {
@@ -76,7 +76,7 @@ function useLargura<T extends HTMLElement>() {
 }
 
 /** Marcas de eixo "redondas" entre 0 (ou mínimo) e o máximo. */
-function marcasDoEixo(minimo: number, maximo: number, quantas = 4) {
+export function marcasDoEixo(minimo: number, maximo: number, quantas = 4) {
   const amplitude = Math.max(1e-9, maximo - minimo);
   const passoBruto = amplitude / quantas;
   const mag = Math.pow(10, Math.floor(Math.log10(passoBruto)));
@@ -89,7 +89,7 @@ function marcasDoEixo(minimo: number, maximo: number, quantas = 4) {
 }
 
 /** Afasta rótulos verticais que se sobrepõem (mantém a ordem, distância mínima `gap`). */
-function afastar(ys: number[], gap: number, min: number, max: number) {
+export function afastar(ys: number[], gap: number, min: number, max: number) {
   const ordem = ys.map((y, i) => ({ y, i })).sort((a, b) => a.y - b.y);
   for (let k = 1; k < ordem.length; k++) if (ordem[k]!.y - ordem[k - 1]!.y < gap) ordem[k]!.y = ordem[k - 1]!.y + gap;
   const excesso = ordem.length ? ordem[ordem.length - 1]!.y - max : 0;
@@ -102,9 +102,9 @@ function afastar(ys: number[], gap: number, min: number, max: number) {
 }
 
 /** Largura aproximada de um texto (Plus Jakarta / Inter em px). */
-const larguraTexto = (s: string, px = 12) => s.length * px * 0.56;
+export const larguraTexto = (s: string, px = 12) => s.length * px * 0.56;
 
-type Base = {
+export type BaseDoGrafico = {
   /** Nome acessível do gráfico (vira o começo do aria-label). */
   rotulo: string;
   /** Formata os valores escritos junto das marcas. */
@@ -112,7 +112,7 @@ type Base = {
   className?: string;
 };
 
-const fmtPadrao: Formatador = n => formatarNumero(n);
+export const fmtPadrao: Formatador = n => formatarNumero(n);
 
 /* ── Moldura da descoberta (os 4 passos do design de inteligência) ─────────────────────────────────────── */
 
@@ -254,7 +254,7 @@ export function LegendaDoGrafico({ itens, className }: { itens: { rotulo: string
 
 export type ParteDaRosca = { rotulo: string; valor: number; /** "Outros" e afins: grafite, sempre no fim. */ neutro?: boolean };
 
-export type GraficoDeRoscaProps = Base & {
+export type GraficoDeRoscaProps = BaseDoGrafico & {
   partes: ParteDaRosca[];
   /** Texto do centro: o total (quantidade), não o número de partes. */
   centro: { valor: string; rotulo: string };
@@ -265,7 +265,7 @@ export type GraficoDeRoscaProps = Base & {
   tamanho?: number;
 };
 
-function arco(cx: number, cy: number, r: number, a0: number, a1: number) {
+export function arco(cx: number, cy: number, r: number, a0: number, a1: number) {
   const p = (a: number) => [cx + r * Math.sin(a), cy - r * Math.cos(a)] as const;
   const [x0, y0] = p(a0);
   const [x1, y1] = p(a1);
@@ -357,7 +357,7 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
 
 /* ── 2. Barras horizontais ordenadas ──────────────────────────────────────────────────────────────────── */
 
-export type BarrasOrdenadasProps = Base & {
+export type BarrasOrdenadasProps = BaseDoGrafico & {
   itens: { rotulo: string; valor: number }[];
   /** Quantos itens do topo ficam na primária (os outros em tom claro). Padrão 3. */
   destaques?: number;
@@ -413,7 +413,7 @@ export type RegiaoDoMapa = {
   altura?: number;
 };
 
-export type MapaDeCalorPorRegiaoProps = Base & {
+export type MapaDeCalorPorRegiaoProps = BaseDoGrafico & {
   regioes: RegiaoDoMapa[];
   colunas: number;
   linhas: number;
@@ -423,12 +423,12 @@ export type MapaDeCalorPorRegiaoProps = Base & {
 };
 
 /** Faixa da escala sequencial (0 a 3) para um valor. */
-function faixa(v: number, min: number, max: number) {
+export function faixa(v: number, min: number, max: number) {
   if (max <= min) return ESCALA_SEQUENCIAL.length - 1;
   return Math.min(ESCALA_SEQUENCIAL.length - 1, Math.floor(((v - min) / (max - min)) * ESCALA_SEQUENCIAL.length));
 }
 
-function LegendaSequencial({ menos, mais }: { menos: string; mais: string }) {
+export function LegendaSequencial({ menos, mais }: { menos: string; mais: string }) {
   return (
     <div aria-hidden className="flex items-center gap-2 text-[0.75rem] text-muted-foreground">
       <span>{menos}</span>
@@ -490,7 +490,7 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
 
 /* ── 4. Halteres (dumbbell): duas medidas lado a lado ─────────────────────────────────────────────────── */
 
-export type GraficoDeHalteresProps = Base & {
+export type GraficoDeHalteresProps = BaseDoGrafico & {
   itens: { rotulo: string; a: number; b: number }[];
   /** Nomes das duas medidas: [a, b]. "b" é a medida em destaque (primária). */
   series: [string, string];
@@ -558,7 +558,7 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
 
 export type SerieDeLinha = { rotulo: string; valores: number[]; destaque?: boolean };
 
-export type GraficoDeLinhasProps = Base & {
+export type GraficoDeLinhasProps = BaseDoGrafico & {
   series: SerieDeLinha[];
   rotulosX: string[];
   /** Preenche a área abaixo da série em destaque. */
@@ -664,7 +664,7 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
 
 /* ── 6. Inclinação (slope): antes e depois ─────────────────────────────────────────────────────────────── */
 
-export type GraficoDeInclinacaoProps = Base & {
+export type GraficoDeInclinacaoProps = BaseDoGrafico & {
   itens: { rotulo: string; inicio: number; fim: number }[];
   periodos: [string, string];
   /** Itens em destaque (pelo nome). Padrão: os 2 que mais cresceram em proporção. */
@@ -751,7 +751,7 @@ function squarify(areas: number[], r: Ret): Ret[] {
   return saida;
 }
 
-export type MosaicoProps = Base & {
+export type MosaicoProps = BaseDoGrafico & {
   itens: { rotulo: string; valor: number; neutro?: boolean }[];
   altura?: number;
   localidade?: string;
@@ -801,7 +801,7 @@ export function Mosaico({ itens, altura = 260, rotulo, localidade = "pt-BR", cla
 
 /* ── 8. Barras 100% empilhadas ────────────────────────────────────────────────────────────────────────── */
 
-export type BarrasEmpilhadas100Props = Base & {
+export type BarrasEmpilhadas100Props = BaseDoGrafico & {
   categorias: { rotulo: string; neutro?: boolean }[];
   /** Uma linha por grupo; `valores` na ordem de `categorias`. */
   linhas: { rotulo: string; valores: number[] }[];
@@ -848,7 +848,7 @@ export function BarrasEmpilhadas100({ categorias, linhas, minimoParaRotulo = 9, 
 
 export type BolhaDoGrafico = { rotulo: string; x: number; y: number; tamanho: number; destaque?: boolean };
 
-export type GraficoDeBolhasProps = Base & {
+export type GraficoDeBolhasProps = BaseDoGrafico & {
   itens: BolhaDoGrafico[];
   eixoX: { rotulo: string; formatar?: Formatador };
   eixoY: { rotulo: string; formatar?: Formatador };
@@ -919,7 +919,7 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
 
 /* ── 10. Mapa de calor em matriz ──────────────────────────────────────────────────────────────────────── */
 
-export type MapaDeCalorMatricialProps = Base & {
+export type MapaDeCalorMatricialProps = BaseDoGrafico & {
   linhas: string[];
   colunas: string[];
   /** valores[linha][coluna] */
@@ -974,7 +974,7 @@ export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = 
 
 /* ── 11. Ranking ao longo do tempo (bump chart) ───────────────────────────────────────────────────────── */
 
-export type GraficoDeRankingProps = Base & {
+export type GraficoDeRankingProps = BaseDoGrafico & {
   /** posicoes[i] = posição no período i (1 = primeiro lugar). */
   series: { rotulo: string; posicoes: number[]; destaque?: boolean }[];
   periodos: string[];
@@ -1036,7 +1036,7 @@ export function GraficoDeRanking({ series, periodos, rotulo, formatarPosicao = p
 
 /* ── 12. Funil ────────────────────────────────────────────────────────────────────────────────────────── */
 
-export type FunilProps = Base & {
+export type FunilProps = BaseDoGrafico & {
   etapas: { rotulo: string; valor: number }[];
   /** Marca a passagem com a maior perda (padrão: sim). */
   destacarMaiorPerda?: boolean;
