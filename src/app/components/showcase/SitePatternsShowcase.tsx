@@ -11,6 +11,7 @@ import { BotaoSubir } from "../ui/botao-subir";
 import { AvisoCookies } from "../ui/aviso-cookies";
 import { SurgirAoRolar, TituloQueSurge } from "../ui/surgir-ao-rolar";
 import { CurvaSecao } from "../ui/curva-secao";
+import { CardDeFrente, GradeDeFrentes } from "../ui/card-frente";
 import { SegmentedControl } from "../ui/segmented-control";
 import { SeloSecao } from "../ui/selo-secao";
 import { Button } from "../ui/button";
@@ -324,28 +325,184 @@ function SecaoCookies() {
   );
 }
 
+/* ───────────── Seção "Onde podemos atuar" (reprodução do Projeto Piloto) ───────────── */
+
+function IconeFeather({ children }: { children: React.ReactNode }) {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+      {children}
+    </svg>
+  );
+}
+
+/* As seis frentes do site (projeto-piloto/index.html), com os ícones originais (traço 2, 24 × 24). */
+const FRENTES: { numero: string; icone: React.ReactNode; titulo: [string, string]; subtitulo: [string, string]; descricao: [string, string]; temas: [string, string][] }[] = [
+  {
+    numero: "01",
+    icone: <IconeFeather><circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" /></IconeFeather>,
+    titulo: ["Experience Research and Strategy", "Pesquisa e Estratégia de Experiência"],
+    subtitulo: ["Understand people and identify opportunities", "Compreender pessoas e identificar oportunidades"],
+    descricao: ["We investigate needs, expectations and behaviours to understand problems, support decisions and reveal opportunities to evolve.", "Investigamos necessidades, expectativas e comportamentos para compreender problemas, apoiar decisões e revelar oportunidades de evolução."],
+    temas: [["Research", "Pesquisa"], ["Behaviour", "Comportamento"], ["Diagnosis", "Diagnóstico"]],
+  },
+  {
+    numero: "02",
+    icone: <IconeFeather><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></IconeFeather>,
+    titulo: ["Journeys and Customer Experience", "Jornadas e Experiência do Cliente"],
+    subtitulo: ["Improve each interaction along the journey", "Melhorar cada interação ao longo da jornada"],
+    descricao: ["We analyse and redesign physical, digital and hybrid journeys to reduce friction and make interactions simpler, more integrated and more relevant.", "Analisamos e redesenhamos jornadas físicas, digitais e híbridas para reduzir atritos e tornar as interações mais simples, integradas e relevantes."],
+    temas: [["Journeys", "Jornadas"], ["Customer service", "Atendimento"], ["Touchpoints", "Pontos de contato"]],
+  },
+  {
+    numero: "03",
+    icone: <IconeFeather><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" /></IconeFeather>,
+    titulo: ["Service Design and Transformation", "Design e Transformação de Serviços"],
+    subtitulo: ["Align operations with the desired experience", "Alinhar operações à experiência desejada"],
+    descricao: ["We investigate and redesign the elements that support service delivery, connecting processes, people and operations to customers' needs.", "Investigamos e redesenhamos os elementos que sustentam a entrega dos serviços, conectando processos, pessoas e operações às necessidades dos clientes."],
+    temas: [["Services", "Serviços"], ["Processes", "Processos"], ["Operations", "Operações"]],
+  },
+  {
+    numero: "04",
+    icone: <IconeFeather><line x1="9" y1="18" x2="15" y2="18" /><line x1="10" y1="22" x2="14" y2="22" /><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14" /></IconeFeather>,
+    titulo: ["Service Innovation and Development", "Inovação e Desenvolvimento de Serviços"],
+    subtitulo: ["Create and reinvent services from real needs", "Criar e reinventar serviços a partir de necessidades reais"],
+    descricao: ["We identify opportunities to conceive, improve and validate services and experiences that create value for people and for the business.", "Identificamos oportunidades para conceber, aprimorar e validar serviços e experiências que gerem valor para as pessoas e para o negócio."],
+    temas: [["New services", "Novos serviços"], ["Prototyping", "Prototipação"], ["Validation", "Validação"]],
+  },
+  {
+    numero: "05",
+    icone: <IconeFeather><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" /></IconeFeather>,
+    titulo: ["Employee Experience", "Experiência do Colaborador"],
+    subtitulo: ["Improve the experience of those who make the service happen", "Melhorar a experiência de quem faz o serviço acontecer"],
+    descricao: ["We investigate work journeys, tools and interactions that influence the teams' experience and the quality of the services delivered.", "Investigamos jornadas, ferramentas e interações de trabalho que influenciam a experiência das equipes e a qualidade dos serviços entregues."],
+    temas: [["Employees", "Colaboradores"], ["Internal journeys", "Jornadas internas"], ["Collaboration", "Colaboração"]],
+  },
+  {
+    numero: "06",
+    icone: <IconeFeather><polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" /></IconeFeather>,
+    titulo: ["Experience Strategy and Management", "Estratégia e Gestão da Experiência"],
+    subtitulo: ["Guide decisions and the continuous evolution of the experience", "Orientar decisões e a evolução contínua da experiência"],
+    descricao: ["We support organisations in defining priorities, initiatives and indicators to structure and track the evolution of the experience.", "Apoiamos organizações na definição de prioridades, iniciativas e indicadores para estruturar e acompanhar a evolução da experiência."],
+    temas: [["Strategy", "Estratégia"], ["Prioritisation", "Priorização"], ["Indicators", "Indicadores"]],
+  },
+];
+
+const CSS_FUNDO = `
+@keyframes dm-blob-a { 0% { transform: translate(0, 0); } 50% { transform: translate(28%, 22%); } 100% { transform: translate(-18%, 42%); } }
+@keyframes dm-blob-b { 0% { transform: translate(0, 0); } 50% { transform: translate(-40%, 48%); } 100% { transform: translate(14%, 16%); } }
+@keyframes dm-blob-c { 0% { transform: translate(0, 0); } 50% { transform: translate(-30%, -40%); } 100% { transform: translate(24%, -12%); } }
+@media (prefers-reduced-motion: reduce) { .dm-fundo-escuro > span { animation: none !important; } }
+`;
+
+/** Fundo da seção escura do site: três manchas de luz que se movem devagar (crimson-600, graphite-600, crimson-400). */
+function FundoSecaoEscura() {
+  const mancha = (cor: string, pct: number) => `radial-gradient(closest-side, color-mix(in srgb, var(${cor}) ${pct}%, transparent) 0%, transparent 100%)`;
+  const base: React.CSSProperties = { position: "absolute", borderRadius: 9999, scale: "1.35" };
+  const mascara = "linear-gradient(to bottom, transparent 0, #000 160px, #000 calc(100% - 160px), transparent 100%)";
+  return (
+    <div aria-hidden className="dm-fundo-escuro pointer-events-none absolute inset-0 overflow-hidden" style={{ maskImage: mascara, WebkitMaskImage: mascara }}>
+      <style>{CSS_FUNDO}</style>
+      <span style={{ ...base, width: 620, height: 620, top: "12%", left: "-8%", background: mancha("--crimson-600", 45), animation: "dm-blob-a 18s ease-in-out infinite alternate" }} />
+      <span style={{ ...base, width: 520, height: 520, top: "-10%", left: "60%", background: mancha("--graphite-600", 60), animation: "dm-blob-b 23s ease-in-out infinite alternate" }} />
+      <span style={{ ...base, width: 460, height: 460, top: "55%", left: "30%", background: mancha("--crimson-400", 18), animation: "dm-blob-c 16s ease-in-out infinite alternate" }} />
+    </div>
+  );
+}
+
+/** A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. */
+function SecaoEscopo() {
+  const { t } = useI18n();
+  return (
+    <section aria-labelledby="escopo-demo-titulo" className="relative isolate overflow-hidden bg-graphite-950 pb-16 pt-28 font-sans sm:pb-36 sm:pt-44 lg:pt-48">
+      <FundoSecaoEscura />
+      <CurvaSecao posicao="topo" cor="var(--background)" />
+      <CurvaSecao posicao="base" cor="var(--background)" />
+      <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SurgirAoRolar escalonar passo={80} duracao={1400} className="mx-auto mb-8 max-w-3xl text-center sm:mb-16">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-400">
+            <span aria-hidden className="size-1.5 rounded-full bg-crimson-400" />{t("Scope of work", "Escopo de atuação")}
+          </p>
+          <h3 id="escopo-demo-titulo" className="mb-4 text-3xl font-bold tracking-[-0.02em] text-graphite-50 sm:text-4xl">{t("Where we can work", "Onde podemos atuar")}</h3>
+          <p className="mb-3 text-base font-medium leading-snug text-crimson-400 sm:text-lg">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
+          <p className="mx-auto max-w-2xl text-sm leading-relaxed text-graphite-300 sm:text-base">
+            {t(
+              "We investigate the experience in an integrated way, considering people, journeys, services and operations to identify opportunities for improvement and innovation.",
+              "Investigamos a experiência de forma integrada, considerando pessoas, jornadas, serviços e operações para identificar oportunidades de melhoria e inovação.",
+            )}
+          </p>
+        </SurgirAoRolar>
+        <SurgirAoRolar as={GradeDeFrentes} escalonar aria-label={t("Areas of work", "Frentes de atuação")}>
+          {FRENTES.map(f => (
+            <CardDeFrente
+              key={f.numero}
+              numero={f.numero}
+              icone={f.icone}
+              titulo={t(...f.titulo)}
+              subtitulo={t(...f.subtitulo)}
+              descricao={t(...f.descricao)}
+              temas={f.temas.map(x => t(...x))}
+              rotuloTemas={t("Topics", "Temas")}
+              nivelTitulo="h4"
+            />
+          ))}
+        </SurgirAoRolar>
+        <SurgirAoRolar as="p" className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-graphite-300">
+          {t(
+            "The areas of work represent possibilities for investigation and project development. In the Projeto Piloto Programme, the scope will be defined according to the selected challenge and the conditions agreed with each company.",
+            "As frentes de atuação representam possibilidades de investigação e desenvolvimento de projetos. No Programa Projeto Piloto, o escopo será delimitado conforme o desafio selecionado e as condições acordadas com cada empresa.",
+          )}
+        </SurgirAoRolar>
+      </div>
+    </section>
+  );
+}
+
+/** Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. */
+function SecaoArtigos() {
+  const { t } = useI18n();
+  const titulo = t("Thoughts and views on experience and strategy", "Pensamentos e visões sobre experiência e estratégia");
+  const destaque = t("experience and strategy", "experiência e estratégia");
+  return (
+    <div className="bg-card px-4 py-14 text-center font-sans sm:px-6 md:py-20">
+      <SurgirAoRolar efeito="desfoque">
+        <SeloSecao className="mb-3">{t("Insights & articles", "Insights & artigos")}</SeloSecao>
+      </SurgirAoRolar>
+      <TituloQueSurge as="h3" destaque={destaque} className="mx-auto mb-3 max-w-3xl text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-[2.25rem]">{titulo}</TituloQueSurge>
+      <SurgirAoRolar efeito="desfoque" atraso={200 + titulo.split(" ").length * 45}>
+        <p className="mx-auto mb-12 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {t(
+            "Reflections on human-centred design, ecosystem architecture and turning products into lasting relationships.",
+            "Reflexões sobre design centrado no humano, arquitetura de ecossistemas e a transformação de produtos em relações duradouras.",
+          )}
+        </p>
+      </SurgirAoRolar>
+      <SurgirAoRolar efeito="desfoque" escalonar className="mx-auto grid max-w-5xl grid-cols-1 gap-6 text-left md:grid-cols-3">
+        {[0, 1, 2].map(i => (
+          <div key={i} aria-hidden className="rounded-xl bg-background p-5 shadow-sm">
+            <div className="mb-4 h-32 rounded-lg bg-graphite-100 dark:bg-white/10" />
+            <div className="mb-2 h-3 w-1/3 rounded-full bg-graphite-200 dark:bg-white/10" />
+            <div className="mb-2 h-4 w-5/6 rounded-full bg-graphite-200 dark:bg-white/10" />
+            <div className="h-3 w-2/3 rounded-full bg-graphite-100 dark:bg-white/5" />
+          </div>
+        ))}
+      </SurgirAoRolar>
+    </div>
+  );
+}
+
 /* ───────────── Entrada ao rolar ───────────── */
 
 function SecaoEntrada() {
   const { t } = useI18n();
   const [efeito, setEfeito] = useState<"subir" | "desfoque">("subir");
   const [chave, setChave] = useState(0);
-  const raiz = useRef<HTMLDivElement>(null);
-  const cards = [
-    [t("Experience Research and Strategy", "Pesquisa e Estratégia de Experiência"), t("Understand people and identify opportunities", "Compreender pessoas e identificar oportunidades")],
-    [t("Journeys and Customer Experience", "Jornadas e Experiência do Cliente"), t("Improve each interaction along the journey", "Melhorar cada interação ao longo da jornada")],
-    [t("Service Design and Transformation", "Design e Transformação de Serviços"), t("Align operations with the desired experience", "Alinhar operações à experiência desejada")],
-  ];
-  const titulo = t("Where we can work", "Onde podemos atuar");
-  const selo = t("Scope of work", "Escopo de atuação");
-  const desc = t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.");
   return (
     <section id="site-entrada" className="scroll-mt-24 space-y-6">
       <SectionHeader
         title={t("Reveal on scroll", "Entrada ao rolar")}
         description={t(
-          "Blocks come in when they reach the screen, once. Two effects from the site: slide up (Projeto Piloto) and blur reveal, with the title word by word (Home and Seja Parceiro).",
-          "Os blocos entram quando chegam na tela, uma vez. Dois efeitos do site: subir (Projeto Piloto) e surgir do desfoque, com o título palavra por palavra (Home e Seja Parceiro).",
+          "Blocks come in when they reach the screen, once. Two effects from the site: slide up, here in the real “Onde podemos atuar” section of Projeto Piloto; and blur reveal with the title word by word, here in the real header of “Insights & artigos” on Home (the article cards are neutral blocks).",
+          "Os blocos entram quando chegam na tela, uma vez. Dois efeitos do site: subir, aqui na seção real “Onde podemos atuar” do Projeto Piloto; e surgir do desfoque com o título palavra por palavra, aqui no cabeçalho real de “Insights & artigos” da Home (os cards de artigo são blocos neutros).",
         )}
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -356,63 +513,122 @@ function SecaoEntrada() {
           onValueChange={v => { setEfeito(v); setChave(k => k + 1); }}
           options={[{ value: "subir", label: t("Slide up", "Subir") }, { value: "desfoque", label: t("Blur", "Desfoque") }]}
         />
-        <Button type="button" variant="outline" size="sm" onClick={() => { raiz.current?.scrollTo({ top: 0 }); setChave(k => k + 1); }}>
+        <Button type="button" variant="outline" size="sm" onClick={() => setChave(k => k + 1)}>
           <RotateCcw aria-hidden /> {t("Play again", "Ver de novo")}
         </Button>
       </div>
-      <Moldura rotulo={t("Reveal demo", "Demonstração da entrada")}>
-        <div ref={raiz} id="site-entrada-rolagem" tabIndex={0} aria-label={t("Scrollable demo page", "Página de demonstração com rolagem")} className="h-[460px] overflow-y-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
-          <p className="px-5 pt-5 text-center text-[0.8125rem] text-muted-foreground">{t("Scroll down inside the box ↓", "Role para baixo dentro da caixa ↓")}</p>
-          <div className="h-[300px]" aria-hidden />
-          <div key={`${efeito}-${chave}`} className="px-5 pb-10 text-center">
-            {efeito === "subir" ? (
-              <SurgirAoRolar raiz={raiz} escalonar className="flex flex-col items-center">
-                <SeloSecao size="sm" className="mb-3">{selo}</SeloSecao>
-                <h3 className="mb-2 text-[1.5rem] font-extrabold tracking-tight text-foreground">{titulo}</h3>
-                <p className="max-w-md text-[0.875rem] leading-relaxed text-muted-foreground">{desc}</p>
-              </SurgirAoRolar>
-            ) : (
-              <div className="flex flex-col items-center">
-                <SurgirAoRolar raiz={raiz} efeito="desfoque"><SeloSecao size="sm" className="mb-3">{selo}</SeloSecao></SurgirAoRolar>
-                <TituloQueSurge as="h3" raiz={raiz} className="mb-2 text-[1.5rem] font-extrabold tracking-tight text-foreground">{titulo}</TituloQueSurge>
-                <SurgirAoRolar raiz={raiz} efeito="desfoque" atraso={200 + titulo.split(" ").length * 45}>
-                  <p className="max-w-md text-[0.875rem] leading-relaxed text-muted-foreground">{desc}</p>
-                </SurgirAoRolar>
-              </div>
-            )}
-            <SurgirAoRolar raiz={raiz} efeito={efeito} escalonar className="mx-auto mt-6 grid max-w-3xl grid-cols-1 gap-3 text-left sm:grid-cols-3">
-              {cards.map(([a, b]) => (
-                <div key={a} className="rounded-lg border border-border bg-card p-4 shadow-sm">
-                  <p className="text-[0.9375rem] font-bold text-foreground">{a}</p>
-                  <p className="mt-1 text-[0.8125rem] font-semibold text-[var(--primary-text)]">{b}</p>
-                </div>
-              ))}
-            </SurgirAoRolar>
-          </div>
-        </div>
-      </Moldura>
+      <div id="site-entrada-demo" role="group" aria-label={t("Reveal demo", "Demonstração da entrada")} className="overflow-hidden rounded-lg border border-border">
+        {efeito === "subir" ? <SecaoEscopo key={`s${chave}`} /> : <SecaoArtigos key={`d${chave}`} />}
+      </div>
       <Orientacoes
         quando={[
           t("Section headers and groups of cards on marketing pages.", "Cabeçalhos de seção e grupos de cards em páginas de divulgação."),
-          t("Slide up for most blocks; blur with the word-by-word title for the main sections of a landing page.", "Subir para a maioria dos blocos; desfoque com o título palavra por palavra nas seções principais de uma landing page."),
+          t("Slide up for most blocks (header items every 80 ms, cards every 70 ms); blur with the word-by-word title for the main sections of a landing page.", "Subir para a maioria dos blocos (itens do cabeçalho a cada 80 ms, cards a cada 70 ms); desfoque com o título palavra por palavra nas seções principais de uma landing page."),
           t("Not in panels, forms and data: content people work with must already be there.", "Não use em painéis, formulários e dados: o conteúdo de trabalho tem de estar lá."),
         ]}
         a11y={[
           t("With reduced motion, nothing is hidden and nothing moves.", "Com movimento reduzido, nada fica escondido e nada se mexe."),
           t("Without JavaScript or IntersectionObserver, the content stays visible.", "Sem JavaScript ou sem IntersectionObserver, o conteúdo continua visível."),
           t("The word-by-word title keeps the whole sentence for screen readers.", "O título palavra por palavra mantém a frase inteira para leitores de tela."),
-          t("It animates once (repeating is optional) and lasts less than 1 s per block.", "Anima uma vez (repetir é opcional) e dura menos de 1 s por bloco."),
+          t("It animates once (repeating is optional) and lasts less than 1 s per block; then the entrance styles leave, so hover stays immediate.", "Anima uma vez (repetir é opcional) e dura menos de 1 s por bloco; depois os estilos da entrada saem, e o hover continua imediato."),
         ]}
       />
       <Codigo>{`import { SurgirAoRolar, TituloQueSurge } from "@/app/components/ui/surgir-ao-rolar";
+import { GradeDeFrentes, CardDeFrente } from "@/app/components/ui/card-frente";
 
-<SurgirAoRolar escalonar>            {/* subir: 24 px, 0,7 s, filhos a cada 70 ms */}
-  <SeloSecao>Escopo de atuação</SeloSecao>
-  <h2>Onde podemos atuar</h2>
+<SurgirAoRolar escalonar passo={80}>       {/* selo, título, subtítulo, texto */}
+  …
 </SurgirAoRolar>
+<SurgirAoRolar as={GradeDeFrentes} escalonar>{cards}</SurgirAoRolar>
 
-<TituloQueSurge>Onde podemos atuar</TituloQueSurge>
-<SurgirAoRolar efeito="desfoque" escalonar>{cards}</SurgirAoRolar>`}</Codigo>
+<TituloQueSurge destaque="experiência e estratégia">
+  Pensamentos e visões sobre experiência e estratégia
+</TituloQueSurge>`}</Codigo>
+    </section>
+  );
+}
+
+/* ───────────── Card de frente ───────────── */
+
+function SecaoFrentes() {
+  const { t } = useI18n();
+  const f = FRENTES[1];
+  const props = {
+    numero: f.numero,
+    icone: f.icone,
+    titulo: t(...f.titulo),
+    subtitulo: t(...f.subtitulo),
+    descricao: t(...f.descricao),
+    temas: f.temas.map(x => t(...x)),
+    rotuloTemas: t("Topics", "Temas"),
+    nivelTitulo: "h4" as const,
+  };
+  return (
+    <section id="site-frentes" className="scroll-mt-24 space-y-6">
+      <SectionHeader
+        title={t("Area of work card", "Card de frente de atuação")}
+        description={t(
+          "The card of the “Onde podemos atuar” section of Projeto Piloto: icon, title, red subtitle, description and topics. Hover it: the card lifts, light runs around the border, a soft glow follows the pointer and the icon turns solid.",
+          "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda, um brilho suave segue o cursor e o ícone fica sólido.",
+        )}
+      />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="min-w-0">
+          <Rotulo titulo={t("Dark (as on the site)", "Escuro (como no site)")} desc={t("Light glass over the dark section. It is the default.", "Vidro claro sobre a seção escura. É o padrão.")} />
+          <div className="relative overflow-hidden rounded-lg bg-graphite-950 p-5 sm:p-8">
+            <FundoSecaoEscura />
+            <div className="relative"><CardDeFrente {...props} /></div>
+          </div>
+        </div>
+        <div className="min-w-0">
+          <Rotulo titulo={t("Light", "Claro")} desc={t("White DS card for light sections, with the number and the red bar of the original markup turned on.", "Card branco do DS para seções claras, com o número e a barra vermelha da marcação original ligados.")} />
+          <div className="rounded-lg border border-border bg-background p-5 sm:p-8">
+            <CardDeFrente {...props} tom="claro" mostrarNumero barra />
+          </div>
+        </div>
+      </div>
+      <Panel className="p-5">
+        <SubTitle>{t("Props", "Props")}</SubTitle>
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-2 text-[0.8125rem] leading-relaxed text-muted-foreground md:grid-cols-2">
+          {[
+            ["icone, titulo, subtitulo, descricao, temas", t("Content. Topics are short (1 or 2 words); on wide screens they stay on one line.", "Conteúdo. Os temas são curtos (1 ou 2 palavras); em telas largas ficam numa linha só.")],
+            ["tom", t("“escuro” (default, site) or “claro”.", "“escuro” (padrão, site) ou “claro”.")],
+            ["numero + mostrarNumero", t("Large decorative number at the top right. Hidden on the site today.", "Número grande decorativo no canto superior direito. Escondido no site hoje.")],
+            ["barra", t("Red bar that grows at the top on hover. Hidden on the site today.", "Barra vermelha que cresce no topo no hover. Escondida no site hoje.")],
+            ["nivelTitulo", t("Heading level of the title (h3 by default).", "Nível do título (h3 por padrão).")],
+            ["GradeDeFrentes", t("Grid of 1/2/3 columns; carousel with snap on phones (84% per card).", "Grade de 1/2/3 colunas; carrossel com encaixe no celular (84% por card).")],
+          ].map(([nome, desc]) => (
+            <li key={nome}><code className="font-[family-name:var(--font-mono)] text-foreground">{nome}</code>: {desc}</li>
+          ))}
+        </ul>
+      </Panel>
+      <Orientacoes
+        quando={[
+          t("Areas of work, services or fronts of a programme: 3 to 6 items of the same kind.", "Frentes de atuação, serviços ou eixos de um programa: de 3 a 6 itens do mesmo tipo."),
+          t("Dark tone inside a dark section; light tone on light pages.", "Tom escuro dentro de uma seção escura; tom claro em páginas claras."),
+          t("On phones, put them in GradeDeFrentes: a carousel that always shows part of the next card.", "No celular, use a GradeDeFrentes: um carrossel que sempre mostra parte do próximo card."),
+        ]}
+        a11y={[
+          t("Each card is an article named by its title; the topics are a list named “Topics”.", "Cada card é um article nomeado pelo título; os temas são uma lista com nome “Temas”."),
+          t("Icon, glow, number and bar are decorative and hidden from screen readers.", "Ícone, brilho, número e barra são decorativos e ficam ocultos para leitores de tela."),
+          t("The phone carousel is a named region that receives focus and scrolls with the arrow keys.", "O carrossel do celular é uma região com nome, que recebe foco e rola com as setas."),
+          t("With reduced motion: no lift, no icon swing and the border light stays still.", "Com movimento reduzido: sem subir, sem balanço do ícone e a luz da borda fica parada."),
+          t("On the dark section the red subtitle uses crimson-400, as on the site (4.47:1 on graphite-950, just below 4.5:1).", "Na seção escura o subtítulo vermelho usa crimson-400, como no site (4,47:1 sobre graphite-950, logo abaixo de 4,5:1)."),
+        ]}
+      />
+      <Codigo>{`import { CardDeFrente, GradeDeFrentes } from "@/app/components/ui/card-frente";
+import { Search } from "lucide-react";
+
+<GradeDeFrentes aria-label="Frentes de atuação">
+  <CardDeFrente
+    icone={<Search />}
+    titulo="Pesquisa e Estratégia de Experiência"
+    subtitulo="Compreender pessoas e identificar oportunidades"
+    descricao="Investigamos necessidades, expectativas e comportamentos…"
+    temas={["Pesquisa", "Comportamento", "Diagnóstico"]}
+  />
+  …
+</GradeDeFrentes>`}</Codigo>
     </section>
   );
 }
@@ -484,6 +700,7 @@ export function SitePatternsShowcase() {
       <SecaoFlutuantes />
       <SecaoCookies />
       <SecaoEntrada />
+      <SecaoFrentes />
       <SecaoCurvas />
     </div>
   );

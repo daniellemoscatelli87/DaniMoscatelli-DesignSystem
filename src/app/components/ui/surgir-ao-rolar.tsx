@@ -30,6 +30,8 @@ type OpcoesVisivel = {
   limiar?: number;
   margem?: string;
   repetir?: boolean;
+  /** Tempo total da entrada, em ms; depois dele os estilos da entrada saem (o hover volta a ser imediato). */
+  duracao?: number;
 };
 
 const CURVA = "cubic-bezier(0.16, 1, 0.3, 1)";
@@ -71,11 +73,18 @@ function useEstiloSurgir() {
   }, []);
 }
 
-/** "inicial" (sem estilo, antes do script), "oculto" (esperando a tela) ou "visto". */
-export function useSurgirAoRolar<T extends HTMLElement>({ raiz, limiar = 0.15, margem = "0px 0px -8% 0px", repetir = false }: OpcoesVisivel = {}) {
+/** "inicial" (sem estilo, antes do script), "oculto" (esperando a tela), "visto" (entrando) ou "fim" (entrada
+ *  terminada: nenhum estilo da entrada fica no elemento, para não atrasar transições de hover dos filhos). */
+export function useSurgirAoRolar<T extends HTMLElement>({ raiz, limiar = 0.15, margem = "0px 0px -8% 0px", repetir = false, duracao = 1600 }: OpcoesVisivel = {}) {
   useEstiloSurgir();
   const ref = React.useRef<T>(null);
-  const [estado, setEstado] = React.useState<"inicial" | "oculto" | "visto">("inicial");
+  const [estado, setEstado] = React.useState<"inicial" | "oculto" | "visto" | "fim">("inicial");
+
+  React.useEffect(() => {
+    if (estado !== "visto") return;
+    const id = window.setTimeout(() => setEstado(s => (s === "visto" ? "fim" : s)), duracao);
+    return () => window.clearTimeout(id);
+  }, [estado, duracao]);
 
   React.useLayoutEffect(() => {
     const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -88,10 +97,20 @@ export function useSurgirAoRolar<T extends HTMLElement>({ raiz, limiar = 0.15, m
     const el = ref.current;
     if (!el) return;
     const caixa = raiz?.current ?? null;
+    const topoDaRaiz = () => (caixa ? caixa.getBoundingClientRect().top : 0);
+    const mostrar = () => setEstado(s => (s === "fim" ? s : "visto"));
+    // rolagem rápida pode pular o bloco sem o observador perceber: o que já ficou acima da tela aparece
+    let quadro = 0;
+    const conferir = () => {
+      quadro = 0;
+      if (el.getBoundingClientRect().bottom < topoDaRaiz()) mostrar();
+    };
+    const aoRolar = () => { if (!quadro) quadro = requestAnimationFrame(conferir); };
+    const alvoRolagem: HTMLElement | Window = caixa ?? window;
     const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        setEstado("visto");
-        if (!repetir) obs.disconnect();
+      if (e.isIntersecting || e.boundingClientRect.bottom < topoDaRaiz()) {
+        mostrar();
+        if (!repetir) { obs.disconnect(); alvoRolagem.removeEventListener("scroll", aoRolar); }
       } else if (repetir) {
         const fundo = caixa ? caixa.getBoundingClientRect().bottom : window.innerHeight;
         if (e.boundingClientRect.top > fundo) setEstado("oculto");
@@ -100,7 +119,11 @@ export function useSurgirAoRolar<T extends HTMLElement>({ raiz, limiar = 0.15, m
     // só observa depois que o estado escondido foi desenhado; senão o que já está na tela aparece sem a transição
     let r2 = 0;
     const r1 = requestAnimationFrame(() => { r2 = requestAnimationFrame(() => obs.observe(el)); });
-    return () => { cancelAnimationFrame(r1); cancelAnimationFrame(r2); obs.disconnect(); };
+    alvoRolagem.addEventListener("scroll", aoRolar, { passive: true });
+    return () => {
+      cancelAnimationFrame(r1); cancelAnimationFrame(r2); cancelAnimationFrame(quadro);
+      obs.disconnect(); alvoRolagem.removeEventListener("scroll", aoRolar);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [estado === "inicial", raiz, limiar, margem, repetir]);
 
@@ -127,15 +150,19 @@ function SurgirAoRolar({
   limiar,
   margem,
   repetir,
+  duracao,
   className,
   style,
   children,
   ...props
 }: SurgirAoRolarProps) {
-  const { ref, estado } = useSurgirAoRolar<HTMLElement>({ raiz, limiar, margem, repetir });
+  const durMs = efeito === "desfoque" ? 900 : escalonar ? 600 : 700;
+  const passoMs = passo ?? (efeito === "desfoque" ? 150 : 70);
+  const filhos = escalonar ? Math.min(React.Children.count(children), 12) : 1;
+  const { ref, estado } = useSurgirAoRolar<HTMLElement>({ raiz, limiar, margem, repetir, duracao: duracao ?? atraso + durMs + (filhos - 1) * passoMs + 700 });
   const vars = {
-    "--surgir-dur": efeito === "desfoque" ? "900ms" : escalonar ? "600ms" : "700ms",
-    "--surgir-passo": `${passo ?? (efeito === "desfoque" ? 150 : 70)}ms`,
+    "--surgir-dur": `${durMs}ms`,
+    "--surgir-passo": `${passoMs}ms`,
     "--surgir-atraso": `${atraso}ms`,
   } as React.CSSProperties;
   return (
@@ -160,12 +187,18 @@ export type TituloQueSurgeProps = Omit<React.HTMLAttributes<HTMLHeadingElement>,
   /** Intervalo entre as palavras, em ms. */
   passo?: number;
   atraso?: number;
+  /** Trecho do título em destaque, na cor primária de texto (por exemplo, "experiência e estratégia"). */
+  destaque?: string;
 };
 
-function TituloQueSurge({ as: Tag = "h2", children, passo = 45, atraso = 0, raiz, limiar, margem, repetir, className, style, ...props }: TituloQueSurgeProps) {
-  const { ref, estado } = useSurgirAoRolar<HTMLHeadingElement>({ raiz, limiar, margem, repetir });
+function TituloQueSurge({ as: Tag = "h2", children, passo = 45, atraso = 0, destaque, raiz, limiar, margem, repetir, duracao, className, style, ...props }: TituloQueSurgeProps) {
   const partes = children.split(/(\s+)/);
+  const palavras = partes.filter(p => p.trim()).length;
+  const { ref, estado } = useSurgirAoRolar<HTMLHeadingElement>({ raiz, limiar, margem, repetir, duracao: duracao ?? atraso + 120 + palavras * passo + 800 });
+  const ini = destaque ? children.indexOf(destaque) : -1;
+  const fim = ini >= 0 && destaque ? ini + destaque.length : -1;
   let k = 0;
+  let pos = 0;
   return (
     <Tag
       ref={ref}
@@ -178,11 +211,16 @@ function TituloQueSurge({ as: Tag = "h2", children, passo = 45, atraso = 0, raiz
     >
       <span className="sr-only">{children}</span>
       <span aria-hidden>
-        {partes.map((p, i) =>
-          !p ? null : /^\s+$/.test(p) ? p : (
-            <span key={i} className="surgir-palavra" style={{ "--surgir-k": k++ } as React.CSSProperties}>{p}</span>
-          ),
-        )}
+        {partes.map((p, i) => {
+          const comeco = pos;
+          pos += p.length;
+          if (!p) return null;
+          if (/^\s+$/.test(p)) return p;
+          const realce = ini >= 0 && comeco >= ini && comeco < fim;
+          return (
+            <span key={i} className={cn("surgir-palavra", realce && "text-[var(--primary-text)]")} style={{ "--surgir-k": k++ } as React.CSSProperties}>{p}</span>
+          );
+        })}
       </span>
     </Tag>
   );

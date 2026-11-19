@@ -48,6 +48,7 @@ const itens: Item[] = [
   { nome: "button", en: "Action button: 40 px, variants default, outline, secondary, ghost, link and destructive.", pt: "Botão de ação: 40 px, variantes padrão, contorno, secundário, ghost, link e destrutivo.", pagina: P.form },
   { nome: "calendar", en: "Month calendar to pick a date or a range.", pt: "Calendário mensal para escolher uma data ou um intervalo." },
   { nome: "card", en: "Base card with header, content and footer.", pt: "Card base com cabeçalho, conteúdo e rodapé.", pagina: P.cards },
+  { nome: "card-frente", en: "Area of work card (icon, title, red subtitle, topics) and its grid/phone carousel.", pt: "Card de frente de atuação (ícone, título, subtítulo vermelho, temas) e sua grade/carrossel no celular.", pagina: { ...P.site, ancora: "site-frentes" } },
   { nome: "carousel", en: "Horizontal list that slides, with previous and next buttons.", pt: "Lista horizontal que desliza, com botões de anterior e próximo." },
   { nome: "chart", en: "Wrapper for Recharts charts with DS colors and tooltip.", pt: "Base para gráficos (Recharts) com as cores e a dica do DS.", pagina: P.dados },
   { nome: "checkbox", en: "Checkbox for independent choices.", pt: "Caixa de seleção para escolhas independentes.", pagina: P.form },
