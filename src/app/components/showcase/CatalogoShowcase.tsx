@@ -29,6 +29,7 @@ const P = {
   etapas: { secao: "stepper", rotulo: ["Stepper", "Etapas"] as [string, string] },
   upload: { secao: "upload", rotulo: ["Upload", "Upload"] as [string, string] },
   painel: { secao: "sidepanel", rotulo: ["Side panel", "Painel lateral"] as [string, string] },
+  site: { secao: "site", rotulo: ["Site patterns", "Padrões do site"] as [string, string] },
 };
 
 const itens: Item[] = [
@@ -38,7 +39,11 @@ const itens: Item[] = [
   { nome: "aspect-ratio", en: "Keeps an image or video in a fixed proportion (for example 4:5).", pt: "Mantém imagem ou vídeo numa proporção fixa (por exemplo 4:5)." },
   { nome: "avatar-circles", en: "Row of overlapping avatars with a counter.", pt: "Fileira de avatares sobrepostos com contador.", pagina: P.rotulos },
   { nome: "avatar", en: "Photo or initials of a person or store.", pt: "Foto ou iniciais de uma pessoa ou loja.", pagina: P.rotulos },
+  { nome: "aviso-cookies", en: "Cookie consent bar (LGPD) with Decline and Accept; reopens from the footer.", pt: "Faixa de consentimento de cookies (LGPD) com Recusar e Aceitar; reabre pelo rodapé.", pagina: { ...P.site, ancora: "site-cookies" } },
+  { nome: "aviso-projeto", en: "Floating “Got a project?” notice pointing to the WhatsApp button.", pt: "Aviso flutuante “Tem um projeto?” apontando para o botão do WhatsApp.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "badge", en: "Short label for status or category.", pt: "Rótulo curto de status ou categoria.", pagina: P.rotulos },
+  { nome: "botao-subir", en: "Back-to-top button that appears with the footer, beside the WhatsApp button.", pt: "Botão de voltar ao topo que aparece com o rodapé, ao lado do botão do WhatsApp.", pagina: { ...P.site, ancora: "site-flutuantes" } },
+  { nome: "botao-whatsapp", en: "Floating WhatsApp button with a ready message.", pt: "Botão flutuante do WhatsApp com mensagem pronta.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "breadcrumb", en: "Trail showing where the page is in the hierarchy.", pt: "Trilha que mostra onde a página está na hierarquia.", pagina: P.overlays },
   { nome: "button", en: "Action button: 40 px, variants default, outline, secondary, ghost, link and destructive.", pt: "Botão de ação: 40 px, variantes padrão, contorno, secundário, ghost, link e destrutivo.", pagina: P.form },
   { nome: "calendar", en: "Month calendar to pick a date or a range.", pt: "Calendário mensal para escolher uma data ou um intervalo." },
@@ -50,6 +55,7 @@ const itens: Item[] = [
   { nome: "command", en: "Command palette with search (Ctrl+K).", pt: "Paleta de comandos com busca (Ctrl+K).", pagina: P.templates },
   { nome: "context-menu", en: "Menu opened with the right button.", pt: "Menu aberto com o botão direito." },
   { nome: "contrast", en: "Helpers to compute contrast between colors.", pt: "Funções para calcular o contraste entre cores.", pagina: P.cards },
+  { nome: "curva-secao", en: "Curved divider between a light and a dark section.", pt: "Divisor curvo entre uma seção clara e uma escura.", pagina: { ...P.site, ancora: "site-curvas" } },
   { nome: "dialog", en: "Modal window for focused tasks.", pt: "Janela modal para tarefas que pedem foco.", pagina: P.overlays },
   { nome: "doodle-texture", en: "Brand texture used as a background.", pt: "Textura da marca usada como fundo.", pagina: P.fundos },
   { nome: "drawer", en: "Panel that slides up from the bottom (mobile).", pt: "Painel que sobe da parte de baixo da tela (celular)." },
@@ -79,6 +85,7 @@ const itens: Item[] = [
   { nome: "progress", en: "Progress bar.", pt: "Barra de progresso.", pagina: P.feedback },
   { nome: "radio-group", en: "Single choice among a few options.", pt: "Escolha única entre poucas opções.", pagina: P.form },
   { nome: "resizable", en: "Panels with a handle to resize.", pt: "Painéis com alça para redimensionar." },
+  { nome: "rodape-site", en: "Site footer in light, dark and compact variants.", pt: "Rodapé do site nas variantes clara, escura e compacta.", pagina: { ...P.site, ancora: "site-rodape" } },
   { nome: "scroll-area", en: "Area with a styled scrollbar.", pt: "Área com barra de rolagem estilizada." },
   { nome: "segmented-control", en: "Segmented control to switch between options or views.", pt: "Controle segmentado para alternar opções ou visualizações.", pagina: P.form },
   { nome: "select", en: "Selection list in a 40 px field.", pt: "Lista de seleção em campo de 40 px.", pagina: P.form },
@@ -94,6 +101,7 @@ const itens: Item[] = [
   { nome: "sonner", en: "Toast notifications. Mount <Toaster /> once and call toast().", pt: "Notificações (toast). Monte <Toaster /> uma vez e chame toast().", pagina: P.feedback },
   { nome: "status-chip", en: "Information state chip: icon and text always together.", pt: "Selo de estado de informação: ícone e texto sempre juntos.", pagina: P.estados },
   { nome: "stepper", en: "Steps of a process with the current step.", pt: "Etapas de um processo, com a etapa atual.", pagina: P.etapas },
+  { nome: "surgir-ao-rolar", en: "Reveal on scroll (slide up or blur) and title that appears word by word.", pt: "Entrada ao rolar (subir ou desfoque) e título que surge palavra por palavra.", pagina: { ...P.site, ancora: "site-entrada" } },
   { nome: "switch", en: "On/off switch with immediate effect.", pt: "Chave liga/desliga com efeito imediato.", pagina: P.form },
   { nome: "table", en: "Data table with header and rows.", pt: "Tabela de dados com cabeçalho e linhas.", pagina: P.dados },
   { nome: "tabs", en: "Tabs that switch content in the same place.", pt: "Abas que trocam o conteúdo no mesmo lugar.", pagina: P.feedback },

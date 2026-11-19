@@ -8,7 +8,7 @@ import {
   ChevronRight, Zap,
   TableProperties, Box,
   Search, X, Code2, Shapes, LayoutTemplate, Wind, Image, Fingerprint, Coins, Plug, Rocket, Accessibility, Compass, Lightbulb, Home,
-  PanelRight, PanelTop, UploadCloud, Milestone, MessageCircle, LibraryBig,
+  PanelRight, PanelTop, UploadCloud, Milestone, MessageCircle, LibraryBig, Globe,
 } from "lucide-react";
 import { I18nProvider, useI18n } from "./i18n";
 import { FoundationShowcase } from "./components/showcase/FoundationShowcase";
@@ -38,6 +38,7 @@ import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 import { Toaster } from "./components/ui/sonner";
 import { CatalogoShowcase } from "./components/showcase/CatalogoShowcase";
+import { SitePatternsShowcase } from "./components/showcase/SitePatternsShowcase";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -188,6 +189,12 @@ const ptLabels: Record<string, string> = {
   "Library": "Biblioteca",
   "Component catalog": "Catálogo de componentes",
   "All components": "Todos os componentes",
+  "Site patterns": "Padrões do site",
+  "Footer": "Rodapé",
+  "Floating elements": "Elementos flutuantes",
+  "Cookie notice": "Aviso de cookies",
+  "Reveal on scroll": "Entrada ao rolar",
+  "Curved dividers": "Divisores curvos",
   "Overlays": "Overlays",
   "Breadcrumb": "Breadcrumb",
   "Pagination": "Paginação",
@@ -483,6 +490,15 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "overlays-tokens",  label: "Tokens",     sectionId: "overlays" },
         ],
       },
+      { id: "site", label: "Site patterns", icon: Globe,
+        items: [
+          { id: "site-rodape",     label: "Footer",            sectionId: "site" },
+          { id: "site-flutuantes", label: "Floating elements", sectionId: "site" },
+          { id: "site-cookies",    label: "Cookie notice",     sectionId: "site" },
+          { id: "site-entrada",    label: "Reveal on scroll",  sectionId: "site" },
+          { id: "site-curvas",     label: "Curved dividers",   sectionId: "site" },
+        ],
+      },
       { id: "header", label: "Header & Menus", icon: PanelTop,
         items: [
           { id: "header-demo",        label: "Demo",                          sectionId: "header" },
@@ -554,6 +570,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   icons:     <IconsShowcase />,
   overlays:  <OverlaysShowcase />,
   header:    <HeaderShowcase />,
+  site:      <SitePatternsShowcase />,
   grid:      <GridShowcase />,
   sidepanel: <SidePanelShowcase />,
   timeline:  <TimelineShowcase />,
@@ -582,6 +599,7 @@ const sectionLabels: Record<string, string> = {
   icons:     "Icons",
   overlays:  "Overlays & Navigation",
   header:    "Header & Menus",
+  site:      "Site patterns",
   grid:      "Grid & Spacing",
   sidepanel: "Side Panel",
   timeline:  "Timeline",
@@ -612,6 +630,7 @@ function AppShell() {
     icons:     false,
     overlays:  false,
     header:    false,
+    site:      false,
     grid:      false,
     sidepanel: false,
     upload:    false,
