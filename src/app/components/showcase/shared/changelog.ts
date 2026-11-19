@@ -14,6 +14,11 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "No sideways scroll on phones", pt: "Celular sem rolagem lateral" },
+    desc: { en: "Every page fits 390 px: pagination and tabs wrap instead of scrolling, typography cards break long text, and the orbiting circles stack on phones.", pt: "Todas as páginas cabem em 390 px: paginação e abas quebram linha em vez de rolar, os cards de tipografia quebram textos longos e os círculos em órbita ficam um embaixo do outro no celular." },
+    page: "overlays", anchor: "pagination",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Organization and cleanup", pt: "Organização e limpeza" },
     desc: { en: "One section title style in every page (title font, 24 px). Radii moved to the scale (8, 12, 16 and 24 px). Tailwind default colors and leftover hex values replaced by tokens; all red text uses --primary-text. Feedback and Labels now show different content; Motion tokens got their own address; menu items that only led to \"See in\" notices were removed. Toasts work (ui/sonner, without next-themes) and the Feedback page shows real notifications. Tabs, accordion, dropdown menu, dialog, confirmation (ui/alert-dialog), checkbox, radio and switch pages now use the ui/ components, adjusted to the documented look. New Component catalog page with every ui/ file.", pt: "Um estilo só de título de seção em todas as páginas (fonte de títulos, 24 px). Raios levados para a escala (8, 12, 16 e 24 px). Cores padrão do Tailwind e hexadecimais que sobravam trocados por tokens; todo texto em vermelho usa --primary-text. Feedback e Rótulos passam a ter conteúdo próprio; os tokens de Movimento ganham endereço próprio; saem do menu os itens que só levavam a avisos \"Ver em\". As notificações (toast) funcionam (ui/sonner, sem next-themes) e a página Feedback mostra notificações reais. Abas, sanfona, menu suspenso, diálogo, confirmação (ui/alert-dialog), caixa de seleção, opção e chave passam a usar os componentes de ui/, ajustados ao visual documentado. Página nova Catálogo de componentes, com todos os arquivos de ui/." },
     page: "catalogo", anchor: "catalogo-lista",
