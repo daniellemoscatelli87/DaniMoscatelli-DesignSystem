@@ -58,7 +58,7 @@ const TONS = {
     numero: "text-white/[0.08] group-hover:text-crimson-400",
     icone: "border-white/15 bg-white/[0.08] text-white group-hover:border-primary group-hover:bg-primary group-hover:text-white",
     titulo: "text-graphite-50",
-    subtitulo: "text-crimson-400",
+    subtitulo: "text-crimson-300",
     descricao: "text-graphite-300",
     divisor: "border-white/[0.07]",
     tema: "border-white/20 bg-transparent text-graphite-200 group-hover:border-crimson-300/60 group-hover:text-crimson-200",
