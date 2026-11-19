@@ -464,7 +464,7 @@ function SecaoCatalogo() {
             cuidado={t("Correlation is not cause. A value near zero only says there is no straight-line relation, not that there is no relation at all.", "Correlação não é causa. Um valor perto de zero só diz que não há relação em linha reta, não que não há relação nenhuma.")}
             dados={tabela([t("Measure", "Medida"), ...CORRELACAO.variaveis], CORRELACAO.variaveis.map((v, i) => [v, ...CORRELACAO.valores[i]!.map(x => x.toLocaleString(loc, { minimumFractionDigits: 2 }))]))}>
             <MatrizDeCorrelacao localidade={loc} rotulo={t("Correlation between experience measures (example data)", "Correlação entre medidas da experiência (dados de exemplo)")} {...CORRELACAO} destaque={[4, 0]}
-              rotulos={{ fraca: t("Weak relation", "Relação fraca"), forte: t("Strong relation", "Relação forte"), nota: t("The sign shows the direction: + move together, − one rises as the other falls.", "O sinal mostra a direção: + andam juntas, − uma sobe quando a outra desce.") }} />
+              rotulos={{ fraca: t("Weak relation", "Relação fraca"), forte: t("Strong relation", "Relação forte"), nota: t("Striped: inverse relation, when one rises the other falls. Plain: they move together.", "Com listras: relação inversa, quando uma sobe a outra desce. Sem listras: andam juntas."), destaque: (a, b, v) => t(`Highlighted: ${a} and ${b} (${v})`, `Em destaque: ${a} e ${b} (${v})`) }} />
           </CartaoDoCatalogo>
           <CartaoDoCatalogo nome="Radar" componente="Radar" quando={t("To compare the profile of 1 to 3 items across several measures on the same scale.", "Para comparar o perfil de 1 a 3 itens em várias medidas na mesma escala.")}
             cuidado={t("The area changes with the order of the axes and exaggerates differences; with more than 3 series it becomes a tangle. To compare numbers, use bars.", "A área muda com a ordem dos eixos e exagera diferenças; com mais de 3 séries vira um emaranhado. Para comparar números, use barras.")}
@@ -524,7 +524,7 @@ function SecaoCatalogo() {
               tipos={[t("Unit", "Unidade"), t("Partner point", "Posto parceiro")]} rotulos={{ nota }} />
           </CartaoDoCatalogo>
           <CartaoDoCatalogo nome={t("Bubble map", "Mapa de bolhas")} componente="MapaDeBolhas" quando={t("To compare quantities by place without painting whole regions.", "Para comparar quantidades por lugar sem pintar regiões inteiras.")}
-            cuidado={t("Areas are hard to compare precisely: that is why each bubble has its value written.", "Áreas são difíceis de comparar com precisão: por isso o valor vai escrito em cada bolha.")}
+            cuidado={t("Areas are hard to compare precisely: that is why the value is written next to each bubble.", "Áreas são difíceis de comparar com precisão: por isso o valor vai escrito junto de cada bolha.")}
             dados={tabela([t("Region", "Região"), t("Contacts", "Contatos")], [...BOLHAS].sort((a, b) => b.valor - a.valor).map(b => [b.rotulo, n(b.valor)]))}>
             <MapaDeBolhas formatar={n} rotulo={t("Contacts by region (example data)", "Contatos por região (dados de exemplo)")} regioes={REGIOES_ESQ} colunas={3} linhas={3} bolhas={BOLHAS} nomesDasRegioes={false}
               rotuloTamanho={t("Bubble size: contacts in the last 4 weeks", "Tamanho da bolha: contatos nas últimas 4 semanas")} rotulos={{ nota }} />
@@ -696,7 +696,7 @@ export function GraficosShowcase() {
   const TOKENS_COR = [
     { token: "--chart-1", passo: "crimson-500", uso: t("Highlight: the main series (one step darker than the primary: 6.2:1 on white)", "Destaque: a série principal (um tom abaixo da primária: 6,2:1 sobre branco)") },
     { token: "--chart-2", passo: "crimson-700", uso: t("Second series; top of the heat scale", "Segunda série; topo da escala de calor") },
-    { token: "--chart-3", passo: "crimson-400", uso: t("Third series (the primary; no text on it)", "Terceira série (a primária; sem texto por cima)") },
+    { token: "--chart-3", passo: "crimson-400", uso: t("Third series (the primary)", "Terceira série (a primária)") },
     { token: "--chart-4", passo: "crimson-300", uso: t("Fourth series; items outside the highlight", "Quarta série; itens fora do destaque") },
     { token: "--chart-5", passo: "crimson-200", uso: t("Fifth series; start of the heat scale", "Quinta série; começo da escala de calor") },
     { token: "--chart-neutral", passo: "graphite-200", uso: t("Not highlighted: \"Other\", context, disabled", "Sem destaque: \"Outros\", contexto, desativado") },
@@ -770,14 +770,28 @@ export function GraficosShowcase() {
           </ul>
           <div className="mt-6 border-t border-border pt-5">
             <Rotulo>{t("Heat scale (lowest to highest)", "Escala de calor (do menor para o maior)")}</Rotulo>
-            <div className="flex gap-1">
-              {[["--chart-seq-1", "var(--chart-seq-1-texto)"], ["--chart-seq-2", "var(--chart-seq-2-texto)"], ["--chart-seq-3", "var(--chart-seq-3-texto)"], ["--chart-seq-4", "var(--chart-seq-4-texto)"]].map(([tk, tx]) => (
-                <span key={tk} className="flex h-10 flex-1 items-center justify-center rounded-sm text-[0.75rem] font-semibold" style={{ background: `var(${tk})`, color: tx }}>{tk}</span>
+            <ul className="m-0 grid list-none grid-cols-4 gap-1 p-0">
+              {["--chart-seq-1", "--chart-seq-2", "--chart-seq-3", "--chart-seq-4"].map(tk => (
+                <li key={tk} className="min-w-0">
+                  <span aria-hidden className="block h-10 rounded-sm" style={{ background: `var(${tk})` }} />
+                  <span className="mt-1 block font-mono text-[0.6875rem] text-foreground [overflow-wrap:anywhere]">{tk}</span>
+                </li>
               ))}
-            </div>
+            </ul>
             <p className="mt-2 text-[0.75rem] text-muted-foreground">{t(
-              "Dark text on the two light tones and light text on the two dark ones: all above 4.5:1. chart-3 stays out of the heat scale because no text color reaches 4.5:1 on it.",
-              "Texto escuro nos dois tons claros e texto claro nos dois escuros: todos passam de 4,5:1. O chart-3 fica fora da escala de calor porque nenhuma cor de texto atinge 4,5:1 sobre ele.",
+              "Heat cells carry no numbers: the color shows the range, the highlighted cell gets an outline and is stated in a sentence below, and the numbers are in the tooltip and in See data.",
+              "As células de calor não levam número: a cor mostra a faixa, a célula em destaque é contornada e dita numa frase abaixo, e os números ficam na dica e em Ver dados.",
+            )}</p>
+          </div>
+          <div className="mt-6 border-t border-border pt-5">
+            <Rotulo>{t("Text in charts", "Texto nos gráficos")}</Rotulo>
+            <p className="text-[0.9375rem] font-semibold leading-snug text-foreground">{t(
+              "No text on top of chart colors: values and labels stay outside the mark, always in the same text color.",
+              "Nenhum texto sobre a cor do gráfico: valores e rótulos ficam fora da marca, sempre na mesma cor de texto.",
+            )}</p>
+            <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground">{t(
+              "No single text color reaches 4.5:1 on every tone of the palette, and switching the text color from one part to another makes the chart harder to read. So bars, slices, cells, blocks and bubbles carry no numbers or names. Values and names in --foreground; --muted-foreground only for secondary text, such as axes. When a value has to be tied to a part (stacked bars, treemap, donut), it follows a dot in that part's color, in the same order as the parts. Product owner's decision, 19/11/2026.",
+              "Nenhuma cor de texto passa de 4,5:1 sobre todos os tons da paleta, e trocar a cor do texto de uma parte para outra confunde a leitura. Por isso barras, fatias, células, blocos e bolhas não levam número nem nome. Valores e nomes em --foreground; --muted-foreground só no texto secundário, como os eixos. Quando o valor precisa ser ligado a uma parte (barras empilhadas, mosaico, rosca), ele vem depois de um ponto na cor dela, na mesma ordem das partes. Decisão da dona do produto, 19/11/2026.",
             )}</p>
           </div>
         </Cartao>
@@ -805,14 +819,14 @@ export function GraficosShowcase() {
             dos={[
               t("Highlight in --chart-1; other series in --chart-2 to --chart-5.", "Destaque na --chart-1; outras séries em --chart-2 a --chart-5."),
               t("Write values and names next to the marks; the legend is only support.", "Escreva valores e nomes junto das marcas; a legenda é só apoio."),
-              t("Text on a color only on tones above 4.5:1 (the heat scale and the treemap already do this).", "Texto sobre uma cor só nos tons que passam de 4,5:1 (escala de calor e mosaico já fazem isso)."),
+              t("Values and names outside the marks, always in the same text color, with a dot in the part's color when they need to be tied to it.", "Valores e nomes fora das marcas, sempre na mesma cor de texto, com um ponto na cor da parte quando for preciso ligá-los a ela."),
               t("Graphite (--chart-neutral) for Other, context and baseline.", "Grafite (--chart-neutral) para Outros, contexto e linha de base."),
             ]}
             donts={[
               t("Use graphite and the primary as two series of equal weight.", "Usar grafite e primária como duas séries de mesmo peso."),
               t("Create colors outside the scale (green, blue, orange) to separate series.", "Criar cores fora da escala (verde, azul, laranja) para separar séries."),
               t("Rely on the legend alone to say what each color is.", "Depender só da legenda para dizer o que é cada cor."),
-              t("Write small text on chart-3 or on a dark --chart-neutral.", "Escrever texto pequeno sobre o chart-3 ou sobre o --chart-neutral escuro."),
+              t("Write a number or name on a bar, slice, cell, block or bubble, or switch the text color by tone.", "Escrever número ou nome sobre uma barra, fatia, célula, bloco ou bolha, ou trocar a cor do texto conforme o tom."),
             ]}
           />
         </div>
@@ -908,7 +922,7 @@ export function GraficosShowcase() {
               dados={tabela([t("Region", "Região"), t("Contacts", "Atendimentos")], [...REGIOES].sort((a, b) => b.valor - a.valor).map(r => [r.rotulo, n(r.valor)]))}
             >
               <MapaDeCalorPorRegiao rotulo={t("Contacts by region (example data)", "Atendimentos por região (dados de exemplo)")} regioes={REGIOES} colunas={3} linhas={3} destaque="l" formatar={n}
-                rotulos={{ ...escala, nota: t("Schematic map: each block is a region, in an approximate position, not to scale.", "Mapa esquemático: cada bloco é uma região, em posição aproximada, sem escala.") }} />
+                rotulos={{ ...escala, nota: t("Schematic map: each block is a region, in an approximate position, not to scale.", "Mapa esquemático: cada bloco é uma região, em posição aproximada, sem escala."), destaque: (r, v) => t(`Highlighted: ${r} (${v})`, `Em destaque: ${r} (${v})`) }} />
             </DescobertaVisual>
           </div>
 
@@ -1005,7 +1019,7 @@ export function GraficosShowcase() {
               dados={tabela([t("Period", "Período"), ...MATRIZ.colunas], MATRIZ.linhas.map((l, i) => [l, ...MATRIZ.valores[i]!.map(n)]))}
             >
               <MapaDeCalorMatricial rotulo={t("Contacts by day and period (example data)", "Atendimentos por dia e período (dados de exemplo)")} {...MATRIZ} formatar={n}
-                rotuloLinhas={t("Period", "Período")} destaque={[0, 0]} rotulos={escala} />
+                rotuloLinhas={t("Period", "Período")} destaque={[0, 0]} rotulos={{ ...escala, destaque: (l, c, v) => t(`Highlighted: ${l}, ${c} (${v})`, `Em destaque: ${l}, ${c} (${v})`) }} />
             </DescobertaVisual>
           </div>
 
@@ -1181,7 +1195,7 @@ export function GraficosShowcase() {
               <li>{t("See data opens a table with the numbers: it is the detail layer and the alternative for screen readers.", "Ver dados abre uma tabela com os números: é o detalhamento e a alternativa para leitores de tela.")}</li>
               <li>{t("Values and names written next to the marks; the legend is support, never the only way to read.", "Valores e nomes escritos junto das marcas; a legenda é apoio, nunca a única forma de leitura.")}</li>
               <li>{t("Highlight also through thickness, text weight or an outline, not only color.", "Destaque também pela espessura, pelo peso do texto ou por um contorno, não só pela cor.")}</li>
-              <li>{t("Text on color only on tones at 4.5:1 or above; other labels stay outside the marks.", "Texto sobre cor só em tons com 4,5:1 ou mais; os demais rótulos ficam fora das marcas.")}</li>
+              <li>{t("No text on top of chart colors: values and labels stay outside the mark, always in the same text color. In heat maps, the highlight gets an outline and a sentence.", "Nenhum texto sobre a cor do gráfico: valores e rótulos ficam fora da marca, sempre na mesma cor de texto. Nos mapas de calor, o destaque vai contornado e dito numa frase.")}</li>
             </ul>
           </Callout>
           <Callout title={t("Motion and size", "Movimento e tamanho")}>

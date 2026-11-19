@@ -11,6 +11,11 @@ import { cn } from "./utils";
  * ("Outros", contexto, linha de base, desativado), nunca como série par da primária. Grade em --chart-grid.
  * A cor nunca carrega o significado sozinha: todo gráfico escreve rótulos e valores junto das marcas.
  *
+ * Nenhum texto sobre a cor do gráfico (decisão da dona do produto, 19/11/2026, opção B): barras, fatias, células,
+ * blocos e bolhas não levam número nem nome. Valores e rótulos ficam fora da marca, sempre na mesma cor de texto
+ * (--foreground; --muted-foreground só no texto secundário, como eixos), com um ponto na cor da marca quando
+ * precisam ser ligados a ela. Os tokens --chart-N-texto e --chart-seq-N-texto continuam no theme.css, sem uso aqui.
+ *
  * Os SVGs são desenhados na largura real do contêiner (ResizeObserver), para o texto não encolher no celular.
  * Com "menos movimento", nada anima.
  */
@@ -25,24 +30,20 @@ export const COR_NEUTRA = "var(--chart-neutral)";
 export const COR_GRADE = "var(--chart-grid)";
 
 /**
- * Escala sequencial (do menor para o maior) com a cor de texto que passa no contraste AA em cada tom.
- * A ordem e as cores de texto vêm dos tokens --chart-seq-* de cada DS.
+ * Escala sequencial (do menor para o maior), pelos tokens --chart-seq-* de cada DS.
+ * As células de calor não levam texto: o valor fica na dica, na frase do destaque e em Ver dados.
  */
 export const ESCALA_SEQUENCIAL = [
-  { cor: "var(--chart-seq-1)", texto: "var(--chart-seq-1-texto)" },
-  { cor: "var(--chart-seq-2)", texto: "var(--chart-seq-2-texto)" },
-  { cor: "var(--chart-seq-3)", texto: "var(--chart-seq-3-texto)" },
-  { cor: "var(--chart-seq-4)", texto: "var(--chart-seq-4-texto)" },
+  { cor: "var(--chart-seq-1)" },
+  { cor: "var(--chart-seq-2)" },
+  { cor: "var(--chart-seq-3)" },
+  { cor: "var(--chart-seq-4)" },
 ] as const;
 
-/** Tons categóricos que aceitam texto por cima (mosaico); a cor do texto vem de cada DS (--chart-N-texto). */
-export const TONS_COM_TEXTO = [
-  { cor: "var(--chart-1)", texto: "var(--chart-1-texto)" },
-  { cor: "var(--chart-2)", texto: "var(--chart-2-texto)" },
-  { cor: "var(--chart-4)", texto: "var(--chart-4-texto)" },
-  { cor: "var(--chart-5)", texto: "var(--chart-5-texto)" },
-] as const;
-export const NEUTRO_COM_TEXTO = { cor: COR_NEUTRA, texto: "var(--foreground)" };
+/** Ponto na cor da marca, antes de um valor escrito fora dela (liga o número à parte). */
+export function PontoDaCor({ cor, className }: { cor: string; className?: string }) {
+  return <span aria-hidden className={cn("inline-block h-2 w-2 shrink-0 rounded-full", className)} style={{ background: cor }} />;
+}
 
 /* ── Utilidades ────────────────────────────────────────────────────────────────────────────────────────── */
 
@@ -417,9 +418,9 @@ export type MapaDeCalorPorRegiaoProps = BaseDoGrafico & {
   regioes: RegiaoDoMapa[];
   colunas: number;
   linhas: number;
-  /** Região contornada (a descoberta). */
+  /** Região contornada (a descoberta). Sem ela, a região de maior valor é a contornada. */
   destaque?: string;
-  rotulos?: { menos?: string; mais?: string; nota?: string };
+  rotulos?: { menos?: string; mais?: string; nota?: string; destaque?: (regiao: string, valor: string) => string };
 };
 
 /** Faixa da escala sequencial (0 a 3) para um valor. */
@@ -442,48 +443,59 @@ export function LegendaSequencial({ menos, mais }: { menos: string; mais: string
 
 /**
  * Mapa de calor esquemático: cada região é um bloco numa grade, na posição aproximada (não é mapa em escala).
- * As posições vêm por props; nada de dados geográficos é buscado. Nome e valor ficam escritos em cada bloco.
+ * As posições vêm por props; nada de dados geográficos é buscado. O nome fica escrito acima de cada bloco, fora da cor;
+ * o bloco não leva número. A região em destaque (ou a de maior valor) é contornada e dita numa frase abaixo;
+ * o valor de cada região aparece ao passar o cursor e em Ver dados.
  */
 export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotulo, formatar = fmtPadrao, rotulos, className }: MapaDeCalorPorRegiaoProps) {
   const menos = useReducedMotion();
-  const r = { menos: "Menos", mais: "Mais", nota: "Mapa esquemático: cada bloco é uma região, em posição aproximada, sem escala.", ...rotulos };
+  const r = {
+    menos: "Menos", mais: "Mais", nota: "Mapa esquemático: cada bloco é uma região, em posição aproximada, sem escala.",
+    destaque: (regiao: string, valor: string) => `Em destaque: ${regiao} (${valor})`, ...rotulos,
+  };
   const valores = regioes.map(x => x.valor);
   const min = Math.min(...valores), max = Math.max(...valores);
+  const marcada = regioes.find(x => x.id === destaque) ?? regioes.find(x => x.valor === max);
   const resumo = `${rotulo}: ${[...regioes].sort((a, b) => b.valor - a.valor).map(x => `${x.rotulo} ${formatar(x.valor)}`).join(", ")}.`;
   return (
     <div className={cn("space-y-3", className)}>
       <div
         role="img"
         aria-label={resumo}
-        className="grid gap-1.5"
+        className="grid gap-x-1.5 gap-y-2"
         style={{ gridTemplateColumns: `repeat(${colunas}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${linhas}, minmax(4.25rem, auto))` }}
       >
         {regioes.map((x, i) => {
           const e = ESCALA_SEQUENCIAL[faixa(x.valor, min, max)]!;
+          const marcado = marcada?.id === x.id;
           return (
             <motion.div
               key={x.id}
               title={`${x.rotulo}: ${formatar(x.valor)}`}
-              className={cn(
-                "flex min-w-0 flex-col justify-between rounded-sm p-2 transition-transform duration-200 hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0",
-                destaque === x.id && "ring-2 ring-foreground ring-offset-2 ring-offset-card",
-              )}
-              style={{ gridColumn: `${x.coluna} / span ${x.largura ?? 1}`, gridRow: `${x.linha} / span ${x.altura ?? 1}`, background: e.cor, color: e.texto }}
+              className="group flex min-w-0 flex-col gap-1"
+              style={{ gridColumn: `${x.coluna} / span ${x.largura ?? 1}`, gridRow: `${x.linha} / span ${x.altura ?? 1}` }}
               initial={menos ? false : { opacity: 0, scale: 0.96 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: menos ? 0 : 0.03 * i }}
             >
-              <span className="text-[0.6875rem] font-semibold leading-tight [overflow-wrap:anywhere]">{x.rotulo}</span>
-              <span className="text-[0.9375rem] font-bold tabular-nums leading-none">{formatar(x.valor)}</span>
+              <span className={cn("text-[0.6875rem] leading-tight text-foreground [overflow-wrap:anywhere]", marcado ? "font-bold" : "font-medium")}>{x.rotulo}</span>
+              <span
+                className={cn(
+                  "block min-h-8 flex-1 rounded-sm transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
+                  marcado && "ring-2 ring-foreground ring-offset-2 ring-offset-card",
+                )}
+                style={{ background: e.cor }}
+              />
             </motion.div>
           );
         })}
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <LegendaSequencial menos={r.menos} mais={r.mais} />
-        <p className="text-[0.6875rem] text-muted-foreground">{r.nota}</p>
+        {marcada && <p className="text-[0.75rem] font-semibold tabular-nums text-foreground">{r.destaque(marcada.rotulo, formatar(marcada.valor))}</p>}
       </div>
+      <p className="text-[0.6875rem] text-muted-foreground">{r.nota}</p>
     </div>
   );
 }
@@ -757,44 +769,65 @@ export type MosaicoProps = BaseDoGrafico & {
   localidade?: string;
 };
 
+/** Tons do mosaico, do maior bloco para o menor; a partir do 5º, grafite. */
+const TONS_DO_MOSAICO = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)"] as const;
+
 /**
- * Mosaico (treemap): a área de cada bloco é a fatia do total. Os 4 maiores em tons da primária,
- * o restante em grafite; nome e percentual escritos dentro do bloco quando cabem (com contraste AA).
+ * Mosaico (treemap): a área de cada bloco é a fatia do total. Os 4 maiores em tons da primária, o restante em grafite.
+ * Os blocos não levam texto: ao lado (ou abaixo, em telas estreitas) fica a lista com ponto, nome e percentual, na mesma
+ * ordem dos blocos. Passar o cursor num bloco ou num item da lista realça o par.
  */
 export function Mosaico({ itens, altura = 260, rotulo, localidade = "pt-BR", className }: MosaicoProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
+  const [ativo, setAtivo] = React.useState<number | null>(null);
   const lista = [...itens].sort((a, b) => Number(!!a.neutro) - Number(!!b.neutro) || b.valor - a.valor);
   const total = soma(lista.map(i => i.valor)) || 1;
   const rets = largura > 0 ? squarify(lista.map(i => (i.valor / total) * largura * altura), { x: 0, y: 0, w: largura, h: altura }) : [];
   let k = 0;
-  const tons = lista.map(i => (i.neutro || k >= TONS_COM_TEXTO.length ? NEUTRO_COM_TEXTO : TONS_COM_TEXTO[k++]!));
-  const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${formatarPercentual((i.valor / total) * 100, 0, localidade)}`).join(", ")}.`;
+  const cores = lista.map(i => (i.neutro || k >= TONS_DO_MOSAICO.length ? COR_NEUTRA : TONS_DO_MOSAICO[k++]!));
+  const pct = (v: number) => formatarPercentual((v / total) * 100, 0, localidade);
+  const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${pct(i.valor)}`).join(", ")}.`;
   return (
-    <div ref={ref} role="img" aria-label={resumo} className={cn("relative w-full", className)} style={{ height: altura }}>
-      {rets.map((r, i) => {
-        const item = lista[i]!;
-        const t = tons[i]!;
-        const p = formatarPercentual((item.valor / total) * 100, 0, localidade);
-        const maiorPalavra = Math.max(...item.rotulo.split(/\s+/).map(w => larguraTexto(w, 12)));
-        const cabeNome = r.w >= maiorPalavra + 18 && r.h >= 44;
-        const cabePct = r.w >= 34 && r.h >= 22;
-        return (
-          <motion.div
-            key={item.rotulo}
-            title={`${item.rotulo}: ${p}`}
-            className="absolute overflow-hidden rounded-sm p-2 transition-[filter] duration-200 hover:brightness-95 motion-reduce:transition-none"
-            style={{ left: r.x + 1, top: r.y + 1, width: Math.max(0, r.w - 2), height: Math.max(0, r.h - 2), background: t.cor, color: t.texto }}
-            initial={menos ? false : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: menos ? 0 : 0.04 * i }}
-          >
-            {cabeNome && <p className="text-[0.75rem] font-semibold leading-tight">{item.rotulo}</p>}
-            {cabePct && <p className={cn("tabular-nums leading-tight", cabeNome ? "mt-0.5 text-[0.8125rem] font-bold" : "text-[0.6875rem] font-semibold")}>{p}</p>}
-          </motion.div>
-        );
-      })}
+    <div className={cn("@container", className)}>
+      <div className="flex flex-col gap-4 @min-[36rem]:flex-row @min-[36rem]:items-start">
+        <div ref={ref} role="img" aria-label={resumo} className="relative w-full min-w-0 @min-[36rem]:flex-[1.4]" style={{ height: altura }} onMouseLeave={() => setAtivo(null)}>
+          {rets.map((r, i) => {
+            const item = lista[i]!;
+            return (
+              <motion.div
+                key={item.rotulo}
+                title={`${item.rotulo}: ${pct(item.valor)}`}
+                className="absolute"
+                style={{ left: r.x + 1, top: r.y + 1, width: Math.max(0, r.w - 2), height: Math.max(0, r.h - 2) }}
+                onMouseEnter={() => setAtivo(i)}
+                initial={menos ? false : { opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: menos ? 0 : 0.04 * i }}
+              >
+                <span
+                  className={cn("block h-full w-full rounded-sm transition-opacity duration-200 motion-reduce:transition-none", ativo === i && "ring-2 ring-foreground ring-offset-1 ring-offset-card")}
+                  style={{ background: cores[i], opacity: ativo == null || ativo === i ? 1 : 0.35 }}
+                />
+              </motion.div>
+            );
+          })}
+        </div>
+        <ul className="m-0 w-full min-w-0 list-none space-y-0.5 p-0 @min-[36rem]:flex-1" onMouseLeave={() => setAtivo(null)}>
+          {lista.map((item, i) => (
+            <li
+              key={item.rotulo}
+              onMouseEnter={() => setAtivo(i)}
+              className={cn("flex items-center gap-2.5 rounded-sm px-2 py-1 text-[0.8125rem] transition-colors motion-reduce:transition-none", ativo === i && "bg-muted")}
+            >
+              <PontoDaCor cor={cores[i]!} className="h-2.5 w-2.5" />
+              <span className={cn("min-w-0 flex-1 leading-snug", item.neutro ? "text-muted-foreground" : "text-foreground")}>{item.rotulo}</span>
+              <span className="w-11 shrink-0 text-right font-semibold tabular-nums text-foreground">{pct(item.valor)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -926,17 +959,26 @@ export type MapaDeCalorMatricialProps = BaseDoGrafico & {
   valores: number[][];
   /** Texto do canto da tabela (o que as linhas são). */
   rotuloLinhas?: string;
-  /** Célula em destaque: [linha, coluna]. */
+  /** Célula em destaque: [linha, coluna]. Sem ela, a célula de maior valor é a contornada. */
   destaque?: [number, number];
-  rotulos?: { menos?: string; mais?: string };
+  rotulos?: { menos?: string; mais?: string; destaque?: (linha: string, coluna: string, valor: string) => string };
 };
 
-/** Matriz com a cor de cada célula pela escala sequencial e o valor escrito nela. É uma tabela de verdade. */
+/**
+ * Matriz com a cor de cada célula pela escala sequencial. É uma tabela de verdade: as células não mostram o número
+ * (ele fica para leitores de tela, na dica ao passar o cursor e em Ver dados); a célula em destaque (ou a de maior valor)
+ * é contornada e dita numa frase abaixo.
+ */
 export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = "", destaque, rotulo, formatar = fmtPadrao, rotulos, className }: MapaDeCalorMatricialProps) {
   const menos = useReducedMotion();
-  const r = { menos: "Menos", mais: "Mais", ...rotulos };
+  const r = { menos: "Menos", mais: "Mais", destaque: (l: string, c: string, v: string) => `Em destaque: ${l}, ${c} (${v})`, ...rotulos };
   const todos = valores.flat();
   const min = Math.min(...todos), max = Math.max(...todos);
+  const alvo: [number, number] = destaque ?? (() => {
+    for (let li = 0; li < linhas.length; li++) for (let ci = 0; ci < colunas.length; ci++) if ((valores[li]?.[ci] ?? 0) === max) return [li, ci] as [number, number];
+    return [0, 0] as [number, number];
+  })();
+  const valorAlvo = valores[alvo[0]]?.[alvo[1]];
   return (
     <div className={cn("space-y-3", className)}>
       <table className="w-full table-fixed border-separate border-spacing-[3px] text-[0.8125rem]">
@@ -954,12 +996,13 @@ export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = 
               {colunas.map((c, ci) => {
                 const v = valores[li]?.[ci] ?? 0;
                 const e = ESCALA_SEQUENCIAL[faixa(v, min, max)]!;
-                const marcado = destaque && destaque[0] === li && destaque[1] === ci;
+                const marcado = alvo[0] === li && alvo[1] === ci;
                 return (
-                  <motion.td key={c} className={cn("h-11 rounded-sm text-center font-semibold tabular-nums", marcado && "outline outline-2 outline-offset-1 outline-foreground")}
-                    style={{ background: e.cor, color: e.texto }}
+                  <motion.td key={c} title={`${l}, ${c}: ${formatar(v)}`}
+                    className={cn("h-10 rounded-sm transition-[filter] duration-200 hover:brightness-95 motion-reduce:transition-none", marcado && "outline outline-2 outline-offset-1 outline-foreground")}
+                    style={{ background: e.cor }}
                     initial={menos ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: menos ? 0 : 0.02 * (li * colunas.length + ci) }}>
-                    {formatar(v)}
+                    <span className="sr-only">{formatar(v)}</span>
                   </motion.td>
                 );
               })}
@@ -967,7 +1010,12 @@ export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = 
           ))}
         </tbody>
       </table>
-      <LegendaSequencial menos={r.menos} mais={r.mais} />
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <LegendaSequencial menos={r.menos} mais={r.mais} />
+        {valorAlvo != null && linhas[alvo[0]] != null && colunas[alvo[1]] != null && (
+          <p className="text-[0.75rem] font-semibold tabular-nums text-foreground">{r.destaque(linhas[alvo[0]]!, colunas[alvo[1]]!, formatar(valorAlvo))}</p>
+        )}
+      </div>
     </div>
   );
 }

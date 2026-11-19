@@ -2,7 +2,7 @@ import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "./utils";
 import {
-  CORES_GRAFICO, COR_NEUTRA, COR_GRADE, ESCALA_SEQUENCIAL, LegendaDoGrafico, LegendaSequencial,
+  CORES_GRAFICO, COR_NEUTRA, COR_GRADE, ESCALA_SEQUENCIAL, LegendaDoGrafico, LegendaSequencial, PontoDaCor,
   formatarPercentual, fmtPadrao, useLargura, marcasDoEixo, afastar, larguraTexto, soma, arco, faixa,
   type BaseDoGrafico, type Formatador, type ParteDaRosca,
 } from "./graficos-inteligencia";
@@ -13,8 +13,8 @@ import {
  * (--chart-1 a --chart-5, --chart-neutral, --chart-grid, --chart-seq-*), valores e nomes escritos junto das marcas,
  * role="img" com aria-label que resume os dados, SVG desenhado na largura real do contêiner e nada anima com "menos movimento".
  *
- * Texto sobre uma cor só onde o token --chart-N-texto (ou --chart-seq-N-texto) garante 4,5:1; nos demais casos o rótulo
- * fica fora da marca. Linhas de referência (média, tendência) usam a cor do texto secundário, não uma cor nova.
+ * Nenhum texto sobre a cor do gráfico (decisão da dona do produto, 19/11/2026, opção B): valores e rótulos ficam fora da
+ * marca, sempre na mesma cor de texto. Linhas de referência (média, tendência) usam a cor do texto secundário, não uma cor nova.
  */
 
 /* ── Cores e utilidades do catálogo ───────────────────────────────────────────────────────────────────── */
@@ -24,16 +24,6 @@ import {
  * Até 4 séries; a partir da 5ª, agrupe em "Outros" (grafite).
  */
 export const CORES_SERIES = ["var(--chart-1)", "var(--chart-4)", "var(--chart-2)", "var(--chart-3)"] as const;
-
-/** Cor do texto que passa 4,5:1 sobre cada tom; null = o texto fica fora da marca (o --chart-3 não aceita texto). */
-const TEXTO_SOBRE: Record<string, string | null> = {
-  "var(--chart-1)": "var(--chart-1-texto)",
-  "var(--chart-2)": "var(--chart-2-texto)",
-  "var(--chart-3)": null,
-  "var(--chart-4)": "var(--chart-4-texto)",
-  "var(--chart-5)": "var(--chart-5-texto)",
-  [COR_NEUTRA]: "var(--foreground)",
-};
 
 /** Cor das linhas de referência (média, tendência, ligações): a do texto secundário. */
 const COR_REFERENCIA = "var(--muted-foreground)";
@@ -262,8 +252,8 @@ export type BarrasEmpilhadasProps = BaseDoGrafico & {
 };
 
 /**
- * Barras empilhadas com o total escrito no fim. O valor de cada parte vai dentro dela só quando cabe e o tom
- * aceita texto com 4,5:1; o detalhe completo fica na tabela (Ver dados).
+ * Barras empilhadas com o total escrito no fim. As partes não levam texto: embaixo de cada barra, uma linha com o valor
+ * de cada parte, na mesma ordem e com um ponto na cor dela.
  */
 export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPadrao, className }: BarrasEmpilhadasProps) {
   const menos = useReducedMotion();
@@ -283,21 +273,19 @@ export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPad
           <div key={l.rotulo}>
             <p className="mb-1 text-[0.8125rem] font-medium text-foreground">{l.rotulo}</p>
             <div className="flex items-center gap-2">
-              <motion.div className="flex h-5 shrink-0 gap-[2px] overflow-hidden rounded-sm" style={{ width: (totais[li]! / max) * trilho, originX: 0 }}
+              <motion.div className="flex h-4 shrink-0 gap-[2px] overflow-hidden rounded-sm" style={{ width: (totais[li]! / max) * trilho, originX: 0 }}
                 initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: menos ? 0 : 0.08 * li, ease: [0.22, 1, 0.36, 1] }}>
-                {l.valores.map((v, i) => {
-                  const px = (v / max) * trilho;
-                  const texto = TEXTO_SOBRE[cores[i]!];
-                  const cabe = texto && px >= larguraTexto(formatar(v), 11) + 8;
-                  return (
-                    <span key={i} className="flex h-full min-w-0 items-center justify-center text-[11px] font-semibold tabular-nums" style={{ flex: `${v} 1 0`, background: cores[i], color: texto ?? undefined }}>
-                      {cabe ? formatar(v) : ""}
-                    </span>
-                  );
-                })}
+                {l.valores.map((v, i) => (
+                  <span key={i} title={`${categorias[i]?.rotulo}: ${formatar(v)}`} className="block h-full min-w-0" style={{ flex: `${v} 1 0`, background: cores[i] }} />
+                ))}
               </motion.div>
               <span className="shrink-0 text-[0.8125rem] font-semibold tabular-nums text-foreground">{formatar(totais[li]!)}</span>
             </div>
+            <ul className="m-0 mt-1 flex list-none flex-wrap gap-x-3 gap-y-0.5 p-0 text-[0.75rem] tabular-nums text-foreground">
+              {l.valores.map((v, i) => (
+                <li key={i} className="flex items-center gap-1"><PontoDaCor cor={cores[i]!} />{formatar(v)}</li>
+              ))}
+            </ul>
           </div>
         ))}
       </div>
@@ -340,7 +328,7 @@ export function Pirulito({ itens, destaques = 1, ordenar = true, referencia, max
           const cor = d ? "var(--chart-1)" : "var(--chart-4)";
           return (
             <div key={item.rotulo} className="min-w-0">
-              <p className={cn("mb-0.5 text-[0.8125rem] leading-snug", d ? "font-semibold text-foreground" : "text-muted-foreground")}>{item.rotulo}</p>
+              <p className={cn("mb-0.5 text-[0.8125rem] leading-snug", d ? "font-semibold text-foreground" : "text-muted-foreground")}><span className="relative bg-card pr-1 [box-decoration-break:clone]">{item.rotulo}</span></p>
               <div className="relative flex h-4 items-center">
                 <motion.span aria-hidden className="block h-[2px] rounded-sm" style={{ width: pos(item.valor), background: cor, originX: 0 }}
                   initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.05 * i }} />
@@ -1058,10 +1046,7 @@ export function Dispersao({ pontos, eixoX, eixoY, tendencia, altura = 280, rotul
           ))}
           <text x={m.l + w} y={altura - 2} textAnchor="end" className="fill-muted-foreground text-[11px] font-semibold">{eixoX.rotulo} →</text>
           {tendencia && (
-            <g>
-              <line x1={X(xa)} x2={X(xb)} y1={Y(reta(xa))} y2={Y(reta(xb))} stroke={COR_REFERENCIA} strokeWidth={1.5} strokeDasharray="5 4" />
-              <text x={X(xb)} y={Y(reta(xb)) - 8} textAnchor="end" style={HALO} className="fill-muted-foreground text-[11px] font-semibold">{r.tendencia}</text>
-            </g>
+            <line x1={X(xa)} x2={X(xb)} y1={Y(reta(xa))} y2={Y(reta(xb))} stroke={COR_REFERENCIA} strokeWidth={1.5} strokeDasharray="5 4" />
           )}
           <Entrada>
             {[...pontos].sort((a, b) => Number(!!a.destaque) - Number(!!b.destaque)).map((p, i) => {
@@ -1080,6 +1065,13 @@ export function Dispersao({ pontos, eixoX, eixoY, tendencia, altura = 280, rotul
           </Entrada>
         </svg>
       )}
+      {/* o nome da linha de tendência fica fora do desenho, para não cruzar os pontos */}
+      {tendencia && largura > 0 && (
+        <p className="mt-1 flex items-center gap-1.5 text-[0.75rem] font-semibold text-muted-foreground">
+          <svg aria-hidden width={18} height={4} className="shrink-0"><line x1={0} x2={18} y1={2} y2={2} stroke={COR_REFERENCIA} strokeWidth={1.5} strokeDasharray="5 4" /></svg>
+          {r.tendencia}
+        </p>
+      )}
     </div>
   );
 }
@@ -1094,20 +1086,34 @@ export type MatrizDeCorrelacaoProps = {
   /** Par em destaque: [linha, coluna]. */
   destaque?: [number, number];
   localidade?: string;
-  rotulos?: { fraca?: string; forte?: string; nota?: string };
+  rotulos?: { fraca?: string; forte?: string; nota?: string; destaque?: (a: string, b: string, valor: string) => string };
   className?: string;
 };
 
+/** Listras na cor do card: marcam a relação inversa sem depender da cor nem de texto sobre a célula. */
+const LISTRAS_INVERSA = "repeating-linear-gradient(135deg, transparent 0 5px, var(--card) 5px 7.5px)";
+
 /**
  * Matriz de correlação (metade de baixo, numa tabela de verdade): a cor mostra a força da relação, pela escala sequencial,
- * e o número com sinal mostra a direção (+ andam juntas; − quando uma sobe, a outra desce).
+ * e as listras mostram a direção (com listras: quando uma sobe, a outra desce). As células não levam número: o par em
+ * destaque (ou o de relação mais forte) é contornado e dito numa frase abaixo; os números ficam na dica e em Ver dados.
  */
 export function MatrizDeCorrelacao({ variaveis, valores, destaque, localidade = "pt-BR", rotulo, rotulos, className }: MatrizDeCorrelacaoProps) {
   const menos = useReducedMotion();
-  const r = { fraca: "Relação fraca", forte: "Relação forte", nota: "O sinal mostra a direção: + andam juntas, − uma sobe quando a outra desce.", ...rotulos };
+  const r = {
+    fraca: "Relação fraca", forte: "Relação forte", nota: "Com listras: relação inversa, quando uma sobe a outra desce. Sem listras: andam juntas.",
+    destaque: (a: string, b: string, v: string) => `Em destaque: ${a} e ${b} (${v})`, ...rotulos,
+  };
   const fmt = (v: number) => `${v < 0 ? "−" : v > 0 ? "+" : ""}${Math.abs(v).toLocaleString(localidade, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   const nivel = (v: number) => { const a = Math.abs(v); return a >= 0.7 ? 3 : a >= 0.5 ? 2 : a >= 0.3 ? 1 : 0; };
   const linhas = variaveis.slice(1), colunas = variaveis.slice(0, -1);
+  const alvo: [number, number] = destaque ?? (() => {
+    let melhor: [number, number] = [1, 0];
+    for (let li = 1; li < variaveis.length; li++) for (let ci = 0; ci < li; ci++)
+      if (Math.abs(valores[li]?.[ci] ?? 0) > Math.abs(valores[melhor[0]]?.[melhor[1]] ?? 0)) melhor = [li, ci];
+    return melhor;
+  })();
+  const valorAlvo = valores[alvo[0]]?.[alvo[1]];
   return (
     <div className={cn("space-y-3", className)}>
       <table className="w-full table-fixed border-separate border-spacing-[3px] text-[0.8125rem]">
@@ -1128,12 +1134,12 @@ export function MatrizDeCorrelacao({ variaveis, valores, destaque, localidade = 
                   if (ci >= li) return <td key={c} />;
                   const v = valores[li]?.[ci] ?? 0;
                   const e = ESCALA_SEQUENCIAL[nivel(v)]!;
-                  const marcado = destaque && destaque[0] === li && destaque[1] === ci;
+                  const marcado = alvo[0] === li && alvo[1] === ci;
                   return (
-                    <motion.td key={c} className={cn("h-10 rounded-sm text-center text-[0.75rem] font-semibold tabular-nums", marcado && "outline outline-2 outline-offset-1 outline-foreground")}
-                      style={{ background: e.cor, color: e.texto }} title={`${l} × ${c}: ${fmt(v)}`}
+                    <motion.td key={c} className={cn("h-10 rounded-sm transition-[filter] duration-200 hover:brightness-95 motion-reduce:transition-none", marcado && "outline outline-2 outline-offset-1 outline-foreground")}
+                      style={{ backgroundColor: e.cor, backgroundImage: v < 0 ? LISTRAS_INVERSA : undefined }} title={`${l} × ${c}: ${fmt(v)}`}
                       initial={menos ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: menos ? 0 : 0.03 * (li + ci) }}>
-                      {fmt(v)}
+                      <span className="sr-only">{fmt(v)}</span>
                     </motion.td>
                   );
                 })}
@@ -1144,8 +1150,14 @@ export function MatrizDeCorrelacao({ variaveis, valores, destaque, localidade = 
       </table>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <LegendaSequencial menos={r.fraca} mais={r.forte} />
-        <p className="text-[0.6875rem] text-muted-foreground">{r.nota}</p>
+        {valorAlvo != null && variaveis[alvo[0]] != null && variaveis[alvo[1]] != null && (
+          <p className="text-[0.75rem] font-semibold tabular-nums text-foreground">{r.destaque(variaveis[alvo[0]]!, variaveis[alvo[1]]!, fmt(valorAlvo))}</p>
+        )}
       </div>
+      <p className="flex items-center gap-2 text-[0.6875rem] text-muted-foreground">
+        <span aria-hidden className="h-3 w-6 shrink-0 rounded-[3px]" style={{ backgroundColor: ESCALA_SEQUENCIAL[2]!.cor, backgroundImage: LISTRAS_INVERSA }} />
+        {r.nota}
+      </p>
     </div>
   );
 }
@@ -1164,8 +1176,8 @@ export type RadarProps = BaseDoGrafico & {
 };
 
 /**
- * Radar: cada eixo é uma medida na mesma escala. A série em destaque é preenchida e tem os valores escritos;
- * as outras são só contorno (tracejado), para não depender só da cor.
+ * Radar: cada eixo é uma medida na mesma escala. A série em destaque é preenchida e tem os valores escritos junto do
+ * nome de cada eixo, fora da área; as outras são só contorno (tracejado), para não depender só da cor.
  */
 export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fmtPadrao, className }: RadarProps) {
   const menos = useReducedMotion();
@@ -1178,8 +1190,10 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
   const cores = series.map((_, i) => (i === iDestaque ? "var(--chart-1)" : outras[k++ % outras.length]!));
   const larguraRotulo = Math.min(largura < 420 ? 70 : 92, Math.max(...eixos.map(e => larguraTexto(e, 11))) + 4);
   const R = Math.max(40, Math.min(112, (largura - 2 * larguraRotulo - 20) / 2));
-  const cx = largura / 2, cy = R + 30;
-  const altura = cy + R + 30;
+  const valoresDestaque = series[iDestaque]?.valores;
+  const folga = valoresDestaque ? 44 : 30; // espaço para o nome do eixo e, embaixo dele, o valor em destaque
+  const cx = largura / 2, cy = R + folga;
+  const altura = cy + R + folga;
   const ang = (i: number) => (i / n) * 2 * Math.PI;
   const P = (i: number, v: number) => [cx + (v / max) * R * Math.sin(ang(i)), cy - (v / max) * R * Math.cos(ang(i))] as const;
   const poligono = (vs: number[]) => vs.map((v, i) => P(i, v).map(c => c.toFixed(1)).join(",")).join(" ");
@@ -1198,12 +1212,14 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
               const lx = cx + (R + 10) * s, ly = cy - (R + 10) * c;
               const ancora = Math.abs(s) < 0.2 ? "middle" : s > 0 ? "start" : "end";
               const linhasTxt = quebrarTexto(e, larguraRotulo);
-              const y0 = c > 0.5 ? ly - (linhasTxt.length - 1) * 13 - 2 : c < -0.5 ? ly + 10 : ly + 4 - ((linhasTxt.length - 1) * 13) / 2;
+              const total = linhasTxt.length + (valoresDestaque ? 1 : 0);
+              const y0 = c > 0.5 ? ly - (total - 1) * 13 - 2 : c < -0.5 ? ly + 10 : ly + 4 - ((total - 1) * 13) / 2;
               return (
                 <g key={e}>
                   <line x1={cx} y1={cy} x2={x} y2={y} stroke={COR_GRADE} />
                   <text x={lx} y={y0} textAnchor={ancora} className="fill-muted-foreground text-[11px]">
                     {linhasTxt.map((t, li) => <tspan key={li} x={lx} dy={li ? 13 : 0}>{t}</tspan>)}
+                    {valoresDestaque && <tspan x={lx} dy={13.5} className="fill-foreground text-[12px] font-semibold tabular-nums">{formatar(valoresDestaque[i] ?? 0)}</tspan>}
                   </text>
                 </g>
               );
@@ -1214,16 +1230,9 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
                 initial={menos ? false : { opacity: 0, scale: 0.6 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
                 style={{ transformOrigin: `${cx}px ${cy}px` }} transition={{ duration: 0.55, delay: menos ? 0 : 0.1 * i, ease: [0.22, 1, 0.36, 1] }} />
             ))}
-            {series[iDestaque]?.valores.map((v, i) => {
+            {valoresDestaque?.map((v, i) => {
               const [x, y] = P(i, v);
-              const [xi, yi] = P(i, Math.max(0, v - (16 / R) * max));
-              return (
-                <g key={i}>
-                  <circle cx={x} cy={y} r={3} fill="var(--chart-1)" />
-                  <text x={xi} y={yi + 4} textAnchor="middle" style={HALO}
-                    className="fill-foreground text-[11px] font-semibold tabular-nums">{formatar(v)}</text>
-                </g>
-              );
+              return <circle key={i} cx={x} cy={y} r={3} fill="var(--chart-1)" />;
             })}
           </svg>
         )}
@@ -1878,8 +1887,8 @@ export type MapaDeBolhasProps = MapaEsquematicoBase & {
 };
 
 /**
- * Mapa de bolhas esquemático: uma bolha por lugar, com a área proporcional ao valor, escrito dentro (ou ao lado,
- * quando a bolha é pequena). Não é mapa em escala e não usa dados geográficos.
+ * Mapa de bolhas esquemático: uma bolha por lugar, com a área proporcional ao valor. Nome e valor ficam escritos
+ * embaixo da bolha, fora dela. Não é mapa em escala e não usa dados geográficos.
  */
 export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, formatar = fmtPadrao, altura, nomesDasRegioes = true, rotulo, rotulos, className }: MapaDeBolhasProps) {
   const menos = useReducedMotion();
@@ -1887,7 +1896,7 @@ export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, 
   const r = { nota: NOTA_MAPA, ...rotulos };
   const { H, cw, ch } = useMapaEsquematico(colunas, linhas, largura, altura);
   const maxV = Math.max(1, ...bolhas.map(b => b.valor));
-  const rMax = Math.max(12, Math.min(cw, ch) * 0.32);
+  const rMax = Math.max(12, Math.min(cw, ch) * 0.3);
   const raio = (v: number) => Math.max(5, Math.sqrt(v / maxV) * rMax);
   const resumo = `${rotulo}: ${[...bolhas].sort((a, b) => b.valor - a.valor).map(b => `${b.rotulo} ${formatar(b.valor)}`).join(", ")}. ${r.nota}`;
   return (
@@ -1898,16 +1907,16 @@ export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, 
             <FundoDoMapa regioes={regioes} cw={cw} ch={ch} nomes={nomesDasRegioes} />
             {[...bolhas].sort((a, b) => b.valor - a.valor).map((b, i) => {
               const x = b.x * cw, y = b.y * ch, rr = raio(b.valor);
-              const dentro = rr >= larguraTexto(formatar(b.valor), 11) / 2 + 7;
               return (
                 <g key={b.rotulo}>
                   <title>{`${b.rotulo}: ${formatar(b.valor)}`}</title>
                   <motion.circle cx={x} cy={y} r={rr} fill="var(--chart-1)" fillOpacity={b.destaque ? 0.38 : 0.2} stroke="var(--chart-1)" strokeWidth={b.destaque ? 2 : 1.25}
                     initial={menos ? false : { scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
                     style={{ transformOrigin: `${x}px ${y}px` }} transition={{ duration: 0.45, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }} />
-                  <text x={dentro ? x : x + rr + 4} y={y + 4} textAnchor={dentro ? "middle" : "start"} style={dentro ? undefined : HALO}
-                    className="fill-foreground text-[11px] font-bold tabular-nums">{formatar(b.valor)}</text>
-                  <text x={x} y={y + rr + 13} textAnchor="middle" style={HALO} className={cn("text-[11px]", b.destaque ? "fill-foreground font-semibold" : "fill-foreground")}>{b.rotulo}</text>
+                  <text x={x} y={y + rr + 13} textAnchor="middle" style={HALO} className="fill-foreground text-[11px]">
+                    <tspan className={b.destaque ? "font-semibold" : undefined}>{b.rotulo}</tspan>
+                    <tspan dx={4} className="text-[12px] font-bold tabular-nums">{formatar(b.valor)}</tspan>
+                  </text>
                 </g>
               );
             })}
