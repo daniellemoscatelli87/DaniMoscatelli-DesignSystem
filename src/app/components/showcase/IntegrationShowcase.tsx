@@ -136,7 +136,7 @@ export function IntegrationShowcase() {
             <Paintbrush className="h-4 w-4 text-violet" />
           </div>
           <div>
-            <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("For the design team", "Para o time de design")}</h2>
+            <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("For the design team", "Para o time de design")}</h2>
             <p className="text-[0.75rem] text-muted-foreground">{t("Connecting the Figma library to your project", "Conectando a biblioteca do Figma ao seu projeto")}</p>
           </div>
         </div>
@@ -247,7 +247,7 @@ export function IntegrationShowcase() {
             <Code2 className="h-4 w-4 text-info" />
           </div>
           <div>
-            <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("For the development team", "Para o time de desenvolvimento")}</h2>
+            <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("For the development team", "Para o time de desenvolvimento")}</h2>
             <p className="text-[0.75rem] text-muted-foreground">{t("Installing the tokens in a React + Tailwind v4 project", "Instalando os tokens em um projeto React + Tailwind v4")}</p>
           </div>
         </div>
@@ -438,7 +438,7 @@ export function IntegrationShowcase() {
       {/* ── File structure ── */}
       <section className="space-y-4">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Recommended file structure", "Estrutura de arquivos recomendada")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Recommended file structure", "Estrutura de arquivos recomendada")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How to organize token files in a React project.", "Como organizar os arquivos de tokens em um projeto React.")}</p>
         </div>
 
@@ -481,7 +481,7 @@ export function IntegrationShowcase() {
       {/* ── Full flow ── */}
       <section className="space-y-4">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Full flow: from token to component", "Fluxo completo: do token ao componente")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Full flow: from token to component", "Fluxo completo: do token ao componente")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How a design decision becomes code, step by step.", "Como uma decisão de design vira código, passo a passo.")}</p>
         </div>
 
@@ -551,7 +551,7 @@ export function IntegrationShowcase() {
       <section className="space-y-4">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Integration checklist", "Checklist de integração")}</h2>
+            <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Integration checklist", "Checklist de integração")}</h2>
             <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("Everything that must be done for the design system to be correctly connected.", "Tudo o que precisa ser feito para o design system ficar conectado corretamente.")}</p>
           </div>
           <div className="flex items-center gap-1.5 flex-wrap">

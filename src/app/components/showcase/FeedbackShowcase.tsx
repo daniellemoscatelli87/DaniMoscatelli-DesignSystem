@@ -8,13 +8,13 @@ import {
   CheckCircle, AlertCircle, AlertTriangle, Info, X,
   Loader2, Clock, Check,
 } from "lucide-react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useI18n } from "../../i18n";
 import { Alert as UiAlert, AlertTitle, AlertDescription } from "../ui/alert";
 import { SectionHeader } from "./shared/SectionHeader";
 import { VejaEm } from "./shared/VejaEm";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -172,27 +172,18 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
         <SectionHeader title={t("Tabs", "Abas")} description={t("Clean tab navigation for switching between content panels.", "Navegação limpa por abas para alternar entre painéis de conteúdo.")} />
         <SubSection title={t("Default Tabs", "Abas padrão")}>
           <ShowcaseCard>
-            <TabsPrimitive.Root value={defaultTab} onValueChange={setDefaultTab}>
-              <TabsPrimitive.List className="flex items-center gap-1 p-1 bg-muted rounded-md w-fit mb-5">
+            <Tabs value={defaultTab} onValueChange={setDefaultTab}>
+              <TabsList className="mb-5">
                 {tabItems.map(tab => (
-                  <TabsPrimitive.Trigger
-                    key={tab.id}
-                    value={tab.id}
-                    className={`px-4 py-2 text-[0.875rem] font-medium rounded-sm transition-all duration-150 outline-none
-                      data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:shadow-sm
-                      data-[state=inactive]:text-muted-foreground data-[state=inactive]:hover:text-foreground`}
-                    style={{ boxShadow: defaultTab === tab.id ? "var(--shadow-sm)" : undefined }}
-                  >
-                    {bi(tab.label)}
-                  </TabsPrimitive.Trigger>
+                  <TabsTrigger key={tab.id} value={tab.id}>{bi(tab.label)}</TabsTrigger>
                 ))}
-              </TabsPrimitive.List>
-              <TabsPrimitive.Content value={defaultTab}>
+              </TabsList>
+              <TabsContent value={defaultTab}>
                 <div className="rounded-md bg-muted/30 border border-border p-4 text-[0.875rem] text-muted-foreground">
                   {t("Content for", "Conteúdo da aba")} <strong className="text-foreground">{bi(tabItems.find(x => x.id === defaultTab)!.label)}</strong>{lang === "en" ? " tab." : "."}
                 </div>
-              </TabsPrimitive.Content>
-            </TabsPrimitive.Root>
+              </TabsContent>
+            </Tabs>
           </ShowcaseCard>
         </SubSection>
 
@@ -646,7 +637,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       {parte === "feedback" && (
       <section id="feedback-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Tokens — Feedback", "Tokens — Feedback")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Tokens — Feedback", "Tokens — Feedback")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by alerts, toasts, and status components.", "Propriedades CSS customizadas usadas por alertas, toasts e componentes de status.")}</p>
         </div>
         <TokenTable groups={feedbackTokenGroups(t)} />
@@ -657,7 +648,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       {parte === "rotulos" && (
       <section id="badges-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Tokens — Labels & Badges", "Tokens — Rótulos e badges")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Tokens — Labels & Badges", "Tokens — Rótulos e badges")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by badges, tags, avatars, and status pills.", "Propriedades CSS customizadas usadas por badges, tags, avatares e pílulas de status.")}</p>
         </div>
         <TokenTable groups={badgesTokenGroups(t)} />

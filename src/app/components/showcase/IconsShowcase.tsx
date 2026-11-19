@@ -294,7 +294,7 @@ export function IconsShowcase() {
       {/* ── Tokens ── */}
       <section id="icons-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Tokens</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties for icon color, sizing, and context.", "Propriedades CSS customizadas para cor, tamanho e contexto dos ícones.")}</p>
         </div>
         <TokenTable groups={localizedTokenGroups} />

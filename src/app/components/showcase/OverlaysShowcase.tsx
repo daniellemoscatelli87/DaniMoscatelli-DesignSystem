@@ -6,10 +6,7 @@ import {
   ChevronDown, Plus, Minus,
   ShieldCheck, CreditCard, Zap, MessageSquare, Globe,
 } from "lucide-react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { useI18n } from "../../i18n";
 import { Breadcrumb as UiBreadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
 import { Pagination as UiPagination, PaginationContent, PaginationItem, PaginationLink, PaginationEllipsis } from "../ui/pagination";
@@ -17,6 +14,12 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { SectionHeader } from "./shared/SectionHeader";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "../ui/dropdown-menu";
+import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "../ui/dialog";
+import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../ui/alert-dialog";
+import { Input } from "../ui/input";
+import { Textarea } from "../ui/textarea";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -223,15 +226,14 @@ export function OverlaysShowcase() {
         <SectionHeader title={t("Dropdown Menus", "Menus dropdown")} description={t("Context menus and action dropdowns with keyboard navigation.", "Menus de contexto e dropdowns de ações com navegação por teclado.")} />
         <SubSection title={t("Action Dropdown", "Dropdown de ações")}>
           <ShowcaseCard>
-            <DropdownMenuPrimitive.Root>
-              <DropdownMenuPrimitive.Trigger asChild>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
                 <button className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
                   {t("Actions", "Ações")}
                   <svg className="h-4 w-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="m6 9 6 6 6-6"/></svg>
                 </button>
-              </DropdownMenuPrimitive.Trigger>
-              <DropdownMenuPrimitive.Portal>
-                <DropdownMenuPrimitive.Content
+              </DropdownMenuTrigger>
+                <DropdownMenuContent
                   sideOffset={6}
                   align="start"
                   className="z-50 min-w-[180px] bg-card border border-border rounded-md p-1.5 shadow-lg animate-in fade-in-0 zoom-in-95"
@@ -244,7 +246,7 @@ export function OverlaysShowcase() {
                   ].map(item => {
                     const Icon = item.icon;
                     return (
-                      <DropdownMenuPrimitive.Item
+                      <DropdownMenuItem
                         key={item.label.en}
                         className="flex items-center justify-between gap-2 px-3 py-2 text-[0.875rem] font-medium text-foreground rounded-sm hover:bg-accent cursor-pointer outline-none"
                       >
@@ -253,17 +255,16 @@ export function OverlaysShowcase() {
                           {bi(item.label)}
                         </span>
                         {item.shortcut && <span className="text-[0.75rem] text-muted-foreground font-normal">{item.shortcut}</span>}
-                      </DropdownMenuPrimitive.Item>
+                      </DropdownMenuItem>
                     );
                   })}
-                  <DropdownMenuPrimitive.Separator className="my-1 h-px bg-border" />
-                  <DropdownMenuPrimitive.Item className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
                     <Trash2 className="h-4 w-4" />
                     {t("Delete", "Excluir")}
-                  </DropdownMenuPrimitive.Item>
-                </DropdownMenuPrimitive.Content>
-              </DropdownMenuPrimitive.Portal>
-            </DropdownMenuPrimitive.Root>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
           </ShowcaseCard>
         </SubSection>
       </section>
@@ -298,70 +299,55 @@ export function OverlaysShowcase() {
       </section>
 
       {/* ── DIALOG MODALS ── */}
-      <DialogPrimitive.Root open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogPrimitive.Portal>
-          <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm animate-in fade-in-0" />
-          <DialogPrimitive.Content
-            className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-card rounded-[20px] border border-border p-6 animate-in fade-in-0 zoom-in-95"
-            style={{ boxShadow: "var(--shadow-xl)" }}
-          >
-            <div className="flex items-start justify-between mb-5">
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="max-w-md gap-0 rounded-[20px] p-6 sm:max-w-md" style={{ boxShadow: "var(--shadow-xl)" }}>
+            <div className="mb-5 pr-8">
               <div>
-                <DialogPrimitive.Title className="text-[1.125rem] font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogPrimitive.Title>
-                <DialogPrimitive.Description className="text-[0.875rem] text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogPrimitive.Description>
+                <DialogTitle className="text-[1.125rem] font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogTitle>
+                <DialogDescription className="text-[0.875rem] text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogDescription>
               </div>
-              <DialogPrimitive.Close aria-label={t("Close", "Fechar")} className="h-8 w-8 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors">
-                <X className="h-4 w-4" />
-              </DialogPrimitive.Close>
             </div>
             <div className="space-y-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
-                <input className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all" placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
+                <Input placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-[0.875rem] font-medium text-foreground">{t("Description", "Descrição")}</label>
-                <textarea className="w-full bg-background border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring transition-all resize-none" rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
+                <Textarea rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
               </div>
             </div>
             <div className="flex justify-end gap-2 mt-6">
-              <DialogPrimitive.Close className="h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
-              <button className="h-10 px-5 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Create Project", "Criar projeto")}</button>
+              <DialogClose asChild><Button variant="outline">{t("Cancel", "Cancelar")}</Button></DialogClose>
+              <Button>{t("Create Project", "Criar projeto")}</Button>
             </div>
-          </DialogPrimitive.Content>
-        </DialogPrimitive.Portal>
-      </DialogPrimitive.Root>
+          </DialogContent>
+      </Dialog>
 
-      <DialogPrimitive.Root open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <DialogPrimitive.Portal>
-          <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-foreground/20 backdrop-blur-sm animate-in fade-in-0" />
-          <DialogPrimitive.Content
-            className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm bg-card rounded-[20px] border border-border p-6 animate-in fade-in-0 zoom-in-95"
-            style={{ boxShadow: "var(--shadow-xl)" }}
-          >
+      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+          <AlertDialogContent className="max-w-sm gap-0 rounded-[20px] p-6 sm:max-w-sm" style={{ boxShadow: "var(--shadow-xl)" }}>
             <div className="flex flex-col items-center text-center gap-4 mb-5">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Trash2 className="h-6 w-6 text-primary-text" />
               </div>
               <div>
-                <DialogPrimitive.Title className="text-[1.125rem] font-semibold text-foreground">{t("Delete Project", "Excluir projeto")}</DialogPrimitive.Title>
-                <DialogPrimitive.Description className="text-[0.875rem] text-muted-foreground mt-1">{t("This action cannot be undone. All data will be permanently removed.", "Esta ação não pode ser desfeita. Todos os dados serão removidos permanentemente.")}</DialogPrimitive.Description>
+                <AlertDialogTitle className="text-[1.125rem] font-semibold text-foreground">{t("Delete Project", "Excluir projeto")}</AlertDialogTitle>
+                <AlertDialogDescription className="text-[0.875rem] text-muted-foreground mt-1">{t("This action cannot be undone. All data will be permanently removed.", "Esta ação não pode ser desfeita. Todos os dados serão removidos permanentemente.")}</AlertDialogDescription>
               </div>
             </div>
             <div className="flex gap-2">
-              <DialogPrimitive.Close className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors">{t("Cancel", "Cancelar")}</DialogPrimitive.Close>
-              <button className="flex-1 h-10 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">{t("Delete", "Excluir")}</button>
+              <AlertDialogCancel className="flex-1">{t("Cancel", "Cancelar")}</AlertDialogCancel>
+              <AlertDialogAction className="flex-1 bg-destructive text-destructive-foreground hover:bg-destructive/90">{t("Delete", "Excluir")}</AlertDialogAction>
             </div>
-          </DialogPrimitive.Content>
-        </DialogPrimitive.Portal>
-      </DialogPrimitive.Root>
+          </AlertDialogContent>
+      </AlertDialog>
 
       <DrawerDemo open={drawerOpen} onClose={() => setDrawerOpen(false)} />
 
       {/* ── Accordion ── */}
       <section id="accordion" className="space-y-5 mt-10">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Accordion", "Accordion")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Accordion", "Sanfona (accordion)")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("Collapsible content panels powered by Radix UI. Three style variants.", "Painéis de conteúdo recolhíveis com Radix UI. Três variantes de estilo.")}</p>
         </div>
 
@@ -369,33 +355,29 @@ export function OverlaysShowcase() {
           {/* Variant 1 — Default (bordered, single open) */}
           <ShowcaseCard>
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Default — Single open", "Padrão — Um aberto por vez")}</p>
-            <AccordionPrimitive.Root type="single" collapsible className="w-full divide-y divide-border rounded-md border border-border overflow-hidden">
+            <Accordion type="single" collapsible className="w-full divide-y divide-border rounded-md border border-border overflow-hidden">
               {defaultItems.map(item => (
-                <AccordionPrimitive.Item key={item.value} value={item.value}>
-                  <AccordionPrimitive.Header>
-                    <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between px-5 py-4 text-[0.9375rem] font-semibold text-foreground bg-card hover:bg-muted transition-colors data-[state=open]:bg-muted">
+                <AccordionItem key={item.value} value={item.value} className="border-b-0">
+                    <AccordionTrigger className="group flex w-full items-center justify-between px-5 py-4 text-[0.9375rem] font-semibold text-foreground bg-card hover:bg-muted transition-colors data-[state=open]:bg-muted">
                       {bi(item.label)}
-                      <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                    </AccordionPrimitive.Trigger>
-                  </AccordionPrimitive.Header>
-                  <AccordionPrimitive.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                    </AccordionTrigger>
+                  <AccordionContent className="pb-0">
                     <div className="px-5 pb-5 pt-3 text-[0.875rem] text-muted-foreground leading-relaxed bg-card">
                       {bi(item.content)}
                     </div>
-                  </AccordionPrimitive.Content>
-                </AccordionPrimitive.Item>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </AccordionPrimitive.Root>
+            </Accordion>
           </ShowcaseCard>
 
           {/* Variant 2 — Flush (no outer border, subtle separator) */}
           <ShowcaseCard>
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Flush — Multiple open", "Flush — Vários abertos")}</p>
-            <AccordionPrimitive.Root type="multiple" className="w-full divide-y divide-border">
+            <Accordion type="multiple" className="w-full divide-y divide-border">
               {flushItems.map(item => (
-                <AccordionPrimitive.Item key={item.value} value={item.value}>
-                  <AccordionPrimitive.Header>
-                    <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between py-4 text-[0.9375rem] font-semibold text-foreground hover:text-primary-text transition-colors">
+                <AccordionItem key={item.value} value={item.value} className="border-b-0">
+                    <AccordionTrigger semIcone className="group flex w-full items-center justify-between py-4 text-[0.9375rem] font-semibold text-foreground hover:text-primary-text transition-colors">
                       <span className="flex items-center gap-3">
                         <item.icon className="h-4 w-4 text-primary-text shrink-0" />
                         {bi(item.label)}
@@ -404,42 +386,38 @@ export function OverlaysShowcase() {
                         <Plus className="h-3 w-3 text-muted-foreground group-data-[state=open]:hidden" />
                         <Minus className="h-3 w-3 text-white hidden group-data-[state=open]:block" />
                       </span>
-                    </AccordionPrimitive.Trigger>
-                  </AccordionPrimitive.Header>
-                  <AccordionPrimitive.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                    </AccordionTrigger>
+                  <AccordionContent className="pb-0">
                     <div className="pb-4 text-[0.875rem] text-muted-foreground leading-relaxed">
                       {bi(item.content)}
                     </div>
-                  </AccordionPrimitive.Content>
-                </AccordionPrimitive.Item>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </AccordionPrimitive.Root>
+            </Accordion>
           </ShowcaseCard>
 
           {/* Variant 3 — Card stack (each item is its own card) */}
           <ShowcaseCard>
             <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Card stack — FAQ style", "Pilha de cards — estilo FAQ")}</p>
-            <AccordionPrimitive.Root type="single" collapsible className="w-full space-y-2">
+            <Accordion type="single" collapsible className="w-full space-y-2">
               {faqItems.map(item => (
-                <AccordionPrimitive.Item
+                <AccordionItem
                   key={item.value}
                   value={item.value}
                   className="rounded-md border border-border bg-background overflow-hidden data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03] transition-colors"
                 >
-                  <AccordionPrimitive.Header>
-                    <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between px-4 py-3.5 text-[0.875rem] font-semibold text-foreground">
+                    <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-3.5 text-[0.875rem] font-semibold text-foreground">
                       <span className="text-left">{bi(item.label)}</span>
-                      <ChevronDown className="h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary-text ml-4" />
-                    </AccordionPrimitive.Trigger>
-                  </AccordionPrimitive.Header>
-                  <AccordionPrimitive.Content className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
+                    </AccordionTrigger>
+                  <AccordionContent className="pb-0">
                     <div className="px-4 pb-4 text-[0.8125rem] text-muted-foreground leading-relaxed border-t border-border/50 pt-3">
                       {bi(item.content)}
                     </div>
-                  </AccordionPrimitive.Content>
-                </AccordionPrimitive.Item>
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </AccordionPrimitive.Root>
+            </Accordion>
           </ShowcaseCard>
         </div>
       </section>
@@ -447,7 +425,7 @@ export function OverlaysShowcase() {
       {/* ── Tokens ── */}
       <section id="overlays-tokens" className="space-y-5 mt-10">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Tokens", "Tokens")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Tokens", "Tokens")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by popovers, dialogs, tooltips, and navigation.", "Propriedades CSS customizadas usadas por popovers, diálogos, tooltips e navegação.")}</p>
         </div>
         <TokenTable groups={overlaysTokenGroups(t)} />
@@ -585,7 +563,7 @@ const overlaysTokenGroups = (t: TFn): TokenGroup[] => [
     ],
   },
   {
-    group: t("Accordion", "Accordion"),
+    group: t("Accordion", "Sanfona (accordion)"),
     tokens: [
       { name: "--card",            description: t("Accordion panel background", "Fundo do painel do accordion"),      light: "#FFFFFF",              dark: "rgba(19,26,39,0.75)", isColor: true },
       { name: "--muted",           description: t("Trigger hover background", "Fundo do gatilho no hover"),        light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },

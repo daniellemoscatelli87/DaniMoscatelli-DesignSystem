@@ -1786,7 +1786,7 @@ export function BackgroundsShowcase() {
       {/* Usage guide */}
       <section id="section-backgrounds" className="space-y-4">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Composition guide", "Guia de composição")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Composition guide", "Guia de composição")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("How to combine the four effects on a landing page — with a palette suggestion for each section.", "Como combinar os quatro efeitos em uma landing page — com sugestão de paleta para cada seção.")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1910,7 +1910,7 @@ export function BackgroundsShowcase() {
       {/* Tokens */}
       <section id="backgrounds-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">{t("Color tokens", "Tokens de cor")}</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Color tokens", "Tokens de cor")}</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">
             {t("Reference values for the system's four Canvas patterns. Big Bang and Background Lines use interchangeable palettes — the tokens below document the default palette (Crimson).", "Valores de referência para os quatro padrões Canvas do sistema. Big Bang e Background Lines usam paletas intercambiáveis — os tokens abaixo documentam a paleta padrão (Crimson).")}
           </p>

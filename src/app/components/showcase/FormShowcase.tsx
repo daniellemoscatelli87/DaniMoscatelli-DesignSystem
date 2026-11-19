@@ -6,12 +6,12 @@ import {
   Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
   ArrowRight, Check, X, AlertCircle, Zap, Star,
 } from "lucide-react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import * as SwitchPrimitive from "@radix-ui/react-switch";
-import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
+import { Checkbox } from "@/app/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
+import { Switch } from "@/app/components/ui/switch";
 import { PasswordConfirm, regrasPadrao, textosPadrao } from "@/app/components/ui/password-field";
 import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
 import { SectionHeader } from "./shared/SectionHeader";
@@ -313,24 +313,12 @@ const [confirmacao, setConfirmacao] = useState("");
                 { id: "indeterminate", label: t("Indeterminate", "Indeterminado"), state: checkC, setter: setCheckC },
               ].map(({ id, label, state, setter }) => (
                 <label key={id} className="flex items-center gap-2.5 cursor-pointer select-none group">
-                  <CheckboxPrimitive.Root
-                    checked={state}
-                    onCheckedChange={setter}
-                    className={`h-5 w-5 rounded-sm border transition-all duration-150 flex items-center justify-center outline-none focus-visible:ring-2 focus-visible:ring-ring
-                      ${state === true ? "bg-primary border-primary" : state === "indeterminate" ? "bg-primary border-primary" : "bg-card border-border hover:border-[var(--border-strong)]"}`}
-                  >
-                    <CheckboxPrimitive.Indicator className="text-primary-foreground">
-                      {state === "indeterminate"
-                        ? <div className="w-2 h-0.5 bg-primary-foreground rounded-full" />
-                        : <Check className="h-3 w-3" strokeWidth={3} />
-                      }
-                    </CheckboxPrimitive.Indicator>
-                  </CheckboxPrimitive.Root>
+                  <Checkbox checked={state} onCheckedChange={setter} />
                   <span className="text-[0.9375rem] text-foreground group-hover:text-foreground transition-colors">{label}</span>
                 </label>
               ))}
               <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
-                <div className="h-5 w-5 rounded-sm border border-border bg-card" />
+                <Checkbox disabled />
                 <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
             </div>
@@ -339,26 +327,18 @@ const [confirmacao, setConfirmacao] = useState("");
 
         <SubSection title="Radio">
           <ShowcaseCard>
-            <RadioGroupPrimitive.Root value={radio} onValueChange={setRadio}>
-              <div className="flex flex-wrap gap-6">
-                {["a", "b", "c"].map((val) => (
-                  <RadioGroupPrimitive.Item key={val} value={val} asChild>
-                    <label className="flex items-center gap-2.5 cursor-pointer select-none group">
-                      <div className={`h-5 w-5 rounded-full border-2 flex items-center justify-center transition-all duration-150
-                        ${radio === val ? "border-primary" : "border-border group-hover:border-[var(--border-strong)]"}`}
-                      >
-                        {radio === val && <div className="h-2 w-2 rounded-full bg-primary" />}
-                      </div>
-                      <span className="text-[0.9375rem] text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
-                    </label>
-                  </RadioGroupPrimitive.Item>
-                ))}
-                <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
-                  <div className="h-5 w-5 rounded-full border-2 border-border" />
-                  <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
+            <RadioGroup value={radio} onValueChange={setRadio} className="flex flex-wrap gap-6">
+              {["a", "b", "c"].map((val) => (
+                <label key={val} className="flex items-center gap-2.5 cursor-pointer select-none">
+                  <RadioGroupItem value={val} />
+                  <span className="text-[0.9375rem] text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
                 </label>
-              </div>
-            </RadioGroupPrimitive.Root>
+              ))}
+              <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
+                <RadioGroupItem value="d" disabled />
+                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
+              </label>
+            </RadioGroup>
           </ShowcaseCard>
         </SubSection>
 
@@ -425,21 +405,11 @@ const [confirmacao, setConfirmacao] = useState("");
             <div className="flex flex-wrap gap-8">
               {[
                 { id: "notifications", label: t("Notifications", "Notificações"), state: swA, setter: setSwA },
-                { id: "dark", label: t("Dark Mode", "Dark Mode"), state: swB, setter: setSwB },
+                { id: "dark", label: t("Dark mode", "Modo escuro"), state: swB, setter: setSwB },
               ].map(({ id, label, state, setter }) => (
                 <div key={id} className="flex items-center gap-3">
-                  <SwitchPrimitive.Root
-                    checked={state}
-                    onCheckedChange={setter}
-                    className={`relative h-6 w-11 rounded-full transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-ring cursor-pointer
-                      ${state ? "bg-primary" : "bg-switch-background"}`}
-                  >
-                    <SwitchPrimitive.Thumb
-                      className="block h-4.5 w-4.5 rounded-full bg-white shadow-sm transition-transform duration-200 translate-x-0.5 data-[state=checked]:translate-x-[22px]"
-                      style={{ height: "18px", width: "18px", marginTop: "3px", marginLeft: "3px" }}
-                    />
-                  </SwitchPrimitive.Root>
-                  <span className="text-[0.9375rem] text-foreground">{label}</span>
+                  <Switch id={`sw-${id}`} checked={state} onCheckedChange={setter} />
+                  <label htmlFor={`sw-${id}`} className="text-[0.9375rem] text-foreground cursor-pointer">{label}</label>
                 </div>
               ))}
               <div className="flex items-center gap-3 opacity-40 cursor-not-allowed">
@@ -472,7 +442,7 @@ const [confirmacao, setConfirmacao] = useState("");
       {/* ── Tokens ── */}
       <section id="buttons-tokens" className="space-y-5">
         <div>
-          <h2 className="text-[1.125rem] font-black text-foreground tracking-[-0.025em]">Tokens</h2>
+          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
           <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
         </div>
         <TokenTable groups={formTokenGroups} />
