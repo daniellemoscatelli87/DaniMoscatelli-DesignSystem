@@ -120,6 +120,15 @@
   --chart-5: var(--crimson-200);
   --chart-neutral: var(--graphite-200);
   --chart-grid:    var(--graphite-100);
+  /* Escala de calor (do menor para o maior) e cor de texto sobre cada tom (todas passam de 4,5:1) */
+  --chart-seq-1: var(--chart-5); --chart-seq-1-texto: var(--foreground);
+  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--foreground);
+  --chart-seq-3: var(--chart-1); --chart-seq-3-texto: var(--background);
+  --chart-seq-4: var(--chart-2); --chart-seq-4-texto: var(--background);
+  --chart-1-texto: var(--background);
+  --chart-2-texto: var(--background);
+  --chart-4-texto: var(--foreground);
+  --chart-5-texto: var(--foreground);
 
   --destructive:            var(--crimson-400);
   --destructive-foreground: #FFFFFF;
@@ -204,6 +213,15 @@
   --chart-5: var(--crimson-600);
   --chart-neutral: var(--graphite-600);
   --chart-grid:    var(--graphite-800);
+  /* Escala de calor (do menor para o maior) e cor de texto sobre cada tom (todas passam de 4,5:1) */
+  --chart-seq-1: var(--chart-5); --chart-seq-1-texto: var(--foreground);
+  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--foreground);
+  --chart-seq-3: var(--chart-1); --chart-seq-3-texto: var(--background);
+  --chart-seq-4: var(--chart-2); --chart-seq-4-texto: var(--background);
+  --chart-1-texto: var(--background);
+  --chart-2-texto: var(--background);
+  --chart-4-texto: var(--foreground);
+  --chart-5-texto: var(--foreground);
 
   --destructive:            var(--crimson-400);
   --destructive-foreground: #FFFFFF;

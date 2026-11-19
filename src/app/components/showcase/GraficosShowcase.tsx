@@ -315,7 +315,7 @@ export function GraficosShowcase() {
           <div className="mt-6 border-t border-border pt-5">
             <Rotulo>{t("Heat scale (lowest to highest)", "Escala de calor (do menor para o maior)")}</Rotulo>
             <div className="flex gap-1">
-              {[["--chart-5", "var(--foreground)"], ["--chart-4", "var(--foreground)"], ["--chart-1", "var(--background)"], ["--chart-2", "var(--background)"]].map(([tk, tx]) => (
+              {[["--chart-seq-1", "var(--chart-seq-1-texto)"], ["--chart-seq-2", "var(--chart-seq-2-texto)"], ["--chart-seq-3", "var(--chart-seq-3-texto)"], ["--chart-seq-4", "var(--chart-seq-4-texto)"]].map(([tk, tx]) => (
                 <span key={tk} className="flex h-10 flex-1 items-center justify-center rounded-sm text-[0.75rem] font-semibold" style={{ background: `var(${tk})`, color: tx }}>{tk}</span>
               ))}
             </div>

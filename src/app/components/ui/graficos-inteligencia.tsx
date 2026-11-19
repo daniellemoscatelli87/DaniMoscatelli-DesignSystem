@@ -25,22 +25,22 @@ export const COR_NEUTRA = "var(--chart-neutral)";
 export const COR_GRADE = "var(--chart-grid)";
 
 /**
- * Escala sequencial (do menor para o maior) com a cor de texto que passa no contraste AA em cada tom,
- * no tema claro e no escuro. O chart-3 fica de fora porque nenhum texto atinge 4,5:1 sobre ele nos dois DS.
+ * Escala sequencial (do menor para o maior) com a cor de texto que passa no contraste AA em cada tom.
+ * A ordem e as cores de texto vêm dos tokens --chart-seq-* de cada DS.
  */
 export const ESCALA_SEQUENCIAL = [
-  { cor: "var(--chart-5)", texto: "var(--foreground)" },
-  { cor: "var(--chart-4)", texto: "var(--foreground)" },
-  { cor: "var(--chart-1)", texto: "var(--background)" },
-  { cor: "var(--chart-2)", texto: "var(--background)" },
+  { cor: "var(--chart-seq-1)", texto: "var(--chart-seq-1-texto)" },
+  { cor: "var(--chart-seq-2)", texto: "var(--chart-seq-2-texto)" },
+  { cor: "var(--chart-seq-3)", texto: "var(--chart-seq-3-texto)" },
+  { cor: "var(--chart-seq-4)", texto: "var(--chart-seq-4-texto)" },
 ] as const;
 
-/** Tons categóricos que aceitam texto por cima (mosaico): a mesma regra de contraste da escala sequencial. */
+/** Tons categóricos que aceitam texto por cima (mosaico); a cor do texto vem de cada DS (--chart-N-texto). */
 const TONS_COM_TEXTO = [
-  { cor: "var(--chart-1)", texto: "var(--background)" },
-  { cor: "var(--chart-2)", texto: "var(--background)" },
-  { cor: "var(--chart-4)", texto: "var(--foreground)" },
-  { cor: "var(--chart-5)", texto: "var(--foreground)" },
+  { cor: "var(--chart-1)", texto: "var(--chart-1-texto)" },
+  { cor: "var(--chart-2)", texto: "var(--chart-2-texto)" },
+  { cor: "var(--chart-4)", texto: "var(--chart-4-texto)" },
+  { cor: "var(--chart-5)", texto: "var(--chart-5-texto)" },
 ] as const;
 const NEUTRO_COM_TEXTO = { cor: COR_NEUTRA, texto: "var(--foreground)" };
 
