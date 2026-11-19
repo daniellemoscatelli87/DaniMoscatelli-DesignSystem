@@ -179,7 +179,10 @@ export function DataShowcase() {
 
       {/* ── CHARTS ── */}
       <section id="charts">
-        <SectionHeader title={t("Charts", "Gráficos")} description={t("Minimal analytics charts using thin strokes and grayscale with crimson highlights.", "Gráficos de analytics minimalistas, com traços finos e escala de cinza com destaques em crimson.")} />
+        <SectionHeader title={t("Charts", "Gráficos")} description={t("Minimal analytics charts using thin strokes and tones of the primary crimson.", "Gráficos de analytics minimalistas, com traços finos e tons do carmim primário.")} />
+        <div className="mb-4">
+          <VejaEm secao="graficos" titulo={t("More charts, colors and the discovery card", "Mais gráficos, cores e o card de descoberta")} texto={t("The redesigned donut, the 10 recommended charts for intelligence and the color rule live in Charts and visualizations.", "A rosca redesenhada, os 10 gráficos recomendados para a inteligência e a regra de cor ficam em Gráficos e visualizações.")} rotuloBotao={t("See in Charts", "Ver em Gráficos")} />
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
           {/* Area Chart */}
@@ -380,11 +383,13 @@ function getDataTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
   {
     group: t("Chart Palette", "Paleta de gráficos"),
     tokens: [
-      { name: "--chart-1", description: t("Series 1 — primary crimson", "Série 1 — crimson primário"),    light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--chart-2", description: t("Series 2 — graphite mid", "Série 2 — grafite médio"),       light: "#495669", dark: "#627288", isColor: true },
-      { name: "--chart-3", description: t("Series 3 — graphite light", "Série 3 — grafite claro"),     light: "#8898B0", dark: "#495669", isColor: true },
-      { name: "--chart-4", description: t("Series 4 — graphite lighter", "Série 4 — grafite mais claro"),   light: "#B3BDD0", dark: "#374155", isColor: true },
-      { name: "--chart-5", description: t("Series 5 — graphite pale", "Série 5 — grafite pálido"),      light: "#D6DCE6", dark: "#283043", isColor: true },
+      { name: "--chart-1", description: t("Series 1, highlight — crimson-500", "Série 1, destaque — carmim 500"), light: "#B82828", dark: "#E88080", isColor: true },
+      { name: "--chart-2", description: t("Series 2 — dark crimson (crimson-700)", "Série 2 — carmim escuro (carmim 700)"), light: "#6D1313", dark: "#F9DADA", isColor: true },
+      { name: "--chart-3", description: t("Series 3 — crimson-400 (primary)", "Série 3 — carmim 400 (primária)"), light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--chart-4", description: t("Series 4 — crimson-300", "Série 4 — carmim 300"), light: "#E88080", dark: "#B82828", isColor: true },
+      { name: "--chart-5", description: t("Series 5 — crimson-200", "Série 5 — carmim 200"), light: "#F3B3B3", dark: "#8C1B1B", isColor: true },
+      { name: "--chart-neutral", description: t("Not highlighted: Others, context, disabled (graphite)", "Sem destaque: Outros, contexto, desativado (grafite)"), light: "#B3BDD0", dark: "#374155", isColor: true },
+      { name: "--chart-grid", description: t("Chart grid lines", "Linhas de grade dos gráficos"), light: "#D6DCE6", dark: "#1C2333", isColor: true },
     ],
   },
   {
