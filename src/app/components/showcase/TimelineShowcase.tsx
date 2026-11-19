@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SectionHeader } from "./shared/SectionHeader";
 import { Target, Search, Layers, Lightbulb, Wand2, CalendarCheck, LineChart, MapPin, Heart, MessageCircle, Store, Star, ShoppingBag } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { Timeline, type TimelineStep } from "../ui/timeline";
@@ -70,7 +71,7 @@ export function TimelineShowcase() {
 
       <section id="timeline-motion" className="scroll-mt-32">
         <SectionHeader title={t("Motion: Step Indicator", "Movimento: Step Indicator")} description={t("The same scroll-driven logic as the site, in React.", "A mesma lógica de rolagem do site, em React.")} />
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
           <DataTable
             head={[t("Moment", "Momento"), t("What happens", "O que acontece")]}
             rows={[
@@ -87,7 +88,6 @@ export function TimelineShowcase() {
             </Callout>
             <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Timeline } from "@/app/components/ui/timeline";
 import { Target, Search } from "lucide-react";
-import { SectionHeader } from "./shared/SectionHeader";
 
 <Timeline
   etapas={[
@@ -104,7 +104,7 @@ import { SectionHeader } from "./shared/SectionHeader";
 
       <section id="timeline-usage" className="scroll-mt-32">
         <SectionHeader title={t("Usage", "Uso")} description={t("For sequences the person reads top to bottom: how a product works, a journey, a process.", "Para sequências que a pessoa lê de cima para baixo: como um produto funciona, uma jornada, um processo.")} />
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
           <DoDont
             dos={[
               t("Three to eight steps, each with one short title and one or two sentences.", "De três a oito etapas, cada uma com um título curto e uma ou duas frases."),
