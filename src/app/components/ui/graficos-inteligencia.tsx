@@ -6,9 +6,17 @@ import { cn } from "./utils";
 /**
  * Gráficos do design system: componentes de apresentação (dados entram por props; nada é buscado aqui).
  *
- * Regra de cor (decisão da dona do produto, 19/11/2026): só a cor primária e variações tonais dela
- * (tokens --chart-1 a --chart-5). O grafite (--chart-neutral) aparece só no que não está em destaque
- * ("Outros", contexto, linha de base, desativado), nunca como série par da primária. Grade em --chart-grid.
+ * Paleta de transição (decisão da dona do produto, 20/11/2026): 8 tons, do vermelho/rosa da marca ao cinza
+ * (--chart-1 a --chart-8), os mesmos no tema claro e no escuro. Faixas: 1–2 destaque, 3–5 apoio e transição,
+ * 6–8 contexto. Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
+ * Regras de uso:
+ *   1. 1 gráfico = 1 foco: o tom 1 vai no dado principal ou no ponto de atenção.
+ *   2. Importância em ordem: séries da mais importante (vermelho/rosa) à mais contextual (cinza) — coresPorImportancia.
+ *   3. Contexto em cinza: referências, histórico, metas e comparações secundárias nos tons finais (6–8).
+ *   4. Evite excesso de destaque: nunca mais de 2 tons intensos (1 e 2) no mesmo gráfico.
+ *   5. Escalas contínuas (calor, degradês, intensidades) começam no cinza e vão ao vermelho conforme o valor sobe.
+ * "Outros" e informação sem destaque usam --chart-neutral (= --chart-8), sempre por último. Grade em --chart-grid.
+ * Os componentes só usam var(--chart-N): cada DS define os próprios valores no theme.css.
  * A cor nunca carrega o significado sozinha: todo gráfico escreve rótulos e valores junto das marcas.
  *
  * Nenhum texto sobre a cor do gráfico (decisão da dona do produto, 19/11/2026, opção B): barras, fatias, células,
@@ -22,10 +30,67 @@ import { cn } from "./utils";
 
 /* ── Cores ─────────────────────────────────────────────────────────────────────────────────────────────── */
 
-/** Tons das séries, na ordem de uso: chart-1 é o destaque (primária); os demais são variações tonais. */
-export const CORES_GRAFICO = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"] as const;
-/** Grafite: só para o que não está em destaque ("Outros", contexto, desativado). */
+/** Os 8 tons da paleta de transição, do destaque (1) ao contexto (8). Para escolher tons, use coresPorImportancia. */
+export const CORES_GRAFICO = [
+  "var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)",
+  "var(--chart-5)", "var(--chart-6)", "var(--chart-7)", "var(--chart-8)",
+] as const;
+/** Cinza de contexto (= tom 8): "Outros" e informação sem destaque, sempre por último. */
 export const COR_NEUTRA = "var(--chart-neutral)";
+
+/** Tom da paleta (1 a 8) como cor CSS. */
+export const corDoTom = (tom: number) => `var(--chart-${Math.min(8, Math.max(1, Math.round(tom)))})`;
+
+/** Tons por número de séries, da mais importante para a mais contextual (decisão da dona do produto, 20/11/2026). */
+const TONS_POR_QUANTIDADE: readonly (readonly number[])[] = [
+  [],
+  [1],
+  [1, 6],
+  [1, 4, 7],
+  [1, 4, 6, 8],
+  [1, 3, 5, 6, 8],
+  [1, 3, 4, 5, 6, 8],
+  [1, 3, 4, 5, 6, 7, 8],
+  [1, 2, 3, 4, 5, 6, 7, 8],
+];
+
+/**
+ * Índices dos tons (1 a 8) para `n` séries, da mais importante para a mais contextual:
+ * 1 → [1] · 2 → [1, 6] · 3 → [1, 4, 7] · 4 → [1, 4, 6, 8] · 5 → [1, 3, 5, 6, 8] · 6 → [1, 3, 4, 5, 6, 8]
+ * · 7 → [1, 3, 4, 5, 6, 7, 8] · 8 → todos. Acima de 8, as séries a mais ficam no tom 8 (agrupe-as em "Outros").
+ */
+export function coresPorImportancia(n: number): number[] {
+  const q = Math.max(0, Math.floor(n));
+  if (q <= 8) return [...TONS_POR_QUANTIDADE[q]!];
+  return [...TONS_POR_QUANTIDADE[8]!, ...new Array<number>(q - 8).fill(8)];
+}
+
+/**
+ * Cores de séries já ordenadas por importância. As marcadas `neutro` ("Outros") ficam em --chart-neutral; quando há
+ * alguma, as outras usam os tons de n + 1 séries sem o último (o 8 fica para "Outros", sem repetir a cor).
+ */
+export function coresDasSeries(itens: readonly { neutro?: boolean }[]): string[] {
+  const n = itens.filter(i => !i.neutro).length;
+  const tons = n < itens.length ? coresPorImportancia(Math.min(8, n + 1)).slice(0, Math.min(n, 7)) : coresPorImportancia(n);
+  let k = 0;
+  return itens.map(i => (i.neutro ? COR_NEUTRA : corDoTom(tons[k++] ?? 8)));
+}
+
+/**
+ * Gráficos de um foco só (barras ordenadas, pirulito, inclinação, halteres, ranking, destaques): o 1º destaque no tom 1,
+ * um 2º destaque no tom 2 (nunca mais de 2 tons intensos), destaques além disso na faixa de apoio (3 a 5)
+ * e todo o restante no tom de contexto 6.
+ */
+export function coresDeFoco(destaques: readonly boolean[]): string[] {
+  let k = 0;
+  return destaques.map(d => (d ? corDoTom([1, 2, 3, 4, 5][Math.min(4, k++)]!) : corDoTom(6)));
+}
+
+/** Tons de contexto para `n` séries sem destaque que precisam ser diferenciadas: 6; 6 e 8; 6, 7 e 8 (e repete). */
+export function coresDeContexto(n: number): string[] {
+  const tons = n <= 1 ? [6] : n === 2 ? [6, 8] : [6, 7, 8];
+  return Array.from({ length: Math.max(0, n) }, (_, i) => corDoTom(tons[i % tons.length]!));
+}
 /** Linhas de grade. */
 export const COR_GRADE = "var(--chart-grid)";
 /** Grade horizontal tracejada dos gráficos de área (sem linhas de eixo). */
@@ -86,7 +151,7 @@ export function curvaMonotona(pts: [number, number][], continuar = false) {
 }
 
 /**
- * Escala sequencial (do menor para o maior), pelos tokens --chart-seq-* de cada DS.
+ * Escala contínua (do menor para o maior), pelos tokens --chart-seq-* de cada DS: do cinza (tom 6) ao vermelho (tom 1).
  * As células de calor não levam texto: o valor fica na dica, na frase do destaque e em Ver dados.
  */
 export const ESCALA_SEQUENCIAL = [
@@ -330,8 +395,8 @@ export function arco(cx: number, cy: number, r: number, a0: number, a1: number) 
 }
 
 /**
- * Rosca de participação, no traço fino do DS: as partes em destaque em tons da primária (da maior para a menor),
- * "Outros" em grafite no fim, percentuais escritos junto de cada parte e lista com nome, quantidade e percentual.
+ * Rosca de participação, no traço fino do DS: as partes nos tons por importância (da maior para a menor; a maior no tom 1),
+ * "Outros" em cinza de contexto no fim, percentuais escritos junto de cada parte e lista com nome, quantidade e percentual.
  * O centro mostra o total. Passar o cursor sobre a lista realça a parte.
  */
 export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, localidade = "pt-BR", tamanho = 220, className }: GraficoDeRoscaProps) {
@@ -340,7 +405,9 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
   const ordenadas = React.useMemo(() => {
     const destaque = partes.filter(p => !p.neutro).sort((a, b) => b.valor - a.valor);
     const neutras = partes.filter(p => p.neutro);
-    return [...destaque, ...neutras].map((p, i) => ({ ...p, cor: p.neutro ? COR_NEUTRA : CORES_GRAFICO[i % CORES_GRAFICO.length]! }));
+    const lista = [...destaque, ...neutras];
+    const cores = coresDasSeries(lista);
+    return lista.map((p, i) => ({ ...p, cor: cores[i]! }));
   }, [partes]);
   const total = soma(ordenadas.map(p => p.valor)) || 1;
   const pct = (v: number) => (v / total) * 100;
@@ -416,8 +483,13 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
 
 export type BarrasOrdenadasProps = BaseDoGrafico & {
   itens: { rotulo: string; valor: number }[];
-  /** Quantos itens do topo ficam na primária (os outros em tom claro). Padrão 3. */
+  /** Quantos itens do topo ficam em destaque (o 1º no tom 1, o 2º no tom 2, os seguintes em apoio; o restante em contexto). Padrão 3. */
   destaques?: number;
+  /**
+   * "foco" (padrão): os destaques em vermelho e o restante no cinza de contexto (tom 6).
+   * "importancia": cada barra num tom, da mais importante para a mais contextual (coresPorImportancia).
+   */
+  cores?: "foco" | "importancia";
   /** Ordena do maior para o menor (padrão: sim). */
   ordenar?: boolean;
   /** Mostra a posição (1º, 2º…) antes do nome. */
@@ -425,9 +497,10 @@ export type BarrasOrdenadasProps = BaseDoGrafico & {
 };
 
 /** Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra. */
-export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao = true, rotulo, formatar = fmtPadrao, className }: BarrasOrdenadasProps) {
+export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao = true, cores: modo = "foco", rotulo, formatar = fmtPadrao, className }: BarrasOrdenadasProps) {
   const menos = useReducedMotion();
   const lista = ordenar ? [...itens].sort((a, b) => b.valor - a.valor) : itens;
+  const cores = modo === "importancia" ? coresPorImportancia(lista.length).map(corDoTom) : coresDeFoco(lista.map((_, i) => i < destaques));
   const maximo = Math.max(1, ...lista.map(i => i.valor));
   const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${formatar(i.valor)}`).join(", ")}.`;
   return (
@@ -442,7 +515,7 @@ export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao 
             <div className="flex items-center gap-2">
               <motion.div
                 className="h-2 rounded-sm"
-                style={{ width: `calc((100% - 4.5rem) * ${item.valor / maximo})`, background: destaque ? "var(--chart-1)" : "var(--chart-4)", originX: 0 }}
+                style={{ width: `calc((100% - 4.5rem) * ${item.valor / maximo})`, background: cores[i], originX: 0 }}
                 initial={menos ? false : { scaleX: 0 }}
                 whileInView={{ scaleX: 1 }}
                 viewport={{ once: true }}
@@ -560,7 +633,7 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
 
 export type GraficoDeHalteresProps = BaseDoGrafico & {
   itens: { rotulo: string; a: number; b: number }[];
-  /** Nomes das duas medidas: [a, b]. "b" é a medida em destaque (primária). */
+  /** Nomes das duas medidas: [a, b]. "b" é a medida em destaque (tom 1); "a" é o contexto (tom 6). */
   series: [string, string];
   /** Máximo do eixo (padrão: o maior valor). */
   maximo?: number;
@@ -576,7 +649,7 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
   const resumo = `${rotulo}: ${itens.map(i => `${i.rotulo}, ${series[0]} ${formatar(i.a)}, ${series[1]} ${formatar(i.b)}`).join("; ")}.`;
   return (
     <div className={cn("space-y-4", className)}>
-      <LegendaDoGrafico itens={[{ rotulo: series[0], cor: "var(--chart-4)", forma: "anel" }, { rotulo: series[1], cor: "var(--chart-1)" }]} />
+      <LegendaDoGrafico itens={[{ rotulo: series[0], cor: "var(--chart-6)", forma: "anel" }, { rotulo: series[1], cor: "var(--chart-1)" }]} />
       <div role="img" aria-label={resumo} className="space-y-3.5">
         {itens.map((item, i) => {
           const menor = Math.min(item.a, item.b), maior = Math.max(item.a, item.b);
@@ -600,9 +673,9 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: menos ? 0 : 0.06 * i }}
                   />
-                  {/* a: anel em tom claro */}
-                  <span aria-hidden className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-card" style={{ left: pos(item.a), borderColor: "var(--chart-4)" }} />
-                  {/* b: ponto cheio na primária */}
+                  {/* a: anel no cinza de contexto */}
+                  <span aria-hidden className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-card" style={{ left: pos(item.a), borderColor: "var(--chart-6)" }} />
+                  {/* b: ponto cheio no tom de destaque */}
                   <span aria-hidden className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ left: pos(item.b), background: "var(--chart-1)" }} />
                   <span aria-hidden className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-[0.75rem] tabular-nums text-muted-foreground"
                     style={aEsquerda ? { right: `calc(100% - ${pos(item.a)} + 0.6rem)` } : { left: `calc(${pos(item.a)} + 0.6rem)` }}>
@@ -624,7 +697,16 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
 
 /* ── 5. Linhas ou área (tendência no tempo) ───────────────────────────────────────────────────────────── */
 
-export type SerieDeLinha = { rotulo: string; valores: number[]; destaque?: boolean };
+export type SerieDeLinha = {
+  rotulo: string;
+  valores: number[];
+  /** A série em foco (tom 1); as outras vão para o contexto (tons 6 a 8). */
+  destaque?: boolean;
+  /** Referência, meta, histórico ou benchmark: cinza de contexto (--chart-neutral) e linha tracejada. */
+  neutro?: boolean;
+  /** Tom fixo da paleta (1 a 8), quando o papel da série pede um tom específico (ex.: secundária no 5). */
+  tom?: number;
+};
 
 export type GraficoDeLinhasProps = BaseDoGrafico & {
   series: SerieDeLinha[];
@@ -638,6 +720,8 @@ export type GraficoDeLinhasProps = BaseDoGrafico & {
 
 /**
  * Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto.
+ * Cores: com uma série em `destaque`, ela fica no tom 1 e as outras no contexto (6 a 8); sem destaque, por importância
+ * (a ordem das séries). Séries `neutro` (referência, meta, benchmark) ficam em cinza e tracejadas.
  * Com `area`, segue o estilo das áreas (20/11/2026): curvas suaves monotônicas, linha de 1,5 px, degradê transparente
  * sob a série em destaque e grade tracejada.
  */
@@ -647,9 +731,16 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
   const [indice, setIndice] = React.useState<number | null>(null);
   const idGrad = useIdDoSvg();
   const temDestaque = series.some(s => s.destaque);
-  const outras = ["var(--chart-4)", "var(--chart-5)", "var(--chart-3)", "var(--chart-2)"];
-  let k = 0;
-  const cores = series.map((s, i) => (temDestaque ? (s.destaque ? "var(--chart-1)" : outras[k++ % outras.length]!) : CORES_GRAFICO[i % 5]!));
+  const cores = React.useMemo(() => {
+    let base: string[];
+    if (temDestaque) {
+      const foco = coresDeFoco(series.filter(s => s.destaque).map(() => true));
+      const contexto = coresDeContexto(series.filter(s => !s.destaque && !s.neutro).length);
+      let kf = 0, kc = 0;
+      base = series.map(s => (s.neutro ? COR_NEUTRA : s.destaque ? foco[kf++]! : contexto[kc++]!));
+    } else base = coresDasSeries(series);
+    return series.map((s, i) => (s.tom != null ? corDoTom(s.tom) : base[i]!));
+  }, [series, temDestaque]);
   const todos = series.flatMap(s => s.valores);
   const marcas = marcasDoEixo(zero ? 0 : Math.min(...todos), Math.max(...todos), 4);
   const yMin = marcas[0]!, yMax = marcas[marcas.length - 1]!;
@@ -694,8 +785,9 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
           ) : null)}
           {/* séries sem destaque primeiro, para o destaque ficar por cima */}
           {series.map((s, si) => ({ s, si })).sort((a, b) => Number(!!a.s.destaque) - Number(!!b.s.destaque)).map(({ s, si }) => (
-            <motion.path key={s.rotulo} d={caminho(s.valores)} fill="none" stroke={cores[si]} strokeWidth={area ? LINHA_DA_AREA : s.destaque || !temDestaque ? 2 : 1.5} strokeLinejoin="round" strokeLinecap="round"
-              initial={menos ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.9, delay: menos ? 0 : si * 0.08, ease: [0.22, 1, 0.36, 1] }} />
+            <motion.path key={s.rotulo} d={caminho(s.valores)} fill="none" stroke={cores[si]} strokeWidth={area ? LINHA_DA_AREA : s.destaque || !temDestaque ? 2 : 1.5} strokeDasharray={s.neutro ? "5 3" : undefined} strokeLinejoin="round" strokeLinecap="round"
+              // A série tracejada (neutro) aparece por opacidade: a animação de pathLength apagaria o tracejado.
+              initial={menos ? false : s.neutro ? { opacity: 0 } : { pathLength: 0 }} animate={s.neutro ? { opacity: 1 } : { pathLength: 1 }} transition={{ duration: 0.9, delay: menos ? 0 : si * 0.08, ease: [0.22, 1, 0.36, 1] }} />
           ))}
           {series.map((s, si) => {
             const ult = s.valores.length - 1;
@@ -743,7 +835,7 @@ export type GraficoDeInclinacaoProps = BaseDoGrafico & {
   altura?: number;
 };
 
-/** Duas colunas (antes e agora) ligadas por linhas: o destaque na primária, o restante em grafite como contexto. */
+/** Duas colunas (antes e agora) ligadas por linhas: o destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto. */
 export function GraficoDeInclinacao({ itens, periodos, destaques, altura = 260, rotulo, formatar = fmtPadrao, className }: GraficoDeInclinacaoProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
@@ -758,6 +850,7 @@ export function GraficoDeInclinacao({ itens, periodos, destaques, altura = 260, 
   const ysIni = afastar(itens.map(i => y(i.inicio)), 16, m.t, m.t + h);
   const ysFim = afastar(itens.map(i => y(i.fim)), 16, m.t, m.t + h);
   const ordem = itens.map((it, i) => ({ it, i })).sort((a, b) => Number(emDestaque.includes(a.it.rotulo)) - Number(emDestaque.includes(b.it.rotulo)));
+  const cores = coresDeFoco(itens.map(it => emDestaque.includes(it.rotulo)));
   const resumo = `${rotulo}: ${itens.map(i => `${i.rotulo} de ${formatar(i.inicio)} para ${formatar(i.fim)}`).join("; ")}.`;
   return (
     <div ref={ref} className={cn("w-full", className)}>
@@ -769,7 +862,7 @@ export function GraficoDeInclinacao({ itens, periodos, destaques, altura = 260, 
           <line x1={x1} x2={x1} y1={m.t - 6} y2={m.t + h + 4} stroke={COR_GRADE} />
           {ordem.map(({ it, i }) => {
             const d = emDestaque.includes(it.rotulo);
-            const cor = d ? "var(--chart-1)" : COR_NEUTRA;
+            const cor = cores[i]!;
             return (
               <g key={it.rotulo}>
                 <motion.line x1={x0} y1={y(it.inicio)} x2={x1} y2={y(it.fim)} stroke={cor} strokeWidth={d ? 2 : 1.25} strokeLinecap="round"
@@ -828,11 +921,9 @@ export type MosaicoProps = BaseDoGrafico & {
   localidade?: string;
 };
 
-/** Tons do mosaico, do maior bloco para o menor; a partir do 5º, grafite. */
-const TONS_DO_MOSAICO = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)"] as const;
-
 /**
- * Mosaico (treemap): a área de cada bloco é a fatia do total. Os 4 maiores em tons da primária, o restante em grafite.
+ * Mosaico (treemap): a área de cada bloco é a fatia do total. Tons por importância, do maior bloco (tom 1) ao menor;
+ * "Outros" em cinza de contexto.
  * Os blocos não levam texto: ao lado (ou abaixo, em telas estreitas) fica a lista com ponto, nome e percentual, na mesma
  * ordem dos blocos. Passar o cursor num bloco ou num item da lista realça o par.
  */
@@ -843,8 +934,7 @@ export function Mosaico({ itens, altura = 260, rotulo, localidade = "pt-BR", cla
   const lista = [...itens].sort((a, b) => Number(!!a.neutro) - Number(!!b.neutro) || b.valor - a.valor);
   const total = soma(lista.map(i => i.valor)) || 1;
   const rets = largura > 0 ? squarify(lista.map(i => (i.valor / total) * largura * altura), { x: 0, y: 0, w: largura, h: altura }) : [];
-  let k = 0;
-  const cores = lista.map(i => (i.neutro || k >= TONS_DO_MOSAICO.length ? COR_NEUTRA : TONS_DO_MOSAICO[k++]!));
+  const cores = coresDasSeries(lista);
   const pct = (v: number) => formatarPercentual((v / total) * 100, 0, localidade);
   const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${pct(i.valor)}`).join(", ")}.`;
   return (
@@ -902,11 +992,10 @@ export type BarrasEmpilhadas100Props = BaseDoGrafico & {
   localidade?: string;
 };
 
-/** Barras 100%: cada linha soma 100%; o percentual de cada parte fica escrito logo acima dela. */
+/** Barras 100%: cada linha soma 100%; o percentual de cada parte fica escrito logo acima dela. Categorias em ordem de importância. */
 export function BarrasEmpilhadas100({ categorias, linhas, minimoParaRotulo = 9, rotulo, localidade = "pt-BR", className }: BarrasEmpilhadas100Props) {
   const menos = useReducedMotion();
-  let k = 0;
-  const cores = categorias.map(c => (c.neutro ? COR_NEUTRA : CORES_GRAFICO[k++ % 5]!));
+  const cores = coresDasSeries(categorias);
   const resumo = `${rotulo}: ${linhas.map(l => { const t = soma(l.valores) || 1; return `${l.rotulo}: ${l.valores.map((v, i) => `${categorias[i]?.rotulo} ${formatarPercentual((v / t) * 100, 0, localidade)}`).join(", ")}`; }).join("; ")}.`;
   return (
     <div className={cn("space-y-4", className)}>
@@ -950,7 +1039,7 @@ export type GraficoDeBolhasProps = BaseDoGrafico & {
   altura?: number;
 };
 
-/** Bolhas: posição em dois eixos e tamanho como terceira medida. Destaques na primária; o restante em grafite. */
+/** Bolhas: posição em dois eixos e tamanho como terceira medida. O destaque no tom 1; o restante no cinza de contexto. */
 export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTamanho = fmtPadrao, altura = 300, rotulo, className }: GraficoDeBolhasProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
@@ -966,6 +1055,8 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
   const R = (t: number) => Math.max(5, Math.sqrt(t / tMax) * rMax);
   const passoX = Math.max(1, Math.ceil((mx.length * 58) / Math.max(1, w)));
   const resumo = `${rotulo}: ${itens.map(i => `${i.rotulo}, ${eixoX.rotulo} ${fx(i.x)}, ${eixoY.rotulo} ${fy(i.y)}, ${rotuloTamanho} ${formatarTamanho(i.tamanho)}`).join("; ")}.`;
+  const temDestaque = itens.some(i => i.destaque);
+  const corDe = new Map((temDestaque ? coresDeFoco(itens.map(i => !!i.destaque)) : itens.map(() => "var(--chart-1)")).map((c, i) => [itens[i]!, c] as const));
   return (
     <div className={cn("space-y-2", className)}>
       <div ref={ref} className="w-full">
@@ -983,7 +1074,7 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
             ))}
             <text x={m.l + w} y={altura - 2} textAnchor="end" className="fill-muted-foreground text-[11px] font-semibold">{eixoX.rotulo} →</text>
             {[...itens].sort((a, b) => Number(!!a.destaque) - Number(!!b.destaque) || b.tamanho - a.tamanho).map((b, i) => {
-              const cor = b.destaque ? "var(--chart-1)" : COR_NEUTRA;
+              const cor = corDe.get(b)!;
               const cx = X(b.x), cy = Y(b.y), r = R(b.tamanho);
               const direita = cx + r + 6 + larguraTexto(b.rotulo, 11) < m.l + w + m.r;
               return (
@@ -1089,7 +1180,7 @@ export type GraficoDeRankingProps = BaseDoGrafico & {
   formatarPosicao?: (p: number) => string;
 };
 
-/** Bump chart: como a posição de cada item muda ao longo dos períodos. Destaques na primária, o restante em grafite. */
+/** Bump chart: como a posição de cada item muda ao longo dos períodos. O destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto. */
 export function GraficoDeRanking({ series, periodos, rotulo, formatarPosicao = p => `${p}º`, className }: GraficoDeRankingProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
@@ -1107,8 +1198,7 @@ export function GraficoDeRanking({ series, periodos, rotulo, formatarPosicao = p
     const xa = X(i - 1), xb = X(i), meio = (xa + xb) / 2;
     return `C ${meio} ${Y(ps[i - 1]!)} ${meio} ${Y(p)} ${xb} ${Y(p)}`;
   }).join(" ");
-  let kd = 0;
-  const cores = series.map(s => (s.destaque ? (kd++ === 0 ? "var(--chart-1)" : "var(--chart-4)") : COR_NEUTRA));
+  const cores = coresDeFoco(series.map(s => !!s.destaque));
   const passo = Math.max(1, Math.ceil((n * 44) / Math.max(1, w)));
   const ordem = series.map((s, i) => ({ s, i })).sort((a, b) => Number(!!a.s.destaque) - Number(!!b.s.destaque));
   const resumo = `${rotulo}: ${series.map(s => `${s.rotulo} de ${formatarPosicao(s.posicoes[0]!)} em ${periodos[0]} para ${formatarPosicao(s.posicoes[n - 1]!)} em ${periodos[n - 1]}`).join("; ")}.`;
@@ -1155,14 +1245,17 @@ export type FunilProps = BaseDoGrafico & {
   };
 };
 
-/** Funil: etapas da jornada com o valor escrito e, entre elas, quanto seguiu para a próxima. A maior perda fica marcada. */
+/**
+ * Funil: etapas da jornada com o valor escrito e, entre elas, quanto seguiu para a próxima. A maior perda fica marcada:
+ * a etapa logo depois dela é o ponto de atenção (tom 1) e as outras ficam no cinza de contexto. Sem a marca, todas no tom 1.
+ */
 export function Funil({ etapas, destacarMaiorPerda = true, rotulo, formatar = fmtPadrao, localidade = "pt-BR", rotulos, className }: FunilProps) {
   const menos = useReducedMotion();
   const r = { seguiram: (p: string) => `${p} seguiram`, maiorPerda: "Maior perda", ...rotulos };
   const max = Math.max(1, ...etapas.map(e => e.valor));
   const taxas = etapas.slice(1).map((e, i) => e.valor / (etapas[i]!.valor || 1));
   const piorPassagem = destacarMaiorPerda && taxas.length ? taxas.indexOf(Math.min(...taxas)) : -1;
-  const tons = ["var(--chart-1)", "var(--chart-3)", "var(--chart-4)", "var(--chart-5)"];
+  const corDaEtapa = (i: number) => (piorPassagem < 0 || i === piorPassagem + 1 ? "var(--chart-1)" : "var(--chart-6)");
   const resumo = `${rotulo}: ${etapas.map(e => `${e.rotulo} ${formatar(e.valor)}`).join(", ")}.`;
   return (
     <ol role="img" aria-label={resumo} className={cn("m-0 list-none p-0", className)}>
@@ -1179,7 +1272,7 @@ export function Funil({ etapas, destacarMaiorPerda = true, rotulo, formatar = fm
             <span className="min-w-0 font-medium text-foreground">{e.rotulo}</span>
             <span className="shrink-0 font-semibold tabular-nums text-foreground">{formatar(e.valor)}</span>
           </div>
-          <motion.div className="mx-auto h-5 rounded-sm" style={{ width: `${Math.max(3, (e.valor / max) * 100)}%`, background: tons[Math.min(i, tons.length - 1)] }}
+          <motion.div className="mx-auto h-5 rounded-sm" style={{ width: `${Math.max(3, (e.valor / max) * 100)}%`, background: corDaEtapa(i) }}
             initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.55, delay: menos ? 0 : 0.08 * i, ease: [0.22, 1, 0.36, 1] }} />
         </li>
       ))}

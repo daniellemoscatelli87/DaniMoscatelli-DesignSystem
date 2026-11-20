@@ -108,25 +108,29 @@
   --shadow-lg:  0 8px 24px rgba(13, 17, 25, 0.09), 0 24px 64px rgba(13, 17, 25, 0.07);
   --shadow-xl:  0 16px 48px rgba(13, 17, 25, 0.10), 0 40px 96px rgba(13, 17, 25, 0.08);
 
-  /* Gráficos (decisão da dona do produto, 19/11/2026): só a primária e variações tonais dela.
-     chart-1 é a série em destaque (carmim 500, um tom abaixo da primária: 6,2:1 sobre branco, para traços finos); chart-2 é o tom escuro para a segunda série; chart-3 a chart-5 clareiam.
-     Escala sequencial (mapa de calor, do menor ao maior): chart-5, chart-4, chart-1, chart-2.
-     --chart-neutral (grafite) só para o que não está em destaque ("Outros", contexto, desativado), nunca como série par da primária.
-     --chart-grid: linhas de grade. */
-  --chart-1: var(--crimson-500);
-  --chart-2: var(--crimson-700);
-  --chart-3: var(--crimson-400);
-  --chart-4: var(--crimson-300);
-  --chart-5: var(--crimson-200);
-  --chart-neutral: var(--graphite-200);
+  /* Paleta de transição dos gráficos (decisão da dona do produto, 20/11/2026): 8 tons do vermelho/rosa da marca ao cinza,
+     os mesmos no tema claro e no escuro (são tons médios). Faixas: 1–2 destaque · 3–5 apoio e transição · 6–8 contexto.
+     Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
+     Regras: 1 gráfico = 1 foco (tom 1) · importância em ordem · contexto em cinza (6–8) · no máximo 2 tons intensos (1 e 2)
+     · escalas contínuas do cinza ao vermelho. --chart-neutral (= tom 8): "Outros" e informação sem destaque. */
+  --chart-1: #D44D4D;
+  --chart-2: #D36267;
+  --chart-3: #CD797E;
+  --chart-4: #C48E93;
+  --chart-5: #B69FA5;
+  --chart-6: #A4ACB7;
+  --chart-7: #939EAF;
+  --chart-8: #808DA1;
+  --chart-neutral: var(--chart-8);
   --chart-grid:    var(--graphite-100);
-  /* Escala de calor (do menor para o maior) e cor de texto sobre cada tom (todas passam de 4,5:1) */
-  --chart-seq-1: var(--chart-5); --chart-seq-1-texto: var(--foreground);
-  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--foreground);
-  --chart-seq-3: var(--chart-1); --chart-seq-3-texto: var(--background);
-  --chart-seq-4: var(--chart-2); --chart-seq-4-texto: var(--background);
-  --chart-1-texto: var(--background);
-  --chart-2-texto: var(--background);
+  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho. Os tokens -texto ficam por compatibilidade:
+     os componentes não escrevem texto sobre a cor do gráfico. */
+  --chart-seq-1: var(--chart-6); --chart-seq-1-texto: var(--foreground);
+  --chart-seq-2: var(--chart-5); --chart-seq-2-texto: var(--foreground);
+  --chart-seq-3: var(--chart-3); --chart-seq-3-texto: var(--foreground);
+  --chart-seq-4: var(--chart-1); --chart-seq-4-texto: var(--foreground);
+  --chart-1-texto: var(--foreground);
+  --chart-2-texto: var(--foreground);
   --chart-4-texto: var(--foreground);
   --chart-5-texto: var(--foreground);
 
@@ -205,23 +209,27 @@
   --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.50), 0 32px 80px rgba(0, 0, 0, 0.35);
   --shadow-xl:  0 16px 64px rgba(0, 0, 0, 0.55), 0 48px 100px rgba(0, 0, 0, 0.40);
 
-  /* Gráficos no escuro: a escala se inverte (os tons claros ganham destaque sobre o fundo escuro). */
-  --chart-1: var(--crimson-300);
-  --chart-2: var(--crimson-100);
-  --chart-3: var(--crimson-400);
-  --chart-4: var(--crimson-500);
-  --chart-5: var(--crimson-600);
-  --chart-neutral: var(--graphite-600);
+  /* Gráficos no escuro: a mesma paleta de transição do tema claro (tons médios, decisão de 20/11/2026). */
+  --chart-1: #D44D4D;
+  --chart-2: #D36267;
+  --chart-3: #CD797E;
+  --chart-4: #C48E93;
+  --chart-5: #B69FA5;
+  --chart-6: #A4ACB7;
+  --chart-7: #939EAF;
+  --chart-8: #808DA1;
+  --chart-neutral: var(--chart-8);
   --chart-grid:    var(--graphite-800);
-  /* Escala de calor (do menor para o maior) e cor de texto sobre cada tom (todas passam de 4,5:1) */
-  --chart-seq-1: var(--chart-5); --chart-seq-1-texto: var(--foreground);
-  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--foreground);
-  --chart-seq-3: var(--chart-1); --chart-seq-3-texto: var(--background);
-  --chart-seq-4: var(--chart-2); --chart-seq-4-texto: var(--background);
+  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho. Os tokens -texto ficam por compatibilidade:
+     os componentes não escrevem texto sobre a cor do gráfico. */
+  --chart-seq-1: var(--chart-6); --chart-seq-1-texto: var(--background);
+  --chart-seq-2: var(--chart-5); --chart-seq-2-texto: var(--background);
+  --chart-seq-3: var(--chart-3); --chart-seq-3-texto: var(--background);
+  --chart-seq-4: var(--chart-1); --chart-seq-4-texto: var(--background);
   --chart-1-texto: var(--background);
   --chart-2-texto: var(--background);
-  --chart-4-texto: var(--foreground);
-  --chart-5-texto: var(--foreground);
+  --chart-4-texto: var(--background);
+  --chart-5-texto: var(--background);
 
   --destructive:            var(--crimson-400);
   --destructive-foreground: #FFFFFF;
@@ -299,6 +307,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
   --color-chart-neutral: var(--chart-neutral);
   --color-chart-grid: var(--chart-grid);
   --color-success: var(--success);

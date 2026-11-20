@@ -2,7 +2,7 @@ import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "./utils";
 import {
-  CORES_GRAFICO, COR_NEUTRA, COR_GRADE, ESCALA_SEQUENCIAL, LegendaDoGrafico, LegendaSequencial, PontoDaCor,
+  COR_NEUTRA, COR_GRADE, coresPorImportancia, coresDasSeries, coresDeFoco, coresDeContexto, corDoTom, ESCALA_SEQUENCIAL, LegendaDoGrafico, LegendaSequencial, PontoDaCor,
   formatarPercentual, fmtPadrao, useLargura, marcasDoEixo, afastar, larguraTexto, soma, arco, faixa,
   DegradeDaArea, LINHA_DA_AREA, TRACO_DA_GRADE, curvaMonotona, useIdDoSvg,
   type BaseDoGrafico, type Formatador, type ParteDaRosca,
@@ -11,7 +11,9 @@ import {
 /**
  * Catálogo completo de gráficos (19/11/2026): os modelos do catálogo de referência que não estão entre os recomendados.
  * Mesmas regras de graficos-inteligencia.tsx: componentes de apresentação (dados por props), só os tokens de gráfico
- * (--chart-1 a --chart-5, --chart-neutral, --chart-grid, --chart-seq-*), valores e nomes escritos junto das marcas,
+ * (--chart-1 a --chart-8, --chart-neutral, --chart-grid, --chart-seq-*) com as 5 regras da paleta de transição
+ * (um foco no tom 1, importância em ordem, contexto em cinza, no máximo 2 tons intensos, escalas do cinza ao vermelho),
+ * valores e nomes escritos junto das marcas,
  * role="img" com aria-label que resume os dados, SVG desenhado na largura real do contêiner e nada anima com "menos movimento".
  *
  * Nenhum texto sobre a cor do gráfico (decisão da dona do produto, 19/11/2026, opção B): valores e rótulos ficam fora da
@@ -24,15 +26,13 @@ import {
 /* ── Cores e utilidades do catálogo ───────────────────────────────────────────────────────────────────── */
 
 /**
- * Ordem das séries quando ficam lado a lado ou empilhadas: alterna tom escuro e claro para separar vizinhas.
- * Até 4 séries; a partir da 5ª, agrupe em "Outros" (grafite).
+ * Tons de 4 séries lado a lado ou empilhadas, por importância (coresPorImportancia(4): 1, 4, 6 e 8).
+ * Mantido por compatibilidade: para outro número de séries, use coresPorImportancia ou coresDasSeries.
  */
-export const CORES_SERIES = ["var(--chart-1)", "var(--chart-4)", "var(--chart-2)", "var(--chart-3)"] as const;
+export const CORES_SERIES = ["var(--chart-1)", "var(--chart-4)", "var(--chart-6)", "var(--chart-8)"] as const;
 
 /** Cor das linhas de referência (média, tendência, ligações): a do texto secundário. */
 const COR_REFERENCIA = "var(--muted-foreground)";
-
-const corDaSerie = (i: number, neutro?: boolean) => (neutro ? COR_NEUTRA : CORES_SERIES[i] ?? COR_NEUTRA);
 
 /** Contorno na cor do card atrás do texto: mantém o rótulo legível quando cruza linhas ou faixas. */
 const HALO: React.CSSProperties = { paintOrder: "stroke", stroke: "var(--card)", strokeWidth: 3, strokeLinejoin: "round" };
@@ -106,11 +106,12 @@ function setorDeAnel(cx: number, cy: number, r0: number, r1: number, a0: number,
   return `M ${p(r1, a0)} A ${r1} ${r1} 0 ${g} 1 ${p(r1, a1)} L ${p(r0, a1)} A ${r0} ${r0} 0 ${g} 0 ${p(r0, a0)} Z`;
 }
 
-/** Ordena as partes como a rosca: destaques do maior para o menor, "Outros" (neutro) no fim, com a cor de cada uma. */
+/** Ordena as partes como a rosca: do maior para o menor (tons por importância), "Outros" (neutro) no fim, em cinza. */
 function partesOrdenadas(partes: ParteDaRosca[]) {
   const destaque = partes.filter(p => !p.neutro).sort((a, b) => b.valor - a.valor);
-  const neutras = partes.filter(p => p.neutro);
-  return [...destaque, ...neutras].map((p, i) => ({ ...p, cor: p.neutro ? COR_NEUTRA : CORES_GRAFICO[i % CORES_GRAFICO.length]! }));
+  const lista = [...destaque, ...partes.filter(p => p.neutro)];
+  const cores = coresDasSeries(lista);
+  return lista.map((p, i) => ({ ...p, cor: cores[i]! }));
 }
 
 /** Lista de partes (nome, quantidade opcional, percentual), usada ao lado da pizza e do waffle. */
@@ -186,7 +187,7 @@ function densidade(valores: number[], xs: number[]) {
 export type BarrasAgrupadasProps = BaseDoGrafico & {
   /** Um bloco por grupo; `valores` na ordem de `series`. */
   grupos: { rotulo: string; valores: number[] }[];
-  /** Nomes das séries (até 4; a primeira fica na cor de destaque). */
+  /** Nomes das séries, da mais importante (tom 1) para a mais contextual (coresPorImportancia). */
   series: string[];
   /** Máximo do eixo (padrão: o maior valor). */
   maximo?: number;
@@ -199,7 +200,7 @@ export type BarrasAgrupadasProps = BaseDoGrafico & {
 export function BarrasAgrupadas({ grupos, series, maximo, rotulo, formatar = fmtPadrao, className }: BarrasAgrupadasProps) {
   const menos = useReducedMotion();
   const max = maximo ?? Math.max(1, ...grupos.flatMap(g => g.valores));
-  const cores = series.map((_, i) => corDaSerie(i));
+  const cores = coresPorImportancia(series.length).map(corDoTom);
   const resumo = `${rotulo}: ${grupos.map(g => `${g.rotulo}, ${series.map((s, i) => `${s} ${formatar(g.valores[i] ?? 0)}`).join(", ")}`).join("; ")}.`;
   return (
     <div className={cn("space-y-4", className)}>
@@ -237,7 +238,7 @@ export function BarrasAgrupadas({ grupos, series, maximo, rotulo, formatar = fmt
 /* ── Barras empilhadas (valores absolutos) ─────────────────────────────────────────────────────────────── */
 
 export type BarrasEmpilhadasProps = BaseDoGrafico & {
-  /** Partes de cada barra (até 4 em destaque; `neutro` = "Outros", em grafite). */
+  /** Partes de cada barra, da mais importante para a mais contextual (`neutro` = "Outros", em cinza, por último). */
   categorias: { rotulo: string; neutro?: boolean }[];
   /** Uma barra por linha; `valores` na ordem de `categorias`. */
   linhas: { rotulo: string; valores: number[] }[];
@@ -250,8 +251,7 @@ export type BarrasEmpilhadasProps = BaseDoGrafico & {
 export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPadrao, className }: BarrasEmpilhadasProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
-  let k = 0;
-  const cores = categorias.map(c => (c.neutro ? COR_NEUTRA : corDaSerie(k++)));
+  const cores = coresDasSeries(categorias);
   const totais = linhas.map(l => soma(l.valores));
   const max = Math.max(1, ...totais);
   const maxTotal = Math.max(...totais.map(t => larguraTexto(formatar(t), 12)));
@@ -289,7 +289,7 @@ export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPad
 
 export type PirulitoProps = BaseDoGrafico & {
   itens: { rotulo: string; valor: number }[];
-  /** Quantos itens do topo ficam na cor de destaque (padrão 1). */
+  /** Quantos itens do topo ficam em destaque (o 1º no tom 1, um 2º no tom 2; o restante no cinza de contexto). Padrão 1. */
   destaques?: number;
   ordenar?: boolean;
   /** Linha de referência (ex.: a média), com nome. */
@@ -304,6 +304,7 @@ export function Pirulito({ itens, destaques = 1, ordenar = true, referencia, max
   const max = maximo ?? Math.max(1, ...lista.map(i => i.valor), referencia?.valor ?? 0);
   const pos = (v: number) => `calc((100% - 4.5rem) * ${v / max})`;
   const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${formatar(i.valor)}`).join(", ")}${referencia ? `. ${referencia.rotulo}: ${formatar(referencia.valor)}` : ""}.`;
+  const cores = coresDeFoco(lista.map((_, i) => i < destaques));
   return (
     <div role="img" aria-label={resumo} className={cn("relative", className)}>
       {referencia && (
@@ -317,7 +318,7 @@ export function Pirulito({ itens, destaques = 1, ordenar = true, referencia, max
       <div className="space-y-2.5">
         {lista.map((item, i) => {
           const d = i < destaques;
-          const cor = d ? "var(--chart-1)" : "var(--chart-4)";
+          const cor = cores[i]!;
           return (
             <div key={item.rotulo} className="min-w-0">
               <p className={cn("mb-0.5 text-[0.8125rem] leading-snug", d ? "font-semibold text-foreground" : "text-muted-foreground")}><span className="relative bg-card pr-1 [box-decoration-break:clone]">{item.rotulo}</span></p>
@@ -406,7 +407,7 @@ function CamadasEmDegrade({ camadas, cores, X, Y, chaves }: { camadas: { ini: nu
 /* ── Área empilhada ───────────────────────────────────────────────────────────────────────────────────── */
 
 export type AreaEmpilhadaProps = BaseDoGrafico & {
-  /** Camadas de baixo para cima (até 4 em destaque; `neutro` = "Outros"). */
+  /** Camadas de baixo para cima, da mais importante para a mais contextual (`neutro` = "Outros", em cinza). */
   series: SerieEmpilhada[];
   rotulosX: string[];
   altura?: number;
@@ -419,8 +420,7 @@ export function AreaEmpilhada({ series, rotulosX, altura = 240, rotulo, formatar
   const r = { total: "Total", ...rotulos };
   const n = rotulosX.length;
   const { totais, camadas } = empilhar(series, n, false);
-  let k = 0;
-  const cores = series.map(s => (s.neutro ? COR_NEUTRA : corDaSerie(k++)));
+  const cores = coresDasSeries(series);
   const marcas = marcasDoEixo(0, Math.max(1, ...totais), 4);
   const yMax = marcas[marcas.length - 1]!;
   const larguraRotulo = Math.min(120, Math.max(...series.map(s => Math.max(larguraTexto(s.rotulo, 11), larguraTexto(formatar(s.valores[n - 1] ?? 0), 12)))) + 16);
@@ -463,8 +463,7 @@ export function Streamgraph({ series, rotulosX, altura = 240, rotulo, formatar =
   const [ref, largura] = useLargura<HTMLDivElement>();
   const n = rotulosX.length;
   const { totais, camadas } = empilhar(series, n, true);
-  let k = 0;
-  const cores = series.map(s => (s.neutro ? COR_NEUTRA : corDaSerie(k++)));
+  const cores = coresDasSeries(series);
   const metade = Math.max(1, ...totais) / 2;
   const larguraRotulo = Math.min(120, Math.max(...series.map(s => Math.max(larguraTexto(s.rotulo, 11), larguraTexto(formatar(s.valores[n - 1] ?? 0), 12)))) + 16);
   const m = { t: 8, r: larguraRotulo, b: 24, l: 4 };
@@ -538,6 +537,7 @@ export function LinhaDoTempo({ eventos, inicio, fim, marcas = [], rotulo, classN
   });
   const altura = eixoY + 18 + fins.length * faixaH;
   const resumo = `${rotulo}: ${lista.map(e => `${e.data}, ${e.rotulo}`).join("; ")}.`;
+  const temDestaque = eventos.some(e => e.destaque);
   return (
     <div ref={ref} className={cn("w-full", className)}>
       {largura > 0 && (
@@ -560,7 +560,7 @@ export function LinhaDoTempo({ eventos, inicio, fim, marcas = [], rotulo, classN
               const ancora = paraEsquerda ? "end" : "start";
               return (
                 <g key={e.rotulo}>
-                  <circle cx={x} cy={eixoY} r={e.destaque ? 6 : 4.5} fill={e.destaque ? "var(--chart-1)" : "var(--card)"} stroke="var(--chart-1)" strokeWidth={2} />
+                  <circle cx={x} cy={eixoY} r={e.destaque ? 6 : 4.5} fill={e.destaque ? "var(--chart-1)" : "var(--card)"} stroke={e.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} strokeWidth={2} />
                   <text x={tx} y={yTexto + 10} textAnchor={ancora} style={HALO} className="fill-muted-foreground text-[11px] tabular-nums">{e.data}</text>
                   <text x={tx} y={yTexto + 25} textAnchor={ancora} style={HALO} className={cn("text-[12px]", e.destaque ? "fill-foreground font-bold" : "fill-foreground")}>{e.rotulo}</text>
                 </g>
@@ -767,91 +767,6 @@ export function Pizza({ partes, rotulo, formatarQuantidade, localidade = "pt-BR"
   );
 }
 
-/* ── Sunburst ──────────────────────────────────────────────────────────────────────────────────────────── */
-
-export type GrupoDoSunburst = { rotulo: string; neutro?: boolean; filhos: { rotulo: string; valor: number }[] };
-
-export type SunburstProps = BaseDoGrafico & {
-  /** Anel de dentro: os grupos; anel de fora: as partes de cada grupo (até 4 grupos em destaque). */
-  grupos: GrupoDoSunburst[];
-  /** Texto do centro (ex.: o total). */
-  centro?: { valor: string; rotulo: string };
-  localidade?: string;
-  tamanho?: number;
-};
-
-/**
- * Sunburst em dois níveis: o anel de dentro mostra os grupos e o de fora divide cada grupo nas suas partes,
- * no mesmo tom do grupo, mais claro. Percentuais do anel de fora escritos junto das partes; a lista traz os dois níveis.
- */
-export function Sunburst({ grupos, centro, rotulo, localidade = "pt-BR", tamanho = 220, className }: SunburstProps) {
-  const lista = grupos.map(g => ({ ...g, valor: soma(g.filhos.map(f => f.valor)) }));
-  const ordenados = [...lista.filter(g => !g.neutro).sort((a, b) => b.valor - a.valor), ...lista.filter(g => g.neutro)];
-  const total = soma(ordenados.map(g => g.valor)) || 1;
-  const c = 110;
-  const pct = (v: number) => formatarPercentual((v / total) * 100, 0, localidade);
-  let acc = 0, k = 0;
-  const desenho = ordenados.map(g => {
-    const cor = g.neutro ? COR_NEUTRA : CORES_GRAFICO[k++ % 4]!;
-    const a0 = (acc / total) * 2 * Math.PI;
-    let accF = acc;
-    const filhos = [...g.filhos].sort((a, b) => b.valor - a.valor).map(f => { const b0 = (accF / total) * 2 * Math.PI; accF += f.valor; return { ...f, a0: b0, a1: (accF / total) * 2 * Math.PI }; });
-    acc += g.valor;
-    return { ...g, cor, a0, a1: (acc / total) * 2 * Math.PI, filhos };
-  });
-  const resumo = `${rotulo}: ${desenho.map(g => `${g.rotulo} ${pct(g.valor)} (${g.filhos.map(f => `${f.rotulo} ${pct(f.valor)}`).join(", ")})`).join("; ")}.`;
-  return (
-    <div className={cn("@container", className)}>
-      <div className="flex flex-col items-center gap-5 @min-[30rem]:flex-row">
-        <svg viewBox="0 0 220 220" width={tamanho} height={tamanho} role="img" aria-label={resumo} className="max-w-full shrink-0 overflow-visible">
-          <Entrada>
-            {desenho.map(g => (
-              <g key={g.rotulo}>
-                <path d={setorDeAnel(c, c, 40, 64, g.a0, g.a1)} fill={g.cor} stroke="var(--card)" strokeWidth={2} />
-                {g.filhos.map(f => <path key={f.rotulo} d={setorDeAnel(c, c, 66, 86, f.a0, f.a1)} fill={g.cor} fillOpacity={0.5} stroke="var(--card)" strokeWidth={2} />)}
-              </g>
-            ))}
-          </Entrada>
-          {desenho.flatMap(g => g.filhos).map(f => {
-            if (f.valor / total < 0.05) return null;
-            const meio = (f.a0 + f.a1) / 2, s = Math.sin(meio);
-            return (
-              <text key={f.rotulo} x={c + 98 * s} y={c - 98 * Math.cos(meio) + 4} textAnchor={Math.abs(s) < 0.3 ? "middle" : s > 0 ? "start" : "end"}
-                className="fill-foreground text-[11px] font-semibold tabular-nums">{pct(f.valor)}</text>
-            );
-          })}
-          {centro && (
-            <>
-              <text x={c} y={c + 2} textAnchor="middle" className="fill-foreground text-[20px] font-bold tabular-nums">{centro.valor}</text>
-              <text x={c} y={c + 17} textAnchor="middle" className="fill-muted-foreground text-[10px]">{centro.rotulo}</text>
-            </>
-          )}
-        </svg>
-        <ul className="m-0 w-full min-w-0 flex-1 list-none space-y-2 p-0">
-          {desenho.map(g => (
-            <li key={g.rotulo} className="text-[0.8125rem]">
-              <p className="flex items-center gap-2 px-2">
-                <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: g.cor }} />
-                <span className={cn("min-w-0 flex-1 font-semibold", g.neutro ? "text-muted-foreground" : "text-foreground")}>{g.rotulo}</span>
-                <span className="w-11 shrink-0 text-right font-semibold tabular-nums text-foreground">{pct(g.valor)}</span>
-              </p>
-              <ul className="m-0 mt-0.5 list-none space-y-0.5 p-0 pl-7">
-                {g.filhos.map(f => (
-                  <li key={f.rotulo} className="flex items-center gap-2 pr-2 text-muted-foreground">
-                    <span aria-hidden className="h-2 w-2 shrink-0 rounded-full" style={{ background: g.cor, opacity: 0.5 }} />
-                    <span className="min-w-0 flex-1">{f.rotulo}</span>
-                    <span className="w-11 shrink-0 text-right tabular-nums">{pct(f.valor)}</span>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
 /* ── Waffle ────────────────────────────────────────────────────────────────────────────────────────────── */
 
 export type WaffleProps = BaseDoGrafico & {
@@ -909,7 +824,7 @@ export function Piramide({ faixas, esquerda, direita, maximo, rotulo, formatar =
   const barra = (v: number, lado: "e" | "d", i: number) => (
     <div className={cn("flex min-w-0 items-center gap-1.5", lado === "e" && "flex-row-reverse @min-[28rem]:order-none", lado === "d" && "@min-[28rem]:order-none")}>
       <motion.span aria-hidden className="block h-4 shrink-0 rounded-sm"
-        style={{ width: `calc((100% - 3rem) * ${v / max})`, background: lado === "e" ? "var(--chart-1)" : "var(--chart-4)", originX: lado === "e" ? 1 : 0 }}
+        style={{ width: `calc((100% - 3rem) * ${v / max})`, background: lado === "e" ? "var(--chart-1)" : "var(--chart-6)", originX: lado === "e" ? 1 : 0 }}
         initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.04 * i }} />
       <span className="shrink-0 text-[0.75rem] tabular-nums text-foreground">{formatar(v)}</span>
     </div>
@@ -919,7 +834,7 @@ export function Piramide({ faixas, esquerda, direita, maximo, rotulo, formatar =
       <div className="grid grid-cols-2 items-end gap-x-2 text-[0.75rem] font-semibold @min-[28rem]:grid-cols-[1fr_auto_1fr]">
         <span className="flex items-center justify-end gap-1.5 text-foreground">{esquerda.rotulo}<span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-1)" }} /></span>
         <span className="hidden @min-[28rem]:block @min-[28rem]:w-[var(--centro)]" />
-        <span className="flex items-center gap-1.5 text-foreground"><span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-4)" }} />{direita.rotulo}</span>
+        <span className="flex items-center gap-1.5 text-foreground"><span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-6)" }} />{direita.rotulo}</span>
       </div>
       <div role="img" aria-label={resumo} className="space-y-1.5">
         {faixas.map((f, i) => (
@@ -933,70 +848,6 @@ export function Piramide({ faixas, esquerda, direita, maximo, rotulo, formatar =
     </div>
   );
 }
-
-/* ── Cascata (waterfall) ──────────────────────────────────────────────────────────────────────────────── */
-
-export type CascataProps = BaseDoGrafico & {
-  /** Valor de partida. */
-  inicio: { rotulo: string; valor: number };
-  /** Variações, positivas ou negativas, na ordem. */
-  passos: { rotulo: string; valor: number }[];
-  /** Nome do valor final (calculado). */
-  fim: { rotulo: string };
-  rotulos?: { total?: string; aumento?: string; reducao?: string };
-};
-
-/**
- * Cascata: do valor de partida ao final, passo a passo. Totais cheios na cor de destaque, aumentos cheios em tom claro,
- * reduções vazadas; o sinal (+ ou −) vai sempre escrito, então a direção não depende da cor.
- */
-export function Cascata({ inicio, passos, fim, rotulo, formatar = fmtPadrao, rotulos, className }: CascataProps) {
-  const [ref, largura] = useLargura<HTMLDivElement>();
-  const r = { total: "Total", aumento: "Aumento", reducao: "Redução", ...rotulos };
-  let acc = inicio.valor;
-  const linhas = [
-    { rotulo: inicio.rotulo, de: 0, ate: inicio.valor, tipo: "total" as const, texto: formatar(inicio.valor) },
-    ...passos.map(p => { const de = acc; acc += p.valor; return { rotulo: p.rotulo, de, ate: acc, tipo: (p.valor >= 0 ? "aumento" : "reducao") as "aumento" | "reducao", texto: `${p.valor >= 0 ? "+" : "−"}${formatar(Math.abs(p.valor))}` }; }),
-    { rotulo: fim.rotulo, de: 0, ate: acc, tipo: "total" as const, texto: formatar(acc) },
-  ];
-  const lo = Math.min(0, ...linhas.map(l => Math.min(l.de, l.ate))), hi = Math.max(...linhas.map(l => Math.max(l.de, l.ate)));
-  const H = 44;
-  const altura = linhas.length * H;
-  const X = (v: number) => ((v - lo) / (hi - lo || 1)) * largura;
-  const resumo = `${rotulo}: ${linhas.map(l => `${l.rotulo} ${l.texto}`).join(", ")}.`;
-  return (
-    <div className={cn("space-y-3", className)}>
-      <LegendaDoGrafico itens={[{ rotulo: r.total, cor: "var(--chart-1)" }, { rotulo: r.aumento, cor: "var(--chart-4)" }, { rotulo: r.reducao, cor: "var(--chart-1)", forma: "anel" }]} />
-      <div ref={ref} className="w-full">
-        {largura > 0 && (
-          <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-            <Entrada>
-              {linhas.map((l, i) => {
-                const y0 = i * H;
-                const a = X(Math.min(l.de, l.ate)), b = X(Math.max(l.de, l.ate));
-                const total = l.tipo === "total";
-                return (
-                  <g key={l.rotulo + i}>
-                    <text x={0} y={y0 + 12} className={cn("text-[12px]", total ? "fill-foreground font-semibold" : "fill-foreground")}>{l.rotulo}</text>
-                    <text x={largura} y={y0 + 12} textAnchor="end" className={cn("text-[12px] tabular-nums", total ? "fill-foreground font-bold" : "fill-foreground font-semibold")}>{l.texto}</text>
-                    <rect x={a + 0.75} y={y0 + 19} width={Math.max(2, b - a - 1.5)} height={14} rx={2}
-                      fill={l.tipo === "total" ? "var(--chart-1)" : l.tipo === "aumento" ? "var(--chart-4)" : "var(--card)"}
-                      stroke={l.tipo === "reducao" ? "var(--chart-1)" : "none"} strokeWidth={1.5} />
-                    {i > 0 && <line x1={X(linhas[i - 1]!.ate)} x2={X(linhas[i - 1]!.ate)} y1={y0 - H + 33} y2={y0 + 19} stroke={COR_REFERENCIA} strokeDasharray="2 2" />}
-                  </g>
-                );
-              })}
-            </Entrada>
-          </svg>
-        )}
-      </div>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════════════════════════════════════════════
-   RELAÇÕES
-   ════════════════════════════════════════════════════════════════════════════════════════════════════════ */
 
 /* ── Dispersão ─────────────────────────────────────────────────────────────────────────────────────────── */
 
@@ -1030,6 +881,7 @@ export function Dispersao({ pontos, eixoX, eixoY, tendencia, altura = 280, rotul
   const inc = soma(pontos.map(p => (p.x - mxm) * (p.y - mym))) / (soma(pontos.map(p => (p.x - mxm) ** 2)) || 1);
   const reta = (x: number) => mym + inc * (x - mxm);
   const xa = Math.min(...xs), xb = Math.max(...xs);
+  const temDestaque = pontos.some(p => p.destaque);
   const resumo = `${rotulo}: ${pontos.length} itens; ${eixoX.rotulo} de ${fx(Math.min(...xs))} a ${fx(Math.max(...xs))}; ${eixoY.rotulo} de ${fy(Math.min(...ys))} a ${fy(Math.max(...ys))}${pontos.some(p => p.destaque) ? `; em destaque: ${pontos.filter(p => p.destaque).map(p => `${p.rotulo ?? ""} (${fx(p.x)}, ${fy(p.y)})`).join(", ")}` : ""}.`;
   return (
     <div ref={ref} className={cn("w-full", className)}>
@@ -1056,7 +908,7 @@ export function Dispersao({ pontos, eixoX, eixoY, tendencia, altura = 280, rotul
               return (
                 <g key={i}>
                   <title>{`${p.rotulo ? p.rotulo + ": " : ""}${eixoX.rotulo} ${fx(p.x)}, ${eixoY.rotulo} ${fy(p.y)}`}</title>
-                  <circle cx={cx} cy={cy} r={p.destaque ? 5.5 : 4} fill={p.destaque ? "var(--chart-1)" : "var(--chart-4)"} fillOpacity={p.destaque ? 1 : 0.75} stroke={p.destaque ? "var(--card)" : "var(--chart-4)"} strokeWidth={p.destaque ? 1.5 : 1} />
+                  <circle cx={cx} cy={cy} r={p.destaque ? 5.5 : 4} fill={p.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} fillOpacity={p.destaque ? 1 : 0.75} stroke={p.destaque ? "var(--card)" : p.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} strokeWidth={p.destaque ? 1.5 : 1} />
                   {p.destaque && p.rotulo && (
                     <text x={direita ? cx + 9 : cx - 9} y={cy + 4} textAnchor={direita ? "start" : "end"} style={HALO} className="fill-foreground text-[11px] font-semibold">{p.rotulo}</text>
                   )}
@@ -1187,9 +1039,9 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
   const n = eixos.length;
   const max = maximo ?? Math.max(1, ...series.flatMap(s => s.valores));
   const iDestaque = Math.max(0, series.findIndex(s => s.destaque));
-  const outras = ["var(--chart-4)", "var(--chart-2)", "var(--chart-3)"];
+  const contexto = coresDeContexto(series.length - 1);
   let k = 0;
-  const cores = series.map((_, i) => (i === iDestaque ? "var(--chart-1)" : outras[k++ % outras.length]!));
+  const cores = series.map((_, i) => (i === iDestaque ? "var(--chart-1)" : contexto[k++]!));
   const larguraRotulo = Math.min(largura < 420 ? 70 : 92, Math.max(...eixos.map(e => larguraTexto(e, 11))) + 4);
   const R = Math.max(40, Math.min(112, (largura - 2 * larguraRotulo - 20) / 2));
   const valoresDestaque = series[iDestaque]?.valores;
@@ -1250,7 +1102,7 @@ export type CoordenadasParalelasProps = {
   rotulo: string;
   /** Um eixo vertical por medida, cada um com a sua escala. */
   eixos: { rotulo: string; formatar?: Formatador; min?: number; max?: number }[];
-  /** Um traço por item; `valores` na ordem dos eixos. Os destaques ganham cor e nome; o resto fica em grafite, como contexto. */
+  /** Um traço por item; `valores` na ordem dos eixos. Os destaques ganham cor (o 1º no tom 1) e nome; o resto fica no cinza de contexto. */
   itens: { rotulo: string; valores: number[]; destaque?: boolean }[];
   altura?: number;
   className?: string;
@@ -1266,7 +1118,7 @@ export function CoordenadasParalelas({ eixos, itens, altura = 280, rotulo, class
     return { min: e.min ?? Math.min(...vs), max: e.max ?? Math.max(...vs), f: e.formatar ?? fmtPadrao };
   });
   const destaques = itens.filter(i => i.destaque);
-  const cores = ["var(--chart-1)", "var(--chart-4)", "var(--chart-2)"];
+  const cores = coresDeFoco(destaques.map(() => true));
   const mr = Math.min(110, Math.max(0, ...destaques.map(d => larguraTexto(d.rotulo, 12))) + 14);
   const m = { l: 8, r: mr };
   const espaco = (largura - m.l - m.r) / Math.max(1, ne - 1);
@@ -1295,7 +1147,7 @@ export function CoordenadasParalelas({ eixos, itens, altura = 280, rotulo, class
             </g>
           ))}
           {itens.filter(i => !i.destaque).map((it, i) => (
-            <motion.path key={it.rotulo} d={caminho(it.valores)} fill="none" stroke={COR_NEUTRA} strokeWidth={1.25} strokeLinejoin="round"
+            <motion.path key={it.rotulo} d={caminho(it.valores)} fill="none" stroke="var(--chart-6)" strokeWidth={1.25} strokeLinejoin="round"
               initial={menos ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: menos ? 0 : 0.03 * i }}>
               <title>{it.rotulo}</title>
             </motion.path>
@@ -1327,7 +1179,8 @@ export type SankeyProps = BaseDoGrafico & {
 
 /**
  * Sankey: fluxos entre etapas; a espessura de cada faixa é a quantidade. O nome e o valor de cada nó ficam escritos
- * ao lado dele; a faixa em destaque fica na cor primária e as outras em tom claro.
+ * ao lado dele; a faixa em destaque fica no tom 1 e as outras no cinza de contexto (tom 6). Os nós ligados a uma faixa
+ * em destaque ficam no tom 1 e os outros no tom 6 (sem faixa em destaque, todos no tom 1); nós `neutro` ficam em cinza.
  */
 export function Sankey({ nos, ligacoes, altura = 280, rotulo, formatar = fmtPadrao, className }: SankeyProps) {
   const menos = useReducedMotion();
@@ -1362,13 +1215,16 @@ export function Sankey({ nos, ligacoes, altura = 280, rotulo, formatar = fmtPadr
     return { l, d: `M ${x0} ${y0} C ${xm} ${y0} ${xm} ${y1} ${x1} ${y1} L ${x1} ${y1 + esp} C ${xm} ${y1 + esp} ${xm} ${y0 + esp} ${x0} ${y0 + esp} Z` };
   });
   const nome = (id: string) => nos.find(n => n.id === id)?.rotulo ?? id;
+  const emDestaque = ligacoes.filter(l => l.destaque);
+  const corDoNo = (n: NoDoSankey) => n.neutro ? COR_NEUTRA
+    : !emDestaque.length || emDestaque.some(l => l.de === n.id || l.para === n.id) ? "var(--chart-1)" : "var(--chart-6)";
   const resumo = `${rotulo}: ${ligacoes.map(l => `${nome(l.de)} para ${nome(l.para)}: ${formatar(l.valor)}`).join("; ")}.`;
   return (
     <div ref={ref} className={cn("w-full", className)}>
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
           {faixas.map((f, i) => f && (
-            <motion.path key={i} d={f.d} fill={f.l.destaque ? "var(--chart-1)" : "var(--chart-4)"} fillOpacity={f.l.destaque ? 0.55 : 0.45}
+            <motion.path key={i} d={f.d} fill={f.l.destaque ? "var(--chart-1)" : "var(--chart-6)"} fillOpacity={f.l.destaque ? 0.55 : 0.45}
               initial={menos ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.05 * i }}>
               <title>{`${nome(f.l.de)} → ${nome(f.l.para)}: ${formatar(f.l.valor)}`}</title>
             </motion.path>
@@ -1381,7 +1237,7 @@ export function Sankey({ nos, ligacoes, altura = 280, rotulo, formatar = fmtPadr
             const yMeio = p.y + p.h / 2 - ((linhasTxt.length + 1) * 13) / 2 + 10;
             return (
               <g key={n.id}>
-                <rect x={p.x} y={p.y} width={larguraNo} height={Math.max(1, p.h)} rx={2} fill={n.neutro ? COR_NEUTRA : "var(--chart-1)"} />
+                <rect x={p.x} y={p.y} width={larguraNo} height={Math.max(1, p.h)} rx={2} fill={corDoNo(n)} />
                 <text x={tx} y={yMeio} textAnchor={primeira ? "end" : "start"} style={!primeira && !ultima ? HALO : undefined} className="fill-foreground text-[12px] font-semibold">
                   {linhasTxt.map((t, li) => <tspan key={li} x={tx} dy={li ? 13 : 0}>{t}</tspan>)}
                   <tspan x={tx} dy={13} className="fill-muted-foreground text-[11px] font-normal tabular-nums">{formatar(valorDo(n.id))}</tspan>
@@ -1449,7 +1305,7 @@ export function RedeDeConexoes({ nos, ligacoes, rotulo, formatar = fmtPadrao, cl
             const emFoco = no.id === foco;
             return (
               <g key={no.id} onMouseEnter={() => setAtivo(no.id)} className="cursor-default">
-                <circle cx={p.x} cy={p.y} r={raio} fill={emFoco ? "var(--chart-1)" : "var(--chart-4)"} stroke="var(--card)" strokeWidth={2} />
+                <circle cx={p.x} cy={p.y} r={raio} fill={emFoco ? "var(--chart-1)" : "var(--chart-6)"} stroke="var(--card)" strokeWidth={2} />
                 <text x={p.x + (raio + 6) * s} y={p.y - (raio + 6) * c + 4 + (c < -0.5 ? 6 : c > 0.5 ? -4 : 0)}
                   textAnchor={Math.abs(s) < 0.25 ? "middle" : s > 0 ? "start" : "end"} style={HALO}
                   className={cn("text-[11px]", emFoco ? "fill-foreground font-bold" : "fill-foreground")}>{no.rotulo}</text>
@@ -1508,7 +1364,7 @@ export function Histograma({ valores, faixas: quantas = 8, destaque, referencia,
           <line x1={m.l} x2={m.l + w} y1={m.t + h} y2={m.t + h} stroke={COR_GRADE} />
           <Entrada>
             {caixas.map((c, i) => {
-              const cor = destaque ? (emDestaque(c) ? "var(--chart-1)" : "var(--chart-4)") : "var(--chart-1)";
+              const cor = destaque ? (emDestaque(c) ? "var(--chart-1)" : "var(--chart-6)") : "var(--chart-1)";
               const cabe = slot >= larguraTexto(formatar(c.n), 11) + 4;
               return (
                 <g key={i}>
@@ -1585,6 +1441,7 @@ export function BoxPlot({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
   const H = 48, topo = 4;
   const altura = topo + grupos.length * H + (eixo ? 36 : 20);
   const resumos = grupos.map(g => resumoDaDistribuicao(g.valores));
+  const temDestaque = grupos.some(g => g.destaque);
   const resumo = `${rotulo}: ${grupos.map((g, i) => { const s = resumos[i]!; return `${g.rotulo}, ${r.mediana} ${formatar(s.mediana)}, de ${formatar(s.q1)} a ${formatar(s.q3)} na metade do meio, mínimo ${formatar(s.minimo)}, máximo ${formatar(s.maximo)}`; }).join("; ")}.`;
   return (
     <div className={cn("space-y-2", className)}>
@@ -1596,18 +1453,19 @@ export function BoxPlot({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
               {grupos.map((g, i) => {
                 const s = resumos[i]!;
                 const y = topo + i * H, yc = y + 30;
+                const cor = g.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)";
                 return (
                   <g key={g.rotulo}>
                     <text x={x0} y={y + 12} style={HALO} className={cn("text-[12px]", g.destaque ? "fill-foreground font-bold" : "fill-foreground")}>{g.rotulo}</text>
                     <text x={x1} y={y + 12} textAnchor="end" style={HALO} className="fill-muted-foreground text-[11px] tabular-nums">{`${r.mediana} `}<tspan className="fill-foreground font-semibold">{formatar(s.mediana)}</tspan></text>
-                    <line x1={X(s.bigodeMin)} x2={X(s.q1)} y1={yc} y2={yc} stroke="var(--chart-1)" strokeWidth={1.5} />
-                    <line x1={X(s.q3)} x2={X(s.bigodeMax)} y1={yc} y2={yc} stroke="var(--chart-1)" strokeWidth={1.5} />
-                    <line x1={X(s.bigodeMin)} x2={X(s.bigodeMin)} y1={yc - 5} y2={yc + 5} stroke="var(--chart-1)" strokeWidth={1.5} />
-                    <line x1={X(s.bigodeMax)} x2={X(s.bigodeMax)} y1={yc - 5} y2={yc + 5} stroke="var(--chart-1)" strokeWidth={1.5} />
+                    <line x1={X(s.bigodeMin)} x2={X(s.q1)} y1={yc} y2={yc} stroke={cor} strokeWidth={1.5} />
+                    <line x1={X(s.q3)} x2={X(s.bigodeMax)} y1={yc} y2={yc} stroke={cor} strokeWidth={1.5} />
+                    <line x1={X(s.bigodeMin)} x2={X(s.bigodeMin)} y1={yc - 5} y2={yc + 5} stroke={cor} strokeWidth={1.5} />
+                    <line x1={X(s.bigodeMax)} x2={X(s.bigodeMax)} y1={yc - 5} y2={yc + 5} stroke={cor} strokeWidth={1.5} />
                     <rect x={X(s.q1)} y={yc - 8} width={Math.max(2, X(s.q3) - X(s.q1))} height={16} rx={2}
-                      fill={g.destaque ? "var(--chart-1)" : "var(--chart-4)"} fillOpacity={g.destaque ? 0.3 : 0.6} stroke="var(--chart-1)" strokeWidth={1.5} />
+                      fill={cor} fillOpacity={0.3} stroke={cor} strokeWidth={1.5} />
                     <line x1={X(s.mediana)} x2={X(s.mediana)} y1={yc - 8} y2={yc + 8} stroke="var(--foreground)" strokeWidth={2.5} />
-                    {s.foraDoPadrao.map((v, j) => <circle key={j} cx={X(v)} cy={yc} r={3.5} fill="var(--card)" stroke="var(--chart-1)" strokeWidth={1.5} />)}
+                    {s.foraDoPadrao.map((v, j) => <circle key={j} cx={X(v)} cy={yc} r={3.5} fill="var(--card)" stroke={cor} strokeWidth={1.5} />)}
                   </g>
                 );
               })}
@@ -1633,6 +1491,7 @@ export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
   const altura = topo + grupos.length * H + (eixo ? 36 : 20);
   const resumos = grupos.map(g => resumoDaDistribuicao(g.valores));
   const resumo = `${rotulo}: ${grupos.map((g, i) => { const s = resumos[i]!; return `${g.rotulo}, ${r.mediana} ${formatar(s.mediana)}, metade do meio de ${formatar(s.q1)} a ${formatar(s.q3)}`; }).join("; ")}.`;
+  const temDestaque = grupos.some(g => g.destaque);
   return (
     <div className={cn("space-y-2", className)}>
       <div ref={ref} className="w-full">
@@ -1641,7 +1500,7 @@ export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
             <EixoDeGrupos marcas={marcas} X={X} y0={topo} y1={topo + grupos.length * H} formatar={formatar} eixo={eixo} largura={x1 - x0} />
             <defs>
               <DegradeDaArea id={`${idGrad}-d`} cor="var(--chart-1)" espelhado />
-              <DegradeDaArea id={`${idGrad}-n`} cor="var(--chart-4)" espelhado />
+              <DegradeDaArea id={`${idGrad}-n`} cor="var(--chart-6)" espelhado />
             </defs>
             <Entrada>
               {grupos.map((g, i) => {
@@ -1656,7 +1515,7 @@ export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
                   <g key={g.rotulo}>
                     <text x={x0} y={y + 12} style={HALO} className={cn("text-[12px]", g.destaque ? "fill-foreground font-bold" : "fill-foreground")}>{g.rotulo}</text>
                     <text x={x1} y={y + 12} textAnchor="end" style={HALO} className="fill-muted-foreground text-[11px] tabular-nums">{`${r.mediana} `}<tspan className="fill-foreground font-semibold">{formatar(s.mediana)}</tspan></text>
-                    <path d={`${curvaSuave(cima)} ${curvaSuave(baixo, true)} Z`} fill={`url(#${idGrad}-${g.destaque ? "d" : "n"})`} stroke={g.destaque ? "var(--chart-1)" : "var(--chart-4)"} strokeWidth={LINHA_DA_AREA} strokeLinejoin="round" />
+                    <path d={`${curvaSuave(cima)} ${curvaSuave(baixo, true)} Z`} fill={`url(#${idGrad}-${g.destaque || !temDestaque ? "d" : "n"})`} stroke={g.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} strokeWidth={LINHA_DA_AREA} strokeLinejoin="round" />
                     <line x1={X(s.q1)} x2={X(s.q3)} y1={yc} y2={yc} stroke="var(--foreground)" strokeWidth={4} strokeLinecap="round" />
                     <circle cx={X(s.mediana)} cy={yc} r={3.5} fill="var(--card)" stroke="var(--foreground)" strokeWidth={1.5} />
                   </g>
@@ -1698,9 +1557,9 @@ export function Densidade({ series, eixoX, altura = 220, rotulo, rotulos, classN
   const curvas = series.map(s => densidade(s.valores, xs));
   const dMax = Math.max(...curvas.flat()) || 1;
   const iDestaque = Math.max(0, series.findIndex(s => s.destaque));
-  const outras = ["var(--chart-4)", "var(--chart-2)"];
+  const contexto = coresDeContexto(series.length - 1);
   let k = 0;
-  const cores = series.map((_, i) => (i === iDestaque ? "var(--chart-1)" : outras[k++ % outras.length]!));
+  const cores = series.map((_, i) => (i === iDestaque ? "var(--chart-1)" : contexto[k++]!));
   const m = { t: 22, r: 8, b: 38, l: 8 };
   const w = Math.max(0, largura - m.l - m.r), h = altura - m.t - m.b;
   const X = (v: number) => m.l + ((v - lo) / (hi - lo || 1)) * w;
@@ -1825,15 +1684,16 @@ export type MapaDePontosProps = MapaEsquematicoBase & {
   tipos?: string[];
 };
 
+/** Tipos por importância (coresPorImportancia(3): tons 1, 4 e 7), cada um com a sua forma. */
 const FORMAS_DOS_TIPOS = [
   { cor: "var(--chart-1)", forma: "circulo" },
   { cor: "var(--chart-4)", forma: "quadrado" },
-  { cor: "var(--chart-2)", forma: "losango" },
+  { cor: "var(--chart-7)", forma: "losango" },
 ] as const;
 
 function MarcaDoTipo({ tipo, x, y, r }: { tipo: number; x: number; y: number; r: number }) {
   const f = FORMAS_DOS_TIPOS[tipo % FORMAS_DOS_TIPOS.length]!;
-  const comum = { fill: f.cor, stroke: f.forma === "circulo" ? "var(--card)" : "var(--chart-1)", strokeWidth: f.forma === "circulo" ? 1.5 : 1.25 };
+  const comum = { fill: f.cor, stroke: "var(--card)", strokeWidth: 1.5 };
   if (f.forma === "quadrado") return <rect x={x - r} y={y - r} width={r * 2} height={r * 2} rx={1.5} {...comum} />;
   if (f.forma === "losango") return <path d={`M ${x} ${y - r * 1.3} L ${x + r * 1.3} ${y} L ${x} ${y + r * 1.3} L ${x - r * 1.3} ${y} Z`} {...comum} />;
   return <circle cx={x} cy={y} r={r} {...comum} />;
@@ -1910,6 +1770,7 @@ export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, 
   const rMax = Math.max(12, Math.min(cw, ch) * 0.3);
   const raio = (v: number) => Math.max(5, Math.sqrt(v / maxV) * rMax);
   const resumo = `${rotulo}: ${[...bolhas].sort((a, b) => b.valor - a.valor).map(b => `${b.rotulo} ${formatar(b.valor)}`).join(", ")}. ${r.nota}`;
+  const temDestaque = bolhas.some(b => b.destaque);
   return (
     <div className={cn("space-y-2", className)}>
       <div ref={ref} className="w-full">
@@ -1921,7 +1782,7 @@ export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, 
               return (
                 <g key={b.rotulo}>
                   <title>{`${b.rotulo}: ${formatar(b.valor)}`}</title>
-                  <motion.circle cx={x} cy={y} r={rr} fill="var(--chart-1)" fillOpacity={b.destaque ? 0.38 : 0.2} stroke="var(--chart-1)" strokeWidth={b.destaque ? 2 : 1.25}
+                  <motion.circle cx={x} cy={y} r={rr} fill={b.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} fillOpacity={b.destaque ? 0.38 : 0.2} stroke={b.destaque || !temDestaque ? "var(--chart-1)" : "var(--chart-6)"} strokeWidth={b.destaque ? 2 : 1.25}
                     initial={menos ? false : { scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
                     style={{ transformOrigin: `${x}px ${y}px` }} transition={{ duration: 0.45, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }} />
                   <text x={x} y={y + rr + 13} textAnchor="middle" style={HALO} className="fill-foreground text-[11px]">

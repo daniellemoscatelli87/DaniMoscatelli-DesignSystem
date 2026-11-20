@@ -14,6 +14,16 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Transition palette for charts", pt: "Paleta de transição nos gráficos" },
+    desc: { en: "Product owner's decision (20/11/2026): 8 tones from the brand red to gray (--chart-1 to --chart-8), the same in the light and dark themes. Ranges: 1–2 highlight, 3–5 support and transition, 6–8 context. Five usage rules: 1 chart = 1 focus, importance in order, context in gray, at most 2 intense tones and continuous scales from gray to red (--chart-seq-1 to 4 = tones 6, 5, 3 and 1). --chart-neutral is now tone 8. Components pick tones with coresPorImportancia(n); BarrasOrdenadas gets cores=\"importancia\" and GraficoDeLinhas accepts neutro (dashed) and tom series.", pt: "Decisão da dona do produto (20/11/2026): 8 tons, do vermelho da marca ao cinza (--chart-1 a --chart-8), os mesmos no tema claro e no escuro. Faixas: 1–2 destaque, 3–5 apoio e transição, 6–8 contexto. Cinco regras de uso: 1 gráfico = 1 foco, importância em ordem, contexto em cinza, no máximo 2 tons intensos e escalas contínuas do cinza ao vermelho (--chart-seq-1 a 4 = tons 6, 5, 3 e 1). --chart-neutral passa a ser o tom 8. Os componentes escolhem os tons com coresPorImportancia(n); BarrasOrdenadas ganha cores=\"importancia\" e GraficoDeLinhas aceita séries neutro (tracejadas) e tom." },
+    page: "graficos", anchor: "graficos-cores",
+  },
+  {
+    date: "Nov 2026", kind: "Removed", title: { en: "Sunburst and Waterfall", pt: "Sunburst e Cascata" },
+    desc: { en: "Product owner's decision (20/11/2026): the Sunburst and Waterfall (Cascata) charts leave the chart catalog.", pt: "Decisão da dona do produto (20/11/2026): os gráficos Sunburst e Cascata (waterfall) saem do catálogo de gráficos." },
+    page: "graficos", anchor: "graficos-catalogo-composicao",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Charts and visualizations", pt: "Gráficos e visualizações" },
     desc: { en: "New page and ui/graficos-inteligencia.tsx: how to choose a chart, chart colours, a redesigned donut, the recommended charts (ranked bars, regional heat map, dumbbell, lines and area, slope, treemap, 100% bars, bubbles, matrix heat map, bump chart, funnel), each as a discovery card (conclusion, chart, why it matters, next step), and the intelligence design principle. Chart tokens become tonal variations of the brand red; graphite only for non-highlighted or disabled information.", pt: "Página nova e ui/graficos-inteligencia.tsx: como escolher o gráfico, cores dos gráficos, rosca redesenhada, os gráficos recomendados (barras ordenadas, mapa de calor por região, dumbbell, linhas e área, slope, treemap, barras 100%, bolhas, heatmap matricial, bump, funil), cada um como um card de descoberta (conclusão, gráfico, por que importa, próximo passo), e o princípio do design de inteligência. Os tokens de gráfico passam a ser variações de tom do vermelho da marca; o grafite fica só para informação sem destaque ou desabilitada." },
     page: "graficos", anchor: "graficos-recomendados",

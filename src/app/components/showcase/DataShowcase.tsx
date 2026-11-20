@@ -99,7 +99,7 @@ const pieData = [
   { name: "Email", pt: "E-mail", value: 12 },
 ];
 
-const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)"];
+const COLORS = ["var(--chart-1)", "var(--chart-4)", "var(--chart-6)", "var(--chart-8)"];
 
 /* ── Table data ── */
 const tableData = [
@@ -194,7 +194,7 @@ export function DataShowcase() {
               </div>
               <div className="flex items-center gap-4 text-[0.75rem] text-muted-foreground">
                 <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-1 inline-block" />{t("Revenue", "Receita")}</span>
-                <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-2 inline-block" />{t("Users", "Usuários")}</span>
+                <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-6 inline-block" />{t("Users", "Usuários")}</span>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={220}>
@@ -205,8 +205,8 @@ export function DataShowcase() {
                     <stop offset="95%" stopColor="var(--chart-1)" stopOpacity={0} />
                   </linearGradient>
                   <linearGradient id="gradUsers" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--chart-2)" stopOpacity={0.15} />
-                    <stop offset="95%" stopColor="var(--chart-2)" stopOpacity={0} />
+                    <stop offset="5%" stopColor="var(--chart-6)" stopOpacity={0.15} />
+                    <stop offset="95%" stopColor="var(--chart-6)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
@@ -214,7 +214,7 @@ export function DataShowcase() {
                 <YAxis tick={{ fontSize: 11, fill: "var(--muted-foreground)" }} axisLine={false} tickLine={false} tickFormatter={v => `$${v/1000}K`} />
                 <RechartTooltip content={<CustomTooltip />} />
                 <Area type="monotone" dataKey="revenue" stroke="var(--chart-1)" strokeWidth={1.5} fill="url(#gradRevenue)" name={t("Revenue", "Receita")} />
-                <Area type="monotone" dataKey="users" stroke="var(--chart-2)" strokeWidth={1.5} fill="url(#gradUsers)" name={t("Users", "Usuários")} />
+                <Area type="monotone" dataKey="users" stroke="var(--chart-6)" strokeWidth={1.5} fill="url(#gradUsers)" name={t("Users", "Usuários")} />
               </AreaChart>
             </ResponsiveContainer>
           </ShowcaseCard>
@@ -383,12 +383,15 @@ function getDataTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
   {
     group: t("Chart Palette", "Paleta de gráficos"),
     tokens: [
-      { name: "--chart-1", description: t("Series 1, highlight — crimson-500", "Série 1, destaque — carmim 500"), light: "#B82828", dark: "#E88080", isColor: true },
-      { name: "--chart-2", description: t("Series 2 — dark crimson (crimson-700)", "Série 2 — carmim escuro (carmim 700)"), light: "#6D1313", dark: "#F9DADA", isColor: true },
-      { name: "--chart-3", description: t("Series 3 — crimson-400 (primary)", "Série 3 — carmim 400 (primária)"), light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--chart-4", description: t("Series 4 — crimson-300", "Série 4 — carmim 300"), light: "#E88080", dark: "#B82828", isColor: true },
-      { name: "--chart-5", description: t("Series 5 — crimson-200", "Série 5 — carmim 200"), light: "#F3B3B3", dark: "#8C1B1B", isColor: true },
-      { name: "--chart-neutral", description: t("Not highlighted: Others, context, disabled (graphite)", "Sem destaque: Outros, contexto, desativado (grafite)"), light: "#B3BDD0", dark: "#374155", isColor: true },
+      { name: "--chart-1", description: t("Tone 1 of the transition palette — highlight: the main data point", "Tom 1 da paleta de transição — destaque: o dado principal"), light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--chart-2", description: t("Tone 2 of the transition palette — highlight", "Tom 2 da paleta de transição — destaque"), light: "#D36267", dark: "#D36267", isColor: true },
+      { name: "--chart-3", description: t("Tone 3 of the transition palette — support and transition", "Tom 3 da paleta de transição — apoio e transição"), light: "#CD797E", dark: "#CD797E", isColor: true },
+      { name: "--chart-4", description: t("Tone 4 of the transition palette — support and transition", "Tom 4 da paleta de transição — apoio e transição"), light: "#C48E93", dark: "#C48E93", isColor: true },
+      { name: "--chart-5", description: t("Tone 5 of the transition palette — support and transition", "Tom 5 da paleta de transição — apoio e transição"), light: "#B69FA5", dark: "#B69FA5", isColor: true },
+      { name: "--chart-6", description: t("Tone 6 of the transition palette — context", "Tom 6 da paleta de transição — contexto"), light: "#A4ACB7", dark: "#A4ACB7", isColor: true },
+      { name: "--chart-7", description: t("Tone 7 of the transition palette — context", "Tom 7 da paleta de transição — contexto"), light: "#939EAF", dark: "#939EAF", isColor: true },
+      { name: "--chart-8", description: t("Tone 8 of the transition palette — context; same as --chart-neutral", "Tom 8 da paleta de transição — contexto; igual a --chart-neutral"), light: "#808DA1", dark: "#808DA1", isColor: true },
+      { name: "--chart-neutral", description: t("Other and information with no highlight (tone 8)", "Outros e informação sem destaque (tom 8)"), light: "#808DA1", dark: "#808DA1", isColor: true },
       { name: "--chart-grid", description: t("Chart grid lines", "Linhas de grade dos gráficos"), light: "#D6DCE6", dark: "#1C2333", isColor: true },
     ],
   },
@@ -448,7 +451,7 @@ export function CardsDeKpi() {
                   <Line
                     type="monotone"
                     dataKey="v"
-                    stroke={kpi.trend === "up" ? "var(--chart-1)" : "var(--chart-2)"}
+                    stroke={kpi.trend === "up" ? "var(--chart-1)" : "var(--chart-6)"}
                     strokeWidth={1.5}
                     dot={false}
                   />
