@@ -56,19 +56,20 @@ const TONS = {
     brilhoTopo: true,
     luz: "color-mix(in srgb, var(--primary) 10%, transparent)",
     numero: "text-white/[0.08] group-hover:text-crimson-400",
-    icone: "border-white/15 bg-white/[0.08] text-white group-hover:border-primary group-hover:bg-primary group-hover:text-white",
+    // card de vidro não é clicável: ícone e temas continuam em vidro no hover (decisão da dona do produto, 19/11/2026)
+    icone: "border-white/15 bg-white/[0.08] text-white",
     titulo: "text-graphite-50",
-    subtitulo: "text-crimson-400",
+    subtitulo: "text-crimson-300",
     descricao: "text-graphite-300",
     divisor: "border-white/[0.07]",
-    tema: "border-white/20 bg-transparent text-graphite-200 group-hover:border-crimson-300/60 group-hover:text-crimson-200",
+    tema: "border-white/20 bg-transparent text-graphite-200",
   },
   claro: {
     card: "border-border bg-card shadow-sm hover:border-crimson-200 hover:shadow-xl",
     brilhoTopo: false,
     luz: "color-mix(in srgb, var(--primary) 8%, transparent)",
     numero: "text-graphite-100 group-hover:text-crimson-50",
-    icone: "border-crimson-100 bg-crimson-50 text-[var(--primary-text)] group-hover:border-primary group-hover:bg-primary group-hover:text-white",
+    icone: "border-crimson-100 bg-crimson-50 text-[var(--primary-text)] group-hover:border-primary group-hover:bg-primary group-hover:text-white group-hover:shadow-lg group-hover:shadow-primary/25",
     titulo: "text-foreground",
     subtitulo: "text-[var(--primary-text)]",
     descricao: "text-graphite-500",
@@ -163,7 +164,7 @@ function CardDeFrente({
           aria-hidden
           data-frente-icone=""
           className={cn(
-            "mb-6 flex size-14 items-center justify-center rounded-lg border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-primary/25 [&>svg]:size-7",
+            "mb-6 flex size-14 items-center justify-center rounded-lg border transition-all duration-300 [&>svg]:size-7",
             c.icone,
           )}
         >

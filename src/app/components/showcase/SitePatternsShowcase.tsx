@@ -419,11 +419,11 @@ function SecaoEscopo() {
       <CurvaSecao posicao="base" cor="var(--background)" />
       <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SurgirAoRolar escalonar passo={80} duracao={1400} className="mx-auto mb-8 max-w-3xl text-center sm:mb-16">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-400">
-            <span aria-hidden className="size-1.5 rounded-full bg-crimson-400" />{t("Scope of work", "Escopo de atuação")}
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-300">
+            <span aria-hidden className="size-1.5 rounded-full bg-crimson-300" />{t("Scope of work", "Escopo de atuação")}
           </p>
           <h3 id="escopo-demo-titulo" className="mb-4 text-3xl font-bold tracking-[-0.02em] text-graphite-50 sm:text-4xl">{t("Where we can work", "Onde podemos atuar")}</h3>
-          <p className="mb-3 text-base font-medium leading-snug text-crimson-400 sm:text-lg">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
+          <p className="mb-3 text-base font-medium leading-snug text-crimson-300 sm:text-lg">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-graphite-300 sm:text-base">
             {t(
               "We investigate the experience in an integrated way, considering people, journeys, services and operations to identify opportunities for improvement and innovation.",
@@ -568,8 +568,8 @@ function SecaoFrentes() {
       <SectionHeader
         title={t("Area of work card", "Card de frente de atuação")}
         description={t(
-          "The card of the “Onde podemos atuar” section of Projeto Piloto: icon, title, red subtitle, description and topics. Hover it: the card lifts, light runs around the border, a soft glow follows the pointer and the icon turns solid.",
-          "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda, um brilho suave segue o cursor e o ícone fica sólido.",
+          "The card of the “Onde podemos atuar” section of Projeto Piloto: icon, title, red subtitle, description and topics. Hover it: the card lifts, light runs around the border and a soft glow follows the pointer. On the glass card the icon and topics stay glass, because the card is not clickable.",
+          "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda e um brilho suave segue o cursor. No card de vidro, o ícone e os temas continuam em vidro, porque o card não é clicável.",
         )}
       />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -613,7 +613,7 @@ function SecaoFrentes() {
           t("Icon, glow, number and bar are decorative and hidden from screen readers.", "Ícone, brilho, número e barra são decorativos e ficam ocultos para leitores de tela."),
           t("The phone carousel is a named region that receives focus and scrolls with the arrow keys.", "O carrossel do celular é uma região com nome, que recebe foco e rola com as setas."),
           t("With reduced motion: no lift, no icon swing and the border light stays still.", "Com movimento reduzido: sem subir, sem balanço do ícone e a luz da borda fica parada."),
-          t("On the dark section the red subtitle uses crimson-400, as on the site (4.47:1 on graphite-950, just below 4.5:1).", "Na seção escura o subtítulo vermelho usa crimson-400, como no site (4,47:1 sobre graphite-950, logo abaixo de 4,5:1)."),
+          t("On the dark section, small red text uses crimson-300 (7:1 on graphite-950), as on the site.", "Na seção escura, o texto vermelho pequeno usa crimson-300 (7:1 sobre graphite-950), como no site."),
         ]}
       />
       <Codigo>{`import { CardDeFrente, GradeDeFrentes } from "@/app/components/ui/card-frente";
