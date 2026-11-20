@@ -25,9 +25,9 @@ function Section({ id, title, sub, children }: { id: string; title: string; sub:
 /* ── Token pill ── */
 function Token({ name, value }: { name: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-md border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
-      <code className="text-[0.75rem] font-mono text-primary-text">{name}</code>
-      <span className="text-[0.6875rem] text-muted-foreground font-mono">{value}</span>
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-0.5 rounded-md border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
+      <code className="whitespace-nowrap text-[0.75rem] font-mono text-primary-text">{name}</code>
+      <span className="min-w-0 text-[0.6875rem] text-muted-foreground font-mono">{value}</span>
     </div>
   );
 }
