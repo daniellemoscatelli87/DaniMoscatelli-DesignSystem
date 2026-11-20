@@ -28,6 +28,62 @@ export const CORES_GRAFICO = ["var(--chart-1)", "var(--chart-2)", "var(--chart-3
 export const COR_NEUTRA = "var(--chart-neutral)";
 /** Linhas de grade. */
 export const COR_GRADE = "var(--chart-grid)";
+/** Grade horizontal tracejada dos gráficos de área (sem linhas de eixo). */
+export const TRACO_DA_GRADE = "3 3";
+
+/**
+ * Estilo das áreas (aprovado pela dona do produto, 20/11/2026, o mesmo de "Visão geral das buscas"): linha fina (1,5 px)
+ * na cor da série no topo de cada área ou camada e preenchimento em degradê vertical transparente da mesma cor.
+ * Camadas empilhadas: de 0,34 no topo a 0,06 na base de cada camada, para as faixas continuarem distintas.
+ * Área única ou áreas sobrepostas: de 0,2 a 0. `espelhado` (violino): forte nas duas bordas e leve no meio.
+ * O degradê vai de ponta a ponta de cada forma (objectBoundingBox). Use um `id` único por instância (React.useId).
+ */
+export const LINHA_DA_AREA = 1.5;
+export function DegradeDaArea({ id, cor, topo = 0.34, base = 0.06, espelhado }: { id: string; cor: string; topo?: number; base?: number; espelhado?: boolean }) {
+  return (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor={cor} stopOpacity={topo} />
+      {espelhado && <stop offset="50%" stopColor={cor} stopOpacity={base} />}
+      <stop offset="100%" stopColor={cor} stopOpacity={espelhado ? topo : base} />
+    </linearGradient>
+  );
+}
+
+/** Id de SVG único por instância, sem os caracteres que o React põe no useId (quebram o `url(#…)`). */
+export function useIdDoSvg() {
+  return "g" + React.useId().replace(/[^a-zA-Z0-9_-]/g, "");
+}
+
+/**
+ * Curva suave monotônica em X (como a "monotone" do Recharts/d3): passa por todos os pontos e não ultrapassa os
+ * dados entre eles (sem picos falsos nem valores abaixo de zero). Os pontos podem vir da esquerda para a direita ou
+ * ao contrário. `continuar` emenda num caminho já começado.
+ */
+export function curvaMonotona(pts: [number, number][], continuar = false) {
+  if (!pts.length) return "";
+  const f = (x: number, y: number) => `${x.toFixed(1)} ${y.toFixed(1)}`;
+  let d = `${continuar ? "L" : "M"} ${f(pts[0]![0], pts[0]![1])}`;
+  const n = pts.length;
+  if (n < 3) return d + pts.slice(1).map(p => ` L ${f(p[0], p[1])}`).join("");
+  const h = pts.slice(0, -1).map((p, i) => pts[i + 1]![0] - p[0]);
+  const s = pts.slice(0, -1).map((p, i) => (h[i] ? (pts[i + 1]![1] - p[1]) / h[i]! : 0));
+  const t = new Array<number>(n).fill(0);
+  for (let i = 1; i < n - 1; i++) {
+    const h0 = h[i - 1]!, h1 = h[i]!, s0 = s[i - 1]!, s1 = s[i]!;
+    if (s0 * s1 <= 0 || !(h0 + h1)) { t[i] = 0; continue; }
+    const p = (s0 * h1 + s1 * h0) / (h0 + h1);
+    t[i] = (Math.sign(s0) + Math.sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p));
+  }
+  // Pontas: como no d3 (tangente pela inclinação do 1º e do último trecho), limitadas para não inverter o sentido.
+  const ponta = (sl: number, viz: number) => { const v = (3 * sl - viz) / 2; return sl === 0 || Math.sign(v) !== Math.sign(sl) ? 0 : Math.sign(v) * Math.min(Math.abs(v), 3 * Math.abs(sl)); };
+  t[0] = ponta(s[0]!, t[1]!);
+  t[n - 1] = ponta(s[n - 2]!, t[n - 2]!);
+  for (let i = 0; i < n - 1; i++) {
+    const [x0, y0] = pts[i]!, [x1, y1] = pts[i + 1]!, dx = h[i]! / 3;
+    d += ` C ${f(x0 + dx, y0 + t[i]! * dx)} ${f(x1 - dx, y1 - t[i + 1]! * dx)} ${f(x1, y1)}`;
+  }
+  return d;
+}
 
 /**
  * Escala sequencial (do menor para o maior), pelos tokens --chart-seq-* de cada DS.
@@ -580,12 +636,16 @@ export type GraficoDeLinhasProps = BaseDoGrafico & {
   zero?: boolean;
 };
 
-/** Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto. */
+/**
+ * Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto.
+ * Com `area`, segue o estilo das áreas (20/11/2026): curvas suaves monotônicas, linha de 1,5 px, degradê transparente
+ * sob a série em destaque e grade tracejada.
+ */
 export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = true, rotulo, formatar = fmtPadrao, className }: GraficoDeLinhasProps) {
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
   const [indice, setIndice] = React.useState<number | null>(null);
-  const idGrad = React.useId().replace(/:/g, "");
+  const idGrad = useIdDoSvg();
   const temDestaque = series.some(s => s.destaque);
   const outras = ["var(--chart-4)", "var(--chart-5)", "var(--chart-3)", "var(--chart-2)"];
   let k = 0;
@@ -599,7 +659,9 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
   const n = rotulosX.length;
   const x = (i: number) => m.l + (n <= 1 ? 0 : (i / (n - 1)) * w);
   const y = (v: number) => m.t + h - ((v - yMin) / (yMax - yMin || 1)) * h;
-  const caminho = (vs: number[]) => vs.map((v, i) => `${i ? "L" : "M"} ${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(" ");
+  const caminho = (vs: number[]) => area
+    ? curvaMonotona(vs.map((v, i) => [x(i), y(v)]))
+    : vs.map((v, i) => `${i ? "L" : "M"} ${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(" ");
   const passoX = Math.max(1, Math.ceil((n * 54) / Math.max(1, w)));
   const finais = afastar(series.map(s => y(s.valores[s.valores.length - 1] ?? 0)), 28, m.t + 6, m.t + h - 4);
   const resumo = `${rotulo}: ${series.map(s => `${s.rotulo} de ${formatar(s.valores[0] ?? 0)} em ${rotulosX[0]} para ${formatar(s.valores[s.valores.length - 1] ?? 0)} em ${rotulosX[n - 1]}`).join("; ")}.`;
@@ -615,14 +677,11 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
           <defs>
-            <linearGradient id={idGrad} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="var(--chart-1)" stopOpacity={0.18} />
-              <stop offset="100%" stopColor="var(--chart-1)" stopOpacity={0} />
-            </linearGradient>
+            <DegradeDaArea id={idGrad} cor="var(--chart-1)" topo={0.2} base={0} />
           </defs>
           {marcas.map(v => (
             <g key={v}>
-              <line x1={m.l} x2={m.l + w} y1={y(v)} y2={y(v)} stroke={COR_GRADE} strokeWidth={1} />
+              <line x1={m.l} x2={m.l + w} y1={y(v)} y2={y(v)} stroke={COR_GRADE} strokeWidth={1} strokeDasharray={area ? TRACO_DA_GRADE : undefined} />
               <text x={m.l - 8} y={y(v) + 4} textAnchor="end" className="fill-muted-foreground text-[11px] tabular-nums">{formatar(v)}</text>
             </g>
           ))}
@@ -635,7 +694,7 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
           ) : null)}
           {/* séries sem destaque primeiro, para o destaque ficar por cima */}
           {series.map((s, si) => ({ s, si })).sort((a, b) => Number(!!a.s.destaque) - Number(!!b.s.destaque)).map(({ s, si }) => (
-            <motion.path key={s.rotulo} d={caminho(s.valores)} fill="none" stroke={cores[si]} strokeWidth={s.destaque || !temDestaque ? 2 : 1.5} strokeLinejoin="round" strokeLinecap="round"
+            <motion.path key={s.rotulo} d={caminho(s.valores)} fill="none" stroke={cores[si]} strokeWidth={area ? LINHA_DA_AREA : s.destaque || !temDestaque ? 2 : 1.5} strokeLinejoin="round" strokeLinecap="round"
               initial={menos ? false : { pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 0.9, delay: menos ? 0 : si * 0.08, ease: [0.22, 1, 0.36, 1] }} />
           ))}
           {series.map((s, si) => {

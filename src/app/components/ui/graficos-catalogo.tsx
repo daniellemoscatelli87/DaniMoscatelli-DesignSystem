@@ -4,6 +4,7 @@ import { cn } from "./utils";
 import {
   CORES_GRAFICO, COR_NEUTRA, COR_GRADE, ESCALA_SEQUENCIAL, LegendaDoGrafico, LegendaSequencial, PontoDaCor,
   formatarPercentual, fmtPadrao, useLargura, marcasDoEixo, afastar, larguraTexto, soma, arco, faixa,
+  DegradeDaArea, LINHA_DA_AREA, TRACO_DA_GRADE, curvaMonotona, useIdDoSvg,
   type BaseDoGrafico, type Formatador, type ParteDaRosca,
 } from "./graficos-inteligencia";
 
@@ -15,6 +16,9 @@ import {
  *
  * Nenhum texto sobre a cor do gráfico (decisão da dona do produto, 19/11/2026, opção B): valores e rótulos ficam fora da
  * marca, sempre na mesma cor de texto. Linhas de referência (média, tendência) usam a cor do texto secundário, não uma cor nova.
+ *
+ * Áreas (área empilhada, streamgraph, violino, densidade e o preenchimento do radar) seguem o estilo aprovado em
+ * 20/11/2026: linha fina na cor da série e preenchimento em degradê transparente (DegradeDaArea), curvas monotônicas.
  */
 
 /* ── Cores e utilidades do catálogo ───────────────────────────────────────────────────────────────────── */
@@ -59,12 +63,12 @@ function Entrada({ children, atraso = 0 }: { children: React.ReactNode; atraso?:
 }
 
 /** Linhas de grade horizontais com os valores à esquerda. */
-function GradeY({ marcas, Y, x0, x1, formatar }: { marcas: number[]; Y: (v: number) => number; x0: number; x1: number; formatar: Formatador }) {
+function GradeY({ marcas, Y, x0, x1, formatar, tracejada }: { marcas: number[]; Y: (v: number) => number; x0: number; x1: number; formatar: Formatador; /** Grade tracejada (gráficos de área). */ tracejada?: boolean }) {
   return (
     <>
       {marcas.map(v => (
         <g key={v}>
-          <line x1={x0} x2={x1} y1={Y(v)} y2={Y(v)} stroke={COR_GRADE} />
+          <line x1={x0} x2={x1} y1={Y(v)} y2={Y(v)} stroke={COR_GRADE} strokeDasharray={tracejada ? TRACO_DA_GRADE : undefined} />
           <text x={x0 - 6} y={Y(v) + 4} textAnchor="end" className="fill-muted-foreground text-[11px] tabular-nums">{formatar(v)}</text>
         </g>
       ))}
@@ -85,20 +89,8 @@ function RotulosX({ rotulos, X, y, largura, centrado }: { rotulos: string[]; X: 
   );
 }
 
-/** Curva suave (Catmull-Rom) que passa por todos os pontos. `continuar` emenda num caminho já começado. */
-function curvaSuave(pts: [number, number][], continuar = false) {
-  if (!pts.length) return "";
-  const f = (p: [number, number]) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`;
-  let d = `${continuar ? "L" : "M"} ${f(pts[0]!)}`;
-  if (pts.length < 3) return d + pts.slice(1).map(p => ` L ${f(p)}`).join("");
-  for (let i = 0; i < pts.length - 1; i++) {
-    const p0 = pts[i - 1] ?? pts[i]!, p1 = pts[i]!, p2 = pts[i + 1]!, p3 = pts[i + 2] ?? p2;
-    const c1: [number, number] = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
-    const c2: [number, number] = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
-    d += ` C ${f(c1)} ${f(c2)} ${f(p2)}`;
-  }
-  return d;
-}
+/** Curvas suaves das áreas: monotônicas em X, sem ultrapassar os dados (ver curvaMonotona). */
+const curvaSuave = curvaMonotona;
 
 /** Fatia de pizza (centro, raio, ângulos em radianos a partir do topo, sentido horário). */
 function fatia(cx: number, cy: number, r: number, a0: number, a1: number) {
@@ -394,6 +386,23 @@ function DicasPorPeriodo({ rotulosX, series, X, topo, altura, formatar, total }:
   );
 }
 
+/** Camadas empilhadas no estilo das áreas: degradê transparente em cada camada e linha fina na cor da série no topo. */
+function CamadasEmDegrade({ camadas, cores, X, Y, chaves }: { camadas: { ini: number[]; fim: number[] }[]; cores: string[]; X: (i: number) => number; Y: (v: number) => number; chaves: string[] }) {
+  const id = useIdDoSvg();
+  const topos = camadas.map(c => curvaSuave(c.fim.map((v, i) => [X(i), Y(v)])));
+  return (
+    <>
+      <defs>{cores.map((cor, i) => <DegradeDaArea key={i} id={`${id}-${i}`} cor={cor} />)}</defs>
+      {camadas.map((c, i) => (
+        <path key={"a" + chaves[i]} d={`${topos[i]} ${curvaSuave(c.ini.map((v, j) => [X(j), Y(v)] as [number, number]).reverse(), true)} Z`} fill={`url(#${id}-${i})`} />
+      ))}
+      {camadas.map((_, i) => (
+        <path key={"l" + chaves[i]} d={topos[i]} fill="none" stroke={cores[i]} strokeWidth={LINHA_DA_AREA} strokeLinejoin="round" strokeLinecap="round" />
+      ))}
+    </>
+  );
+}
+
 /* ── Área empilhada ───────────────────────────────────────────────────────────────────────────────────── */
 
 export type AreaEmpilhadaProps = BaseDoGrafico & {
@@ -424,14 +433,10 @@ export function AreaEmpilhada({ series, rotulosX, altura = 240, rotulo, formatar
     <div ref={ref} className={cn("w-full", className)}>
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-          <GradeY marcas={marcas} Y={Y} x0={m.l} x1={m.l + w} formatar={formatar} />
+          <GradeY marcas={marcas} Y={Y} x0={m.l} x1={m.l + w} formatar={formatar} tracejada />
           <RotulosX rotulos={rotulosX} X={X} y={altura - 6} largura={w} />
           <Entrada>
-            {camadas.map((c, si) => {
-              const topo = c.fim.map((v, i) => `${i ? "L" : "M"} ${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(" ");
-              const base = [...c.ini].map((v, i) => [X(i), Y(v)] as const).reverse().map(([x, y]) => `L ${x.toFixed(1)} ${y.toFixed(1)}`).join(" ");
-              return <path key={series[si]!.rotulo} d={`${topo} ${base} Z`} fill={cores[si]} stroke="var(--card)" strokeWidth={1.5} strokeLinejoin="round" />;
-            })}
+            <CamadasEmDegrade camadas={camadas} cores={cores} X={X} Y={Y} chaves={series.map(s => s.rotulo)} />
           </Entrada>
           <RotulosDasCamadas series={series} cores={cores} formatar={formatar} x={m.l + w + 4}
             meios={camadas.map(c => (Y(c.ini[n - 1] ?? 0) + Y(c.fim[n - 1] ?? 0)) / 2)} topo={m.t} fundo={m.t + h} />
@@ -471,14 +476,10 @@ export function Streamgraph({ series, rotulosX, altura = 240, rotulo, formatar =
     <div ref={ref} className={cn("w-full", className)}>
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-          {rotulosX.map((_, i) => <line key={i} x1={X(i)} x2={X(i)} y1={m.t} y2={m.t + h} stroke={COR_GRADE} />)}
+          <line x1={m.l} x2={m.l + w} y1={m.t + h} y2={m.t + h} stroke={COR_GRADE} strokeDasharray={TRACO_DA_GRADE} />
           <RotulosX rotulos={rotulosX} X={X} y={altura - 6} largura={w} />
           <Entrada>
-            {camadas.map((c, si) => {
-              const topo = curvaSuave(c.fim.map((v, i) => [X(i), Y(v)]));
-              const base = curvaSuave(c.ini.map((v, i) => [X(i), Y(v)] as [number, number]).reverse(), true);
-              return <path key={series[si]!.rotulo} d={`${topo} ${base} Z`} fill={cores[si]} stroke="var(--card)" strokeWidth={1.5} strokeLinejoin="round" />;
-            })}
+            <CamadasEmDegrade camadas={camadas} cores={cores} X={X} Y={Y} chaves={series.map(s => s.rotulo)} />
           </Entrada>
           <RotulosDasCamadas series={series} cores={cores} formatar={formatar} x={m.l + w + 4}
             meios={camadas.map(c => (Y(c.ini[n - 1] ?? 0) + Y(c.fim[n - 1] ?? 0)) / 2)} topo={m.t} fundo={m.t + h} />
@@ -1181,6 +1182,7 @@ export type RadarProps = BaseDoGrafico & {
  */
 export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fmtPadrao, className }: RadarProps) {
   const menos = useReducedMotion();
+  const idGrad = useIdDoSvg();
   const [ref, largura] = useLargura<HTMLDivElement>();
   const n = eixos.length;
   const max = maximo ?? Math.max(1, ...series.flatMap(s => s.valores));
@@ -1205,6 +1207,7 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
       <div ref={ref} className="w-full">
         {largura > 0 && (
           <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
+            <defs><DegradeDaArea id={idGrad} cor="var(--chart-1)" /></defs>
             {Array.from({ length: niveis }, (_, j) => <polygon key={j} points={poligono(eixos.map(() => (max * (j + 1)) / niveis))} fill="none" stroke={COR_GRADE} />)}
             {eixos.map((e, i) => {
               const [x, y] = P(i, max);
@@ -1225,8 +1228,8 @@ export function Radar({ eixos, series, maximo, niveis = 4, rotulo, formatar = fm
               );
             })}
             {ordem.map(({ s, i }) => (
-              <motion.polygon key={s.rotulo} points={poligono(s.valores)} fill={cores[i]} fillOpacity={i === iDestaque ? 0.16 : 0}
-                stroke={cores[i]} strokeWidth={i === iDestaque ? 2 : 1.5} strokeDasharray={i === iDestaque ? undefined : "5 3"} strokeLinejoin="round"
+              <motion.polygon key={s.rotulo} points={poligono(s.valores)} fill={i === iDestaque ? `url(#${idGrad})` : "none"}
+                stroke={cores[i]} strokeWidth={LINHA_DA_AREA} strokeDasharray={i === iDestaque ? undefined : "5 3"} strokeLinejoin="round"
                 initial={menos ? false : { opacity: 0, scale: 0.6 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
                 style={{ transformOrigin: `${cx}px ${cy}px` }} transition={{ duration: 0.55, delay: menos ? 0 : 0.1 * i, ease: [0.22, 1, 0.36, 1] }} />
             ))}
@@ -1623,6 +1626,7 @@ export function BoxPlot({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
  */
 export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, className }: DistribuicaoPorGrupoProps) {
   const [ref, largura] = useLargura<HTMLDivElement>();
+  const idGrad = useIdDoSvg();
   const r = { mediana: "mediana", nota: "Mais largo: mais valores naquela faixa. Barra escura: metade do meio. Ponto: mediana.", ...rotulos };
   const { marcas, X, x0, x1 } = useEscalaDeGrupos(grupos, largura);
   const H = 58, topo = 4, meia = 15;
@@ -1635,6 +1639,10 @@ export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
         {largura > 0 && (
           <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
             <EixoDeGrupos marcas={marcas} X={X} y0={topo} y1={topo + grupos.length * H} formatar={formatar} eixo={eixo} largura={x1 - x0} />
+            <defs>
+              <DegradeDaArea id={`${idGrad}-d`} cor="var(--chart-1)" espelhado />
+              <DegradeDaArea id={`${idGrad}-n`} cor="var(--chart-4)" espelhado />
+            </defs>
             <Entrada>
               {grupos.map((g, i) => {
                 const s = resumos[i]!;
@@ -1648,7 +1656,7 @@ export function Violino({ grupos, eixo, rotulo, formatar = fmtPadrao, rotulos, c
                   <g key={g.rotulo}>
                     <text x={x0} y={y + 12} style={HALO} className={cn("text-[12px]", g.destaque ? "fill-foreground font-bold" : "fill-foreground")}>{g.rotulo}</text>
                     <text x={x1} y={y + 12} textAnchor="end" style={HALO} className="fill-muted-foreground text-[11px] tabular-nums">{`${r.mediana} `}<tspan className="fill-foreground font-semibold">{formatar(s.mediana)}</tspan></text>
-                    <path d={`${curvaSuave(cima)} ${curvaSuave(baixo, true)} Z`} fill={g.destaque ? "var(--chart-1)" : "var(--chart-4)"} fillOpacity={g.destaque ? 0.35 : 0.6} stroke="var(--chart-1)" strokeWidth={1.25} />
+                    <path d={`${curvaSuave(cima)} ${curvaSuave(baixo, true)} Z`} fill={`url(#${idGrad}-${g.destaque ? "d" : "n"})`} stroke={g.destaque ? "var(--chart-1)" : "var(--chart-4)"} strokeWidth={LINHA_DA_AREA} strokeLinejoin="round" />
                     <line x1={X(s.q1)} x2={X(s.q3)} y1={yc} y2={yc} stroke="var(--foreground)" strokeWidth={4} strokeLinecap="round" />
                     <circle cx={X(s.mediana)} cy={yc} r={3.5} fill="var(--card)" stroke="var(--foreground)" strokeWidth={1.5} />
                   </g>
@@ -1681,6 +1689,7 @@ export function Densidade({ series, eixoX, altura = 220, rotulo, rotulos, classN
   const menos = useReducedMotion();
   const [ref, largura] = useLargura<HTMLDivElement>();
   const r = { nota: "Quanto mais alta a curva, mais valores naquela faixa.", ...rotulos };
+  const idGrad = useIdDoSvg();
   const fx = eixoX.formatar ?? fmtPadrao;
   const todos = series.flatMap(s => s.valores);
   const marcas = marcasDoEixo(Math.min(...todos), Math.max(...todos), 5);
@@ -1715,7 +1724,8 @@ export function Densidade({ series, eixoX, altura = 220, rotulo, rotulos, classN
       <div ref={ref} className="w-full">
         {largura > 0 && (
           <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-            <line x1={m.l} x2={m.l + w} y1={m.t + h} y2={m.t + h} stroke={COR_GRADE} />
+            <defs>{cores.map((cor, i) => <DegradeDaArea key={i} id={`${idGrad}-${i}`} cor={cor} topo={i === iDestaque ? 0.2 : 0.12} base={0} />)}</defs>
+            <line x1={m.l} x2={m.l + w} y1={m.t + h} y2={m.t + h} stroke={COR_GRADE} strokeDasharray={TRACO_DA_GRADE} />
             {marcas.map((v, i) => (i % passo === 0 || i === marcas.length - 1) && (i === marcas.length - 1 || marcas.length - 1 - i >= passo) ? (
               <text key={v} x={X(v)} y={m.t + h + 15} textAnchor={i === 0 ? "start" : i === marcas.length - 1 ? "end" : "middle"} className="fill-muted-foreground text-[11px] tabular-nums">{fx(v)}</text>
             ) : null)}
@@ -1725,10 +1735,11 @@ export function Densidade({ series, eixoX, altura = 220, rotulo, rotulos, classN
               const d = curvaSuave(pts);
               return (
                 <g key={s.rotulo}>
-                  <motion.path d={`${d} L ${X(hi)} ${m.t + h} L ${X(lo)} ${m.t + h} Z`} fill={cores[i]} fillOpacity={i === iDestaque ? 0.18 : 0.1}
+                  <motion.path d={`${d} L ${X(hi)} ${m.t + h} L ${X(lo)} ${m.t + h} Z`} fill={`url(#${idGrad}-${i})`}
                     initial={menos ? false : { opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.1 * i }} />
-                  <motion.path d={d} fill="none" stroke={cores[i]} strokeWidth={i === iDestaque ? 2.25 : 1.5} strokeDasharray={i === iDestaque ? undefined : "5 3"}
-                    initial={menos ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: menos ? 0 : 0.1 * i }} />
+                  <motion.path d={d} fill="none" stroke={cores[i]} strokeWidth={LINHA_DA_AREA} strokeDasharray={i === iDestaque ? undefined : "5 3"}
+                    // O traço da série sem destaque aparece por opacidade: a animação de pathLength apagaria o tracejado.
+                    initial={menos ? false : i === iDestaque ? { pathLength: 0 } : { opacity: 0 }} whileInView={i === iDestaque ? { pathLength: 1 } : { opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: menos ? 0 : 0.1 * i }} />
                 </g>
               );
             })}

@@ -793,6 +793,7 @@ export function GraficosShowcase() {
               "No single text color reaches 4.5:1 on every tone of the palette, and switching the text color from one part to another makes the chart harder to read. So bars, slices, cells, blocks and bubbles carry no numbers or names. Values and names in --foreground; --muted-foreground only for secondary text, such as axes. When a value has to be tied to a part (stacked bars, treemap, donut), it follows a dot in that part's color, in the same order as the parts. Product owner's decision, 19/11/2026.",
               "Nenhuma cor de texto passa de 4,5:1 sobre todos os tons da paleta, e trocar a cor do texto de uma parte para outra confunde a leitura. Por isso barras, fatias, células, blocos e bolhas não levam número nem nome. Valores e nomes em --foreground; --muted-foreground só no texto secundário, como os eixos. Quando o valor precisa ser ligado a uma parte (barras empilhadas, mosaico, rosca), ele vem depois de um ponto na cor dela, na mesma ordem das partes. Decisão da dona do produto, 19/11/2026.",
             )}</p>
+            <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">{t("Areas:", "Áreas:")}</span> {t("a thin line in the series color and a transparent gradient fill.", "linha fina na cor da série e preenchimento em degradê transparente.")}</p>
           </div>
         </Cartao>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
