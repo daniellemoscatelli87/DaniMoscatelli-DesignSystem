@@ -586,8 +586,8 @@ function SecaoCores() {
           ))}
         </ul>
         <p className="mt-4 text-[0.75rem] leading-relaxed text-muted-foreground">{t(
-          "--chart-neutral is tone 8: \"Other\" and information with no highlight, always last. --chart-grid: grid lines. The components pick tones with coresPorImportancia(n): ",
-          "--chart-neutral é o tom 8: \"Outros\" e informação sem destaque, sempre por último. --chart-grid: linhas de grade. Os componentes escolhem os tons com coresPorImportancia(n): ",
+          "--chart-neutral is tone 8: \"Other\" and information with no highlight, always last. \"Other\" takes the next gray, with no jumps: tone 6 when the parts stop before it (a pie with 2 parts and Other: 1, 4 and 6), tone 8 otherwise. --chart-grid: grid lines. The components pick tones with coresPorImportancia(n): ",
+          "--chart-neutral é o tom 8: \"Outros\" e informação sem destaque, sempre por último. \"Outros\" vem no cinza seguinte, sem saltos: no tom 6 quando as partes param antes dele (pizza com 2 partes e Outros: 1, 4 e 6), no tom 8 nos demais casos. --chart-grid: linhas de grade. Os componentes escolhem os tons com coresPorImportancia(n): ",
         )}{sequencia}</p>
       </Cartao>
 

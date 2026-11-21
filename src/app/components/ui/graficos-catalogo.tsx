@@ -11,7 +11,7 @@ import {
 /**
  * Catálogo completo de gráficos (19/11/2026): os modelos do catálogo de referência que não estão entre os recomendados.
  * Mesmas regras de graficos-inteligencia.tsx: componentes de apresentação (dados por props), só os tokens de gráfico
- * (--chart-1 a --chart-8, --chart-neutral, --chart-grid, --chart-seq-*) com as 5 regras da paleta de transição
+ * (--chart-1 a --chart-N, --chart-neutral, --chart-grid, --chart-seq-*; os tons de cada DS em graficos-paleta.ts) com as 5 regras da paleta
  * (um foco no tom 1, importância em ordem, contexto em cinza, no máximo 2 tons intensos, escalas do cinza ao vermelho),
  * valores e nomes escritos junto das marcas,
  * role="img" com aria-label que resume os dados, SVG desenhado na largura real do contêiner e nada anima com "menos movimento".
@@ -26,10 +26,10 @@ import {
 /* ── Cores e utilidades do catálogo ───────────────────────────────────────────────────────────────────── */
 
 /**
- * Tons de 4 séries lado a lado ou empilhadas, por importância (coresPorImportancia(4): 1, 4, 6 e 8).
+ * Tons de 4 séries lado a lado ou empilhadas, por importância (coresPorImportancia(4)).
  * Mantido por compatibilidade: para outro número de séries, use coresPorImportancia ou coresDasSeries.
  */
-export const CORES_SERIES = ["var(--chart-1)", "var(--chart-4)", "var(--chart-6)", "var(--chart-8)"] as const;
+export const CORES_SERIES: readonly string[] = coresPorImportancia(4).map(corDoTom);
 
 /** Cor das linhas de referência (média, tendência, ligações): a do texto secundário. */
 const COR_REFERENCIA = "var(--muted-foreground)";
@@ -1684,12 +1684,8 @@ export type MapaDePontosProps = MapaEsquematicoBase & {
   tipos?: string[];
 };
 
-/** Tipos por importância (coresPorImportancia(3): tons 1, 4 e 7), cada um com a sua forma. */
-const FORMAS_DOS_TIPOS = [
-  { cor: "var(--chart-1)", forma: "circulo" },
-  { cor: "var(--chart-4)", forma: "quadrado" },
-  { cor: "var(--chart-7)", forma: "losango" },
-] as const;
+/** Tipos por importância (coresPorImportancia(3)), cada um com a sua forma. */
+const FORMAS_DOS_TIPOS = (["circulo", "quadrado", "losango"] as const).map((forma, i) => ({ cor: corDoTom(coresPorImportancia(3)[i]!), forma }));
 
 function MarcaDoTipo({ tipo, x, y, r }: { tipo: number; x: number; y: number; r: number }) {
   const f = FORMAS_DOS_TIPOS[tipo % FORMAS_DOS_TIPOS.length]!;

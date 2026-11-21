@@ -2,20 +2,24 @@ import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronDown, Info, Lightbulb } from "lucide-react";
 import { cn } from "./utils";
+import { TOTAL_DE_TONS, TOM_NEUTRO, tonsPorImportancia, tomDosOutros, tonsDeContexto } from "./graficos-paleta";
+
+export { TOTAL_DE_TONS, TOM_NEUTRO, TONS_DA_ESCALA } from "./graficos-paleta";
 
 /**
  * Gráficos do design system: componentes de apresentação (dados entram por props; nada é buscado aqui).
  *
- * Paleta de transição (decisão da dona do produto, 20/11/2026): 8 tons, do vermelho/rosa da marca ao cinza
- * (--chart-1 a --chart-8), os mesmos no tema claro e no escuro. Faixas: 1–2 destaque, 3–5 apoio e transição,
- * 6–8 contexto. Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
+ * Paleta dos gráficos: tons do vermelho/rosa da marca ao cinza (--chart-1 a --chart-N), os mesmos no tema claro e no
+ * escuro. Quantos tons existem e como são escolhidos fica em graficos-paleta.ts, o único arquivo de gráficos que muda
+ * entre os design systems (Dani Moscatelli: 8 tons, faixas 1–2, 3–5 e 6–8; FindLook: 7 tons, faixas 1–2, 3–5 e 6–7).
+ * Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
  * Regras de uso:
  *   1. 1 gráfico = 1 foco: o tom 1 vai no dado principal ou no ponto de atenção.
  *   2. Importância em ordem: séries da mais importante (vermelho/rosa) à mais contextual (cinza) — coresPorImportancia.
- *   3. Contexto em cinza: referências, histórico, metas e comparações secundárias nos tons finais (6–8).
+ *   3. Contexto em cinza: referências, histórico, metas e comparações secundárias nos tons finais (do 6 em diante).
  *   4. Evite excesso de destaque: nunca mais de 2 tons intensos (1 e 2) no mesmo gráfico.
  *   5. Escalas contínuas (calor, degradês, intensidades) começam no cinza e vão ao vermelho conforme o valor sobe.
- * "Outros" e informação sem destaque usam --chart-neutral (= --chart-8), sempre por último. Grade em --chart-grid.
+ * "Outros" e informação sem destaque usam --chart-neutral (o último tom), sempre por último. Grade em --chart-grid.
  * Os componentes só usam var(--chart-N): cada DS define os próprios valores no theme.css.
  * A cor nunca carrega o significado sozinha: todo gráfico escreve rótulos e valores junto das marcas.
  *
@@ -30,50 +34,37 @@ import { cn } from "./utils";
 
 /* ── Cores ─────────────────────────────────────────────────────────────────────────────────────────────── */
 
-/** Os 8 tons da paleta de transição, do destaque (1) ao contexto (8). Para escolher tons, use coresPorImportancia. */
-export const CORES_GRAFICO = [
-  "var(--chart-1)", "var(--chart-2)", "var(--chart-3)", "var(--chart-4)",
-  "var(--chart-5)", "var(--chart-6)", "var(--chart-7)", "var(--chart-8)",
-] as const;
-/** Cinza de contexto (= tom 8): "Outros" e informação sem destaque, sempre por último. */
+/** Os tons da paleta, do destaque (1) ao contexto (o último). Para escolher tons, use coresPorImportancia. */
+export const CORES_GRAFICO: readonly string[] = Array.from({ length: TOTAL_DE_TONS }, (_, i) => `var(--chart-${i + 1})`);
+/** Cinza de contexto (o último tom): "Outros" e informação sem destaque, sempre por último. */
 export const COR_NEUTRA = "var(--chart-neutral)";
 
-/** Tom da paleta (1 a 8) como cor CSS. */
-export const corDoTom = (tom: number) => `var(--chart-${Math.min(8, Math.max(1, Math.round(tom)))})`;
-
-/** Tons por número de séries, da mais importante para a mais contextual (decisão da dona do produto, 20/11/2026). */
-const TONS_POR_QUANTIDADE: readonly (readonly number[])[] = [
-  [],
-  [1],
-  [1, 6],
-  [1, 4, 7],
-  [1, 4, 6, 8],
-  [1, 3, 5, 6, 8],
-  [1, 3, 4, 5, 6, 8],
-  [1, 3, 4, 5, 6, 7, 8],
-  [1, 2, 3, 4, 5, 6, 7, 8],
-];
+/** Tom da paleta (1 ao último) como cor CSS. */
+export const corDoTom = (tom: number) => `var(--chart-${Math.min(TOTAL_DE_TONS, Math.max(1, Math.round(tom)))})`;
 
 /**
- * Índices dos tons (1 a 8) para `n` séries, da mais importante para a mais contextual:
- * 1 → [1] · 2 → [1, 6] · 3 → [1, 4, 7] · 4 → [1, 4, 6, 8] · 5 → [1, 3, 5, 6, 8] · 6 → [1, 3, 4, 5, 6, 8]
- * · 7 → [1, 3, 4, 5, 6, 7, 8] · 8 → todos. Acima de 8, as séries a mais ficam no tom 8 (agrupe-as em "Outros").
+ * Índices dos tons para `n` séries, da mais importante para a mais contextual (tabela em graficos-paleta.ts).
+ * Acima do número de tons, as séries a mais ficam no último tom (agrupe-as em "Outros").
  */
 export function coresPorImportancia(n: number): number[] {
-  const q = Math.max(0, Math.floor(n));
-  if (q <= 8) return [...TONS_POR_QUANTIDADE[q]!];
-  return [...TONS_POR_QUANTIDADE[8]!, ...new Array<number>(q - 8).fill(8)];
+  return tonsPorImportancia(n);
 }
 
 /**
- * Cores de séries já ordenadas por importância. As marcadas `neutro` ("Outros") ficam em --chart-neutral; quando há
- * alguma, as outras usam os tons de n + 1 séries sem o último (o 8 fica para "Outros", sem repetir a cor).
+ * Cores de séries já ordenadas por importância. Quando há partes `neutro` ("Outros"), as outras usam os tons de
+ * n + 1 séries sem o último, e "Outros" fica no cinza seguinte, sem saltos (tomDosOutros em graficos-paleta.ts): no
+ * tom 6 quando as partes param antes dele e em --chart-neutral nos demais casos (decisão da dona do produto, 21/11/2026).
  */
 export function coresDasSeries(itens: readonly { neutro?: boolean }[]): string[] {
   const n = itens.filter(i => !i.neutro).length;
-  const tons = n < itens.length ? coresPorImportancia(Math.min(8, n + 1)).slice(0, Math.min(n, 7)) : coresPorImportancia(n);
+  const tons = n < itens.length
+    ? coresPorImportancia(Math.min(TOTAL_DE_TONS, n + 1)).slice(0, Math.min(n, TOTAL_DE_TONS - 1))
+    : coresPorImportancia(n);
+  const ultimo = tons[Math.min(n, tons.length) - 1] ?? 1;
+  const tomOutros = tomDosOutros(ultimo);
+  const corOutros = tomOutros === TOM_NEUTRO ? COR_NEUTRA : corDoTom(tomOutros);
   let k = 0;
-  return itens.map(i => (i.neutro ? COR_NEUTRA : corDoTom(tons[k++] ?? 8)));
+  return itens.map(i => (i.neutro ? corOutros : corDoTom(tons[k++] ?? TOTAL_DE_TONS)));
 }
 
 /**
@@ -86,9 +77,9 @@ export function coresDeFoco(destaques: readonly boolean[]): string[] {
   return destaques.map(d => (d ? corDoTom([1, 2, 3, 4, 5][Math.min(4, k++)]!) : corDoTom(6)));
 }
 
-/** Tons de contexto para `n` séries sem destaque que precisam ser diferenciadas: 6; 6 e 8; 6, 7 e 8 (e repete). */
+/** Tons de contexto para `n` séries sem destaque que precisam ser diferenciadas (tonsDeContexto em graficos-paleta.ts). */
 export function coresDeContexto(n: number): string[] {
-  const tons = n <= 1 ? [6] : n === 2 ? [6, 8] : [6, 7, 8];
+  const tons = tonsDeContexto(n);
   return Array.from({ length: Math.max(0, n) }, (_, i) => corDoTom(tons[i % tons.length]!));
 }
 /** Linhas de grade. */
@@ -151,7 +142,8 @@ export function curvaMonotona(pts: [number, number][], continuar = false) {
 }
 
 /**
- * Escala contínua (do menor para o maior), pelos tokens --chart-seq-* de cada DS: do cinza (tom 6) ao vermelho (tom 1).
+ * Escala contínua (do menor para o maior), pelos tokens --chart-seq-* de cada DS: do cinza (tom 6) ao vermelho (tom 1);
+ * os tons de cada passo estão em TONS_DA_ESCALA (graficos-paleta.ts).
  * As células de calor não levam texto: o valor fica na dica, na frase do destaque e em Ver dados.
  */
 export const ESCALA_SEQUENCIAL = [
@@ -700,11 +692,11 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
 export type SerieDeLinha = {
   rotulo: string;
   valores: number[];
-  /** A série em foco (tom 1); as outras vão para o contexto (tons 6 a 8). */
+  /** A série em foco (tom 1); as outras vão para o contexto (do tom 6 em diante). */
   destaque?: boolean;
   /** Referência, meta, histórico ou benchmark: cinza de contexto (--chart-neutral) e linha tracejada. */
   neutro?: boolean;
-  /** Tom fixo da paleta (1 a 8), quando o papel da série pede um tom específico (ex.: secundária no 5). */
+  /** Tom fixo da paleta (1 ao último), quando o papel da série pede um tom específico (ex.: secundária no 5). */
   tom?: number;
 };
 
@@ -720,7 +712,7 @@ export type GraficoDeLinhasProps = BaseDoGrafico & {
 
 /**
  * Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto.
- * Cores: com uma série em `destaque`, ela fica no tom 1 e as outras no contexto (6 a 8); sem destaque, por importância
+ * Cores: com uma série em `destaque`, ela fica no tom 1 e as outras no contexto (do tom 6 em diante); sem destaque, por importância
  * (a ordem das séries). Séries `neutro` (referência, meta, benchmark) ficam em cinza e tracejadas.
  * Com `area`, segue o estilo das áreas (20/11/2026): curvas suaves monotônicas, linha de 1,5 px, degradê transparente
  * sob a série em destaque e grade tracejada.
