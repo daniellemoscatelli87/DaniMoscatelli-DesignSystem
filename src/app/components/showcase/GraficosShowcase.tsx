@@ -7,7 +7,7 @@ import { Callout, DoDont } from "./shared/Guidance";
 import {
   DescobertaVisual, GraficoDeRosca, BarrasOrdenadas, MapaDeCalorPorRegiao, GraficoDeHalteres, GraficoDeLinhas,
   GraficoDeInclinacao, Mosaico, BarrasEmpilhadas100, GraficoDeBolhas, MapaDeCalorMatricial, GraficoDeRanking, Funil,
-  formatarNumero, TabelaDeDados, type RegiaoDoMapa, type DadosDaTabela,
+  formatarNumero, TabelaDeDados, TONS_DA_ESCALA, type RegiaoDoMapa, type DadosDaTabela,
 } from "../ui/graficos-inteligencia";
 import {
   BarrasAgrupadas, BarrasEmpilhadas, Pirulito, AreaEmpilhada, Streamgraph, LinhaDoTempo, CalendarioDeCalor, GraficoDeVelas,
@@ -509,21 +509,22 @@ function SecaoCatalogo() {
   );
 }
 
-const PALETA = ["#D44D4D", "#D36267", "#CD797E", "#C48E93", "#B69FA5", "#A4ACB7", "#939EAF", "#808DA1"];
+/** Chart palette (product owner's decision, 21/11/2026), in order of importance. */
+const PALETA = ["#D44D4D", "#F0828B", "#F2BDC2", "#D99BA1", "#BFA0A3", "#D4D7DC", "#EBEEF4"];
 
-/** "Chart colors" area: transition palette, ranges, the 5 rules and applied examples built with the real components. */
+/** "Chart colors" area: 7-tone palette, ranges, the 5 rules and applied examples built with the real components. */
 function SecaoCores() {
   const { t, lang } = useI18n();
   const loc = lang === "pt" ? "pt-BR" : "en-US";
   const FAIXAS_DA_PALETA = [
     { tons: [1, 2], nome: t("Highlight", "Destaque"), d: t("The main data point or the point of attention.", "O dado principal ou o ponto de atenção.") },
     { tons: [3, 4, 5], nome: t("Support and transition", "Apoio e transição"), d: t("Supporting series, in order of importance.", "Séries de apoio, na ordem de importância.") },
-    { tons: [6, 7, 8], nome: t("Context", "Contexto"), d: t("Benchmarks, history, targets, secondary comparisons and Other.", "Referências, histórico, metas, comparações secundárias e Outros.") },
+    { tons: [6, 7], nome: t("Context", "Contexto"), d: t("Benchmarks, history, targets, secondary comparisons and Other.", "Referências, histórico, metas, comparações secundárias e Outros.") },
   ];
   const REGRAS_DE_COR = [
     { t: t("1 chart = 1 focus", "1 gráfico = 1 foco"), d: t("Use the strong tone 1 for the main data point or the point of attention.", "Use o tom 1, forte, para o dado principal ou o ponto de atenção.") },
     { t: t("Importance in order", "Importância em ordem"), d: t("Order series from the most important (red/pink) to the most contextual (gray).", "Ordene as séries da mais importante (vermelho/rosa) para a mais contextual (cinza).") },
-    { t: t("Context in gray", "Contexto em cinza"), d: t("Benchmarks, history, targets and secondary comparisons use the final tones (6 to 8).", "Benchmarks, histórico, metas e comparações secundárias usam os tons finais (6 a 8).") },
+    { t: t("Context in gray", "Contexto em cinza"), d: t("Benchmarks, history, targets and secondary comparisons use the final tones (6 and 7).", "Benchmarks, histórico, metas e comparações secundárias usam os tons finais (6 e 7).") },
     { t: t("Avoid too much highlight", "Evite excesso de destaque"), d: t("Never use more than 2 intense tones (1 and 2) in the same chart.", "Nunca use mais de 2 tons intensos (1 e 2) no mesmo gráfico.") },
     { t: t("Continuous scales", "Escalas contínuas"), d: t("Heat maps, gradients and intensities start at gray and move to red/pink as the value increases.", "Mapas de calor, degradês e intensidades começam no cinza e vão ao vermelho/rosa conforme o valor aumenta.") },
   ];
@@ -531,8 +532,8 @@ function SecaoCores() {
   const EX_MESES = [t("Jan", "Jan"), t("Feb", "Fev"), t("Mar", "Mar"), t("Apr", "Abr"), t("May", "Mai"), t("Jun", "Jun")];
   const EX_LINHAS = [
     { rotulo: t("Main", "Principal"), valores: [42, 48, 55, 61, 70, 78], destaque: true },
-    { rotulo: t("Secondary", "Secundária"), valores: [36, 38, 41, 40, 44, 47], tom: 5 },
-    { rotulo: "Benchmark", valores: [50, 50, 50, 50, 50, 50], neutro: true },
+    { rotulo: t("Secondary", "Secundária"), valores: [36, 38, 41, 40, 44, 47], tom: 2 },
+    { rotulo: "Benchmark", valores: [50, 50, 50, 50, 50, 50], neutro: true, tom: 6 },
   ];
   const EX_ROSCA = [
     { rotulo: t("Main", "Principal"), valor: 140 },
@@ -545,25 +546,21 @@ function SecaoCores() {
     colunas: [t("Mon", "Seg"), t("Tue", "Ter"), t("Wed", "Qua"), t("Thu", "Qui"), t("Fri", "Sex")],
     valores: [[12, 18, 22, 30, 41], [20, 26, 35, 44, 58], [8, 14, 19, 27, 36]],
   };
-  const sequencia = t(
-    "1 series → 1 · 2 → 1, 6 · 3 → 1, 4, 7 · 4 → 1, 4, 6, 8 · 5 → 1, 3, 5, 6, 8 · 6 → 1, 3, 4, 5, 6, 8 · 7 → 1, 3, 4, 5, 6, 7, 8 · 8 → all.",
-    "1 série → 1 · 2 → 1, 6 · 3 → 1, 4, 7 · 4 → 1, 4, 6, 8 · 5 → 1, 3, 5, 6, 8 · 6 → 1, 3, 4, 5, 6, 8 · 7 → 1, 3, 4, 5, 6, 7, 8 · 8 → todos.",
-  );
   return (
     <section id="graficos-cores" className="scroll-mt-32">
       <SectionHeader
         title={t("Chart colors", "Cores dos gráficos")}
         description={t(
-          "Transition palette: 8 tones, from the brand red to gray, the same in the light and dark themes. Further left means more visual emphasis; further right, more neutral and contextual. Product owner's decision, 20/11/2026.",
-          "Paleta de transição: 8 tons, do vermelho da marca ao cinza, os mesmos no tema claro e no escuro. Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual. Decisão da dona do produto, 20/11/2026.",
+          "Chart palette: 7 tones in order of importance, from the brand red to gray, the same in the light and dark themes. Further left means more visual emphasis; further right, more neutral and contextual. Product owner's decision, 21/11/2026.",
+          "Paleta dos gráficos: 7 tons em ordem de importância, do vermelho da marca ao cinza, os mesmos no tema claro e no escuro. Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual. Decisão da dona do produto, 21/11/2026.",
         )}
       />
       <Cartao>
-        <Rotulo>{t("Transition palette", "Paleta de transição")}</Rotulo>
-        <ol className="m-0 grid list-none grid-cols-4 gap-x-2 gap-y-4 p-0 sm:grid-cols-8">
+        <Rotulo>{t("Palette in order of importance", "Paleta em ordem de importância")}</Rotulo>
+        <ol className="m-0 grid list-none grid-cols-4 gap-x-2 gap-y-4 p-0 sm:grid-cols-7">
           {PALETA.map((hex, i) => (
             <li key={hex} className="min-w-0">
-              <span aria-hidden className="block h-14 rounded-md" style={{ background: `var(--chart-${i + 1})` }} />
+              <span aria-hidden className="block h-14 rounded-md border border-border" style={{ background: `var(--chart-${i + 1})` }} />
               <p className="mt-1.5 text-[0.875rem] font-bold tabular-nums text-foreground">{i + 1}</p>
               <p className="font-mono text-[0.6875rem] text-muted-foreground [overflow-wrap:anywhere]">{hex}</p>
               <p className="font-mono text-[0.6875rem] text-muted-foreground [overflow-wrap:anywhere]">--chart-{i + 1}</p>
@@ -586,9 +583,9 @@ function SecaoCores() {
           ))}
         </ul>
         <p className="mt-4 text-[0.75rem] leading-relaxed text-muted-foreground">{t(
-          "--chart-neutral is tone 8: \"Other\" and information with no highlight, always last. \"Other\" takes the next gray, with no jumps: tone 6 when the parts stop before it (a pie with 2 parts and Other: 1, 4 and 6), tone 8 otherwise. --chart-grid: grid lines. The components pick tones with coresPorImportancia(n): ",
-          "--chart-neutral é o tom 8: \"Outros\" e informação sem destaque, sempre por último. \"Outros\" vem no cinza seguinte, sem saltos: no tom 6 quando as partes param antes dele (pizza com 2 partes e Outros: 1, 4 e 6), no tom 8 nos demais casos. --chart-grid: linhas de grade. Os componentes escolhem os tons com coresPorImportancia(n): ",
-        )}{sequencia}</p>
+          "Series take the tones in order, with coresPorImportancia(n): 1 series → 1 · 2 → 1, 2 · 3 → 1, 2, 3 · … · 7 → 1 to 7 (a 7-part treemap uses all 7 tones, in order). --chart-neutral is tone 7: \"Other\" and information with no highlight, always last. \"Other\" goes on tone 6 when the parts stop before it (a pie with 2 parts and Other: 1, 2 and 6) and on tone 7 otherwise. --chart-grid: grid lines. The two grays are light and close to each other, so every chart writes its labels and values, and color is never the only cue.",
+          "As séries usam os tons em sequência, com coresPorImportancia(n): 1 série → 1 · 2 → 1, 2 · 3 → 1, 2, 3 · … · 7 → 1 a 7 (um mosaico de 7 partes usa os 7 tons, na ordem). --chart-neutral é o tom 7: \"Outros\" e informação sem destaque, sempre por último. \"Outros\" fica no tom 6 quando as partes param antes dele (pizza com 2 partes e Outros: 1, 2 e 6) e no tom 7 nos demais casos. --chart-grid: linhas de grade. Os dois cinzas são claros e próximos entre si: por isso todo gráfico escreve rótulos e valores, e a cor nunca é a única pista.",
+        )}</p>
       </Cartao>
 
       <div className="mt-6">
@@ -611,22 +608,22 @@ function SecaoCores() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Cartao>
             <p className="text-[0.875rem] font-semibold text-foreground">{t("Bars by importance", "Barras por importância")}</p>
-            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("A to E in tones 1, 3, 5, 6 and 8 (example data).", "A a E nos tons 1, 3, 5, 6 e 8 (dados de exemplo).")}</p>
+            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("A to E in tones 1, 2, 3, 4 and 5, in order (example data).", "A a E nos tons 1, 2, 3, 4 e 5, em sequência (dados de exemplo).")}</p>
             <BarrasOrdenadas rotulo={t("Bars by importance (example data)", "Barras por importância (dados de exemplo)")} itens={EX_BARRAS} destaques={1} posicao={false} cores="importancia" formatar={v => formatarNumero(v, 0, loc)} />
           </Cartao>
           <Cartao>
             <p className="text-[0.875rem] font-semibold text-foreground">{t("Lines: main, secondary and benchmark", "Linhas: principal, secundária e benchmark")}</p>
-            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("Main in tone 1, secondary in 5, benchmark in 8 and dashed (example data).", "Principal no tom 1, secundária no 5, benchmark no 8 e tracejado (dados de exemplo).")}</p>
+            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("Main in tone 1, secondary in 2 and benchmark in the context gray (tone 6), dashed (example data).", "Principal no tom 1, secundária no 2 e benchmark no cinza de contexto (tom 6), tracejado (dados de exemplo).")}</p>
             <GraficoDeLinhas rotulo={t("Main, secondary and benchmark lines (example data)", "Linhas principal, secundária e benchmark (dados de exemplo)")} series={EX_LINHAS} rotulosX={EX_MESES} altura={200} zero={false} formatar={v => formatarNumero(v, 0, loc)} />
           </Cartao>
           <Cartao>
             <p className="text-[0.875rem] font-semibold text-foreground">{t("Donut with one focus", "Rosca com um foco")}</p>
-            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("Main in tone 1 (56%), support in 4, secondary in 6 and context in 8 (example data).", "Principal no tom 1 (56%), apoio no 4, secundária no 6 e contexto no 8 (dados de exemplo).")}</p>
+            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("Main in tone 1 (56%), support in 2, secondary in 3 and context in 6 (example data).", "Principal no tom 1 (56%), apoio no 2, secundária no 3 e contexto no 6 (dados de exemplo).")}</p>
             <GraficoDeRosca localidade={loc} rotulo={t("Donut with one focus (example data)", "Rosca com um foco (dados de exemplo)")} partes={EX_ROSCA} centro={{ valor: "250", rotulo: t("answers", "respostas") }} tamanho={180} />
           </Cartao>
           <Cartao>
             <p className="text-[0.875rem] font-semibold text-foreground">{t("Continuous scale", "Escala contínua")}</p>
-            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("From gray (low value) to red (high value) (example data).", "Do cinza (valor baixo) ao vermelho (valor alto) (dados de exemplo).")}</p>
+            <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("From gray (low value) to red (high value), in tones 6, 4, 2 and 1 (example data).", "Do cinza (valor baixo) ao vermelho (valor alto), nos tons 6, 4, 2 e 1 (dados de exemplo).")}</p>
             <MapaDeCalorMatricial rotulo={t("Continuous scale (example data)", "Escala contínua (dados de exemplo)")} {...EX_ESCALA} rotuloLinhas={t("Period", "Período")} formatar={v => formatarNumero(v, 0, loc)}
               rotulos={{ menos: t("Low", "Baixo"), mais: t("High", "Alto"), destaque: (l, c, v) => t(`Highlighted: ${l}, ${c} (${v})`, `Em destaque: ${l}, ${c} (${v})`) }} />
           </Cartao>
@@ -636,7 +633,7 @@ function SecaoCores() {
       <Cartao className="mt-6">
         <Rotulo>{t("Heat scale (lowest to highest)", "Escala de calor (do menor para o maior)")}</Rotulo>
         <ul className="m-0 grid list-none grid-cols-4 gap-1 p-0">
-          {([["--chart-seq-1", 6], ["--chart-seq-2", 5], ["--chart-seq-3", 3], ["--chart-seq-4", 1]] as const).map(([tk, tom]) => (
+          {TONS_DA_ESCALA.map((tom, i) => [`--chart-seq-${i + 1}`, tom] as const).map(([tk, tom]) => (
             <li key={tk} className="min-w-0">
               <span aria-hidden className="block h-10 rounded-sm" style={{ background: `var(${tk})` }} />
               <span className="mt-1 block font-mono text-[0.6875rem] text-foreground [overflow-wrap:anywhere]">{tk}</span>
@@ -645,8 +642,8 @@ function SecaoCores() {
           ))}
         </ul>
         <p className="mt-2 text-[0.75rem] leading-relaxed text-muted-foreground">{t(
-          "From gray (tone 6) to red (tone 1). Heat cells carry no numbers: the color shows the range, the highlighted cell gets an outline and is stated in a sentence below, and the numbers are in the tooltip and in See data. Neighbouring tones look alike to people with color blindness, so the highlight is also written.",
-          "Do cinza (tom 6) ao vermelho (tom 1). As células de calor não levam número: a cor mostra a faixa, a célula em destaque é contornada e dita numa frase abaixo, e os números ficam na dica e em Ver dados. Tons vizinhos ficam parecidos para quem tem daltonismo: por isso o destaque também vai escrito.",
+          "From gray (tone 6) to red (tone 1), through tones 4 and 2. Heat cells carry no numbers: the color shows the range, the highlighted cell gets an outline and is stated in a sentence below, and the numbers are in the tooltip and in See data. Neighbouring tones look alike to people with color blindness, so the highlight is also written.",
+          "Do cinza (tom 6) ao vermelho (tom 1), passando pelos tons 4 e 2. As células de calor não levam número: a cor mostra a faixa, a célula em destaque é contornada e dita numa frase abaixo, e os números ficam na dica e em Ver dados. Tons vizinhos ficam parecidos para quem tem daltonismo: por isso o destaque também vai escrito.",
         )}</p>
         <div className="mt-6 border-t border-border pt-5">
           <Rotulo>{t("Text in charts", "Texto nos gráficos")}</Rotulo>
@@ -687,7 +684,7 @@ function SecaoCores() {
           dos={[
             t("Tone 1 only on the main data point or the point of attention.", "Tom 1 só no dado principal ou no ponto de atenção."),
             t("Series in order of importance, from red to gray (coresPorImportancia).", "Séries em ordem de importância, do vermelho ao cinza (coresPorImportancia)."),
-            t("Benchmarks, history and targets in tones 6 to 8; Other in --chart-neutral, last.", "Referências, histórico e metas nos tons 6 a 8; Outros em --chart-neutral, por último."),
+            t("Benchmarks, history and targets in tones 6 and 7; Other in --chart-neutral, last.", "Referências, histórico e metas nos tons 6 e 7; Outros em --chart-neutral, por último."),
             t("Values and names outside the marks, always in the same text color, with a dot in the part's color when they need to be tied to it.", "Valores e nomes fora das marcas, sempre na mesma cor de texto, com um ponto na cor da parte quando for preciso ligá-los a ela."),
           ]}
           donts={[
@@ -1212,7 +1209,7 @@ export function GraficosShowcase() {
         <TabelaQueQuebra
           head={[t("Component", "Componente"), t("For", "Para quê"), t("Main props", "Props principais")]}
           rows={[
-            ["coresPorImportancia", t("Series tones by importance", "Tons das séries por importância"), t("n (number of series): returns tones 1 to 8, from most important to most contextual; with coresDasSeries, coresDeFoco and coresDeContexto", "n (número de séries): devolve os tons de 1 a 8, do mais importante ao mais contextual; com coresDasSeries, coresDeFoco e coresDeContexto")],
+            ["coresPorImportancia", t("Series tones by importance", "Tons das séries por importância"), t("n (number of series): returns tones 1 to 7 in order, from most important to most contextual; with coresDasSeries, coresDeFoco and coresDeContexto", "n (número de séries): devolve os tons de 1 a 7 em sequência, do mais importante ao mais contextual; com coresDasSeries, coresDeFoco e coresDeContexto")],
             ["DescobertaVisual", t("Card with the 4 steps and See data", "Card com os 4 passos e Ver dados"), "tema, conclusao, contexto, porQueImporta, acao, dados, selo, numerar, rotulos"],
             ["GraficoDeRosca", t("Share of up to 5 parts", "Participação de até 5 partes"), "partes (rotulo, valor, neutro), centro, formatarQuantidade, tamanho, localidade"],
             ["BarrasOrdenadas", t("Ranking of values", "Ranking de valores"), "itens, destaques, ordenar, posicao, cores (\"foco\" | \"importancia\")"],

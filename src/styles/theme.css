@@ -111,26 +111,29 @@
   --shadow-lg:  0 8px 24px rgba(13, 17, 25, 0.09), 0 24px 64px rgba(13, 17, 25, 0.07);
   --shadow-xl:  0 16px 48px rgba(13, 17, 25, 0.10), 0 40px 96px rgba(13, 17, 25, 0.08);
 
-  /* Paleta de transição dos gráficos (decisão da dona do produto, 20/11/2026): 8 tons do vermelho/rosa da marca ao cinza,
-     os mesmos no tema claro e no escuro (são tons médios). Faixas: 1–2 destaque · 3–5 apoio e transição · 6–8 contexto.
-     Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
-     Regras: 1 gráfico = 1 foco (tom 1) · importância em ordem · contexto em cinza (6–8) · no máximo 2 tons intensos (1 e 2)
-     · escalas contínuas do cinza ao vermelho. --chart-neutral (= tom 8): "Outros" e informação sem destaque. */
+  /* Paleta dos gráficos (decisão da dona do produto, 21/11/2026): 7 tons em ordem de importância, do vermelho da marca
+     ao cinza, os mesmos no tema claro e no escuro. Faixas: 1–2 destaque · 3–5 apoio e transição · 6–7 contexto.
+     As séries usam os tons em sequência (graficos-paleta.ts). Os dois cinzas são claros e próximos entre si: os gráficos
+     sempre escrevem rótulos e valores, e a cor nunca é a única pista.
+     Regras: 1 gráfico = 1 foco (tom 1) · importância em ordem · contexto em cinza (6–7) · no máximo 2 tons intensos (1 e 2)
+     · escalas contínuas do cinza ao vermelho. --chart-neutral (= tom 7): "Outros" e informação sem destaque. */
   --chart-1: #D44D4D;
-  --chart-2: #D36267;
-  --chart-3: #CD797E;
-  --chart-4: #C48E93;
-  --chart-5: #B69FA5;
-  --chart-6: #A4ACB7;
-  --chart-7: #939EAF;
-  --chart-8: #808DA1;
-  --chart-neutral: var(--chart-8);
+  --chart-2: #F0828B;
+  --chart-3: #F2BDC2;
+  --chart-4: #D99BA1;
+  --chart-5: #BFA0A3;
+  --chart-6: #D4D7DC;
+  --chart-7: #EBEEF4;
+  /* A paleta tem 7 tons. --chart-8 continua só por compatibilidade (o token já foi publicado) e aponta para o tom 7;
+     nenhum componente usa o tom 8. */
+  --chart-8: var(--chart-7);
+  --chart-neutral: var(--chart-7);
   --chart-grid:    var(--graphite-100);
-  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho. Os tokens -texto ficam por compatibilidade:
+  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho (tons 6, 4, 2 e 1). Os tokens -texto ficam por compatibilidade:
      os componentes não escrevem texto sobre a cor do gráfico. */
   --chart-seq-1: var(--chart-6); --chart-seq-1-texto: var(--foreground);
-  --chart-seq-2: var(--chart-5); --chart-seq-2-texto: var(--foreground);
-  --chart-seq-3: var(--chart-3); --chart-seq-3-texto: var(--foreground);
+  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--foreground);
+  --chart-seq-3: var(--chart-2); --chart-seq-3-texto: var(--foreground);
   --chart-seq-4: var(--chart-1); --chart-seq-4-texto: var(--foreground);
   --chart-1-texto: var(--foreground);
   --chart-2-texto: var(--foreground);
@@ -215,22 +218,24 @@
   --shadow-lg:  0 8px 32px rgba(0, 0, 0, 0.50), 0 32px 80px rgba(0, 0, 0, 0.35);
   --shadow-xl:  0 16px 64px rgba(0, 0, 0, 0.55), 0 48px 100px rgba(0, 0, 0, 0.40);
 
-  /* Gráficos no escuro: a mesma paleta de transição do tema claro (tons médios, decisão de 20/11/2026). */
+  /* Gráficos no escuro: a mesma paleta do tema claro (decisão de 21/11/2026). */
   --chart-1: #D44D4D;
-  --chart-2: #D36267;
-  --chart-3: #CD797E;
-  --chart-4: #C48E93;
-  --chart-5: #B69FA5;
-  --chart-6: #A4ACB7;
-  --chart-7: #939EAF;
-  --chart-8: #808DA1;
-  --chart-neutral: var(--chart-8);
+  --chart-2: #F0828B;
+  --chart-3: #F2BDC2;
+  --chart-4: #D99BA1;
+  --chart-5: #BFA0A3;
+  --chart-6: #D4D7DC;
+  --chart-7: #EBEEF4;
+  /* A paleta tem 7 tons. --chart-8 continua só por compatibilidade (o token já foi publicado) e aponta para o tom 7;
+     nenhum componente usa o tom 8. */
+  --chart-8: var(--chart-7);
+  --chart-neutral: var(--chart-7);
   --chart-grid:    var(--graphite-800);
-  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho. Os tokens -texto ficam por compatibilidade:
+  /* Escala contínua (mapa de calor, do menor para o maior): do cinza ao vermelho (tons 6, 4, 2 e 1). Os tokens -texto ficam por compatibilidade:
      os componentes não escrevem texto sobre a cor do gráfico. */
   --chart-seq-1: var(--chart-6); --chart-seq-1-texto: var(--background);
-  --chart-seq-2: var(--chart-5); --chart-seq-2-texto: var(--background);
-  --chart-seq-3: var(--chart-3); --chart-seq-3-texto: var(--background);
+  --chart-seq-2: var(--chart-4); --chart-seq-2-texto: var(--background);
+  --chart-seq-3: var(--chart-2); --chart-seq-3-texto: var(--background);
   --chart-seq-4: var(--chart-1); --chart-seq-4-texto: var(--background);
   --chart-1-texto: var(--background);
   --chart-2-texto: var(--background);

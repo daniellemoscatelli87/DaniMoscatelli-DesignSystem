@@ -11,7 +11,7 @@ export { TOTAL_DE_TONS, TOM_NEUTRO, TONS_DA_ESCALA } from "./graficos-paleta";
  *
  * Paleta dos gráficos: tons do vermelho/rosa da marca ao cinza (--chart-1 a --chart-N), os mesmos no tema claro e no
  * escuro. Quantos tons existem e como são escolhidos fica em graficos-paleta.ts, o único arquivo de gráficos que muda
- * entre os design systems (Dani Moscatelli: 8 tons, faixas 1–2, 3–5 e 6–8; FindLook: 7 tons, faixas 1–2, 3–5 e 6–7).
+ * entre os design systems (hoje os dois têm 7 tons, faixas 1–2, 3–5 e 6–7, com as séries em sequência; decisões de 21/11/2026).
  * Quanto mais à esquerda, mais ênfase visual; quanto mais à direita, mais neutro e contextual.
  * Regras de uso:
  *   1. 1 gráfico = 1 foco: o tom 1 vai no dado principal ou no ponto de atenção.
