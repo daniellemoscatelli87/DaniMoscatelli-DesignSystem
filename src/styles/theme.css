@@ -63,9 +63,10 @@
   --secondary-hover:      var(--graphite-100);
   --secondary-foreground: var(--graphite-900);
 
-  /* Desabilitado: cinza médio, com forma de botão e texto apagado mas legível (3,7:1); decisão da dona do produto, 20/11/2026 */
-  --disabled:            color-mix(in srgb, var(--graphite-200) 60%, var(--graphite-100));
-  --disabled-foreground: color-mix(in srgb, var(--graphite-500) 55%, var(--graphite-400));
+  /* Desabilitado: fundo grafite-100 (#D6DCE6, decisão da dona do produto, 23/11/2026), com forma de botão e texto
+     meio apagado mas legível: grafite-400 sobre ele dá 3,6:1 (antes: cinza médio e 3,7:1, decisão de 20/11/2026) */
+  --disabled:            var(--graphite-100);
+  --disabled-foreground: var(--graphite-400);
   --muted:            #E8EDF3;
   --muted-foreground: var(--graphite-400);
   --accent:           #E8EDF3;

@@ -543,7 +543,7 @@ export function TokensShowcase() {
                   { action: { en: "Name token", pt: "Nomear token" }, design: { en: "Name describes intent: 'Primary', not 'BrandRed'", pt: "O nome descreve a intenção: 'Primary', não 'BrandRed'" }, dev: { en: "Same name in kebab-case: --primary, not --brand-red", pt: "Mesmo nome em kebab-case: --primary, não --brand-red" } },
                   { action: { en: "Sync", pt: "Sincronizar" }, design: { en: "Ensures the Figma collection mirrors the same set as the CSS", pt: "Garante que a coleção do Figma espelhe o mesmo conjunto do CSS" }, dev: { en: "Ensures theme.css reflects all tokens in the Figma collection", pt: "Garante que o theme.css reflita todos os tokens da coleção do Figma" } },
                 ].map(row => (
-                  <tr key={row.action.en} className="hover:bg-muted/20 transition-colors">
+                  <tr key={row.action.en} className="hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors">
                     <td className="px-5 py-3 font-semibold text-foreground align-top">{bi(row.action)}</td>
                     <td className="px-4 py-3 text-muted-foreground align-top">{bi(row.design)}</td>
                     <td className="px-4 py-3 text-muted-foreground align-top">{bi(row.dev)}</td>
@@ -591,7 +591,7 @@ export function TokensShowcase() {
               </thead>
               <tbody className="divide-y divide-border/50">
                 {filtered.map((row, i) => (
-                  <tr key={i} className="hover:bg-muted/20 transition-colors group">
+                  <tr key={i} className="hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors group">
                     <td className="px-4 py-2.5">
                       <Pill color={catPill[row.category] ?? "muted"}>{bi(catLabel[row.category])}</Pill>
                     </td>

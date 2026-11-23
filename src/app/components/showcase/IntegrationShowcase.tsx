@@ -586,7 +586,7 @@ export function IntegrationShowcase() {
             return (
               <button key={item.id} onClick={() => toggle(item.id)}
                 className={`w-full rounded-md border px-4 py-3 flex items-center gap-3 text-left transition-colors ${
-                  done ? "border-success/30 bg-success/5" : "border-border bg-card hover:bg-muted/30"
+                  done ? "border-success/30 bg-success/5" : "border-border bg-card hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40"
                 }`}
                 style={{ boxShadow: "var(--shadow-xs)" }}>
                 {done

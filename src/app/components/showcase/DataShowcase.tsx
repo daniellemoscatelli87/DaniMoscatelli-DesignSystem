@@ -317,7 +317,7 @@ export function DataShowcase() {
                 {tableData.map((row, i) => (
                   <tr
                     key={row.id}
-                    className={`border-b border-border/50 hover:bg-muted/20 transition-colors ${i === tableData.length - 1 ? "border-b-0" : ""}`}
+                    className={`border-b border-border/50 hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors ${i === tableData.length - 1 ? "border-b-0" : ""}`}
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">

@@ -49,7 +49,7 @@ function SpecCard({
   className?: string;
 }) {
   return (
-    <Card className={`gap-5 border-border shadow-[var(--shadow-sm)] ${className}`}>
+    <Card className={`gap-5 border-border shadow-none ${className}`}>
       <CardHeader className="gap-1.5">
         <CardTitle className={`${display} text-[1rem] font-semibold tracking-[-0.01em]`}>{title}</CardTitle>
         <CardDescription className="text-[0.8125rem] leading-relaxed">{description}</CardDescription>
@@ -327,7 +327,7 @@ function CardPorFundo({ fundo }: { fundo: FundoSolido }) {
   const { t } = useI18n();
   const regras: Record<FundoSolido, { painel: string; card: string; sombra?: string; regra: string }> = {
     branco: { painel: "bg-white", card: "border border-[var(--graphite-100)]", regra: t("Border, no shadow", "Borda, sem sombra") },
-    cinza: { painel: "bg-[var(--graphite-50)]", card: "border border-[var(--graphite-100)]", sombra: "var(--shadow-sm)", regra: t("Border and soft shadow", "Borda e sombra suave") },
+    cinza: { painel: "bg-[var(--graphite-50)]", card: "border border-[var(--graphite-100)]", regra: t("Border, no shadow", "Borda, sem sombra") },
     escuro: { painel: "bg-[var(--graphite-950)]", card: "", sombra: "var(--shadow-lg)", regra: t("No border, strong shadow", "Sem borda, sombra forte") },
   };
   const r = regras[fundo];
@@ -367,7 +367,7 @@ export function CardShowcase() {
         { name: "--radius", description: t("Base radius. The card uses rounded-xl = --radius + 12 px = 24 px", "Raio base. O card usa rounded-xl = --radius + 12 px = 24 px"), light: "0.75rem (12 px)" },
         { name: t("Highlight radius", "Raio de destaque"), description: t("Media, highlight and partner cards", "Cards com mídia, destaque e convite"), light: "16 px" },
         { name: t("Glass radius", "Raio do vidro"), description: t("Glass cards", "Cards de vidro"), light: "20 px" },
-        { name: "--shadow-sm", description: t("Soft shadow: card on a light grey background", "Sombra suave: card sobre fundo cinza claro"), light: "0 1px 3px …", dark: "0 1px 3px …" },
+        { name: "--shadow-sm", description: t("Soft shadow for small raised controls (active tab, top bar). Never on a resting card", "Sombra suave para controles pequenos em destaque (aba ativa, barra do topo). Nunca em card parado"), light: "0 1px 3px …", dark: "0 1px 3px …" },
         { name: "--shadow-md", description: t("Hover elevation", "Elevação no hover"), light: "0 4px 12px …", dark: "0 4px 12px …" },
         { name: "--shadow-lg", description: t("Strong shadow: light card on a dark background", "Sombra forte: card claro sobre fundo escuro"), light: "0 8px 24px …", dark: "0 8px 32px …" },
       ],
@@ -442,7 +442,7 @@ export function CardShowcase() {
           head={[t("Background behind the card", "Fundo atrás do card"), t("Card", "Card"), t("Border", "Borda"), t("Shadow", "Sombra"), t("Radius", "Raio")]}
           rows={[
             [t("White", "Branco"), t("Solid", "Sólido"), "--border", t("None", "Nenhuma"), "12 px"],
-            [t("Light grey (like this page)", "Cinza claro (como esta página)"), t("Solid", "Sólido"), "--border", "--shadow-sm", "12 px"],
+            [t("Light grey (like this page)", "Cinza claro (como esta página)"), t("Solid", "Sólido"), "--border", t("None", "Nenhuma"), "12 px"],
             [t("Dark, in light mode", "Escuro, no modo claro"), t("Solid white", "Sólido branco"), t("None", "Nenhuma"), "--shadow-lg", "12 px"],
             [t("Photo, colour or gradient", "Foto, cor ou gradiente"), t("Glass", "Vidro"), t("Light glass edge", "Borda clara do vidro"), t("Glass shadow", "Sombra do vidro"), "20 px"],
           ]}
@@ -502,8 +502,8 @@ export function CardShowcase() {
         <SectionHeader
           title={t("By background", "Por fundo")}
           description={t(
-            "The same light-mode card on the three backgrounds where solid cards are used. On a dark background (not the dark theme), the white card drops the border and gains a strong shadow.",
-            "O mesmo card do modo claro nos três fundos em que o card sólido é usado. Sobre fundo escuro (não é o tema escuro), o card branco fica sem borda e ganha sombra forte.",
+            "The same light-mode card on the three backgrounds where solid cards are used. On the page background, white or light grey, the card is always border only: 1 px border, no shadow. On a dark background (not the dark theme), the white card drops the border and gains a strong shadow.",
+            "O mesmo card do modo claro nos três fundos em que o card sólido é usado. Sobre o fundo da página, branco ou cinza claro, o card é sempre só borda: borda de 1 px, sem sombra. Sobre fundo escuro (não é o tema escuro), o card branco fica sem borda e ganha sombra forte.",
           )}
         />
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -519,10 +519,9 @@ export function CardShowcase() {
           description={t("When each card gets a border or a shadow, and which radius to use. Card dimensions respond to the parent grid; prefer consistent internal spacing over fixed heights.", "Quando o card tem borda ou sombra e qual raio usar. As dimensões respondem ao grid pai; prefira espaçamento interno consistente a alturas fixas.")}
         />
         <div className="space-y-6">
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              { nome: t("Border only", "Só borda"), quando: t("Resting card on a white background.", "Card parado sobre fundo branco."), cls: "border border-border", sombra: undefined },
-              { nome: t("Border and soft shadow", "Borda e sombra suave"), quando: t("Resting card on a light grey background.", "Card parado sobre fundo cinza claro."), cls: "border border-border", sombra: "var(--shadow-sm)" },
+              { nome: t("Border only", "Só borda"), quando: t("Resting card on the page background, white or light grey: 1 px border, no shadow.", "Card parado sobre o fundo da página, branco ou cinza claro: borda de 1 px, sem sombra."), cls: "border border-border", sombra: undefined },
               { nome: t("Medium shadow", "Sombra média"), quando: t("Hover on a clickable card.", "Hover de card clicável."), cls: "border border-[var(--border-strong)]", sombra: "var(--shadow-md)" },
               { nome: t("Strong shadow, no border", "Sombra forte, sem borda"), quando: t("Light card on a dark background.", "Card claro sobre fundo escuro."), cls: "", sombra: "var(--shadow-lg)" },
             ].map(x => (
@@ -818,6 +817,7 @@ export function CardShowcase() {
               rows={[
                 [t("Resting", "Parado"), t("Rule of the background (see How to choose).", "Regra do fundo (veja Como escolher).")],
                 [t("Hover (clickable card)", "Hover (card clicável)"), t("Stronger border and medium shadow; may rise 2 px.", "Borda mais forte e sombra média; pode subir 2 px.")],
+                [t("Hover of a row or item inside a card", "Hover de linha ou item dentro do card"), t("Lightest grey background (--graphite-50, #EDF0F5), no shadow; the card itself does not change.", "Fundo no cinza mais claro (--graphite-50, #EDF0F5), sem sombra; o card em si não muda.")],
                 [t("Focus", "Foco"), t("Visible focus ring around the whole card.", "Anel de foco visível em volta do card inteiro.")],
                 [t("Selected", "Selecionado"), t("2 px primary border, check icon and aria-pressed.", "Borda primária de 2 px, ícone de check e aria-pressed.")],
                 [t("Loading", "Carregando"), t("Skeleton in the shape of the content and aria-busy.", "Skeleton no formato do conteúdo e aria-busy.")],
@@ -916,7 +916,7 @@ export function CardShowcase() {
           description={t("When a card contains another card, only the outer card defines elevation; the inner card uses a border or a tonal background.", "Quando um card contém outro, só o card externo define a elevação; o card interno usa borda ou fundo tonal.")}
         />
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
-          <Card className="gap-5 border-border p-6 shadow-[var(--shadow-sm)]">
+          <Card className="gap-5 border-border p-6 shadow-none">
             <div>
               <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Project overview", "Visão geral do projeto")}</CardTitle>
               <CardDescription className="mt-1">{t("The parent card owns the visual elevation.", "O card pai é responsável pela elevação visual.")}</CardDescription>
@@ -931,12 +931,12 @@ export function CardShowcase() {
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full w-3/4 rounded-full bg-primary" /></div>
             </Card>
-            <p className="text-[0.75rem] text-muted-foreground"><Mono>shadow-[var(--shadow-sm)]</Mono> {t("on the parent", "no card pai")} · <Mono>shadow-none</Mono> {t("on the child", "no card filho")}</p>
+            <p className="text-[0.75rem] text-muted-foreground"><Mono>border</Mono> {t("on the parent", "no card pai")} · <Mono>border bg-muted/40</Mono> {t("on the child", "no card filho")}</p>
           </Card>
           <DataTable
             head={[t("Layer", "Camada"), t("Surface treatment", "Tratamento da superfície")]}
             rows={[
-              [t("Parent card", "Card pai"), t("Border plus the elevation defined for its background.", "Borda mais a elevação definida pelo fundo.")],
+              [t("Parent card", "Card pai"), t("Border only on the page background; shadow only on a dark background.", "Só borda sobre o fundo da página; sombra só sobre fundo escuro.")],
               [t("Inner card", "Card interno"), t("Border or tonal background with shadow-none.", "Borda ou fundo tonal com shadow-none.")],
               [t("Inner interactive card", "Card interno interativo"), t("Border and focus ring communicate the state.", "Borda e anel de foco comunicam o estado.")],
             ]}
@@ -1104,7 +1104,7 @@ export function CardShowcase() {
               t("Use one primary action and move secondary actions to the footer or menu.", "Use uma ação principal e mova ações secundárias para o rodapé ou menu."),
             ]}
             donts={[
-              t("Put a resting shadow on a card that sits on a white background.", "Não coloque sombra em card parado sobre fundo branco."),
+              t("Put a resting shadow on a card that sits on the page background, white or light grey.", "Não coloque sombra em card parado sobre o fundo da página, branco ou cinza claro."),
               t("Give an inner card its own elevation or hover shadow: it creates a false layer.", "Não dê ao card interno elevação própria nem sombra no hover: isso cria uma camada falsa."),
               t("Make the whole surface clickable when it contains other interactive controls.", "Não torne toda a superfície clicável quando houver outros controles interativos."),
               t("Use the link style for save, submit, delete or other state-changing actions.", "Não use o estilo link para salvar, enviar, excluir ou outras ações que alteram estado."),
