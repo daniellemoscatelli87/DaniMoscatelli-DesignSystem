@@ -80,15 +80,18 @@
   --success:            #388459;   /* texto branco atinge 4,5:1 (decisão de 16/11/2026) */
   --success-foreground: #FFFFFF;
   --success-muted:      rgba(56, 132, 89, 0.1);
+  --success-text:       #327650;   /* verde escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,5:1 no branco (23/11/2026, aguarda aprovação) */
   --warning:            #C2410C;   /* laranja queimado: texto branco atinge 5,2:1 (decisão de 16/11/2026) */
   --warning-foreground: #FFFFFF;
   --warning-muted:      rgba(194, 65, 12, 0.1);
+  --warning-text:       #B73D0B;   /* laranja escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,7:1 no branco (23/11/2026, aguarda aprovação) */
   --error:              var(--crimson-400);
   --error-foreground:   #FFFFFF;
   --error-muted:        rgba(212, 77, 77, 0.1);
   --info:               #3D7CAA;   /* texto branco atinge 4,5:1 (decisão de 16/11/2026) */
   --info-foreground:    #FFFFFF;
   --info-muted:         rgba(61, 124, 170, 0.1);
+  --info-text:          #366E97;   /* azul escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,5:1 no branco (23/11/2026, aguarda aprovação) */
   --violet:             #ba69dc;
   --violet-foreground:  #FFFFFF;
   --violet-muted:       rgba(186, 105, 220, 0.1);
@@ -190,15 +193,18 @@
   --success:            #22C55E;
   --success-foreground: #FFFFFF;
   --success-muted:      rgba(34, 197, 94, 0.12);
+  --success-text:       var(--success);
   --warning:            #f5b320;
   --warning-foreground: #FFFFFF;
   --warning-muted:      rgba(245, 179, 32, 0.12);
+  --warning-text:       var(--warning);
   --error:              var(--crimson-400);
   --error-foreground:   #FFFFFF;
   --error-muted:        rgba(212, 77, 77, 0.15);
   --info:               #3B82F6;
   --info-foreground:    #FFFFFF;
   --info-muted:         rgba(59, 130, 246, 0.12);
+  --info-text:          var(--info);
   --violet:             #eb6cff;
   --violet-foreground:  #FFFFFF;
   --violet-muted:       rgba(235, 108, 255, 0.12);
@@ -332,6 +338,9 @@
   --color-chart-grid: var(--chart-grid);
   --color-success: var(--success);
   --color-warning: var(--warning);
+  --color-warning-text: var(--warning-text);
+  --color-success-text: var(--success-text);
+  --color-info-text: var(--info-text);
   --color-error: var(--error);
   --color-info: var(--info);
   --color-violet: var(--violet);

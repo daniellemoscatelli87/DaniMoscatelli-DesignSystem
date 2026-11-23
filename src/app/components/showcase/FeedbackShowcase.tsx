@@ -5,12 +5,13 @@ import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
 import { MapPin, Sparkles } from "lucide-react";
 import {
-  CheckCircle, AlertCircle, AlertTriangle, Info, X,
+  CheckCircle, CheckCircle2, AlertCircle, AlertTriangle, TriangleAlert, Info, X,
   Loader2, Clock, Check,
 } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { Alert as UiAlert, AlertTitle, AlertDescription } from "../ui/alert";
 import { SectionHeader } from "./shared/SectionHeader";
+import { AlertaComAcaoDoc } from "./AlertaComAcaoShowcase";
 import { VejaEm } from "./shared/VejaEm";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
@@ -47,7 +48,7 @@ function SubSection({ title, children }: { title: string; children: React.ReactN
 type AlertKind = "success" | "error" | "warning" | "info";
 const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: Bi; bg: string; border: string; iconColor: string; titleColor: string }> = {
   success: {
-    icon: CheckCircle, title: { en: "Changes saved", pt: "Alterações salvas" },
+    icon: CheckCircle2, title: { en: "Changes saved", pt: "Alterações salvas" },
     msg: { en: "Your configuration has been updated successfully.", pt: "Sua configuração foi atualizada com sucesso." },
     bg: "bg-[var(--success-muted,rgba(21,128,61,0.07))]",
     border: "border-success/20", iconColor: "text-success", titleColor: "text-foreground",
@@ -59,13 +60,13 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     border: "border-info/20", iconColor: "text-info", titleColor: "text-foreground",
   },
   warning: {
-    icon: AlertTriangle, title: { en: "Subscription expiring", pt: "Assinatura prestes a expirar" },
+    icon: AlertCircle, title: { en: "Subscription expiring", pt: "Assinatura prestes a expirar" },
     msg: { en: "Your plan renews in 3 days. Update billing to avoid interruptions.", pt: "Seu plano renova em 3 dias. Atualize o pagamento para evitar interrupções." },
     bg: "bg-[var(--warning-muted,rgba(180,83,9,0.07))]",
     border: "border-warning/20", iconColor: "text-warning", titleColor: "text-foreground",
   },
   error: {
-    icon: AlertCircle, title: { en: "Deployment failed", pt: "Falha no deploy" },
+    icon: TriangleAlert, title: { en: "Deployment failed", pt: "Falha no deploy" },
     msg: { en: "Build #1042 failed due to a type error in src/app/App.tsx.", pt: "O build #1042 falhou por um erro de tipo em src/app/App.tsx." },
     bg: "bg-[var(--error-muted,rgba(140,27,27,0.07))]",
     border: "border-error/20", iconColor: "text-error", titleColor: "text-foreground",
@@ -80,13 +81,13 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
   if (!visible) return null;
   // Componente real (ui/alert), o mesmo que o produto copia
   return (
-    <UiAlert variant={kind} className={dismissible ? "pr-11" : ""}>
+    <UiAlert variant={kind} className={dismissible ? "pr-[52px]" : ""}>
       <Icon aria-hidden />
       <AlertTitle>{bi(cfg.title)}</AlertTitle>
       <AlertDescription>{bi(cfg.msg)}</AlertDescription>
       {dismissible && (
-        <button aria-label={t("Dismiss", "Dispensar")} onClick={() => setVisible(false)} className="absolute right-3 top-3 rounded-sm p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-          <X className="h-4 w-4" />
+        <button aria-label={t("Dismiss", "Dispensar")} onClick={() => setVisible(false)} className="absolute right-3 top-3 flex size-8 items-center justify-center rounded-sm text-muted-foreground transition-colors duration-[var(--duration-fast)] hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_10%,transparent)] hover:text-foreground motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <X className="h-4 w-4" aria-hidden />
         </button>
       )}
     </UiAlert>
@@ -212,7 +213,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       {/* ── ALERTS ── */}
       {parte === "feedback" && (
       <section id="alerts">
-        <SectionHeader title={t("Alerts", "Alertas")} description={t("Status messages for feedback, warnings, and errors. Inline and dismissible variants.", "Mensagens de status para feedback, avisos e erros. Variantes inline e dispensáveis.")} />
+        <SectionHeader title={t("Alerts", "Alertas")} description={t("Status messages for feedback, warnings, and errors. All alerts follow the same pattern: icon with base, 15 px title, 14 px text and a background in the state colour. Without an action, use the plain Alert; when the reader needs to act, use the Alert with action.", "Mensagens de status para feedback, avisos e erros. Todos os alertas seguem o mesmo padrão: ícone com base, título de 15 px, texto de 14 px e fundo com a cor do estado. Sem ação, use o Alerta simples; quando a pessoa precisa agir, use o Alerta com ação.")} />
         <SubSection title={t("Alert Variants", "Variantes de alerta")}>
           <ShowcaseCard>
             <div className="space-y-3">
@@ -232,6 +233,10 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
             </div>
           </ShowcaseCard>
         </SubSection>
+
+        <div id="alerta-com-acao" className="scroll-mt-32">
+          <AlertaComAcaoDoc />
+        </div>
       </section>
       )}
 
@@ -665,15 +670,18 @@ const feedbackTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--success",              description: t("Positive / confirmed action", "Ação positiva / confirmada"),    light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--success-foreground",   description: t("Text on success", "Texto sobre sucesso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--success-muted",        description: t("Success tinted background", "Fundo com tom de sucesso"),      light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
+      { name: "--success-text",         description: t("Success text and icon on light backgrounds (alert button)", "Texto e ícone de sucesso sobre fundo claro (botão do alerta)"), light: "#327650", dark: "#22C55E", isColor: true },
       { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#C2410C", dark: "#f5b320", isColor: true },
       { name: "--warning-foreground",   description: t("Text on warning", "Texto sobre aviso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--warning-muted",        description: t("Warning tinted background", "Fundo com tom de aviso"),      light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
+      { name: "--warning-text",         description: t("Warning text and icon on light backgrounds (alert icon and button)", "Texto e ícone de aviso sobre fundo claro (ícone e botão dos alertas)"), light: "#B73D0B", dark: "#f5b320", isColor: true },
       { name: "--error",                description: t("Error / failure state", "Estado de erro / falha"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--error-foreground",     description: t("Text on error", "Texto sobre erro"),                 light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--error-muted",          description: t("Error tinted background", "Fundo com tom de erro"),        light: "rgba(212,77,77,0.10)",  dark: "rgba(212,77,77,0.15)",  isColor: true },
       { name: "--info",                 description: t("Informational notice", "Aviso informativo"),           light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--info-foreground",      description: t("Text on info", "Texto sobre info"),                  light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--info-muted",           description: t("Info tinted background", "Fundo com tom de info"),         light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },
+      { name: "--info-text",            description: t("Info text and icon on light backgrounds (alert button)", "Texto e ícone de info sobre fundo claro (botão do alerta)"), light: "#366E97", dark: "#3B82F6", isColor: true },
       { name: "--destructive",          description: t("Destructive / irreversible", "Destrutivo / irreversível"),     light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--destructive-foreground",description: t("Text on destructive", "Texto sobre destrutivo"),           light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
     ],

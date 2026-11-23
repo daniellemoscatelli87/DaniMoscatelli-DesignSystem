@@ -1,0 +1,192 @@
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva } from "class-variance-authority";
+import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from "lucide-react";
+
+import { cn } from "./utils";
+
+/**
+ * Alerta com ação (aprovado pela dona do produto em 23/11/2026)
+ *
+ * Aviso que pede uma ação de quem lê: ícone com base, título, descrição (com nota opcional) e, embaixo do texto,
+ * uma ação principal de contorno (BotaoDoAlerta) e, se precisar, uma secundária em forma de link (LinkDoAlerta).
+ * Regras:
+ *  - as ações ficam sempre embaixo do texto, nunca ao lado;
+ *  - uma só ação principal, de contorno (sem preenchimento);
+ *  - dentro do card só o título muda de tamanho (15 px); todo o resto tem 14 px;
+ *  - role="alert" para aviso e erro; role="status" para info e sucesso.
+ * Tudo vem dos tokens: cor do estado (--info, --success, --warning, --error), cor de texto do estado
+ * (--info-text, --success-text, --warning-text, --primary-text), --card, --foreground, --muted-foreground, --ring,
+ * --disabled e os tokens de movimento. O arquivo é o mesmo nos dois design systems; só os tokens mudam.
+ */
+
+type TomDoAlerta = "info" | "sucesso" | "aviso" | "erro";
+
+/* Cada tom define as variáveis que o alerta e os botões usam:
+   --alerta-cor (borda, fundo e contorno do botão), --alerta-texto (texto do botão), --alerta-icone (ícone),
+   --alerta-fundo (tinta do fundo sobre o card) e --alerta-base (tinta da base do ícone). */
+const variaveisDoTom = cva("", {
+  variants: {
+    tom: {
+      info: "[--alerta-cor:var(--info)] [--alerta-texto:var(--info-text)] [--alerta-icone:var(--info)] [--alerta-fundo:7%] [--alerta-base:18%]",
+      sucesso: "[--alerta-cor:var(--success)] [--alerta-texto:var(--success-text)] [--alerta-icone:var(--success)] [--alerta-fundo:7%] [--alerta-base:18%]",
+      aviso: "[--alerta-cor:var(--warning)] [--alerta-texto:var(--warning-text)] [--alerta-icone:var(--warning-text)] [--alerta-fundo:9%] [--alerta-base:30%]",
+      erro: "[--alerta-cor:var(--error)] [--alerta-texto:var(--primary-text)] [--alerta-icone:var(--primary-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
+    },
+  },
+  defaultVariants: { tom: "info" },
+});
+
+const ICONE_DO_TOM: Record<TomDoAlerta, React.ElementType> = {
+  info: Info,
+  sucesso: CheckCircle2,
+  aviso: AlertCircle,
+  erro: TriangleAlert,
+};
+
+const transicao =
+  "transition-[background-color,color,border-color,text-decoration-color,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out)] motion-reduce:transition-none";
+const foco =
+  "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const ContextoDoAlerta = React.createContext<TomDoAlerta | null>(null);
+
+type AlertaComAcaoProps = Omit<React.ComponentProps<"div">, "title"> & {
+  tom?: TomDoAlerta;
+  titulo: React.ReactNode;
+  /** Troca o ícone padrão do tom (ícone lucide de 20 px). */
+  icone?: React.ReactNode;
+  /** Ações embaixo do texto: um BotaoDoAlerta e, se precisar, um LinkDoAlerta. */
+  acoes?: React.ReactNode;
+  /** Mostra o botão Fechar no canto (32 px). */
+  onFechar?: () => void;
+  rotuloFechar?: string;
+};
+
+function AlertaComAcao({
+  tom = "info",
+  titulo,
+  icone,
+  acoes,
+  onFechar,
+  rotuloFechar = "Fechar",
+  className,
+  children,
+  ...props
+}: AlertaComAcaoProps) {
+  const Icone = ICONE_DO_TOM[tom];
+  return (
+    <ContextoDoAlerta.Provider value={tom}>
+      <div
+        data-slot="alerta-com-acao"
+        data-tom={tom}
+        role={tom === "aviso" || tom === "erro" ? "alert" : "status"}
+        className={cn(
+          variaveisDoTom({ tom }),
+          "[--alerta-tinta:color-mix(in_oklab,var(--alerta-cor)_var(--alerta-fundo),transparent)]",
+          "@container/alerta relative grid grid-cols-[2.75rem_minmax(0,1fr)] items-start gap-x-[18px] rounded-lg border border-[color:color-mix(in_oklab,var(--alerta-cor)_22%,transparent)] bg-card bg-[image:linear-gradient(var(--alerta-tinta),var(--alerta-tinta))] px-[22px] py-5 text-left",
+          onFechar && "pr-[52px]",
+          className,
+        )}
+        {...props}
+      >
+        <span
+          aria-hidden
+          data-slot="alerta-com-acao-icone"
+          className="col-start-1 row-start-1 flex size-11 shrink-0 items-center justify-center rounded-md bg-[color:color-mix(in_oklab,var(--alerta-cor)_var(--alerta-base),var(--card))] text-[color:var(--alerta-icone)] [&>svg]:size-5"
+        >
+          {icone ?? <Icone />}
+        </span>
+        <div className="col-start-2 row-start-1 min-w-0 pt-[3px]">
+          <div data-slot="alerta-com-acao-titulo" className="text-[0.9375rem] font-bold leading-[1.35] text-foreground">
+            {titulo}
+          </div>
+          {children != null && (
+            <div
+              data-slot="alerta-com-acao-descricao"
+              className="mt-1 text-sm leading-[1.6] text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground [&>p+p]:mt-1.5"
+            >
+              {children}
+            </div>
+          )}
+        </div>
+        {/* Ações embaixo do texto. Em alerta estreito (menos de 352 px de conteúdo, como no celular), a linha de ações usa
+            também a largura sob o ícone, para o botão não quebrar em duas linhas. */}
+        {acoes != null && (
+          <div
+            data-slot="alerta-com-acao-acoes"
+            className="col-start-2 row-start-2 mt-3.5 flex min-w-0 flex-wrap items-center gap-2 @max-[22rem]/alerta:col-span-2 @max-[22rem]/alerta:col-start-1"
+          >
+            {acoes}
+          </div>
+        )}
+        {onFechar && (
+          <button
+            type="button"
+            aria-label={rotuloFechar}
+            onClick={onFechar}
+            className={cn(
+              "absolute right-3 top-3 flex size-8 items-center justify-center rounded-sm text-muted-foreground hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_10%,transparent)] hover:text-foreground [&_svg]:size-4",
+              transicao,
+              foco,
+            )}
+          >
+            <X aria-hidden />
+          </button>
+        )}
+      </div>
+    </ContextoDoAlerta.Provider>
+  );
+}
+
+type BotaoDoAlertaProps = React.ComponentProps<"button"> & {
+  /** Por padrão usa o tom do AlertaComAcao em volta. */
+  tom?: TomDoAlerta;
+  asChild?: boolean;
+};
+
+/** Ação principal do alerta: só contorno, na cor do estado; texto e ícone na cor de texto do estado. */
+function BotaoDoAlerta({ tom, asChild = false, className, ...props }: BotaoDoAlertaProps) {
+  const tomDoContexto = React.useContext(ContextoDoAlerta);
+  const tomFinal = tom ?? tomDoContexto ?? "info";
+  const Comp = asChild ? Slot : "button";
+  return (
+    <Comp
+      data-slot="botao-do-alerta"
+      data-tom={tomFinal}
+      className={cn(
+        variaveisDoTom({ tom: tomFinal }),
+        "inline-flex min-h-9 max-w-full items-center justify-center gap-2 rounded-md border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3.5 py-1.5 text-left text-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
+        "hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_8%,transparent)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "disabled:cursor-not-allowed disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground aria-disabled:pointer-events-none aria-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground",
+        transicao,
+        foco,
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+type LinkDoAlertaProps = React.ComponentProps<"button"> & { asChild?: boolean };
+
+/** Ação secundária do alerta: botão com cara de link, sublinhado, em --foreground. */
+function LinkDoAlerta({ asChild = false, className, ...props }: LinkDoAlertaProps) {
+  const Comp = asChild ? Slot : "button";
+  return (
+    <Comp
+      data-slot="link-do-alerta"
+      className={cn(
+        "inline-flex min-h-9 max-w-full items-center gap-2 rounded-sm bg-transparent px-1.5 text-left text-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "disabled:cursor-not-allowed disabled:text-disabled-foreground disabled:no-underline aria-disabled:pointer-events-none aria-disabled:text-disabled-foreground aria-disabled:no-underline",
+        transicao,
+        foco,
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+export { AlertaComAcao, BotaoDoAlerta, LinkDoAlerta, variaveisDoTom as variaveisDoAlerta };
+export type { TomDoAlerta, AlertaComAcaoProps, BotaoDoAlertaProps, LinkDoAlertaProps };

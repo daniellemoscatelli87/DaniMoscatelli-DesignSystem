@@ -174,6 +174,7 @@ const ptLabels: Record<string, string> = {
   "Feedback": "Feedback",
   "Tabs": "Abas",
   "Alerts": "Alertas",
+  "Alert with action": "Alerta com ação",
   "Toasts": "Toasts",
   "Progress": "Progresso",
   "Skeleton": "Skeleton",
@@ -478,6 +479,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
         items: [
           { id: "tabs",              label: "Tabs",     sectionId: "feedback" },
           { id: "alerts",            label: "Alerts",   sectionId: "feedback" },
+          { id: "alerta-com-acao",   label: "Alert with action", sectionId: "feedback" },
           { id: "toasts",            label: "Toasts",   sectionId: "feedback" },
           { id: "progress",          label: "Progress", sectionId: "feedback" },
           { id: "skeleton",          label: "Skeleton", sectionId: "feedback" },
