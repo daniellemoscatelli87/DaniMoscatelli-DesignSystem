@@ -86,7 +86,7 @@ function InputField({
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{rightElement}</span>
         )}
       </div>
-      {error && <p className="text-[0.8125rem] text-error flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
+      {error && <p className="text-[0.8125rem] text-error-text flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
       {hint && !error && <p className="text-[0.8125rem] text-muted-foreground">{hint}</p>}
     </div>
   );

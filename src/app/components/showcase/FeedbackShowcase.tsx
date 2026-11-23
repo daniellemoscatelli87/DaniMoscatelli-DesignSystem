@@ -63,13 +63,13 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     icon: AlertCircle, title: { en: "Subscription expiring", pt: "Assinatura prestes a expirar" },
     msg: { en: "Your plan renews in 3 days. Update billing to avoid interruptions.", pt: "Seu plano renova em 3 dias. Atualize o pagamento para evitar interrupções." },
     bg: "bg-[var(--warning-muted,rgba(180,83,9,0.07))]",
-    border: "border-warning/20", iconColor: "text-warning", titleColor: "text-foreground",
+    border: "border-warning/20", iconColor: "text-warning-text", titleColor: "text-foreground",
   },
   error: {
     icon: TriangleAlert, title: { en: "Deployment failed", pt: "Falha no deploy" },
     msg: { en: "Build #1042 failed due to a type error in src/app/App.tsx.", pt: "O build #1042 falhou por um erro de tipo em src/app/App.tsx." },
     bg: "bg-[var(--error-muted,rgba(140,27,27,0.07))]",
-    border: "border-error/20", iconColor: "text-error", titleColor: "text-foreground",
+    border: "border-error/20", iconColor: "text-error-text", titleColor: "text-foreground",
   },
 };
 
@@ -97,8 +97,8 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
 /* ── Toast ── */
 const toastTypes = [
   { tipo: "success", label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
-  { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
-  { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
+  { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error-text", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
+  { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning-text",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
   { tipo: "loading", label: "Loading", icon: Loader2,     color: "text-info",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
 ];
 
@@ -128,8 +128,8 @@ const badgeVariants = [
   { label: { en: "Default", pt: "Padrão" },  cls: "bg-muted text-foreground border-border" },
   { label: { en: "Primary", pt: "Primário" },  cls: "bg-primary/10 text-primary-text border-primary/20" },
   { label: { en: "Success", pt: "Sucesso" },  cls: "bg-success/10 text-success border-success/20" },
-  { label: { en: "Warning", pt: "Aviso" },  cls: "bg-warning/10 text-warning border-warning/20" },
-  { label: { en: "Error", pt: "Erro" },    cls: "bg-error/10 text-error border-error/20" },
+  { label: { en: "Warning", pt: "Aviso" },  cls: "bg-warning/10 text-warning-text border-warning/20" },
+  { label: { en: "Error", pt: "Erro" },    cls: "bg-error/10 text-error-text border-error/20" },
   { label: { en: "Info", pt: "Info" },     cls: "bg-info/10 text-info border-info/20" },
 ];
 
@@ -154,7 +154,7 @@ const timelineItems = [
   { icon: Check,         color: "bg-success text-white",   title: { en: "Deployment completed", pt: "Deploy concluído" },    desc: { en: "Production build deployed to edge network.", pt: "Build de produção publicado na rede de borda." },    time: { en: "Just now", pt: "Agora mesmo" } },
   { icon: Loader2,       color: "bg-info text-white",      title: { en: "Running tests", pt: "Executando testes" },           desc: { en: "96 of 112 test suites passing.", pt: "96 de 112 suítes de teste passando." },                time: { en: "2 min ago", pt: "há 2 min" } },
   { icon: Clock,         color: "bg-muted text-muted-foreground", title: { en: "Build queued", pt: "Build na fila" },  desc: { en: "Waiting for available runner.", pt: "Aguardando um runner disponível." },                  time: { en: "5 min ago", pt: "há 5 min" } },
-  { icon: AlertCircle,   color: "bg-warning text-white",   title: { en: "Warning: API latency", pt: "Aviso: latência da API" },    desc: { en: "P95 latency exceeded 800ms threshold.", pt: "A latência P95 excedeu o limite de 800ms." },         time: { en: "12 min ago", pt: "há 12 min" } },
+  { icon: AlertCircle,   color: "bg-warning text-warning-foreground",   title: { en: "Warning: API latency", pt: "Aviso: latência da API" },    desc: { en: "P95 latency exceeded 800ms threshold.", pt: "A latência P95 excedeu o limite de 800ms." },         time: { en: "12 min ago", pt: "há 12 min" } },
   { icon: CheckCircle,   color: "bg-success text-white",   title: { en: "PR #284 merged", pt: "PR #284 mesclado" },          desc: { en: "Feature: enhanced search indexing.", pt: "Funcionalidade: indexação de busca aprimorada." },            time: { en: "1 hr ago", pt: "há 1 h" } },
 ];
 
@@ -671,13 +671,14 @@ const feedbackTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--success-foreground",   description: t("Text on success", "Texto sobre sucesso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--success-muted",        description: t("Success tinted background", "Fundo com tom de sucesso"),      light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
       { name: "--success-text",         description: t("Success text and icon on light backgrounds (alert button)", "Texto e ícone de sucesso sobre fundo claro (botão do alerta)"), light: "#327650", dark: "#22C55E", isColor: true },
-      { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#C2410C", dark: "#f5b320", isColor: true },
-      { name: "--warning-foreground",   description: t("Text on warning", "Texto sobre aviso"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--warning-muted",        description: t("Warning tinted background", "Fundo com tom de aviso"),      light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
-      { name: "--warning-text",         description: t("Warning text and icon on light backgrounds (alert icon and button)", "Texto e ícone de aviso sobre fundo claro (ícone e botão dos alertas)"), light: "#B73D0B", dark: "#f5b320", isColor: true },
-      { name: "--error",                description: t("Error / failure state", "Estado de erro / falha"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--error-foreground",     description: t("Text on error", "Texto sobre erro"),                 light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--error-muted",          description: t("Error tinted background", "Fundo com tom de erro"),        light: "rgba(212,77,77,0.10)",  dark: "rgba(212,77,77,0.15)",  isColor: true },
+      { name: "--warning",              description: t("Caution / pending action", "Atenção / ação pendente"),       light: "#F0A020", dark: "#F5B040", isColor: true },
+      { name: "--warning-foreground",   description: t("Text on warning (graphite, never white)", "Texto sobre aviso (grafite, nunca branco)"),               light: "#131A27", dark: "#131A27", isColor: true },
+      { name: "--warning-muted",        description: t("Warning tinted background", "Fundo com tom de aviso"),      light: "rgba(240,160,32,0.14)", dark: "rgba(245,176,64,0.14)", isColor: true },
+      { name: "--warning-text",         description: t("Warning text and icon on light backgrounds (alert icon and button)", "Texto e ícone de aviso sobre fundo claro (ícone e botão dos alertas)"), light: "#935E0A", dark: "#F5B040", isColor: true },
+      { name: "--error",                description: t("Error / failure state", "Estado de erro / falha"),          light: "#D9416E", dark: "#E5688F", isColor: true },
+      { name: "--error-foreground",     description: t("Text on error", "Texto sobre erro"),                 light: "#FFFFFF", dark: "#131A27", isColor: true },
+      { name: "--error-muted",          description: t("Error tinted background", "Fundo com tom de erro"),        light: "rgba(217,65,110,0.10)",  dark: "rgba(229,104,143,0.15)",  isColor: true },
+      { name: "--error-text",           description: t("Error text and icon on light backgrounds (alert icon and button)", "Texto e ícone de erro sobre fundo claro (ícone e botão dos alertas)"), light: "#C52756", dark: "#E5688F", isColor: true },
       { name: "--info",                 description: t("Informational notice", "Aviso informativo"),           light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--info-foreground",      description: t("Text on info", "Texto sobre info"),                  light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
       { name: "--info-muted",           description: t("Info tinted background", "Fundo com tom de info"),         light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },
@@ -705,8 +706,8 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--primary-muted",description: t("Primary badge tinted", "Badge primário com tom"), light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
       { name: "--success",      description: t("Success badge", "Badge de sucesso"),        light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--success-muted",description: t("Success badge tinted", "Badge de sucesso com tom"), light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
-      { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#C2410C", dark: "#f5b320", isColor: true },
-      { name: "--warning-muted",description: t("Warning badge tinted", "Badge de aviso com tom"), light: "rgba(229,169,78,0.10)", dark: "rgba(245,179,32,0.12)", isColor: true },
+      { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#F0A020", dark: "#F5B040", isColor: true },
+      { name: "--warning-muted",description: t("Warning badge tinted", "Badge de aviso com tom"), light: "rgba(240,160,32,0.14)", dark: "rgba(245,176,64,0.14)", isColor: true },
       { name: "--info",         description: t("Info badge", "Badge de info"),           light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--info-muted",   description: t("Info badge tinted", "Badge de info com tom"),    light: "rgba(68,138,188,0.10)", dark: "rgba(59,130,246,0.12)", isColor: true },
       { name: "--violet",       description: t("Violet accent badge", "Badge de destaque violeta"),  light: "#ba69dc", dark: "#eb6cff", isColor: true },

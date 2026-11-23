@@ -30,8 +30,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
       position="bottom-right"
       icons={{
         success: <CheckCircle2 className="h-[18px] w-[18px] text-success" aria-hidden />,
-        error: <AlertCircle className="h-[18px] w-[18px] text-error" aria-hidden />,
-        warning: <AlertTriangle className="h-[18px] w-[18px] text-warning" aria-hidden />,
+        error: <AlertCircle className="h-[18px] w-[18px] text-error-text" aria-hidden />,
+        warning: <AlertTriangle className="h-[18px] w-[18px] text-warning-text" aria-hidden />,
         info: <Info className="h-[18px] w-[18px] text-info" aria-hidden />,
         loading: <Loader2 className="h-[18px] w-[18px] animate-spin text-info" aria-hidden />,
       }}

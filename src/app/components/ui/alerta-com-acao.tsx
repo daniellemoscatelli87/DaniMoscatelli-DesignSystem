@@ -16,7 +16,7 @@ import { cn } from "./utils";
  *  - dentro do card só o título muda de tamanho (15 px); todo o resto tem 14 px;
  *  - role="alert" para aviso e erro; role="status" para info e sucesso.
  * Tudo vem dos tokens: cor do estado (--info, --success, --warning, --error), cor de texto do estado
- * (--info-text, --success-text, --warning-text, --primary-text), --card, --foreground, --muted-foreground, --ring,
+ * (--info-text, --success-text, --warning-text, --error-text), --card, --foreground, --muted-foreground, --ring,
  * --disabled e os tokens de movimento. O arquivo é o mesmo nos dois design systems; só os tokens mudam.
  */
 
@@ -31,7 +31,7 @@ const variaveisDoTom = cva("", {
       info: "[--alerta-cor:var(--info)] [--alerta-texto:var(--info-text)] [--alerta-icone:var(--info)] [--alerta-fundo:7%] [--alerta-base:18%]",
       sucesso: "[--alerta-cor:var(--success)] [--alerta-texto:var(--success-text)] [--alerta-icone:var(--success)] [--alerta-fundo:7%] [--alerta-base:18%]",
       aviso: "[--alerta-cor:var(--warning)] [--alerta-texto:var(--warning-text)] [--alerta-icone:var(--warning-text)] [--alerta-fundo:9%] [--alerta-base:30%]",
-      erro: "[--alerta-cor:var(--error)] [--alerta-texto:var(--primary-text)] [--alerta-icone:var(--primary-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
+      erro: "[--alerta-cor:var(--error)] [--alerta-texto:var(--error-text)] [--alerta-icone:var(--error-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
     },
   },
   defaultVariants: { tom: "info" },

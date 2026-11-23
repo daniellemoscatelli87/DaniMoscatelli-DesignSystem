@@ -578,7 +578,7 @@ const statusLabel: Record<string, L> = {
 const statusColor: Record<string, string> = {
   Active:   "bg-success/10 text-success border-success/20",
   Inactive: "bg-muted text-muted-foreground border-border",
-  Pending:  "bg-warning/10 text-warning border-warning/20",
+  Pending:  "bg-warning/10 text-warning-text border-warning/20",
 };
 
 function TeamTemplate() {
@@ -714,7 +714,7 @@ const notifColor: Record<string, string> = {
   success: "text-success bg-success/10",
   info:    "text-info bg-info/10",
   error:   "text-primary-text bg-primary/10",
-  warning: "text-warning bg-warning/10",
+  warning: "text-warning-text bg-warning/10",
 };
 
 function InboxTemplate() {
@@ -971,7 +971,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                 {/* "Para quem": no máximo 4 linhas, sem reticências; altura de 4 linhas em todos os cards (só cresce, em vez de vazar, quando o card fica estreito demais). No escuro, caixa neutra e só a lâmpada em amarelo */}
                 {forWhom && (
                 <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-md border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
-                  <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+                  <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning-text" />
                   <p className="min-h-[5.5em] text-[0.8125rem] leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
@@ -1074,7 +1074,7 @@ const contactChannels = [
     label: { en: "Address", pt: "Endereço" },
     value: { en: "São Paulo, SP — Brazil", pt: "São Paulo, SP — Brasil" } as string | L,
     desc: { en: "Av. Paulista, 1000", pt: "Av. Paulista, 1000" },
-    color: "bg-warning/10 text-warning",
+    color: "bg-warning/10 text-warning-text",
   },
 ];
 
@@ -1651,7 +1651,7 @@ function LandingTemplate() {
                 {[
                   { name: "Fintech BR",  plan: "Enterprise", mrr: "$4,200", status: t("Active", "Ativo"),   sc: "text-success" },
                   { name: "ScaleUp SP",  plan: "Pro",        mrr: "$490",   status: t("Active", "Ativo"),   sc: "text-success" },
-                  { name: "StartupMVP",  plan: "Starter",    mrr: "—",      status: t("Trial", "Em teste"),   sc: "text-warning" },
+                  { name: "StartupMVP",  plan: "Starter",    mrr: "—",      status: t("Trial", "Em teste"),   sc: "text-warning-text" },
                 ].map(r => (
                   <div key={r.name} className="grid grid-cols-4 gap-0 px-3 py-2 border-b border-border last:border-0 items-center">
                     <div className="text-[0.625rem] font-medium text-foreground">{r.name}</div>

@@ -180,7 +180,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                   <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
                 </div>
               </div>
-              {error && <p role="alert" className="text-[0.75rem] text-error">{error}</p>}
+              {error && <p role="alert" className="text-[0.75rem] text-error-text">{error}</p>}
             </form>
           )}
         </SidePanelBody>

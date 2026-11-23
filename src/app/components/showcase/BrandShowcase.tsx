@@ -176,7 +176,7 @@ function RuleCard({
           ) : (
             <XCircle className="h-4 w-4 text-error shrink-0" />
           )}
-          <span className={`text-[0.8125rem] font-medium ${type === "do" ? "text-success" : "text-error"}`}>
+          <span className={`text-[0.8125rem] font-medium ${type === "do" ? "text-success" : "text-error-text"}`}>
             {type === "do" ? t("Correct", "Correto") : t("Incorrect", "Incorreto")}
           </span>
         </div>

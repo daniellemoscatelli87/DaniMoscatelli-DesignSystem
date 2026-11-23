@@ -51,7 +51,9 @@ const lightPairs: Pair[] = [
   { name: "success / card", usage: { en: "Status color alone", pt: "Cor de status isolada" }, fg: "#388459", bg: "#FFFFFF" },
   { name: "success-text / alerta", usage: { en: "Success button text on the alert", pt: "Texto do botão no alerta de sucesso" }, fg: "#327650", bg: "#F1F6F3" },
   { name: "info-text / alerta", usage: { en: "Info button text on the alert", pt: "Texto do botão no alerta de info" }, fg: "#366E97", bg: "#F1F6F9" },
-  { name: "warning-text / alerta", usage: { en: "Warning icon and button text on the alert", pt: "Ícone e texto do botão no alerta de aviso" }, fg: "#B73D0B", bg: "#FAEEE9" },
+  { name: "warning-text / alerta", usage: { en: "Warning icon and button text on the alert", pt: "Ícone e texto do botão no alerta de aviso" }, fg: "#935E0A", bg: "#FEF6EB" },
+  { name: "error-text / alerta", usage: { en: "Error icon and button text on the alert", pt: "Ícone e texto do botão no alerta de erro" }, fg: "#C52756", bg: "#FCF2F5" },
+  { name: "warning-foreground / warning", usage: { en: "Text on the warning amber (never white)", pt: "Texto sobre o âmbar de aviso (nunca branco)" }, fg: "#131A27", bg: "#F0A020" },
 ];
 const darkPairs: Pair[] = [
   { name: "foreground / background", usage: { en: "Body text on page", pt: "Texto do corpo na página" }, fg: "#E4E9F0", bg: "#0D1119" },

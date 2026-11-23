@@ -261,7 +261,7 @@ export function UploadDropzone({
         {capture && <input ref={captureRef} type="file" className="sr-only" tabIndex={-1} accept="image/*" capture={capture} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />}
       </div>
       {error && (
-        <p role="alert" className="mt-2 flex items-start gap-1.5 text-[0.8125rem] text-error">
+        <p role="alert" className="mt-2 flex items-start gap-1.5 text-[0.8125rem] text-error-text">
           <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />{error}
         </p>
       )}
@@ -293,7 +293,7 @@ export function UploadItem({
             </div>
           )}
           <span className={cn("flex shrink-0 items-center gap-1 text-[0.75rem]",
-            item.status === "concluido" ? "text-success" : item.status === "erro" ? "text-error" : "text-muted-foreground")}>
+            item.status === "concluido" ? "text-success" : item.status === "erro" ? "text-error-text" : "text-muted-foreground")}>
             {item.status === "enviando" && <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />}
             {item.status === "concluido" && <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />}
             {item.status === "erro" && <AlertCircle className="h-3.5 w-3.5" aria-hidden />}

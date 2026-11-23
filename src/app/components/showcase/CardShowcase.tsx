@@ -191,11 +191,11 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
       {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
       {result && (
         <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
-          {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning)]" aria-hidden />}
+          {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning-text)]" aria-hidden />}
           <span>
             {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({naFoto ? t("worst case: any area of the photo, from black to white", "pior caso: qualquer área da foto, do preto ao branco") : comTextura ? t("worst case: text over the background or a texture stroke", "pior caso: texto sobre o fundo ou um traço da textura") : t("solid background", "fundo sólido")})</span>
-            {" · "}{t("title", "título")} <strong className={result.titleOk ? "" : "text-[var(--error,var(--destructive))]"}>{t(`${result.title.toFixed(1)}:1`, formatRatio(result.title))}</strong> ({t("min.", "mín.")} {AA.large}:1)
-            {" · "}{t("subtitle", "subtítulo")} <strong className={result.subtitleOk ? "" : "text-[var(--error,var(--destructive))]"}>{t(`${result.subtitle.toFixed(1)}:1`, formatRatio(result.subtitle))}</strong> ({t("min.", "mín.")} {t(String(AA.normal), String(AA.normal).replace(".", ","))}:1)
+            {" · "}{t("title", "título")} <strong className={result.titleOk ? "" : "text-[var(--error-text)]"}>{t(`${result.title.toFixed(1)}:1`, formatRatio(result.title))}</strong> ({t("min.", "mín.")} {AA.large}:1)
+            {" · "}{t("subtitle", "subtítulo")} <strong className={result.subtitleOk ? "" : "text-[var(--error-text)]"}>{t(`${result.subtitle.toFixed(1)}:1`, formatRatio(result.subtitle))}</strong> ({t("min.", "mín.")} {t(String(AA.normal), String(AA.normal).replace(".", ","))}:1)
           </span>
         </div>
       )}

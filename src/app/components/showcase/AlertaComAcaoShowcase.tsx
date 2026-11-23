@@ -106,8 +106,8 @@ function DemoInfoFechavel() {
 const CONTRASTES: { tom: TomDoAlerta; nome: [string, string]; token: string; valor: string; contraste: string }[] = [
   { tom: "info", nome: ["Info", "Info"], token: "--info-text", valor: "#366E97", contraste: "5.0:1|5,0:1" },
   { tom: "sucesso", nome: ["Success", "Sucesso"], token: "--success-text", valor: "#327650", contraste: "5.0:1|5,0:1" },
-  { tom: "aviso", nome: ["Warning", "Aviso"], token: "--warning-text", valor: "#B73D0B", contraste: "5.0:1|5,0:1" },
-  { tom: "erro", nome: ["Error", "Erro"], token: "--primary-text", valor: "#B82828 (crimson-500)", contraste: "5.7:1|5,7:1" },
+  { tom: "aviso", nome: ["Warning", "Aviso"], token: "--warning-text", valor: "#935E0A", contraste: "5.1:1|5,1:1" },
+  { tom: "erro", nome: ["Error", "Erro"], token: "--error-text", valor: "#C52756", contraste: "5.0:1|5,0:1" },
 ];
 
 const BORDA_DO_TOM: Record<TomDoAlerta, string> = {
@@ -199,10 +199,10 @@ export function AlertaComAcaoDoc() {
           ))}
         </Panel>
         <p className="mt-3 max-w-3xl text-[0.8125rem] leading-relaxed text-muted-foreground">
-          <Mono>--info-text</Mono>, <Mono>--success-text</Mono> {t("and", "e")} <Mono>--warning-text</Mono> {t(
+          <Mono>--info-text</Mono>, <Mono>--success-text</Mono>, <Mono>--warning-text</Mono> {t("and", "e")} <Mono>--error-text</Mono> {t(
             "are new (23/11/2026): only for text and icons on light backgrounds. In the dark theme they point to",
             "são novos (23/11/2026): servem só para texto e ícone sobre fundo claro. No tema escuro, apontam para",
-          )} <Mono>--info</Mono>, <Mono>--success</Mono> {t("and", "e")} <Mono>--warning</Mono>. {t("The link uses", "O link usa")} <Mono>--foreground</Mono>, {t("with a 35% underline that turns solid on hover.", "com sublinhado a 35% que fica inteiro no hover.")}
+          )} <Mono>--info</Mono>, <Mono>--success</Mono>, <Mono>--warning</Mono> {t("and", "e")} <Mono>--error</Mono>. {t("The link uses", "O link usa")} <Mono>--foreground</Mono>, {t("with a 35% underline that turns solid on hover.", "com sublinhado a 35% que fica inteiro no hover.")}
         </p>
       </div>
 

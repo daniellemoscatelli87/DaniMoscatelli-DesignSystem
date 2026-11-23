@@ -139,7 +139,7 @@ function CartaoDoCatalogo({ nome, componente, quando, cuidado, dados, children }
       <div className="mt-5 min-w-0 flex-1">{children}</div>
       {cuidado && (
         <p className="mt-4 flex gap-2 rounded-md bg-[var(--warning-muted)] px-3 py-2 text-[0.8125rem] leading-relaxed text-foreground">
-          <AlertTriangle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+          <AlertTriangle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning-text" />
           <span><span className="font-semibold">{t("Careful: ", "Cuidado: ")}</span>{cuidado}</span>
         </p>
       )}

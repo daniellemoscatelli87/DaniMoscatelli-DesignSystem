@@ -27,11 +27,11 @@ const alertVariants = cva(
         default:
           "border-border bg-none text-card-foreground [&>svg]:bg-muted [&>svg]:text-muted-foreground",
         destructive:
-          "[--alerta-cor:var(--error)] [--alerta-icone:var(--primary-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
+          "[--alerta-cor:var(--error)] [--alerta-icone:var(--error-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
         success: "[--alerta-cor:var(--success)] [--alerta-icone:var(--success)] [--alerta-fundo:7%] [--alerta-base:18%]",
         info: "[--alerta-cor:var(--info)] [--alerta-icone:var(--info)] [--alerta-fundo:7%] [--alerta-base:18%]",
         warning: "[--alerta-cor:var(--warning)] [--alerta-icone:var(--warning-text)] [--alerta-fundo:9%] [--alerta-base:30%]",
-        error: "[--alerta-cor:var(--error)] [--alerta-icone:var(--primary-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
+        error: "[--alerta-cor:var(--error)] [--alerta-icone:var(--error-text)] [--alerta-fundo:7%] [--alerta-base:18%]",
       },
     },
     defaultVariants: {

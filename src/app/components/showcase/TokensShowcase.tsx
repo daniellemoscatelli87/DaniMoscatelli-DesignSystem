@@ -28,7 +28,7 @@ function Pill({ children, color = "muted" }: { children: React.ReactNode; color?
     primary: "bg-primary/10 text-primary-text border-primary/20",
     violet:  "bg-violet/10 text-violet border-violet/20",
     blue:    "bg-info/10 text-info border-info/20",
-    amber:   "bg-warning/10 text-warning border-warning/20",
+    amber:   "bg-warning/10 text-warning-text border-warning/20",
     success: "bg-success/10 text-success border-success/20",
     slate:   "bg-muted-foreground/10 text-muted-foreground border-border/20",
   };
@@ -70,7 +70,7 @@ const bridgeRows = [
   { category: "Color",        intent: { en: "Focus / ring color", pt: "Cor de foco / anel" },         design: "Ring",                 dev: "--ring",                  tw: "ring-ring" },
   { category: "Color",        intent: { en: "Destructive action / error", pt: "Ação destrutiva / erro" },     design: "Destructive",          dev: "--destructive",           tw: "bg-destructive" },
   { category: "Color",        intent: { en: "Confirmation / success", pt: "Confirmação / sucesso" },      design: "Success",              dev: "--success",               tw: "text-success / bg-success" },
-  { category: "Color",        intent: { en: "Alert / attention", pt: "Alerta / atenção" },           design: "Warning",              dev: "--warning",               tw: "text-warning" },
+  { category: "Color",        intent: { en: "Alert / attention", pt: "Alerta / atenção" },           design: "Warning",              dev: "--warning",               tw: "text-warning-text" },
   { category: "Typography", intent: { en: "Default interface font", pt: "Fonte padrão da interface" },  design: "Font/Sans",            dev: "--font-sans",             tw: "font-sans" },
   { category: "Typography", intent: { en: "Display / heading font", pt: "Fonte de destaque / títulos" },   design: "Font/Display",         dev: "--font-display",          tw: "font-display" },
   { category: "Typography", intent: { en: "Editorial / accent font", pt: "Fonte editorial / de acento" },     design: "Font/Accent",          dev: "--font-accent",           tw: "font-accent" },
@@ -246,7 +246,7 @@ export function TokensShowcase() {
                   </div>
                 </div>
                 <div className="rounded-sm bg-warning/10 border border-warning/20 px-2.5 py-1.5">
-                  <p className="text-[0.5625rem] text-warning/80 leading-snug">
+                  <p className="text-[0.5625rem] text-warning-text leading-snug">
                     <strong>{t("Rule:", "Regra:")}</strong> {t("primitives are never applied directly to components.", "primitivos nunca são aplicados diretamente aos componentes.")}
                   </p>
                 </div>

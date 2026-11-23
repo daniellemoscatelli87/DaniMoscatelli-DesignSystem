@@ -58,7 +58,7 @@ const colorVariants = [
   { label: "Muted",       cls: "text-muted-foreground" },
   { label: "Primary",     cls: "text-primary-text" },
   { label: "Success",     cls: "text-success" },
-  { label: "Warning",     cls: "text-warning" },
+  { label: "Warning",     cls: "text-warning-text" },
   { label: "Info",        cls: "text-info" },
 ];
 
@@ -211,7 +211,7 @@ export function IconsShowcase() {
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-primary/10 text-primary-text border border-primary/20">
                 <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Alert", "Alerta")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-warning/10 text-warning border border-warning/20">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[0.8125rem] font-medium bg-warning/10 text-warning-text border border-warning/20">
                 <Clock className="w-3.5 h-3.5" strokeWidth={2} /> {t("Pending", "Pendente")}
               </span>
             </div>
@@ -312,8 +312,8 @@ const iconsTokenGroups: TokenGroup[] = [
       { name: "--foreground-subtle",description: "Decorative / disabled icon", light: "#8898B0", dark: "#627288", isColor: true },
       { name: "--primary",          description: "Accent / active icon",       light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--success",          description: "Confirmation / done icon",   light: "#388459", dark: "#22C55E", isColor: true },
-      { name: "--warning",          description: "Caution / alert icon",       light: "#C2410C", dark: "#f5b320", isColor: true },
-      { name: "--error",            description: "Error / danger icon",        light: "#D44D4D", dark: "#D44D4D", isColor: true },
+      { name: "--warning",          description: "Caution / alert icon",       light: "#F0A020", dark: "#F5B040", isColor: true },
+      { name: "--error",            description: "Error / danger icon",        light: "#D9416E", dark: "#E5688F", isColor: true },
       { name: "--info",             description: "Informational icon",         light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--violet",           description: "Purple accent icon",         light: "#ba69dc", dark: "#eb6cff", isColor: true },
       { name: "--orange",           description: "Orange accent icon",         light: "#fa9852", dark: "#ff8833", isColor: true },
@@ -325,7 +325,7 @@ const iconsTokenGroups: TokenGroup[] = [
       { name: "--muted",            description: "Icon container background",  light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
       { name: "--primary-muted",    description: "Primary icon container bg",  light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
       { name: "--success-muted",    description: "Success icon container bg",  light: "rgba(79,181,123,0.10)",dark: "rgba(34,197,94,0.12)", isColor: true },
-      { name: "--warning-muted",    description: "Warning icon container bg",  light: "rgba(229,169,78,0.10)",dark: "rgba(245,179,32,0.12)", isColor: true },
+      { name: "--warning-muted",    description: "Warning icon container bg",  light: "rgba(240,160,32,0.14)",dark: "rgba(245,176,64,0.14)", isColor: true },
       { name: "--info-muted",       description: "Info icon container bg",     light: "rgba(68,138,188,0.10)",dark: "rgba(59,130,246,0.12)", isColor: true },
     ],
   },

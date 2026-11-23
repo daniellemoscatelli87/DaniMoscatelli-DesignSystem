@@ -185,7 +185,7 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
             {mostrarConf && (coincidem ? (
               <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--primary-text,var(--primary))]" aria-hidden />{textos.coincidem}</span>
             ) : (
-              <span className="inline-flex items-center gap-1 text-[var(--error)]"><AlertCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
+              <span className="inline-flex items-center gap-1 text-[var(--error-text)]"><AlertCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
             ))}
           </p>
         </div>

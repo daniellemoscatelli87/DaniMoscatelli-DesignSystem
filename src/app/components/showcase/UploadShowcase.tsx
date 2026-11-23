@@ -199,7 +199,7 @@ function UploadShowcaseConteudo() {
               <ImageUpload shape="wide" size={140} label={ex.coverLabel} value={cover} onChange={(_, url) => setCover(url)} maxSize={8 * 1024 * 1024} onError={setImgError} />
             </div>
           </div>
-          {imgError && <p role="alert" className="mt-3 text-[0.8125rem] text-error">{imgError}</p>}
+          {imgError && <p role="alert" className="mt-3 text-[0.8125rem] text-error-text">{imgError}</p>}
         </ShowcaseCard>
       </section>
 
@@ -207,7 +207,7 @@ function UploadShowcaseConteudo() {
         <SectionHeader title={ex.galleryTitle} description={ex.galleryDesc} />
         <ShowcaseCard>
           <ImageGrid images={gallery} onAdd={files => { setGalError(null); addToGallery(files); }} onRemove={id => setGallery(g => g.filter(x => x.id !== id))} onSetCover={setCoverId} coverId={coverId} max={8} maxSize={10 * 1024 * 1024} onError={setGalError} addLabel={t("Add photos", "Adicionar fotos")} />
-          {galError && <p role="alert" className="mt-3 text-[0.8125rem] text-error">{galError}</p>}
+          {galError && <p role="alert" className="mt-3 text-[0.8125rem] text-error-text">{galError}</p>}
           <p className="mt-4 text-[0.8125rem] text-muted-foreground">{t("Each thumbnail shows its own progress; the cover badge marks the first image unless another is chosen.", "Cada miniatura mostra o próprio progresso; o selo “Capa” marca a primeira imagem, a menos que outra seja escolhida.")}</p>
         </ShowcaseCard>
       </section>
