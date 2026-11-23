@@ -554,6 +554,7 @@ function getFoundationTokenGroups(t: (en: string, pt: string) => string): TokenG
       { name: "--popover",         description: t("Popover / tooltip surface", "Superfície de popover / tooltip"), light: "#FFFFFF",              dark: "rgba(19,26,39,0.95)",  isColor: true },
       { name: "--muted",           description: t("Subtle background", "Fundo sutil"),        light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
       { name: "--accent",          description: t("Hover background", "Fundo de hover"),         light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
+      { name: "--row-hover",       description: t("Hover of a row or item inside a card (very light)", "Hover de linha ou item dentro do card (bem claro)"), light: "#F6F8FA", dark: "rgba(255,255,255,0.04)", isColor: true },
       { name: "--secondary",       description: t("Secondary button surface", "Superfície do botão secundário"), light: "#E4E9F0",              dark: "rgba(40,48,67,0.80)", isColor: true },
     ],
   },

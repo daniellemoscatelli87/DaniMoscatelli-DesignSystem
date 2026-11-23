@@ -1889,7 +1889,7 @@ export function BackgroundsShowcase() {
                   { palette: "Aurora",  dot: "#8B5CF6", personality: t("Premium, creative, distinctive", "Premium, criativo, diferenciado"),  bb: t("Consumer CTA, consumer product", "CTA consumer, produto consumer"),   bgl: t("Design tools, creative platforms", "Ferramentas de design, plataformas criativas") },
                   { palette: "Graphite", dot: "#8898B0", personality: t("Neutral, elegant, subtle background", "Neutro, elegante, fundo sutil"),  bb: "—",                                bgl: t("Features background, light mode", "Fundo de features, light mode") },
                 ].map(row => (
-                  <tr key={row.palette} className="border-b border-border/50 last:border-0 hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors">
+                  <tr key={row.palette} className="border-b border-border/50 last:border-0 hover:bg-[var(--row-hover)] transition-colors">
                     <td className="px-4 py-2.5">
                       <div className="flex items-center gap-2">
                         <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: row.dot }} />

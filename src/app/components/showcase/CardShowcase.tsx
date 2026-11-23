@@ -817,7 +817,7 @@ export function CardShowcase() {
               rows={[
                 [t("Resting", "Parado"), t("Rule of the background (see How to choose).", "Regra do fundo (veja Como escolher).")],
                 [t("Hover (clickable card)", "Hover (card clicável)"), t("Stronger border and medium shadow; may rise 2 px.", "Borda mais forte e sombra média; pode subir 2 px.")],
-                [t("Hover of a row or item inside a card", "Hover de linha ou item dentro do card"), t("Lightest grey background (--graphite-50, #EDF0F5), no shadow; the card itself does not change.", "Fundo no cinza mais claro (--graphite-50, #EDF0F5), sem sombra; o card em si não muda.")],
+                [t("Hover of a row or item inside a card", "Hover de linha ou item dentro do card"), t("Very light, subtle grey background (--row-hover: half of --graphite-50 over the card, ≈ #F6F8FA), no shadow; the card itself does not change.", "Fundo cinza bem claro e sutil (--row-hover: metade do --graphite-50 sobre o card, ≈ #F6F8FA), sem sombra; o card em si não muda.")],
                 [t("Focus", "Foco"), t("Visible focus ring around the whole card.", "Anel de foco visível em volta do card inteiro.")],
                 [t("Selected", "Selecionado"), t("2 px primary border, check icon and aria-pressed.", "Borda primária de 2 px, ícone de check e aria-pressed.")],
                 [t("Loading", "Carregando"), t("Skeleton in the shape of the content and aria-busy.", "Skeleton no formato do conteúdo e aria-busy.")],

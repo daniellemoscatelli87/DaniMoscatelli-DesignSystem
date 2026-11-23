@@ -636,7 +636,7 @@ function TeamTemplate() {
             </thead>
             <tbody>
               {filtered.map((m, i) => (
-                <tr key={m.email} className={`border-b border-border hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors ${i % 2 === 0 ? "" : ""}`}>
+                <tr key={m.email} className={`border-b border-border hover:bg-[var(--row-hover)] transition-colors ${i % 2 === 0 ? "" : ""}`}>
                   <td className="px-6 py-3">
                     <div className="flex items-center gap-3">
                       <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
@@ -752,7 +752,7 @@ function InboxTemplate() {
                   key={n.id}
                   onClick={() => { setSelected(n.id); markRead(n.id); }}
                   className={`w-full text-left px-4 py-3 border-b border-border transition-colors flex gap-3
-                    ${selected === n.id ? "bg-primary/5 border-l-2 border-l-primary" : "hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 border-l-2 border-l-transparent"}`}
+                    ${selected === n.id ? "bg-primary/5 border-l-2 border-l-primary" : "hover:bg-[var(--row-hover)] border-l-2 border-l-transparent"}`}
                 >
                   <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 mt-0.5 ${notifColor[n.type]}`}>
                     <Icon className="h-3.5 w-3.5" />
@@ -1881,7 +1881,7 @@ function LandingTemplate() {
               <div key={i} className="rounded-md border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-[var(--graphite-50)] dark:hover:bg-muted/40 transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-3.5 text-left hover:bg-[var(--row-hover)] transition-colors"
                 >
                   <span className="text-[0.875rem] font-semibold text-foreground pr-4">{bi(item.q)}</span>
                   <ChevronRight className={`h-4 w-4 text-muted-foreground shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-90" : ""}`} />

@@ -67,6 +67,8 @@
      meio apagado mas legível: grafite-400 sobre ele dá 3,6:1 (antes: cinza médio e 3,7:1, decisão de 20/11/2026) */
   --disabled:            var(--graphite-100);
   --disabled-foreground: var(--graphite-400);
+  /* Hover de linha ou item dentro do card: cinza bem claro e sutil, metade do grafite-50 sobre o card (≈ #F6F8FA no branco); decisão de 23/11/2026 */
+  --row-hover:           color-mix(in srgb, var(--graphite-50) 50%, var(--card));
   --muted:            #E8EDF3;
   --muted-foreground: var(--graphite-400);
   --accent:           #E8EDF3;
@@ -176,6 +178,7 @@
   /* Desabilitado: cinza médio, com forma de botão e texto apagado mas legível (4,0:1); decisão da dona do produto, 20/11/2026 */
   --disabled:            color-mix(in srgb, var(--graphite-700) 60%, var(--graphite-800));
   --disabled-foreground: color-mix(in srgb, var(--graphite-300) 60%, var(--graphite-400));
+  --row-hover:           rgba(255, 255, 255, 0.04);
   --muted:            rgba(40, 48, 67, 0.6);
   --muted-foreground: var(--graphite-300);
   --accent:           rgba(40, 48, 67, 0.6);
@@ -305,6 +308,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-disabled: var(--disabled);
   --color-disabled-foreground: var(--disabled-foreground);
+  --color-row-hover: var(--row-hover);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
