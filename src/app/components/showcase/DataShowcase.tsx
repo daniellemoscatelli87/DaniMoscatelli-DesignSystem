@@ -13,6 +13,7 @@ import {
   ResponsiveContainer, PieChart, Pie, Cell,
 } from "recharts";
 import { SectionHeader } from "./shared/SectionHeader";
+import { RegraDasLinhas } from "./shared/RegraDasLinhas";
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -364,6 +365,18 @@ export function DataShowcase() {
             </div>
           </div>
         </ShowcaseCard>
+      </section>
+
+      {/* ── LINHAS COM TAGS E AÇÕES (regras da dona do produto, 24/11/2026) ── */}
+      <section id="linhas-colunas" className="scroll-mt-32">
+        <SectionHeader
+          title={t("Rows with tags and actions", "Linhas com tags e ações")}
+          description={t(
+            "Lists, tables, grids and card lists: the text never goes past the tags or actions column, and the row hover covers the whole row, square.",
+            "Listas, tabelas, grades e listas de cards: o texto nunca ultrapassa a coluna de tags ou ações, e o hover cobre a linha inteira, sem cantos.",
+          )}
+        />
+        <RegraDasLinhas />
       </section>
 
       {/* ── Tokens ── */}
