@@ -868,7 +868,8 @@ function AppShell() {
         `}</style>
         <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2.5 min-w-0 text-left">
           <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
-          <div className="flex items-center gap-0">
+          {/* Celular (26/11/2026): só o símbolo abaixo de 420 px; "| Design System" só a partir de 640 px, para nunca encostar nos seletores */}
+          <div className="hidden min-[420px]:flex items-center gap-0 min-w-0">
             <span
               className="ds-wordmark text-[1.0625rem] font-semibold tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
@@ -876,16 +877,17 @@ function AppShell() {
               Dani Moscatelli
             </span>
             <span
-              className="mx-2 text-[1.0625rem] font-light"
+              aria-hidden
+              className="hidden sm:inline mx-2 text-[1.0625rem] font-light"
               style={{ color: "#627288", opacity: 0.4 }}
             >
               |
             </span>
             <span
-              className="text-[1.0625rem] font-normal tracking-tight whitespace-nowrap ds-shimmer"
+              className="hidden sm:inline text-[1.0625rem] font-normal tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
             >
-              Design System
+              <span className="ds-shimmer">Design System</span>
             </span>
           </div>
         </button>
