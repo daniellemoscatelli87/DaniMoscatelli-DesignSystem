@@ -37,3 +37,23 @@ Publicado em https://designsystem.danimoscatelli.com.br. Este repositório é a 
   O produto só usa o componente depois que ele chega pela sincronização; nunca uma cópia local. A publicação continua com o "sim" da dona do produto.
 - Ao delegar a um agente, a instrução inclui esta regra e o caminho do catálogo (`CATALOGO.md` na raiz deste repositório), e o relatório lista qual componente cada peça usa.
 - Antes de mostrar capturas, confira cada peça contra o catálogo.
+
+## Crítica de design e fundamentos (regras da dona do produto, 27/11/2026)
+Antes de mostrar qualquer tela, demonstração ou componente, escreva uma crítica curta e corrija o que ela encontrar. A crítica cobre:
+- prioridade;
+- redundância;
+- contexto;
+- variedade;
+- densidade e ritmo;
+- intuição;
+- estética de alto padrão.
+
+Use a skill de UX/UI quando existir.
+
+Nenhuma tela pode ferir:
+- as leis da Gestalt;
+- as heurísticas de usabilidade de Nielsen;
+- os princípios de arquitetura de informação;
+- a semiótica (o mesmo sinal significa sempre a mesma coisa).
+
+E toda interface tem motion (tokens do DS, respeitando "menos movimento"), design de interação, sofisticação e modernidade.
