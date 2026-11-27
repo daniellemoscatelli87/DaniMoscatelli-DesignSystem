@@ -57,3 +57,5 @@ Nenhuma tela pode ferir:
 - a semiótica (o mesmo sinal significa sempre a mesma coisa).
 
 E toda interface tem motion (tokens do DS, respeitando "menos movimento"), design de interação, sofisticação e modernidade.
+
+Comunicação sempre não técnica: todo texto que explica uma funcionalidade, na interface, na documentação e nas mensagens para a dona do produto, usa linguagem natural, didática e objetiva, sem jargão técnico.
