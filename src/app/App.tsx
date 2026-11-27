@@ -171,6 +171,7 @@ const ptLabels: Record<string, string> = {
   "KPI Cards": "Cards de KPI",
   "Charts": "Gráficos",
   "Table": "Tabela",
+  "Rows with tags and actions": "Linhas com tags e ações",
   "Feedback": "Feedback",
   "Tabs": "Abas",
   "Alerts": "Alertas",
@@ -472,6 +473,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
         items: [
           { id: "charts",      label: "Charts",    sectionId: "data" },
           { id: "table",       label: "Table",     sectionId: "data" },
+          { id: "linhas-colunas", label: "Rows with tags and actions", sectionId: "data" },
           { id: "data-tokens", label: "Tokens",    sectionId: "data" },
         ],
       },

@@ -398,7 +398,7 @@ function Checklist() {
       <ul className="space-y-1">
         {checklistItems.map((item, i) => (
           <li key={item.en}>
-            <label className="flex items-start gap-3 rounded-sm px-2 py-2 cursor-pointer hover:bg-[var(--row-hover)] transition-colors">
+            <label className="flex items-start gap-3 rounded-none px-2 py-2 cursor-pointer hover:bg-[var(--row-hover)] transition-colors">
               <input
                 type="checkbox"
                 checked={!!done[i]}

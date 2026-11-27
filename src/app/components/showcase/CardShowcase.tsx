@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Check, ChevronRight, Image, LayoutPanelTop, MousePointer2, ShieldCheck, Sparkles } from "lucide-react";
 import { useI18n } from "../../i18n";
+import { ResumoDaRegraDasLinhas } from "./shared/RegraDasLinhas";
 import {
   Card,
   CardAction,
@@ -566,6 +567,7 @@ export function CardShowcase() {
                 "Let cards fill their grid column. Collapse multi-column content before reducing internal padding, and keep the content inside the card without horizontal scrolling.",
                 "Deixe os cards preencherem sua coluna no grid. Reduza conteúdos em múltiplas colunas antes de diminuir o padding interno e mantenha o conteúdo dentro do card, sem rolagem horizontal.",
               )}</p>
+              <ResumoDaRegraDasLinhas />
             </Callout>
           </div>
         </div>

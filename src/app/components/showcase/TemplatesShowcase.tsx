@@ -751,22 +751,21 @@ function InboxTemplate() {
                 <button
                   key={n.id}
                   onClick={() => { setSelected(n.id); markRead(n.id); }}
-                  className={`w-full text-left px-4 py-3 border-b border-border transition-colors flex gap-3
+                  className={`w-full text-left px-4 py-3 border-b border-border transition-colors flex gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring
                     ${selected === n.id ? "bg-primary/5 border-l-2 border-l-primary" : "hover:bg-[var(--row-hover)] border-l-2 border-l-transparent"}`}
                 >
                   <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 mt-0.5 ${notifColor[n.type]}`}>
                     <Icon className="h-3.5 w-3.5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-start justify-between gap-1 mb-0.5">
-                      <span className={`text-[0.75rem] font-semibold leading-tight truncate ${!n.read ? "text-foreground" : "text-muted-foreground"}`}>
-                        {bi(n.title)}
-                      </span>
-                      {!n.read && <span className="h-1.5 w-1.5 rounded-full bg-primary shrink-0 mt-1" />}
-                    </div>
+                    <span className={`block mb-0.5 text-[0.75rem] font-semibold leading-tight truncate ${!n.read ? "text-foreground" : "text-muted-foreground"}`}>
+                      {bi(n.title)}
+                    </span>
                     <p className="text-[0.625rem] text-muted-foreground leading-tight line-clamp-1">{bi(n.body)}</p>
                     <span className="text-[0.5625rem] text-muted-foreground/60">{bi(n.time)}</span>
                   </div>
+                  {/* Coluna própria para o ponto de não lida: o texto nunca passa por baixo dele (regra de 24/11/2026). */}
+                  <span aria-hidden className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${!n.read ? "bg-primary" : ""}`} />
                 </button>
               );
             })}
