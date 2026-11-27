@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
@@ -18,6 +20,8 @@ import { cn } from "./utils";
  * Tudo vem dos tokens: cor do estado (--info, --success, --warning, --error), cor de texto do estado
  * (--info-text, --success-text, --warning-text, --error-text), --card, --foreground, --muted-foreground, --ring,
  * --disabled e os tokens de movimento. O arquivo é o mesmo nos dois design systems; só os tokens mudam.
+ * O texto de apoio usa --muted-foreground com 15% de --foreground, para passar de 4,5:1 em todos os fundos coloridos,
+ * inclusive o rosado do erro (27/11/2026).
  */
 
 type TomDoAlerta = "info" | "sucesso" | "aviso" | "erro";
@@ -104,7 +108,7 @@ function AlertaComAcao({
           {children != null && (
             <div
               data-slot="alerta-com-acao-descricao"
-              className="mt-1 text-sm leading-[1.6] text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground [&>p+p]:mt-1.5"
+              className="mt-1 text-sm leading-[1.6] text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))] [&_strong]:font-semibold [&_strong]:text-foreground [&>p+p]:mt-1.5"
             >
               {children}
             </div>
@@ -156,7 +160,7 @@ function BotaoDoAlerta({ tom, asChild = false, className, ...props }: BotaoDoAle
       data-tom={tomFinal}
       className={cn(
         variaveisDoTom({ tom: tomFinal }),
-        "inline-flex min-h-9 max-w-full items-center justify-center gap-2 rounded-md border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3.5 py-1.5 text-left text-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
+        "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-md border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3.5 py-1.5 text-left text-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
         "hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_8%,transparent)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground aria-disabled:pointer-events-none aria-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground",
         transicao,
@@ -177,7 +181,7 @@ function LinkDoAlerta({ asChild = false, className, ...props }: LinkDoAlertaProp
     <Comp
       data-slot="link-do-alerta"
       className={cn(
-        "inline-flex min-h-9 max-w-full items-center gap-2 rounded-sm bg-transparent px-1.5 text-left text-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex min-h-10 max-w-full items-center gap-2 rounded-sm bg-transparent px-1.5 text-left text-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:text-disabled-foreground disabled:no-underline aria-disabled:pointer-events-none aria-disabled:text-disabled-foreground aria-disabled:no-underline",
         transicao,
         foco,

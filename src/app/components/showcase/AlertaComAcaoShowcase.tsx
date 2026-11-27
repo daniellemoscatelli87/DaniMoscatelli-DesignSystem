@@ -171,7 +171,7 @@ export function AlertaComAcaoDoc() {
         <DoDont
           dos={[
             t("Put the actions below the text, never beside it.", "Coloque as ações embaixo do texto, nunca ao lado."),
-            t("Use a single primary action, outline only (BotaoDoAlerta), in the state colour.", "Use uma só ação principal, de contorno (BotaoDoAlerta), na cor do estado."),
+            t("Use a single primary action, outline only (BotaoDoAlerta), in the state colour. It has the design system button height (40 px), with the alert's 14 px text.", "Use uma só ação principal, de contorno (BotaoDoAlerta), na cor do estado. Ela tem a altura dos botões do design system (40 px), com o texto de 14 px do alerta."),
             t("If a second action is needed, use the link (LinkDoAlerta).", "Se precisar de uma segunda ação, use o link (LinkDoAlerta)."),
             t("Use <strong> only for what the reader must see: semibold, in the main text colour.", "Destaque com <strong> só o que a pessoa precisa ver: seminegrito, na cor do texto principal."),
             t("Use role=\"alert\" for warning and error and role=\"status\" for info and success (the component does this).", "Use role=\"alert\" em aviso e erro e role=\"status\" em info e sucesso (o componente já faz isso)."),

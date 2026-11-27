@@ -234,6 +234,20 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
           </ShowcaseCard>
         </SubSection>
 
+        <SubSection title={t("Alert without a title", "Alerta só com descrição")}>
+          <div id="alerta-sem-titulo" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <p className="mb-4 max-w-3xl text-[0.8125rem] leading-relaxed text-muted-foreground">
+              {t("When the message fits in one sentence, use the Alert without AlertTitle. The sentence becomes the main information: it takes the main text colour, sits centred on the icon and wraps evenly. It is automatic: just leave out the title.", "Quando a mensagem cabe numa frase, use o Alert sem AlertTitle. A frase passa a ser a informação principal: fica na cor do texto principal, centralizada na altura do ícone e com a quebra de linha equilibrada. É automático: basta não usar o título.")}
+            </p>
+            <div className="space-y-3">
+              <UiAlert variant="error"><TriangleAlert aria-hidden /><AlertDescription>{t("Wrong email or password. Check them and try again.", "E-mail ou senha incorretos. Confira e tente de novo.")}</AlertDescription></UiAlert>
+              <UiAlert variant="success"><CheckCircle2 aria-hidden /><AlertDescription>{t("Changes saved.", "Alterações salvas.")}</AlertDescription></UiAlert>
+              <UiAlert variant="info"><Info aria-hidden /><AlertDescription>{t("You can change this later in Settings.", "Você pode mudar isso depois em Configurações.")}</AlertDescription></UiAlert>
+            </div>
+          </ShowcaseCard>
+        </SubSection>
+
         <div id="alerta-com-acao" className="scroll-mt-32">
           <AlertaComAcaoDoc />
         </div>
