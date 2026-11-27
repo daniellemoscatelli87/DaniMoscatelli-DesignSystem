@@ -51,7 +51,7 @@ Menu expandido e recolhido (dica ao lado), item padrão, hover, ativo, foco, com
 Template Painel em 1280 e 390 px (escala 2): `dm-pecas-painel-1280.png` e `dm-pecas-painel-390.png`, anexadas ao pull request.
 
 ## Pendências para a dona do produto
-- **Cor do contador:** pedida em `--primary` com número branco, mas o branco sobre `--primary` dá 4,2:1 (abaixo do AA de 4,5:1 para o número de 11 px). O contador usa `--primary-text` (6,2:1), o vermelho mais escuro do DS; o ponto do menu recolhido, sem texto, continua `--primary`. Decidir: manter `--primary-text` ou escurecer `--primary`.
+- **Cor do contador (resolvida em 27/11/2026):** com a nova `--primary` #CC4545 aprovada pela dona do produto, o número branco fica em 4,66:1 e o contador voltou a `--primary`, como pedido.
 - Abas sublinhadas da Opção A: este DS só tem as abas em pílula (`Tabs`); o FindLook usa `AbasComContador estilo="sublinhado"`.
 - `SeletorDeLoja` e `CardDePlano` não foram trazidos (são de loja).
 - O menu do site do DS (`App.tsx`) continua com marcação própria; passar a usar a casca é um passo separado (três níveis de itens e o painel fixo do site).

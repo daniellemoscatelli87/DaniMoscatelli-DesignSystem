@@ -245,7 +245,7 @@ export function PecasDoPainel() {
               </GrupoDoMenu>
             </nav>
           </Exemplo>
-          <Exemplo titulo={t("Counter and bell", "Contador e sino")} descricao={t("ContadorDoPainel: round, red (--primary-text, 6.2:1 with white) with white bold tabular numbers; two digits become a round-ended pill; above 99, 99+. On the bell it sits on the icon's top-right corner with a 2 px ring.", "ContadorDoPainel: redondo, vermelho (--primary-text, 6,2:1 com o branco) com número branco em negrito e tabular; com dois algarismos vira pílula de pontas redondas; acima de 99, 99+. No sino, fica no canto superior direito do ícone, com anel de 2 px.")}>
+          <Exemplo titulo={t("Counter and bell", "Contador e sino")} descricao={t("ContadorDoPainel: round, red (--primary, 4.66:1 with white) with white bold tabular numbers; two digits become a round-ended pill; above 99, 99+. On the bell it sits on the icon's top-right corner with a 2 px ring.", "ContadorDoPainel: redondo, vermelho (--primary, 4,66:1 com o branco) com número branco em negrito e tabular; com dois algarismos vira pílula de pontas redondas; acima de 99, 99+. No sino, fica no canto superior direito do ícone, com anel de 2 px.")}>
             <div className="flex flex-wrap items-center gap-4">
               <ContadorDoPainel valor={3} />
               <ContadorDoPainel valor={12} />

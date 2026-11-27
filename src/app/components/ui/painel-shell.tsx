@@ -233,15 +233,15 @@ type ContadorDoPainelProps = React.ComponentProps<"span"> & {
  * Contador redondo do painel: fundo vermelho e número branco em negrito, números tabulares. Círculo de 20 px com um
  * algarismo; com dois ou mais, vira pílula com as pontas redondas (largura mínima de 20 px, nunca um oval alto).
  * Acima de 99, "99+". O mesmo contador do item do menu, do grupo e do sino de notificações.
- * Cor: --primary-text (6,2:1 com o branco). Com --primary, o número branco de 11 px fica em 4,2:1, abaixo do AA (4,5:1);
- * decisão pendente da dona do produto (ver a proposta). O ponto do menu recolhido, sem texto, continua --primary.
+ * Cor: --primary (#CC4545, 4,66:1 com o branco, desde a decisão de cores da dona do produto de 27/11/2026; antes, com
+ * #D44D4D, o contador usava --primary-text). O ponto do menu recolhido, sem texto, também é --primary.
  */
 function ContadorDoPainel({ valor, rotulo, anel, className, ...props }: ContadorDoPainelProps) {
   return (
     <span
       data-slot="contador-do-painel"
       className={cn(
-        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary-text px-1.5 text-[0.6875rem] font-bold leading-none tabular-nums text-primary-foreground",
+        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary px-1.5 text-[0.6875rem] font-bold leading-none tabular-nums text-primary-foreground",
         anel && "ring-2 ring-card",
         className,
       )}
