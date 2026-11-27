@@ -53,8 +53,8 @@ function AccordionTrigger({
  * - `className` vai para o bloco de dentro (o texto, com o respiro de baixo pb-4): é onde você muda respiro, cor e
  *   tamanho do texto. `classeDaRegiao` vai para a região que abre e fecha (a que anima a altura). Sempre assim, nos
  *   dois DS (27/11/2026).
- * - `manterNoHtml`: as respostas fechadas continuam no HTML (para buscadores e para a busca da página, Ctrl+F do
- *   navegador não abre), escondidas com o atributo hidden: fora da tela e dos leitores de tela até abrir. Use nas
+ * - `manterNoHtml`: as respostas fechadas continuam no HTML (para os buscadores lerem), escondidas com display: none,
+ *   fora da tela e dos leitores de tela até abrir; ao fechar, a resposta some sem a animação de recolher. Use nas
  *   perguntas frequentes de páginas públicas. Sem ele, a resposta fechada sai do HTML (padrão do Radix).
  */
 function AccordionContent({
@@ -68,7 +68,7 @@ function AccordionContent({
     <AccordionPrimitive.Content
       data-slot="accordion-content"
       forceMount={manterNoHtml ? true : props.forceMount}
-      className={cn("data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-body-sm leading-5", classeDaRegiao)}
+      className={cn("data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-body-sm leading-5", manterNoHtml && "data-[state=closed]:hidden", classeDaRegiao)}
       {...props}
     >
       <div className={cn("pt-0 pb-4", className)}>{children}</div>

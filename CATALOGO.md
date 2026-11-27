@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 120 arquivos de componentes em `src/app/components/ui/` com 407 componentes exportados · 77 templates e padrões ainda só em demonstração · 44 seções com marcação feita à mão · 160 tokens · 33 páginas e 233 âncoras no site (https://designsystem.danimoscatelli.com.br) · 35 propostas de componente.
+**Resumo:** 120 arquivos de componentes em `src/app/components/ui/` com 407 componentes exportados · 77 templates e padrões ainda só em demonstração · 44 seções com marcação feita à mão · 160 tokens · 33 páginas e 233 âncoras no site (https://designsystem.danimoscatelli.com.br) · 38 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -948,7 +948,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Popover`
   - `PopoverTrigger`
-  - `PopoverContent` (props: `className`, `align`, `sideOffset`)
+  - `PopoverContent` (props: `className`, `align`, `sideOffset`, `collisionPadding`)
   - `PopoverAnchor`
 - **Onde ver:** Overlays › Diálogos (`overlays#dialogs`)
 
@@ -1196,7 +1196,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Arquivo:** [src/app/components/ui/tabela-adaptavel.tsx](src/app/components/ui/tabela-adaptavel.tsx)
 - **Quando usar:** Tabela adaptável: o mesmo componente nos dois DS (FindLook e Dani Moscatelli, 27/11/2026): seleção, ordem controlada (ordem + onOrdenar) ou da própria tabela, e as colunas que cabem pela medida da largura (`largura`). A tabela das listas do painel (parceiros, pesquisas, contatos) que nunca rola para o lado (regra da dona do produto, 18/11/2026).
 - **Componentes:**
-  - `TabelaAdaptavel` (props: `colunas`, `linhas`, `chave`, `legenda`, `mostrarLegenda`, `ordemInicial`, `textos`, `rotuloDaLinha`, `selecionadas`, `onSelecionadasChange`, `acoes`, `larguraDasAcoes`, `ordem`, `onOrdenar`, `larguraDaLista`, `vazio`, `className`)
+  - `TabelaAdaptavel` (props: `colunas`, `linhas`, `chave`, `legenda`, `mostrarLegenda`, `ordemInicial`, `textos`, `rotuloDaLinha`, `selecionadas`, `onSelecionadasChange`, `acoes`, `larguraDasAcoes`, `ordem`, `onOrdenar`, `moldura`, `larguraDaLista`, `vazio`, `className`)
   - `BarraDeFerramentasDaTabela` (props: `busca`, `children`, `filtrosAtivos`, `className`): Barra de ferramentas
 - **Onde ver:** Campos › Tabela adaptável (`campos#campos-tabela`) · Gráficos › Como escolher (`graficos#graficos-escolher`) · Gráficos › Componentes e props (`graficos#graficos-componentes`)
 
@@ -1232,7 +1232,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Textarea. `contador` (com maxLength) mostra "120 de 500" embaixo, alinhado à borda esquerda do campo: cinza enquanto há folga, no tom de aviso quando faltam 10% ou menos e no tom de erro no limite. Para leitores de tela, o aviso só fala quando faltam 20 caracteres ou menos ("Restam 12 caracteres"), para não anunciar cada letra.
 - **Componentes:**
   - `Textarea` (props: `className`, `contador`, `maxLength`, `onChange`)
-- **Onde ver:** Templates › Contato (`templates#template-contact`) · Templates › Landing page (`templates#template-landing`) · Campos › Campo e máscaras (`campos#campos-campo`) · e mais 2 seções (ver `catalogo.json`)
+- **Onde ver:** Botões › Senha (`buttons#password`) · Templates › Contato (`templates#template-contact`) · Templates › Landing page (`templates#template-landing`) · e mais 3 seções (ver `catalogo.json`)
 
 ### timeline
 
@@ -1317,7 +1317,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `DashboardTemplate` | Templates › Dashboard (`templates#template-dashboard`) | [src/app/components/showcase/TemplatesResponsivos.tsx:134](src/app/components/showcase/TemplatesResponsivos.tsx#L134) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador`, `ChipDeEstado`, `GatilhoDaConta` +13 | 0 |
 | `SettingsTemplate` | Templates › Configurações (`templates#template-settings`) | [src/app/components/showcase/TemplatesResponsivos.tsx:223](src/app/components/showcase/TemplatesResponsivos.tsx#L223) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `Card`, `CardComCabecalho`, `CardContent`, `CardFooter` +21 | 1 |
 | `InboxTemplate`<br>Caixa de entrada: a CaixaDeEntrada do DS (27/11/2026). Lista e leitura lado a lado a partir de 42rem de largura da própria caixa; antes disso, uma coisa por vez, com Voltar. Abrir uma notificação marca como lida. | Templates › Caixa de entrada (`templates#template-inbox`) | [src/app/components/showcase/TemplatesResponsivos.tsx:373](src/app/components/showcase/TemplatesResponsivos.tsx#L373) | `Button`, `CaixaDeEntrada`, `ContadorDoPainel`, `EstadoVazio`, `IconeComBase`, `Select` | 2 |
-| `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:499](src/app/components/showcase/TemplatesResponsivos.tsx#L499) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger`, `BarraDeNumeros`, `Button`, `Card`, `CardComCabecalho` +31 | 14 |
+| `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:500](src/app/components/showcase/TemplatesResponsivos.tsx#L500) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger`, `BarraDeNumeros`, `Button`, `Card`, `CardComCabecalho` +31 | 14 |
 | `AuthTemplate`<br>3. Login / Auth Template | Templates › Autenticação (`templates#template-auth`) | [src/app/components/showcase/TemplatesShowcase.tsx:85](src/app/components/showcase/TemplatesShowcase.tsx#L85) | `Button`, `Campo`, `EstadoFinal`, `MolduraDeConta` | 0 |
 | `TeamTemplate`<br>Equipe: card nunca rola para o lado. Abaixo de 40rem de largura, a tabela vira lista (LinhaDeLista, com função, situação e ações embaixo do texto); a partir dela, a tabela, com a coluna Entrada só a partir de 48rem. | Templates › Equipe (`templates#template-team`) | [src/app/components/showcase/TemplatesShowcase.tsx:196](src/app/components/showcase/TemplatesShowcase.tsx#L196) | `Button`, `ChipDeEstado`, `Input`, `LinhaDeLista`, `Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink` | 6 |
 | `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:389](src/app/components/showcase/TemplatesShowcase.tsx#L389) | `GradeDeCards`, `Select`, `Switch` | 8 |
@@ -1330,8 +1330,8 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
 | `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 5 |
-| `Secao` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:485](src/app/components/showcase/TemplatesResponsivos.tsx#L485) |  | 1 |
-| `InputField` | Botões › Controles de formulário (`buttons#inputs`) | [src/app/components/showcase/FormShowcase.tsx:65](src/app/components/showcase/FormShowcase.tsx#L65) | `Input` | 1 |
+| `Secao` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:486](src/app/components/showcase/TemplatesResponsivos.tsx#L486) |  | 1 |
+| `InputField` | Botões › Controles de formulário (`buttons#inputs`) | [src/app/components/showcase/FormShowcase.tsx:66](src/app/components/showcase/FormShowcase.tsx#L66) | `Input` | 1 |
 | `CanvasRevealCard`<br>Cards com revelação em canvas (usado na página Cards › Animação). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/BackgroundsShowcase.tsx:500](src/app/components/showcase/BackgroundsShowcase.tsx#L500) |  | 9 |
 | `CenaDoVidro`<br>Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene). | Cards › Vidro: acabamentos (`cards#card-glass`) (+3) | [src/app/components/showcase/CardShowcase.tsx:113](src/app/components/showcase/CardShowcase.tsx#L113) | `DoodleTexture`, `GlassScene` | 2 |
 | `GlassTestCard`<br>Card de teste: título e subtítulo reais sobre o vidro, com avaliação de contraste (WCAG AA) e alerta dentro do card quando a configuração compromete a acessibilidade. | Cards › Vidro: acabamentos (`cards#card-glass`) (+2) | [src/app/components/showcase/CardShowcase.tsx:175](src/app/components/showcase/CardShowcase.tsx#L175) | `GlassCard` | 1 |
@@ -1706,6 +1706,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Caixa de entrada](propostas/2026-11-27-caixa-de-entrada.md) | `CaixaDeEntrada em src/app/components/ui/caixa-de-entrada.tsx` | proposta |
 | [Campo de busca e campo copiável](propostas/2026-11-27-campo-de-busca-e-copiavel.md) | `CampoDeBusca, CampoCopiavel em src/app/components/ui/campo-de-busca.tsx, src/app/components/ui/campo-copiavel.tsx` | proposta |
 | [Campo de vários e-mails](propostas/2026-11-27-campo-de-emails.md) | `CampoDeEmails em src/app/components/ui/campo-de-emails.tsx` | proposta |
+| [CampoDeEndereco (endereço com sugestões)](propostas/2026-11-27-campo-de-endereco.md) | `CampoDeEndereco, buscaNoPhoton, enderecoDoPhoton, textoDaSugestao em src/app/components/ui/campo-de-endereco.tsx (mesmo arquivo nos dois DS)` | proposta |
 | [Campo de horário](propostas/2026-11-27-campo-de-horario.md) | `CampoDeHorario em src/app/components/ui/campo-de-horario.tsx` | proposta |
 | [Campo, CampoDeEmail, CampoEstadoCidade e máscaras](propostas/2026-11-27-campo.md) | `Campo, GradeDeCampos, MensagemDeErro, ResumoDeErros, CampoDeTelefone, CampoDeCnpj, mascaraTelefone, mascaraCnpj, cnpjValido, CampoDeEmail, CampoEstadoCidade em src/app/components/ui/campo.tsx, src/app/components/ui/campo-de-email.tsx, src/app/components/ui/campo-estado-cidade.tsx` | proposta |
 | [Card de artigo](propostas/2026-11-27-card-de-artigo.md) | `CardDeArtigo em src/app/components/ui/card-de-artigo.tsx` | proposta |
@@ -1716,10 +1717,12 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Chip de estado](propostas/2026-11-27-chip-de-estado.md) | `ChipDeEstado em src/app/components/ui/chip-de-estado.tsx` | proposta |
 | [Chip filtrável](propostas/2026-11-27-chip-filtravel.md) | `ChipFiltravel, GrupoDeChipsFiltraveis em src/app/components/ui/chip-filtravel.tsx` | proposta |
 | [Citação](propostas/2026-11-27-citacao.md) | `Citacao em src/app/components/ui/citacao.tsx` | proposta |
+| [Consistência entre os dois design systems](propostas/2026-11-27-consistencia-entre-ds.md) | — | proposta |
 | [Conversa](propostas/2026-11-27-conversa.md) | `Conversa, BalaoDaConversa, SeparadorDaConversa, IndicadorDeDigitacao em src/app/components/ui/conversa.tsx` | proposta |
 | [Estado vazio, estado final e página de erro](propostas/2026-11-27-estado-vazio.md) | `EstadoVazio, EstadoFinal, PaginaDeErro em src/app/components/ui/estado-vazio.tsx` | proposta |
 | [Faixa de logos](propostas/2026-11-27-faixa-de-logos.md) | `FaixaDeLogos em src/app/components/ui/faixa-de-logos.tsx` | proposta |
 | [Link Saiba mais](propostas/2026-11-27-link-saiba-mais.md) | `LinkSaibaMais em src/app/components/ui/link-saiba-mais.tsx` | proposta |
+| [Links: LinkPularConteudo, LinkDeTexto e LinkDeVoltar](propostas/2026-11-27-links.md) | `src/app/components/ui/links.tsx (o mesmo arquivo e a mesma API do DS FindLook)` | proposta |
 | [Lista de pilares](propostas/2026-11-27-lista-de-pilares.md) | `ListaDePilares em src/app/components/ui/lista-de-pilares.tsx` | proposta |
 | [Logo](propostas/2026-11-27-logo.md) | `Logo em src/app/components/ui/logo.tsx` | proposta |
 | [Luzes difusas](propostas/2026-11-27-luzes-difusas.md) | `LuzesDifusas em src/app/components/ui/luzes-difusas.tsx` | proposta |

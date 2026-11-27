@@ -12,7 +12,7 @@
     "tokens": 160,
     "paginas": 33,
     "ancoras": 233,
-    "propostas": 35
+    "propostas": 38
   },
   "componentes": [
     {
@@ -1256,7 +1256,7 @@
           "ancora": "buttons",
           "titulo": "Variantes de botão",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 115,
+          "linha": 116,
           "uso": "direto",
           "exports": [
             "Button"
@@ -2156,7 +2156,7 @@
         {
           "nome": "Calendar",
           "tipo": "componente",
-          "linha": 22,
+          "linha": 24,
           "descricao": "",
           "props": [
             "className",
@@ -3790,7 +3790,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 236,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -3802,7 +3802,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 357,
+          "linha": 347,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -8548,7 +8548,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 210,
+          "linha": 211,
           "uso": "direto",
           "exports": [
             "Input"
@@ -10488,7 +10488,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 236,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "regrasPadrao",
@@ -10588,14 +10588,15 @@
           "props": [
             "className",
             "align",
-            "sideOffset"
+            "sideOffset",
+            "collisionPadding"
           ],
           "reexportaDe": null
         },
         {
           "nome": "PopoverAnchor",
           "tipo": "componente",
-          "linha": 42,
+          "linha": 45,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -10760,7 +10761,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 236,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "RadioGroup",
@@ -10966,7 +10967,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 357,
+          "linha": 347,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -11149,7 +11150,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 236,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "Select",
@@ -11165,7 +11166,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 357,
+          "linha": 347,
           "uso": "direto",
           "exports": [
             "Select"
@@ -12313,7 +12314,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 357,
+          "linha": 347,
           "uso": "direto",
           "exports": [
             "Switch"
@@ -12378,7 +12379,7 @@
         {
           "nome": "TabelaAdaptavel",
           "tipo": "componente",
-          "linha": 110,
+          "linha": 115,
           "descricao": "",
           "props": [
             "colunas",
@@ -12395,6 +12396,7 @@
             "larguraDasAcoes",
             "ordem",
             "onOrdenar",
+            "moldura",
             "larguraDaLista",
             "vazio",
             "className"
@@ -12404,7 +12406,7 @@
         {
           "nome": "BarraDeFerramentasDaTabela",
           "tipo": "componente",
-          "linha": 299,
+          "linha": 305,
           "descricao": "Barra de ferramentas",
           "props": [
             "busca",
@@ -12689,6 +12691,18 @@
       "tipos": [],
       "variantes": {},
       "ondeVer": [
+        {
+          "pagina": "buttons",
+          "paginaRotulo": "Botões",
+          "ancora": "password",
+          "titulo": "Senha",
+          "arquivo": "src/app/components/showcase/FormShowcase.tsx",
+          "linha": 237,
+          "uso": "direto",
+          "exports": [
+            "Textarea"
+          ]
+        },
         {
           "pagina": "templates",
           "paginaRotulo": "Templates",
@@ -14273,7 +14287,7 @@
       "nome": "Secao",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/TemplatesResponsivos.tsx",
-      "linha": 485,
+      "linha": 486,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -14294,7 +14308,7 @@
       "nome": "LandingTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesResponsivos.tsx",
-      "linha": 499,
+      "linha": 500,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -14468,7 +14482,7 @@
       "nome": "InputField",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-      "linha": 65,
+      "linha": 66,
       "descricao": "",
       "pagina": "buttons",
       "paginaRotulo": "Botões",
@@ -14479,7 +14493,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 210
+          "linha": 211
         }
       ],
       "usaComponentes": [
@@ -17491,6 +17505,12 @@
       "componente": "CampoDeEmails em src/app/components/ui/campo-de-emails.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-27-campo-de-endereco.md",
+      "titulo": "CampoDeEndereco (endereço com sugestões)",
+      "status": "proposta",
+      "componente": "CampoDeEndereco, buscaNoPhoton, enderecoDoPhoton, textoDaSugestao em src/app/components/ui/campo-de-endereco.tsx (mesmo arquivo nos dois DS)"
+    },
+    {
       "arquivo": "propostas/2026-11-27-campo-de-horario.md",
       "titulo": "Campo de horário",
       "status": "proposta",
@@ -17551,6 +17571,12 @@
       "componente": "Citacao em src/app/components/ui/citacao.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-27-consistencia-entre-ds.md",
+      "titulo": "Consistência entre os dois design systems",
+      "status": "proposta",
+      "componente": null
+    },
+    {
       "arquivo": "propostas/2026-11-27-conversa.md",
       "titulo": "Conversa",
       "status": "proposta",
@@ -17573,6 +17599,12 @@
       "titulo": "Link Saiba mais",
       "status": "proposta",
       "componente": "LinkSaibaMais em src/app/components/ui/link-saiba-mais.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-links.md",
+      "titulo": "Links: LinkPularConteudo, LinkDeTexto e LinkDeVoltar",
+      "status": "proposta",
+      "componente": "src/app/components/ui/links.tsx (o mesmo arquivo e a mesma API do DS FindLook)"
     },
     {
       "arquivo": "propostas/2026-11-27-lista-de-pilares.md",
@@ -18337,31 +18369,31 @@
           "id": "buttons",
           "titulo": "Variantes de botão",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 115
+          "linha": 116
         },
         {
           "id": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 210
+          "linha": 211
         },
         {
           "id": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 236
+          "linha": 237
         },
         {
           "id": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 357
+          "linha": 347
         },
         {
           "id": "buttons-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 454
+          "linha": 444
         }
       ]
     },

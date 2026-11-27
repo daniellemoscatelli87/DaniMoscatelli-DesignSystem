@@ -14,6 +14,69 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "Updated", title: { en: "Consistency between the two design systems", pt: "Consistência entre os dois design systems" },
+    desc: {
+      en: "The components FindLook and Dani Moscatelli share now end with the same names and the same props (27/11/2026). Quadro accepts both ways (columns with ready cards, or items that move between stages with onMover); CabecalhoDoSite has the same props in both (acaoSecundaria, transparenteNoTopo, iconeAoRolar, telaLarga, comoLink, containerDoMenu and modelo), each DS keeping its brand model; TabelaAdaptavel measures its width and shows the columns that fit for any priority number (new moldura prop); EstadoVazio (ilustracao, moldura), Conversa (rolagem, citacao, imagem, texto and icone in IndicadorDeDigitacao), Logo (href, comoLink), Prosa (html), MolduraDeConta (lateral, comoLink), Campo (opcional, acaoDoRotulo, show password), CampoDeBusca (rotuloVisivel), ChipFiltravel (icone), Textarea (contador), PasswordConfirm, Alert (icone), the panel side menu and CardComCabecalho with the same props. scripts/comparar-ds.mjs checks it: 94 ui/ files in common, 94 equal (apart from the brand differences listed in scripts/comparar-ds-marca.json). Full table in propostas/2026-11-27-consistencia-entre-ds.md.",
+      pt: "Os componentes que o FindLook e o Dani Moscatelli têm em comum terminam com os mesmos nomes e as mesmas props (27/11/2026). Quadro aceita os dois jeitos (colunas com cartões prontos ou itens que mudam de etapa, com onMover); CabecalhoDoSite tem as mesmas props nos dois (acaoSecundaria, transparenteNoTopo, iconeAoRolar, telaLarga, comoLink, containerDoMenu e modelo), cada DS com o seu modelo de marca; TabelaAdaptavel mede a largura e mostra as colunas que cabem por qualquer número de prioridade (nova prop moldura); EstadoVazio (ilustracao, moldura), Conversa (rolagem, citacao, imagem, texto e icone no IndicadorDeDigitacao), Logo (href, comoLink), Prosa (html), MolduraDeConta (lateral, comoLink), Campo (opcional, acaoDoRotulo, Mostrar senha), CampoDeBusca (rotuloVisivel), ChipFiltravel (icone), Textarea (contador), PasswordConfirm, Alert (icone), menu lateral do painel e CardComCabecalho com as mesmas props. O script scripts/comparar-ds.mjs confere: 94 arquivos de ui/ em comum, 94 iguais (fora as diferenças de marca listadas em scripts/comparar-ds-marca.json). Tabela completa em propostas/2026-11-27-consistencia-entre-ds.md.",
+    },
+    page: "campos",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Field outlines of at least 3:1", pt: "Bordas de campo com pelo menos 3:1" },
+    desc: {
+      en: "The outline of fields, selects, checkboxes, radios, outline buttons, chips and the switch when off is now --input = graphite 400 (WCAG 1.4.11). Measured: FindLook #888896, 3.49:1 on white and 3.24:1 on grey #F6F6F7; Dani Moscatelli #627288, 4.9:1 on white and 4.29:1 on the page background #EDF0F5 (before 1.53:1 and 1.4:1). --border-strong stays only on cards and dividers, which are not fields. The switch track when off uses the same graphite 400.",
+      pt: "O contorno de campos, seleção, caixa de marcar, opção, botão de contorno, chip e do interruptor desligado passa a ser --input = grafite 400 (WCAG 1.4.11). Medido: FindLook #888896, 3,49:1 no branco e 3,24:1 no cinza #F6F6F7; Dani Moscatelli #627288, 4,9:1 no branco e 4,29:1 no fundo #EDF0F5 (antes 1,53:1 e 1,4:1). O --border-strong fica só nos cards e divisores, que não são campos. Trilho do interruptor desligado no mesmo grafite 400.",
+    },
+    page: "buttons",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Same state icons in both DS", pt: "Ícones de estado iguais nos dois DS" },
+    desc: {
+      en: "One sign per state (semiotics): warning = ! in a circle (AlertCircle), error = X in a circle (XCircle). The triangle is no longer a state icon: worldwide it means caution, and FindLook used it for error while Dani Moscatelli used it for warning. Applies to Alert, AlertaComAcao, EstadoVazio and EstadoFinal, BalaoDaConversa, Campo, ResumoDeErros, toasts, Upload, password, status chips and the docs.",
+      pt: "Um sinal só para cada estado (semiótica): aviso = ! no círculo (AlertCircle), erro = X no círculo (XCircle). O triângulo deixa de ser ícone de estado, porque no mundo ele quer dizer atenção, e o FindLook usava para erro enquanto o Dani Moscatelli usava para aviso. Vale para Alert, AlertaComAcao, EstadoVazio e EstadoFinal, BalaoDaConversa, Campo, ResumoDeErros, avisos (toast), Upload, senha, chips de status e para a documentação.",
+    },
+    page: "feedback",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "One overlay behind every window", pt: "Um véu só atrás das janelas" },
+    desc: {
+      en: "Dialog, AlertDialog, Sheet, Drawer, SidePanel, the phone menu and the demos use the --sobreposicao token (graphite 950 at 50%, no blur), with the same name and value in both DS.",
+      pt: "Dialog, AlertDialog, Sheet, Drawer, SidePanel, o menu do celular e as demonstrações usam o token --sobreposicao (grafite 950 a 50%, sem desfoque), com o mesmo nome e o mesmo valor nos dois DS.",
+    },
+    page: "overlays",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Popover inside a dialog, Button with ref, pill button and 44 px icon", pt: "Popover dentro de janela, Button com ref, botão pílula e ícone de 44 px" },
+    desc: {
+      en: "Button now forwards its ref (forwardRef): with React 18, a Popover opened by a Button inside a dialog stayed off screen (translate(0, -200%)); now it opens anchored to the field, 8 px from the screen edge. New demo: date field inside a dialog. Button gets forma=\"pilula\" and size=\"icon-lg\" (always 44 px); on phones the button is 44 px also through Tailwind's own variants (max-sm and pointer-coarse), without depending on theme.css being in the same CSS as Tailwind.",
+      pt: "Button passa a repassar a ref (forwardRef): com React 18, o Popover aberto por um Button dentro de uma janela ficava fora da tela (translate(0, -200%)); agora abre ancorado no campo, com 8 px de folga da borda. Nova demonstração: campo de data dentro de uma janela. Button ganha forma=\"pilula\" e size=\"icon-lg\" (44 px sempre); no celular, o botão tem 44 px também com as variantes do próprio Tailwind (max-sm e pointer-coarse), sem depender do theme.css estar no mesmo CSS do Tailwind.",
+    },
+    page: "overlays",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Calendar on phones, in Portuguese", pt: "Calendar no celular, em português" },
+    desc: {
+      en: "On touch, the month takes the width it has (up to 320 px), each day is a square of up to 40 px and the touch area is always 44 × 44 px; it fits whole in a card from a 320 px screen (before it needed about 336 px). Chosen day in the selected pink, today outlined; weekdays and months in Portuguese.",
+      pt: "No toque, o mês ocupa a largura que tem (até 320 px), cada dia é um quadrado de até 40 px e a área de toque é sempre de 44 × 44 px; cabe inteiro num card a partir de 320 px de tela (antes pedia cerca de 336 px). Dia escolhido no rosa de selecionado, hoje com contorno; dias da semana e meses em português.",
+    },
+    page: "campos",
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "Docs tables on phones", pt: "Tabelas da documentação no celular" },
+    desc: {
+      en: "The docs table (props, keys, tokens) becomes a list when narrow, with the name above and the description below; code never breaks mid-word.",
+      pt: "A tabela de documentação (props, teclas, tokens) vira lista no estreito, com o nome em cima e a descrição embaixo; o código nunca quebra no meio da palavra (antes, \"esconderAoRolar\" quebrava em três pedaços).",
+    },
+  },
+  {
+    date: "Nov 2026", kind: "Updated", title: { en: "CampoDeEndereco, accessible Upload, Stepper with dates and other fixes", pt: "CampoDeEndereco, Upload acessível, Stepper com data e outros ajustes" },
+    desc: {
+      en: "New CampoDeEndereco: suggests addresses while the person types (combobox with a list, keyboard, 350 ms wait, searching, no result and error states); the product does the search, with buscaNoPhoton() ready (the same request as the HTML restricted area). UploadDropzone with no control inside another and a named file input (axe: 0 label and nested-interactive failures). Stepper measures its real width and accepts a second line (detalhe, such as a date). Side menu: the names fade in only when opening and collapsing, not when the window width changes. AccordionContent: className documented and manterNoHtml. Campo: an outside aria-describedby is added to Campo's own, and manterAjudaNoErro. BarraDaEtapa: descricaoDoContinuar. Layout effects safe on the server. Logo with fill-rule evenodd. New links.tsx with LinkPularConteudo, LinkDeTexto and LinkDeVoltar (same API as FindLook).",
+      pt: "Novo CampoDeEndereco: sugere endereços enquanto a pessoa digita (combobox com lista, teclado, espera de 350 ms, procurando, nenhum resultado e erro); quem busca é o produto, com buscaNoPhoton() pronto (o mesmo pedido da área restrita em HTML). UploadDropzone sem controle dentro de outro e com campo de arquivo nomeado (axe: 0 falhas de label e nested-interactive). Stepper mede a largura real e aceita uma segunda linha (detalhe, como a data). Menu lateral: os nomes só entram com o esmaecer ao abrir e recolher, não ao mudar a largura da janela. AccordionContent: className documentado e manterNoHtml. Campo: aria-describedby de fora somado ao do Campo e manterAjudaNoErro. BarraDaEtapa: descricaoDoContinuar. Efeitos de layout seguros no servidor. Logo com fill-rule evenodd. Novo links.tsx com LinkPularConteudo, LinkDeTexto e LinkDeVoltar (a mesma API do FindLook).",
+    },
+    page: "campos",
+  },
+  {
     date: "Nov 2026", kind: "New", title: { en: "Site sections: testimonials, articles, logos, quotes, pillars, floating cards, simulation and long text", pt: "Seções do site: depoimentos, artigos, logos, citações, pilares, cartões flutuantes, simulação e texto longo" },
     desc: {
       en: "So the studio site can switch its hand-built sections to the DS without changing content (27/11/2026): CardDeDepoimento, CardDeArtigo (highlight, horizontal, vertical), FaixaDeLogos (pauses, still grid with reduced motion), Citacao, ListaDePilares, CartaoFlutuante, Simulacao (real tabs, auto-advance with Pause), LinkSaibaMais, Prosa, BarraDeNumeros, CardDeNavegacao, and LuzesDifusas brought from the FindLook DS with the same API. New page Components › Site sections.",

@@ -373,7 +373,8 @@ const notificacoes: { icone: React.ElementType; tom: TomDaNotificacao; titulo: L
 export function InboxTemplate() {
   const { t, bi } = useI18n();
   const [lidas, setLidas] = useState<Set<number>>(() => new Set(notificacoes.flatMap((n, i) => (n.lida ? [i] : []))));
-  const [aberta, setAberta] = useState<string | null>("0");
+  // Nenhuma aberta no início: no celular a lista vem primeiro; no computador, a leitura mostra "Selecione uma notificação".
+  const [aberta, setAberta] = useState<string | null>(null);
   const naoLidas = notificacoes.length - lidas.size;
   const itens = notificacoes.map((n, i) => {
     const Icone = n.icone;
@@ -739,7 +740,7 @@ export function LandingTemplate() {
           {faqItems.map((f, i) => (
             <AccordionItem key={i} value={`faq-${i}`}>
               <AccordionTrigger className="text-body-sm font-semibold">{bi(f.q)}</AccordionTrigger>
-              <AccordionContent className="text-body-sm leading-relaxed text-muted-foreground">{bi(f.a)}</AccordionContent>
+              <AccordionContent manterNoHtml className="text-body-sm leading-relaxed text-muted-foreground">{bi(f.a)}</AccordionContent>
             </AccordionItem>
           ))}
         </Accordion>

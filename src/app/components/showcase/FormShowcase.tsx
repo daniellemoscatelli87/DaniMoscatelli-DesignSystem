@@ -11,6 +11,7 @@ import { Input } from "@/app/components/ui/input";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
 import { Switch } from "@/app/components/ui/switch";
+import { Textarea } from "@/app/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 import { PasswordConfirm, regrasPadrao, textosPadrao } from "@/app/components/ui/password-field";
 import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
@@ -273,23 +274,12 @@ const [confirmacao, setConfirmacao] = useState("");
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div className="flex flex-col gap-1">
-                <label className="text-body-sm font-medium text-foreground">{t("Message", "Mensagem")}</label>
-                <textarea
-                  placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")}
-                  rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
-                  style={{ boxShadow: "var(--shadow-xs)" }}
-                />
+                <label htmlFor="textarea-demo-1" className="text-body-sm font-medium text-foreground">{t("Message", "Mensagem")}</label>
+                <Textarea id="textarea-demo-1" placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")} rows={4} />
               </div>
               <div className="flex flex-col gap-1">
-                <label className="text-body-sm font-medium text-foreground">{t("Notes", "Notas")}</label>
-                <textarea
-                  placeholder={t("Add notes...", "Adicione notas...")}
-                  rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
-                  disabled
-                  style={{ boxShadow: "var(--shadow-xs)" }}
-                />
+                <label htmlFor="textarea-demo-2" className="text-body-sm font-medium text-foreground">{t("Notes", "Notas")}</label>
+                <Textarea id="textarea-demo-2" placeholder={t("Add notes...", "Adicione notas...")} rows={4} disabled />
               </div>
             </div>
           </ShowcaseCard>

@@ -195,7 +195,7 @@ function DemoCalendario() {
   const [data, setData] = useState<Date | undefined>(new Date(2026, 10, 27));
   return (
     <ShowcaseCard>
-      <div className="mx-auto w-fit rounded-xl border border-border bg-card">
+      <div className="mx-auto w-full rounded-xl border border-border bg-card sm:w-fit">
         <Calendar mode="single" selected={data} onSelect={setData} defaultMonth={new Date(2026, 10, 1)} />
       </div>
     </ShowcaseCard>

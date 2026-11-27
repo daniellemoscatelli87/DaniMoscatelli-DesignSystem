@@ -66,6 +66,11 @@ export type TabelaAdaptavelProps<T> = {
   onOrdenar?: (o: OrdemDaTabela) => void;
   larguraDaLista?: number;
   vazio?: React.ReactNode;
+  /**
+   * "card": a tabela no próprio card (borda, cantos de 12 px e fundo branco); "nenhuma": sem moldura, para ficar dentro
+   * de um card que já existe. Padrão: "card" (como cada DS usava antes de 27/11/2026).
+   */
+  moldura?: "card" | "nenhuma";
   className?: string;
 };
 
@@ -122,6 +127,7 @@ export function TabelaAdaptavel<T>({
   larguraDasAcoes = 56,
   ordem,
   onOrdenar,
+  moldura = "card",
   larguraDaLista = 480,
   vazio,
   className,
@@ -190,7 +196,7 @@ export function TabelaAdaptavel<T>({
   };
 
   return (
-    <div ref={ref} data-slot="tabela-adaptavel" data-modo={lista ? "lista" : "tabela"} className={cn("min-w-0", className)}>
+    <div ref={ref} data-slot="tabela-adaptavel" data-modo={lista ? "lista" : "tabela"} className={cn("min-w-0", moldura === "card" && "overflow-hidden rounded-xl border border-border bg-card", className)}>
       {linhas.length === 0 && vazio ? (
         <div className="p-4">{vazio}</div>
       ) : lista ? (
