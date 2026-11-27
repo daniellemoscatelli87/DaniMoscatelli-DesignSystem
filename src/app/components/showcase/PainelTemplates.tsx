@@ -12,6 +12,8 @@ import { CabecalhoDaPagina } from "../ui/painel-cabecalho";
 import { CardIndicador, CardComCabecalho, IconeComBase, LinkVerTudo } from "../ui/painel-dados";
 import { GradeDeCards } from "../ui/grade-de-cards";
 import { LinhaDeLista } from "../ui/linha-de-lista";
+import { ChipDeEstado } from "../ui/chip-de-estado";
+import { BarraDeComposicao } from "../ui/barra-de-composicao";
 import { AlertaComAcao, BotaoDoAlerta, LinkDoAlerta } from "../ui/alerta-com-acao";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -88,36 +90,37 @@ function PaginaInicio({ t, bi, emDia }: { t: Tr; bi: (v: { en: string; pt: strin
     <div className="space-y-6">
       <CabecalhoDaPagina
         titulo={t("Good morning, **Ana**!", "Bom dia, **Ana**!")}
-        descricao={t("What came in through the website: contact messages, partner applications and launch sign-ups.", "O que chegou pelo site: mensagens de contato, candidaturas à Rede de Parceiros e cadastros para o lançamento.")}
+        descricao={t("What came in through the website.", "O que chegou pelo site.")}
       />
 
       {emDia ? (
         <AlertaComAcao tom="sucesso" titulo={t("All caught up", "Tudo em dia")}>
-          {t("New messages and applications will appear here first.", "Mensagens e candidaturas novas aparecem aqui primeiro.")}
+          {t("No message waiting for a reply and no application to review.", "Nenhuma mensagem esperando resposta e nenhuma candidatura por ver.")}
         </AlertaComAcao>
       ) : (
         <AlertaComAcao
-          tom="info"
+          tom="aviso"
           titulo={t("Needs your attention", "Precisa da sua atenção")}
           acoes={<><BotaoDoAlerta>{t("Reply to messages", "Responder mensagens")}</BotaoDoAlerta><LinkDoAlerta>{t("See applications", "Ver candidaturas")}</LinkDoAlerta></>}
         >
-          {t("3 unanswered messages, the oldest from 3 days ago. 2 partner applications not seen yet.", "3 mensagens sem resposta, a mais antiga de 3 dias atrás. 2 candidaturas de parceiros ainda não vistas.")}
+          {t("Reply to the messages waiting for an answer and review the new applications. The oldest has been waiting for 3 days.", "Responda as mensagens que esperam retorno e veja as candidaturas novas. A mais antiga espera há 3 dias.")}
         </AlertaComAcao>
       )}
 
       <section aria-label={t("Summary", "Resumo")}>
-        <GradeDeCards className="gap-4 @min-[28rem]/conteudo:grid-cols-2 @min-[66rem]/conteudo:grid-cols-4">
-          <CardIndicador href="#contato" icone={<Mail />} valor={5} rotulo={t("Messages this week", "Mensagens na semana")} />
-          <CardIndicador href="#reunioes" icone={<CalendarCheck />} valor={3} rotulo={t("Meetings booked", "Reuniões marcadas")} />
-          <CardIndicador href="#perfis" icone={<Users />} valor={2} rotulo={t("Applications this week", "Candidaturas na semana")} />
-          <CardIndicador href="#lancamento" icone={<Rocket />} valor={2} total={9} rotulo={t("Waiting for the launch", "Aguardando o lançamento")} apoio={t("7 already notified", "7 já avisados")} />
+        {/* 2 × 2 até um conteúdo de 44rem, 4 lado a lado a partir dele; no celular, só rótulo e número */}
+        <GradeDeCards colunas={{ base: 2 }} className="gap-4 @min-[44rem]/conteudo:grid-cols-4">
+          <CardIndicador compacto soNumeroNoCelular href="#contato" icone={<Mail />} valor={5} rotulo={t("Messages", "Mensagens")} apoio={t("in the last 7 days", "nos últimos 7 dias")} />
+          <CardIndicador compacto soNumeroNoCelular href="#reunioes" icone={<CalendarCheck />} valor={3} rotulo={t("Meetings", "Reuniões")} apoio={t("booked via the site", "marcadas pelo site")} />
+          <CardIndicador compacto soNumeroNoCelular href="#perfis" icone={<Users />} valor={2} rotulo={t("Applications", "Candidaturas")} apoio={t("in the last 7 days", "nos últimos 7 dias")} />
+          <CardIndicador compacto soNumeroNoCelular href="#lancamento" icone={<Rocket />} valor={2} total={9} rotulo={t("Launch", "Lançamento")} apoio={t("waiting for the notice", "aguardando o aviso")} />
         </GradeDeCards>
       </section>
 
       <CardComCabecalho
         icone={<Mail />}
         titulo={t("Contact", "Contato")}
-        descricao={t("Latest messages", "Últimas mensagens")}
+        descricao={t("3 messages received · 1 unanswered", "3 mensagens recebidas · 1 sem resposta")}
         acao={<LinkVerTudo href="#contato" rotulo={t("See all messages", "Ver todas as mensagens")}>{t("See all", "Ver todas")}</LinkVerTudo>}
         sangria
       >
@@ -128,12 +131,18 @@ function PaginaInicio({ t, bi, emDia }: { t: Tr; bi: (v: { en: string; pt: strin
                 as="a"
                 href="#contato"
                 inicio={<IconeComBase tom={m.tom} redonda>{m.icone}</IconeComBase>}
-                titulo={<>{m.nome}<span className="sr-only">, {bi(m.estado)}</span></>}
-                descricao={`${m.detalhe} · ${bi(m.assunto)}`}
-                fim={<span className="text-[0.8125rem] tabular-nums text-muted-foreground">{m.quando}</span>}
-                quebraAcoes={false}
+                titulo={m.nome}
+                descricao={m.detalhe}
+                fim={
+                  <span className="flex items-center gap-2 sm:flex-col sm:items-end sm:gap-1.5">
+                    <ChipDeEstado tom={m.tom}>{bi(m.estado)}</ChipDeEstado>
+                    <span className="text-sm tabular-nums text-muted-foreground">{m.quando}</span>
+                  </span>
+                }
                 className="px-5 sm:px-6"
-              />
+              >
+                <span className="mt-0.5 block text-sm text-foreground">{bi(m.assunto)}</span>
+              </LinhaDeLista>
             </li>
           ))}
         </ul>
@@ -168,7 +177,8 @@ export function PainelTemplate({ emDia = false }: { emDia?: boolean }) {
             <span className="hidden whitespace-nowrap text-[1rem] font-semibold tracking-tight text-foreground @md/painel:inline">Dani Moscatelli</span>
           </span>
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
-            <BotaoDeNotificacoes naoLidas={7} aria-label={t("Notifications, 7 unread", "Notificações, 7 não lidas")} />
+            {/* O sino soma os contadores do menu (3 + 2): o mesmo número tem o mesmo sentido em toda a tela. */}
+            <BotaoDeNotificacoes naoLidas={5} aria-label={t("Notifications, 5 unread", "Notificações, 5 não lidas")} />
             <MenuDaConta t={t} />
           </div>
         </BarraSuperiorDoPainel>
@@ -177,9 +187,10 @@ export function PainelTemplate({ emDia = false }: { emDia?: boolean }) {
           <MenuLateral aria-label={t("Side menu", "Menu lateral")} className="hidden @4xl/painel:flex">
             <ConteudoDoMenu ativo={pagina} ir={ir} t={t} />
           </MenuLateral>
-          <div className="@container/conteudo min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
+          <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-width:thin]">
             <main key={pagina} className="mx-auto w-full max-w-[72rem] p-4 animate-in fade-in-0 duration-300 motion-reduce:animate-none sm:p-6 lg:p-8">
-              {pagina === "inicio" ? <PaginaInicio t={t} bi={bi} emDia={emDia} /> : <PaginaEmBreve t={t} />}
+              {/* O contêiner é a área do conteúdo, sem o respiro: as colunas dos cards seguem a largura real deles. */}
+              <div className="@container/conteudo">{pagina === "inicio" ? <PaginaInicio t={t} bi={bi} emDia={emDia} /> : <PaginaEmBreve t={t} />}</div>
             </main>
           </div>
         </div>
@@ -220,8 +231,8 @@ export function PecasDoPainel() {
         <SubTitle>{t("1. Panel shell (ui/painel-shell)", "1. Casca do painel (ui/painel-shell)")}</SubTitle>
         <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
           {t(
-            "White full-width top bar (BarraSuperiorDoPainel) with the logo on the left and the bell and account on the right; below it, the white side menu (MenuLateral) on the grey page background. The ≡ MENU button at the top (TopoDoMenu) collapses it from 240 px to 64 px (icons with a tooltip), from 1024 px up; the menu pushes the content and the choice is saved per panel (MenuLateralProvider chave). Below 1024 px the same items go in a SidePanel side=\"left\".",
-            "Barra superior branca na largura toda (BarraSuperiorDoPainel), com o logo à esquerda e o sino e a conta à direita; embaixo, o menu lateral branco (MenuLateral) sobre o fundo cinza da página. O botão ≡ MENU no topo (TopoDoMenu) recolhe de 240 px para 64 px (ícones com dica), a partir de 1024 px; o menu empurra o conteúdo e a escolha fica guardada por painel (chave do MenuLateralProvider). Abaixo de 1024 px, os mesmos itens vão num SidePanel side=\"left\".",
+            "White full-width top bar (BarraSuperiorDoPainel) with the logo on the left and the bell and account on the right; below it, the white side menu (MenuLateral) on the grey page background. The ≡ MENU button at the top (TopoDoMenu) collapses it from 240 px to 64 px (icons with a tooltip), from 1024 px up; the menu pushes the content and the choice is saved per panel (MenuLateralProvider chave). Below 1024 px the same items go in a SidePanel side=\"left\". On a page that scrolls as a whole, use grudarAbaixoDe={64}: the menu becomes a white column as tall as the page and the items stick right under the header.",
+            "Barra superior branca na largura toda (BarraSuperiorDoPainel), com o logo à esquerda e o sino e a conta à direita; embaixo, o menu lateral branco (MenuLateral) sobre o fundo cinza da página. O botão ≡ MENU no topo (TopoDoMenu) recolhe de 240 px para 64 px (ícones com dica), a partir de 1024 px; o menu empurra o conteúdo e a escolha fica guardada por painel (chave do MenuLateralProvider). Abaixo de 1024 px, os mesmos itens vão num SidePanel side=\"left\". Em página que rola inteira, use grudarAbaixoDe={64}: o menu vira uma coluna branca da altura da página toda e os itens ficam grudados logo abaixo do cabeçalho.",
           )}
         </p>
         <GradeDeCards className="gap-4 md:grid-cols-2">
@@ -285,8 +296,8 @@ export function PecasDoPainel() {
         <SubTitle>{t("3. Indicator card (ui/painel-dados › CardIndicador)", "3. Card de indicador (ui/painel-dados › CardIndicador)")}</SubTitle>
         <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
           {t(
-            "Label top left, icon with base top right, big number at the bottom so numbers line up across a row. Optional: total (\"of 9\"), support line, trend, explanation, status badge, footer action, and href to make the whole card a link (hover: --primary border at 30% and --row-hover; focus ring on the card). null shows a dash and \"No data\" for screen readers. Put them in a GradeDeCards whose columns follow the container: 4 across only when each card keeps about 15.75rem (a 66rem container), so the label fits on one line; otherwise 2 × 2, and 1 on phones.",
-            "Rótulo em cima à esquerda, ícone com base no canto superior direito, número grande na base para os números se alinharem na linha. Opcionais: total (\"de 9\"), linha de apoio, variação, explicação, selo de estado, ação no rodapé e href para o card inteiro virar link (hover: borda --primary a 30% e --row-hover; anel de foco no card). null mostra um traço e \"Sem dado\" para leitores de tela. Use numa GradeDeCards com colunas pelo contêiner: 4 lado a lado só quando cada card tem ao menos ~15,75rem (contêiner de 66rem), para o rótulo caber numa linha; senão 2 × 2, e 1 no celular.",
+            "Label top left, icon with base top right, big number at the bottom so numbers line up across a row. Optional: total (\"of 9\"), support line, trend, explanation, status badge, footer action, and href to make the whole card a link (hover: --primary border at 30% and --row-hover; focus ring on the card). null shows a dash and \"No data\" for screen readers. Put them in a GradeDeCards whose columns follow the container: 4 across only when each card keeps about 15.75rem (a 66rem container), so the label fits on one line; otherwise 2 × 2, and 1 on phones. Compact variant (16 px padding, 32 px icon, short label and one context line): 4 across from a 44rem container and 2 × 2 on phones; with soNumeroNoCelular, phones show only label and number.",
+            "Rótulo em cima à esquerda, ícone com base no canto superior direito, número grande na base para os números se alinharem na linha. Opcionais: total (\"de 9\"), linha de apoio, variação, explicação, selo de estado, ação no rodapé e href para o card inteiro virar link (hover: borda --primary a 30% e --row-hover; anel de foco no card). null mostra um traço e \"Sem dado\" para leitores de tela. Use numa GradeDeCards com colunas pelo contêiner: 4 lado a lado só quando cada card tem ao menos ~15,75rem (contêiner de 66rem), para o rótulo caber numa linha; senão 2 × 2, e 1 no celular. Variante compacto (respiro de 16 px, ícone de 32 px, rótulo curto e uma linha de contexto): 4 lado a lado a partir de um contêiner de 44rem e 2 × 2 no celular; com soNumeroNoCelular, o celular mostra só rótulo e número.",
           )}
         </p>
         <div className="@container/conteudo">
@@ -343,6 +354,48 @@ export function PecasDoPainel() {
             <p className="text-[0.9375rem] text-foreground">{t("4 projects", "4 projetos")}</p>
           </CardComCabecalho>
         </GradeDeCards>
+      </div>
+
+      <div className="space-y-4">
+        <SubTitle>{t("6. Status chip (ui/chip-de-estado › ChipDeEstado)", "6. Chip de estado (ui/chip-de-estado › ChipDeEstado)")}</SubTitle>
+        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+          {t(
+            "The state of an item always in words (never only by colour or by icon shape), in the end column of a list row; on phones it moves to its own line under the text. Keep few tones per list and the same tone for the same meaning: pink for what still needs action, grey for what is resolved.",
+            "O estado de um item sempre em palavras (nunca só pela cor ou pela forma do ícone), na coluna do fim da linha da lista; no celular, desce para uma linha própria embaixo do texto. Poucos tons por lista e o mesmo tom para o mesmo sentido: rosa para o que ainda pede ação, cinza para o que está resolvido.",
+          )}
+        </p>
+        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card p-5">
+          <ChipDeEstado tom="marca">{t("Unread", "Não lida")}</ChipDeEstado>
+          <ChipDeEstado tom="marca">{t("Unanswered", "Sem resposta")}</ChipDeEstado>
+          <ChipDeEstado tom="neutro">{t("Answered", "Respondida")}</ChipDeEstado>
+          <ChipDeEstado tom="neutro" icone={<CalendarCheck />}>{t("Meeting booked", "Reunião marcada")}</ChipDeEstado>
+          <ChipDeEstado tom="sucesso">{t("Active", "Ativo")}</ChipDeEstado>
+          <ChipDeEstado tom="info">{t("In review", "Em análise")}</ChipDeEstado>
+          <ChipDeEstado tom="aviso">{t("Expiring", "Vencendo")}</ChipDeEstado>
+          <ChipDeEstado tom="erro">{t("Failed", "Falhou")}</ChipDeEstado>
+          <ChipDeEstado tom="marca" tamanho="md">{t("Size md", "Tamanho md")}</ChipDeEstado>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <SubTitle>{t("7. Composition bar (ui/barra-de-composicao › BarraDeComposicao)", "7. Barra de composição (ui/barra-de-composicao › BarraDeComposicao)")}</SubTitle>
+        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+          {t(
+            "How a total splits into 2 to 5 parts, in one bar. Fixed order: title, bar, and the legend below with a dot in each part's colour, the count and the percentage. Colours only from the chart tokens; give each part a tone so the same meaning keeps the same colour (pending in tones 1 and 2, resolved in the context tones).",
+            "Como um total se divide em 2 a 5 partes, numa barra só. Ordem fixa: título, barra e, embaixo, a legenda com o ponto na cor de cada parte, a quantidade e o percentual. Cores só dos tokens de gráfico; dê um tom a cada parte para o mesmo sentido ter a mesma cor (pendentes nos tons 1 e 2, resolvidas nos tons de contexto).",
+          )}
+        </p>
+        <div className="rounded-xl border border-border bg-card p-5">
+          <BarraDeComposicao
+            titulo={t("Status of the last 6 messages", "Situação das últimas 6 mensagens")}
+            partes={[
+              { rotulo: t("Unread", "Não lida"), valor: 2, tom: 1 },
+              { rotulo: t("Unanswered", "Sem resposta"), valor: 1, tom: 2 },
+              { rotulo: t("Answered", "Respondida"), valor: 2, tom: 6 },
+              { rotulo: t("Meeting booked", "Reunião marcada"), valor: 1, tom: 5 },
+            ]}
+          />
+        </div>
       </div>
 
       <div className="space-y-3">

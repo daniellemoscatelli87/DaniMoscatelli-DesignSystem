@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 82 arquivos de componentes em `src/app/components/ui/` com 347 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 157 tokens · 29 páginas e 201 âncoras no site (https://designsystem.danimoscatelli.com.br) · 1 propostas de componente.
+**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 157 tokens · 29 páginas e 201 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -126,6 +126,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Variantes:** `variant` = `default` · `secondary` · `destructive` · `outline`
 - **Onde ver:** Templates › Peças do painel (`templates#template-painel-pecas`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
 
+### barra-de-composicao
+
+- **Arquivo:** [src/app/components/ui/barra-de-composicao.tsx](src/app/components/ui/barra-de-composicao.tsx)
+- **Quando usar:** Barra de composição: como um total se divide em poucas partes (2 a 5), numa barra só. Ordem fixa, pela regra dos gráficos do DS: título, a barra e, embaixo, a legenda com os valores fora da barra, cada um com o ponto na cor da parte (nome, quantidade e percentual).
+- **Componentes:**
+  - `BarraDeComposicao` (props: `titulo`, `partes`, `ocultarZeros`, `formatarQuantidade`)
+- **Onde ver:** Templates › Peças do painel (`templates#template-painel-pecas`)
+
 ### botao-subir
 
 - **Arquivo:** [src/app/components/ui/botao-subir.tsx](src/app/components/ui/botao-subir.tsx)
@@ -231,6 +239,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Checkbox` (props: `className`)
 - **Onde ver:** Botões › Senha (`buttons#password`) · Botões › Controle segmentado (`buttons#segmented`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
+
+### chip-de-estado
+
+- **Arquivo:** [src/app/components/ui/chip-de-estado.tsx](src/app/components/ui/chip-de-estado.tsx)
+- **Quando usar:** Chip de estado: o estado de um item (mensagem, candidatura, pedido) sempre em texto, com ícone opcional e o fundo do tom. Regra: estado nunca só por cor ou forma; o texto é obrigatório. Vai na coluna do fim de uma LinhaDeLista (tags e ações), que no celular desce para uma linha própria embaixo do texto.
+- **Componentes:**
+  - `ChipDeEstado` (props: `tom`, `icone`, `tamanho`, `className`, `children`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
 
 ### collapsible
 
@@ -605,7 +621,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `IconeComBase` (props: `tom`, `tamanho`, `redonda`, `children`, `className`)
   - `Variacao` (props: `valor`, `comparacao`, `className`): Variação (seta + texto; nunca só cor)
   - `Explicacao` (props: `termo`, `children`): Explicação acessível (toque, teclado e mouse)
-  - `CardIndicador` (props: `icone`, `valor`, `total`, `rotulo`, `apoio`, `variacao`, `comparacao`, `explicacao`, `selo`, `acao`, `tom`, `href`, `as`, `className`): Card de indicador: rótulo em cima à esquerda, ícone com base no canto superior direito e, logo abaixo, o número grande. A linha do rótulo tem a altura de duas linhas de texto (a do ícone), então numa linha de cards os números ficam …
+  - `CardIndicador` (props: `icone`, `valor`, `total`, `rotulo`, `apoio`, `variacao`, `comparacao`, `explicacao`, `selo`, `acao`, `tom`, `href`, `as`, `compacto`, `soNumeroNoCelular`, `className`): Card de indicador: rótulo em cima à esquerda, ícone com base no canto superior direito e, logo abaixo, o número grande. A linha do rótulo tem a altura de duas linhas de texto (a do ícone), então numa linha de cards os números ficam …
   - `DivisorSuave` (props: `className`): Linha de 1 px que some nas laterais: degradê transparente → --border-strong → transparente, com o esmaecimento nos últimos ~18% de cada lado. Separa partes de um card sem fechar uma caixa.
   - `CardComCabecalho` (props: `icone`, `titulo`, `descricao`, `acao`, `tom`, `cabecalho`, `nivel`, `sangria`, `idDoTitulo`, `children`, `className`)
   - `LinkVerTudo` (props: `children`, `href`, `rotulo`, `onClick`, `tom`, `icone`, `as`, `className`)
@@ -618,7 +634,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Casca do painel (área restrita, painéis de produto): a moldura aprovada pela dona do produto para o site do design system e para a área restrita, trazida do FindLook Design System (ui/painel-shell.tsx) com as cores deste DS. BarraSuperiorDoPainel branca de ponta a ponta no alto (logo à esquerda;
 - **Componentes:**
   - `MenuLateralProvider` (props: `children`, `chave`, `padrao`, `recolhido`, `onRecolhidoChange`)
-  - `MenuLateral` (props: `midia`, `className`, `style`, `children`): Coluna do menu lateral fixo (telas largas). Muda de largura entre 240 px e 64 px com os tokens de movimento; com "menos movimento", a troca é instantânea.
+  - `MenuLateral` (props: `midia`, `grudarAbaixoDe`, `className`, `style`, `children`): Coluna do menu lateral fixo (telas largas). Muda de largura entre 240 px e 64 px com os tokens de movimento; com "menos movimento", a troca é instantânea.
   - `NavDoMenu` (props: `className`): <nav> do menu lateral, com o id que o BotaoRecolherMenu controla e a rolagem própria.
   - `DivisorDoMenu` (props: `className`): Linha fina entre grupos do menu.
   - `ContadorDoPainel` (props: `valor`, `rotulo`, `anel`, `className`): Contador redondo do painel: fundo vermelho e número branco em negrito, números tabulares. Círculo de 20 px com um algarismo; com dois ou mais, vira pílula com as pontas redondas (largura mínima de 20 px, nunca um oval alto).
@@ -982,7 +998,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
-| `PainelTemplate`<br>Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início. | Templates › Painel (`templates#template-painel`) | [src/app/components/showcase/PainelTemplates.tsx:152](src/app/components/showcase/PainelTemplates.tsx#L152) | `AlertaComAcao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `BotaoDoAlerta`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador` +22 | 1 |
+| `PainelTemplate`<br>Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início. | Templates › Painel (`templates#template-painel`) | [src/app/components/showcase/PainelTemplates.tsx:161](src/app/components/showcase/PainelTemplates.tsx#L161) | `AlertaComAcao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `BotaoDoAlerta`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador` +23 | 1 |
 | `DashboardTemplate` | Templates › Dashboard (`templates#template-dashboard`) | [src/app/components/showcase/TemplatesShowcase.tsx:97](src/app/components/showcase/TemplatesShowcase.tsx#L97) | `GradeDeCards` | 13 |
 | `SettingsTemplate`<br>2. Settings Template | Templates › Configurações (`templates#template-settings`) | [src/app/components/showcase/TemplatesShowcase.tsx:244](src/app/components/showcase/TemplatesShowcase.tsx#L244) |  | 14 |
 | `AuthTemplate`<br>3. Login / Auth Template | Templates › Autenticação (`templates#template-auth`) | [src/app/components/showcase/TemplatesShowcase.tsx:439](src/app/components/showcase/TemplatesShowcase.tsx#L439) |  | 10 |
@@ -998,7 +1014,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
-| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:215](src/app/components/showcase/PainelTemplates.tsx#L215) | `Badge`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card`, `CardComCabecalho` +18 | 5 |
+| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 7 |
 | `ChaveParaQuem`<br>Controle só da demonstração: liga e desliga o bloco opcional "Para quem" nos cards de preço | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:876](src/app/components/showcase/TemplatesShowcase.tsx#L876) |  | 2 |
 | `InputField` | Botões › Controles de formulário (`buttons#inputs`) | [src/app/components/showcase/FormShowcase.tsx:65](src/app/components/showcase/FormShowcase.tsx#L65) | `Input` | 1 |
 | `CanvasRevealCard`<br>Cards com revelação em canvas (usado na página Cards › Animação). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/BackgroundsShowcase.tsx:498](src/app/components/showcase/BackgroundsShowcase.tsx#L498) |  | 9 |
@@ -1365,6 +1381,8 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 
 | Proposta | Componente | Status |
 |---|---|---|
+| [Barra de composição](propostas/2026-11-27-barra-de-composicao.md) | `BarraDeComposicao em src/app/components/ui/barra-de-composicao.tsx` | proposta |
+| [Chip de estado](propostas/2026-11-27-chip-de-estado.md) | `ChipDeEstado em src/app/components/ui/chip-de-estado.tsx` | proposta |
 | [Peças do painel: casca, cabeçalho da página, card de indicador e ícone com base](propostas/2026-11-27-pecas-do-painel.md) | `MenuLateralProvider, MenuLateral, TopoDoMenu, BotaoRecolherMenu, NavDoMenu, ItemDoMenu, GrupoDoMenu, BarraSuperiorDoPainel, BotaoDeNotificacoes, GatilhoDaConta, AvatarPainel, ContadorDoPainel, CampoDeBuscaGlobal, CardDeAjuda em src/app/components/ui/painel-shell.tsx; CabecalhoDaPagina em src/app/components/ui/painel-cabecalho.tsx; IconeComBase, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao em src/app/components/ui/painel-dados.tsx` | proposta |
 
 ## 6. Páginas e âncoras do site

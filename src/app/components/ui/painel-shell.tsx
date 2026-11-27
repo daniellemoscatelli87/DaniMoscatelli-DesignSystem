@@ -129,6 +129,13 @@ function useTelaLarga(midia: string) {
 type MenuLateralProps = React.ComponentProps<"aside"> & {
   /** A partir de qual largura de tela o menu pode recolher (padrão: 1024 px). Abaixo dela, fica sempre expandido. */
   midia?: string;
+  /**
+   * Página que rola inteira (área restrita): altura do cabeçalho fixo acima do menu, em px (64 para a
+   * BarraSuperiorDoPainel). O menu vira uma coluna branca da altura da página toda (nunca termina no meio dela) e o
+   * conteúdo dele fica grudado logo abaixo do cabeçalho enquanto a página rola. Sem ele, o menu ocupa a altura do
+   * contêiner (h-full), para painéis com rolagem própria.
+   */
+  grudarAbaixoDe?: number;
 };
 
 /**
@@ -136,7 +143,7 @@ type MenuLateralProps = React.ComponentProps<"aside"> & {
  * com "menos movimento", a troca é instantânea. Use dentro de um MenuLateralProvider, numa linha flex ao lado do
  * conteúdo (o menu empurra o conteúdo). Esconder em telas estreitas (onde o menu vira gaveta) fica por conta da página.
  */
-const MenuLateral = React.forwardRef<HTMLElement, MenuLateralProps>(function MenuLateral({ midia = MIDIA_RECOLHIVEL, className, style, children, ...props }, ref) {
+const MenuLateral = React.forwardRef<HTMLElement, MenuLateralProps>(function MenuLateral({ midia = MIDIA_RECOLHIVEL, grudarAbaixoDe, className, style, children, ...props }, ref) {
   const { recolhido: escolha, restaurado } = useMenuLateral();
   const larga = useTelaLarga(midia);
   const recolhido = escolha && larga;
@@ -154,14 +161,22 @@ const MenuLateral = React.forwardRef<HTMLElement, MenuLateralProps>(function Men
       data-slot="menu-lateral"
       data-recolhido={recolhido ? "" : undefined}
       className={cn(
-        "flex h-full shrink-0 flex-col overflow-hidden border-r border-border bg-sidebar",
+        "flex shrink-0 flex-col border-r border-border bg-sidebar",
+        // Coluna da página: estica até o fim da página; clip (e não hidden) para o conteúdo poder grudar no topo.
+        grudarAbaixoDe === undefined ? "h-full overflow-hidden" : "self-stretch overflow-x-clip",
         restaurado && montado && "transition-[width] duration-[var(--duration-normal)] ease-[var(--ease-in-out)] motion-reduce:transition-none",
         className,
       )}
       style={{ width: recolhido ? LARGURA_RECOLHIDO : LARGURA_EXPANDIDO, ...style }}
       {...props}
     >
-      <ContextoDoRecolhido.Provider value={valor}>{children}</ContextoDoRecolhido.Provider>
+      <ContextoDoRecolhido.Provider value={valor}>
+        {grudarAbaixoDe === undefined ? children : (
+          <div data-slot="menu-lateral-grudado" className="sticky flex min-h-0 flex-col overflow-hidden" style={{ top: grudarAbaixoDe, height: `calc(100dvh - ${grudarAbaixoDe}px)` }}>
+            {children}
+          </div>
+        )}
+      </ContextoDoRecolhido.Provider>
     </aside>
   );
 });

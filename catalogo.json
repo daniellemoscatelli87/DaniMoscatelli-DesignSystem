@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 82,
-    "componentesExportados": 347,
+    "arquivosDeComponentes": 84,
+    "componentesExportados": 349,
     "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 46,
     "tokens": 157,
     "paginas": 29,
     "ancoras": 201,
-    "propostas": 1
+    "propostas": 3
   },
   "componentes": [
     {
@@ -683,6 +683,46 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "Badge"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/barra-de-composicao.tsx",
+      "nome": "barra-de-composicao",
+      "quandoUsar": "Barra de composição: como um total se divide em poucas partes (2 a 5), numa barra só. Ordem fixa, pela regra dos gráficos do DS: título, a barra e, embaixo, a legenda com os valores fora da barra, cada um com o ponto na cor da parte (nome, quantidade e percentual).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "BarraDeComposicao",
+          "tipo": "componente",
+          "linha": 27,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "partes",
+            "ocultarZeros",
+            "formatarQuantidade"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BarraDeComposicaoProps",
+        "ParteDaComposicao"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "BarraDeComposicao"
           ]
         }
       ]
@@ -1847,6 +1887,59 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "Checkbox"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/chip-de-estado.tsx",
+      "nome": "chip-de-estado",
+      "quandoUsar": "Chip de estado: o estado de um item (mensagem, candidatura, pedido) sempre em texto, com ícone opcional e o fundo do tom. Regra: estado nunca só por cor ou forma; o texto é obrigatório. Vai na coluna do fim de uma LinhaDeLista (tags e ações), que no celular desce para uma linha própria embaixo do texto.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "ChipDeEstado",
+          "tipo": "componente",
+          "linha": 34,
+          "descricao": "",
+          "props": [
+            "tom",
+            "icone",
+            "tamanho",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ChipDeEstadoProps",
+        "TomDoChip"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
           ]
         }
       ]
@@ -6256,7 +6349,7 @@
         {
           "nome": "CardIndicador",
           "tipo": "componente",
-          "linha": 117,
+          "linha": 124,
           "descricao": "Card de indicador: rótulo em cima à esquerda, ícone com base no canto superior direito e, logo abaixo, o número grande. A linha do rótulo tem a altura de duas linhas de texto (a do ícone), então numa linha de cards os números ficam …",
           "props": [
             "icone",
@@ -6272,6 +6365,8 @@
             "tom",
             "href",
             "as",
+            "compacto",
+            "soNumeroNoCelular",
             "className"
           ],
           "reexportaDe": null
@@ -6279,7 +6374,7 @@
         {
           "nome": "DivisorSuave",
           "tipo": "componente",
-          "linha": 175,
+          "linha": 184,
           "descricao": "Linha de 1 px que some nas laterais: degradê transparente → --border-strong → transparente, com o esmaecimento nos últimos ~18% de cada lado. Separa partes de um card sem fechar uma caixa.",
           "props": [
             "className"
@@ -6289,7 +6384,7 @@
         {
           "nome": "CardComCabecalho",
           "tipo": "componente",
-          "linha": 207,
+          "linha": 216,
           "descricao": "",
           "props": [
             "icone",
@@ -6309,7 +6404,7 @@
         {
           "nome": "LinkVerTudo",
           "tipo": "componente",
-          "linha": 243,
+          "linha": 252,
           "descricao": "",
           "props": [
             "children",
@@ -6420,10 +6515,11 @@
         {
           "nome": "MenuLateral",
           "tipo": "componente",
-          "linha": 139,
+          "linha": 146,
           "descricao": "Coluna do menu lateral fixo (telas largas). Muda de largura entre 240 px e 64 px com os tokens de movimento; com \"menos movimento\", a troca é instantânea.",
           "props": [
             "midia",
+            "grudarAbaixoDe",
             "className",
             "style",
             "children"
@@ -6433,7 +6529,7 @@
         {
           "nome": "NavDoMenu",
           "tipo": "componente",
-          "linha": 170,
+          "linha": 185,
           "descricao": "<nav> do menu lateral, com o id que o BotaoRecolherMenu controla e a rolagem própria.",
           "props": [
             "className"
@@ -6443,7 +6539,7 @@
         {
           "nome": "DivisorDoMenu",
           "tipo": "componente",
-          "linha": 185,
+          "linha": 200,
           "descricao": "Linha fina entre grupos do menu.",
           "props": [
             "className"
@@ -6453,7 +6549,7 @@
         {
           "nome": "textoDoContador",
           "tipo": "utilitário",
-          "linha": 205,
+          "linha": 220,
           "descricao": "Mostra até 99; acima disso, \"99+\".",
           "props": [],
           "reexportaDe": null
@@ -6461,7 +6557,7 @@
         {
           "nome": "ContadorDoPainel",
           "tipo": "componente",
-          "linha": 224,
+          "linha": 239,
           "descricao": "Contador redondo do painel: fundo vermelho e número branco em negrito, números tabulares. Círculo de 20 px com um algarismo; com dois ou mais, vira pílula com as pontas redondas (largura mínima de 20 px, nunca um oval alto).",
           "props": [
             "valor",
@@ -6474,7 +6570,7 @@
         {
           "nome": "BotaoRecolherMenu",
           "tipo": "componente",
-          "linha": 247,
+          "linha": 262,
           "descricao": "",
           "props": [
             "className",
@@ -6488,7 +6584,7 @@
         {
           "nome": "TopoDoMenu",
           "tipo": "componente",
-          "linha": 280,
+          "linha": 295,
           "descricao": "Topo do menu lateral (como no site do DS): o botão \"≡ Menu\", centralizado quando recolhido.",
           "props": [
             "className",
@@ -6499,7 +6595,7 @@
         {
           "nome": "BarraSuperiorDoPainel",
           "tipo": "componente",
-          "linha": 296,
+          "linha": 311,
           "descricao": "Faixa branca de ponta a ponta no alto do painel, acima do menu lateral, com linha fina embaixo. O logo fica à esquerda; busca e notificações à direita; o perfil (GatilhoDaConta) sempre na ponta direita.",
           "props": [
             "className",
@@ -6510,7 +6606,7 @@
         {
           "nome": "iniciais",
           "tipo": "utilitário",
-          "linha": 305,
+          "linha": 320,
           "descricao": "Iniciais e avatar",
           "props": [],
           "reexportaDe": null
@@ -6518,7 +6614,7 @@
         {
           "nome": "AvatarPainel",
           "tipo": "componente",
-          "linha": 310,
+          "linha": 325,
           "descricao": "Avatar do painel (Avatar do DS, 36 px): foto, ou as iniciais na base rosa clara com texto --primary-text.",
           "props": [
             "nome",
@@ -6530,7 +6626,7 @@
         {
           "nome": "ItemDoMenu",
           "tipo": "componente",
-          "linha": 343,
+          "linha": 358,
           "descricao": "",
           "props": [
             "icone",
@@ -6546,7 +6642,7 @@
         {
           "nome": "GrupoDoMenu",
           "tipo": "componente",
-          "linha": 395,
+          "linha": 410,
           "descricao": "",
           "props": [
             "titulo",
@@ -6566,7 +6662,7 @@
         {
           "nome": "CardDeAjuda",
           "tipo": "componente",
-          "linha": 457,
+          "linha": 472,
           "descricao": "Card de ajuda (rodapé do menu)",
           "props": [
             "titulo",
@@ -6579,7 +6675,7 @@
         {
           "nome": "CampoDeBuscaGlobal",
           "tipo": "componente",
-          "linha": 503,
+          "linha": 518,
           "descricao": "Barra superior: busca, sino e conta",
           "props": [
             "placeholder",
@@ -6592,7 +6688,7 @@
         {
           "nome": "BotaoDeNotificacoes",
           "tipo": "componente",
-          "linha": 534,
+          "linha": 549,
           "descricao": "Sino de notificações (botão redondo de 44 px, o alvo de toque mínimo). Com não lidas, o ContadorDoPainel fica sobre o canto superior direito do sino (centro do contador no canto do ícone), com anel de 2 px na cor do cabeçalho.",
           "props": [
             "naoLidas",
@@ -6604,7 +6700,7 @@
         {
           "nome": "GatilhoDaConta",
           "tipo": "componente",
-          "linha": 560,
+          "linha": 575,
           "descricao": "",
           "props": [
             "nome",
@@ -9652,7 +9748,7 @@
       "nome": "PainelTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 152,
+      "linha": 161,
       "descricao": "Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início.",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9675,6 +9771,7 @@
         "CabecalhoDaPagina",
         "CardComCabecalho",
         "CardIndicador",
+        "ChipDeEstado",
         "DropdownMenu",
         "DropdownMenuContent",
         "DropdownMenuItem",
@@ -9704,7 +9801,7 @@
       "nome": "PecasDoPainel",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 215,
+      "linha": 226,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9720,6 +9817,7 @@
       ],
       "usaComponentes": [
         "Badge",
+        "BarraDeComposicao",
         "BarraSuperiorDoPainel",
         "BotaoDeNotificacoes",
         "Button",
@@ -9732,6 +9830,7 @@
         "CardHeader",
         "CardIndicador",
         "CardTitle",
+        "ChipDeEstado",
         "ContadorDoPainel",
         "GradeDeCards",
         "GrupoDoMenu",
@@ -9746,7 +9845,7 @@
         "TabsTrigger",
         "TopoDoMenu"
       ],
-      "elementosFeitosAMao": 5
+      "elementosFeitosAMao": 7
     },
     {
       "nome": "DashboardTemplate",
@@ -12862,6 +12961,18 @@
     ]
   },
   "propostas": [
+    {
+      "arquivo": "propostas/2026-11-27-barra-de-composicao.md",
+      "titulo": "Barra de composição",
+      "status": "proposta",
+      "componente": "BarraDeComposicao em src/app/components/ui/barra-de-composicao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-chip-de-estado.md",
+      "titulo": "Chip de estado",
+      "status": "proposta",
+      "componente": "ChipDeEstado em src/app/components/ui/chip-de-estado.tsx"
+    },
     {
       "arquivo": "propostas/2026-11-27-pecas-do-painel.md",
       "titulo": "Peças do painel: casca, cabeçalho da página, card de indicador e ícone com base",
