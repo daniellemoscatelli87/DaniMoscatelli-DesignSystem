@@ -17,6 +17,7 @@ import { SeloSecao } from "../ui/selo-secao";
 import { Button } from "../ui/button";
 import logoSobreClaro from "../../../imports/Logo-Horizontal-DarkMode.png";
 import logoSobreEscuro from "../../../imports/Logo-Horizontal-LightMode.png";
+import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
 
 /* ─────────────────────────────────────────────────────────────
    Padrões do site
@@ -43,7 +44,7 @@ function Lista({ itens }: { itens: string[] }) {
 function Orientacoes({ quando, a11y }: { quando: string[]; a11y: string[] }) {
   const { t } = useI18n();
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <GradeDeCards className="gap-4 lg:grid-cols-2">
       <Panel className="p-5">
         <SubTitle>{t("When to use", "Quando usar")}</SubTitle>
         <Lista itens={quando} />
@@ -52,7 +53,7 @@ function Orientacoes({ quando, a11y }: { quando: string[]; a11y: string[] }) {
         <SubTitle>{t("Accessibility", "Acessibilidade")}</SubTitle>
         <Lista itens={a11y} />
       </Panel>
-    </div>
+    </GradeDeCards>
   );
 }
 
@@ -205,24 +206,24 @@ function SecaoFlutuantes() {
           <RotateCcw aria-hidden /> {t("Show the notices again", "Mostrar os avisos de novo")}
         </Button>
       </div>
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div>
+      <GradeDeCards className="gap-6 lg:grid-cols-2">
+        <ItemDaGrade>
           <Rotulo titulo={t("Computer: notice above the button", "Computador: aviso acima do botão")} desc={t("From 1024 px, the notice floats above the WhatsApp button, with the arrow pointing down.", "A partir de 1024 px, o aviso flutua acima do botão do WhatsApp, com a seta para baixo.")} />
           <Moldura className="h-[300px]" rotulo={t("Computer demo", "Demonstração no computador")}>
             <PaginaFalsa />
             <AvisoProjeto key={`a${chave}`} posicao="acima" {...aviso} />
             <BotaoWhatsApp {...whats} />
           </Moldura>
-        </div>
-        <div>
+        </ItemDaGrade>
+        <ItemDaGrade>
           <Rotulo titulo={t("Phone: notice beside the button", "Celular: aviso ao lado do botão")} desc={t("Up to 1023 px, it takes the space to the left of the button, with the arrow pointing right.", "Até 1023 px, ocupa o espaço à esquerda do botão, com a seta para a direita.")} />
           <Moldura className="mx-auto h-[300px] max-w-[390px]" rotulo={t("Phone demo", "Demonstração no celular")}>
             <PaginaFalsa />
             <AvisoProjeto key={`b${chave}`} posicao="ao-lado" {...aviso} />
             <BotaoWhatsApp {...whats} />
           </Moldura>
-        </div>
-      </div>
+        </ItemDaGrade>
+      </GradeDeCards>
       <div>
         <Rotulo titulo={t("Back to top", "Voltar ao topo")} desc={t("Scroll to the end of the box: when the footer appears, the button comes in beside the WhatsApp button.", "Role até o fim da caixa: quando o rodapé aparece, o botão entra ao lado do botão do WhatsApp.")} />
         <Moldura className="mx-auto h-[300px] max-w-[390px]" rotulo={t("Back-to-top demo", "Demonstração do voltar ao topo")}>
@@ -572,21 +573,21 @@ function SecaoFrentes() {
           "O card da seção “Onde podemos atuar” do Projeto Piloto: ícone, título, subtítulo em vermelho, descrição e temas. Passe o mouse: o card sobe, a luz percorre a borda e um brilho suave segue o cursor. No card de vidro, o ícone e os temas continuam em vidro, porque o card não é clicável.",
         )}
       />
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="min-w-0">
+      <GradeDeCards className="gap-6 lg:grid-cols-2">
+        <ItemDaGrade className="min-w-0">
           <Rotulo titulo={t("Dark (as on the site)", "Escuro (como no site)")} desc={t("Light glass over the dark section. It is the default.", "Vidro claro sobre a seção escura. É o padrão.")} />
-          <div className="relative overflow-hidden rounded-lg bg-graphite-950 p-5 sm:p-8">
+          <div className="relative flex flex-col overflow-hidden rounded-lg border border-transparent bg-graphite-950 p-5 sm:p-8">
             <FundoSecaoEscura />
-            <div className="relative"><CardDeFrente {...props} /></div>
+            <div className="relative flex flex-1 flex-col"><CardDeFrente {...props} className="flex-1" /></div>
           </div>
-        </div>
-        <div className="min-w-0">
+        </ItemDaGrade>
+        <ItemDaGrade className="min-w-0">
           <Rotulo titulo={t("Light", "Claro")} desc={t("White DS card for light sections, with the number and the red bar of the original markup turned on.", "Card branco do DS para seções claras, com o número e a barra vermelha da marcação original ligados.")} />
-          <div className="rounded-lg border border-border bg-background p-5 sm:p-8">
-            <CardDeFrente {...props} tom="claro" mostrarNumero barra />
+          <div className="flex flex-col rounded-lg border border-border bg-background p-5 sm:p-8">
+            <CardDeFrente {...props} tom="claro" mostrarNumero barra className="flex-1" />
           </div>
-        </div>
-      </div>
+        </ItemDaGrade>
+      </GradeDeCards>
       <Panel className="p-5">
         <SubTitle>{t("Props", "Props")}</SubTitle>
         <ul className="grid grid-cols-1 gap-x-8 gap-y-2 text-[0.8125rem] leading-relaxed text-muted-foreground md:grid-cols-2">

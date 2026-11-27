@@ -5,6 +5,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { DataTable, DoDont, Mono, Panel } from "./shared/Guidance";
 import { cn } from "../ui/utils";
 import { SectionHeader } from "./shared/SectionHeader";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 /* ─────────────────────────────────────────────────────────────
    Grid e espaçamento
@@ -184,7 +185,7 @@ export function GridShowcase() {
           title={t("Vertical rhythm", "Ritmo vertical")}
           description={t("Sections of a page are separated by the same space, so the page reads as a sequence. The hero gets more air.", "As seções de uma página ficam separadas pelo mesmo espaço, para a página ser lida em sequência. O hero ganha mais respiro.")}
         />
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <GradeDeCards className="gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="rounded-lg border border-border bg-card p-4">
             {[
               [t("Hero", "Hero"), "96 px", "--section-space-hero"],
@@ -210,7 +211,7 @@ export function GridShowcase() {
               [t("Between groups in a section", "Entre grupos da seção"), "32 px", "--space-8"],
             ]}
           />
-        </div>
+        </GradeDeCards>
       </section>
 
       <section id="grid-uso" className="scroll-mt-32">

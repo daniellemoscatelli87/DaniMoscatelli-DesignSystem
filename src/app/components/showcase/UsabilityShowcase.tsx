@@ -5,6 +5,7 @@ import {
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { useI18n } from "../../i18n";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, display } from "./shared/Guidance";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 type Bi = { en: string; pt: string };
 
@@ -310,7 +311,7 @@ export function UsabilityShowcase() {
         title={t("System status", "Status do sistema")}
         intro={<p>{t("People should never wonder whether something worked. Match the feedback to how long the wait is.", "As pessoas nunca devem se perguntar se algo funcionou. Ajuste o feedback ao tempo de espera.")}</p>}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <GradeDeCards className="lg:grid-cols-2 gap-4">
           <FeedbackDemo />
           <DataTable
             head={[t("Wait", "Espera"), t("Feedback", "Feedback")]}
@@ -321,7 +322,7 @@ export function UsabilityShowcase() {
               ["> 10s", t("Determinate progress, time estimate and a way to cancel.", "Progresso determinado, estimativa de tempo e uma forma de cancelar.")],
             ]}
           />
-        </div>
+        </GradeDeCards>
       </PageSection>
 
       <PageSection

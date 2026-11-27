@@ -4,6 +4,7 @@ import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { UploadDropzone, UploadList, ImageUpload, ImageGrid, formatBytes, UploadTextsProvider, uploadTextosEn, uploadTextosPt, type UploadFile, type GalleryImage } from "@/app/components/ui/upload";
 import { SectionHeader } from "./shared/SectionHeader";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 /* Troque para true no FindLook Design System: muda só os exemplos. */
 const FINDLOOK = false;
@@ -156,7 +157,7 @@ function UploadShowcaseConteudo() {
           </div>
         </ShowcaseCard>
 
-        <div className="mt-5 grid gap-5 md:grid-cols-2">
+        <GradeDeCards className="mt-5 gap-5 md:grid-cols-2">
           <ShowcaseCard>
             <SubTitle>{t("Compact", "Compacta")}</SubTitle>
             <UploadDropzone size="compact" multiple={false} accept={[".pdf"]} maxSize={5 * 1024 * 1024} title={t("Attach a PDF", "Anexar um PDF")} description={t("One file, up to 5 MB", "Um arquivo, até 5 MB")} onFiles={files => docs.add(files)} onError={setDocsError} />
@@ -179,7 +180,7 @@ function UploadShowcaseConteudo() {
             )}
             <p className="mt-3 text-[0.8125rem] text-muted-foreground">{t("On the phone, “Take photo” opens the camera directly; on desktop it opens the file picker.", "No celular, “Tirar foto” abre a câmera direto; no computador, abre o seletor de arquivos.")}</p>
           </ShowcaseCard>
-        </div>
+        </GradeDeCards>
       </section>
 
       <section id="upload-image">
@@ -222,7 +223,7 @@ function UploadShowcaseConteudo() {
 
       <section id="upload-states">
         <SectionHeader title={t("States and messages", "Estados e mensagens")} />
-        <div className="grid gap-4 md:grid-cols-2">
+        <GradeDeCards className="gap-4 md:grid-cols-2">
           {[
             [t("Rest", "Repouso"), t("Dashed border, card background, icon in a primary-muted circle, one sentence of instruction and the limits in small text.", "Borda tracejada, fundo de card, ícone em círculo primary-muted, uma frase de instrução e os limites em texto pequeno.")],
             [t("Hover / dragging", "Hover / arrastando"), t("Border turns primary, background gets the primary tint, the area grows 1% and the title changes to “Drop to upload”.", "A borda vira primária, o fundo ganha o tom primário, a área cresce 1% e o título muda para “Solte para enviar”.")],
@@ -238,7 +239,7 @@ function UploadShowcaseConteudo() {
               <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
             </div>
           ))}
-        </div>
+        </GradeDeCards>
       </section>
 
       <section id="upload-a11y">

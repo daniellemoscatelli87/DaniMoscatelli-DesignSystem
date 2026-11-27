@@ -14,6 +14,7 @@ import {
   Pizza, Waffle, Piramide, Dispersao, MatrizDeCorrelacao, Radar, CoordenadasParalelas, Sankey, RedeDeConexoes,
   Histograma, BoxPlot, Violino, Densidade, MapaDePontos, MapaDeBolhas, resumoDaDistribuicao,
 } from "../ui/graficos-catalogo";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 /* Charts and visualizations (19/11/2026). Every number on this page is fictitious example data
    (neutral service examples): none describes real clients, units, regions or contacts. */
@@ -167,7 +168,7 @@ function Familia({ id, icone: Icone, nome, descricao, children }: { id: string; 
           <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{descricao}</p>
         </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">{children}</div>
+      <GradeDeCards className="gap-4 lg:grid-cols-2">{children}</GradeDeCards>
     </div>
   );
 }
@@ -605,7 +606,7 @@ function SecaoCores() {
 
       <div className="mt-6">
         <Rotulo>{t("Applied examples", "Exemplos aplicados")}</Rotulo>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <GradeDeCards className="gap-4 md:grid-cols-2">
           <Cartao>
             <p className="text-[0.875rem] font-semibold text-foreground">{t("Bars by importance", "Barras por importância")}</p>
             <p className="mb-4 text-[0.75rem] text-muted-foreground">{t("A to E in tones 1, 2, 3, 4 and 5, in order (example data).", "A a E nos tons 1, 2, 3, 4 e 5, em sequência (dados de exemplo).")}</p>
@@ -627,7 +628,7 @@ function SecaoCores() {
             <MapaDeCalorMatricial rotulo={t("Continuous scale (example data)", "Escala contínua (dados de exemplo)")} {...EX_ESCALA} rotuloLinhas={t("Period", "Período")} formatar={v => formatarNumero(v, 0, loc)}
               rotulos={{ menos: t("Low", "Baixo"), mais: t("High", "Alto"), destaque: (l, c, v) => t(`Highlighted: ${l}, ${c} (${v})`, `Em destaque: ${l}, ${c} (${v})`) }} />
           </Cartao>
-        </div>
+        </GradeDeCards>
       </div>
 
       <Cartao className="mt-6">
@@ -658,7 +659,7 @@ function SecaoCores() {
           <p className="mt-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">{t("Areas:", "Áreas:")}</span> {t("a thin line in the series color and a transparent gradient fill.", "linha fina na cor da série e preenchimento em degradê transparente.")}</p>
         </div>
       </Cartao>
-      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <GradeDeCards className="mt-4 gap-4 md:grid-cols-2">
         <Cartao>
           <p className="mb-3 flex items-center gap-1.5 text-[0.8125rem] font-semibold text-foreground"><Check aria-hidden className="h-4 w-4 text-success" />{t("Like this: importance in order, Other in gray", "Assim: importância em ordem, Outros em cinza")}</p>
           <BarrasEmpilhadas100 localidade={loc} rotulo={t("Correct example", "Exemplo correto")}
@@ -678,7 +679,7 @@ function SecaoCores() {
             "Com tons intensos em todas as partes, nada se destaca e o olho não sabe por onde começar; \"Outros\" parece tão importante quanto o resto. Sem rótulos, a cor carrega o significado sozinha.",
           )}</p>
         </Cartao>
-      </div>
+      </GradeDeCards>
       <div className="mt-4">
         <DoDont
           dos={[
@@ -882,7 +883,7 @@ export function GraficosShowcase() {
             </li>
           ))}
         </ol>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <GradeDeCards className="gap-4 md:grid-cols-2 xl:grid-cols-3">
           {FAMILIAS.map(f => (
             <Cartao key={f.nome}>
               <div className="mb-3 flex items-center gap-3">
@@ -896,7 +897,7 @@ export function GraficosShowcase() {
               <p className="mt-3 text-[0.75rem] text-muted-foreground"><span className="font-semibold text-foreground">{t("In the DS:", "No DS:")}</span> {f.ds}</p>
             </Cartao>
           ))}
-        </div>
+        </GradeDeCards>
         <div className="mt-8">
           <Rotulo>{t("Recommended charts", "Gráficos recomendados")}</Rotulo>
           <TabelaQueQuebra head={[t("Question", "Pergunta"), t("Chart", "Gráfico"), t("Component", "Componente")]} rows={RECOMENDACOES} />
@@ -915,7 +916,7 @@ export function GraficosShowcase() {
             "A rosca continua, redesenhada no traço do DS: anel fino, partes nos tons por importância da maior para a menor (a maior no tom 1), Outros em cinza no fim, percentual escrito junto de cada parte e o total no centro (dados de exemplo).",
           )}
         />
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <GradeDeCards className="gap-4 lg:grid-cols-2">
           <Cartao>
             <Rotulo>{t("Before", "Antes")}</Rotulo>
             <h3 className="mb-4 text-[0.9375rem] font-bold text-foreground">{t("Contacts by channel", "Atendimentos por canal")}</h3>
@@ -952,7 +953,7 @@ export function GraficosShowcase() {
               ].map(p => <li key={p} className="flex gap-2"><Check aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" />{p}</li>)}
             </ul>
           </Cartao>
-        </div>
+        </GradeDeCards>
         <div className="mt-4">
           <Callout title={t("When to use the donut", "Quando usar a rosca")}>
             <p>{t(
@@ -972,7 +973,7 @@ export function GraficosShowcase() {
             "Dez gráficos para a inteligência de experiência, cada um dentro do card de descoberta: conclusão, gráfico, por que importa e próximo passo. Textos, unidades, regiões e números são dados de exemplo.",
           )}
         />
-        <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <GradeDeCards className="gap-4 xl:grid-cols-2">
           <div id="graficos-barras" className="min-w-0 scroll-mt-32">
             <DescobertaVisual rotulos={rotulos}
               tema={t("Reasons for contact", "Motivos de contato")} selo={SELO}
@@ -1124,7 +1125,7 @@ export function GraficosShowcase() {
                 rotulos={{ seguiram: p => t(`${p} continued`, `${p} seguiram`), maiorPerda: t("Biggest drop", "Maior perda") }} />
             </DescobertaVisual>
           </div>
-        </div>
+        </GradeDeCards>
       </section>
 
       {/* ── FULL CATALOG ── */}
@@ -1261,7 +1262,7 @@ export function GraficosShowcase() {
       {/* ── ACCESSIBILITY ── */}
       <section id="graficos-acessibilidade" className="scroll-mt-32">
         <SectionHeader title={t("Accessibility", "Acessibilidade")} description={t("A chart must be understood without color, without a mouse and without seeing the screen.", "O gráfico precisa ser entendido sem a cor, sem o mouse e sem enxergar a tela.")} />
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <GradeDeCards className="gap-4 lg:grid-cols-2">
           <Callout title={t("Checklist", "Checklist")}>
             <ul className="list-disc space-y-1 pl-5">
               <li>{t("Every chart has a title with the conclusion and an accessible name (role=\"img\" with an aria-label that summarizes the data). The matrix heat map is a real table.", "Todo gráfico tem título com a conclusão e um nome acessível (role=\"img\" com aria-label que resume os dados). O mapa de calor em matriz é uma tabela de verdade.")}</li>
@@ -1279,7 +1280,7 @@ export function GraficosShowcase() {
               <li>{t("Hover highlighting is extra: the same information is written on the chart or in the table.", "Realce ao passar o cursor é extra: a mesma informação está escrita no gráfico ou na tabela.")}</li>
             </ul>
           </Callout>
-        </div>
+        </GradeDeCards>
       </section>
     </div>
   );

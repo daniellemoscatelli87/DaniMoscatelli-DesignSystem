@@ -1,6 +1,7 @@
 import React from "react";
 import { Check, X, Info } from "lucide-react";
 import { useI18n } from "../../../i18n";
+import { GradeDeCards } from "../../ui/grade-de-cards";
 
 export const display = "font-[family-name:var(--font-display)]";
 
@@ -39,7 +40,7 @@ export function Callout({ title, children }: { title: string; children: React.Re
 export function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
   const { t } = useI18n();
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+    <GradeDeCards className="md:grid-cols-2 gap-3">
       {[
         { title: "Do", label: t("Do", "Faça"), items: dos, Icon: Check },
         { title: "Don't", label: t("Don't", "Não faça"), items: donts, Icon: X },
@@ -58,7 +59,7 @@ export function DoDont({ dos, donts }: { dos: string[]; donts: string[] }) {
           </ul>
         </Panel>
       ))}
-    </div>
+    </GradeDeCards>
   );
 }
 
@@ -66,7 +67,7 @@ export type Principle = { icon: React.ElementType; title: string; desc: string }
 
 export function PrincipleGrid({ items, cols = "lg:grid-cols-3" }: { items: Principle[]; cols?: string }) {
   return (
-    <div className={`grid grid-cols-1 md:grid-cols-2 ${cols} gap-3`}>
+    <GradeDeCards className={`md:grid-cols-2 ${cols} gap-3`}>
       {items.map(p => (
         <Panel key={p.title} className="p-5">
           <p.icon className="h-5 w-5 text-primary-text mb-4" strokeWidth={1.75} aria-hidden />
@@ -74,7 +75,7 @@ export function PrincipleGrid({ items, cols = "lg:grid-cols-3" }: { items: Princ
           <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{p.desc}</p>
         </Panel>
       ))}
-    </div>
+    </GradeDeCards>
   );
 }
 

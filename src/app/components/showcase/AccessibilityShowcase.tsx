@@ -5,6 +5,7 @@ import {
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { useI18n } from "../../i18n";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, SubTitle, display } from "./shared/Guidance";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 type Bi = { en: string; pt: string };
 
@@ -549,12 +550,12 @@ export function AccessibilityShowcase() {
         title={t("Motion and preferences", "Movimento e preferências")}
         intro={<p>{t("Honor", "Respeite")} <Mono>prefers-reduced-motion</Mono>. {t("Keep essential feedback, drop decoration such as shimmer, parallax and looping backgrounds. Nothing should flash more than three times per second.", "Mantenha o feedback essencial e elimine decorações como shimmer, parallax e fundos em loop. Nada deve piscar mais de três vezes por segundo.")}</p>}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <GradeDeCards className="lg:grid-cols-2 gap-4">
           <MotionDemo />
           <Panel className="overflow-hidden">
             <pre className="px-4 py-4 text-[0.75rem] leading-relaxed font-[family-name:var(--font-mono)] text-foreground overflow-x-auto"><code>{motionCode}</code></pre>
           </Panel>
-        </div>
+        </GradeDeCards>
       </PageSection>
 
       <PageSection

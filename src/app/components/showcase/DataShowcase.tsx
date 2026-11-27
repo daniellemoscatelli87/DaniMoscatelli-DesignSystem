@@ -13,6 +13,7 @@ import {
   ResponsiveContainer, PieChart, Pie, Cell,
 } from "recharts";
 import { SectionHeader } from "./shared/SectionHeader";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -428,7 +429,7 @@ function getDataTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
 export function CardsDeKpi() {
   const { t } = useI18n();
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <GradeDeCards className="sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {kpis.map((kpi) => {
         const Icon = kpi.icon;
         const TrendIcon = kpi.trend === "up" ? ArrowUpRight : ArrowDownRight;
@@ -465,6 +466,6 @@ export function CardsDeKpi() {
           </div>
         );
       })}
-    </div>
+    </GradeDeCards>
   );
 }

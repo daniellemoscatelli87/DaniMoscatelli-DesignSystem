@@ -8,6 +8,7 @@ import {
 import { useI18n } from "../../i18n";
 import { VejaEm } from "./shared/VejaEm";
 import { ShineBorder, shinePresets, type ShinePreset } from "../ui/shine-border";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 /* ── Section wrapper ── */
 function Section({ id, title, sub, children }: { id: string; title: string; sub: string; children: React.ReactNode }) {
@@ -812,7 +813,7 @@ function LoadersSection() {
 
   return (
     <Section id="loaders" title={t("Loaders & Progress", "Loaders e progresso")} sub={t("Animated loading states that communicate ongoing work.", "Estados de loading animados que comunicam trabalho em andamento.")}>
-      <div className="grid grid-cols-3 gap-3">
+      <GradeDeCards className="grid-cols-3 gap-3">
 
         {/* Spinner variants */}
         <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -951,7 +952,7 @@ function LoadersSection() {
             </div>
           </div>
         </div>
-      </div>
+      </GradeDeCards>
     </Section>
   );
 }
@@ -1199,7 +1200,7 @@ function MarqueeRow({ items, direction, duration }: {
         }}
       >
         {[...items, ...items].map((item, i) => (
-          <div key={i} className="shrink-0">{item}</div>
+          <div key={i} className="flex shrink-0">{item}</div>
         ))}
       </div>
     </div>

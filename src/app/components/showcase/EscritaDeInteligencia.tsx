@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CheckCircle, XCircle, ChevronDown, Lightbulb, ListChecks, MessagesSquare } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { PageSection } from "./GetStartedShowcase";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 /* Escrita de textos de inteligência: como apresentar descobertas geradas a partir de dados (e pela IA)
    como uma conversa, e não como um relatório estatístico. A estrutura e as regras são as mesmas nos dois DS;
@@ -120,14 +121,14 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
           </>
         }
       >
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <GradeDeCards className="gap-3 md:grid-cols-2">
           {regras.map(r => (
             <div key={r.titulo} className="rounded-[var(--radius)] border border-border bg-card p-4">
               <p className="flex items-start gap-2 text-[0.9375rem] font-semibold text-foreground"><MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{r.titulo}</p>
               <p className="mt-1 pl-6 text-[0.8125rem] leading-relaxed text-muted-foreground">{r.texto}</p>
             </div>
           ))}
-        </div>
+        </GradeDeCards>
       </PageSection>
 
       <PageSection
@@ -165,7 +166,7 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
           {exemplos.map(ex => (
             <div key={ex.regra} className="rounded-[var(--radius)] border border-border bg-card p-4 sm:p-5">
               <p className="mb-3 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{ex.regra}</p>
-              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+              <GradeDeCards className="gap-3 md:grid-cols-2">
                 <div className="rounded-md border border-border bg-muted/40 p-4">
                   <p className="mb-1.5 flex items-center gap-1.5 text-[0.75rem] font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
                   <p className="text-[0.9375rem] font-semibold text-foreground/70 line-through decoration-error/40">{ex.evitar.titulo}</p>
@@ -177,7 +178,7 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
                   {ex.recomendado.texto && <p className="mt-1 text-[0.8125rem] text-foreground/80">{ex.recomendado.texto}</p>}
                   {ex.recomendado.detalhe && <p className="mt-2 border-t border-success/20 pt-2 text-[0.75rem] text-muted-foreground"><span className="font-semibold">{t("In the details:", "No detalhamento:")}</span> {ex.recomendado.detalhe}</p>}
                 </div>
-              </div>
+              </GradeDeCards>
             </div>
           ))}
         </div>

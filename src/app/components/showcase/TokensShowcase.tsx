@@ -4,6 +4,7 @@ import {
   Copy, Check, ChevronRight, AlertTriangle, Sparkles,
   RefreshCw, Palette, Code2, Layers, Lightbulb, Bot,
 } from "lucide-react";
+import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
 
 /* ── helpers ── */
 function CopyBtn({ text }: { text: string }) {
@@ -128,8 +129,8 @@ export function TokensShowcase() {
             <Lightbulb className="h-4 w-4 text-primary-text shrink-0" />
             <p className="text-[0.8125rem] font-bold text-foreground">{t("The simple analogy", "A analogia simples")}</p>
           </div>
-          <div className="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
+          <GradeDeCards className="p-5 md:grid-cols-3 gap-4">
+            <ItemDaGrade className="space-y-2">
               <p className="text-[0.5625rem] font-bold uppercase tracking-[0.08em] text-muted-foreground/60">{t("Without tokens", "Sem tokens")}</p>
               <div className="rounded-md border border-border bg-muted/30 p-3 space-y-2">
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
@@ -147,16 +148,16 @@ export function TokensShowcase() {
                 </div>
                 <p className="text-[0.5625rem] text-muted-foreground/50 text-center">{t("same color, different spellings scattered across the code", "mesma cor, grafias diferentes espalhadas pelo código")}</p>
               </div>
-            </div>
+            </ItemDaGrade>
 
-            <div className="hidden md:flex items-center justify-center">
+            <div data-grade-ignorar className="hidden md:flex items-center justify-center">
               <div className="flex flex-col items-center gap-1">
                 <ChevronRight className="h-6 w-6 text-primary-text" />
                 <p className="text-[0.5625rem] font-bold uppercase tracking-[0.07em] text-primary-text">tokens</p>
               </div>
             </div>
 
-            <div className="space-y-2">
+            <ItemDaGrade className="space-y-2">
               <p className="text-[0.5625rem] font-bold uppercase tracking-[0.08em] text-success">{t("With tokens", "Com tokens")}</p>
               <div className="rounded-md border border-success/20 bg-success/5 p-3 space-y-2">
                 <p className="text-[0.75rem] text-muted-foreground leading-relaxed">
@@ -175,8 +176,8 @@ export function TokensShowcase() {
                   <span className="text-muted-foreground/40">{t("/* change here */", "/* altere aqui */")}</span>
                 </div>
               </div>
-            </div>
-          </div>
+            </ItemDaGrade>
+          </GradeDeCards>
         </div>
 
         {/* 3 benefits */}

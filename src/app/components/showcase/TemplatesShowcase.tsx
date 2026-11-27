@@ -21,6 +21,7 @@ import {
 } from "recharts";
 import { useI18n } from "../../i18n";
 import { SectionHeader } from "./shared/SectionHeader";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 type L = { en: string; pt: string };
 
@@ -160,7 +161,7 @@ function DashboardTemplate() {
 
           <div className="p-5 space-y-4">
             {/* KPIs */}
-            <div className="grid grid-cols-4 gap-3">
+            <GradeDeCards className="grid-cols-4 gap-3">
               {kpis.map(k => {
                 const Icon = k.icon;
                 return (
@@ -177,10 +178,10 @@ function DashboardTemplate() {
                   </div>
                 );
               })}
-            </div>
+            </GradeDeCards>
 
             {/* Chart + Activity */}
-            <div className="grid grid-cols-[1fr_220px] gap-3">
+            <GradeDeCards className="grid-cols-[1fr_220px] gap-3">
               {/* Chart */}
               <div className="bg-card rounded-md border border-border p-4" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="flex items-center justify-between mb-3">
@@ -227,7 +228,7 @@ function DashboardTemplate() {
                   ))}
                 </div>
               </div>
-            </div>
+            </GradeDeCards>
           </div>
         </div>
       </div>
@@ -937,7 +938,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
 
         {/* Colunas pela largura disponível (não pela tela): dentro do protótipo do painel, os 3 cards só ficam lado a lado se couberem */}
         <div className="@container/precos">
-        <div className="grid grid-cols-1 @4xl/precos:grid-cols-3 gap-5 max-w-md @4xl/precos:max-w-5xl mx-auto">
+        <GradeDeCards className="@4xl/precos:grid-cols-3 gap-5 max-w-md @4xl/precos:max-w-5xl mx-auto">
           {plans.map(plan => {
             const Icon = plan.icon;
             const valor = annual ? Math.round(plan.price * 0.8) : plan.price;
@@ -1044,7 +1045,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
               </div>
             );
           })}
-        </div>
+        </GradeDeCards>
         </div>
       </div>
     </TemplateFrame>
@@ -1921,7 +1922,7 @@ function LandingTemplate() {
             </div>
 
             {/* Contact channels row */}
-            <div className="max-w-2xl mx-auto grid grid-cols-3 gap-3 mb-8">
+            <GradeDeCards className="max-w-2xl mx-auto grid-cols-3 gap-3 mb-8">
               {[
                 {
                   icon: Mail,
@@ -1967,7 +1968,7 @@ function LandingTemplate() {
                   </div>
                 );
               })}
-            </div>
+            </GradeDeCards>
 
             {/* Divider */}
             <div className="max-w-2xl mx-auto flex items-center gap-3 mb-8">
