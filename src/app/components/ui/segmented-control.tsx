@@ -36,9 +36,9 @@ export type SegmentedControlProps<T extends string = string> = Omit<
 };
 
 const sizes = {
-  sm: { root: "rounded-sm", item: "h-8 px-3 text-[0.8125rem] gap-1.5 [&_svg]:size-3.5" },
-  md: { root: "rounded-md", item: "h-10 px-4 text-[0.9375rem] gap-2 [&_svg]:size-4" },
-  lg: { root: "rounded-md", item: "h-11 px-5 text-[1rem] gap-2 [&_svg]:size-[18px]" },
+  sm: { root: "rounded-sm", item: "h-8 px-3 text-body-sm gap-1 [&_svg]:size-3.5 max-sm:h-11" },
+  md: { root: "rounded-md", item: "h-10 px-4 text-body gap-2 [&_svg]:size-4 max-sm:h-11" },
+  lg: { root: "rounded-md", item: "h-11 px-5 text-body gap-2 [&_svg]:size-4" },
 } as const;
 
 export function SegmentedControl<T extends string = string>({

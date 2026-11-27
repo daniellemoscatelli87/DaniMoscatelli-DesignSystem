@@ -66,8 +66,8 @@ function SidePanelContent({
           "fixed inset-y-0 z-50 flex max-w-full flex-col overflow-hidden bg-card text-card-foreground shadow-[var(--shadow-xl)] outline-none",
           "data-[state=open]:animate-in data-[state=closed]:animate-out duration-300 ease-in-out",
           side === "right"
-            ? "right-0 sm:rounded-l-3xl data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right"
-            : "left-0 sm:rounded-r-3xl data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left",
+            ? "right-0 sm:rounded-l-xl data-[state=open]:slide-in-from-right data-[state=closed]:slide-out-to-right"
+            : "left-0 sm:rounded-r-xl data-[state=open]:slide-in-from-left data-[state=closed]:slide-out-to-left",
           widths[width],
           className,
         )}
@@ -100,16 +100,16 @@ function SidePanelHeader({
   return (
     <div data-slot="side-panel-header" className={cn("relative z-10 shrink-0 border-b border-border bg-card px-6 pb-3.5 pt-5 pr-14 sm:px-8 sm:pr-16", className)}>
       {eyebrow && (
-        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-0.5 text-[0.6875rem] font-bold uppercase tracking-[0.2em] text-primary-text">
+        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-0.5 text-caption font-bold uppercase tracking-[0.2em] text-primary-text">
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />
           {eyebrow}
         </div>
       )}
-      <DialogPrimitive.Title className="text-[1.5rem] font-extrabold leading-tight tracking-[-0.025em] text-foreground sm:text-[1.875rem]">
+      <DialogPrimitive.Title className="text-h3 font-extrabold leading-tight tracking-[-0.025em] text-foreground sm:text-h2">
         {title}
       </DialogPrimitive.Title>
       {description ? (
-        <DialogPrimitive.Description className="mt-1 text-[0.75rem] leading-snug text-muted-foreground sm:text-[0.875rem]">
+        <DialogPrimitive.Description className="mt-1 text-label leading-snug text-muted-foreground sm:text-body-sm">
           {description}
         </DialogPrimitive.Description>
       ) : (
@@ -134,7 +134,7 @@ function SidePanelFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="side-panel-footer"
-      className={cn("flex shrink-0 items-center justify-between gap-3 border-t border-border bg-muted/60 px-6 py-2.5 text-[0.6875rem] text-muted-foreground sm:px-8", className)}
+      className={cn("flex shrink-0 items-center justify-between gap-3 border-t border-border bg-muted/60 px-6 py-2.5 text-caption text-muted-foreground sm:px-8", className)}
       {...props}
     />
   );

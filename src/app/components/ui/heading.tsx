@@ -11,10 +11,10 @@ import { cn } from "./utils";
  */
 
 const sizes = {
-  hero: "text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] leading-[1.1] tracking-[-0.03em] font-bold",
-  page: "text-[2rem] sm:text-[2.5rem] leading-none tracking-[-0.035em] font-bold",
-  section: "text-[1.5rem] leading-tight tracking-[-0.02em] font-bold",
-  card: "text-[1.25rem] leading-snug tracking-[-0.015em] font-bold",
+  hero: "text-h2 sm:text-h1 lg:text-display-l leading-[1.1] tracking-[-0.03em] font-bold",
+  page: "text-h2 sm:text-h1 leading-none tracking-[-0.035em] font-bold",
+  section: "text-h3 leading-tight tracking-[-0.02em] font-bold",
+  card: "text-h4 leading-snug tracking-[-0.015em] font-bold",
 } as const;
 
 export type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {

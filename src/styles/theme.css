@@ -403,6 +403,26 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ── Escala de texto (tokens de tamanho, decisão de 27/11/2026) ──
+   Os tamanhos de texto da escala tipográfica documentada em Fundamentos > Tipografia. As classes text-caption,
+   text-label, text-body-sm, text-body, text-body-lg, text-h4, text-h3, text-h2, text-h1 e text-display-* usam estes
+   valores. Nada de tamanho fora da escala: um valor fora dela vai para o passo mais perto (13 px vira 14, 15 vira 16,
+   10 vira 11, 28 vira 32). Os mesmos nomes valem no FindLook Design System. */
+@theme {
+  --text-caption: 0.6875rem;   /* 11 px: Legenda */
+  --text-label: 0.75rem;       /* 12 px: Rótulo */
+  --text-body-sm: 0.875rem;    /* 14 px: Corpo pequeno e Botão */
+  --text-body: 1rem;           /* 16 px: Corpo */
+  --text-body-lg: 1.125rem;    /* 18 px: Corpo grande e Subtítulo */
+  --text-h4: 1.25rem;          /* 20 px: H4 e Subtítulo G */
+  --text-h3: 1.5rem;           /* 24 px: H3 e Declaração */
+  --text-h2: 2rem;             /* 32 px: H2 */
+  --text-h1: 2.5rem;           /* 40 px: H1 */
+  --text-display-m: 2.25rem;   /* 36 px: Display M */
+  --text-display-l: 3rem;      /* 48 px: Display G */
+  --text-display-xl: 4rem;     /* 64 px: Display XL */
+}
+
 /* ── Scrollbar — light mode ── */
 :root {
   scrollbar-color: #B3BDD0 #ECF0F5;

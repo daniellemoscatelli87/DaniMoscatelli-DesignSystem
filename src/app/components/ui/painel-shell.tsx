@@ -241,7 +241,7 @@ function ContadorDoPainel({ valor, rotulo, anel, className, ...props }: Contador
     <span
       data-slot="contador-do-painel"
       className={cn(
-        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary px-1.5 text-[0.6875rem] font-bold leading-none tabular-nums text-primary-foreground",
+        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary px-1.5 text-caption font-bold leading-none tabular-nums text-primary-foreground",
         anel && "ring-2 ring-card",
         className,
       )}
@@ -326,7 +326,7 @@ function AvatarPainel({ nome, foto, className }: { nome: string; foto?: string; 
   return (
     <Avatar aria-hidden data-slot="avatar-painel" className={cn("size-9", className)}>
       {foto && <AvatarImage src={foto} alt="" className="object-cover" />}
-      <AvatarFallback className="bg-[var(--primary-muted)] text-[0.75rem] font-bold text-primary-text">{iniciais(nome)}</AvatarFallback>
+      <AvatarFallback className="bg-[var(--primary-muted)] text-label font-bold text-primary-text">{iniciais(nome)}</AvatarFallback>
     </Avatar>
   );
 }
@@ -348,7 +348,7 @@ const classeDoItem = (ativo: boolean | undefined, recolhido: boolean, dentro: bo
   cn(
     // Fora do MenuLateral (gaveta do celular e do tablet), alvo de toque de 44 px; no menu fixo do computador, 36 px.
     dentro ? "min-h-9" : "min-h-11",
-    "group relative flex w-full items-center gap-2.5 rounded-sm px-3 py-2 text-left text-[0.875rem] font-medium transition-[background-color,color] duration-150",
+    "group relative flex w-full items-center gap-2.5 rounded-sm px-3 py-2 text-left text-body-sm font-medium transition-[background-color,color] duration-150",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     // Regra dos rosas claros (dona do produto, 27/11/2026): ativo no rosa do meio (--primary-suave) com --primary-text,
     // e continua rosa com o mouse em cima; hover dos outros itens no cinza claro (--accent), nunca rosa.
@@ -416,7 +416,7 @@ function GrupoDoMenu({ titulo, children, className, expansivel, icone, padraoAbe
   if (!expansivel) {
     return (
       <div data-slot="grupo-do-menu" className={cn("space-y-0.5", className)} role="group" aria-labelledby={titulo ? id : undefined}>
-        {titulo && <p id={id} className={recolhido ? "sr-only" : "px-3 pb-1 pt-3 text-[0.75rem] font-semibold text-muted-foreground"}>{titulo}</p>}
+        {titulo && <p id={id} className={recolhido ? "sr-only" : "px-3 pb-1 pt-3 text-label font-semibold text-muted-foreground"}>{titulo}</p>}
         {/* Recolhido: o título vira uma linha fina (que some se já houver um divisor logo antes do grupo). */}
         {titulo && recolhido && <div aria-hidden data-slot="divisor-do-grupo" className="my-2 border-t border-border [.border-t+[data-slot=grupo-do-menu]_&]:hidden" />}
         {children}
@@ -506,8 +506,8 @@ function CardDeAjuda({ titulo = "Precisa de ajuda?", texto = "Acesse a central d
     >
       <HelpCircle aria-hidden className="h-6 w-6 shrink-0 text-muted-foreground" />
       <span className="min-w-0 flex-1">
-        <span className="block text-[0.8125rem] font-bold text-foreground">{titulo}</span>
-        <span className="block text-[0.75rem] text-muted-foreground">{texto}</span>
+        <span className="block text-body-sm font-bold text-foreground">{titulo}</span>
+        <span className="block text-label text-muted-foreground">{texto}</span>
       </span>
       <ExternalLink aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
       <span className="sr-only">(abre em nova aba)</span>
@@ -524,14 +524,14 @@ function CampoDeBuscaGlobal({ placeholder = "Buscar no painel", atalho = "Ctrl +
       onClick={onAbrir}
       aria-keyshortcuts={atalho === "Ctrl + K" ? "Control+K" : undefined}
       className={cn(
-        "flex h-10 w-full items-center gap-3 rounded-md border border-border bg-card px-3 text-left text-[0.8125rem] text-muted-foreground transition-colors hover:bg-accent",
+        "flex h-10 w-full items-center gap-3 rounded-md border border-border bg-card px-3 text-left text-body-sm text-muted-foreground transition-colors hover:bg-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}
     >
       <Search aria-hidden className="h-4 w-4 shrink-0" />
       <span className="min-w-0 flex-1 truncate">{placeholder}</span>
-      {atalho && <kbd className="hidden shrink-0 rounded-sm border border-border bg-muted px-1.5 py-0.5 font-sans text-[0.6875rem] font-medium sm:inline">{atalho}</kbd>}
+      {atalho && <kbd className="hidden shrink-0 rounded-sm border border-border bg-muted px-1.5 py-0.5 font-sans text-caption font-medium sm:inline">{atalho}</kbd>}
     </button>
   );
 }
@@ -589,8 +589,8 @@ const GatilhoDaConta = React.forwardRef<HTMLButtonElement, GatilhoDaContaProps>(
     >
       <AvatarPainel nome={nome} foto={foto} />
       <span className="hidden min-w-0 sm:block">
-        <span className="block truncate text-[0.875rem] font-semibold text-foreground">{nome}</span>
-        {papel && <span className="block truncate text-[0.75rem] text-muted-foreground">{papel}</span>}
+        <span className="block truncate text-body-sm font-semibold text-foreground">{nome}</span>
+        {papel && <span className="block truncate text-label text-muted-foreground">{papel}</span>}
       </span>
       <ChevronDown aria-hidden className="h-4 w-4 shrink-0 text-muted-foreground" />
     </button>

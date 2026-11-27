@@ -58,8 +58,8 @@ function SpecCard({
   return (
     <Card className={`gap-5 border-border shadow-none ${className}`}>
       <CardHeader className="gap-1.5">
-        <CardTitle className={`${display} text-[1rem] font-semibold tracking-[-0.01em]`}>{title}</CardTitle>
-        <CardDescription className="text-[0.8125rem] leading-relaxed">{description}</CardDescription>
+        <CardTitle className={`${display} text-body font-semibold tracking-[-0.01em]`}>{title}</CardTitle>
+        <CardDescription className="text-body-sm leading-relaxed">{description}</CardDescription>
         {action && <CardAction>{action}</CardAction>}
       </CardHeader>
       <CardContent>{children}</CardContent>
@@ -186,18 +186,18 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
   const monoCls = escura ? "text-white/60" : "text-muted-foreground dark:text-white/60";
   return (
     <GlassCard finish={finish} tone={tone} intensity={intensity} opacity={opacity} blur={blur} tint={tint} interactive={interactive} tabIndex={interactive ? 0 : undefined} className={cn(compact && "p-4", className)} aria-describedby={undefined}>
-      {eyebrow && <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${subCls}`}><MapPin className="h-3 w-3" aria-hidden /> {eyebrow}</p>}
-      <p className={`${display} ${compact ? "mt-1 text-[1.0625rem]" : "mt-2 text-[1.25rem]"} font-semibold tracking-[-0.01em]`}>{title}</p>
-      <p className={`${compact ? "mt-1 text-[0.75rem]" : "mt-2 text-[0.8125rem]"} leading-relaxed ${subCls}`}>{subtitle}</p>
+      {eyebrow && <p className={`inline-flex items-center gap-1 text-caption font-semibold uppercase tracking-[0.08em] ${subCls}`}><MapPin className="h-3 w-3" aria-hidden /> {eyebrow}</p>}
+      <p className={`${display} ${compact ? "mt-1 text-body-lg" : "mt-2 text-h4"} font-semibold tracking-[-0.01em]`}>{title}</p>
+      <p className={`${compact ? "mt-1 text-label" : "mt-2 text-body-sm"} leading-relaxed ${subCls}`}>{subtitle}</p>
       {cta && !compact && (
         <div className="mt-4 flex items-center justify-between">
-          <span className="text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))]">{cta}</span>
+          <span className="text-body-sm font-semibold text-[var(--primary-text,var(--primary))]">{cta}</span>
           <ArrowUpRight className="h-5 w-5 text-primary-text" aria-hidden />
         </div>
       )}
       {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
       {result && (
-        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2.5 py-1.5 text-[0.6875rem] leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
+        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2.5 py-1.5 text-caption leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
           {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning-text)]" aria-hidden />}
           <span>
             {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({naFoto ? t("worst case: any area of the photo, from black to white", "pior caso: qualquer área da foto, do preto ao branco") : comTextura ? t("worst case: text over the background or a texture stroke", "pior caso: texto sobre o fundo ou um traço da textura") : t("solid background", "fundo sólido")})</span>
@@ -206,7 +206,7 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
           </span>
         </div>
       )}
-      {!compact && <p className={`mt-3 text-[0.6875rem] font-mono ${monoCls}`}>finish="{finish ?? "padrao"}" tone="{tone}" intensity="{intensity}"{opacity !== undefined ? ` opacity={${opacity}}` : ""}{blur !== undefined ? ` blur={${blur}}` : ""}{tint ? " tint" : ""}</p>}
+      {!compact && <p className={`mt-3 text-caption font-mono ${monoCls}`}>finish="{finish ?? "padrao"}" tone="{tone}" intensity="{intensity}"{opacity !== undefined ? ` opacity={${opacity}}` : ""}{blur !== undefined ? ` blur={${blur}}` : ""}{tint ? " tint" : ""}</p>}
     </GlassCard>
   );
 }
@@ -246,26 +246,26 @@ function GlassFinishPicker() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Finish", "Acabamento")}</span>
+          <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Finish", "Acabamento")}</span>
           <SegmentedControl size="sm" aria-label={t("Finish", "Acabamento")} value={finish} onValueChange={setFinish} options={finishes.map(x => ({ value: x.value, label: x.label }))} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Tone", "Tom")}</span>
+          <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Tone", "Tom")}</span>
           <SegmentedControl size="sm" aria-label={t("Tone", "Tom")} value={tone} onValueChange={setTone} options={[{ value: "clara", label: t("Light", "Claro") }, { value: "escura", label: t("Dark", "Escuro") }]} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Opacity", "Opacidade")}</span>
+          <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Opacity", "Opacidade")}</span>
           <SegmentedControl size="sm" aria-label={t("Opacity", "Opacidade")} value={intensity} onValueChange={setIntensity} options={[{ value: "leve", label: t("Light", "Leve") }, { value: "media", label: t("Medium", "Média") }, { value: "forte", label: t("Strong", "Forte") }]} />
         </div>
       </div>
       <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
         <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Test background", "Fundo de teste")}</span>
+          <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Test background", "Fundo de teste")}</span>
           <SegmentedControl size="sm" aria-label={t("Test background", "Fundo de teste")} value={cena.fundo} onValueChange={v => setCena(c => ({ ...c, fundo: v }))} options={fundos} />
         </div>
         {cena.fundo === "solida" && (
           <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
-            <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Colour", "Cor")}</span>
+            <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Colour", "Cor")}</span>
             <SegmentedControl size="sm" aria-label={t("Colour", "Cor")} value={cena.cor} onValueChange={v => setCena(c => ({ ...c, cor: v }))}
               options={cores.map(x => ({ value: x.value, label: <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-3 w-3 rounded-full border border-border" style={{ backgroundColor: coresSolidas[x.value] }} />{x.label}</span> }))} />
           </div>
@@ -273,23 +273,23 @@ function GlassFinishPicker() {
       </div>
       <div className="grid gap-x-8 gap-y-4 rounded-lg border border-border bg-card p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end">
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-[0.75rem]">
+          <div className="flex items-center justify-between text-label">
             <span className="font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Background opacity", "Opacidade do fundo")}</span>
             <span className="font-mono text-foreground">{opacidade === null ? t("by finish", "do acabamento") : `${opacidade}%`}</span>
           </div>
           <Slider aria-label={t("Background opacity", "Opacidade do fundo")} min={0} max={100} step={1} value={[opacidade ?? 55]} onValueChange={([v]) => setOpacidade(v)} />
-          <p className="text-[0.6875rem] text-muted-foreground">{t("0% = fully transparent · 100% = solid", "0% = totalmente transparente · 100% = sólido")}</p>
+          <p className="text-caption text-muted-foreground">{t("0% = fully transparent · 100% = solid", "0% = totalmente transparente · 100% = sólido")}</p>
         </div>
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-[0.75rem]">
+          <div className="flex items-center justify-between text-label">
             <span className="font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Blur", "Desfoque")}</span>
             <span className="font-mono text-foreground">{desfoque === null ? t("by finish", "do acabamento") : `${desfoque} px`}</span>
           </div>
           <Slider aria-label={t("Blur", "Desfoque")} min={0} max={80} step={1} value={[desfoque ?? 24]} onValueChange={([v]) => setDesfoque(v)} />
-          <p className="text-[0.6875rem] text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
+          <p className="text-caption text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
         </div>
         <button type="button" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}
-          className="h-9 rounded-full border border-border bg-card px-4 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text disabled:opacity-40 disabled:pointer-events-none">
+          className="h-9 rounded-full border border-border bg-card px-4 text-label font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text disabled:opacity-40 disabled:pointer-events-none">
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
@@ -316,16 +316,16 @@ function GlassFinishPicker() {
 function Parte({ id, numero, titulo, texto }: { id: string; numero: string; titulo: string; texto: string }) {
   return (
     <div id={id} className="scroll-mt-32 border-t border-border pt-8">
-      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-[var(--primary-text,var(--primary))]">{numero}</p>
-      <h2 className={`${display} mt-1 text-[1.875rem] font-bold tracking-[-0.025em] text-foreground`}>{titulo}</h2>
-      <p className="mt-2 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{texto}</p>
+      <p className="text-label font-semibold uppercase tracking-[0.12em] text-[var(--primary-text,var(--primary))]">{numero}</p>
+      <h2 className={`${display} mt-1 text-h2 font-bold tracking-[-0.025em] text-foreground`}>{titulo}</h2>
+      <p className="mt-2 max-w-3xl text-body leading-relaxed text-muted-foreground">{texto}</p>
     </div>
   );
 }
 
 /** Rótulo curto acima de cada exemplo. */
 function Rotulo({ children }: { children: React.ReactNode }) {
-  return <p className="mb-2 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</p>;
+  return <p className="mb-2 text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</p>;
 }
 
 /* Exemplos "por fundo" mostram o modo claro mesmo com o DS no escuro: cores fixas da escala grafite. */
@@ -341,11 +341,11 @@ function CardPorFundo({ fundo }: { fundo: FundoSolido }) {
   return (
     <div data-fundo-solido={fundo} className={cn("rounded-lg border border-border p-6", r.painel)}>
       <div className={cn("rounded-xl bg-white p-5 text-[var(--graphite-900)]", r.card)} style={{ boxShadow: r.sombra }}>
-        <p className={`${display} text-[1rem] font-semibold`}>{t("Card title", "Título do card")}</p>
-        <p className="mt-1 text-[0.8125rem] leading-relaxed text-[var(--graphite-500)]">{t("Short description of the content.", "Descrição curta do conteúdo.")}</p>
+        <p className={`${display} text-body font-semibold`}>{t("Card title", "Título do card")}</p>
+        <p className="mt-1 text-body-sm leading-relaxed text-[var(--graphite-500)]">{t("Short description of the content.", "Descrição curta do conteúdo.")}</p>
         <Button size="sm" className="mt-4">{t("Action", "Ação")}</Button>
       </div>
-      <p className={cn("mt-3 text-[0.75rem] font-semibold", fundo === "escuro" ? "text-white/80" : "text-[var(--graphite-700)]")}>{r.regra}</p>
+      <p className={cn("mt-3 text-label font-semibold", fundo === "escuro" ? "text-white/80" : "text-[var(--graphite-700)]")}>{r.regra}</p>
     </div>
   );
 }
@@ -372,9 +372,9 @@ function DemoMesmaAltura() {
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <Switch id={id} checked={mais} onCheckedChange={setMais} />
-          <Label htmlFor={id} className="text-[0.875rem]">{t("Much more content in the second card", "Muito mais conteúdo no segundo card")}</Label>
+          <Label htmlFor={id} className="text-body-sm">{t("Much more content in the second card", "Muito mais conteúdo no segundo card")}</Label>
         </div>
-        <Badge variant="outline" role="status" className="gap-1.5 px-2.5 py-1 text-[0.75rem]">
+        <Badge variant="outline" role="status" className="gap-1.5 px-2.5 py-1 text-label">
           {layout === "grade" ? <Columns2 aria-hidden /> : <Rows2 aria-hidden />}
           {layout === "grade" ? t("Side by side · same height", "Lado a lado · mesma altura") : t("One per row · horizontal cards", "Um por linha · cards horizontais")}
         </Badge>
@@ -383,20 +383,20 @@ function DemoMesmaAltura() {
         <Card className="border-border">
           <CardMidia tipo="icone"><Search /></CardMidia>
           <CardHeader>
-            <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Customer research", "Pesquisa com clientes")}</CardTitle>
-            <CardDescription className="text-[0.8125rem] leading-relaxed">{t("Interviews and observations gathered this month.", "Entrevistas e observações reunidas neste mês.")}</CardDescription>
+            <CardTitle className={`${display} text-body font-semibold`}>{t("Customer research", "Pesquisa com clientes")}</CardTitle>
+            <CardDescription className="text-body-sm leading-relaxed">{t("Interviews and observations gathered this month.", "Entrevistas e observações reunidas neste mês.")}</CardDescription>
           </CardHeader>
           <CardFooter><Button variant="outline" size="sm">{t("See research", "Ver pesquisa")}</Button></CardFooter>
         </Card>
         <Card className="border-border">
           <CardMidia tipo="icone"><TrendingUp /></CardMidia>
           <CardHeader>
-            <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Friction points", "Pontos de atrito")}</CardTitle>
-            <CardDescription className="text-[0.8125rem] leading-relaxed">{t("Where the journey gets stuck the most.", "Onde a jornada mais trava.")}</CardDescription>
+            <CardTitle className={`${display} text-body font-semibold`}>{t("Friction points", "Pontos de atrito")}</CardTitle>
+            <CardDescription className="text-body-sm leading-relaxed">{t("Where the journey gets stuck the most.", "Onde a jornada mais trava.")}</CardDescription>
           </CardHeader>
           {mais && (
             <CardContent>
-              <ol className="space-y-2 text-[0.8125rem] text-foreground">
+              <ol className="space-y-2 text-body-sm text-foreground">
                 {itens.map((x, i) => (
                   <li key={x} className="flex items-center gap-3"><span className="w-4 text-right font-semibold text-muted-foreground">{i + 1}</span>{x}</li>
                 ))}
@@ -419,7 +419,7 @@ function ExemploDeAltura({ certo, titulo, children }: { certo: boolean; titulo: 
         <Badge variant="outline" className={cn("gap-1 px-2 py-0.5", certo ? "text-[var(--success-text,var(--success))]" : "text-[var(--error-text,var(--destructive))]")}>
           {certo ? <Check aria-hidden /> : <X aria-hidden />}{certo ? t("Correct", "Certo") : t("Incorrect", "Errado")}
         </Badge>
-        <p className="text-[0.8125rem] text-muted-foreground">{titulo}</p>
+        <p className="text-body-sm text-muted-foreground">{titulo}</p>
       </div>
       {children}
     </div>
@@ -431,8 +431,8 @@ function CardDeExemplo({ titulo, texto, acao }: { titulo: string; texto: string;
   return (
     <Card className="gap-3 border-border">
       <CardHeader className="px-4 pt-4">
-        <CardTitle className={`${display} text-[0.875rem] font-semibold`}>{titulo}</CardTitle>
-        <CardDescription className="text-[0.75rem] leading-relaxed">{texto}</CardDescription>
+        <CardTitle className={`${display} text-body-sm font-semibold`}>{titulo}</CardTitle>
+        <CardDescription className="text-label leading-relaxed">{texto}</CardDescription>
       </CardHeader>
       <CardFooter className="px-4 pb-4"><Button variant="outline" size="sm">{acao}</Button></CardFooter>
     </Card>
@@ -460,7 +460,7 @@ export function CardShowcase() {
       tokens: [
         { name: "--radius", description: t("Base radius. The card uses rounded-xl = --radius + 12 px = 24 px", "Raio base. O card usa rounded-xl = --radius + 12 px = 24 px"), light: "0.75rem (12 px)" },
         { name: t("Highlight radius", "Raio de destaque"), description: t("Media, highlight and partner cards", "Cards com mídia, destaque e convite"), light: "16 px" },
-        { name: t("Glass radius", "Raio do vidro"), description: t("Glass cards", "Cards de vidro"), light: "20 px" },
+        { name: t("Glass radius", "Raio do vidro"), description: t("Glass cards", "Cards de vidro"), light: "16 px (rounded-lg)" },
         { name: "--shadow-sm", description: t("Soft shadow for small raised controls (active tab, top bar). Never on a resting card", "Sombra suave para controles pequenos em destaque (aba ativa, barra do topo). Nunca em card parado"), light: "0 1px 3px …", dark: "0 1px 3px …" },
         { name: "--shadow-md", description: t("Hover elevation", "Elevação no hover"), light: "0 4px 12px …", dark: "0 4px 12px …" },
         { name: "--shadow-lg", description: t("Strong shadow: light card on a dark background", "Sombra forte: card claro sobre fundo escuro"), light: "0 8px 24px …", dark: "0 8px 32px …" },
@@ -480,7 +480,7 @@ export function CardShowcase() {
       { name: "escura — bg", description: t("Dark glass background", "Fundo do vidro escuro"), light: "graphite-950 35% · 50% · 65%" },
       { name: "border", description: t("Glass edge", "Borda do vidro"), light: "white 60% (clara) · white 15% (escura)", dark: "white 15%" },
       { name: "highlight", description: t("1 px top highlight", "Fio de luz no topo, 1 px"), light: "gradient white 80%", dark: "gradient white 40%" },
-      { name: "radius / padding", description: t("Same anatomy as Card", "Mesma anatomia do Card"), light: "20 px / 24 px" },
+      { name: "radius / padding", description: t("Same anatomy as Card", "Mesma anatomia do Card"), light: "16 px / 24 px" },
       { name: "shadow", description: t("Soft elevation", "Elevação suave"), light: "0 8px 32px graphite-950 8% (clara) · 25% (escura)" },
     ],
   };
@@ -538,10 +538,10 @@ export function CardShowcase() {
             [t("White", "Branco"), t("Solid", "Sólido"), "--border", t("None", "Nenhuma"), "12 px"],
             [t("Light grey (like this page)", "Cinza claro (como esta página)"), t("Solid", "Sólido"), "--border", t("None", "Nenhuma"), "12 px"],
             [t("Dark, in light mode", "Escuro, no modo claro"), t("Solid white", "Sólido branco"), t("None", "Nenhuma"), "--shadow-lg", "12 px"],
-            [t("Photo, colour or gradient", "Foto, cor ou gradiente"), t("Glass", "Vidro"), t("Light glass edge", "Borda clara do vidro"), t("Glass shadow", "Sombra do vidro"), "20 px"],
+            [t("Photo, colour or gradient", "Foto, cor ou gradiente"), t("Glass", "Vidro"), t("Light glass edge", "Borda clara do vidro"), t("Glass shadow", "Sombra do vidro"), "16 px"],
           ]}
         />
-        <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("In the dark theme the card tokens change on their own; the same rules apply. Media, highlight and partner cards use 16 px.", "No tema escuro os tokens do card mudam sozinhos; as mesmas regras valem. Cards com mídia, de destaque e de convite usam 16 px.")}</p>
+        <p className="mt-3 text-body-sm leading-relaxed text-muted-foreground">{t("In the dark theme the card tokens change on their own; the same rules apply. Media, highlight and partner cards use 16 px.", "No tema escuro os tokens do card mudam sozinhos; as mesmas regras valem. Cards com mídia, de destaque e de convite usam 16 px.")}</p>
       </section>
 
       {/* ═══ PARTE 1: CARD SÓLIDO ═══ */}
@@ -562,7 +562,7 @@ export function CardShowcase() {
             action={<Button variant="ghost" size="icon" aria-label={t("Open options", "Abrir opções")}><Sparkles /></Button>}
             footer={
               <div className="flex w-full items-center justify-between gap-3">
-                <span className="text-[0.75rem] text-muted-foreground">{t("Updated 5 minutes ago", "Atualizado há 5 minutos")}</span>
+                <span className="text-label text-muted-foreground">{t("Updated 5 minutes ago", "Atualizado há 5 minutos")}</span>
                 <Button size="sm">{t("View report", "Ver relatório")}<ChevronRight /></Button>
               </div>
             }
@@ -573,9 +573,9 @@ export function CardShowcase() {
                 [t("Actions", "Ações"), "1,284"],
                 [t("Rate", "Taxa"), "5.2%"],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-[var(--radius)] bg-muted p-3">
-                  <p className="text-[0.6875rem] text-muted-foreground mb-1">{label}</p>
-                  <p className={`${display} text-[1rem] font-semibold text-foreground`}>{value}</p>
+                <div key={label} className="rounded-md bg-muted p-3">
+                  <p className="text-caption text-muted-foreground mb-1">{label}</p>
+                  <p className={`${display} text-body font-semibold text-foreground`}>{value}</p>
                 </div>
               ))}
             </div>
@@ -620,8 +620,8 @@ export function CardShowcase() {
               { nome: t("Strong shadow, no border", "Sombra forte, sem borda"), quando: t("Light card on a dark background.", "Card claro sobre fundo escuro."), cls: "", sombra: "var(--shadow-lg)" },
             ].map(x => (
               <div key={x.nome} className={cn("rounded-xl bg-card p-5", x.cls)} style={{ boxShadow: x.sombra }}>
-                <p className="text-[0.875rem] font-semibold text-foreground">{x.nome}</p>
-                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{x.quando}</p>
+                <p className="text-body-sm font-semibold text-foreground">{x.nome}</p>
+                <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{x.quando}</p>
               </div>
             ))}
           </GradeDeCards>
@@ -629,18 +629,18 @@ export function CardShowcase() {
             {[
               { raio: "rounded-xl", valor: "24 px · rounded-xl", uso: t("Default card, lists, forms and data.", "Card padrão, listas, formulários e dados.") },
               { raio: "rounded-lg", valor: "16 px", uso: t("Media, highlight and partner cards.", "Cards com mídia, de destaque e de convite.") },
-              { raio: "rounded-[20px]", valor: "20 px", uso: t("Glass cards.", "Cards de vidro.") },
+              { raio: "rounded-lg", valor: "16 px", uso: t("Glass cards.", "Cards de vidro.") },
             ].map(x => (
               <div key={x.valor} className={cn("border border-border bg-card p-5", x.raio)}>
-                <p className="font-mono text-[0.8125rem] text-foreground">{x.valor}</p>
-                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{x.uso}</p>
+                <p className="font-mono text-body-sm text-foreground">{x.valor}</p>
+                <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{x.uso}</p>
               </div>
             ))}
           </GradeDeCards>
           <GradeDeCards className="gap-5 lg:grid-cols-2">
             <Panel className="p-5">
               <SubTitle>{t("Default specification", "Especificação padrão")}</SubTitle>
-              <div className="space-y-3 text-[0.8125rem]">
+              <div className="space-y-3 text-body-sm">
                 {[
                   [t("Padding", "Padding"), "24px", t("16px for compact cards", "16px para cards compactos")],
                   [t("Section gap", "Espaço entre seções"), "24px", t("Use 12–16px in dense layouts", "Use 12–16px em layouts densos")],
@@ -677,7 +677,7 @@ export function CardShowcase() {
             <Card orientacao="vertical" className="overflow-hidden rounded-lg border-border">
               <CardMidia><img src={FOTO.src} alt={bi(FOTO.alt)} /></CardMidia>
               <CardHeader>
-                <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")}</CardTitle>
+                <CardTitle className={`${display} text-body font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")}</CardTitle>
                 <CardDescription>{t("A new perspective on your business experience challenges.", "Uma nova perspectiva sobre os desafios de experiência do seu negócio.")}</CardDescription>
               </CardHeader>
               <CardFooter><Button variant="outline" size="sm">{t("Learn more", "Saiba mais")}</Button></CardFooter>
@@ -688,14 +688,14 @@ export function CardShowcase() {
             <Card orientacao="horizontal" className="overflow-hidden rounded-lg border-border">
               <CardMidia><img src={FOTO.src} alt={bi(FOTO.alt)} /></CardMidia>
               <CardHeader>
-                <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")}</CardTitle>
+                <CardTitle className={`${display} text-body font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")}</CardTitle>
                 <CardDescription>{t("A new perspective on your business experience challenges.", "Uma nova perspectiva sobre os desafios de experiência do seu negócio.")}</CardDescription>
               </CardHeader>
               <CardFooter><Button variant="outline" size="sm">{t("Learn more", "Saiba mais")}</Button></CardFooter>
             </Card>
           </ItemDaGrade>
         </GradeDeCards>
-        <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("Same Card, same parts: orientacao=\"horizontal\" puts the CardMidia on the left and the header and content in the rest of the width; the footer goes below, across the whole card. Inside a GradeDeCards that became a list, the Card turns horizontal on its own.", "O mesmo Card, as mesmas partes: orientacao=\"horizontal\" põe a CardMidia à esquerda e o cabeçalho e o conteúdo no resto da largura; o rodapé vai para baixo, na largura inteira do card. Dentro de uma GradeDeCards que virou lista, o Card fica horizontal sozinho.")}</p>
+        <p className="mt-3 text-body-sm leading-relaxed text-muted-foreground">{t("Same Card, same parts: orientacao=\"horizontal\" puts the CardMidia on the left and the header and content in the rest of the width; the footer goes below, across the whole card. Inside a GradeDeCards that became a list, the Card turns horizontal on its own.", "O mesmo Card, as mesmas partes: orientacao=\"horizontal\" põe a CardMidia à esquerda e o cabeçalho e o conteúdo no resto da largura; o rodapé vai para baixo, na largura inteira do card. Dentro de uma GradeDeCards que virou lista, o Card fica horizontal sozinho.")}</p>
         <div className="mt-4">
           <Callout title={t("Card with an action: divider and button in the bottom-right corner", "Card com ação: divisor e botão no canto inferior direito")}>
             <p>{t("Rule of the product owner (27/11/2026). In the horizontal card, the actions never form a column on the right, centred beside the content: the CardFooter becomes a full-width row below, with the card divider on top and the buttons aligned to the bottom-right corner. The vertical card keeps its footer at the bottom, as before.", "Regra da dona do produto (27/11/2026). No card horizontal, as ações nunca formam uma coluna à direita, centrada ao lado do conteúdo: o CardFooter vira uma linha de largura inteira embaixo, com o divisor do card em cima e os botões alinhados no canto inferior direito. O card vertical mantém o rodapé na base, como antes.")}</p>
@@ -763,7 +763,7 @@ export function CardShowcase() {
               )}</p>
             </Callout>
           </GradeDeCards>
-          <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { GradeDeCards, ItemDaGrade } from "@/app/components/ui/grade-de-cards";
+          <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { GradeDeCards, ItemDaGrade } from "@/app/components/ui/grade-de-cards";
 import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/components/ui/card";
 
 <GradeDeCards colunas={{ base: 1, md: 2, lg: 3 }}>      {/* ou larguraMinima={280} */}
@@ -788,13 +788,13 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
           <ItemDaGrade>
             <Rotulo>{t("No photo, no button", "Sem foto, sem botão")}</Rotulo>
             <SpecCard title={t("Information", "Informação")} description={t("For grouped information to read, with no action.", "Para informações agrupadas para leitura, sem ação.")}>
-              <p className="text-[0.875rem] leading-relaxed text-muted-foreground">{t("Keep the content focused and let the surrounding layout define its width.", "Mantenha o conteúdo focado e deixe o layout ao redor definir sua largura.")}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground">{t("Keep the content focused and let the surrounding layout define its width.", "Mantenha o conteúdo focado e deixe o layout ao redor definir sua largura.")}</p>
             </SpecCard>
           </ItemDaGrade>
           <ItemDaGrade>
             <Rotulo>{t("No photo, with button", "Sem foto, com botão")}</Rotulo>
             <SpecCard title={t("Task", "Tarefa")} description={t("For one clear action related to the content.", "Para uma ação clara relacionada ao conteúdo.")} footer={<Button size="sm">{t("Continue", "Continuar")}<ChevronRight /></Button>}>
-              <p className="text-[0.875rem] leading-relaxed text-muted-foreground">{t("The button goes in the footer, aligned with the content.", "O botão fica no rodapé, alinhado ao conteúdo.")}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground">{t("The button goes in the footer, aligned with the content.", "O botão fica no rodapé, alinhado ao conteúdo.")}</p>
             </SpecCard>
           </ItemDaGrade>
           <ItemDaGrade>
@@ -803,7 +803,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               <Card className="flex-1 gap-0 overflow-hidden rounded-lg border-border transition-all group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
                 <img src={FOTO.src} alt="" className="h-32 w-full object-cover" />
                 <CardHeader className="pb-6 pt-5">
-                  <CardTitle className={`${display} flex items-center justify-between gap-2 text-[1rem] font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></CardTitle>
+                  <CardTitle className={`${display} flex items-center justify-between gap-2 text-body font-semibold`}>{t("Pilot Project Programme", "Programa Projeto Piloto")} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></CardTitle>
                   <CardDescription>{t("The whole surface is the link; there is no other control inside.", "A superfície inteira é o link; não há outro controle dentro.")}</CardDescription>
                 </CardHeader>
               </Card>
@@ -814,7 +814,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             <Card className="gap-0 overflow-hidden rounded-lg border-border">
               <img src={FOTO.src} alt={bi(FOTO.alt)} className="h-32 w-full object-cover" />
               <CardHeader className="pt-5">
-                <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Media card", "Card com mídia")}</CardTitle>
+                <CardTitle className={`${display} text-body font-semibold`}>{t("Media card", "Card com mídia")}</CardTitle>
                 <CardDescription>{t("Use meaningful imagery that adds context.", "Use imagens relevantes que adicionem contexto.")}</CardDescription>
               </CardHeader>
               <CardFooter className="pt-5"><Button variant="outline" size="sm">{t("Learn more", "Saiba mais")}</Button></CardFooter>
@@ -825,8 +825,8 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             <Card className="gap-3 border-border px-4 py-3">
               <div className="flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <CardTitle className={`${display} text-[0.875rem] font-semibold`}>{t("Compact card", "Card compacto")}</CardTitle>
-                  <CardDescription className="truncate text-[0.75rem]">{t("Dense lists and secondary information.", "Listas densas e informações secundárias.")}</CardDescription>
+                  <CardTitle className={`${display} text-body-sm font-semibold`}>{t("Compact card", "Card compacto")}</CardTitle>
+                  <CardDescription className="truncate text-label">{t("Dense lists and secondary information.", "Listas densas e informações secundárias.")}</CardDescription>
                 </div>
                 <Button variant="ghost" size="sm">{t("Open", "Abrir")}</Button>
               </div>
@@ -854,7 +854,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               </div>
             }
           >
-            <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">
+            <p className="text-body-sm leading-relaxed text-muted-foreground">
               {t("Use this pattern when the card represents a form, configuration or focused task.", "Use este padrão quando o card representa um formulário, configuração ou tarefa focada.")}
             </p>
           </SpecCard>
@@ -863,8 +863,8 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             description={t("Header actions should be compact and visually quiet.", "Ações no cabeçalho devem ser compactas e visualmente discretas.")}
             action={<Button variant="ghost" size="icon" aria-label={t("More options", "Mais opções")}><Sparkles /></Button>}
           >
-            <div className="rounded-[var(--radius)] bg-muted p-4">
-              <p className="text-[0.8125rem] text-foreground">{t("Ghost works for menus, dismiss, edit or other tertiary actions.", "Ghost funciona para menus, dispensar, editar ou outras ações terciárias.")}</p>
+            <div className="rounded-md bg-muted p-4">
+              <p className="text-body-sm text-foreground">{t("Ghost works for menus, dismiss, edit or other tertiary actions.", "Ghost funciona para menus, dispensar, editar ou outras ações terciárias.")}</p>
             </div>
           </SpecCard>
           <SpecCard
@@ -872,7 +872,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             description={t("Use a link button when the action only navigates to related detail.", "Use um botão link quando a ação apenas navega para um detalhe relacionado.")}
             footer={<Button variant="link" size="sm" className="px-0">{t("View full report", "Ver relatório completo")}<ChevronRight /></Button>}
           >
-            <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{t("For opening a report, a profile or a related page.", "Para abrir um relatório, um perfil ou uma página relacionada.")}</p>
+            <p className="text-body-sm leading-relaxed text-muted-foreground">{t("For opening a report, a profile or a related page.", "Para abrir um relatório, um perfil ou uma página relacionada.")}</p>
           </SpecCard>
           <SpecCard
             title={t("Destructive action", "Ação destrutiva")}
@@ -922,9 +922,9 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               >
                 <div className="grid grid-cols-3 gap-3">
                   {[[t("Views", "Visualizações"), "24.8K"], [t("Actions", "Ações"), "1,284"], [t("Rate", "Taxa"), "5.2%"]].map(([label, value]) => (
-                    <div key={label} className="rounded-[var(--radius)] bg-muted p-3">
-                      <p className="mb-1 text-[0.6875rem] text-muted-foreground">{label}</p>
-                      <p className={`${display} text-[1rem] font-semibold text-foreground`}>{value}</p>
+                    <div key={label} className="rounded-md bg-muted p-3">
+                      <p className="mb-1 text-caption text-muted-foreground">{label}</p>
+                      <p className={`${display} text-body font-semibold text-foreground`}>{value}</p>
                     </div>
                   ))}
                 </div>
@@ -937,7 +937,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
           </GradeDeCards>
           <div>
             <Rotulo>{t("Choice (plan): name → who it is for → select", "Escolha (plano): nome → para quem → selecionar")}</Rotulo>
-            <p className="mb-3 text-[0.8125rem] text-muted-foreground">{t("See the selectable plans in Interactive states, below.", "Veja os planos selecionáveis em Estados, logo abaixo.")}</p>
+            <p className="mb-3 text-body-sm text-muted-foreground">{t("See the selectable plans in Interactive states, below.", "Veja os planos selecionáveis em Estados, logo abaixo.")}</p>
           </div>
         </div>
       </section>
@@ -961,7 +961,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
                 return (
                   <Card key={index} className={`gap-4 border-2 transition-all ${isSelected ? "border-primary shadow-[var(--shadow-md)]" : "border-border hover:border-[var(--border-strong)]"}`}>
                     <CardHeader>
-                      <CardTitle className={`${display} text-[1rem] font-semibold flex items-center gap-2`}>
+                      <CardTitle className={`${display} text-body font-semibold flex items-center gap-2`}>
                         {labels[index][0]}
                         {isSelected && <Check className="h-4 w-4 text-primary-text" aria-label={t("Selected", "Selecionado")} />}
                       </CardTitle>
@@ -1026,8 +1026,8 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               {[t("Store", "Loja"), t("Article", "Artigo"), t("Project", "Projeto")].map(x => (
                 <a key={x} href="#card-animacao" onClick={e => e.preventDefault()} className="group block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                   <Card className="gap-2 border-border p-5 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:border-[var(--border-strong)] group-hover:shadow-[var(--shadow-md)] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
-                    <p className="flex items-center justify-between text-[0.875rem] font-semibold text-foreground">{x} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></p>
-                    <p className="text-[0.8125rem] text-muted-foreground">{t("Hover: rises 2 px, stronger border, medium shadow.", "Hover: sobe 2 px, borda mais forte, sombra média.")}</p>
+                    <p className="flex items-center justify-between text-body-sm font-semibold text-foreground">{x} <ArrowUpRight className="h-4 w-4 text-primary-text" aria-hidden /></p>
+                    <p className="text-body-sm text-muted-foreground">{t("Hover: rises 2 px, stronger border, medium shadow.", "Hover: sobe 2 px, borda mais forte, sombra média.")}</p>
                   </Card>
                 </a>
               ))}
@@ -1057,14 +1057,14 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             <Card className="relative gap-5 overflow-hidden border-border">
               <ShineBorder borderWidth={1} duration={7} shineColor={["var(--primary)", "var(--chart-2)", "var(--primary)"]} />
               <CardHeader>
-                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-primary-text">{t("Recommended", "Recomendado")}</span>
-                <CardTitle className={`${display} text-[1.125rem] font-semibold`}>{t("Studio plan", "Plano Studio")}</CardTitle>
+                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-caption font-semibold text-primary-text">{t("Recommended", "Recomendado")}</span>
+                <CardTitle className={`${display} text-body-lg font-semibold`}>{t("Studio plan", "Plano Studio")}</CardTitle>
                 <CardDescription>{t("Use Shine Border to call attention to one exceptional option.", "Use Shine Border para chamar atenção para uma única opção excepcional.")}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex items-baseline gap-1">
-                  <span className={`${display} text-[1.75rem] font-semibold text-foreground`}>$49</span>
-                  <span className="text-[0.75rem] text-muted-foreground">/{t("month", "mês")}</span>
+                  <span className={`${display} text-h2 font-semibold text-foreground`}>$49</span>
+                  <span className="text-label text-muted-foreground">/{t("month", "mês")}</span>
                 </div>
               </CardContent>
               <CardFooter><Button className="w-full">{t("Choose Studio", "Escolher Studio")}</Button></CardFooter>
@@ -1096,20 +1096,20 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
         <GradeDeCards className="gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           <Card className="gap-5 border-border p-6 shadow-none">
             <div>
-              <CardTitle className={`${display} text-[1rem] font-semibold`}>{t("Project overview", "Visão geral do projeto")}</CardTitle>
+              <CardTitle className={`${display} text-body font-semibold`}>{t("Project overview", "Visão geral do projeto")}</CardTitle>
               <CardDescription className="mt-1">{t("The parent card owns the visual elevation.", "O card pai é responsável pela elevação visual.")}</CardDescription>
             </div>
             <Card className="gap-4 border-border bg-muted/40 p-4 shadow-none">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <CardTitle className={`${display} text-[0.875rem] font-semibold`}>{t("Delivery status", "Status da entrega")}</CardTitle>
-                  <CardDescription className="mt-1 text-[0.75rem]">{t("This inner card uses a border and no shadow.", "Este card interno usa borda e nenhuma sombra.")}</CardDescription>
+                  <CardTitle className={`${display} text-body-sm font-semibold`}>{t("Delivery status", "Status da entrega")}</CardTitle>
+                  <CardDescription className="mt-1 text-label">{t("This inner card uses a border and no shadow.", "Este card interno usa borda e nenhuma sombra.")}</CardDescription>
                 </div>
-                <span className="inline-flex shrink-0 items-center rounded-full border border-success/20 bg-success/10 px-2.5 py-1 text-[0.6875rem] font-semibold text-success">{t("On track", "Em dia")}</span>
+                <span className="inline-flex shrink-0 items-center rounded-full border border-success/20 bg-success/10 px-2.5 py-1 text-caption font-semibold text-success">{t("On track", "Em dia")}</span>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full w-3/4 rounded-full bg-primary" /></div>
             </Card>
-            <p className="text-[0.75rem] text-muted-foreground"><Mono>border</Mono> {t("on the parent", "no card pai")} · <Mono>border bg-muted/40</Mono> {t("on the child", "no card filho")}</p>
+            <p className="text-label text-muted-foreground"><Mono>border</Mono> {t("on the parent", "no card pai")} · <Mono>border bg-muted/40</Mono> {t("on the child", "no card filho")}</p>
           </Card>
           <DataTable
             head={[t("Layer", "Camada"), t("Surface treatment", "Tratamento da superfície")]}
@@ -1147,10 +1147,10 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               [t("Surfaces", "Superfícies"), t("card (default), tint (support surface) and dark (graphite, for contrast bands). The primary glow in the corner echoes the hero background.", "card (padrão), tint (superfície de apoio) e dark (grafite, para faixas de contraste). O brilho primário no canto ecoa o fundo do hero.")],
               [t("Content", "Conteúdo"), t("One headline with one highlight, one benefit sentence, one primary action (verb first) and at most one secondary link.", "Um título com um destaque, uma frase de benefício, uma ação principal (verbo primeiro) e no máximo um link secundário.")],
             ].map(([a, b]) => (
-              <div key={a} className="rounded-lg border border-border bg-card p-4"><p className="mb-1 text-[0.875rem] font-semibold text-foreground">{a}</p><p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{b}</p></div>
+              <div key={a} className="rounded-lg border border-border bg-card p-4"><p className="mb-1 text-body-sm font-semibold text-foreground">{a}</p><p className="text-body-sm leading-relaxed text-muted-foreground">{b}</p></div>
             ))}
           </GradeDeCards>
-          <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { PartnerCard } from "@/app/components/ui/partner-card";
+          <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { PartnerCard } from "@/app/components/ui/partner-card";
 <PartnerCard orientation="horizontal" size="m" eyebrow="…" title="… **destaque** …" description="…" cta={{ label: "…", href: "/…" }} />`}</code></pre>
         </div>
       </section>
@@ -1176,7 +1176,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             </CenaDoVidro>
           </CenaDeTesteCtx.Provider>
           {semAprovacao.length > 0 && (
-            <p className="text-[0.8125rem] text-muted-foreground">{t("No approved combination on this background in the current theme: ", "Sem combinação aprovada sobre este fundo no tema atual: ")}{semAprovacao.join(", ")}. {t("Test them in Test the glass.", "Teste em Testar o vidro.")}</p>
+            <p className="text-body-sm text-muted-foreground">{t("No approved combination on this background in the current theme: ", "Sem combinação aprovada sobre este fundo no tema atual: ")}{semAprovacao.join(", ")}. {t("Test them in Test the glass.", "Teste em Testar o vidro.")}</p>
           )}
           <DataTable
             head={[t("Rule", "Regra"), t("Guidance", "Orientação")]}
@@ -1185,11 +1185,11 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               [t("Quantity", "Quantidade"), t("One to three per view. Glass loses meaning when everything is glass.", "De um a três por tela. O vidro perde sentido quando tudo é vidro.")],
               [t("Contrast", "Contraste"), t("Light glass at 55% or more for body text; dark glass at 50% or more.", "Vidro claro com 55% ou mais para texto corrido; vidro escuro com 50% ou mais.")],
               [t("Content", "Conteúdo"), t("Short content: a number, a title, one sentence, one action. Long reading goes on a solid card.", "Conteúdo curto: um número, um título, uma frase, uma ação. Leitura longa vai em card sólido.")],
-              [t("Shape", "Forma"), t("Radius 20 px, light glass edge and the glass shadow; same anatomy and spacing as the solid card.", "Raio de 20 px, borda clara do vidro e a sombra do vidro; mesma anatomia e espaçamentos do card sólido.")],
+              [t("Shape", "Forma"), t("Radius 16 px, light glass edge and the glass shadow; same anatomy and spacing as the solid card.", "Raio de 16 px, borda clara do vidro e a sombra do vidro; mesma anatomia e espaçamentos do card sólido.")],
               [t("Reduced transparency", "Transparência reduzida"), t("With prefers-reduced-transparency the card becomes solid (card or graphite).", "Com prefers-reduced-transparency o card vira sólido (card ou grafite).")],
             ]}
           />
-          <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { GlassCard } from "@/app/components/ui/glass-card";
+          <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { GlassCard } from "@/app/components/ui/glass-card";
 
 <GlassCard finish="padrao" intensity="forte">…</GlassCard>   {/* Vidro */}
 <GlassCard finish="fosco" tone="clara" interactive>…</GlassCard>`}</code></pre>
@@ -1213,7 +1213,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
                 <CenaDoVidro className="p-4 sm:p-5">
                   {cfg
                     ? <GlassTestCard compact {...cfg} title={nome} subtitle={propsDoVidro(cfg)} />
-                    : <p className="rounded-md bg-card p-4 text-[0.8125rem] text-foreground">{t("No approved glass on this background in the current theme: use a solid card.", "Sem vidro aprovado neste fundo no tema atual: use card sólido.")}</p>}
+                    : <p className="rounded-md bg-card p-4 text-body-sm text-foreground">{t("No approved glass on this background in the current theme: use a solid card.", "Sem vidro aprovado neste fundo no tema atual: use card sólido.")}</p>}
                 </CenaDoVidro>
               </CenaDeTesteCtx.Provider>
             </ItemDaGrade>
@@ -1233,25 +1233,25 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             <CenaDoVidro>
               <GradeDeCards className="gap-5 md:grid-cols-3">
                 <GlassCard {...vidroConteudo}>
-                  <p className={`text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}>{t("Challenges in progress", "Desafios em andamento")}</p>
-                  <p className={`${display} mt-2 text-[2.25rem] font-bold leading-none tracking-[-0.03em]`}>12</p>
-                  <p className={`mt-2 text-[0.8125rem] ${corSub(vidroConteudo)}`}>{t("3 with evidence collected this week", "3 com evidências coletadas nesta semana")}</p>
+                  <p className={`text-caption font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}>{t("Challenges in progress", "Desafios em andamento")}</p>
+                  <p className={`${display} mt-2 text-display-m font-bold leading-none tracking-[-0.03em]`}>12</p>
+                  <p className={`mt-2 text-body-sm ${corSub(vidroConteudo)}`}>{t("3 with evidence collected this week", "3 com evidências coletadas nesta semana")}</p>
                 </GlassCard>
                 <GlassCard {...vidroConteudo} interactive tabIndex={0} role="link">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className={`inline-flex items-center gap-1 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
-                      <p className={`${display} mt-2 text-[1.125rem] font-semibold tracking-[-0.01em]`}>Clínica Horizonte</p>
+                      <p className={`inline-flex items-center gap-1 text-caption font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}><MapPin className="h-3 w-3" aria-hidden /> {t("Organization · Health", "Organização · Saúde")}</p>
+                      <p className={`${display} mt-2 text-body-lg font-semibold tracking-[-0.01em]`}>Clínica Horizonte</p>
                     </div>
                     <ArrowUpRight className="h-5 w-5 shrink-0 text-primary-text" aria-hidden />
                   </div>
-                  <p className={`mt-2 text-[0.8125rem] leading-relaxed ${corSub(vidroConteudo)}`}>{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
+                  <p className={`mt-2 text-body-sm leading-relaxed ${corSub(vidroConteudo)}`}>{t("Reception journey: 4 hypotheses, 2 tests planned.", "Jornada da recepção: 4 hipóteses, 2 testes planejados.")}</p>
                   <div className="mt-4"><AvatarCircles size="sm" numPeople={12} avatarUrls={[1, 2, 3].map(i => ({ imageUrl: `${import.meta.env.BASE_URL}avatares/avatar-${i}.svg`, profileUrl: "#card-glass-conteudo", name: `Pessoa ${i}` }))} /></div>
                 </GlassCard>
                 <GlassCard {...vidroConteudo}>
-                  <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-[var(--primary-text,var(--primary))]">{t("What do you want to improve?", "O que você deseja melhorar?")}</p>
-                  <p className={`${display} mt-2 text-[1.125rem] font-semibold tracking-[-0.01em]`}>{t("Start a challenge", "Comece um desafio")}</p>
-                  <p className={`mt-2 text-[0.8125rem] leading-relaxed ${corSub(vidroConteudo)}`}>{t("Describe the human problem in your own words; the system guides the rest.", "Descreva o problema humano com suas palavras; o sistema conduz o resto.")}</p>
+                  <p className="text-caption font-semibold uppercase tracking-[0.08em] text-[var(--primary-text,var(--primary))]">{t("What do you want to improve?", "O que você deseja melhorar?")}</p>
+                  <p className={`${display} mt-2 text-body-lg font-semibold tracking-[-0.01em]`}>{t("Start a challenge", "Comece um desafio")}</p>
+                  <p className={`mt-2 text-body-sm leading-relaxed ${corSub(vidroConteudo)}`}>{t("Describe the human problem in your own words; the system guides the rest.", "Descreva o problema humano com suas palavras; o sistema conduz o resto.")}</p>
                   <Button className="mt-4 w-full rounded-full">{t("Start", "Começar")}</Button>
                 </GlassCard>
               </GradeDeCards>
@@ -1259,7 +1259,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
           </CenaDeTesteCtx.Provider>
           </>
         ) : (
-          <p className="text-[0.8125rem] text-muted-foreground">{t("No approved glass for content in the current theme.", "Sem vidro aprovado para conteúdo no tema atual.")}</p>
+          <p className="text-body-sm text-muted-foreground">{t("No approved glass for content in the current theme.", "Sem vidro aprovado para conteúdo no tema atual.")}</p>
         )}
       </section>
 
@@ -1298,7 +1298,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
           <DoDont
             dos={[
               t("Use for a hero summary, a highlighted item or a floating action card.", "Use para um resumo no hero, um item em destaque ou um card de ação flutuante."),
-              t("Keep the 20 px radius and the spacing; glass changes the surface, not the anatomy.", "Mantenha o raio de 20 px e os espaçamentos; o vidro muda a superfície, não a anatomia."),
+              t("Keep the 16 px radius and the spacing; glass changes the surface, not the anatomy.", "Mantenha o raio de 16 px e os espaçamentos; o vidro muda a superfície, não a anatomia."),
               t("Pair dark glass with photos and light glass with the brand gradient.", "Combine vidro escuro com fotos e vidro claro com o gradiente da marca."),
             ]}
             donts={[
@@ -1318,10 +1318,10 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               [t("Shine Border", "Shine Border"), [t("More than one per decision group.", "Mais de um por grupo de decisão."), t("As the only indicator of selection.", "Como único indicador de seleção.")]],
             ].map(([nome, itens]) => (
               <Panel key={nome as string} className="p-5">
-                <p className="mb-3 flex items-center gap-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-foreground"><X className="h-3.5 w-3.5 text-primary-text" aria-hidden /> {nome as string}</p>
+                <p className="mb-3 flex items-center gap-2 text-label font-semibold uppercase tracking-[0.08em] text-foreground"><X className="h-3.5 w-3.5 text-primary-text" aria-hidden /> {nome as string}</p>
                 <ul className="space-y-2">
                   {(itens as string[]).map(i => (
-                    <li key={i} className="flex gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />{i}</li>
+                    <li key={i} className="flex gap-2 text-body-sm leading-relaxed text-muted-foreground"><span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted-foreground/60" />{i}</li>
                   ))}
                 </ul>
               </Panel>

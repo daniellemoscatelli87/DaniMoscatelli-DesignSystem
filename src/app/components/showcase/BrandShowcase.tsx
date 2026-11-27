@@ -46,7 +46,7 @@ function downloadSvg(markup: string, filename: string) {
 function DownloadButtons({ asset }: { asset: DownloadAsset }) {
   const { t } = useI18n();
   const btn =
-    "inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-[0.75rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+    "inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-label font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   return (
     <div className="flex shrink-0 items-center gap-2">
       <button
@@ -75,8 +75,8 @@ function DownloadButtons({ asset }: { asset: DownloadAsset }) {
 function SectionBlock({ id, title, subtitle }: { id: string; title: string; subtitle?: string }) {
   return (
     <div id={id} className="mb-8">
-      <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{title}</h2>
-      {subtitle && <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">{subtitle}</p>}
+      <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{title}</h2>
+      {subtitle && <p className="mt-1 max-w-3xl text-body leading-relaxed text-muted-foreground">{subtitle}</p>}
       <div className="mt-4 h-px bg-border" />
     </div>
   );
@@ -99,19 +99,19 @@ function LogoCard({
   download?: DownloadAsset;
 }) {
   return (
-    <div className="rounded-2xl border border-border overflow-hidden">
+    <div className="rounded-lg border border-border overflow-hidden">
       <div className={`flex items-center justify-center p-10 min-h-[220px] ${bg}`}>
         {children}
       </div>
       <div className="px-5 py-4 bg-card border-t border-border">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-[0.875rem] font-semibold text-foreground">{label}</p>
-            {description && <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{description}</p>}
+            <p className="text-body-sm font-semibold text-foreground">{label}</p>
+            {description && <p className="text-body-sm text-muted-foreground mt-0.5">{description}</p>}
           </div>
           {download && <DownloadButtons asset={download} />}
           {!download && badge && (
-            <span className="text-[0.6875rem] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+            <span className="text-caption font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
               {badge}
             </span>
           )}
@@ -143,8 +143,8 @@ function ColorChip({ name, hex, textColor = "text-foreground" }: { name: string;
         style={{ backgroundColor: hex }}
       />
       <div className="flex-1 min-w-0">
-        <p className="text-[0.875rem] font-semibold text-foreground truncate">{name}</p>
-        <p className="text-[0.8125rem] text-muted-foreground font-mono">{hex}</p>
+        <p className="text-body-sm font-semibold text-foreground truncate">{name}</p>
+        <p className="text-body-sm text-muted-foreground font-mono">{hex}</p>
       </div>
       <span className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
         {copied ? <Check className="h-4 w-4 text-success" /> : <Copy className="h-4 w-4" />}
@@ -167,7 +167,7 @@ function RuleCard({
 }) {
   const { t } = useI18n();
   return (
-    <div className="rounded-2xl border border-border overflow-hidden">
+    <div className="rounded-lg border border-border overflow-hidden">
       <div className={`flex items-center justify-center p-8 min-h-[180px] ${bg}`}>{children}</div>
       <div className="px-4 py-3 bg-card border-t border-border">
         <div className="flex items-center gap-2">
@@ -176,11 +176,11 @@ function RuleCard({
           ) : (
             <XCircle className="h-4 w-4 text-error shrink-0" />
           )}
-          <span className={`text-[0.8125rem] font-medium ${type === "do" ? "text-success" : "text-error-text"}`}>
+          <span className={`text-body-sm font-medium ${type === "do" ? "text-success" : "text-error-text"}`}>
             {type === "do" ? t("Correct", "Correto") : t("Incorrect", "Incorreto")}
           </span>
         </div>
-        <p className="mt-0.5 text-[0.8125rem] text-muted-foreground pl-6">— {label}</p>
+        <p className="mt-0.5 text-body-sm text-muted-foreground pl-6">— {label}</p>
       </div>
     </div>
   );
@@ -193,7 +193,7 @@ export function BrandShowcase() {
 
       {/* ── Intro ── */}
       <div>
-        <p className="text-[0.9375rem] leading-relaxed text-muted-foreground max-w-2xl">
+        <p className="text-body leading-relaxed text-muted-foreground max-w-2xl">
           {t("Dani Moscatelli brand usage guidelines — logo versions, symbol, palette, and application rules to ensure consistency across all touchpoints.", "Diretrizes de uso da marca Dani Moscatelli — versões do logo, símbolo, paleta e regras de aplicação para garantir consistência em todos os pontos de contato.")}
         </p>
       </div>
@@ -391,7 +391,7 @@ export function BrandShowcase() {
               previewSize: "h-8",
             },
           ].map(({ icon: Icon, label, desc, bg, preview, previewSize }) => (
-            <div key={label.en} className={`rounded-2xl border border-border ${bg} p-5 flex flex-col gap-4`}>
+            <div key={label.en} className={`rounded-lg border border-border ${bg} p-5 flex flex-col gap-4`}>
               <div className="flex items-start justify-between">
                 <Icon className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <ImageWithFallback
@@ -401,16 +401,16 @@ export function BrandShowcase() {
                 />
               </div>
               <div>
-                <p className="text-[0.875rem] font-semibold text-foreground">{bi(label)}</p>
-                <p className="text-[0.75rem] text-muted-foreground mt-0.5 leading-snug">{bi(desc)}</p>
+                <p className="text-body-sm font-semibold text-foreground">{bi(label)}</p>
+                <p className="text-label text-muted-foreground mt-0.5 leading-snug">{bi(desc)}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* Minimum sizes */}
-        <div className="rounded-2xl border border-border bg-card px-6 py-5">
-          <p className="text-[0.8125rem] font-semibold text-foreground mb-4">{t("Minimum Sizes", "Tamanhos Mínimos")}</p>
+        <div className="rounded-lg border border-border bg-card px-6 py-5">
+          <p className="text-body-sm font-semibold text-foreground mb-4">{t("Minimum Sizes", "Tamanhos Mínimos")}</p>
           <div className="flex flex-wrap gap-6 items-end">
             {[
               { size: "h-3 w-3", label: "16px", note: { en: "digital minimum", pt: "mínimo digital" } },
@@ -426,12 +426,12 @@ export function BrandShowcase() {
                   alt={t(`Symbol ${label}`, `Símbolo ${label}`)}
                   className={`${size} object-contain`}
                 />
-                <span className="text-[0.75rem] font-mono font-semibold text-foreground">{label}</span>
-                <span className="text-[0.6875rem] text-muted-foreground">{bi(note)}</span>
+                <span className="text-label font-mono font-semibold text-foreground">{label}</span>
+                <span className="text-caption text-muted-foreground">{bi(note)}</span>
               </div>
             ))}
           </div>
-          <p className="mt-4 text-[0.75rem] text-muted-foreground border-t border-border pt-3">
+          <p className="mt-4 text-label text-muted-foreground border-t border-border pt-3">
             {lang === "pt" ? <>Nunca use o símbolo abaixo de <span className="font-semibold text-foreground">16 px</span> no digital ou <span className="font-semibold text-foreground">5 mm</span> na impressão.</> : <>Never use the symbol below <span className="font-semibold text-foreground">16 px</span> in digital or <span className="font-semibold text-foreground">5 mm</span> in print.</>}
           </p>
         </div>
@@ -449,14 +449,14 @@ export function BrandShowcase() {
         <div className="space-y-4">
 
           {/* Desktop */}
-          <div className="rounded-2xl border border-border bg-card overflow-hidden">
+          <div className="rounded-lg border border-border bg-card overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-3 border-b border-border bg-muted/30">
               <Monitor className="h-4 w-4 text-muted-foreground" />
-              <span className="text-[0.8125rem] font-semibold text-foreground">Desktop</span>
-              <span className="text-[0.75rem] text-muted-foreground">≥ 1024 px</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Full Horizontal Logo", "Logo Horizontal Completo")}</span>
+              <span className="text-body-sm font-semibold text-foreground">Desktop</span>
+              <span className="text-label text-muted-foreground">≥ 1024 px</span>
+              <span className="ml-auto text-label font-mono text-primary-text">{t("Full Horizontal Logo", "Logo Horizontal Completo")}</span>
             </div>
-            <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
+            <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-lg">
               {/* Desktop navbar simulation */}
               <ImageWithFallback
                 src={iconeWhite}
@@ -465,24 +465,24 @@ export function BrandShowcase() {
               />
               <div className="ml-auto flex items-center gap-5">
                 {([["Home", "Início"], ["Services", "Serviços"], ["Portfolio", "Portfólio"], ["Contact", "Contato"]] as const).map(([en, pt]) => (
-                  <span key={en} className="text-[0.8125rem] text-white/60">{t(en, pt)}</span>
+                  <span key={en} className="text-body-sm text-white/60">{t(en, pt)}</span>
                 ))}
                 <div className="h-8 w-20 rounded-lg bg-primary/80 flex items-center justify-center">
-                  <span className="text-[0.75rem] text-white font-medium">{t("Hire us", "Contrate")}</span>
+                  <span className="text-label text-white font-medium">{t("Hire us", "Contrate")}</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Tablet */}
-          <div className="rounded-2xl border border-border bg-card overflow-hidden">
+          <div className="rounded-lg border border-border bg-card overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-3 border-b border-border bg-muted/30">
               <Tablet className="h-4 w-4 text-muted-foreground" />
-              <span className="text-[0.8125rem] font-semibold text-foreground">Tablet</span>
-              <span className="text-[0.75rem] text-muted-foreground">768 px – 1023 px</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Vertical Logo or reduced Horizontal", "Logo Vertical ou Horizontal reduzido")}</span>
+              <span className="text-body-sm font-semibold text-foreground">Tablet</span>
+              <span className="text-label text-muted-foreground">768 px – 1023 px</span>
+              <span className="ml-auto text-label font-mono text-primary-text">{t("Vertical Logo or reduced Horizontal", "Logo Vertical ou Horizontal reduzido")}</span>
             </div>
-            <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
+            <div className="px-8 py-6 bg-[#181F2E] flex items-center gap-0 rounded-b-lg">
               <ImageWithFallback
                 src={iconeWhite}
                 alt={t("Logo icon — tablet", "Ícone do logo — tablet")}
@@ -490,7 +490,7 @@ export function BrandShowcase() {
               />
               <div className="ml-auto flex items-center gap-4">
                 {([["Services", "Serviços"], ["Portfolio", "Portfólio"]] as const).map(([en, pt]) => (
-                  <span key={en} className="text-[0.8125rem] text-white/60">{t(en, pt)}</span>
+                  <span key={en} className="text-body-sm text-white/60">{t(en, pt)}</span>
                 ))}
                 <div className="h-8 w-8 rounded-lg bg-muted/40 flex items-center justify-center">
                   <span className="text-white/60 text-lg leading-none">☰</span>
@@ -500,14 +500,14 @@ export function BrandShowcase() {
           </div>
 
           {/* Mobile */}
-          <div className="rounded-2xl border border-border bg-card overflow-hidden">
+          <div className="rounded-lg border border-border bg-card overflow-hidden">
             <div className="flex items-center gap-3 px-5 py-3 border-b border-border bg-muted/30">
               <Smartphone className="h-4 w-4 text-muted-foreground" />
-              <span className="text-[0.8125rem] font-semibold text-foreground">Mobile</span>
-              <span className="text-[0.75rem] text-muted-foreground">{"< 768 px"}</span>
-              <span className="ml-auto text-[0.75rem] font-mono text-primary-text">{t("Standalone symbol", "Símbolo isolado")}</span>
+              <span className="text-body-sm font-semibold text-foreground">Mobile</span>
+              <span className="text-label text-muted-foreground">{"< 768 px"}</span>
+              <span className="ml-auto text-label font-mono text-primary-text">{t("Standalone symbol", "Símbolo isolado")}</span>
             </div>
-            <div className="px-6 py-5 bg-[#181F2E] flex items-center gap-0 rounded-b-2xl">
+            <div className="px-6 py-5 bg-[#181F2E] flex items-center gap-0 rounded-b-lg">
               <ImageWithFallback
                 src={iconeWhite}
                 alt={t("Standalone symbol — mobile", "Símbolo isolado — mobile")}
@@ -530,8 +530,8 @@ export function BrandShowcase() {
         </div>
 
         {/* Summary table */}
-        <div className="mt-5 rounded-2xl border border-border bg-card overflow-hidden">
-          <div className="grid grid-cols-4 text-[0.75rem] font-semibold text-muted-foreground uppercase tracking-wider px-5 py-3 border-b border-border bg-muted/20">
+        <div className="mt-5 rounded-lg border border-border bg-card overflow-hidden">
+          <div className="grid grid-cols-4 text-label font-semibold text-muted-foreground uppercase tracking-wider px-5 py-3 border-b border-border bg-muted/20">
             <span>{t("Device", "Dispositivo")}</span>
             <span>Breakpoint</span>
             <span>{t("Logo version", "Versão do logo")}</span>
@@ -546,7 +546,7 @@ export function BrandShowcase() {
           ].map(({ device, bp, version, size }, i, arr) => (
             <div
               key={device}
-              className={`grid grid-cols-4 px-5 py-3.5 text-[0.8125rem] ${i < arr.length - 1 ? "border-b border-border" : ""}`}
+              className={`grid grid-cols-4 px-5 py-3.5 text-body-sm ${i < arr.length - 1 ? "border-b border-border" : ""}`}
             >
               <span className="font-medium text-foreground">{device === "Favicon / Tab" ? t("Favicon / Tab", "Favicon / Aba") : device}</span>
               <span className="text-muted-foreground font-mono">{bp}</span>
@@ -571,13 +571,13 @@ export function BrandShowcase() {
             { bg: "bg-primary",                         label: { en: "Primary", pt: "Primária" },    useLight: false },
             { bg: "bg-[var(--graphite-950)] border border-border",  label: { en: "Graphite 950", pt: "Graphite 950" }, useLight: false },
           ].map(({ bg, label, useLight }) => (
-            <div key={label.en} className={`rounded-2xl flex flex-col items-center justify-center gap-4 p-6 min-h-[160px] ${bg}`}>
+            <div key={label.en} className={`rounded-lg flex flex-col items-center justify-center gap-4 p-6 min-h-[160px] ${bg}`}>
               <ImageWithFallback
                 src={useLight ? iconeRed : iconeWhite}
                 alt={t(`DM icon on ${label.en}`, `Ícone DM em ${label.pt}`)}
                 className="h-14 w-auto object-contain"
               />
-              <span className={`text-[0.75rem] font-medium ${useLight ? "text-muted-foreground" : "text-white/60"}`}>
+              <span className={`text-label font-medium ${useLight ? "text-muted-foreground" : "text-white/60"}`}>
                 {bi(label)}
               </span>
             </div>
@@ -613,12 +613,12 @@ export function BrandShowcase() {
           title={t("Institutional Typography", "Tipografia Institucional")}
           subtitle={t("Plus Jakarta Sans is the brand's primary font. The Experience Design Studio tagline is set in Space Grotesk.", "Plus Jakarta Sans é a fonte principal da marca. O slogan Experience Design Studio é composto em Space Grotesk.")}
         />
-        <div className="rounded-2xl border border-border bg-card overflow-hidden">
+        <div className="rounded-lg border border-border bg-card overflow-hidden">
           {[
-            { sample: "Dani Moscatelli", size: "text-[2.5rem]", weight: "font-bold",     label: { en: "Display / Logotype", pt: "Display / Logotipo" },  tracking: "tracking-[-0.03em]" },
-            { sample: "Experience Design Studio", size: "text-[1.5rem]", weight: "font-medium",  label: { en: "Tagline", pt: "Slogan" },  tracking: "tracking-[0.01em]", font: "font-['Space_Grotesk',_sans-serif]" },
-            { sample: "Design System · Components · Patterns", size: "text-[1.125rem]", weight: "font-normal", label: { en: "Body / Descriptive", pt: "Corpo / Descritivo" }, tracking: "" },
-            { sample: rotuloVersao(t).toUpperCase(), size: "text-[0.75rem]", weight: "font-semibold", label: { en: "Label / Caption", pt: "Rótulo / Legenda" }, tracking: "tracking-[0.12em]" },
+            { sample: "Dani Moscatelli", size: "text-h1", weight: "font-bold",     label: { en: "Display / Logotype", pt: "Display / Logotipo" },  tracking: "tracking-[-0.03em]" },
+            { sample: "Experience Design Studio", size: "text-h3", weight: "font-medium",  label: { en: "Tagline", pt: "Slogan" },  tracking: "tracking-[0.01em]", font: "font-['Space_Grotesk',_sans-serif]" },
+            { sample: "Design System · Components · Patterns", size: "text-body-lg", weight: "font-normal", label: { en: "Body / Descriptive", pt: "Corpo / Descritivo" }, tracking: "" },
+            { sample: rotuloVersao(t).toUpperCase(), size: "text-label", weight: "font-semibold", label: { en: "Label / Caption", pt: "Rótulo / Legenda" }, tracking: "tracking-[0.12em]" },
           ].map(({ sample, size, weight, label, tracking, font }: { sample: string; size: string; weight: string; label: { en: string; pt: string }; tracking: string; font?: string }, i, arr) => (
             <div
               key={label.en}
@@ -627,7 +627,7 @@ export function BrandShowcase() {
               <span className={`${size} ${weight} ${tracking} text-foreground ${font ?? "font-['Plus_Jakarta_Sans',_sans-serif]"} leading-tight`}>
                 {sample}
               </span>
-              <span className="text-[0.75rem] text-muted-foreground shrink-0 font-mono">{bi(label)}</span>
+              <span className="text-label text-muted-foreground shrink-0 font-mono">{bi(label)}</span>
             </div>
           ))}
         </div>
@@ -707,24 +707,24 @@ export function BrandShowcase() {
           title={t("Clear Space", "Área de Respiro")}
           subtitle={t("Always keep a minimum spacing around the logo equal to the height of the letter 'D' in the logotype.", "Sempre mantenha um espaçamento mínimo ao redor do logo igual à altura da letra 'D' do logotipo.")}
         />
-        <div className="rounded-2xl border border-border bg-card p-20 flex items-center justify-center">
+        <div className="rounded-lg border border-border bg-card p-20 flex items-center justify-center">
           <div className="relative inline-flex items-center justify-center">
             {/* Clear space indicator lines */}
             <div className="absolute inset-0 -m-10 border-2 border-dashed border-primary/30 rounded-lg pointer-events-none" />
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
               <div className="w-px h-8 bg-primary/40" />
-              <span className="text-[0.6875rem] font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
             </div>
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-              <span className="text-[0.6875rem] font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
               <div className="w-px h-8 bg-primary/40" />
             </div>
             <div className="absolute -left-10 top-1/2 -translate-y-1/2 flex items-center gap-1">
               <div className="h-px w-8 bg-primary/40" />
-              <span className="text-[0.6875rem] font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded rotate-0">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm rotate-0">1×</span>
             </div>
             <div className="absolute -right-10 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              <span className="text-[0.6875rem] font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
               <div className="h-px w-8 bg-primary/40" />
             </div>
             {/* Versão de texto escuro no tema claro e de texto branco no tema escuro */}
@@ -740,7 +740,7 @@ export function BrandShowcase() {
             />
           </div>
         </div>
-        <p className="mt-3 text-[0.8125rem] text-muted-foreground text-center">
+        <p className="mt-3 text-body-sm text-muted-foreground text-center">
           {lang === "pt" ? <>Onde <span className="font-semibold text-primary-text">1×</span> = altura do "D" maiúsculo no logotipo</> : <>Where <span className="font-semibold text-primary-text">1×</span> = height of the uppercase "D" in the logotype</>}
         </p>
       </div>

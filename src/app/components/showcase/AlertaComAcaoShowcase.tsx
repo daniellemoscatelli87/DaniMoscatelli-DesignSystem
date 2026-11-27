@@ -10,7 +10,7 @@ import { Callout, DoDont, Mono, Panel } from "./shared/Guidance";
  */
 
 function Rotulo({ children }: { children: React.ReactNode }) {
-  return <h4 className="mb-4 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</h4>;
+  return <h4 className="mb-4 text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</h4>;
 }
 
 /* Project example with a simulated action: loading, then the alert turns into success. */
@@ -95,7 +95,7 @@ function DemoInfoFechavel() {
         </AlertaComAcao>
       ) : (
         <div className="flex h-full min-h-[120px] flex-col items-start justify-center gap-3 rounded-lg border border-dashed border-border px-[22px] py-5">
-          <p className="text-[0.875rem] text-muted-foreground">{t("You closed the notice.", "Você fechou o aviso.")}</p>
+          <p className="text-body-sm text-muted-foreground">{t("You closed the notice.", "Você fechou o aviso.")}</p>
           <LinkDoAlerta onClick={() => setAberto(true)}>{t("Show again", "Mostrar de novo")}</LinkDoAlerta>
         </div>
       )}
@@ -136,8 +136,8 @@ export function AlertaComAcaoDoc() {
   return (
     <div className="space-y-10">
       <div>
-        <h3 className="font-[family-name:var(--font-display)] text-[1.25rem] font-semibold tracking-[-0.01em] text-foreground">{t("Alert with action", "Alerta com ação")}</h3>
-        <p className="mt-1 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <h3 className="font-[family-name:var(--font-display)] text-h4 font-semibold tracking-[-0.01em] text-foreground">{t("Alert with action", "Alerta com ação")}</h3>
+        <p className="mt-1 max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "A notice that asks the reader to act: icon with base, title, description and, below the text, one outline primary action and, if needed, a secondary action styled as a link. Component",
             "Aviso que pede uma ação de quem lê: ícone com base, título, descrição e, embaixo do texto, uma ação principal de contorno e, se precisar, uma secundária em forma de link. Componente",
@@ -192,14 +192,14 @@ export function AlertaComAcaoDoc() {
           {CONTRASTES.map(c => (
             <div key={c.tom} className="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3.5">
               <span aria-hidden className={`h-6 w-6 shrink-0 rounded-sm border-[1.5px] ${BORDA_DO_TOM[c.tom]}`} style={{ backgroundColor: `var(${c.token})` }} />
-              <span className="min-w-[7.5rem] text-[0.875rem] font-semibold text-foreground">{t(c.nome[0], c.nome[1])}</span>
+              <span className="min-w-[7.5rem] text-body-sm font-semibold text-foreground">{t(c.nome[0], c.nome[1])}</span>
               <Mono>{c.token}</Mono>
-              <span className="text-[0.8125rem] text-muted-foreground">{c.valor}</span>
-              <span className="text-[0.8125rem] font-semibold text-foreground sm:ml-auto">{c.contraste.split("|")[lang === "pt" ? 1 : 0]} {t("on the alert background", "no fundo do alerta")}</span>
+              <span className="text-body-sm text-muted-foreground">{c.valor}</span>
+              <span className="text-body-sm font-semibold text-foreground sm:ml-auto">{c.contraste.split("|")[lang === "pt" ? 1 : 0]} {t("on the alert background", "no fundo do alerta")}</span>
             </div>
           ))}
         </Panel>
-        <p className="mt-3 max-w-3xl text-[0.8125rem] leading-relaxed text-muted-foreground">
+        <p className="mt-3 max-w-3xl text-body-sm leading-relaxed text-muted-foreground">
           <Mono>--info-text</Mono>, <Mono>--success-text</Mono>, <Mono>--warning-text</Mono> {t("and", "e")} <Mono>--error-text</Mono> {t(
             "are new (23/11/2026): only for text and icons on light backgrounds. In the dark theme they point to",
             "são novos (23/11/2026): servem só para texto e ícone sobre fundo claro. No tema escuro, apontam para",
@@ -225,7 +225,7 @@ export function AlertaComAcaoDoc() {
 
       <div>
         <Rotulo>{t("How to use", "Como usar")}</Rotulo>
-        <pre className="whitespace-pre-wrap break-words rounded-lg border border-border bg-card p-4 text-[0.75rem] leading-relaxed text-muted-foreground"><code>{exemploDeCodigo}</code></pre>
+        <pre className="whitespace-pre-wrap break-words rounded-lg border border-border bg-card p-4 text-label leading-relaxed text-muted-foreground"><code>{exemploDeCodigo}</code></pre>
       </div>
     </div>
   );

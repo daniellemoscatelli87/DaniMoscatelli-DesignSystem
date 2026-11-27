@@ -48,9 +48,9 @@ export function TimelineShowcase() {
           )}
         />
         <div className="mb-6 flex flex-wrap items-end gap-x-6 gap-y-3">
-          <div className="flex flex-col gap-1.5"><span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Cards", "Cards")}</span><SegmentedControl size="sm" aria-label={t("Card layout", "Disposição dos cards")} value={alternar} onValueChange={setAlternar} options={[{ value: "sim", label: t("Alternating", "Alternados") }, { value: "nao", label: t("Right only", "Só à direita") }]} /></div>
-          <div className="flex flex-col gap-1.5"><span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Done steps", "Etapas feitas")}</span><SegmentedControl size="sm" aria-label={t("Done steps", "Etapas feitas")} value={check} onValueChange={setCheck} options={[{ value: "icone", label: t("Keep icon", "Mantêm o ícone") }, { value: "check", label: "Check" }]} /></div>
-          <div className="flex flex-col gap-1.5"><span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Animation", "Animação")}</span><SegmentedControl size="sm" aria-label={t("Animation", "Animação")} value={animar} onValueChange={setAnimar} options={[{ value: "sim", label: t("On scroll", "Na rolagem") }, { value: "nao", label: t("Off", "Desligada") }]} /></div>
+          <div className="flex flex-col gap-1.5"><span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Cards", "Cards")}</span><SegmentedControl size="sm" aria-label={t("Card layout", "Disposição dos cards")} value={alternar} onValueChange={setAlternar} options={[{ value: "sim", label: t("Alternating", "Alternados") }, { value: "nao", label: t("Right only", "Só à direita") }]} /></div>
+          <div className="flex flex-col gap-1.5"><span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Done steps", "Etapas feitas")}</span><SegmentedControl size="sm" aria-label={t("Done steps", "Etapas feitas")} value={check} onValueChange={setCheck} options={[{ value: "icone", label: t("Keep icon", "Mantêm o ícone") }, { value: "check", label: "Check" }]} /></div>
+          <div className="flex flex-col gap-1.5"><span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Animation", "Animação")}</span><SegmentedControl size="sm" aria-label={t("Animation", "Animação")} value={animar} onValueChange={setAnimar} options={[{ value: "sim", label: t("On scroll", "Na rolagem") }, { value: "nao", label: t("Off", "Desligada") }]} /></div>
         </div>
         <div className="rounded-xl border border-border bg-background p-4 sm:p-8">
           <Timeline key={`${alternar}-${check}-${animar}`} etapas={etapas} alternar={alternar === "sim"} checkNasFeitas={check === "check"} animar={animar === "sim"} />
@@ -87,7 +87,7 @@ export function TimelineShowcase() {
             <Callout title={t("Inner scroll containers", "Contêineres com rolagem própria")}>
               <p>{t("The component listens to scroll in capture mode, so it also works inside a panel that scrolls on its own, like this design system. The threshold is measured against the window height.", "O componente escuta a rolagem em modo de captura, então funciona também dentro de um painel com rolagem própria, como este design system. O limite é medido contra a altura da janela.")}</p>
             </Callout>
-            <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Timeline } from "@/app/components/ui/timeline";
+            <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { Timeline } from "@/app/components/ui/timeline";
 import { Target, Search } from "lucide-react";
 
 <Timeline

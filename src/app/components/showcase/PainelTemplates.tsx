@@ -68,8 +68,8 @@ function MenuDaConta({ t }: { t: Tr }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="font-normal">
-          <span className="block text-[0.875rem] font-semibold text-foreground">Ana Oliveira</span>
-          <span className="block text-[0.8125rem] text-muted-foreground">ana@exemplo.com</span>
+          <span className="block text-body-sm font-semibold text-foreground">Ana Oliveira</span>
+          <span className="block text-body-sm text-muted-foreground">ana@exemplo.com</span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem><Settings aria-hidden />{t("Settings", "Configurações")}</DropdownMenuItem>
@@ -174,7 +174,7 @@ export function PainelTemplate({ emDia = false }: { emDia?: boolean }) {
             <img src={logoIconRed} alt="Dani Moscatelli" className="h-8 w-8 shrink-0 object-contain @md/painel:hidden" />
             <img src={logoIconRed} alt="" aria-hidden className="hidden h-8 w-8 shrink-0 object-contain @md/painel:block" />
             {/* Telas estreitas: só o símbolo (como no site do DS), para o nome nunca ser cortado */}
-            <span className="hidden whitespace-nowrap text-[1rem] font-semibold tracking-tight text-foreground @md/painel:inline">Dani Moscatelli</span>
+            <span className="hidden whitespace-nowrap text-body font-semibold tracking-tight text-foreground @md/painel:inline">Dani Moscatelli</span>
           </span>
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
             {/* O sino soma os contadores do menu (3 + 2): o mesmo número tem o mesmo sentido em toda a tela. */}
@@ -229,7 +229,7 @@ export function PecasDoPainel() {
     <div className="space-y-10">
       <div className="space-y-4">
         <SubTitle>{t("1. Panel shell (ui/painel-shell)", "1. Casca do painel (ui/painel-shell)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "White full-width top bar (BarraSuperiorDoPainel) with the logo on the left and the bell and account on the right; below it, the white side menu (MenuLateral) on the grey page background. The ≡ MENU button at the top (TopoDoMenu) collapses it from 240 px to 64 px (icons with a tooltip), from 1024 px up; the menu pushes the content and the choice is saved per panel (MenuLateralProvider chave). Below 1024 px the same items go in a SidePanel side=\"left\". On a page that scrolls as a whole, use grudarAbaixoDe={64}: the menu becomes a white column as tall as the page and the items stick right under the header.",
             "Barra superior branca na largura toda (BarraSuperiorDoPainel), com o logo à esquerda e o sino e a conta à direita; embaixo, o menu lateral branco (MenuLateral) sobre o fundo cinza da página. O botão ≡ MENU no topo (TopoDoMenu) recolhe de 240 px para 64 px (ícones com dica), a partir de 1024 px; o menu empurra o conteúdo e a escolha fica guardada por painel (chave do MenuLateralProvider). Abaixo de 1024 px, os mesmos itens vão num SidePanel side=\"left\". Em página que rola inteira, use grudarAbaixoDe={64}: o menu vira uma coluna branca da altura da página toda e os itens ficam grudados logo abaixo do cabeçalho.",
@@ -266,7 +266,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-4">
         <SubTitle>{t("2. Page header, Option A (ui/painel-cabecalho)", "2. Cabeçalho da página, Opção A (ui/painel-cabecalho)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "CabecalhoDaPagina: title (Heading \"page\", the **highlight** in --primary-text), description in --foreground (on the grey background --muted-foreground is below 4.5:1), actions on the right that move below the text when they do not fit, and optional tabs. It sits outside any card; the content comes below, in cards.",
             "CabecalhoDaPagina: título (Heading \"page\", o **destaque** em --primary-text), descrição em --foreground (no fundo cinza o --muted-foreground fica abaixo de 4,5:1), ações à direita que descem para baixo do texto quando não cabem e abas opcionais. Fica fora de qualquer card; o conteúdo vem embaixo, em cards.",
@@ -294,7 +294,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-4">
         <SubTitle>{t("3. Indicator card (ui/painel-dados › CardIndicador)", "3. Card de indicador (ui/painel-dados › CardIndicador)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "Label top left, icon with base top right, big number at the bottom so numbers line up across a row. Optional: total (\"of 9\"), support line, trend, explanation, status badge, footer action, and href to make the whole card a link (hover: --primary border at 30% and --row-hover; focus ring on the card). null shows a dash and \"No data\" for screen readers. Put them in a GradeDeCards whose columns follow the container: 4 across only when each card keeps about 15.75rem (a 66rem container), so the label fits on one line; otherwise 2 × 2, and 1 on phones. Compact variant (16 px padding, 32 px icon, short label and one context line): 4 across from a 44rem container and 2 × 2 on phones; with soNumeroNoCelular, phones show only label and number.",
             "Rótulo em cima à esquerda, ícone com base no canto superior direito, número grande na base para os números se alinharem na linha. Opcionais: total (\"de 9\"), linha de apoio, variação, explicação, selo de estado, ação no rodapé e href para o card inteiro virar link (hover: borda --primary a 30% e --row-hover; anel de foco no card). null mostra um traço e \"Sem dado\" para leitores de tela. Use numa GradeDeCards com colunas pelo contêiner: 4 lado a lado só quando cada card tem ao menos ~15,75rem (contêiner de 66rem), para o rótulo caber numa linha; senão 2 × 2, e 1 no celular. Variante compacto (respiro de 16 px, ícone de 32 px, rótulo curto e uma linha de contexto): 4 lado a lado a partir de um contêiner de 44rem e 2 × 2 no celular; com soNumeroNoCelular, o celular mostra só rótulo e número.",
@@ -312,7 +312,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-4">
         <SubTitle>{t("4. Icon with base (ui/painel-dados › IconeComBase)", "4. Ícone com base (ui/painel-dados › IconeComBase)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "Only three ways to show an icon, never mixed: pink base + red icon (tom=\"marca\": focus, something to act on, active), grey base + grey icon (tom=\"neutro\": it only identifies; the default in grids of equal cards; paused or record-only items), or no base (inline, beside text, without this component). Sizes sm 32 px, md 40 px (default), lg 48 px; redonda for list rows.",
             "Só três jeitos de mostrar um ícone, nunca misturados: base rosa + ícone vermelho (tom=\"marca\": foco, algo para agir, ativo), base cinza + ícone cinza (tom=\"neutro\": só identifica; padrão em grades de cards iguais; itens pausados ou só de registro), ou sem base (inline, ao lado do texto, sem este componente). Tamanhos sm 32 px, md 40 px (padrão), lg 48 px; redonda para linhas de lista.",
@@ -340,7 +340,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-4">
         <SubTitle>{t("5. Card with icon header, soft divider and \"see all\" link", "5. Card com cabeçalho de ícone, divisor suave e link \"ver tudo\"")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "CardComCabecalho: the Card of the DS with IconeComBase (marca by default), title, one-line description and an action on the right (LinkVerTudo). The header is separated by a DivisorSuave (fades at the sides); sangria lets lists run edge to edge, so row hover covers the whole row.",
             "CardComCabecalho: o Card do DS com IconeComBase (marca por padrão), título, descrição de uma linha e ação à direita (LinkVerTudo). O cabeçalho é separado por um DivisorSuave (some nas laterais); sangria deixa listas de ponta a ponta, para o hover cobrir a linha inteira.",
@@ -348,17 +348,17 @@ export function PecasDoPainel() {
         </p>
         <GradeDeCards className="gap-4 md:grid-cols-2">
           <CardComCabecalho icone={<Rocket />} titulo={t("Launch", "Lançamento")} descricao={t("People waiting for the launch", "Pessoas aguardando o lançamento")} acao={<LinkVerTudo href="#" onClick={e => e.preventDefault()}>{t("See all", "Ver todas")}</LinkVerTudo>}>
-            <p className="text-[0.9375rem] text-foreground">{t("2 waiting, 7 already notified.", "2 aguardando, 7 já avisadas.")}</p>
+            <p className="text-body text-foreground">{t("2 waiting, 7 already notified.", "2 aguardando, 7 já avisadas.")}</p>
           </CardComCabecalho>
           <CardComCabecalho icone={<ClipboardList />} tom="neutro" cabecalho="simples" titulo={t("Archived projects", "Projetos arquivados")} descricao={t("Record only (neutral tone, simple header)", "Só registro (tom neutro, cabeçalho simples)")}>
-            <p className="text-[0.9375rem] text-foreground">{t("4 projects", "4 projetos")}</p>
+            <p className="text-body text-foreground">{t("4 projects", "4 projetos")}</p>
           </CardComCabecalho>
         </GradeDeCards>
       </div>
 
       <div className="space-y-4">
         <SubTitle>{t("6. Status chip (ui/chip-de-estado › ChipDeEstado)", "6. Chip de estado (ui/chip-de-estado › ChipDeEstado)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "The state of an item always in words (never only by colour or by icon shape), in the end column of a list row; on phones it moves to its own line under the text. Keep few tones per list and the same tone for the same meaning: pink for what still needs action, grey for what is resolved.",
             "O estado de um item sempre em palavras (nunca só pela cor ou pela forma do ícone), na coluna do fim da linha da lista; no celular, desce para uma linha própria embaixo do texto. Poucos tons por lista e o mesmo tom para o mesmo sentido: rosa para o que ainda pede ação, cinza para o que está resolvido.",
@@ -379,7 +379,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-4">
         <SubTitle>{t("7. Composition bar (ui/barra-de-composicao › BarraDeComposicao)", "7. Barra de composição (ui/barra-de-composicao › BarraDeComposicao)")}</SubTitle>
-        <p className="max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
             "How a total splits into 2 to 5 parts, in one bar. Fixed order: title, bar, and the legend below with a dot in each part's colour, the count and the percentage. Colours only from the chart tokens; give each part a tone so the same meaning keeps the same colour (pending in tones 1 and 2, resolved in the context tones).",
             "Como um total se divide em 2 a 5 partes, numa barra só. Ordem fixa: título, barra e, embaixo, a legenda com o ponto na cor de cada parte, a quantidade e o percentual. Cores só dos tokens de gráfico; dê um tom a cada parte para o mesmo sentido ter a mesma cor (pendentes nos tons 1 e 2, resolvidas nos tons de contexto).",
@@ -400,14 +400,14 @@ export function PecasDoPainel() {
 
       <div className="space-y-3">
         <SubTitle>{t("Accessibility", "Acessibilidade")}</SubTitle>
-        <ul className="max-w-3xl list-disc space-y-1.5 pl-5 text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <ul className="max-w-3xl list-disc space-y-1.5 pl-5 text-body leading-relaxed text-muted-foreground">
           <li>{t("Menu: <nav> with a name; the current page has aria-current=\"page\"; the ≡ MENU button says the action (Collapse/Expand menu) with aria-expanded and aria-controls; collapsed items and groups keep their name for screen readers and show a tooltip on hover and keyboard focus.", "Menu: <nav> com nome; a página atual tem aria-current=\"page\"; o botão ≡ MENU diz a ação (Recolher/Expandir menu) com aria-expanded e aria-controls; itens e grupos recolhidos mantêm o nome para leitores de tela e mostram dica no hover e no foco do teclado.")}</li>
           <li>{t("Counters are read with their meaning (\"3 unread\"), never a bare number; the bell's name carries the count (\"Notifications, 7 unread\") and its visible number is aria-hidden.", "Contadores são lidos com o sentido (\"3 não lidas\"), nunca o número solto; o nome do sino leva a contagem (\"Notificações, 7 não lidas\") e o número visível é aria-hidden.")}</li>
           <li>{t("Targets: bell and account 44 px; menu items 36 px in the fixed menu (pointer) and 44 px in the drawer (touch).", "Alvos: sino e conta com 44 px; itens do menu com 36 px no menu fixo (mouse) e 44 px na gaveta (toque).")}</li>
           <li>{t("Contrast: page description in --foreground on the grey background; card text in --muted-foreground only on white; trends with an arrow and text, never colour alone.", "Contraste: descrição da página em --foreground no fundo cinza; texto de card em --muted-foreground só no branco; variação com seta e texto, nunca só cor.")}</li>
           <li>{t("Reduced motion: the menu width, the item fade and the arrow nudge do not animate.", "Menos movimento: a largura do menu, o esmaecimento dos itens e o deslize da seta não animam.")}</li>
         </ul>
-        <p className="flex max-w-3xl items-start gap-2 text-[0.875rem] text-muted-foreground">
+        <p className="flex max-w-3xl items-start gap-2 text-body-sm text-muted-foreground">
           <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-primary-text" />
           <span>{t("Brought from the FindLook Design System with this DS's colours. Not brought: SeletorDeLoja and CardDePlano (store-specific).", "Trazidas do FindLook Design System com as cores deste DS. Não trazidos: SeletorDeLoja e CardDePlano (próprios de loja).")} <Mono>painel-shell</Mono> <Mono>painel-cabecalho</Mono> <Mono>painel-dados</Mono></span>
         </p>

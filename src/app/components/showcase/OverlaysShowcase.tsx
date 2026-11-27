@@ -36,7 +36,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-12">
-      <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
+      <h3 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
       {children}
     </div>
   );
@@ -96,8 +96,12 @@ function Pagination({ total = 12, current = 4, onChange }: { total?: number; cur
             <ChevronRight className="h-4 w-4 rotate-180" />
           </PaginationLink>
         </PaginationItem>
+        {/* Celular: no lugar dos números, "4 de 12" entre as setas (a lista nunca quebra de linha). */}
+        <PaginationItem className="px-3 text-body-sm font-medium tabular-nums text-muted-foreground sm:hidden" aria-current="page">
+          {t(`${current} of ${total}`, `${current} de ${total}`)}
+        </PaginationItem>
         {visible.map((p, i) => (
-          <PaginationItem key={`${p}-${i}`}>
+          <PaginationItem key={`${p}-${i}`} className="max-sm:hidden">
             {p === "..."
               ? <PaginationEllipsis />
               : <PaginationLink href="#" onClick={ir(p)} isActive={p === current}>{p}</PaginationLink>}
@@ -131,14 +135,14 @@ function DrawerDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
     <Sheet open={open} onOpenChange={v => { if (!v) onClose(); }}>
       <SheetContent side="right" className="w-80 gap-0 p-0 sm:max-w-80">
         <SheetHeader className="border-b border-border px-6 py-5">
-          <SheetTitle className="text-[1rem] font-semibold">{t("Drawer Panel", "Painel lateral")}</SheetTitle>
+          <SheetTitle className="text-body font-semibold">{t("Drawer Panel", "Painel lateral")}</SheetTitle>
           <SheetDescription className="sr-only">{t("Example of a side panel", "Exemplo de painel lateral")}</SheetDescription>
         </SheetHeader>
         <div className="flex-1 space-y-4 px-6 py-5">
-          <p className="text-[0.9rem] text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
+          <p className="text-body-sm text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
           <div className="space-y-3">
             {[["Profile Settings", "Configurações do perfil"], ["Notifications", "Notificações"], ["Store data", "Dados da loja"], ["Opening hours", "Horário de funcionamento"]].map(([en, pt]) => (
-              <button key={en} className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-[0.9rem] font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <button key={en} className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 {t(en, pt)}
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </button>
@@ -215,7 +219,7 @@ export function OverlaysShowcase() {
               <TooltipDemo content={{ en: "View notifications", pt: "Ver notificações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Bell className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
               <TooltipDemo content={{ en: "Open settings", pt: "Abrir configurações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Settings className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
               <TooltipDemo content={{ en: "Get help and documentation", pt: "Obter ajuda e documentação" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><HelpCircle className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
-              <TooltipDemo content={{ en: "Important information about this field", pt: "Informação importante sobre este campo" }}><button className="inline-flex items-center gap-1.5 text-[0.875rem] text-muted-foreground underline underline-offset-2 decoration-dashed hover:text-foreground transition-colors"><Info className="h-4 w-4" />{t("Learn more", "Saiba mais")}</button></TooltipDemo>
+              <TooltipDemo content={{ en: "Important information about this field", pt: "Informação importante sobre este campo" }}><button className="inline-flex items-center gap-1.5 text-body-sm text-muted-foreground underline underline-offset-2 decoration-dashed hover:text-foreground transition-colors"><Info className="h-4 w-4" />{t("Learn more", "Saiba mais")}</button></TooltipDemo>
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -228,7 +232,7 @@ export function OverlaysShowcase() {
           <ShowcaseCard>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                <button className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
                   {t("Actions", "Ações")}
                   <svg className="h-4 w-4 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="m6 9 6 6 6-6"/></svg>
                 </button>
@@ -248,18 +252,18 @@ export function OverlaysShowcase() {
                     return (
                       <DropdownMenuItem
                         key={item.label.en}
-                        className="flex items-center justify-between gap-2 px-3 py-2 text-[0.875rem] font-medium text-foreground rounded-sm hover:bg-accent cursor-pointer outline-none"
+                        className="flex items-center justify-between gap-2 px-3 py-2 text-body-sm font-medium text-foreground rounded-sm hover:bg-accent cursor-pointer outline-none"
                       >
                         <span className="flex items-center gap-2">
                           <Icon className="h-4 w-4 text-muted-foreground" />
                           {bi(item.label)}
                         </span>
-                        {item.shortcut && <span className="text-[0.75rem] text-muted-foreground font-normal">{item.shortcut}</span>}
+                        {item.shortcut && <span className="text-label text-muted-foreground font-normal">{item.shortcut}</span>}
                       </DropdownMenuItem>
                     );
                   })}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-accent cursor-pointer outline-none">
+                  <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-body-sm font-medium text-primary-text rounded-sm hover:bg-accent cursor-pointer outline-none">
                     <Trash2 className="h-4 w-4" />
                     {t("Delete", "Excluir")}
                   </DropdownMenuItem>
@@ -277,19 +281,19 @@ export function OverlaysShowcase() {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setDialogOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors"
               >
                 {t("Open Dialog", "Abrir diálogo")}
               </button>
               <button
                 onClick={() => setConfirmOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
               >
                 {t("Confirm Dialog", "Diálogo de confirmação")}
               </button>
               <button
                 onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-[0.9375rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
+                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
               >
                 {t("Open Drawer", "Abrir painel lateral")}
               </button>
@@ -300,20 +304,20 @@ export function OverlaysShowcase() {
 
       {/* ── DIALOG MODALS ── */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogContent className="max-w-md gap-0 rounded-[20px] p-6 sm:max-w-md" style={{ boxShadow: "var(--shadow-xl)" }}>
+          <DialogContent className="max-w-md gap-0 rounded-lg p-6 sm:max-w-md" style={{ boxShadow: "var(--shadow-xl)" }}>
             <div className="mb-5 pr-8">
               <div>
-                <DialogTitle className="text-[1.125rem] font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogTitle>
-                <DialogDescription className="text-[0.875rem] text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogDescription>
+                <DialogTitle className="text-body-lg font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogTitle>
+                <DialogDescription className="text-body-sm text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogDescription>
               </div>
             </div>
             <div className="space-y-4">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
                 <Input placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Description", "Descrição")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("Description", "Descrição")}</label>
                 <Textarea rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
               </div>
             </div>
@@ -325,14 +329,14 @@ export function OverlaysShowcase() {
       </Dialog>
 
       <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-          <AlertDialogContent className="max-w-sm gap-0 rounded-[20px] p-6 sm:max-w-sm" style={{ boxShadow: "var(--shadow-xl)" }}>
+          <AlertDialogContent className="max-w-sm gap-0 rounded-lg p-6 sm:max-w-sm" style={{ boxShadow: "var(--shadow-xl)" }}>
             <div className="flex flex-col items-center text-center gap-4 mb-5">
               <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
                 <Trash2 className="h-6 w-6 text-primary-text" />
               </div>
               <div>
-                <AlertDialogTitle className="text-[1.125rem] font-semibold text-foreground">{t("Delete Project", "Excluir projeto")}</AlertDialogTitle>
-                <AlertDialogDescription className="text-[0.875rem] text-muted-foreground mt-1">{t("This action cannot be undone. All data will be permanently removed.", "Esta ação não pode ser desfeita. Todos os dados serão removidos permanentemente.")}</AlertDialogDescription>
+                <AlertDialogTitle className="text-body-lg font-semibold text-foreground">{t("Delete Project", "Excluir projeto")}</AlertDialogTitle>
+                <AlertDialogDescription className="text-body-sm text-muted-foreground mt-1">{t("This action cannot be undone. All data will be permanently removed.", "Esta ação não pode ser desfeita. Todos os dados serão removidos permanentemente.")}</AlertDialogDescription>
               </div>
             </div>
             <div className="flex gap-2">
@@ -347,22 +351,22 @@ export function OverlaysShowcase() {
       {/* ── Accordion ── */}
       <section id="accordion" className="space-y-5 mt-10">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Accordion", "Sanfona (accordion)")}</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("Collapsible content panels powered by Radix UI. Three style variants.", "Painéis de conteúdo recolhíveis com Radix UI. Três variantes de estilo.")}</p>
+          <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Accordion", "Sanfona (accordion)")}</h2>
+          <p className="text-body-sm text-muted-foreground mt-0.5">{t("Collapsible content panels powered by Radix UI. Three style variants.", "Painéis de conteúdo recolhíveis com Radix UI. Três variantes de estilo.")}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-8">
           {/* Variant 1 — Default (bordered, single open) */}
           <ShowcaseCard>
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Default — Single open", "Padrão — Um aberto por vez")}</p>
+            <p className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Default — Single open", "Padrão — Um aberto por vez")}</p>
             <Accordion type="single" collapsible className="w-full divide-y divide-border rounded-md border border-border overflow-hidden">
               {defaultItems.map(item => (
                 <AccordionItem key={item.value} value={item.value} className="border-b-0">
-                    <AccordionTrigger className="group flex w-full items-center justify-between px-5 py-4 text-[0.9375rem] font-semibold text-foreground bg-card hover:bg-muted transition-colors data-[state=open]:bg-muted">
+                    <AccordionTrigger className="group flex w-full items-center justify-between px-5 py-4 text-body font-semibold text-foreground bg-card hover:bg-muted transition-colors data-[state=open]:bg-muted">
                       {bi(item.label)}
                     </AccordionTrigger>
                   <AccordionContent className="pb-0">
-                    <div className="px-5 pb-5 pt-3 text-[0.875rem] text-muted-foreground leading-relaxed bg-card">
+                    <div className="px-5 pb-5 pt-3 text-body-sm text-muted-foreground leading-relaxed bg-card">
                       {bi(item.content)}
                     </div>
                   </AccordionContent>
@@ -373,11 +377,11 @@ export function OverlaysShowcase() {
 
           {/* Variant 2 — Flush (no outer border, subtle separator) */}
           <ShowcaseCard>
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Flush — Multiple open", "Flush — Vários abertos")}</p>
+            <p className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Flush — Multiple open", "Flush — Vários abertos")}</p>
             <Accordion type="multiple" className="w-full divide-y divide-border">
               {flushItems.map(item => (
                 <AccordionItem key={item.value} value={item.value} className="border-b-0">
-                    <AccordionTrigger semIcone className="group flex w-full items-center justify-between py-4 text-[0.9375rem] font-semibold text-foreground hover:text-primary-text transition-colors">
+                    <AccordionTrigger semIcone className="group flex w-full items-center justify-between py-4 text-body font-semibold text-foreground hover:text-primary-text transition-colors">
                       <span className="flex items-center gap-3">
                         <item.icon className="h-4 w-4 text-primary-text shrink-0" />
                         {bi(item.label)}
@@ -388,7 +392,7 @@ export function OverlaysShowcase() {
                       </span>
                     </AccordionTrigger>
                   <AccordionContent className="pb-0">
-                    <div className="pb-4 text-[0.875rem] text-muted-foreground leading-relaxed">
+                    <div className="pb-4 text-body-sm text-muted-foreground leading-relaxed">
                       {bi(item.content)}
                     </div>
                   </AccordionContent>
@@ -399,7 +403,7 @@ export function OverlaysShowcase() {
 
           {/* Variant 3 — Card stack (each item is its own card) */}
           <ShowcaseCard>
-            <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Card stack — FAQ style", "Pilha de cards — estilo FAQ")}</p>
+            <p className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground mb-4">{t("Card stack — FAQ style", "Pilha de cards — estilo FAQ")}</p>
             <Accordion type="single" collapsible className="w-full space-y-2">
               {faqItems.map(item => (
                 <AccordionItem
@@ -407,11 +411,11 @@ export function OverlaysShowcase() {
                   value={item.value}
                   className="rounded-md border border-border bg-background overflow-hidden data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03] transition-colors"
                 >
-                    <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-3.5 text-[0.875rem] font-semibold text-foreground">
+                    <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-3.5 text-body-sm font-semibold text-foreground">
                       <span className="text-left">{bi(item.label)}</span>
                     </AccordionTrigger>
                   <AccordionContent className="pb-0">
-                    <div className="px-4 pb-4 text-[0.8125rem] text-muted-foreground leading-relaxed border-t border-border/50 pt-3">
+                    <div className="px-4 pb-4 text-body-sm text-muted-foreground leading-relaxed border-t border-border/50 pt-3">
                       {bi(item.content)}
                     </div>
                   </AccordionContent>
@@ -425,8 +429,8 @@ export function OverlaysShowcase() {
       {/* ── Tokens ── */}
       <section id="overlays-tokens" className="space-y-5 mt-10">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">{t("Tokens", "Tokens")}</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by popovers, dialogs, tooltips, and navigation.", "Propriedades CSS customizadas usadas por popovers, diálogos, tooltips e navegação.")}</p>
+          <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Tokens", "Tokens")}</h2>
+          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by popovers, dialogs, tooltips, and navigation.", "Propriedades CSS customizadas usadas por popovers, diálogos, tooltips e navegação.")}</p>
         </div>
         <TokenTable groups={overlaysTokenGroups(t)} />
       </section>

@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 158 tokens · 29 páginas e 202 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
+**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 78 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 158 tokens · 29 páginas e 202 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -30,7 +30,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `AccordionItem` (props: `className`)
   - `AccordionTrigger` (props: `className`, `children`, `semIcone`)
   - `AccordionContent` (props: `className`, `children`)
-- **Onde ver:** Overlays › Accordion (`overlays#accordion`)
+- **Onde ver:** Overlays › Accordion (`overlays#accordion`) · Templates › Landing page (`templates#template-landing`)
 
 ### alert
 
@@ -169,12 +169,12 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 ### button
 
 - **Arquivo:** [src/app/components/ui/button.tsx](src/app/components/ui/button.tsx)
-- **Quando usar:** Padrão único (decisão de 16/11/2026): botão de 40 px, texto 15 px seminegrito, cantos 12 px; mesma altura do campo de texto.
+- **Quando usar:** Padrão único (decisão de 16/11/2026): botão de 40 px, texto 16 px seminegrito, cantos 12 px; mesma altura do campo de texto. No celular (abaixo de 640 px), todo botão tem pelo menos 44 px de altura, para o dedo acertar (decisão de 27/11/2026).
 - **Componentes:**
   - `Button` (props: `className`, `variant`, `size`, `asChild`)
 - **Funções e constantes:** `buttonVariants`
 - **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon`
-- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 15 seções (ver `catalogo.json`)
+- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 28 seções (ver `catalogo.json`)
 
 ### calendar
 
@@ -197,7 +197,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CardAction` (props: `className`)
   - `CardContent` (props: `className`)
   - `CardFooter` (props: `className`, `children`): Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito.
-- **Onde ver:** Cards › Como escolher (`cards#card-escolher`) · Cards › Card sólido (`cards#card-solido`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 16 seções (ver `catalogo.json`)
+- **Onde ver:** Cards › Como escolher (`cards#card-escolher`) · Cards › Card sólido (`cards#card-solido`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 18 seções (ver `catalogo.json`)
 
 ### card-frente
 
@@ -205,7 +205,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** CardDeFrente e GradeDeFrentes (frentes de atuação): Cards da seção "Onde podemos atuar" do Projeto Piloto (article.card-frente de projeto-piloto/index.html e src/projeto-piloto.css). Ícone num quadro de 56 px, título, subtítulo em vermelho, descrição e os temas em pílulas, separados por uma linha.
 - **Componentes:**
   - `CardDeFrente` (props: `numero`, `icone`, `titulo`, `subtitulo`, `descricao`, `temas`, `rotuloTemas`, `tom`, `mostrarNumero`, `barra`, `nivelTitulo`, `className`, `style`, `onPointerMove`)
-  - `GradeDeFrentes` (props: `rotulo`, `className`, `children`): Grade de 3/2 colunas; no celular, carrossel com encaixe. Para a entrada em cascata do site: <SurgirAoRolar as={GradeDeFrentes} escalonar>…cards…</SurgirAoRolar>.
+  - `GradeDeFrentes` (props: `rotulo`, `className`, `children`): Grade de 3/2 colunas; no celular, um card por linha. Para a entrada em cascata do site: <SurgirAoRolar as={GradeDeFrentes} escalonar>…cards…</SurgirAoRolar>.
 - **Onde ver:** Padrões do site › Card de frente de atuação (`site#site-frentes`) · Padrões do site › Entrada ao rolar (`site#site-entrada`)
 
 ### carousel
@@ -235,10 +235,10 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 ### checkbox
 
 - **Arquivo:** [src/app/components/ui/checkbox.tsx](src/app/components/ui/checkbox.tsx)
-- **Quando usar:** Caixa de seleção para escolhas independentes.
+- **Quando usar:** Caixa de seleção: a caixa tem 20 px. No celular (abaixo de 640 px) a área de toque cresce para 44 px em volta da caixa, sem mudar o lugar dela na tela (margem negativa de 12 px), para o dedo acertar (decisão de 27/11/2026).
 - **Componentes:**
   - `Checkbox` (props: `className`)
-- **Onde ver:** Botões › Senha (`buttons#password`) · Botões › Controle segmentado (`buttons#segmented`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
+- **Onde ver:** Botões › Senha (`buttons#password`) · Botões › Controle segmentado (`buttons#segmented`) · Templates › Landing page (`templates#template-landing`) · e mais 1 seções (ver `catalogo.json`)
 
 ### chip-de-estado
 
@@ -246,7 +246,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Chip de estado: o estado de um item (mensagem, candidatura, pedido) sempre em texto, com ícone opcional e o fundo do tom. Regra: estado nunca só por cor ou forma; o texto é obrigatório. Vai na coluna do fim de uma LinhaDeLista (tags e ações), que no celular desce para uma linha própria embaixo do texto.
 - **Componentes:**
   - `ChipDeEstado` (props: `tom`, `icone`, `tamanho`, `className`, `children`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 1 seções (ver `catalogo.json`)
 
 ### collapsible
 
@@ -360,7 +360,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `DrawerFooter` (props: `className`)
   - `DrawerTitle` (props: `className`)
   - `DrawerDescription` (props: `className`)
-- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+- **Onde ver:** Templates › Landing page (`templates#template-landing`)
 
 ### dropdown-menu
 
@@ -516,7 +516,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Campo de texto: 40 px, borda visível e anel de foco.
 - **Componentes:**
   - `Input` (props: `className`, `type`)
-- **Onde ver:** Botões › Controles de formulário (`buttons#inputs`) · Catálogo de componentes › Todos os componentes (`catalogo#catalogo-lista`) · Overlays (`overlays`, fora das seções)
+- **Onde ver:** Botões › Controles de formulário (`buttons#inputs`) · Catálogo de componentes › Todos os componentes (`catalogo#catalogo-lista`) · Templates › Configurações (`templates#template-settings`) · e mais 2 seções (ver `catalogo.json`)
 
 ### input-otp
 
@@ -535,7 +535,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Rótulo de campo, ligado ao campo.
 - **Componentes:**
   - `Label` (props: `className`)
-- **Onde ver:** Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
+- **Onde ver:** Templates › Configurações (`templates#template-settings`) · Templates › Landing page (`templates#template-landing`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
 
 ### linha-de-lista
 
@@ -543,7 +543,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Linha de lista: início (caixa de seleção, avatar, ícone), conteúdo (título e descrição) e fim (tags, status, ações).
 - **Componentes:**
   - `LinhaDeLista` (props: `as`, `inicio`, `titulo`, `descricao`, `fim`, `quebraAcoes`, `alinharAcoesAbaixo`, `alinhar`, `interativa`, `selecionada`, `className`, `children`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Cards › Borda, sombra e raio (`cards#card-layout`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Dashboard (`templates#template-dashboard`) · Templates › Configurações (`templates#template-settings`) · e mais 4 seções (ver `catalogo.json`)
 
 ### lucide-catalogo
 
@@ -597,7 +597,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Navegação entre páginas, com a ativa na cor primária.
 - **Componentes:**
   - `Pagination` (props: `className`)
-  - `PaginationContent` (props: `className`)
+  - `PaginationContent` (props: `className`): Lista de páginas: fica sempre numa linha só (nunca deixa a seta sozinha na linha de baixo). No celular, mostre menos páginas: a primeira, a atual com as vizinhas e a última, com reticências no meio (regra do DS, 27/11/2026).
   - `PaginationItem`
   - `PaginationLink` (props: `className`, `isActive`, `size`)
   - `PaginationPrevious` (props: `className`)
@@ -611,7 +611,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Cabeçalho da página do painel, "Opção A" (aprovada pela dona do produto para os painéis; trazido do FindLook Design System, ui/painel-cabecalho.tsx, com as cores e o Heading deste DS): saudação opcional, título (Heading tamanho "page", com o destaque entre ** ** em --primary-text), descrição, ações e, opcionalmente, as abas da página. Fica fora de qualquer card, direto no fundo cinza da página;
 - **Componentes:**
   - `CabecalhoDaPagina` (props: `saudacao`, `titulo`, `descricao`, `acoes`, `abas`, `nivel`, `idDoTitulo`, `className`): Texto primeiro, com largura garantida (base de 36rem): as ações ficam no alto, à direita, quando cabem na mesma linha; quando não cabem, descem juntas para baixo do texto, sem apertar o título.
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 1 seções (ver `catalogo.json`)
 
 ### painel-dados
 
@@ -626,7 +626,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CardComCabecalho` (props: `icone`, `titulo`, `descricao`, `acao`, `tom`, `cabecalho`, `nivel`, `sangria`, `idDoTitulo`, `children`, `className`)
   - `LinkVerTudo` (props: `children`, `href`, `rotulo`, `onClick`, `tom`, `icone`, `as`, `className`)
 - **Funções e constantes:** `formatarNumero`, `formatarVariacao`
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 3 seções (ver `catalogo.json`)
 
 ### painel-shell
 
@@ -649,7 +649,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `BotaoDeNotificacoes` (props: `naoLidas`, `indicador`, `className`): Sino de notificações (botão redondo de 44 px, o alvo de toque mínimo). Com não lidas, o ContadorDoPainel fica sobre o canto superior direito do sino (centro do contador no canto do ícone), com anel de 2 px na cor do cabeçalho.
   - `GatilhoDaConta` (props: `nome`, `papel`, `foto`, `className`)
 - **Funções e constantes:** `LARGURA_EXPANDIDO`, `LARGURA_RECOLHIDO`, `useMenuLateral`, `useMenuRecolhido`, `textoDoContador`, `iniciais`
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 2 seções (ver `catalogo.json`)
 
 ### partner-card
 
@@ -713,7 +713,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** RodapeSite (rodapé do site): Rodapé compartilhado do site do estúdio (src/compartilhado/partes.ts): logo + links de navegação em cima, copyright, cidade e crédito do design system embaixo. Três variantes, como no código do site:
 - **Componentes:**
   - `RodapeSite` (props: `variante`, `logo`, `rotuloLogo`, `inicioHref`, `links`, `privacidade`, `rotuloPreferencias`, `onPreferenciasCookies`, `areaRestrita`, `copyright`, `cidade`, `credito`, `rotuloNav`, `novaAba`, `espacoFlutuante`, `className`)
-- **Onde ver:** Padrões do site › Rodapé (`site#site-rodape`)
+- **Onde ver:** Padrões do site › Rodapé (`site#site-rodape`) · Templates › Landing page (`templates#template-landing`)
 
 ### scroll-area
 
@@ -730,7 +730,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** SegmentedControl (controle segmentado): Opções acopladas, uma selecionada por vez, que se tocam como botões. Use para escolhas curtas e exclusivas (2 a 5 opções, rótulos de uma ou duas palavras): filtro, condição, período, modo de exibição. Sempre há uma opção selecionada. Teclado: setas movem a seleção; Tab entra e sai do grupo.
 - **Componentes:**
   - `SegmentedControl` (props: `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size`, `fullWidth`, `className`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 2 seções (ver `catalogo.json`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 3 seções (ver `catalogo.json`)
 
 ### select
 
@@ -747,7 +747,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `SelectSeparator` (props: `className`)
   - `SelectScrollUpButton` (props: `className`)
   - `SelectScrollDownButton` (props: `className`)
-- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+- **Onde ver:** Templates › Caixa de entrada (`templates#template-inbox`) · Templates › Landing page (`templates#template-landing`)
 
 ### selo
 
@@ -810,7 +810,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `SidePanelBody` (props: `className`): Corpo rolável.
   - `SidePanelActions` (props: `className`): Barra de ação fixa na base (botão principal).
   - `SidePanelFooter` (props: `className`): Rodapé discreto abaixo da barra de ação (nota de segurança, assinatura).
-- **Onde ver:** Painel lateral › Comportamento (`sidepanel#sidepanel-behavior`) · Painel lateral › Formulário de contato (`sidepanel#sidepanel-contact`) · Templates › Painel (`templates#template-painel`) · e mais 1 seções (ver `catalogo.json`)
+- **Onde ver:** Painel lateral › Comportamento (`sidepanel#sidepanel-behavior`) · Painel lateral › Formulário de contato (`sidepanel#sidepanel-contact`) · Templates › Painel (`templates#template-painel`) · e mais 3 seções (ver `catalogo.json`)
 
 ### sidebar
 
@@ -884,7 +884,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Chave liga/desliga com efeito imediato.
 - **Componentes:**
   - `Switch` (props: `className`)
-- **Onde ver:** Botões › Controle segmentado (`buttons#segmented`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
+- **Onde ver:** Botões › Controle segmentado (`buttons#segmented`) · Templates › Configurações (`templates#template-settings`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
 
 ### table
 
@@ -899,7 +899,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `TableHead` (props: `className`)
   - `TableCell` (props: `className`)
   - `TableCaption` (props: `className`)
-- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+- **Onde ver:** Templates › Landing page (`templates#template-landing`)
 
 ### tabs
 
@@ -907,10 +907,10 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Abas que trocam o conteúdo no mesmo lugar.
 - **Componentes:**
   - `Tabs` (props: `className`)
-  - `TabsList` (props: `className`)
+  - `TabsList` (props: `className`): Lista de abas: nunca rola para o lado. Quando as abas não cabem numa linha, quebram para a linha de baixo; no celular (abaixo de 640 px) cada linha se divide por igual entre as abas dela e cada aba tem 44 px de altura (regra do DS, …
   - `TabsTrigger` (props: `className`)
   - `TabsContent` (props: `className`)
-- **Onde ver:** Feedback › Abas (`feedback#tabs`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Feedback › Abas (`feedback#tabs`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Configurações (`templates#template-settings`)
 
 ### textarea
 
@@ -918,7 +918,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Campo de texto com várias linhas.
 - **Componentes:**
   - `Textarea` (props: `className`)
-- **Onde ver:** Overlays (`overlays`, fora das seções)
+- **Onde ver:** Templates › Landing page (`templates#template-landing`) · Overlays (`overlays`, fora das seções)
 
 ### timeline
 
@@ -926,7 +926,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Timeline (linha do tempo) — portada da seção "Como funciona" do site do estúdio.
 - **Componentes:**
   - `Timeline` (props: `etapas`, `alternar`, `limite`, `checkNasFeitas`, `animar`, `className`)
-- **Onde ver:** Linha do tempo › Demonstração (`timeline#timeline-demo`) · Linha do tempo › Uso (`timeline#timeline-usage`)
+- **Onde ver:** Linha do tempo › Demonstração (`timeline#timeline-demo`) · Linha do tempo › Uso (`timeline#timeline-usage`) · Templates › Landing page (`templates#template-landing`)
 
 ### toggle
 
@@ -992,30 +992,32 @@ Templates e padrões que existem **só dentro das páginas de demonstração** (
 
 Como a lista é feita: componentes locais das páginas de demonstração (`function X(` ou `const X = (...) =>` que devolvem JSX) com elementos de estilo visual feito à mão (borda, fundo, raio ou sombra no `className`), mais todos os templates. Ficam de fora as peças da própria documentação (títulos, rótulos, molduras e tabelas de especificação: `Bullets`, `Callout`, `CardGrid`, `CodeBlock`, `ConteudoFalso`, `CopyBtn`, `CopyLinkButton`, `CustomTooltip`, `DataTable`, `DoDont`, `DownloadButton`, `Linhas`, `Moldura`, `MolduraCelular`, `Mono`, `NavCard`, `PageHeader`, `PageSection`, `PaginaFalsa`, `Panel`, `Parte`, `Pill`, `RegraDasLinhas`, `Rotulo`, `RotuloVariante`, `SectionBlock`, `SectionHeader`, `SectionLabel`, `ShowcaseCard`, `SpecCard`, `StepBadge`, `SubSection`, `SubTitle`, `Swatch`, `TemplateFrame`, `TemplateLabel`, `TextLink`, `Token`, `TokenRowItem`, `TokenTable`, `VejaEm`) e os componentes que só montam componentes do DS sem estilo próprio. "Marcação à mão" é o número de elementos com estilo visual próprio.
 
-### 2.1 Templates (9)
+### 2.1 Templates (10)
 
 Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida no produto, parta do template (mesma estrutura e as mesmas peças).
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
 | `PainelTemplate`<br>Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início. | Templates › Painel (`templates#template-painel`) | [src/app/components/showcase/PainelTemplates.tsx:161](src/app/components/showcase/PainelTemplates.tsx#L161) | `AlertaComAcao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `BotaoDoAlerta`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador` +23 | 1 |
-| `DashboardTemplate` | Templates › Dashboard (`templates#template-dashboard`) | [src/app/components/showcase/TemplatesShowcase.tsx:97](src/app/components/showcase/TemplatesShowcase.tsx#L97) | `GradeDeCards` | 13 |
-| `SettingsTemplate`<br>2. Settings Template | Templates › Configurações (`templates#template-settings`) | [src/app/components/showcase/TemplatesShowcase.tsx:244](src/app/components/showcase/TemplatesShowcase.tsx#L244) |  | 14 |
-| `AuthTemplate`<br>3. Login / Auth Template | Templates › Autenticação (`templates#template-auth`) | [src/app/components/showcase/TemplatesShowcase.tsx:439](src/app/components/showcase/TemplatesShowcase.tsx#L439) |  | 10 |
-| `TeamTemplate` | Templates › Equipe (`templates#template-team`) | [src/app/components/showcase/TemplatesShowcase.tsx:587](src/app/components/showcase/TemplatesShowcase.tsx#L587) |  | 14 |
-| `InboxTemplate` | Templates › Caixa de entrada (`templates#template-inbox`) | [src/app/components/showcase/TemplatesShowcase.tsx:723](src/app/components/showcase/TemplatesShowcase.tsx#L723) |  | 11 |
-| `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:906](src/app/components/showcase/TemplatesShowcase.tsx#L906) | `GradeDeCards` | 10 |
-| `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:1091](src/app/components/showcase/TemplatesShowcase.tsx#L1091) |  | 14 |
-| `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesShowcase.tsx:1521](src/app/components/showcase/TemplatesShowcase.tsx#L1521) | `GradeDeCards` | 82 |
+| `CascaDoTemplate`<br>Casca dos templates: a mesma do template do Painel, com o menu montado a partir de uma lista de itens. | Templates › Dashboard (`templates#template-dashboard`) (+1) | [src/app/components/showcase/TemplatesResponsivos.tsx:49](src/app/components/showcase/TemplatesResponsivos.tsx#L49) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `GatilhoDaConta`, `GrupoDoMenu`, `IconeComBase`, `ItemDoMenu`, `MenuLateral` +7 | 1 |
+| `DashboardTemplate` | Templates › Dashboard (`templates#template-dashboard`) | [src/app/components/showcase/TemplatesResponsivos.tsx:130](src/app/components/showcase/TemplatesResponsivos.tsx#L130) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador`, `ChipDeEstado`, `GatilhoDaConta` +13 | 0 |
+| `SettingsTemplate` | Templates › Configurações (`templates#template-settings`) | [src/app/components/showcase/TemplatesResponsivos.tsx:219](src/app/components/showcase/TemplatesResponsivos.tsx#L219) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `Card`, `CardComCabecalho`, `CardContent`, `CardFooter` +21 | 1 |
+| `InboxTemplate`<br>Caixa de entrada: lista e detalhe lado a lado só a partir de 48rem de largura. Antes disso, a lista ocupa tudo e o detalhe abre no lugar dela, com o botão Voltar (a lista volta com a mesma notificação selecionada). | Templates › Caixa de entrada (`templates#template-inbox`) | [src/app/components/showcase/TemplatesResponsivos.tsx:369](src/app/components/showcase/TemplatesResponsivos.tsx#L369) | `Button`, `ContadorDoPainel`, `IconeComBase`, `LinhaDeLista`, `Select` | 5 |
+| `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:517](src/app/components/showcase/TemplatesResponsivos.tsx#L517) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger`, `Button`, `Card`, `CardComCabecalho`, `CardContent` +29 | 15 |
+| `AuthTemplate`<br>3. Login / Auth Template | Templates › Autenticação (`templates#template-auth`) | [src/app/components/showcase/TemplatesShowcase.tsx:71](src/app/components/showcase/TemplatesShowcase.tsx#L71) |  | 10 |
+| `TeamTemplate` | Templates › Equipe (`templates#template-team`) | [src/app/components/showcase/TemplatesShowcase.tsx:219](src/app/components/showcase/TemplatesShowcase.tsx#L219) |  | 14 |
+| `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:418](src/app/components/showcase/TemplatesShowcase.tsx#L418) | `GradeDeCards` | 10 |
+| `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:603](src/app/components/showcase/TemplatesShowcase.tsx#L603) |  | 14 |
 
-### 2.2 Padrões nas páginas de componentes (35)
+### 2.2 Padrões nas páginas de componentes (36)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
 | `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 7 |
-| `ChaveParaQuem`<br>Controle só da demonstração: liga e desliga o bloco opcional "Para quem" nos cards de preço | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:876](src/app/components/showcase/TemplatesShowcase.tsx#L876) |  | 2 |
+| `Secao` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:503](src/app/components/showcase/TemplatesResponsivos.tsx#L503) |  | 1 |
+| `ChaveParaQuem`<br>Controle só da demonstração: liga e desliga o bloco opcional "Para quem" nos cards de preço | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:388](src/app/components/showcase/TemplatesShowcase.tsx#L388) |  | 2 |
 | `InputField` | Botões › Controles de formulário (`buttons#inputs`) | [src/app/components/showcase/FormShowcase.tsx:65](src/app/components/showcase/FormShowcase.tsx#L65) | `Input` | 1 |
 | `CanvasRevealCard`<br>Cards com revelação em canvas (usado na página Cards › Animação). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/BackgroundsShowcase.tsx:498](src/app/components/showcase/BackgroundsShowcase.tsx#L498) |  | 9 |
 | `CenaDoVidro`<br>Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene). | Cards › Vidro: acabamentos (`cards#card-glass`) (+3) | [src/app/components/showcase/CardShowcase.tsx:113](src/app/components/showcase/CardShowcase.tsx#L113) | `DoodleTexture`, `GlassScene` | 2 |
@@ -1040,7 +1042,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `AlertaComAcaoDoc` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:133](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L133) | `AlertaComAcao`, `BotaoDoAlerta`, `GradeDeCards`, `LinkDoAlerta` | 1 |
 | `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:76](src/app/components/showcase/FeedbackShowcase.tsx#L76) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
 | `SkeletonPulse`<br>Skeleton | Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:106](src/app/components/showcase/FeedbackShowcase.tsx#L106) |  | 1 |
-| `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:128](src/app/components/showcase/OverlaysShowcase.tsx#L128) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
+| `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:132](src/app/components/showcase/OverlaysShowcase.tsx#L132) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
 | `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:414](src/app/components/showcase/SitePatternsShowcase.tsx#L414) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
 | `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:462](src/app/components/showcase/SitePatternsShowcase.tsx#L462) | `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 6 |
 | `Segmentado`<br>Controles da demonstração | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:91](src/app/components/showcase/HeaderShowcase.tsx#L91) |  | 1 |
@@ -1134,10 +1136,10 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:522](src/app/components/showcase/FeedbackShowcase.tsx#L522) |  | 4 |
 | Rótulos › Estados vazios (`badges#empty-states`) | [src/app/components/showcase/FeedbackShowcase.tsx:613](src/app/components/showcase/FeedbackShowcase.tsx#L613) |  | 4 |
 | Ícones › Tamanhos e cores (`icons#icon-sizes`) | [src/app/components/showcase/IconsShowcase.tsx:123](src/app/components/showcase/IconsShowcase.tsx#L123) |  | 7 |
-| Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:210](src/app/components/showcase/OverlaysShowcase.tsx#L210) | `Tooltip` | 3 |
-| Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:225](src/app/components/showcase/OverlaysShowcase.tsx#L225) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
-| Overlays › Diálogos (`overlays#dialogs`) | [src/app/components/showcase/OverlaysShowcase.tsx:273](src/app/components/showcase/OverlaysShowcase.tsx#L273) | `Dialog` | 3 |
-| Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:348](src/app/components/showcase/OverlaysShowcase.tsx#L348) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
+| Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:214](src/app/components/showcase/OverlaysShowcase.tsx#L214) | `Tooltip` | 3 |
+| Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:229](src/app/components/showcase/OverlaysShowcase.tsx#L229) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
+| Overlays › Diálogos (`overlays#dialogs`) | [src/app/components/showcase/OverlaysShowcase.tsx:277](src/app/components/showcase/OverlaysShowcase.tsx#L277) | `Dialog` | 3 |
+| Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:352](src/app/components/showcase/OverlaysShowcase.tsx#L352) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
 | Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:196](src/app/components/showcase/SitePatternsShowcase.tsx#L196) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade` | 3 |
 | Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:642](src/app/components/showcase/SitePatternsShowcase.tsx#L642) | `CurvaSecao`, `SeloSecao` | 4 |
 | Painel lateral › Anatomia (`sidepanel#sidepanel-anatomy`) | [src/app/components/showcase/SidePanelShowcase.tsx:235](src/app/components/showcase/SidePanelShowcase.tsx#L235) |  | 3 |

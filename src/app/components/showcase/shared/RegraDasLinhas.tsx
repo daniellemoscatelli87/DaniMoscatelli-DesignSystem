@@ -59,7 +59,7 @@ function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legend
   const certo = tipo === "certo";
   return (
     <figure className="m-0 min-w-0">
-      <figcaption className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[0.8125rem] font-semibold text-foreground">
+      <figcaption className="mb-2 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-body-sm font-semibold text-foreground">
         <span aria-hidden className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${certo ? "bg-[var(--success-text)] text-white" : "bg-[var(--error-text)] text-white"}`}>
           {certo ? <Check className="h-3 w-3" strokeWidth={3} /> : <X className="h-3 w-3" strokeWidth={3} />}
         </span>
@@ -68,8 +68,8 @@ function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legend
       </figcaption>
       <div className="w-full max-w-[22.5rem] overflow-hidden rounded-xl border border-border bg-card">
         <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
-          <span className="text-[0.75rem] font-semibold text-foreground">{t("Tasks", "Tarefas")}</span>
-          <span className="text-[0.6875rem] text-muted-foreground">360 px</span>
+          <span className="text-label font-semibold text-foreground">{t("Tasks", "Tarefas")}</span>
+          <span className="text-caption text-muted-foreground">360 px</span>
         </div>
         {children}
       </div>
@@ -113,7 +113,7 @@ function ListaCerta() {
       </ul>
       {itens.length < ITENS.length && (
         <div className="border-t border-border px-4 py-2.5">
-          <button type="button" onClick={() => setItens(ITENS)} className="inline-flex items-center gap-1.5 rounded-sm text-[0.75rem] font-semibold text-[var(--primary-text,var(--primary))] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <button type="button" onClick={() => setItens(ITENS)} className="inline-flex items-center gap-1.5 rounded-sm text-label font-semibold text-[var(--primary-text,var(--primary))] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <RotateCcw aria-hidden className="h-3.5 w-3.5" /> {t("Restore the example", "Restaurar o exemplo")}
           </button>
         </div>
@@ -138,10 +138,10 @@ function ListaErrada() {
       <ul aria-hidden className="divide-y divide-border">
         {ITENS.map((i, n) => (
           <li key={i.id} className="grid grid-cols-[auto_minmax(0,1fr)_auto] gap-x-3 px-4 py-3 [grid-template-areas:'chk_l1_sit'_'chk_res_res']">
-            <span className="[grid-area:chk] mt-0.5 h-4 w-4 rounded-[4px] border border-[var(--border-strong,var(--border))] bg-card" />
-            <span className={`[grid-area:l1] self-center text-[0.875rem] font-semibold text-foreground ${n === 1 ? "-mx-2 -my-1 rounded-md bg-[var(--row-hover)] px-2 py-1 ring-1 ring-border" : ""}`}>{bi(i.titulo)}</span>
+            <span className="[grid-area:chk] mt-0.5 h-4 w-4 rounded-sm border border-[var(--border-strong,var(--border))] bg-card" />
+            <span className={`[grid-area:l1] self-center text-body-sm font-semibold text-foreground ${n === 1 ? "-mx-2 -my-1 rounded-md bg-[var(--row-hover)] px-2 py-1 ring-1 ring-border" : ""}`}>{bi(i.titulo)}</span>
             <span className="[grid-area:sit] flex items-center gap-2"><Tag estado={i.estado} /><span className="flex h-8 w-8 items-center justify-center text-muted-foreground"><Trash2 className="h-4 w-4" /></span></span>
-            <span className="[grid-area:res] mt-0.5 text-[0.8125rem] text-muted-foreground">{bi(i.texto)}</span>
+            <span className="[grid-area:res] mt-0.5 text-body-sm text-muted-foreground">{bi(i.texto)}</span>
           </li>
         ))}
       </ul>
@@ -217,15 +217,15 @@ export function RegraDasLinhas() {
           <ListaErrada />
         </Celular>
       </div>
-      <p className="text-[0.8125rem] text-muted-foreground">{t(
+      <p className="text-body-sm text-muted-foreground">{t(
         "Hover or tap a row in the correct example: the whole row lights up, square, from the checkbox to the trash. Checked rows use the same shape.",
         "Passe o mouse ou toque numa linha do exemplo certo: a linha inteira acende, sem cantos, da caixa de seleção à lixeira. A linha marcada usa a mesma forma.",
       )}</p>
 
       <div className="grid gap-6 md:grid-cols-2 md:items-start">
         <div className="min-w-0">
-          <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{t("Where the tags and actions go", "Onde ficam as tags e ações")}</p>
-          <ul className="list-disc space-y-1.5 pl-5 text-[0.8125rem] leading-relaxed text-muted-foreground">
+          <p className="mb-2 text-body-sm font-semibold text-foreground">{t("Where the tags and actions go", "Onde ficam as tags e ações")}</p>
+          <ul className="list-disc space-y-1.5 pl-5 text-body-sm leading-relaxed text-muted-foreground">
             <li>{t("Default: on phones, in their own row below the whole text block, starting at the left edge of the text column (the same x as the title), tag first, then the date or action, 8 px apart, centred with each other (LinhaDeLista quebraAcoes=\"estreito\"); from 640 px, in the trailing column. Pushing them to the right edge (alinharAcoesAbaixo=\"fim\") separates them from the text they belong to.", "Padrão: no celular, numa linha própria embaixo de todo o bloco de texto, começando na borda esquerda da coluna do texto (o mesmo x do título), a tag primeiro e depois a data ou a ação, a 8 px uma da outra, centralizadas entre si (LinhaDeLista quebraAcoes=\"estreito\"); a partir de 640 px, na coluna final. Empurrar para a borda direita (alinharAcoesAbaixo=\"fim\") afasta a linha do texto a que ela pertence.")}</li>
             <li>{t("Beside the text at every width: quebraAcoes={false}. The text stays in its own column and wraps there.", "Ao lado do texto em qualquer largura: quebraAcoes={false}. O texto fica na coluna dele e quebra ali.")}</li>
             <li>{t("Below the text at every width: quebraAcoes={true}. Or the row becomes a stacked card.", "Embaixo do texto em qualquer largura: quebraAcoes={true}. Ou a linha vira um card empilhado.")}</li>
@@ -254,8 +254,8 @@ export function RegraDasLinhas() {
       />
 
       <div className="overflow-hidden rounded-lg border border-border bg-card">
-        <p className="border-b border-border px-4 py-2.5 text-[0.75rem] font-semibold text-foreground"><Mono>LinhaDeLista</Mono></p>
-        <pre className="whitespace-pre-wrap break-words px-4 py-4 text-[0.75rem] leading-relaxed font-[family-name:var(--font-mono)] text-foreground"><code>{codigo}</code></pre>
+        <p className="border-b border-border px-4 py-2.5 text-label font-semibold text-foreground"><Mono>LinhaDeLista</Mono></p>
+        <pre className="whitespace-pre-wrap break-words px-4 py-4 text-label leading-relaxed font-[family-name:var(--font-mono)] text-foreground"><code>{codigo}</code></pre>
       </div>
     </div>
   );

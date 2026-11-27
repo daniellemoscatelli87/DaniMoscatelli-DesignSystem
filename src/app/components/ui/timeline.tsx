@@ -130,7 +130,7 @@ export function Timeline({ etapas, alternar = true, limite = 0.6, checkNasFeitas
             {/* card */}
             <div
               className={cn(
-                "relative col-start-2 row-start-1 flex items-start gap-[14px] rounded-[20px] border border-border bg-card px-[18px] py-4 shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-[var(--shadow-md)]",
+                "relative col-start-2 row-start-1 flex items-start gap-[14px] rounded-lg border border-border bg-card px-[18px] py-4 shadow-[var(--shadow-sm)] transition-[transform,box-shadow] duration-200 hover:-translate-y-[3px] hover:shadow-[var(--shadow-md)]",
                 direita ? "md:col-start-3" : "md:col-start-1",
                 // setinha apontando para a linha (a partir de 768 px)
                 "md:before:absolute md:before:top-1/2 md:before:h-3 md:before:w-3 md:before:-mt-1.5 md:before:rotate-45 md:before:border md:before:border-border md:before:bg-card md:before:content-['']",
@@ -140,8 +140,8 @@ export function Timeline({ etapas, alternar = true, limite = 0.6, checkNasFeitas
               )}
             >
               <div className="min-w-0">
-                <h4 className="mb-1 text-[1.125rem] font-bold leading-[1.3] tracking-[-0.02em] text-foreground" style={{ fontFamily: "var(--font-sans)" }}>{e.titulo}</h4>
-                <p className="m-0 text-[0.9375rem] leading-normal text-muted-foreground">{e.descricao}</p>
+                <h4 className="mb-1 text-body-lg font-bold leading-[1.3] tracking-[-0.02em] text-foreground" style={{ fontFamily: "var(--font-sans)" }}>{e.titulo}</h4>
+                <p className="m-0 text-body leading-normal text-muted-foreground">{e.descricao}</p>
               </div>
             </div>
           </li>

@@ -108,7 +108,7 @@ function AlertaComAcao({
           {icone ?? <Icone />}
         </span>
         {/* Celular: título ao lado do ícone, centralizado com ele. Computador: título no alto da coluna do texto. */}
-        <div data-slot="alerta-com-acao-titulo" className="col-start-2 row-start-1 min-w-0 self-center text-[0.9375rem] font-bold leading-[1.35] text-foreground sm:self-start sm:pt-[3px]">
+        <div data-slot="alerta-com-acao-titulo" className="col-start-2 row-start-1 min-w-0 self-center text-body font-bold leading-[1.35] text-foreground sm:self-start sm:pt-[3px]">
           {titulo}
         </div>
         {/* Celular: descrição na largura toda, a partir da borda do respiro (alinhada com a base do ícone). */}

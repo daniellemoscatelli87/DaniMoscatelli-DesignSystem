@@ -23,7 +23,7 @@ const display = "font-[family-name:var(--font-display)]";
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">
+    <p className="text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">
       {children}
     </p>
   );
@@ -39,15 +39,15 @@ export function NavCard({
     <button
       type="button"
       onClick={() => onGo(item.target)}
-      className={`group flex flex-col text-left h-full bg-card border border-border rounded-[var(--radius)] shadow-[var(--shadow-sm)] transition-all duration-150 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+      className={`group flex flex-col text-left h-full bg-card border border-border rounded-md shadow-[var(--shadow-sm)] transition-all duration-150 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
         compact ? "p-4" : "p-5"
       }`}
     >
       <Icon className="h-5 w-5 text-primary-text mb-4 shrink-0" strokeWidth={1.75} />
-      <h3 className={`${display} text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
+      <h3 className={`${display} text-body font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
         {txt(item.title)}
       </h3>
-      <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">{txt(item.desc)}</p>
+      <p className="text-body-sm leading-relaxed text-muted-foreground mb-5">{txt(item.desc)}</p>
       <ArrowRight
         className="mt-auto self-end h-4 w-4 text-muted-foreground transition-all duration-150 group-hover:text-primary-text group-hover:translate-x-0.5"
         aria-hidden
@@ -73,9 +73,9 @@ export function PageHeader({
 }: { eyebrow: string; title: string; description: string }) {
   return (
     <header>
-      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.12em] text-primary-text mb-3">{eyebrow}</p>
-      <h1 className={`${display} text-[2rem] sm:text-[2.5rem] font-bold tracking-[-0.035em] leading-none text-foreground mb-4 [text-wrap:balance]`}>{withHighlight(title)}</h1>
-      <p className="text-[1.0625rem] text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
+      <p className="text-label font-semibold uppercase tracking-[0.12em] text-primary-text mb-3">{eyebrow}</p>
+      <h1 className={`${display} text-h2 sm:text-h1 font-bold tracking-[-0.035em] leading-none text-foreground mb-4 [text-wrap:balance]`}>{withHighlight(title)}</h1>
+      <p className="text-body-lg text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
     </header>
   );
 }
@@ -95,13 +95,13 @@ export function CopyLinkButton({ id }: { id: string }) {
         type="button"
         onClick={copy}
         aria-label={t("Copy link", "Copiar link")}
-        className="h-7 w-7 rounded-[var(--radius)] inline-flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="h-7 w-7 rounded-md inline-flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {copied ? <Check className="h-3.5 w-3.5 text-primary-text" /> : <LinkIcon className="h-3.5 w-3.5" />}
       </button>
       <span
         role="tooltip"
-        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 whitespace-nowrap rounded-sm bg-foreground px-2 py-1 text-[0.6875rem] font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 whitespace-nowrap rounded-sm bg-foreground px-2 py-1 text-caption font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
       >
         {copied ? t("Copied", "Copiado") : t("Copy link", "Copiar link")}
       </span>
@@ -116,10 +116,10 @@ export function PageSection({
     <section id={id} className="scroll-mt-32">
       <SectionLabel>{label}</SectionLabel>
       <div className="flex items-center gap-2 mb-3">
-        <h2 className={`${display} text-[1.5rem] tracking-[-0.02em] text-foreground`}>{title}</h2>
+        <h2 className={`${display} text-h3 tracking-[-0.02em] text-foreground`}>{title}</h2>
         <CopyLinkButton id={id} />
       </div>
-      <div className="space-y-3 max-w-2xl mb-6 text-[0.9375rem] leading-relaxed text-muted-foreground">{intro}</div>
+      <div className="space-y-3 max-w-2xl mb-6 text-body leading-relaxed text-muted-foreground">{intro}</div>
       {children}
     </section>
   );
@@ -246,7 +246,7 @@ export function GetStartedShowcase({ onNavigate }: { onNavigate: Navigate }) {
         <CardGrid items={develop} onGo={go} />
       </PageSection>
 
-      <p className="pt-6 border-t border-border text-[0.6875rem] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+      <p className="pt-6 border-t border-border text-caption font-medium uppercase tracking-[0.12em] text-muted-foreground">
         {rotuloVersao(t)}
       </p>
     </div>

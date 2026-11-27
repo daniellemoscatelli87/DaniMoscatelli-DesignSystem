@@ -55,19 +55,28 @@ const semanticColors = [
   { name: "Info text", pt: "Texto de info",       token: "--info-text",       swatch: "bg-info-text",        text: "text-white", light: "#366E97", dark: "#3B82F6" },
 ];
 
+/** Tamanho em px de cada token de texto (classes text-*, definidas em theme.css). */
+const PX_DO_TOKEN: Record<string, string> = {
+  "text-caption": "11px", "text-label": "12px", "text-body-sm": "14px", "text-body": "16px", "text-body-lg": "18px",
+  "text-h4": "20px", "text-h3": "24px", "text-h2": "32px", "text-h1": "40px",
+  "text-display-m": "36px", "text-display-l": "48px", "text-display-xl": "64px",
+};
+
+const DISPLAY_TOKEN: Record<string, string> = { "4rem": "text-display-xl", "3rem": "text-display-l", "2.25rem": "text-display-m", "1.5rem": "text-h3" };
+
 const typeScaleItems = [
-  { label: "H1",          size: "text-[2.5rem]",   weight: "font-bold",     tracking: "tracking-[-0.02em]",  sample: "Heading One", ptLabel: "H1", ptSample: "Título Um" },
-  { label: "H2",          size: "text-[2rem]",     weight: "font-bold",     tracking: "tracking-[-0.015em]", sample: "Heading Two", ptLabel: "H2", ptSample: "Título Dois" },
-  { label: "H3",          size: "text-[1.5rem]",   weight: "font-semibold", tracking: "tracking-[-0.01em]",  sample: "Heading Three", ptLabel: "H3", ptSample: "Título Três" },
-  { label: "H4",          size: "text-[1.25rem]",  weight: "font-semibold", tracking: "",                    sample: "Heading Four", ptLabel: "H4", ptSample: "Título Quatro" },
-  { label: "Subtitle L",  size: "text-[1.25rem]",  weight: "font-medium",   tracking: "",                    sample: "Section subtitle large — contextual emphasis", ptLabel: "Subtítulo G", ptSample: "Subtítulo de seção grande — ênfase contextual" },
-  { label: "Subtitle",    size: "text-[1.125rem]", weight: "font-medium",   tracking: "",                    sample: "Section subtitle — contextual emphasis", ptLabel: "Subtítulo", ptSample: "Subtítulo de seção — ênfase contextual" },
-  { label: "Body Large",  size: "text-[1.125rem]", weight: "font-normal",   tracking: "",                    sample: "Large body — introductions, institutional pages and strategic copy.", ptLabel: "Corpo grande", ptSample: "Corpo grande — introduções, páginas institucionais e textos estratégicos." },
-  { label: "Body",        size: "text-[1rem]",     weight: "font-normal",   tracking: "",                    sample: "Standard body text used for most content and descriptions.", ptLabel: "Corpo", ptSample: "Texto padrão usado na maior parte do conteúdo e das descrições." },
-  { label: "Body Small",  size: "text-[0.875rem]", weight: "font-normal",   tracking: "",                    sample: "Small body — secondary info, cards and component copy.", ptLabel: "Corpo pequeno", ptSample: "Corpo pequeno — informações secundárias, cards e textos de componentes." },
-  { label: "Label",       size: "text-[0.75rem]",  weight: "font-semibold", tracking: "tracking-[0.08em]",   sample: "DISCOVERY · STRATEGY · EXPERIENCE", ptLabel: "Rótulo", ptSample: "DESCOBERTA · ESTRATÉGIA · EXPERIÊNCIA" },
-  { label: "Caption",     size: "text-[0.6875rem]",weight: "font-medium",   tracking: "tracking-[0.10em]",   sample: "CATEGORIES · DATES · METADATA · OVERLINE", ptLabel: "Legenda", ptSample: "CATEGORIAS · DATAS · METADADOS · OVERLINE" },
-  { label: "Button",      size: "text-[0.875rem]", weight: "font-semibold", tracking: "tracking-[-0.01em]",  sample: "Button Label", ptLabel: "Botão", ptSample: "Rótulo do Botão" },
+  { label: "H1",          size: "text-h1",   weight: "font-bold",     tracking: "tracking-[-0.02em]",  sample: "Heading One", ptLabel: "H1", ptSample: "Título Um" },
+  { label: "H2",          size: "text-h2",     weight: "font-bold",     tracking: "tracking-[-0.015em]", sample: "Heading Two", ptLabel: "H2", ptSample: "Título Dois" },
+  { label: "H3",          size: "text-h3",   weight: "font-semibold", tracking: "tracking-[-0.01em]",  sample: "Heading Three", ptLabel: "H3", ptSample: "Título Três" },
+  { label: "H4",          size: "text-h4",  weight: "font-semibold", tracking: "",                    sample: "Heading Four", ptLabel: "H4", ptSample: "Título Quatro" },
+  { label: "Subtitle L",  size: "text-h4",  weight: "font-medium",   tracking: "",                    sample: "Section subtitle large — contextual emphasis", ptLabel: "Subtítulo G", ptSample: "Subtítulo de seção grande — ênfase contextual" },
+  { label: "Subtitle",    size: "text-body-lg", weight: "font-medium",   tracking: "",                    sample: "Section subtitle — contextual emphasis", ptLabel: "Subtítulo", ptSample: "Subtítulo de seção — ênfase contextual" },
+  { label: "Body Large",  size: "text-body-lg", weight: "font-normal",   tracking: "",                    sample: "Large body — introductions, institutional pages and strategic copy.", ptLabel: "Corpo grande", ptSample: "Corpo grande — introduções, páginas institucionais e textos estratégicos." },
+  { label: "Body",        size: "text-body",     weight: "font-normal",   tracking: "",                    sample: "Standard body text used for most content and descriptions.", ptLabel: "Corpo", ptSample: "Texto padrão usado na maior parte do conteúdo e das descrições." },
+  { label: "Body Small",  size: "text-body-sm", weight: "font-normal",   tracking: "",                    sample: "Small body — secondary info, cards and component copy.", ptLabel: "Corpo pequeno", ptSample: "Corpo pequeno — informações secundárias, cards e textos de componentes." },
+  { label: "Label",       size: "text-label",  weight: "font-semibold", tracking: "tracking-[0.08em]",   sample: "DISCOVERY · STRATEGY · EXPERIENCE", ptLabel: "Rótulo", ptSample: "DESCOBERTA · ESTRATÉGIA · EXPERIÊNCIA" },
+  { label: "Caption",     size: "text-caption",weight: "font-medium",   tracking: "tracking-[0.10em]",   sample: "CATEGORIES · DATES · METADATA · OVERLINE", ptLabel: "Legenda", ptSample: "CATEGORIAS · DATAS · METADADOS · OVERLINE" },
+  { label: "Button",      size: "text-body-sm", weight: "font-semibold", tracking: "tracking-[-0.01em]",  sample: "Button Label", ptLabel: "Botão", ptSample: "Rótulo do Botão" },
 ];
 
 const displayScaleItems = [
@@ -78,12 +87,10 @@ const displayScaleItems = [
 ];
 
 const radiusScale = [
-  { name: "XS — 6px",   value: "6px",   cls: "rounded-sm" },
   { name: "SM — 8px",   value: "8px",   cls: "rounded-sm" },
   { name: "MD — 12px",  value: "12px",  cls: "rounded-md" },
   { name: "LG — 16px",  value: "16px",  cls: "rounded-lg" },
   { name: "XL — 24px",  value: "24px",  cls: "rounded-xl" },
-  { name: "2XL — 32px", value: "32px",  cls: "rounded-[32px]" },
   { name: "Full",       value: "9999px",cls: "rounded-full" },
 ];
 
@@ -102,7 +109,7 @@ const shadowTokens = [
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-10">
-      <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-4">{title}</h3>
+      <h3 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-4">{title}</h3>
       {children}
     </div>
   );
@@ -126,8 +133,8 @@ export function FoundationShowcase() {
                   className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
                 />
-                <span className="text-[0.6875rem] font-medium text-muted-foreground text-center">{c.name}</span>
-                <span className="text-[0.625rem] text-muted-foreground/70 text-center font-mono">{c.hex}</span>
+                <span className="text-caption font-medium text-muted-foreground text-center">{c.name}</span>
+                <span className="text-caption text-muted-foreground/70 text-center font-mono">{c.hex}</span>
               </div>
             ))}
           </div>
@@ -141,8 +148,8 @@ export function FoundationShowcase() {
                   className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
                 />
-                <span className="text-[0.6875rem] font-medium text-muted-foreground text-center">{c.name}</span>
-                <span className="text-[0.625rem] text-muted-foreground/70 text-center font-mono">{c.hex}</span>
+                <span className="text-caption font-medium text-muted-foreground text-center">{c.name}</span>
+                <span className="text-caption text-muted-foreground/70 text-center font-mono">{c.hex}</span>
               </div>
             ))}
           </div>
@@ -156,13 +163,13 @@ export function FoundationShowcase() {
               { token: "--primary-muted", nome: t("Highlight", "Destaque"), classe: "bg-[var(--primary-muted)] text-primary-text", uso: t("Icon bases (IconeComBase marca), status chips and support bands. It never marks a selection. Text in --primary-text: 5.1:1.", "Bases de ícones (IconeComBase marca), chips de estado e faixas de apoio. Nunca marca seleção. Texto em --primary-text: 5,1:1.") },
             ].map(n => (
               <div key={n.token} className="rounded-xl border border-border bg-card p-4">
-                <div className={`flex h-10 items-center rounded-sm px-3 text-[0.875rem] font-medium ${n.classe}`}>{n.nome}</div>
-                <p className="mt-2 font-mono text-[0.75rem] text-muted-foreground">{n.token} · {valorDoToken(n.token)?.claro}</p>
-                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{n.uso}</p>
+                <div className={`flex h-10 items-center rounded-sm px-3 text-body-sm font-medium ${n.classe}`}>{n.nome}</div>
+                <p className="mt-2 font-mono text-label text-muted-foreground">{n.token} · {valorDoToken(n.token)?.claro}</p>
+                <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{n.uso}</p>
               </div>
             ))}
           </div>
-          <p className="mt-3 max-w-3xl text-[0.8125rem] leading-relaxed text-muted-foreground">{t(
+          <p className="mt-3 max-w-3xl text-body-sm leading-relaxed text-muted-foreground">{t(
             "Product owner's decision (27/11/2026), the same in both design systems: the selected state uses the middle pink, hover becomes light grey, and the stronger pink is only for highlights. A selected item under the pointer keeps the selected pink.",
             "Decisão da dona do produto (27/11/2026), igual nos dois design systems: o selecionado fica no rosa do meio, o hover passa a ser cinza claro e o rosa mais forte é só para destaque. Um item selecionado com o mouse em cima continua no rosa do selecionado.",
           )}</p>
@@ -174,9 +181,9 @@ export function FoundationShowcase() {
               <div key={c.name} className="flex flex-col gap-2">
                 <div className={`h-12 rounded-md border border-border/40 ${c.swatch}`} />
                 <div>
-                  <div className="text-[0.8125rem] font-medium text-foreground">{bi({ en: c.name, pt: c.pt })}</div>
-                  <div className="text-[0.6875rem] text-muted-foreground font-mono">{c.token}</div>
-                  <div className="mt-1.5 space-y-0.5 font-mono text-[0.625rem]">
+                  <div className="text-body-sm font-medium text-foreground">{bi({ en: c.name, pt: c.pt })}</div>
+                  <div className="text-caption text-muted-foreground font-mono">{c.token}</div>
+                  <div className="mt-1.5 space-y-0.5 font-mono text-caption">
                     <div className="flex items-center justify-between gap-2 text-muted-foreground">
                       <span className="uppercase tracking-[0.08em] opacity-70">{t("Light", "Claro")}</span>
                       <span className="text-foreground/80">{valorDoToken(c.token)?.claro ?? c.light}</span>
@@ -202,16 +209,16 @@ export function FoundationShowcase() {
             <Heading level={2} size="hero">{t("Turn people's experience into a **strategic asset** for your business.", "Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.")}</Heading>
             <div className="h-px bg-border" />
             <div className="grid gap-6 md:grid-cols-2">
-              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">{t("Design **principles**", "Princípios de **design**")}</Heading></div>
-              <div><p className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">{t("Join the **Partner Network**", "Faça parte da **Rede de Parceiros**")}</Heading></div>
+              <div><p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">{t("Design **principles**", "Princípios de **design**")}</Heading></div>
+              <div><p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">{t("Join the **Partner Network**", "Faça parte da **Rede de Parceiros**")}</Heading></div>
             </div>
-            <ul className="grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+            <ul className="grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("One highlight per title, one to three words, in the primary color; never the whole title.", "Um destaque por título, de uma a três palavras, na cor primária; nunca o título inteiro.")}</li>
               <li>• {t("Highlight the expression that carries the value (“strategic asset”), not a connector.", "Destaque a expressão que carrega o valor (“ativo estratégico”), não um conectivo.")}</li>
               <li>• {t("Plus Jakarta Sans Bold (700), as on the site hero. Hero: tracking -0.03em, line height 1.1. Page: -0.035em. Section: -0.02em.", "Plus Jakarta Sans Bold (700), como no hero do site. Hero: tracking -0,03em, entrelinha 1,1. Página: -0,035em. Seção: -0,02em.")}</li>
               <li>• {t("Large text, so the primary color passes contrast on light and dark backgrounds.", "Texto grande, então a cor primária passa no contraste nos fundos claro e escuro.")}</li>
             </ul>
-            <pre className="overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { Heading } from "@/app/components/ui/heading";
+            <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { Heading } from "@/app/components/ui/heading";
 <Heading level={1} size="hero">Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>`}</code></pre>
           </div>
         </SubSection>
@@ -262,13 +269,13 @@ export function FoundationShowcase() {
             <div key={f.role} className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <span className={`inline-block px-2 py-0.5 rounded-sm border text-[0.5625rem] font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
-                  <p className="mt-1.5 text-[0.9375rem] font-bold text-foreground leading-tight break-words">{f.family}</p>
-                  <p className="text-[0.625rem] font-mono text-muted-foreground mt-0.5">{f.token}</p>
+                  <span className={`inline-block px-2 py-0.5 rounded-sm border text-caption font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
+                  <p className="mt-1.5 text-body font-bold text-foreground leading-tight break-words">{f.family}</p>
+                  <p className="text-caption font-mono text-muted-foreground mt-0.5">{f.token}</p>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-[1.5rem] font-black text-foreground leading-none">{f.proportion}</p>
-                  <p className="text-[0.5625rem] text-muted-foreground mt-0.5">{t("of usage", "de uso")}</p>
+                  <p className="text-h3 font-black text-foreground leading-none">{f.proportion}</p>
+                  <p className="text-caption text-muted-foreground mt-0.5">{t("of usage", "de uso")}</p>
                 </div>
               </div>
 
@@ -280,7 +287,7 @@ export function FoundationShowcase() {
               {/* Traits */}
               <div className="flex flex-wrap gap-1">
                 {f.traits.map((tr, ti) => (
-                  <span key={ti} className="px-2 py-0.5 rounded-sm bg-muted text-[0.5625rem] font-semibold text-muted-foreground">{tr}</span>
+                  <span key={ti} className="px-2 py-0.5 rounded-sm bg-muted text-caption font-semibold text-muted-foreground">{tr}</span>
                 ))}
               </div>
 
@@ -290,7 +297,7 @@ export function FoundationShowcase() {
               </div>
 
               {/* Meta */}
-              <div className="space-y-1.5 text-[0.6875rem]">
+              <div className="space-y-1.5 text-caption">
                 <p className="text-muted-foreground leading-relaxed"><span className="font-semibold text-foreground/70">{t("Use in:", "Usar em:")}</span> {f.uses}</p>
                 <p className="text-muted-foreground"><span className="font-semibold text-foreground/70">{t("Weights:", "Pesos:")}</span> {f.weights}</p>
               </div>
@@ -301,7 +308,7 @@ export function FoundationShowcase() {
         {/* ── Plus Jakarta Sans — escala ── */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <h3 className="text-[0.8125rem] font-bold text-foreground uppercase tracking-[0.07em]">Plus Jakarta Sans — {t("Type scale", "Escala tipográfica")}</h3>
+            <h3 className="text-body-sm font-bold text-foreground uppercase tracking-[0.07em]">Plus Jakarta Sans — {t("Type scale", "Escala tipográfica")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
           <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -311,14 +318,15 @@ export function FoundationShowcase() {
                 className={`flex items-baseline gap-6 px-6 py-4 ${i < typeScaleItems.length - 1 ? "border-b border-border/60" : ""}`}
               >
                 <div className="w-24 shrink-0">
-                  <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t(item.label, item.ptLabel)}</span>
+                  <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t(item.label, item.ptLabel)}</span>
                 </div>
-                <div className={`${item.size} ${item.weight} ${item.tracking} text-foreground leading-tight flex-1 min-w-0`}
-                  style={{ fontFamily: "var(--font-sans)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                <div className={`${item.size} ${item.weight} ${item.tracking} text-foreground leading-tight flex-1 min-w-0 [overflow-wrap:anywhere]`}
+                  style={{ fontFamily: "var(--font-sans)" }}>
                   {t(item.sample, item.ptSample)}
                 </div>
-                <div className="shrink-0 hidden md:flex gap-3 text-[0.6875rem] text-muted-foreground/70 font-mono">
-                  <span>{item.size.replace("text-[", "").replace("]", "")}</span>
+                <div className="shrink-0 hidden md:flex gap-3 text-caption text-muted-foreground font-mono">
+                  <span>{item.size}</span>
+                  <span>{PX_DO_TOKEN[item.size]}</span>
                   <span>{item.weight.replace("font-", "")}</span>
                 </div>
               </div>
@@ -329,7 +337,7 @@ export function FoundationShowcase() {
         {/* ── Space Grotesk — escala display ── */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <h3 className="text-[0.8125rem] font-bold text-foreground uppercase tracking-[0.07em]">Space Grotesk — {t("Display Scale", "Escala display")}</h3>
+            <h3 className="text-body-sm font-bold text-foreground uppercase tracking-[0.07em]">Space Grotesk — {t("Display Scale", "Escala display")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
           <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -339,15 +347,15 @@ export function FoundationShowcase() {
                 className={`flex items-baseline gap-6 px-6 py-4 ${i < displayScaleItems.length - 1 ? "border-b border-border/60" : ""}`}
               >
                 <div className="w-24 shrink-0">
-                  <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t(item.label, item.ptLabel)}</span>
+                  <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t(item.label, item.ptLabel)}</span>
                 </div>
                 <div
                   className="text-foreground leading-tight flex-1 min-w-0"
-                  style={{ fontFamily: "var(--font-display)", fontWeight: item.weight, fontSize: item.size, letterSpacing: item.tracking, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  style={{ fontFamily: "var(--font-display)", fontWeight: item.weight, fontSize: item.size, letterSpacing: item.tracking, overflowWrap: "anywhere" }}>
                   {t(item.sample, item.ptSample)}
                 </div>
-                <div className="shrink-0 hidden md:flex gap-3 text-[0.6875rem] text-muted-foreground/70 font-mono">
-                  <span>{item.size}</span>
+                <div className="shrink-0 hidden md:flex gap-3 text-caption text-muted-foreground font-mono">
+                  <span>{PX_DO_TOKEN[DISPLAY_TOKEN[item.size]] ? DISPLAY_TOKEN[item.size] : item.size}</span>
                   <span>{item.weight}</span>
                 </div>
               </div>
@@ -358,29 +366,29 @@ export function FoundationShowcase() {
         {/* ── Fraunces — editorial specimen ── */}
         <div className="space-y-3">
           <div className="flex items-center gap-3">
-            <h3 className="text-[0.8125rem] font-bold text-foreground uppercase tracking-[0.07em]">Fraunces — {t("Editorial Specimen", "Espécime editorial")}</h3>
+            <h3 className="text-body-sm font-bold text-foreground uppercase tracking-[0.07em]">Fraunces — {t("Editorial Specimen", "Espécime editorial")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Specimen cards */}
             <div className="bg-card rounded-lg border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
-              <span className="text-[0.5625rem] font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Italic contrast", "Contraste itálico")}</span>
+              <span className="text-caption font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Italic contrast", "Contraste itálico")}</span>
               <p className="text-foreground leading-snug" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "2rem", letterSpacing: "-0.025em" }}>
                 {t("Design what's", "Projete o que vem")}{" "}
                 <span style={{ fontFamily: "var(--font-accent)", fontStyle: "italic", fontWeight: 400 }}>{t("next.", "a seguir.")}</span>
               </p>
-              <p className="text-[0.75rem] text-muted-foreground leading-relaxed" style={{ fontFamily: "var(--font-sans)" }}>
+              <p className="text-label text-muted-foreground leading-relaxed" style={{ fontFamily: "var(--font-sans)" }}>
                 {t("Space Grotesk creates impact. Fraunces in italic adds emotion to the last word.", "A Space Grotesk cria impacto. A Fraunces em itálico dá emoção à última palavra.")}
               </p>
             </div>
 
             <div className="bg-card rounded-lg border border-border p-6 space-y-5" style={{ boxShadow: "var(--shadow-xs)" }}>
-              <span className="text-[0.5625rem] font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Editorial statement", "Declaração editorial")}</span>
+              <span className="text-caption font-bold uppercase tracking-[0.10em] text-muted-foreground" style={{ fontFamily: "var(--font-sans)" }}>{t("Editorial statement", "Declaração editorial")}</span>
               <div className="space-y-1">
-                <p className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-primary-text" style={{ fontFamily: "var(--font-sans)" }}>{t("HUMAN EXPERIENCE", "EXPERIÊNCIA HUMANA")}</p>
+                <p className="text-caption font-semibold uppercase tracking-[0.12em] text-primary-text" style={{ fontFamily: "var(--font-sans)" }}>{t("HUMAN EXPERIENCE", "EXPERIÊNCIA HUMANA")}</p>
                 <p className="text-foreground leading-none" style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.75rem", letterSpacing: "-0.02em" }}>{t("MAKE IT MEANINGFUL.", "DÊ SIGNIFICADO.")}</p>
                 <p className="text-foreground" style={{ fontFamily: "var(--font-accent)", fontStyle: "italic", fontWeight: 400, fontSize: "1.25rem" }}>{t("But make it human.", "Mas faça humano.")}</p>
-                <p className="text-[0.8125rem] text-muted-foreground leading-relaxed pt-1" style={{ fontFamily: "var(--font-sans)" }}>
+                <p className="text-body-sm text-muted-foreground leading-relaxed pt-1" style={{ fontFamily: "var(--font-sans)" }}>
                   {t("We turn insights into products and experiences that connect people and businesses.", "Transformamos insights em produtos e experiências que conectam pessoas e negócios.")}
                 </p>
               </div>
@@ -397,14 +405,14 @@ export function FoundationShowcase() {
                     <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "color-mix(in srgb, var(--success) 18%, transparent)" }}>
                       <Check style={{ height: 11, width: 11, color: "var(--success)" }} />
                     </div>
-                    <p className="text-[0.6875rem] font-bold" style={{ color: "var(--success)" }}>{t("Use as an accent", "Use como acento")}</p>
+                    <p className="text-caption font-bold" style={{ color: "var(--success)" }}>{t("Use as an accent", "Use como acento")}</p>
                   </div>
                 </div>
                 <ul className="px-4 py-3 space-y-2.5">
                   {[t("Last word of a headline", "Última palavra de um título"), t("Quotes and manifestos", "Citações e manifestos"), t("Editorial statements", "Declarações editoriais"), t("Italic for contrast", "Itálico para contraste"), t("Special editorial headings", "Títulos editoriais especiais")].map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full shrink-0 bg-success opacity-70" />
-                      <span className="text-[0.6875rem] text-muted-foreground leading-snug">{item}</span>
+                      <span className="text-caption text-muted-foreground leading-snug">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -417,14 +425,14 @@ export function FoundationShowcase() {
                     <div className="h-5 w-5 rounded-full flex items-center justify-center shrink-0" style={{ background: "rgba(212,77,77,0.15)" }}>
                       <X style={{ height: 11, width: 11, color: "#D44D4D" }} />
                     </div>
-                    <p className="text-[0.6875rem] font-bold" style={{ color: "#D44D4D" }}>{t("Avoid", "Evitar")}</p>
+                    <p className="text-caption font-bold" style={{ color: "#D44D4D" }}>{t("Avoid", "Evitar")}</p>
                   </div>
                 </div>
                 <ul className="px-4 py-3 space-y-2.5">
                   {[t("Long interface text", "Textos longos de interface"), t("Buttons and functional labels", "Botões e rótulos funcionais"), t("Navigation and menus", "Navegação e menus"), t("Standard body text", "Texto de corpo padrão"), t("Functional components", "Componentes funcionais")].map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full shrink-0" style={{ background: "#D44D4D", opacity: 0.6 }} />
-                      <span className="text-[0.6875rem] text-muted-foreground leading-snug">{item}</span>
+                      <span className="text-caption text-muted-foreground leading-snug">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -433,7 +441,7 @@ export function FoundationShowcase() {
               {/* Peso preferencial */}
               <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border bg-muted/20">
-                  <p className="text-[0.6875rem] font-bold text-foreground">{t("Preferred weight", "Peso preferencial")}</p>
+                  <p className="text-caption font-bold text-foreground">{t("Preferred weight", "Peso preferencial")}</p>
                 </div>
                 <div className="px-4 py-3 space-y-3">
                   {[
@@ -454,10 +462,10 @@ export function FoundationShowcase() {
                         }}>{w.specimen}</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className={`text-[0.625rem] font-semibold leading-none ${w.allowed ? "text-foreground" : "text-muted-foreground line-through"}`}>{w.label}</p>
-                        <p className="text-[0.5625rem] text-muted-foreground mt-0.5">{w.allowed ? t("recommended", "recomendado") : t("do not use", "não use")}</p>
+                        <p className={`text-caption font-semibold leading-none ${w.allowed ? "text-foreground" : "text-muted-foreground line-through"}`}>{w.label}</p>
+                        <p className="text-caption text-muted-foreground mt-0.5">{w.allowed ? t("recommended", "recomendado") : t("do not use", "não use")}</p>
                       </div>
-                      <span className={`text-[0.5625rem] font-bold ${w.allowed ? "text-success" : "text-destructive/60"}`}>{w.allowed ? "✓" : "✕"}</span>
+                      <span className={`text-caption font-bold ${w.allowed ? "text-success" : "text-destructive/60"}`}>{w.allowed ? "✓" : "✕"}</span>
                     </div>
                   ))}
                 </div>
@@ -466,18 +474,18 @@ export function FoundationShowcase() {
               {/* Recommended proportion */}
               <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
                 <div className="px-4 pt-4 pb-3 border-b border-border bg-muted/20">
-                  <p className="text-[0.6875rem] font-bold text-foreground">{t("Proportion in layout", "Proporção no layout")}</p>
+                  <p className="text-caption font-bold text-foreground">{t("Proportion in layout", "Proporção no layout")}</p>
                 </div>
                 <div className="px-4 py-3 space-y-3">
                   {/* Stacked bar */}
                   <div className="space-y-1.5">
-                    <p className="text-[0.5625rem] font-semibold text-muted-foreground uppercase tracking-[0.07em]">{t("Ideal composition", "Composição ideal")}</p>
+                    <p className="text-caption font-semibold text-muted-foreground uppercase tracking-[0.07em]">{t("Ideal composition", "Composição ideal")}</p>
                     <div className="flex h-4 w-full rounded-full overflow-hidden gap-px">
                       <div className="h-full rounded-l-full" style={{ width: "70%", background: "var(--primary)" }} />
                       <div className="h-full" style={{ width: "20%", background: "#3b82f6" }} />
                       <div className="h-full rounded-r-full" style={{ width: "10%", background: "#f59e0b" }} />
                     </div>
-                    <div className="flex items-center justify-between text-[0.5rem] font-mono text-muted-foreground">
+                    <div className="flex items-center justify-between text-caption font-mono text-muted-foreground">
                       <span>70%</span><span>20%</span><span>10%</span>
                     </div>
                   </div>
@@ -490,12 +498,12 @@ export function FoundationShowcase() {
                     ].map(l => (
                       <div key={l.label} className="flex items-center gap-2">
                         <span className="h-2 w-2 rounded-full shrink-0" style={{ background: l.color }} />
-                        <span className="text-[0.5625rem] text-muted-foreground flex-1 leading-none">{l.label}</span>
-                        <span className="text-[0.5625rem] font-bold text-foreground">{l.pct}</span>
+                        <span className="text-caption text-muted-foreground flex-1 leading-none">{l.label}</span>
+                        <span className="text-caption font-bold text-foreground">{l.pct}</span>
                       </div>
                     ))}
                   </div>
-                  <p className="text-[0.5625rem] text-muted-foreground/60 leading-relaxed border-t border-border pt-2">
+                  <p className="text-caption text-muted-foreground/60 leading-relaxed border-t border-border pt-2">
                     {t("Fraunces appears at strategic moments — it should not dominate the interface.", "A Fraunces aparece em momentos estratégicos — ela não deve dominar a interface.")}
                   </p>
                 </div>
@@ -522,8 +530,8 @@ export function FoundationShowcase() {
                 className={`w-20 h-20 border-2 border-primary/60 bg-primary/10 ${r.cls}`}
               />
               <div className="text-center">
-                <div className="text-[0.8125rem] font-medium text-foreground">{r.name.split(" — ")[0] === "Full" ? t("Full", "Total") : r.name.split(" — ")[0]}</div>
-                <div className="text-[0.6875rem] text-muted-foreground font-mono">{r.value}</div>
+                <div className="text-body-sm font-medium text-foreground">{r.name.split(" — ")[0] === "Full" ? t("Full", "Total") : r.name.split(" — ")[0]}</div>
+                <div className="text-caption text-muted-foreground font-mono">{r.value}</div>
               </div>
             </div>
           ))}
@@ -542,8 +550,8 @@ export function FoundationShowcase() {
                 style={{ boxShadow: s.css }}
               />
               <div>
-                <div className="text-[0.875rem] font-medium text-foreground">{t(s.label, s.pt)}</div>
-                <div className="text-[0.75rem] text-muted-foreground font-mono">--{s.name}</div>
+                <div className="text-body-sm font-medium text-foreground">{t(s.label, s.pt)}</div>
+                <div className="text-label text-muted-foreground font-mono">--{s.name}</div>
               </div>
             </div>
           ))}

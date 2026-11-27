@@ -24,7 +24,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 }
 
 const field =
-  "w-full rounded-md border border-border bg-muted/40 px-4 py-2.5 text-[0.8125rem] leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
+  "w-full rounded-md border border-border bg-muted/40 px-4 py-2.5 text-body-sm leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function maskPhone(v: string) {
@@ -80,8 +80,8 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
     <SidePanel open={open} onOpenChange={o => { setOpen(o); if (!o) setTimeout(reset, 300); }}>
       <SidePanelTrigger asChild>
         <button className={outline
-          ? "inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-4 text-[0.9375rem] font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          : "inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"}>
+          ? "inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-4 text-body font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          : "inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-body-sm font-semibold text-primary-foreground transition-colors hover:bg-[var(--primary-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"}>
           {triggerLabel ?? t("Contact", "Contato")}
         </button>
       </SidePanelTrigger>
@@ -101,10 +101,10 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
             <div className="flex flex-col items-center space-y-4 px-4 py-8 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--primary-muted)] text-primary-text"><Check className="h-8 w-8" strokeWidth={2.5} aria-hidden /></div>
               <div>
-                <h3 className="text-[1.25rem] font-bold text-foreground">{t("Message sent successfully!", "Mensagem enviada com sucesso!")}</h3>
-                <p className="mx-auto mt-2 max-w-xs text-[0.875rem] text-muted-foreground">{t("We will get in touch soon to schedule our conversation.", "Entraremos em contato em breve para agendarmos a nossa conversa.")}</p>
+                <h3 className="text-h4 font-bold text-foreground">{t("Message sent successfully!", "Mensagem enviada com sucesso!")}</h3>
+                <p className="mx-auto mt-2 max-w-xs text-body-sm text-muted-foreground">{t("We will get in touch soon to schedule our conversation.", "Entraremos em contato em breve para agendarmos a nossa conversa.")}</p>
               </div>
-              <button type="button" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-muted px-6 py-2.5 text-[0.75rem] font-semibold text-foreground transition-colors hover:bg-accent">{t("Close", "Fechar")}</button>
+              <button type="button" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-muted px-6 py-2.5 text-label font-semibold text-foreground transition-colors hover:bg-accent">{t("Close", "Fechar")}</button>
             </div>
           ) : (
             <form id="ds-contact-form" noValidate onSubmit={submit} className="flex flex-col gap-2.5">
@@ -118,7 +118,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
 
               {/* Acordeão "Meu negócio é..." */}
               <div className={`overflow-hidden rounded-md border bg-muted/40 ${invalid.tipo ? "border-error" : "border-border"}`}>
-                <button type="button" aria-expanded={bizOpen} aria-controls="ds-biz-body" onClick={() => setBizOpen(o => !o)} className="flex w-full items-center justify-between p-3 text-left text-[0.8125rem] font-medium text-foreground transition-colors hover:bg-accent/60">
+                <button type="button" aria-expanded={bizOpen} aria-controls="ds-biz-body" onClick={() => setBizOpen(o => !o)} className="flex w-full items-center justify-between p-3 text-left text-body-sm font-medium text-foreground transition-colors hover:bg-accent/60">
                   <span>{values.tipo ? (values.tipo === "Outro" && values.outro ? values.outro : values.tipo) : t("My business is... *", "Meu negócio é... *")}</span>
                   <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${bizOpen ? "rotate-180" : ""}`} aria-hidden />
                 </button>
@@ -131,15 +131,15 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                     ].map(([label, hint]) => (
                       <label key={label} className="flex cursor-pointer items-start gap-2.5 rounded-md border border-border/60 bg-card/70 p-2 transition-colors hover:bg-card">
                         <input type="radio" name="ds-tipo" className="mt-0.5 h-4 w-4 accent-[var(--primary)]" checked={values.tipo === label} onChange={() => setValues(v => ({ ...v, tipo: label }))} />
-                        <span className="flex-1"><span className="block text-[0.8125rem] font-medium leading-snug text-foreground">{label}</span>{hint && <span className="mt-0.5 block text-[0.6875rem] leading-snug text-muted-foreground">{hint}</span>}</span>
+                        <span className="flex-1"><span className="block text-body-sm font-medium leading-snug text-foreground">{label}</span>{hint && <span className="mt-0.5 block text-caption leading-snug text-muted-foreground">{hint}</span>}</span>
                       </label>
                     ))}
                     <div className="flex items-center gap-2 rounded-md border border-border/60 bg-card/70 p-2">
                       <label className="flex shrink-0 cursor-pointer items-center gap-2.5">
                         <input type="radio" name="ds-tipo" className="h-4 w-4 accent-[var(--primary)]" checked={values.tipo === "Outro"} onChange={() => setValues(v => ({ ...v, tipo: "Outro" }))} />
-                        <span className="text-[0.8125rem] font-medium text-foreground">{t("Other:", "Outro:")}</span>
+                        <span className="text-body-sm font-medium text-foreground">{t("Other:", "Outro:")}</span>
                       </label>
-                      <input className="min-w-0 flex-1 rounded-sm border border-border bg-card px-2.5 py-1 text-[0.8125rem] text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
+                      <input className="min-w-0 flex-1 rounded-sm border border-border bg-card px-2.5 py-1 text-body-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
                     </div>
                   </div>
                 )}
@@ -158,8 +158,8 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 <div className={`flex flex-col justify-center rounded-md border bg-muted/40 px-3 py-2 ${invalid.dias ? "border-error" : "border-border"}`}>
                   <div className="mb-1 flex items-center justify-between">
-                    <span className="text-[0.75rem] font-semibold text-foreground">{t("Best weekday *", "Melhor dia da semana *")}</span>
-                    <span className="text-[0.625rem] text-muted-foreground">{t("multiple", "múltiplos")}</span>
+                    <span className="text-label font-semibold text-foreground">{t("Best weekday *", "Melhor dia da semana *")}</span>
+                    <span className="text-caption text-muted-foreground">{t("multiple", "múltiplos")}</span>
                   </div>
                   <div className="flex items-center justify-between gap-1">
                     {DAYS.map(d => {
@@ -167,7 +167,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                       return (
                         <label key={d} className="flex-1 text-center">
                           <input type="checkbox" className="peer sr-only" checked={on} onChange={() => setDias(x => on ? x.filter(y => y !== d) : [...x, d])} />
-                          <span className={`block rounded-sm py-1 text-[0.75rem] font-semibold transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${on ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>{d}</span>
+                          <span className={`block rounded-sm py-1 text-label font-semibold transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-ring ${on ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>{d}</span>
                         </label>
                       );
                     })}
@@ -181,14 +181,14 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                   <ChevronDown className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
                 </div>
               </div>
-              {error && <p role="alert" className="text-[0.75rem] text-error-text">{error}</p>}
+              {error && <p role="alert" className="text-label text-error-text">{error}</p>}
             </form>
           )}
         </SidePanelBody>
         {!sent && (
           <>
             <SidePanelActions>
-              <button type="submit" form="ds-contact-form" disabled={sending} className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-[0.875rem] font-semibold tracking-wide text-primary-foreground shadow-[var(--shadow-md)] transition-all hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-lg)] disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <button type="submit" form="ds-contact-form" disabled={sending} className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-body-sm font-semibold tracking-wide text-primary-foreground shadow-[var(--shadow-md)] transition-all hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-lg)] disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 {sending ? t("Sending…", "Enviando…") : t("Request a meeting", "Solicitar reunião")}
                 {!sending && <ArrowRight className="h-4 w-4" strokeWidth={2.5} aria-hidden />}
               </button>
@@ -215,7 +215,7 @@ export function SidePanelShowcase() {
         { name: "--border", description: t("Zone dividers", "Divisórias entre as zonas"), light: "rgba(19,26,39,.09)", dark: "rgba(255,255,255,.07)", isColor: true },
         { name: "--shadow-xl", description: t("Panel elevation", "Elevação do painel"), light: "0 16px 48px …" },
         { name: "overlay", description: t("Backdrop: foreground at 40% + blur-sm", "Fundo escurecido: foreground a 40% + blur-sm"), light: "bg-foreground/40" },
-        { name: "radius", description: t("Left corners from the tablet up", "Cantos esquerdos a partir do tablet"), light: "24px (rounded-l-3xl)" },
+        { name: "radius", description: t("Left corners from the tablet up", "Cantos esquerdos a partir do tablet"), light: "24px (rounded-l-xl)" },
       ],
     },
     {
@@ -241,9 +241,9 @@ export function SidePanelShowcase() {
           )}
         />
         <ShowcaseCard>
-          <p className="mb-4 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Anatomy", "Anatomia")}</p>
+          <p className="mb-4 text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Anatomy", "Anatomia")}</p>
           <div className="grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <div className="relative mx-auto w-full max-w-[320px] overflow-hidden rounded-[20px] border border-border bg-card" style={{ boxShadow: "var(--shadow-lg)" }}>
+            <div className="relative mx-auto w-full max-w-[320px] overflow-hidden rounded-lg border border-border bg-card" style={{ boxShadow: "var(--shadow-lg)" }}>
               {[
                 ["1", t("Header", "Cabeçalho"), t("Eyebrow label, title, description and close button. Fixed.", "Rótulo pequeno, título, texto de apoio e botão fechar. Fixo."), "bg-card"],
                 ["2", t("Body", "Corpo"), t("Scrolls on its own. Holds the form or the content.", "Rola sozinho. Guarda o formulário ou o conteúdo."), "bg-muted/30 min-h-[120px]"],
@@ -251,12 +251,12 @@ export function SidePanelShowcase() {
                 ["4", t("Footer", "Rodapé"), t("Optional note: security, signature.", "Nota opcional: segurança, assinatura."), "bg-muted/60"],
               ].map(([n, title, desc, bg], i) => (
                 <div key={n} className={`flex items-start gap-3 px-4 py-3 ${i > 0 ? "border-t border-border" : ""} ${bg}`}>
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-[0.6875rem] font-bold text-primary-foreground">{n}</span>
-                  <div><p className="text-[0.8125rem] font-semibold text-foreground">{title}</p><p className="text-[0.75rem] text-muted-foreground">{desc}</p></div>
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-caption font-bold text-primary-foreground">{n}</span>
+                  <div><p className="text-body-sm font-semibold text-foreground">{title}</p><p className="text-label text-muted-foreground">{desc}</p></div>
                 </div>
               ))}
             </div>
-            <ul className="space-y-3 text-[0.875rem] leading-relaxed text-muted-foreground">
+            <ul className="space-y-3 text-body-sm leading-relaxed text-muted-foreground">
               <li><span className="font-semibold text-foreground">{t("Width", "Largura")}:</span> {t("full screen on mobile, 500 px on tablet, 540 px on desktop; left corners rounded (24 px) from the tablet up.", "tela inteira no celular, 500 px no tablet, 540 px no desktop; cantos esquerdos arredondados (24 px) a partir do tablet.")}</li>
               <li><span className="font-semibold text-foreground">{t("Backdrop", "Fundo")}:</span> {t("page dimmed with a light blur; clicking it closes the panel.", "página escurecida com leve desfoque; clicar nele fecha o painel.")}</li>
               <li><span className="font-semibold text-foreground">{t("Motion", "Movimento")}:</span> {t("slides in from the right in 300 ms while the backdrop fades in; the reverse on close.", "entra da direita em 300 ms enquanto o fundo aparece; o inverso ao fechar.")}</li>
@@ -271,9 +271,9 @@ export function SidePanelShowcase() {
         <SectionHeader title={t("Behavior", "Comportamento")} description={t("Everything the site does when the panel opens and closes, now guaranteed by the component.", "Tudo o que o site faz ao abrir e fechar o painel, agora garantido pelo componente.")} />
         <GradeDeCards className="gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)]">
           <ShowcaseCard>
-            <p className="mb-4 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it", "Experimente")}</p>
+            <p className="mb-4 text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it", "Experimente")}</p>
             <ContactPanelDemo triggerLabel={t("Open panel with form", "Abrir painel com formulário")} outline />
-            <p className="mt-4 text-[0.75rem] text-muted-foreground">{t("Open, fill in or try to submit empty to see the validation, press Esc, click outside, use Tab: the focus stays inside and returns to this button when it closes.", "Abra, preencha ou tente enviar vazio para ver a validação, pressione Esc, clique fora, use Tab: o foco fica dentro e volta para este botão ao fechar.")}</p>
+            <p className="mt-4 text-label text-muted-foreground">{t("Open, fill in or try to submit empty to see the validation, press Esc, click outside, use Tab: the focus stays inside and returns to this button when it closes.", "Abra, preencha ou tente enviar vazio para ver a validação, pressione Esc, clique fora, use Tab: o foco fica dentro e volta para este botão ao fechar.")}</p>
           </ShowcaseCard>
           <ShowcaseCard>
             <ul className="space-y-3">
@@ -286,7 +286,7 @@ export function SidePanelShowcase() {
               ].map(([Icon, text], i) => {
                 const I = Icon as React.ElementType;
                 return (
-                  <li key={i} className="flex items-start gap-3 text-[0.875rem] leading-relaxed text-muted-foreground">
+                  <li key={i} className="flex items-start gap-3 text-body-sm leading-relaxed text-muted-foreground">
                     <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary-text"><I className="h-3.5 w-3.5" aria-hidden /></span>
                     <span>{text as string}</span>
                   </li>
@@ -308,7 +308,7 @@ export function SidePanelShowcase() {
         <ShowcaseCard>
           <div className="flex flex-wrap items-center gap-4">
             <ContactPanelDemo />
-            <p className="text-[0.8125rem] text-muted-foreground">{t("Demo: nothing is sent. On the site, the form writes to the “contatos” table.", "Demonstração: nada é enviado. No site, o formulário grava na tabela “contatos”.")}</p>
+            <p className="text-body-sm text-muted-foreground">{t("Demo: nothing is sent. On the site, the form writes to the “contatos” table.", "Demonstração: nada é enviado. No site, o formulário grava na tabela “contatos”.")}</p>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {[
@@ -317,8 +317,8 @@ export function SidePanelShowcase() {
               [t("States", "Estados"), t("Idle → “Sending…” (button disabled) → success replaces header, form and action bar inside the panel, with a Close button. On failure: “Your message could not be sent. Check your connection and try again.”", "Parado → “Enviando…” (botão desabilitado) → sucesso substitui cabeçalho, formulário e barra de ação dentro do painel, com botão Fechar. Em falha: “Não foi possível enviar sua mensagem. Verifique sua conexão e tente novamente.”")],
             ].map(([title, desc]) => (
               <div key={title} className="rounded-md border border-border bg-muted/30 p-4">
-                <p className="mb-1 text-[0.8125rem] font-semibold text-foreground">{title}</p>
-                <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
+                <p className="mb-1 text-body-sm font-semibold text-foreground">{title}</p>
+                <p className="text-body-sm leading-relaxed text-muted-foreground">{desc}</p>
               </div>
             ))}
           </div>
@@ -339,7 +339,7 @@ export function SidePanelShowcase() {
               t("Touch targets of at least 44 px on the action bar and the weekday chips.", "Alvos de toque de pelo menos 44 px na barra de ação e nos chips de dia."),
               t("Respects prefers-reduced-motion through the system's animation utilities.", "Respeita prefers-reduced-motion pelas utilidades de animação do sistema."),
             ].map(item => (
-              <li key={item} className="flex items-start gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{item}</li>
+              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{item}</li>
             ))}
           </ul>
         </ShowcaseCard>
@@ -347,8 +347,8 @@ export function SidePanelShowcase() {
 
       <section id="sidepanel-usage">
         <SectionHeader title={t("Usage", "Uso")} description={t("Composition of the component in code.", "Composição do componente em código.")} />
-        <ShowcaseCard className="overflow-x-auto">
-          <pre className="text-[0.75rem] leading-relaxed text-muted-foreground"><code>{`import { SidePanel, SidePanelTrigger, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelActions, SidePanelFooter } from "@/app/components/ui/side-panel";
+        <ShowcaseCard>
+          <pre className="text-label leading-relaxed text-muted-foreground whitespace-pre-wrap break-words"><code>{`import { SidePanel, SidePanelTrigger, SidePanelContent, SidePanelHeader, SidePanelBody, SidePanelActions, SidePanelFooter } from "@/app/components/ui/side-panel";
 
 <SidePanel>
   <SidePanelTrigger asChild><button>Contato</button></SidePanelTrigger>

@@ -34,18 +34,18 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
   const [aberto, setAberto] = useState(false);
   const idDetalhes = React.useId();
   return (
-    <article className="rounded-[var(--radius)] border border-border bg-card p-5">
-      <p className="text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))] mb-2">{card.tema}</p>
-      <h3 className="text-[1.125rem] font-bold tracking-[-0.015em] text-foreground leading-snug">{card.titulo}</h3>
-      <p className="mt-1.5 text-[0.9375rem] text-muted-foreground leading-relaxed">{card.contexto}</p>
+    <article className="rounded-md border border-border bg-card p-5">
+      <p className="text-label font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))] mb-2">{card.tema}</p>
+      <h3 className="text-body-lg font-bold tracking-[-0.015em] text-foreground leading-snug">{card.titulo}</h3>
+      <p className="mt-1.5 text-body text-muted-foreground leading-relaxed">{card.contexto}</p>
       {card.leitura && (
-        <p className="mt-3 flex items-start gap-2 text-[0.875rem] text-foreground">
-          <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded-full border border-border bg-muted px-2 text-[0.6875rem] font-semibold text-muted-foreground">{t("Hypothesis", "Hipótese")}</span>
+        <p className="mt-3 flex items-start gap-2 text-body-sm text-foreground">
+          <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded-full border border-border bg-muted px-2 text-caption font-semibold text-muted-foreground">{t("Hypothesis", "Hipótese")}</span>
           {card.leitura}
         </p>
       )}
       {card.passo && (
-        <p className="mt-2 flex items-start gap-2 text-[0.875rem] text-foreground">
+        <p className="mt-2 flex items-start gap-2 text-body-sm text-foreground">
           <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />
           {card.passo}
         </p>
@@ -55,7 +55,7 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
         aria-expanded={aberto}
         aria-controls={idDetalhes}
         onClick={() => setAberto(v => !v)}
-        className="mt-4 inline-flex items-center gap-1 rounded-sm text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="mt-4 inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         {aberto ? t("Hide details", "Ocultar detalhes") : t("See details", "Ver detalhes")}
         <ChevronDown className={`h-4 w-4 transition-transform ${aberto ? "rotate-180" : ""}`} aria-hidden />
@@ -63,8 +63,8 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
       <dl id={idDetalhes} hidden={!aberto} className="mt-3 grid grid-cols-1 gap-x-6 gap-y-2 rounded-md bg-muted/50 p-4 sm:grid-cols-2">
         {card.detalhes.map(d => (
           <div key={d.rotulo}>
-            <dt className="text-[0.75rem] text-muted-foreground">{d.rotulo}</dt>
-            <dd className="text-[0.875rem] font-medium text-foreground">{d.valor}</dd>
+            <dt className="text-label text-muted-foreground">{d.rotulo}</dt>
+            <dd className="text-body-sm font-medium text-foreground">{d.valor}</dd>
           </div>
         ))}
       </dl>
@@ -123,9 +123,9 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
       >
         <GradeDeCards className="gap-3 md:grid-cols-2">
           {regras.map(r => (
-            <div key={r.titulo} className="rounded-[var(--radius)] border border-border bg-card p-4">
-              <p className="flex items-start gap-2 text-[0.9375rem] font-semibold text-foreground"><MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{r.titulo}</p>
-              <p className="mt-1 pl-6 text-[0.8125rem] leading-relaxed text-muted-foreground">{r.texto}</p>
+            <div key={r.titulo} className="rounded-md border border-border bg-card p-4">
+              <p className="flex items-start gap-2 text-body font-semibold text-foreground"><MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{r.titulo}</p>
+              <p className="mt-1 pl-6 text-body-sm leading-relaxed text-muted-foreground">{r.texto}</p>
             </div>
           ))}
         </GradeDeCards>
@@ -140,17 +140,17 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <ol className="space-y-2">
             {estrutura.map((e, i) => (
-              <li key={e.parte} className="flex gap-3 rounded-[var(--radius)] border border-border bg-card p-4">
-                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] text-[0.75rem] font-bold text-[var(--primary-text,var(--primary))]">{i + 1}</span>
+              <li key={e.parte} className="flex gap-3 rounded-md border border-border bg-card p-4">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] text-label font-bold text-[var(--primary-text,var(--primary))]">{i + 1}</span>
                 <div>
-                  <p className="text-[0.9375rem] font-semibold text-foreground">{e.parte}</p>
-                  <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{e.regra}</p>
+                  <p className="text-body font-semibold text-foreground">{e.parte}</p>
+                  <p className="text-body-sm leading-relaxed text-muted-foreground">{e.regra}</p>
                 </div>
               </li>
             ))}
           </ol>
           <div>
-            <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Example (fictitious data)", "Exemplo (dados fictícios)")}</p>
+            <p className="mb-2 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Example (fictitious data)", "Exemplo (dados fictícios)")}</p>
             <Descoberta card={card} />
           </div>
         </div>
@@ -164,19 +164,19 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
       >
         <div className="space-y-4">
           {exemplos.map(ex => (
-            <div key={ex.regra} className="rounded-[var(--radius)] border border-border bg-card p-4 sm:p-5">
-              <p className="mb-3 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{ex.regra}</p>
+            <div key={ex.regra} className="rounded-md border border-border bg-card p-4 sm:p-5">
+              <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{ex.regra}</p>
               <GradeDeCards className="gap-3 md:grid-cols-2">
                 <div className="rounded-md border border-border bg-muted/40 p-4">
-                  <p className="mb-1.5 flex items-center gap-1.5 text-[0.75rem] font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
-                  <p className="text-[0.9375rem] font-semibold text-foreground/70 line-through decoration-error/40">{ex.evitar.titulo}</p>
-                  {ex.evitar.texto && <p className="mt-1 text-[0.8125rem] text-muted-foreground">{ex.evitar.texto}</p>}
+                  <p className="mb-1.5 flex items-center gap-1.5 text-label font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
+                  <p className="text-body font-semibold text-foreground/70 line-through decoration-error/40">{ex.evitar.titulo}</p>
+                  {ex.evitar.texto && <p className="mt-1 text-body-sm text-muted-foreground">{ex.evitar.texto}</p>}
                 </div>
                 <div className="rounded-md border border-success/25 bg-[var(--success-muted)] p-4">
-                  <p className="mb-1.5 flex items-center gap-1.5 text-[0.75rem] font-semibold text-foreground"><CheckCircle className="h-4 w-4 text-success" aria-hidden />{t("Prefer", "Preferir")}</p>
-                  <p className="text-[0.9375rem] font-semibold text-foreground">{ex.recomendado.titulo}</p>
-                  {ex.recomendado.texto && <p className="mt-1 text-[0.8125rem] text-foreground/80">{ex.recomendado.texto}</p>}
-                  {ex.recomendado.detalhe && <p className="mt-2 border-t border-success/20 pt-2 text-[0.75rem] text-muted-foreground"><span className="font-semibold">{t("In the details:", "No detalhamento:")}</span> {ex.recomendado.detalhe}</p>}
+                  <p className="mb-1.5 flex items-center gap-1.5 text-label font-semibold text-foreground"><CheckCircle className="h-4 w-4 text-success" aria-hidden />{t("Prefer", "Preferir")}</p>
+                  <p className="text-body font-semibold text-foreground">{ex.recomendado.titulo}</p>
+                  {ex.recomendado.texto && <p className="mt-1 text-body-sm text-foreground/80">{ex.recomendado.texto}</p>}
+                  {ex.recomendado.detalhe && <p className="mt-2 border-t border-success/20 pt-2 text-label text-muted-foreground"><span className="font-semibold">{t("In the details:", "No detalhamento:")}</span> {ex.recomendado.detalhe}</p>}
                 </div>
               </GradeDeCards>
             </div>
@@ -192,7 +192,7 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
       >
         <ul className="grid grid-cols-1 gap-2 md:grid-cols-2">
           {checklist.map(c => (
-            <li key={c} className="flex items-start gap-2 rounded-[var(--radius)] border border-border bg-card px-4 py-3 text-[0.875rem] text-foreground">
+            <li key={c} className="flex items-start gap-2 rounded-md border border-border bg-card px-4 py-3 text-body-sm text-foreground">
               <ListChecks className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{c}
             </li>
           ))}

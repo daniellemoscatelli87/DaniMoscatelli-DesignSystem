@@ -57,7 +57,7 @@ function Variacao({ valor, comparacao, className }: { valor: number; comparacao?
   const Icone = sobe ? ArrowUpRight : ArrowDownRight;
   const leitura = `${sobe ? "Alta" : "Queda"} de ${formatarVariacao(Math.abs(valor)).replace("+", "")}${comparacao ? ` ${comparacao}` : ""}`;
   return (
-    <span data-slot="variacao" className={cn("inline-flex items-center gap-1 text-[0.8125rem] font-semibold", sobe ? "text-success-text" : "text-primary-text", className)}>
+    <span data-slot="variacao" className={cn("inline-flex items-center gap-1 text-body-sm font-semibold", sobe ? "text-success-text" : "text-primary-text", className)}>
       <Icone aria-hidden className="h-4 w-4" />
       <span aria-hidden className="tabular-nums">{formatarVariacao(valor)}</span>
       {comparacao && <span aria-hidden className="ml-1 font-normal text-muted-foreground">{comparacao}</span>}
@@ -70,10 +70,10 @@ function Variacao({ valor, comparacao, className }: { valor: number; comparacao?
 function Explicacao({ termo, children }: { termo: string; children: React.ReactNode }) {
   return (
     <Popover>
-      <PopoverTrigger aria-label={`O que é ${termo}?`} className={cn("inline-flex h-6 w-6 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground", foco)}>
+      <PopoverTrigger aria-label={`O que é ${termo}?`} className={cn("inline-flex h-6 w-6 max-sm:-m-2.5 max-sm:h-11 max-sm:w-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground", foco)}>
         <Info aria-hidden className="h-4 w-4" />
       </PopoverTrigger>
-      <PopoverContent className="w-64 text-[0.8125rem] leading-relaxed">{children}</PopoverContent>
+      <PopoverContent className="w-64 text-body-sm leading-relaxed">{children}</PopoverContent>
     </Popover>
   );
 }
@@ -99,7 +99,7 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
   tom?: TomDoIcone;
   /**
    * Card clicável: o card inteiro leva ao detalhe (o rótulo é o link, esticado sobre o card). Use no lugar de um link
-   * "Ver …" que repetiria o rótulo. Hover: borda --primary a 30% e fundo --row-hover; foco: anel no card inteiro.
+   * "Ver …" que repetiria o rótulo. Hover: borda --border-strong (cinza, nunca rosa) e fundo --row-hover; foco: anel no card inteiro.
    */
   href?: string;
   /** Elemento do link do card clicável (padrão "a"; use o Link do roteador do produto). */
@@ -109,7 +109,8 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
    * com ~168 px) ou 2 × 2 no celular. Rótulo de uma palavra ou duas, número e uma linha curta de contexto.
    */
   compacto?: boolean;
-  /** No celular (abaixo de 640 px), mostra só rótulo e número: esconde apoio, variação e selo. */
+  /** No celular (abaixo de 640 px), mostra só rótulo e número: esconde ícone, apoio, variação e selo (no 2 × 2 do celular o
+   *  rótulo usa a largura toda do card e nunca é cortado pelo ícone). */
   soNumeroNoCelular?: boolean;
 };
 
@@ -143,26 +144,26 @@ function CardIndicador({ icone, valor, total, rotulo, apoio, variacao, comparaca
       className={cn(
         "relative min-w-0 gap-0",
         compacto ? "p-4" : "p-5",
-        href && "cursor-pointer transition-[background-color,border-color] duration-[var(--duration-fast)] ease-[var(--ease-out)] hover:border-primary/30 hover:bg-row-hover active:border-primary/50 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background motion-reduce:transition-none",
+        href && "cursor-pointer transition-[background-color,border-color] duration-[var(--duration-fast)] ease-[var(--ease-out)] hover:border-[var(--border-strong)] hover:bg-row-hover active:border-[var(--border-strong)] focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background motion-reduce:transition-none",
         className,
       )}
       {...props}
     >
-      <div className={cn("flex items-start justify-between", compacto ? "min-h-8 gap-3" : "min-h-10 gap-4")}>
-        <p className={cn("min-w-0 pt-0.5 font-medium leading-snug text-muted-foreground", compacto ? "text-sm" : "text-[0.9375rem]")}>
+      <div className={cn("flex items-start justify-between", compacto ? "min-h-8 gap-3" : "min-h-10 gap-4", soNumeroNoCelular && "max-sm:min-h-10")}>
+        <p className={cn("min-w-0 pt-0.5 font-medium leading-snug text-muted-foreground", compacto ? "text-body-sm" : "text-body")}>
           {href ? (
             // O link cobre o card inteiro (after:inset-0); o nome acessível é o rótulo seguido do número.
             <Link href={href} className="text-foreground outline-none after:absolute after:inset-0 after:rounded-xl after:content-['']">{textoDoRotulo}</Link>
           ) : textoDoRotulo}
         </p>
-        <IconeComBase tom={tom} tamanho={compacto ? "sm" : "md"}>{icone}</IconeComBase>
+        <IconeComBase tom={tom} tamanho={compacto ? "sm" : "md"} className={extra}>{icone}</IconeComBase>
       </div>
       <div className="pt-2">
-        <p className={cn("font-bold leading-none tracking-[-0.025em] tabular-nums text-foreground", compacto ? "text-[1.75rem]" : "text-[2rem]")}>
+        <p className={cn("font-bold leading-none tracking-[-0.025em] tabular-nums text-foreground", "text-h2")}>
           {valor === null ? <><span aria-hidden>–</span><span className="sr-only">Sem dado</span></> : formatarNumero(valor)}
-          {total !== undefined && valor !== null && <span className="ml-1.5 text-[0.9375rem] font-semibold tracking-normal text-muted-foreground">de {formatarNumero(total)}</span>}
+          {total !== undefined && valor !== null && <span className="ml-1 text-body font-semibold tracking-normal text-muted-foreground">de {formatarNumero(total)}</span>}
         </p>
-        {apoio && <p className={cn("mt-2 text-[0.875rem] leading-snug text-muted-foreground", extra)}>{apoio}</p>}
+        {apoio && <p className={cn("mt-2 text-body-sm leading-snug text-muted-foreground", extra)}>{apoio}</p>}
         {variacao !== undefined && <div className={cn("mt-2", extra)}><Variacao valor={variacao} comparacao={comparacao} /></div>}
         {selo && <div className={cn("mt-3 flex flex-wrap gap-2", extra)}>{selo}</div>}
       </div>
@@ -221,13 +222,16 @@ function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabec
   return (
     <section aria-labelledby={tid} data-slot="card-com-cabecalho" data-cabecalho={cabecalho} className={cn("min-w-0", className)} {...props}>
       <Card orientacao="vertical" className="@container h-full min-w-0 gap-0 py-5 sm:py-6">
-        <div data-slot="cabecalho-do-card" className={cn("flex flex-wrap items-start gap-x-3 gap-y-3 px-5 sm:px-6", temConteudo && cabecalho === "simples" && "mb-5")}>
-          <IconeComBase tom={tom}>{icone}</IconeComBase>
-          <div className="min-w-[12rem] flex-1 self-center">
-            <Titulo id={tid} className="text-[1.125rem] font-bold leading-snug tracking-[-0.01em] text-foreground">{titulo}</Titulo>
-            {descricao && <p className="mt-0.5 text-[0.875rem] leading-snug text-muted-foreground [text-wrap:pretty]">{descricao}</p>}
+        {/* Ícone, texto e ação na mesma linha: a ação fica à direita, centralizada com o texto, e o texto quebra dentro da
+            coluna dele. Em card estreito (menos de 20rem), a ação desce para baixo do texto, na mesma borda esquerda dele;
+            nunca volta para a borda do ícone (regra do DS, 27/11/2026). */}
+        <div data-slot="cabecalho-do-card" className={cn("grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 px-5 sm:px-6", acao && "@xs:grid-cols-[auto_minmax(0,1fr)_auto]", temConteudo && cabecalho === "simples" && "mb-5")}>
+          <IconeComBase tom={tom} className="self-start">{icone}</IconeComBase>
+          <div className="min-w-0 self-center">
+            <Titulo id={tid} className="text-body-lg font-bold leading-snug tracking-[-0.01em] text-foreground [text-wrap:balance]">{titulo}</Titulo>
+            {descricao && <p className="mt-1 text-body-sm leading-snug text-muted-foreground [text-wrap:pretty]">{descricao}</p>}
           </div>
-          {acao && <div className="flex shrink-0 flex-wrap items-center gap-2 self-center">{acao}</div>}
+          {acao && <div data-slot="acao-do-cabecalho" className="col-start-2 flex min-w-0 flex-wrap items-center gap-2 justify-self-start @xs:col-start-3 @xs:row-start-1 @xs:justify-self-end">{acao}</div>}
         </div>
         {temConteudo && cabecalho === "divisor" && <DivisorSuave className="my-4 sm:my-5" />}
         <div data-slot="conteudo-do-card" className={cn("min-w-0", !sangria && "px-5 sm:px-6")}>{children}</div>
@@ -239,7 +243,8 @@ function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabec
 /* ── Link "ver tudo" ─────────────────────────────────────────── */
 /**
  * Link "ver tudo" com seta. tom="marca" (padrão, --primary-text) para o principal; tom="neutro" (cinza) para o
- * secundário. Sem href e com onClick, vira botão. as: o Link do roteador do produto. Alvo de pelo menos 24 px de altura.
+ * secundário. Sem href e com onClick, vira botão. as: o Link do roteador do produto. Alvo de pelo menos 24 px de altura (44 px no
+ * celular, abaixo de 640 px).
  */
 type LinkVerTudoProps = Omit<React.ComponentProps<"a">, "children"> & {
   children?: React.ReactNode;
@@ -251,7 +256,7 @@ type LinkVerTudoProps = Omit<React.ComponentProps<"a">, "children"> & {
 };
 function LinkVerTudo({ children = "Ver tudo", href, rotulo, onClick, tom = "marca", icone, as, className, ...props }: LinkVerTudoProps) {
   const classe = cn(
-    "group inline-flex min-h-6 shrink-0 items-center gap-1 rounded-sm text-[0.875rem] font-semibold underline-offset-2 hover:underline [&>svg]:h-4 [&>svg]:w-4",
+    "group inline-flex min-h-6 shrink-0 items-center gap-1 rounded-sm text-body-sm font-semibold max-sm:min-h-11 underline-offset-2 hover:underline [&>svg]:h-4 [&>svg]:w-4",
     tom === "marca" ? "text-primary-text" : "text-muted-foreground hover:text-foreground",
     foco,
     className,

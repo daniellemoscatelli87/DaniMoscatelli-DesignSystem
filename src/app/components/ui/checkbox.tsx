@@ -6,6 +6,10 @@ import { CheckIcon, MinusIcon } from "lucide-react";
 
 import { cn } from "./utils";
 
+/**
+ * Caixa de seleção: a caixa tem 20 px. No celular (abaixo de 640 px) a área de toque cresce para 44 px em volta da
+ * caixa, sem mudar o lugar dela na tela (margem negativa de 12 px), para o dedo acertar (decisão de 27/11/2026).
+ */
 function Checkbox({
   className,
   ...props
@@ -14,18 +18,31 @@ function Checkbox({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer group border border-input bg-input-background dark:bg-input/30 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground dark:data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=indeterminate]:bg-primary data-[state=indeterminate]:border-primary data-[state=indeterminate]:text-primary-foreground focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-5 shrink-0 rounded-sm border shadow-xs cursor-pointer transition-shadow outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "peer group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm outline-none disabled:cursor-not-allowed max-sm:-m-3 max-sm:size-11",
         className,
       )}
       {...props}
     >
-      <CheckboxPrimitive.Indicator
-        data-slot="checkbox-indicator"
-        className="flex items-center justify-center text-current transition-none"
+      <span
+        aria-hidden
+        data-slot="checkbox-caixa"
+        className={cn(
+          "flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background shadow-xs transition-shadow dark:bg-input/30",
+          "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=checked]:text-primary-foreground dark:group-data-[state=checked]:bg-primary",
+          "group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-data-[state=indeterminate]:text-primary-foreground",
+          "group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2",
+          "group-aria-invalid:border-destructive group-aria-invalid:ring-destructive/20 dark:group-aria-invalid:ring-destructive/40",
+          "group-disabled:opacity-50",
+        )}
       >
-        <CheckIcon className="size-3.5 group-data-[state=indeterminate]:hidden" strokeWidth={3} />
-        <MinusIcon className="hidden size-3.5 group-data-[state=indeterminate]:block" strokeWidth={3} />
-      </CheckboxPrimitive.Indicator>
+        <CheckboxPrimitive.Indicator
+          data-slot="checkbox-indicator"
+          className="flex items-center justify-center text-current transition-none"
+        >
+          <CheckIcon className="size-3.5 group-data-[state=indeterminate]:hidden" strokeWidth={3} />
+          <MinusIcon className="hidden size-3.5 group-data-[state=indeterminate]:block" strokeWidth={3} />
+        </CheckboxPrimitive.Indicator>
+      </span>
     </CheckboxPrimitive.Root>
   );
 }

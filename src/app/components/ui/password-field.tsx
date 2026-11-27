@@ -54,7 +54,7 @@ export const textosPadrao: PasswordTexts = {
 };
 
 const inputCls =
-  "h-10 w-full rounded-md border border-input bg-card pl-3 pr-11 text-[0.9375rem] text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 max-sm:h-11 w-full rounded-md border border-input bg-card pl-3 pr-11 text-body text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "onChange"> & {
   label: string;
@@ -72,7 +72,7 @@ export function PasswordInput({ label, value, onValueChange, textos, invalido, d
   const [visivel, setVisivel] = React.useState(false);
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={inputId} className="text-[0.875rem] font-semibold text-foreground">{label}</label>
+      <label htmlFor={inputId} className="text-body-sm font-semibold text-foreground">{label}</label>
       <div className="relative">
         <input
           id={inputId}
@@ -93,7 +93,7 @@ export function PasswordInput({ label, value, onValueChange, textos, invalido, d
           aria-pressed={visivel}
           aria-label={visivel ? textos.ocultar : textos.mostrar}
           aria-controls={inputId}
-          className="absolute right-1.5 top-1/2 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="absolute right-1.5 top-1/2 inline-flex h-9 w-9 max-sm:right-0 max-sm:h-11 max-sm:w-11 -translate-y-1/2 items-center justify-center rounded-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {visivel ? <EyeOff className="h-5 w-5" aria-hidden /> : <Eye className="h-5 w-5" aria-hidden />}
         </button>
@@ -150,16 +150,16 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
             <span key={n} className={cn("h-1.5 flex-1 rounded-full transition-colors duration-300", n <= forca ? "bg-primary" : "bg-[var(--graphite-200)] dark:bg-[var(--graphite-700)]")} />
           ))}
         </div>
-        <p id={forcaId} className="text-[0.8125rem] text-muted-foreground" aria-live="polite">
+        <p id={forcaId} className="text-body-sm text-muted-foreground" aria-live="polite">
           {textos.forca}: <span className={cn("font-semibold", forca >= 4 ? "text-foreground" : "text-muted-foreground")}>{textos.niveis[forca]}</span>
         </p>
 
         {/* Dicas de preenchimento */}
         <div id={dicasId} className="rounded-md border border-primary/15 bg-primary/5 p-4">
-          <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{textos.dicaTitulo}</p>
+          <p className="mb-2 text-body-sm font-semibold text-foreground">{textos.dicaTitulo}</p>
           <ul className="flex flex-col gap-1.5">
             {regras.map((r, i) => (
-              <li key={r.id} data-atendido={atendidas[i] ? "sim" : "nao"} className={cn("flex items-center gap-2 text-[0.8125rem] transition-colors duration-200 motion-reduce:transition-none", atendidas[i] ? "text-foreground" : "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]")}>
+              <li key={r.id} data-atendido={atendidas[i] ? "sim" : "nao"} className={cn("flex items-center gap-2 text-body-sm transition-colors duration-200 motion-reduce:transition-none", atendidas[i] ? "text-foreground" : "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]")}>
                 {/* Sinais que não parecem controles (27/11/2026): "ainda não" é um ponto neutro, como o de uma lista; "atendido" é o
                     check de sucesso do design system (CheckCircle2 em --success-text). O círculo vazado parecia um botão de rádio. */}
                 {atendidas[i] ? (
@@ -187,7 +187,7 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
             describedBy={confId}
             disabled={disabled}
           />
-          <p id={confId} aria-live="polite" className="min-h-[1.25rem] text-[0.8125rem]">
+          <p id={confId} aria-live="polite" className="min-h-[1.25rem] text-body-sm">
             {mostrarConf && (coincidem ? (
               <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--success-text)]" aria-hidden />{textos.coincidem}</span>
             ) : (

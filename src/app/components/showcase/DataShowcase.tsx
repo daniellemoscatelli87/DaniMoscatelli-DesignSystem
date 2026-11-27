@@ -15,6 +15,10 @@ import {
 import { SectionHeader } from "./shared/SectionHeader";
 import { RegraDasLinhas } from "./shared/RegraDasLinhas";
 import { GradeDeCards } from "../ui/grade-de-cards";
+import { Button } from "../ui/button";
+import { ChipDeEstado } from "../ui/chip-de-estado";
+import { LinhaDeLista } from "../ui/linha-de-lista";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "../ui/pagination";
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -28,7 +32,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-12">
-      <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
+      <h3 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
       {children}
     </div>
   );
@@ -112,25 +116,14 @@ const tableData = [
   { id: "USR-005", name: "Marcus Feld",     email: "m.feld@ventures.de",    plan: "Starter",    status: "Trial",    mrr: "$0",     joined: "Apr 22, 2024", joinedPt: "22 abr 2024" },
 ];
 
-const statusStyles: Record<string, string> = {
-  Active:   "bg-success/10 text-success border-success/20",
-  Inactive: "bg-muted text-muted-foreground border-border",
-  Trial:    "bg-[var(--warning-muted)] text-warning-text border-warning/20",
-};
-
-const planStyles: Record<string, string> = {
-  Enterprise: "bg-primary/10 text-primary-text border-primary/20",
-  Pro:        "bg-info/10 text-info border-info/20",
-  Team:       "bg-muted text-foreground border-border",
-  Starter:    "bg-muted text-muted-foreground border-border",
-};
+const tomDoStatus: Record<string, "sucesso" | "neutro" | "aviso"> = { Active: "sucesso", Inactive: "neutro", Trial: "aviso" };
 
 type SortDir = "asc" | "desc" | null;
 
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-card border border-border rounded-md px-3 py-2 text-[0.8125rem] shadow-lg">
+      <div className="bg-card border border-border rounded-md px-3 py-2 text-body-sm shadow-lg">
         <p className="font-medium text-foreground mb-1">{label}</p>
         {payload.map((p: any, i: number) => (
           <p key={i} style={{ color: p.color }} className="font-medium">
@@ -191,10 +184,10 @@ export function DataShowcase() {
           <ShowcaseCard className="lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <div>
-                <h3 className="text-[1rem] font-semibold text-foreground">{t("Revenue Overview", "Visão geral da receita")}</h3>
-                <p className="text-[0.8125rem] text-muted-foreground">{t("Monthly revenue & user growth", "Receita mensal e crescimento de usuários")}</p>
+                <h3 className="text-body font-semibold text-foreground">{t("Revenue Overview", "Visão geral da receita")}</h3>
+                <p className="text-body-sm text-muted-foreground">{t("Monthly revenue & user growth", "Receita mensal e crescimento de usuários")}</p>
               </div>
-              <div className="flex items-center gap-4 text-[0.75rem] text-muted-foreground">
+              <div className="flex items-center gap-4 text-label text-muted-foreground">
                 <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-1 inline-block" />{t("Revenue", "Receita")}</span>
                 <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-6 inline-block" />{t("Users", "Usuários")}</span>
               </div>
@@ -224,8 +217,8 @@ export function DataShowcase() {
           {/* Pie Chart */}
           <ShowcaseCard>
             <div className="mb-4">
-              <h3 className="text-[1rem] font-semibold text-foreground">{t("Traffic Sources", "Fontes de tráfego")}</h3>
-              <p className="text-[0.8125rem] text-muted-foreground">{t("Acquisition breakdown", "Detalhamento da aquisição")}</p>
+              <h3 className="text-body font-semibold text-foreground">{t("Traffic Sources", "Fontes de tráfego")}</h3>
+              <p className="text-body-sm text-muted-foreground">{t("Acquisition breakdown", "Detalhamento da aquisição")}</p>
             </div>
             <div className="flex flex-col items-center gap-4">
               <ResponsiveContainer width="100%" height={160}>
@@ -239,7 +232,7 @@ export function DataShowcase() {
               </ResponsiveContainer>
               <div className="w-full space-y-2">
                 {pieData.map((item, i) => (
-                  <div key={item.name} className="flex items-center justify-between text-[0.8125rem]">
+                  <div key={item.name} className="flex items-center justify-between text-body-sm">
                     <span className="flex items-center gap-2">
                       <span className="h-2 w-2 rounded-full inline-block" style={{ backgroundColor: COLORS[i] }} />
                       <span className="text-foreground">{t(item.name, item.pt)}</span>
@@ -256,8 +249,8 @@ export function DataShowcase() {
         <ShowcaseCard>
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-[1rem] font-semibold text-foreground">{t("Daily Sessions", "Sessões diárias")}</h3>
-              <p className="text-[0.8125rem] text-muted-foreground">{t("User sessions by day of week", "Sessões de usuários por dia da semana")}</p>
+              <h3 className="text-body font-semibold text-foreground">{t("Daily Sessions", "Sessões diárias")}</h3>
+              <p className="text-body-sm text-muted-foreground">{t("User sessions by day of week", "Sessões de usuários por dia da semana")}</p>
             </div>
           </div>
           <ResponsiveContainer width="100%" height={180}>
@@ -275,95 +268,95 @@ export function DataShowcase() {
       {/* ── TABLE ── */}
       <section id="table">
         <SectionHeader title={t("Data Table", "Tabela de dados")} description={t("Clean, sortable data table with status badges and action menus.", "Tabela de dados limpa e ordenável, com badges de status e menus de ações.")} />
-        <ShowcaseCard className="p-0 overflow-hidden">
-          <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-            <div>
-              <h3 className="text-[1rem] font-semibold text-foreground">{t("Customers", "Clientes")}</h3>
-              <p className="text-[0.8125rem] text-muted-foreground">{tableData.length} {t("total users", "usuários no total")}</p>
+        {/* Card nunca rola para o lado: abaixo de 36rem, a tabela vira lista (LinhaDeLista); a partir dela, a tabela mostra
+            as colunas que cabem (Entrada só a partir de 48rem) e avisa quando alguma ficou de fora. */}
+        <ShowcaseCard className="@container/tabela p-0 overflow-hidden">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-3 border-b border-border px-4 py-4 sm:px-6">
+            <div className="min-w-0 flex-1">
+              <h3 className="text-body font-semibold text-foreground">{t("Customers", "Clientes")}</h3>
+              <p className="text-body-sm text-muted-foreground">{tableData.length} {t("total users", "usuários no total")}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-sm border border-border bg-card hover:bg-accent transition-colors">
-                <Filter className="h-4 w-4" /> {t("Filter", "Filtrar")}
-              </button>
-              <button className="inline-flex items-center gap-1.5 h-9 px-3 text-[0.875rem] font-medium text-muted-foreground rounded-sm border border-border bg-card hover:bg-accent transition-colors">
-                <Download className="h-4 w-4" /> {t("Export", "Exportar")}
-              </button>
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="outline" size="sm"><Filter aria-hidden /> {t("Filter", "Filtrar")}</Button>
+              <Button variant="outline" size="sm"><Download aria-hidden /> {t("Export", "Exportar")}</Button>
             </div>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border bg-muted/30">
-                  {[
-                    { key: "name",   label: t("Customer", "Cliente") },
-                    { key: "plan",   label: t("Plan", "Plano") },
-                    { key: "status", label: "Status" },
-                    { key: "mrr",    label: "MRR" },
-                    { key: "joined", label: t("Joined", "Entrada") },
-                  ].map(col => (
-                    <th
-                      key={col.key}
-                      className="px-6 py-3 text-left text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground cursor-pointer select-none"
-                      onClick={() => handleSort(col.key)}
-                    >
-                      <span className="inline-flex items-center gap-1.5">
-                        {col.label}
-                        <SortIcon col={col.key} />
-                      </span>
-                    </th>
-                  ))}
-                  <th className="px-6 py-3 w-12" />
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, i) => (
-                  <tr
-                    key={row.id}
-                    className={`border-b border-border/50 hover:bg-[var(--row-hover)] transition-colors ${i === tableData.length - 1 ? "border-b-0" : ""}`}
-                  >
-                    <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-[0.75rem] font-semibold text-foreground shrink-0">
-                          {row.name.split(" ").map(n => n[0]).join("")}
-                        </div>
-                        <div>
-                          <div className="text-[0.9rem] font-medium text-foreground">{row.name}</div>
-                          <div className="text-[0.75rem] text-muted-foreground">{row.email}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-[0.75rem] font-medium border ${planStyles[row.plan]}`}>
-                        {planPt[row.plan] && t(row.plan, planPt[row.plan])}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-sm text-[0.75rem] font-medium border ${statusStyles[row.status]}`}>
-                        <span className={`h-1.5 w-1.5 rounded-full mr-1.5 ${row.status === "Active" ? "bg-success" : row.status === "Trial" ? "bg-warning" : "bg-muted-foreground"}`} />
-                        {t(row.status, statusPt[row.status])}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 text-[0.9rem] font-semibold text-foreground">{row.mrr}</td>
-                    <td className="px-6 py-4 text-[0.8125rem] text-muted-foreground">{t(row.joined, row.joinedPt)}</td>
-                    <td className="px-6 py-4">
-                      <button className="h-8 w-8 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </button>
-                    </td>
-                  </tr>
+
+          <ul className="m-0 list-none p-0 @xl/tabela:hidden">
+            {tableData.map(row => (
+              <li key={row.id} className="border-b border-border/60 last:border-0">
+                <LinhaDeLista
+                  inicio={<span aria-hidden className="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-label font-semibold text-foreground">{row.name.split(" ").map(n => n[0]).join("")}</span>}
+                  titulo={row.name}
+                  descricao={<>{row.email}<span className="block">{t(row.plan, planPt[row.plan])} · {row.mrr}</span></>}
+                  fim={
+                    <span className="flex items-center gap-2">
+                      <ChipDeEstado tom={tomDoStatus[row.status]}>{t(row.status, statusPt[row.status])}</ChipDeEstado>
+                      <Button variant="ghost" size="icon" aria-label={t(`Actions for ${row.name}`, `Ações de ${row.name}`)}><MoreHorizontal aria-hidden /></Button>
+                    </span>
+                  }
+                  className="px-4"
+                />
+              </li>
+            ))}
+          </ul>
+
+          <table className="hidden w-full @xl/tabela:table">
+            <thead>
+              <tr className="border-b border-border bg-muted/30">
+                {[
+                  { key: "name",   label: t("Customer", "Cliente"), cls: "" },
+                  { key: "plan",   label: t("Plan", "Plano"), cls: "" },
+                  { key: "status", label: "Status", cls: "" },
+                  { key: "mrr",    label: "MRR", cls: "" },
+                  { key: "joined", label: t("Joined", "Entrada"), cls: "hidden @3xl/tabela:table-cell" },
+                ].map(col => (
+                  <th key={col.key} scope="col" className={`px-4 py-3 text-left text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground ${col.cls}`}>
+                    <button type="button" onClick={() => handleSort(col.key)} className="inline-flex min-h-8 items-center gap-1 rounded-sm uppercase focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+                      {col.label}
+                      <SortIcon col={col.key} />
+                    </button>
+                  </th>
                 ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="flex items-center justify-between px-6 py-4 border-t border-border bg-muted/10">
-            <span className="text-[0.8125rem] text-muted-foreground">{t("Showing", "Exibindo")} 1–{tableData.length} {t("of", "de")} {tableData.length}</span>
-            <div className="flex items-center gap-1">
-              {[1, 2, 3].map(p => (
-                <button key={p} className={`h-8 w-8 rounded-sm text-[0.875rem] font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent"}`}>
-                  {p}
-                </button>
+                <th className="w-12 px-4 py-3"><span className="sr-only">{t("Actions", "Ações")}</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              {tableData.map(row => (
+                <tr key={row.id} className="border-b border-border/50 transition-colors last:border-b-0 hover:bg-[var(--row-hover)]">
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <span aria-hidden className="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-label font-semibold text-foreground">{row.name.split(" ").map(n => n[0]).join("")}</span>
+                      <div className="min-w-0">
+                        <div className="text-body-sm font-medium text-foreground">{row.name}</div>
+                        <div className="text-label text-muted-foreground [overflow-wrap:anywhere]">{row.email}</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-4 py-3"><ChipDeEstado tom="neutro">{t(row.plan, planPt[row.plan])}</ChipDeEstado></td>
+                  <td className="px-4 py-3"><ChipDeEstado tom={tomDoStatus[row.status]}>{t(row.status, statusPt[row.status])}</ChipDeEstado></td>
+                  <td className="px-4 py-3 text-body-sm font-semibold tabular-nums text-foreground">{row.mrr}</td>
+                  <td className="hidden px-4 py-3 text-body-sm text-muted-foreground @3xl/tabela:table-cell">{t(row.joined, row.joinedPt)}</td>
+                  <td className="px-4 py-3">
+                    <Button variant="ghost" size="icon" aria-label={t(`Actions for ${row.name}`, `Ações de ${row.name}`)}><MoreHorizontal aria-hidden /></Button>
+                  </td>
+                </tr>
               ))}
-            </div>
+            </tbody>
+          </table>
+          <p className="hidden border-t border-border px-4 py-2 text-label text-muted-foreground @xl/tabela:block @3xl/tabela:hidden">
+            {t("The Joined column appears on wider screens.", "A coluna Entrada aparece em telas mais largas.")}
+          </p>
+
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3 sm:px-6">
+            <span className="text-body-sm text-muted-foreground">{t("Showing", "Exibindo")} 1–{tableData.length} {t("of", "de")} {tableData.length}</span>
+            <Pagination className="mx-0 w-auto">
+              <PaginationContent>
+                {[1, 2, 3].map(p => (
+                  <PaginationItem key={p}><PaginationLink href="#" onClick={e => e.preventDefault()} isActive={p === 1}>{p}</PaginationLink></PaginationItem>
+                ))}
+              </PaginationContent>
+            </Pagination>
           </div>
         </ShowcaseCard>
       </section>
@@ -383,8 +376,8 @@ export function DataShowcase() {
       {/* ── Tokens ── */}
       <section id="data-tokens" className="space-y-5">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by data display components.", "CSS custom properties usadas por componentes de exibição de dados.")}</p>
+          <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
+          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by data display components.", "CSS custom properties usadas por componentes de exibição de dados.")}</p>
         </div>
         <TokenTable groups={dataTokenGroups} />
       </section>
@@ -451,8 +444,8 @@ export function CardsDeKpi() {
           <div key={kpi.label} className="bg-card rounded-lg border border-border p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow)" }}>
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-[0.8125rem] font-medium text-muted-foreground mb-1">{t(kpi.label, kpi.pt)}</p>
-                <p className="text-[1.625rem] font-bold text-foreground tracking-[-0.025em] leading-none">{kpi.value}</p>
+                <p className="text-body-sm font-medium text-muted-foreground mb-1">{t(kpi.label, kpi.pt)}</p>
+                <p className="text-h3 font-bold text-foreground tracking-[-0.025em] leading-none">{kpi.value}</p>
               </div>
               <div className="h-9 w-9 rounded-md bg-muted flex items-center justify-center">
                 <Icon className="h-4.5 w-4.5 text-muted-foreground" style={{ height: "18px", width: "18px" }} />
@@ -471,7 +464,7 @@ export function CardsDeKpi() {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className={`flex items-center gap-1 text-[0.8125rem] font-semibold ${trendColor}`}>
+            <div className={`flex items-center gap-1 text-body-sm font-semibold ${trendColor}`}>
               <TrendIcon className="h-3.5 w-3.5" />
               {kpi.delta}
               <span className="text-muted-foreground font-normal ml-1">{t("vs last month", "vs mês passado")}</span>

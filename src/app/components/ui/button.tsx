@@ -4,10 +4,11 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "./utils";
 
-// Padrão único (decisão de 16/11/2026): botão de 40 px, texto 15 px seminegrito, cantos 12 px; mesma altura do campo de texto.
+// Padrão único (decisão de 16/11/2026): botão de 40 px, texto 16 px seminegrito, cantos 12 px; mesma altura do campo de texto.
+// No celular (abaixo de 640 px), todo botão tem pelo menos 44 px de altura, para o dedo acertar (decisão de 27/11/2026).
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-[0.9375rem] font-semibold transition-all disabled:cursor-not-allowed disabled:shadow-none disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground disabled:hover:bg-disabled disabled:hover:text-disabled-foreground dark:disabled:bg-disabled dark:disabled:hover:bg-disabled dark:disabled:border-transparent [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-body font-semibold transition-all disabled:cursor-not-allowed disabled:shadow-none disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground disabled:hover:bg-disabled disabled:hover:text-disabled-foreground dark:disabled:bg-disabled dark:disabled:hover:bg-disabled dark:disabled:border-transparent [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
     variants: {
       variant: {
@@ -24,10 +25,10 @@ const buttonVariants = cva(
         link: "text-primary-text underline-offset-4 hover:underline disabled:bg-transparent disabled:hover:bg-transparent disabled:no-underline",
       },
       size: {
-        default: "h-10 px-4 has-[>svg]:px-3.5",
-        sm: "h-8 rounded-sm gap-1.5 px-3 text-[0.8125rem] has-[>svg]:px-2.5",
-        lg: "h-11 rounded-md px-5 text-base has-[>svg]:px-4",
-        icon: "size-10 rounded-md",
+        default: "h-10 px-4 has-[>svg]:px-3 max-sm:h-11",
+        sm: "h-8 rounded-sm gap-1 px-3 text-sm has-[>svg]:px-2 max-sm:h-11",
+        lg: "h-11 rounded-md px-5 text-body has-[>svg]:px-4",
+        icon: "size-10 rounded-md max-sm:size-11",
       },
     },
     defaultVariants: {

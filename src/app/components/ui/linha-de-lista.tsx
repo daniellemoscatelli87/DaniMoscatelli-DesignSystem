@@ -105,8 +105,8 @@ export function LinhaDeLista({
     >
       {temInicio && <Bloco data-slot="linha-de-lista-inicio" className="flex shrink-0 items-center">{inicio}</Bloco>}
       <Bloco data-slot="linha-de-lista-conteudo" className="block min-w-0">
-        {titulo != null && <span className="block text-[0.875rem] font-semibold text-foreground [overflow-wrap:anywhere]">{titulo}</span>}
-        {descricao != null && <span className="mt-0.5 block text-[0.8125rem] text-muted-foreground [overflow-wrap:anywhere]">{descricao}</span>}
+        {titulo != null && <span className="block text-body-sm font-semibold text-foreground [overflow-wrap:anywhere]">{titulo}</span>}
+        {descricao != null && <span className="mt-0.5 block text-body-sm text-muted-foreground [overflow-wrap:anywhere]">{descricao}</span>}
         {children}
       </Bloco>
       {temFim && (
