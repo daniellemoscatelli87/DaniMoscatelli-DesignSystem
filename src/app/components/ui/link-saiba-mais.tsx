@@ -13,18 +13,21 @@ import { cn } from "./utils";
  * - A seta para baixo se move 4 px a cada 2 s; parada com "menos movimento".
  * - `href` aponta para o id da seção ("#rede"). Para rolar suave, a página usa scroll-behavior: smooth (o DS já usa).
  * - Superfície escura (`sobreEscuro`): texto e círculo em branco.
+ * - `comoLink`: o link do produto no lugar do <a> (por exemplo, o Link do Next.js). Mesma API do DS FindLook.
  */
 
 export type LinkSaibaMaisProps = Omit<React.ComponentProps<"a">, "children"> & {
   children?: React.ReactNode;
   direcao?: "baixo" | "direita";
   sobreEscuro?: boolean;
+  comoLink?: React.ElementType;
 };
 
-function LinkSaibaMais({ children = "Saiba mais", direcao = "baixo", sobreEscuro = false, className, ...props }: LinkSaibaMaisProps) {
+function LinkSaibaMais({ children = "Saiba mais", direcao = "baixo", sobreEscuro = false, comoLink, className, ...props }: LinkSaibaMaisProps) {
+  const Comp = comoLink ?? "a";
   const Seta = direcao === "baixo" ? ArrowDown : ArrowRight;
   return (
-    <a
+    <Comp
       data-slot="link-saiba-mais"
       className={cn(
         "group/alca inline-flex min-h-11 items-center gap-3 rounded-full text-body-sm font-semibold transition-colors duration-[var(--duration-fast)]",
@@ -47,7 +50,7 @@ function LinkSaibaMais({ children = "Saiba mais", direcao = "baixo", sobreEscuro
         <Seta className="size-4" />
       </span>
       {direcao === "baixo" && <style>{"@keyframes alca-desce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}"}</style>}
-    </a>
+    </Comp>
   );
 }
 

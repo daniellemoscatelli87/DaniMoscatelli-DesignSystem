@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowLeft, ArrowRight, Loader2, TriangleAlert } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, XCircle } from "lucide-react";
 import { cn } from "./utils";
 import { Button } from "./button";
 import { Stepper, type StepperEtapa } from "./stepper";
@@ -88,7 +88,7 @@ function EtapaDoCadastro({ titulo, explicacao, tituloRef, obrigatorios, erro, re
           {obrigatorios && <p className="mt-5 text-body-sm text-muted-foreground">{obrigatorios}</p>}
           {erro && (
             <Alert variant="error" className="mt-5">
-              <TriangleAlert aria-hidden />
+              <XCircle aria-hidden />
               <AlertDescription>{erro}</AlertDescription>
             </Alert>
           )}
@@ -110,12 +110,17 @@ type BarraDaEtapaProps = {
   carregando?: boolean;
   textoCarregando?: string;
   desativado?: boolean;
+  /**
+   * id do texto que explica o Continuar (por exemplo, "Você revisa tudo antes de publicar" ou o motivo de estar
+   * desativado): vira o aria-describedby do botão principal (27/11/2026).
+   */
+  descricaoDoContinuar?: string;
   /** Troca os botões padrão. */
   children?: React.ReactNode;
   className?: string;
 };
 
-function BarraDaEtapa({ onVoltar, rotuloVoltar = "Voltar", rotuloContinuar, carregando = false, textoCarregando = "Salvando…", desativado = false, children, className }: BarraDaEtapaProps) {
+function BarraDaEtapa({ onVoltar, rotuloVoltar = "Voltar", rotuloContinuar, carregando = false, textoCarregando = "Salvando…", desativado = false, descricaoDoContinuar, children, className }: BarraDaEtapaProps) {
   const botao = "flex-1 @min-[40rem]/etapa:min-w-40 @min-[40rem]/etapa:flex-none";
   return (
     <div data-slot="barra-da-etapa" className={cn("sticky bottom-0 z-10 flex justify-end gap-3 rounded-b-xl border-t border-border bg-card px-4 py-3 @min-[40rem]/etapa:px-8 @min-[40rem]/etapa:py-4", className)}>
@@ -126,7 +131,7 @@ function BarraDaEtapa({ onVoltar, rotuloVoltar = "Voltar", rotuloContinuar, carr
               <ArrowLeft aria-hidden className="@min-[40rem]/etapa:hidden" /> {rotuloVoltar}
             </Button>
           )}
-          <Button type="submit" size="lg" className={botao} disabled={desativado || carregando} aria-busy={carregando || undefined}>
+          <Button type="submit" size="lg" className={botao} disabled={desativado || carregando} aria-busy={carregando || undefined} aria-describedby={descricaoDoContinuar}>
             {carregando ? (
               <>
                 <Loader2 className="motion-safe:animate-spin" aria-hidden /> {textoCarregando}

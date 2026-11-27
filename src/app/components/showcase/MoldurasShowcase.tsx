@@ -8,6 +8,7 @@ import { MolduraDeConta } from "../ui/moldura-de-conta";
 import { EstadoVazio, EstadoFinal, PaginaDeErro } from "../ui/estado-vazio";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Logo } from "../ui/logo";
+import { LinkDeTexto, LinkDeVoltar, LinkPularConteudo } from "../ui/links";
 import { Button } from "../ui/button";
 import { Campo } from "../ui/campo";
 import { PasswordInput } from "../ui/password-field";
@@ -296,6 +297,30 @@ export function MoldurasShowcase() {
             </div>
           </ItemDaGrade>
         </GradeDeCards>
+      </SectionBlock>
+
+      <SectionBlock
+        id="molduras-links"
+        titulo={t("Text links and skip link", "Links de texto e pular para o conteúdo")}
+        quando={t(
+          "LinkPularConteudo is the first item of every page, for keyboard users: it only shows with focus and takes you to the <main> (id \"conteudo\", tabIndex -1). LinkDeTexto is a link inside a sentence; LinkDeVoltar goes back to the previous screen. Same API as the FindLook DS.",
+          "O LinkPularConteudo é o primeiro item de cada página, para quem usa teclado: só aparece com o foco e leva ao <main> (id \"conteudo\", tabIndex -1). O LinkDeTexto é o link dentro de uma frase; o LinkDeVoltar volta para a tela anterior. Mesma API do DS FindLook.",
+        )}
+        arquivo="ui/links.tsx"
+        nomes={["LinkPularConteudo", "LinkDeTexto", "LinkDeVoltar"]}
+        api={`<LinkPularConteudo />  {/* primeiro item do <body> */}
+<main id="conteudo" tabIndex={-1}>…</main>
+<LinkDeTexto href="/privacidade/">Política de privacidade</LinkDeTexto>
+<LinkDeVoltar href="/area-restrita/parceiros/">Parceiros</LinkDeVoltar>`}
+      >
+        <ShowcaseCard>
+          <div className="space-y-4">
+            <LinkDeVoltar href="#molduras-links">{t("Partners", "Parceiros")}</LinkDeVoltar>
+            <p className="m-0 text-body text-foreground">{t("Read the ", "Leia a ")}<LinkDeTexto href="#molduras-links">{t("Privacy policy", "Política de privacidade")}</LinkDeTexto>{t(" before continuing.", " antes de continuar.")}</p>
+            <p className="m-0 text-body-sm text-muted-foreground">{t("Press Tab in the box below to see the skip link.", "Aperte Tab na caixa abaixo para ver o link de pular.")}</p>
+            <div className="relative h-16 rounded-md border border-dashed border-border [transform:translateZ(0)]"><LinkPularConteudo href="#molduras-links">{t("Skip to content", "Pular para o conteúdo")}</LinkPularConteudo></div>
+          </div>
+        </ShowcaseCard>
       </SectionBlock>
     </div>
   );

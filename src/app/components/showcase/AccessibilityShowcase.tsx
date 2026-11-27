@@ -1,6 +1,6 @@
 import React, { useId, useMemo, useRef, useState } from "react";
 import {
-  Eye, Keyboard, Brain, Cpu, Check, X, AlertCircle,
+  Eye, Keyboard, Brain, Cpu, Check, X, XCircle,
 } from "lucide-react";
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { useI18n } from "../../i18n";
@@ -135,7 +135,7 @@ function ContrastChecker() {
           aria-label={t(`${label} color picker`, `Seletor de cor: ${label}`)}
           value={luminance(v) === null ? "#000000" : v.length === 4 ? "#" + v.slice(1).split("").map(c => c + c).join("") : v}
           onChange={e => set(e.target.value.toUpperCase())}
-          className="h-9 w-9 toque:size-11 rounded-sm border border-border bg-transparent p-1 cursor-pointer"
+          className="h-9 w-9 toque:size-11 rounded-sm border border-input bg-transparent p-1 cursor-pointer"
         />
         <input
           id={id}
@@ -144,7 +144,7 @@ function ContrastChecker() {
           maxLength={7}
           spellCheck={false}
           aria-invalid={luminance(v) === null}
-          className="h-9 w-28 rounded-sm border border-border bg-[var(--input-background)] px-3 text-body-sm font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-9 w-28 rounded-sm border border-input bg-[var(--input-background)] px-3 text-body-sm font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
       </div>
     </div>
@@ -202,7 +202,7 @@ function FocusDemo() {
         <input
           aria-label={t("Sample input", "Campo de exemplo")}
           placeholder={t("Input", "Campo")}
-          className="h-10 w-36 rounded-md border border-border bg-[var(--input-background)] px-3 text-body-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
+          className="h-10 w-36 rounded-md border border-input bg-[var(--input-background)] px-3 text-body-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
         />
       </div>
     </Panel>
@@ -296,12 +296,12 @@ function FormDemo() {
             aria-invalid={show}
             aria-describedby={`${id}-hint ${show ? `${id}-err` : ""}`.trim()}
             className={`h-10 w-full rounded-md border bg-[var(--input-background)] px-3 text-body-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-              show ? "border-[var(--error)]" : "border-border focus-visible:border-primary"
+              show ? "border-[var(--error)]" : "border-input focus-visible:border-primary"
             }`}
           />
           <p id={`${id}-hint`} className="mt-1 text-label text-muted-foreground">{t("We only use it to send the invite.", "Usamos apenas para enviar o convite.")}</p>
           <p id={`${id}-err`} role={show ? "alert" : undefined} className="mt-1 text-label font-medium text-foreground flex items-center gap-1 min-h-[1rem]">
-            {show && (<><AlertCircle className="h-3.5 w-3.5 text-[var(--error)] shrink-0" aria-hidden />{error}</>)}
+            {show && (<><XCircle className="h-3.5 w-3.5 text-[var(--error-text)] shrink-0" aria-hidden />{error}</>)}
           </p>
         </div>
         <button type="submit" className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">

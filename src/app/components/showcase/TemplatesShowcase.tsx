@@ -34,6 +34,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { ChipDeEstado } from "../ui/chip-de-estado";
 import { LinhaDeLista } from "../ui/linha-de-lista";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "../ui/pagination";
+import { MolduraDeConta } from "../ui/moldura-de-conta";
+import { Campo } from "../ui/campo";
+import { EstadoFinal } from "../ui/estado-vazio";
 
 import { DashboardTemplate, SettingsTemplate, InboxTemplate, LandingTemplate } from "./TemplatesResponsivos";
 
@@ -80,111 +83,79 @@ function TemplateFrame({ children, className = "" }: { children: React.ReactNode
    3. Login / Auth Template
 ───────────────────────────────────────────── */
 function AuthTemplate() {
-  const { t, bi } = useI18n();
-  const [showPass, setShowPass] = useState(false);
-  const [tab, setTab] = useState<"login" | "signup">("login");
+  // MolduraDeConta, Campo, SegmentedControl e EstadoFinal do DS (27/11/2026): o template é feito só de componentes.
+  const { t } = useI18n();
+  const uid = React.useId();
+  const pre = `auth${uid.replace(/:/g, "")}`;
+  const [tab, setTab] = useState<"entrar" | "criar">("entrar");
+  const [enviado, setEnviado] = useState(false);
+  const entrar = tab === "entrar";
+  const trocar = (novo: "entrar" | "criar") => { setTab(novo); setEnviado(false); };
 
   return (
     <TemplateFrame>
-      <div className="bg-background flex h-[480px] overflow-hidden">
-        {/* Left decorative panel */}
-        <div className="hidden md:flex w-[44%] bg-card border-r border-border flex-col items-center justify-center p-8 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-primary/8 blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-info/6 blur-3xl" />
-          <div className="relative z-10 text-center">
-            <div className="h-14 w-14 rounded-lg bg-primary/12 flex items-center justify-center mx-auto mb-5">
-              <Zap className="h-7 w-7 text-primary-text" />
-            </div>
-            <h2 className="text-body-lg font-bold text-foreground mb-2">DaniMoscatelli</h2>
-            <p className="text-body-sm text-muted-foreground leading-relaxed max-w-[200px]">
-              {t("Premium Design System for modern SaaS applications.", "Design System premium para aplicações SaaS modernas.")}
-            </p>
-            <div className="mt-6 space-y-2">
-              {[t("40+ Components", "Mais de 40 componentes"), t("Dark & Light Mode", "Modo escuro e claro"), t("Radix UI Powered", "Baseado em Radix UI")].map(f => (
-                <div key={f} className="flex items-center gap-2 text-label text-muted-foreground">
-                  <Check className="h-3.5 w-3.5 text-success-text shrink-0" />
-                  {f}
-                </div>
+      <MolduraDeConta
+        telaCheia={false}
+        inicioHref="#template-auth"
+        rotuloInicio={t("Go to the home page", "Ir para a página inicial")}
+        titulo={entrar ? t("Welcome back", "Que bom ter você de volta") : t("Create your account", "Crie sua conta")}
+        descricao={entrar ? t("Sign in to your workspace.", "Entre no seu espaço de trabalho.") : t("It takes a few minutes.", "Leva poucos minutos.")}
+        lateral={
+          <div className="space-y-5">
+            <p className="m-0 text-h4 font-bold leading-snug text-foreground">{t("Design that starts from people.", "Design que começa pelas pessoas.")}</p>
+            <ul className="m-0 grid list-none gap-2 p-0 text-body-sm text-muted-foreground">
+              {[t("Your projects in one place", "Seus projetos num lugar só"), t("Progress you can follow", "Andamento que você acompanha"), t("Direct contact with the studio", "Contato direto com o estúdio")].map(f => (
+                <li key={f} className="flex items-start gap-2"><Check aria-hidden className="mt-1 size-4 shrink-0 text-success-text" />{f}</li>
               ))}
-            </div>
+            </ul>
           </div>
-        </div>
-
-        {/* Right: form */}
-        <div className="flex-1 flex items-center justify-center p-8">
-          <div className="w-full max-w-[280px]">
-            {/* Toggle */}
-            <div className="flex rounded-md border border-border bg-muted/40 p-1 mb-6">
-              {(["login", "signup"] as const).map(tb => (
-                <button
-                  key={tb}
-                  onClick={() => setTab(tb)}
-                  className={`flex-1 py-1 rounded-sm text-label font-semibold transition-all
-                    ${tab === tb ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
-                >
-                  {tb === "login" ? t("Sign In", "Entrar") : t("Sign Up", "Cadastrar")}
-                </button>
-              ))}
-            </div>
-
-            <div className="mb-5">
-              <h1 className="text-body-lg font-bold text-foreground">
-                {tab === "login" ? t("Welcome back", "Bem-vindo de volta") : t("Create account", "Criar conta")}
-              </h1>
-              <p className="text-label text-muted-foreground mt-1">
-                {tab === "login" ? t("Sign in to your workspace", "Entre no seu workspace") : t("Get started for free", "Comece gratuitamente")}
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {tab === "signup" && (
-                <div>
-                  <label className="block text-label font-medium text-foreground mb-1">{t("Full Name", "Nome completo")}</label>
-                  <div className="relative">
-                    <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                    <input type="text" placeholder="Dani Moscatelli" className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
-                  </div>
-                </div>
-              )}
-              <div>
-                <label className="block text-label font-medium text-foreground mb-1">Email</label>
-                <div className="relative">
-                  <Mail className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type="email" placeholder="dani@moscatelli.co" className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <label className="text-label font-medium text-foreground">{t("Password", "Senha")}</label>
-                  {tab === "login" && <button className="text-caption text-primary-text hover:underline">{t("Forgot?", "Esqueceu?")}</button>}
-                </div>
-                <div className="relative">
-                  <Lock className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-                  <input type={showPass ? "text" : "password"} placeholder="••••••••" className="w-full bg-background border border-border rounded-sm pl-8 pr-8 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all" />
-                  <button onClick={() => setShowPass(v => !v)} className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors">
-                    {showPass ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-                  </button>
-                </div>
-              </div>
-
-              <button className="w-full h-9 rounded-sm bg-primary text-primary-foreground text-body-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1 mt-1">
-                <LogIn className="h-3.5 w-3.5" />
-                {tab === "login" ? t("Sign In", "Entrar") : t("Create Account", "Criar conta")}
-              </button>
-
-              <div className="relative py-1">
-                <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-border" /></div>
-                <div className="relative text-center"><span className="bg-background px-2 text-caption text-muted-foreground">{t("or continue with", "ou continue com")}</span></div>
-              </div>
-
-              <button className="w-full h-9 rounded-sm border border-border bg-card text-body-sm font-medium text-foreground hover:bg-accent transition-colors flex items-center justify-center gap-2">
-                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                Google
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        }
+        rodape={
+          <p className="m-0">
+            {entrar ? t("No account yet? ", "Ainda não tem conta? ") : t("Already have an account? ", "Já tem conta? ")}
+            <Button variant="link" className="h-auto p-0" onClick={() => trocar(entrar ? "criar" : "entrar")}>{entrar ? t("Create account", "Criar conta") : t("Sign in", "Entrar")}</Button>
+          </p>
+        }
+      >
+        <SegmentedControl<"entrar" | "criar">
+          aria-label={t("Choose an option", "Escolha uma opção")}
+          fullWidth
+          className="mb-6"
+          options={[{ value: "entrar", label: t("Sign in", "Entrar") }, { value: "criar", label: t("Create account", "Criar conta") }]}
+          value={tab}
+          onValueChange={trocar}
+        />
+        {enviado ? (
+          <EstadoFinal
+            tom="sucesso"
+            className="py-6"
+            titulo={entrar ? t("All set!", "Tudo certo!") : t("Account created!", "Conta criada!")}
+            descricao={entrar ? t("Opening your workspace.", "Abrindo o seu espaço de trabalho.") : t("We sent you an e-mail to confirm the address.", "Enviamos um e-mail para confirmar o endereço.")}
+            acoes={<Button variant="outline" onClick={() => setEnviado(false)}>{t("Back", "Voltar")}</Button>}
+          />
+        ) : (
+          <form className="space-y-5" onSubmit={e => { e.preventDefault(); setEnviado(true); }}>
+            {!entrar && <Campo id={`${pre}-nome`} rotulo={t("Full name", "Nome completo")} icone={<User />} required autoComplete="name" placeholder="Dani Moscatelli" />}
+            <Campo id={`${pre}-email`} rotulo={t("E-mail", "E-mail")} type="email" icone={<Mail />} required autoComplete="email" placeholder="nome@exemplo.com" />
+            <Campo
+              id={`${pre}-senha`}
+              rotulo={t("Password", "Senha")}
+              type="password"
+              icone={<Lock />}
+              required
+              minLength={entrar ? undefined : 8}
+              autoComplete={entrar ? "current-password" : "new-password"}
+              textosDaSenha={{ mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha") }}
+              acaoDoRotulo={entrar ? <Button variant="link" type="button" className="h-auto p-0 text-body-sm">{t("Forgot it?", "Esqueceu?")}</Button> : undefined}
+              ajuda={entrar ? undefined : t("Use at least 8 characters.", "Use pelo menos 8 caracteres.")}
+            />
+            <Button type="submit" className="w-full">
+              <LogIn aria-hidden />
+              {entrar ? t("Sign in", "Entrar") : t("Create account", "Criar conta")}
+            </Button>
+          </form>
+        )}
+      </MolduraDeConta>
     </TemplateFrame>
   );
 }

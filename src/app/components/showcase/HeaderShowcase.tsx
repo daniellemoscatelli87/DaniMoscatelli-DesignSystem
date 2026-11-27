@@ -434,7 +434,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
 
           {/* Menus do celular (abertos pelo botão do header) */}
           {menuAberto && menuCel !== "tela-cheia" && (
-            <div aria-hidden className="absolute inset-0 z-30 bg-[var(--graphite-950)]/55 motion-safe:animate-in motion-safe:fade-in" onClick={fecharMenu} />
+            <div aria-hidden className="absolute inset-0 z-30 bg-sobreposicao motion-safe:animate-in motion-safe:fade-in" onClick={fecharMenu} />
           )}
 
           {menuAberto && menuCel === "folha" && (

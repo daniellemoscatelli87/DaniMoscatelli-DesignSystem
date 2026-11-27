@@ -18,6 +18,9 @@ import { cn } from "./utils";
  * Largura (regra do DS, 27/11/2026, pela largura do próprio rodapé): abaixo de 64rem, tudo alinhado à esquerda, com os
  * links numa grade de colunas alinhadas (2, 3 ou 4, conforme couber), para nenhum link ficar sozinho no meio de uma
  * linha; a partir de 64rem, logo e links lado a lado numa linha só. No toque, cada link tem 44 px de altura.
+ * Colunas na largura do texto (27/11/2026): cada coluna tem a largura do link mais longo dela, então nenhum link quebra
+ * em duas linhas ("Preferências de cookies" quebrava na grade de 2 colunas iguais do celular). Abaixo de 24rem de
+ * rodapé (telas de 320 a 383 px), uma coluna só; de 24rem em diante, 2; a partir de 36rem, 3; de 48rem, 4.
  */
 
 export type RodapeLink = { href: string; rotulo: string };
@@ -130,7 +133,7 @@ function RodapeSite({
                 <span className={cn("text-base font-bold", cor.link)}>Dani Moscatelli</span>
               )}
             </a>
-            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-6 gap-y-1 text-sm font-medium @xl/rodape:grid-cols-3 @3xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-1 gap-x-5 gap-y-1 text-sm font-medium @min-[24rem]/rodape:grid-cols-[repeat(2,minmax(0,max-content))] @xl/rodape:grid-cols-[repeat(3,minmax(0,max-content))] @xl/rodape:gap-x-8 @3xl/rodape:grid-cols-[repeat(4,minmax(0,max-content))] @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               {links.map(l => <a key={l.href + l.rotulo} href={l.href} className={itemLink}>{l.rotulo}</a>)}
               {preferencias}
               {restrita}
@@ -146,7 +149,7 @@ function RodapeSite({
         >
           {copy}
           {compacto ? (
-            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-5 text-xs font-normal @xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-1 gap-x-5 text-xs font-normal @min-[24rem]/rodape:grid-cols-[repeat(2,minmax(0,max-content))] @xl/rodape:grid-cols-[repeat(4,minmax(0,max-content))] @xl/rodape:gap-x-8 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               <a href={privacidade.href} className={cn(itemLink, cor.base)}>{privacidade.rotulo}</a>
               <button type="button" onClick={onPreferenciasCookies} className={cn(itemLink, cor.base, "cursor-pointer")}>{rotuloPreferencias}</button>
               {areaRestrita && <a href={areaRestrita.href} className={cn(itemLink, cor.base)}>{areaRestrita.rotulo}</a>}

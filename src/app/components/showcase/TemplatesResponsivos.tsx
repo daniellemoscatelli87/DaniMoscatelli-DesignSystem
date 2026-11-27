@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
-  Activity, AlertCircle, ArrowLeft, ArrowRight, BarChart2, Bell, Check, CheckCircle, ChevronLeft, ChevronRight, Clock,
-  CreditCard, DollarSign, FileText, Globe, HelpCircle, Home, Inbox, Info, Layers, LayoutDashboard, Mail, Menu,
-  MessageSquare, Moon, PlayCircle, Plus, Rocket, Send, Settings, ShieldCheck, ShoppingCart, Sparkles, Star, Sun,
-  TrendingUp, UserPlus, Users, Zap,
+  Activity, ArrowLeft, ArrowRight, BarChart2, Bell, Check, CheckCircle, ChevronLeft, ChevronRight, Clock, CreditCard,
+  DollarSign, FileText, Globe, HelpCircle, Home, Inbox, Info, Layers, LayoutDashboard, Mail, Menu, MessageSquare,
+  Moon, PlayCircle, Plus, Rocket, Send, Settings, ShieldCheck, ShoppingCart, Sparkles, Star, Sun, TrendingUp,
+  UserPlus, Users, Zap, XCircle,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart as ReBarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer, Tooltip as ReTooltip,
@@ -34,6 +34,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Textarea } from "../ui/textarea";
 import { Checkbox } from "../ui/checkbox";
 import { RodapeSite } from "../ui/rodape-site";
+import { CaixaDeEntrada } from "../ui/caixa-de-entrada";
+import { EstadoVazio } from "../ui/estado-vazio";
+import { BarraDeNumeros } from "../ui/barra-de-numeros";
+import { CardDeDepoimento } from "../ui/card-de-depoimento";
 
 /* ─────────────────────────────────────────────
    Templates de painel que se adaptam ao celular (27/11/2026).
@@ -355,7 +359,7 @@ type TomDaNotificacao = "sucesso" | "info" | "erro" | "aviso";
 const notificacoes: { icone: React.ElementType; tom: TomDaNotificacao; titulo: L; corpo: L; quando: L; lida: boolean }[] = [
   { icone: CheckCircle, tom: "sucesso", titulo: { en: "Payment confirmed", pt: "Pagamento confirmado" }, corpo: { en: "Invoice #INV-2048 for $1,200 has been paid.", pt: "A fatura #INV-2048 de US$ 1.200 foi paga." }, quando: { en: "Just now", pt: "Agora mesmo" }, lida: false },
   { icone: UserPlus, tom: "info", titulo: { en: "New team member", pt: "Novo membro na equipe" }, corpo: { en: "Ana Lima joined your workspace as Editor.", pt: "Ana Lima entrou no seu espaço de trabalho como editora." }, quando: { en: "5m ago", pt: "há 5 min" }, lida: false },
-  { icone: AlertCircle, tom: "erro", titulo: { en: "Deployment failed", pt: "Falha na publicação" }, corpo: { en: "Build #1049 failed during the test stage.", pt: "A versão #1049 falhou na etapa de testes." }, quando: { en: "22m ago", pt: "há 22 min" }, lida: false },
+  { icone: XCircle, tom: "erro", titulo: { en: "Deployment failed", pt: "Falha na publicação" }, corpo: { en: "Build #1049 failed during the test stage.", pt: "A versão #1049 falhou na etapa de testes." }, quando: { en: "22m ago", pt: "há 22 min" }, lida: false },
   { icone: Bell, tom: "aviso", titulo: { en: "Usage limit approaching", pt: "Limite de uso próximo" }, corpo: { en: "You've used 87% of your monthly API quota.", pt: "Você usou 87% da sua cota mensal de API." }, quando: { en: "1h ago", pt: "há 1 h" }, lida: true },
   { icone: Clock, tom: "info", titulo: { en: "Scheduled maintenance", pt: "Manutenção programada" }, corpo: { en: "Planned downtime Sunday Jul 30 from 02:00–04:00 UTC.", pt: "Indisponibilidade planejada no domingo, 30 de jul., das 2h às 4h (UTC)." }, quando: { en: "3h ago", pt: "há 3 h" }, lida: true },
   { icone: Info, tom: "info", titulo: { en: "New feature: Templates", pt: "Novo recurso: Templates" }, corpo: { en: "Check out the new templates section in the Design System.", pt: "Conheça a nova seção de templates no Design System." }, quando: { en: "Yesterday", pt: "Ontem" }, lida: true },
@@ -363,89 +367,67 @@ const notificacoes: { icone: React.ElementType; tom: TomDaNotificacao; titulo: L
 ];
 
 /**
- * Caixa de entrada: lista e detalhe lado a lado só a partir de 48rem de largura. Antes disso, a lista ocupa tudo e o
- * detalhe abre no lugar dela, com o botão Voltar (a lista volta com a mesma notificação selecionada).
+ * Caixa de entrada: a CaixaDeEntrada do DS (27/11/2026). Lista e leitura lado a lado a partir de 42rem de largura da
+ * própria caixa; antes disso, uma coisa por vez, com Voltar. Abrir uma notificação marca como lida.
  */
 export function InboxTemplate() {
   const { t, bi } = useI18n();
-  const [itens, setItens] = useState(notificacoes.map((n, id) => ({ ...n, id })));
-  const [selecionada, setSelecionada] = useState<number | null>(0);
-  const [detalheNoCelular, setDetalheNoCelular] = useState(false);
-  const naoLidas = itens.filter(n => !n.lida).length;
-  const abrir = (id: number) => {
-    setSelecionada(id);
-    setDetalheNoCelular(true);
-    setItens(prev => prev.map(n => (n.id === id ? { ...n, lida: true } : n)));
+  const [lidas, setLidas] = useState<Set<number>>(() => new Set(notificacoes.flatMap((n, i) => (n.lida ? [i] : []))));
+  const [aberta, setAberta] = useState<string | null>("0");
+  const naoLidas = notificacoes.length - lidas.size;
+  const itens = notificacoes.map((n, i) => {
+    const Icone = n.icone;
+    const lida = lidas.has(i);
+    return {
+      id: String(i),
+      titulo: bi(n.titulo),
+      resumo: bi(n.corpo),
+      quando: <span className="tabular-nums">{bi(n.quando)}</span>,
+      lida,
+      inicio: <IconeComBase tom={lida ? "neutro" : "marca"} tamanho="sm"><Icone /></IconeComBase>,
+    };
+  });
+  const abrir = (id: string | null) => {
+    setAberta(id);
+    if (id !== null) setLidas(prev => new Set(prev).add(Number(id)));
   };
-  const atual = itens.find(n => n.id === selecionada) ?? null;
 
   return (
-    <div className="@container/caixa h-[min(620px,88vh)] min-h-[520px] bg-background">
-      <div className="grid h-full grid-cols-1 @3xl/caixa:grid-cols-[20rem_minmax(0,1fr)]">
-        {/* Lista */}
-        <section aria-labelledby="tpl-caixa-titulo" className={`min-h-0 flex-col border-border bg-card @3xl/caixa:flex @3xl/caixa:border-r ${detalheNoCelular ? "hidden" : "flex"}`}>
-          <header className="flex shrink-0 items-center gap-2 border-b border-border px-4 py-3">
-            <h3 id="tpl-caixa-titulo" className="text-body font-bold text-foreground">{t("Inbox", "Caixa de entrada")}</h3>
+    <div className="h-[min(620px,88vh)] min-h-[520px] bg-background">
+      <CaixaDeEntrada
+        className="rounded-none border-0"
+        itens={itens}
+        aberta={aberta}
+        onAbrir={abrir}
+        rotulo={t("Notifications", "Notificações")}
+        textos={{ voltar: t("Back", "Voltar"), naoLida: t("unread", "não lida") }}
+        topo={
+          <div className="flex items-center gap-2">
+            <h3 className="text-body font-bold text-foreground">{t("Inbox", "Caixa de entrada")}</h3>
             {naoLidas > 0 && <ContadorDoPainel valor={naoLidas} rotulo={t("unread", "não lidas")} />}
-          </header>
-          <ul className="min-h-0 flex-1 overflow-y-auto">
-            {itens.map(n => {
-              const Icone = n.icone;
-              return (
-                <li key={n.id} className="border-b border-border last:border-0">
-                  <LinhaDeLista
-                    as="button"
-                    type="button"
-                    onClick={() => abrir(n.id)}
-                    selecionada={selecionada === n.id}
-                    aria-current={selecionada === n.id ? "true" : undefined}
-                    inicio={<IconeComBase tom={n.lida ? "neutro" : "marca"} tamanho="sm"><Icone /></IconeComBase>}
-                    titulo={<span className={n.lida ? "font-medium text-muted-foreground" : "font-semibold text-foreground"}>{bi(n.titulo)}</span>}
-                    descricao={<span className="line-clamp-1">{bi(n.corpo)}</span>}
-                    quebraAcoes={false}
-                    fim={
-                      <span className="flex flex-col items-end gap-1">
-                        <span className="text-label tabular-nums text-muted-foreground">{bi(n.quando)}</span>
-                        {!n.lida && <span className="sr-only">{t("unread", "não lida")}</span>}
-                        <span aria-hidden className={`size-2 rounded-full ${n.lida ? "" : "bg-primary"}`} />
-                      </span>
-                    }
-                    className="px-4"
-                  />
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-
-        {/* Detalhe */}
-        <section aria-label={t("Notification", "Notificação")} className={`min-h-0 overflow-y-auto @3xl/caixa:block ${detalheNoCelular ? "block" : "hidden"}`}>
-          {atual ? (
-            <div className="p-4 sm:p-6 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-[var(--duration-normal)]">
-              <Button variant="ghost" size="sm" onClick={() => setDetalheNoCelular(false)} className="-ml-2 mb-4 @3xl/caixa:hidden">
-                <ArrowLeft aria-hidden />{t("Back", "Voltar")}
-              </Button>
+          </div>
+        }
+        semSelecao={<EstadoVazio tamanho="sm" icone={<Inbox />} titulo={t("Select a notification", "Selecione uma notificação")} descricao={t("The open notification appears here.", "A notificação aberta aparece aqui.")} />}
+        renderLeitura={item => {
+          const n = notificacoes[Number(item.id)];
+          return (
+            <div>
               <div className="flex items-start gap-3">
-                <IconeComBase tom="marca">{React.createElement(atual.icone)}</IconeComBase>
+                <IconeComBase tom="marca">{React.createElement(n.icone)}</IconeComBase>
                 <div className="min-w-0">
-                  <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(atual.titulo)}</h3>
-                  <p className="text-body-sm text-muted-foreground">{bi(atual.quando)}</p>
+                  <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(n.titulo)}</h3>
+                  <p className="text-body-sm text-muted-foreground">{bi(n.quando)}</p>
                 </div>
               </div>
-              <p className="mt-4 text-body leading-relaxed text-foreground">{bi(atual.corpo)}</p>
+              <p className="mt-4 text-body leading-relaxed text-foreground">{bi(n.corpo)}</p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Button>{t("View details", "Ver detalhes")}</Button>
                 <Button variant="outline">{t("Dismiss", "Dispensar")}</Button>
               </div>
             </div>
-          ) : (
-            <div className="flex h-full flex-col items-center justify-center gap-2 text-muted-foreground">
-              <Inbox aria-hidden className="size-8" />
-              <p className="text-body-sm">{t("Select a notification", "Selecione uma notificação")}</p>
-            </div>
-          )}
-        </section>
-      </div>
+          );
+        }}
+      />
     </div>
   );
 }
@@ -601,21 +583,18 @@ export function LandingTemplate() {
         </div>
       </section>
 
-      {/* ══ Números: 2 × 2 no celular, 4 lado a lado a partir de 42rem ══ */}
-      <section aria-label={t("In numbers", "Em números")} className="border-y border-border bg-card/40 px-4 py-6 @2xl/landing:px-6">
-        <dl className="mx-auto grid max-w-2xl grid-cols-2 gap-x-4 gap-y-6 @2xl/landing:grid-cols-4">
-          {[
+      {/* ══ Números: a BarraDeNumeros do DS (2 × 2 no estreito, 4 lado a lado a partir de 40rem) ══ */}
+      <section aria-label={t("In numbers", "Em números")} className="px-4 py-6 @2xl/landing:px-6">
+        <BarraDeNumeros
+          centralizar
+          className="mx-auto max-w-2xl"
+          itens={[
             { valor: "99,99%", rotulo: t("Uptime SLA", "SLA de uptime") },
             { valor: "50 ms", rotulo: t("P99 latency", "Latência P99") },
             { valor: "12 mil+", rotulo: t("Active customers", "Clientes ativos") },
             { valor: "200+", rotulo: t("Integrations", "Integrações") },
-          ].map(s => (
-            <div key={s.rotulo} className="flex min-w-0 flex-col-reverse items-center justify-end text-center">
-              <dt className="text-body-sm text-muted-foreground">{s.rotulo}</dt>
-              <dd className="text-h3 font-black tabular-nums tracking-tight text-foreground">{s.valor}</dd>
-            </div>
-          ))}
-        </dl>
+          ]}
+        />
       </section>
 
       {/* ══ Produto: os indicadores e o gráfico com as peças do painel ══ */}
@@ -736,19 +715,14 @@ export function LandingTemplate() {
         <div className="mx-auto max-w-2xl">
           <GradeDeCards colunas={1} className="mb-4 gap-3 @2xl/landing:grid-cols-3" aria-live="polite">
             {visiveis.map((d, i) => (
-              <Card key={`${d.name}-${slide}`} className={`gap-4 p-5 motion-safe:animate-in motion-safe:fade-in ${i > 0 ? "hidden @2xl/landing:flex" : ""}`}>
-                <div className="flex gap-1" role="img" aria-label={t(`${d.stars} of 5 stars`, `${d.stars} de 5 estrelas`)}>
-                  {Array.from({ length: d.stars }).map((_, e) => <Star key={e} aria-hidden className="size-3.5 fill-warning text-warning" />)}
-                </div>
-                <p className="text-body-sm italic leading-snug text-muted-foreground">“{bi(d.text)}”</p>
-                <div className="mt-auto flex items-center gap-3">
-                  <IconeComBase tom="marca" tamanho="sm" redonda><span className="text-caption font-black">{d.avatar}</span></IconeComBase>
-                  <div className="min-w-0">
-                    <p className="text-body-sm font-bold leading-tight text-foreground">{d.name}</p>
-                    <p className="text-label text-muted-foreground">{bi(d.role)}</p>
-                  </div>
-                </div>
-              </Card>
+              <CardDeDepoimento
+                key={`${d.name}-${slide}`}
+                nome={d.name}
+                cargo={bi(d.role)}
+                className={`motion-safe:animate-in motion-safe:fade-in ${i > 0 ? "hidden @2xl/landing:flex" : ""}`}
+              >
+                {bi(d.text)}
+              </CardDeDepoimento>
             ))}
           </GradeDeCards>
           <div className="flex items-center justify-center gap-3">

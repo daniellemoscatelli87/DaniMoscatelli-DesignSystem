@@ -14,7 +14,8 @@
  * As cores do logo são as da arte oficial (não são tokens de interface), como pede o Manual da marca: o vermelho do
  * símbolo é o da marca e não muda com o tema. Não recolorir, esticar nem aplicar sombra (Marca › Regras de uso).
  * Acessibilidade: com `rotulo`, o SVG é uma imagem com nome (role="img"); sem rotulo, é decorativo (aria-hidden),
- * para quando o link em volta já tem nome (por exemplo, "Página inicial").
+ * para quando o link em volta já tem nome (por exemplo, "Página inicial"). Com `href` (e `comoLink`), o próprio logo
+ * vira o link de 44 px, com o nome "Página inicial" (ou `rotulo`). Mesma API do Logo do DS FindLook.
  */
 import * as React from "react";
 import { cn } from "./utils";
@@ -38,33 +39,54 @@ export type LogoProps = Omit<React.SVGProps<SVGSVGElement>, "children"> & {
   rotulo?: string;
   /** O símbolo em uma cor só: "marca" (vermelho, padrão), "branco" (sobre a primária ou fotos) ou "grafite". */
   corDoSimbolo?: "marca" | "branco" | "grafite";
+  /** Vira link para este endereço (44 px de toque, nome "Página inicial" ou `rotulo`). Mesma prop do DS FindLook. */
+  href?: string;
+  /** O link do produto no lugar do <a> (por exemplo, o Link do Next.js). */
+  comoLink?: React.ElementType;
 };
 
 const COR_DO_SIMBOLO = { marca: VERMELHO_SIMBOLO, branco: "rgb(255,255,255)", grafite: "rgb(19,26,39)" };
 
-function Logo({ variante = "horizontal", superficie = "clara", rotulo, corDoSimbolo = "marca", className, ...props }: LogoProps) {
-  const acessivel = rotulo ? { role: "img", "aria-label": rotulo } : { "aria-hidden": true as const };
+function Logo({ variante = "horizontal", superficie = "clara", rotulo, corDoSimbolo = "marca", href, comoLink, className, ...props }: LogoProps) {
+  const comLink = Boolean(href);
+  const acessivel = rotulo && !comLink ? { role: "img", "aria-label": rotulo } : { "aria-hidden": true as const };
+  // fill-rule evenodd (27/11/2026), como nos arquivos oficiais de src/imports/svg/: sem ele, os furos do D, do o e do a
+  // ficavam preenchidos. Quem precisar pode trocar com fillRule.
+  const regra = { fillRule: "evenodd" as const, clipRule: "evenodd" as const };
+  let desenho: React.ReactNode;
   if (variante === "simbolo") {
-    return (
-      <svg data-slot="logo" data-variante="simbolo" viewBox="0 0 1347 1563" xmlns="http://www.w3.org/2000/svg" className={cn("block h-10 w-auto shrink-0", className)} focusable="false" {...acessivel} {...props}>
+    desenho = (
+      <svg data-slot="logo" data-variante="simbolo" viewBox="0 0 1347 1563" xmlns="http://www.w3.org/2000/svg" className={cn("block h-10 w-auto shrink-0", className)} focusable="false" {...regra} {...acessivel} {...props}>
         <path fill={COR_DO_SIMBOLO[corDoSimbolo]} d={D_SIMBOLO} />
       </svg>
     );
+  } else {
+    const svg = (s: "clara" | "escura", extra?: string) => (
+      <svg data-slot="logo" data-variante="horizontal" data-superficie={s} viewBox="0 0 1600 413" xmlns="http://www.w3.org/2000/svg" className={cn("block h-10 w-auto shrink-0", extra, className)} focusable="false" {...regra} {...acessivel} {...props}>
+        <path fill={VERMELHO_HORIZONTAL} d={D_SIMBOLO_H} />
+        <path fill={CORES[s].nome} d={D_NOME} />
+        <path fill={CORES[s].apoio} d={D_APOIO} />
+      </svg>
+    );
+    // "auto": as duas versões; o tema (.dark) escolhe qual aparece, sem esperar o JavaScript.
+    desenho = superficie !== "auto" ? svg(superficie) : (
+      <>
+        {svg("clara", "dark:hidden")}
+        {svg("escura", "hidden dark:block")}
+      </>
+    );
   }
-  const svg = (s: "clara" | "escura", extra?: string) => (
-    <svg data-slot="logo" data-variante="horizontal" data-superficie={s} viewBox="0 0 1600 413" xmlns="http://www.w3.org/2000/svg" className={cn("block h-10 w-auto shrink-0", extra, className)} focusable="false" {...acessivel} {...props}>
-      <path fill={VERMELHO_HORIZONTAL} d={D_SIMBOLO_H} />
-      <path fill={CORES[s].nome} d={D_NOME} />
-      <path fill={CORES[s].apoio} d={D_APOIO} />
-    </svg>
-  );
-  if (superficie !== "auto") return svg(superficie);
-  // "auto": as duas versões; o tema (.dark) escolhe qual aparece, sem esperar o JavaScript.
+  if (!comLink) return desenho;
+  const Comp = comoLink ?? "a";
   return (
-    <>
-      {svg("clara", "dark:hidden")}
-      {svg("escura", "hidden dark:block")}
-    </>
+    <Comp
+      href={href}
+      aria-label={rotulo ?? "Página inicial"}
+      data-slot="link-do-logo"
+      className="inline-flex min-h-11 min-w-11 shrink-0 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+    >
+      {desenho}
+    </Comp>
   );
 }
 

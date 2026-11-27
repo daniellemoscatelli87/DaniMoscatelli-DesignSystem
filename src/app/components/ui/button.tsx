@@ -17,10 +17,10 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border border-[var(--border-strong)] bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         // O botão secundário do DS é o de contorno (decisão da dona do produto, 20/11/2026)
         secondary:
-          "border border-[var(--border-strong)] bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         // Exclusão em contorno (27/11/2026, especificação da área restrita, ADMIN_REACT.md §7.1): ação destrutiva que não
         // é a principal da área ("Excluir", "Apagar tudo"); o vermelho cheio (destructive) fica só na confirmação.
         // Contorno e texto --error-text (5,5:1 no branco), hover --error-muted, foco com anel de erro.
@@ -30,16 +30,29 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 disabled:bg-transparent disabled:hover:bg-transparent dark:disabled:bg-transparent",
         link: "text-primary-text underline-offset-4 hover:underline disabled:bg-transparent disabled:hover:bg-transparent disabled:no-underline",
       },
+      // 44 px no toque com as variantes do próprio Tailwind (max-sm e pointer-coarse), além da variante toque do DS:
+      // assim o botão tem 44 px no celular mesmo num produto que copiou ui/ e theme.css mas não carrega o theme.css no
+      // mesmo CSS do @import "tailwindcss" (27/11/2026). Medido: 44 px a 390 px de tela (com e sem dedo) e 40 px no
+      // computador com mouse.
       size: {
-        default: "h-10 px-4 has-[>svg]:px-3 toque:h-11",
-        sm: "h-8 rounded-sm gap-1 px-3 text-button has-[>svg]:px-2 toque:h-11",
+        default: "h-10 px-4 has-[>svg]:px-3 toque:h-11 max-sm:h-11 pointer-coarse:h-11",
+        sm: "h-8 rounded-sm gap-1 px-3 text-button has-[>svg]:px-2 toque:h-11 max-sm:h-11 pointer-coarse:h-11",
         lg: "h-11 rounded-md px-5 text-body has-[>svg]:px-4",
-        icon: "size-10 rounded-md toque:size-11",
+        // Ícone: 40 px no computador, 44 px no toque. icon-lg: 44 px sempre (botões de ícone soltos, como o menu).
+        icon: "size-10 rounded-md toque:size-11 max-sm:size-11 pointer-coarse:size-11",
+        "icon-lg": "size-11 rounded-md",
+      },
+      // Forma (27/11/2026): "pilula" deixa o botão todo arredondado (pílula). Usada no cabeçalho do site por decisão
+      // de marca (FindLook: "Sou Lojista" em contorno e "Entrar" em vermelho; Dani Moscatelli: o modelo pílula).
+      forma: {
+        padrao: "",
+        pilula: "rounded-full",
       },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      forma: "padrao",
     },
   },
 );
@@ -48,6 +61,7 @@ function Button({
   className,
   variant,
   size,
+  forma,
   asChild = false,
   ...props
 }: React.ComponentProps<"button"> &
@@ -59,7 +73,7 @@ function Button({
   return (
     <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, forma, className }))}
       {...props}
     />
   );

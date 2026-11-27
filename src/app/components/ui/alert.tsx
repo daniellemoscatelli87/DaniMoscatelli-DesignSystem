@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
+import { CircleAlert, CircleCheck, Info, CircleX } from "lucide-react";
 
 import { cn } from "./utils";
 
@@ -24,7 +24,7 @@ const alertVariants = cva(
   [
     "[--alerta-tinta:color-mix(in_oklab,var(--alerta-cor)_var(--alerta-fundo),transparent)]",
     "[--alerta-texto-apoio:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]",
-    "relative w-full rounded-lg border border-[color:color-mix(in_oklab,var(--alerta-cor)_22%,transparent)] bg-card bg-[image:linear-gradient(var(--alerta-tinta),var(--alerta-tinta))] px-6 py-5 text-left text-sm text-foreground",
+    "relative w-full rounded-lg border border-[color:color-mix(in_oklab,var(--alerta-cor)_22%,transparent)] bg-card bg-[image:linear-gradient(var(--alerta-tinta),var(--alerta-tinta))] px-6 py-5 text-left text-body-sm leading-5 text-foreground",
     "grid grid-cols-[0_1fr] items-start has-[>svg]:grid-cols-[2.75rem_1fr] has-[>svg]:gap-x-4",
     "[&>svg]:row-span-2 [&>svg]:box-border [&>svg]:size-11 [&>svg]:shrink-0 [&>svg]:rounded-md [&>svg]:p-3 [&>svg]:bg-[color:color-mix(in_oklab,var(--alerta-cor)_var(--alerta-base),var(--card))] [&>svg]:text-[color:var(--alerta-icone)]",
   ],
@@ -50,8 +50,9 @@ const alertVariants = cva(
 
 /**
  * tom (27/11/2026): o mesmo alerta em português e com o ícone do estado já colocado, para a mesma mensagem ter sempre
- * o mesmo sinal (semiótica). "neutro" Info cinza · "info" Info · "sucesso" CircleCheck · "aviso" TriangleAlert ·
- * "erro" CircleAlert. Se você passar um svg filho, ele vale no lugar do ícone padrão. Com `tom`, `variant` é ignorado.
+ * o mesmo sinal (semiótica). "neutro" Info cinza · "info" Info · "sucesso" CircleCheck · "aviso" CircleAlert ("!" no círculo) ·
+ * "erro" CircleX ("X" no círculo; mapa único dos dois DS, 27/11/2026). Se você passar um svg filho, ele vale no lugar do ícone padrão; `icone`
+ * troca o ícone (ou `icone={false}` tira), como no DS FindLook. Com `tom`, `variant` é ignorado.
  *   <Alert tom="erro"><AlertDescription>E-mail ou senha incorretos.</AlertDescription></Alert>
  */
 type TomDoAlerta = "neutro" | "info" | "sucesso" | "aviso" | "erro";
@@ -59,17 +60,18 @@ const DO_TOM: Record<TomDoAlerta, { variant: NonNullable<VariantProps<typeof ale
   neutro: { variant: "default", Icone: Info },
   info: { variant: "info", Icone: Info },
   sucesso: { variant: "success", Icone: CircleCheck },
-  aviso: { variant: "warning", Icone: TriangleAlert },
-  erro: { variant: "error", Icone: CircleAlert },
+  aviso: { variant: "warning", Icone: CircleAlert },
+  erro: { variant: "error", Icone: CircleX },
 };
 
 function Alert({
   className,
   variant: variantProp,
+  icone,
   tom,
   children,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants> & { tom?: TomDoAlerta }) {
+}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants> & { tom?: TomDoAlerta; icone?: React.ReactNode | false }) {
   const variant = tom ? DO_TOM[tom].variant : variantProp;
   const urgente = variant === "warning" || variant === "error" || variant === "destructive";
   const temIcone = React.Children.toArray(children).some(c => React.isValidElement(c) && c.type !== AlertTitle && c.type !== AlertDescription && typeof c.type !== "string" ? true : React.isValidElement(c) && c.type === "svg");
@@ -83,7 +85,7 @@ function Alert({
       className={cn(alertVariants({ variant }), className)}
       {...props}
     >
-      {Icone && !temIcone && <Icone aria-hidden />}
+      {Icone && icone !== false && !temIcone && (icone ?? <Icone aria-hidden />)}
       {children}
     </div>
   );
@@ -110,7 +112,7 @@ function AlertDescription({
     <div
       data-slot="alert-description"
       className={cn(
-        "col-start-2 mt-1 grid justify-items-start gap-1 text-sm leading-[1.6] text-[color:var(--alerta-texto-apoio,var(--muted-foreground))] [&_p]:leading-[1.6] [&_strong]:font-semibold [&_strong]:text-foreground",
+        "col-start-2 mt-1 grid justify-items-start gap-1 text-body-sm leading-[1.6] text-[color:var(--alerta-texto-apoio,var(--muted-foreground))] [&_p]:leading-[1.6] [&_strong]:font-semibold [&_strong]:text-foreground",
         // Sem AlertTitle: a descrição é a mensagem principal (cor do texto principal, centralizada na altura do ícone).
         "[[data-slot=alert]:not(:has(>[data-slot=alert-title]))>&]:row-span-2 [[data-slot=alert]:not(:has(>[data-slot=alert-title]))>&]:mt-0 [[data-slot=alert]:not(:has(>[data-slot=alert-title]))>&]:self-center [[data-slot=alert]:not(:has(>[data-slot=alert-title]))>&]:text-foreground [[data-slot=alert]:not(:has(>[data-slot=alert-title]))>&]:text-pretty",
         className,

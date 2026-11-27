@@ -58,7 +58,7 @@ function SidePanelContent({
     <DialogPrimitive.Portal data-slot="side-panel-portal">
       <DialogPrimitive.Overlay
         data-slot="side-panel-overlay"
-        className="fixed inset-0 z-50 bg-foreground/40 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 duration-300"
+        className="fixed inset-0 z-50 bg-sobreposicao data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 duration-300"
       />
       <DialogPrimitive.Content
         data-slot="side-panel-content"

@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { useI18n } from "../../i18n";
 import {
-  Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload,
-  Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
-  ArrowRight, Check, X, AlertCircle, Zap, Star,
+  Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload, Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
+  ArrowRight, Check, X, Zap, Star, XCircle,
 } from "lucide-react";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
 import { Button } from "@/app/components/ui/button";
@@ -12,6 +11,7 @@ import { Input } from "@/app/components/ui/input";
 import { Checkbox } from "@/app/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/app/components/ui/radio-group";
 import { Switch } from "@/app/components/ui/switch";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/app/components/ui/select";
 import { PasswordConfirm, regrasPadrao, textosPadrao } from "@/app/components/ui/password-field";
 import { LayoutGrid, List, Map as MapIcon } from "lucide-react";
 import { SectionHeader } from "./shared/SectionHeader";
@@ -86,7 +86,7 @@ function InputField({
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{rightElement}</span>
         )}
       </div>
-      {error && <p className="text-body-sm text-error-text flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
+      {error && <p className="text-body-sm text-error-text flex items-center gap-1"><XCircle className="h-3.5 w-3.5" aria-hidden />{error}</p>}
       {hint && !error && <p className="text-body-sm text-muted-foreground">{hint}</p>}
     </div>
   );
@@ -177,6 +177,18 @@ export function FormShowcase() {
               <Btn size="icon" variant="ghost" icon={<Copy className="h-4 w-4" />} iconOnly />
               <Btn size="icon" variant="primary" icon={<ArrowRight className="h-4 w-4" />} iconOnly />
               <Btn size="icon" variant="ghost" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly />
+            </div>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Pill shape and 44 px icon", "Forma pílula e ícone de 44 px")}>
+          <ShowcaseCard>
+            <p className="mb-4 max-w-2xl text-body-sm text-muted-foreground">{t("forma=\"pilula\" rounds the button fully; use it only where the brand asks for it (the site header). size=\"icon\" is 40 px with a mouse and 44 px on touch; size=\"icon-lg\" is always 44 px. Every button is 44 px tall on phones (below 640 px) and on touch screens.", "forma=\"pilula\" arredonda o botão inteiro; use só onde a marca pede (o cabeçalho do site). size=\"icon\" tem 40 px com mouse e 44 px no toque; size=\"icon-lg\" tem 44 px sempre. Todo botão tem 44 px de altura no celular (abaixo de 640 px) e em telas de toque.")}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button forma="pilula" variant="outline">{t("Outline pill", "Pílula de contorno")}</Button>
+              <Button forma="pilula">{t("Filled pill", "Pílula preenchida")}</Button>
+              <Button size="icon" variant="outline" aria-label={t("Edit", "Editar")}><Edit3 aria-hidden /></Button>
+              <Button size="icon-lg" variant="ghost" aria-label={t("More options", "Mais opções")}><MoreHorizontal aria-hidden /></Button>
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -288,16 +300,15 @@ const [confirmacao, setConfirmacao] = useState("");
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[t("Default Select", "Select padrão"), t("With Label", "Com rótulo")].map((lbl, i) => (
                 <div key={i} className="flex flex-col gap-1">
-                  <label className="text-body-sm font-medium text-foreground">{lbl}</label>
-                  <div className="relative">
-                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-md px-3 py-2 text-body outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
-                      <option>{t("Select an option...", "Selecione uma opção...")}</option>
-                      <option>{t("Option Alpha", "Opção Alfa")}</option>
-                      <option>{t("Option Beta", "Opção Beta")}</option>
-                      <option>{t("Option Gamma", "Opção Gama")}</option>
-                    </select>
-                    <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
-                  </div>
+                  <label htmlFor={`select-demo-${i}`} className="text-body-sm font-medium text-foreground">{lbl}</label>
+                  <Select>
+                    <SelectTrigger id={`select-demo-${i}`} className="w-full"><SelectValue placeholder={t("Select an option...", "Selecione uma opção...")} /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="alfa">{t("Option Alpha", "Opção Alfa")}</SelectItem>
+                      <SelectItem value="beta">{t("Option Beta", "Opção Beta")}</SelectItem>
+                      <SelectItem value="gama">{t("Option Gamma", "Opção Gama")}</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               ))}
             </div>
@@ -469,11 +480,11 @@ function getFormTokenGroups(t: (en: string, pt: string) => string): TokenGroup[]
   {
     group: t("Input & Form", "Input e formulário"),
     tokens: [
-      { name: "--input",            description: t("Input border color", "Cor da borda do input"),          light: "var(--border-strong)",         dark: "rgba(19,26,39,0.60)", isColor: true },
+      { name: "--input",            description: t("Outline of fields, outline buttons and chips (at least 3:1)", "Contorno de campos, botões de contorno e chips (pelo menos 3:1)"), light: "var(--graphite-400)",         dark: "rgba(19,26,39,0.60)", isColor: true },
       { name: "--input-background", description: t("Input field background", "Fundo do campo de input"),      light: "#FFFFFF",             dark: "rgba(19,26,39,0.60)", isColor: true },
       { name: "--ring",             description: t("Focus ring", "Anel de foco"),                  light: "rgba(212,77,77,0.35)",dark: "rgba(212,77,77,0.40)", isColor: true },
       { name: "--border",           description: t("Default border", "Borda padrão"),              light: "rgba(19,26,39,0.09)", dark: "rgba(255,255,255,0.07)", isColor: true },
-      { name: "--border-strong",    description: t("Hover / active border", "Borda de hover / ativo"),       light: "rgba(19,26,39,0.16)", dark: "rgba(255,255,255,0.12)", isColor: true },
+      { name: "--border-strong",    description: t("Card border on hover (decorative, not for fields)", "Borda de card no hover (decorativa, não vale para campos)"),       light: "rgba(19,26,39,0.16)", dark: "rgba(255,255,255,0.12)", isColor: true },
       { name: "--foreground",       description: t("Input text", "Texto do input"),                  light: "#131A27",             dark: "#E4E9F0", isColor: true },
       { name: "--muted-foreground", description: t("Placeholder text", "Texto de placeholder"),            light: "#627288",             dark: "#8898B0", isColor: true },
     ],

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
-import { AlertCircle, CheckCircle2, Info, TriangleAlert, X } from "lucide-react";
+import { AlertCircle, CheckCircle2, Info, X, XCircle } from "lucide-react";
 
 import { cn } from "./utils";
 
@@ -51,7 +51,7 @@ const ICONE_DO_TOM: Record<TomDoAlerta, React.ElementType> = {
   info: Info,
   sucesso: CheckCircle2,
   aviso: AlertCircle,
-  erro: TriangleAlert,
+  erro: XCircle,
 };
 
 const transicao =

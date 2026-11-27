@@ -110,7 +110,7 @@ export function PartnerCard({
               className={cn(
                 "inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-body-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 "@[22rem]/acoes:justify-start @[22rem]/acoes:rounded-sm @[22rem]/acoes:border-transparent @[22rem]/acoes:px-1 @[22rem]/acoes:underline-offset-4 @[22rem]/acoes:hover:underline",
-                dark ? "border-white/25 text-white/85 hover:bg-white/10 @[22rem]/acoes:hover:bg-transparent" : "border-[var(--border-strong)] text-[var(--primary-text,var(--primary))] hover:bg-accent @[22rem]/acoes:hover:bg-transparent",
+                dark ? "border-white/25 text-white/85 hover:bg-white/10 @[22rem]/acoes:hover:bg-transparent" : "border-input text-[var(--primary-text,var(--primary))] hover:bg-accent @[22rem]/acoes:hover:bg-transparent",
               )}
             >
               {secondary.label}

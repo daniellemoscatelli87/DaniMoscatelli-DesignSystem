@@ -52,6 +52,20 @@ export type CabecalhoDoSiteProps = {
   tela?: "auto" | "celular" | "computador";
   textos?: { principal?: string; menu?: string; abrirMenu?: string; fecharMenu?: string };
   className?: string;
+  /* Props em comum com o CabecalhoDoSite do DS FindLook (27/11/2026): os dois DS aceitam as mesmas; cada um mantém o
+     seu modelo de marca (aqui, a pílula ou a faixa; no FindLook, a faixa). */
+  /** Ação secundária, antes da principal (aqui, em texto; no FindLook, a pílula de contorno "Sou Lojista"). */
+  acaoSecundaria?: AcaoDoCabecalho;
+  /** Faixa transparente sobre a capa até rolar (padrão: sim, no modelo faixa). */
+  transparenteNoTopo?: boolean;
+  /** Na faixa, o logo vira o símbolo ao rolar (padrão: sim). */
+  iconeAoRolar?: boolean;
+  /** A partir de qual largura aparece o cabeçalho de computador: "md" (768 px, padrão aqui), "lg" ou "xl". */
+  telaLarga?: "md" | "lg" | "xl";
+  /** O link do produto (por exemplo, o Link do Next.js) no lugar do <a>. */
+  comoLink?: React.ElementType;
+  /** Onde a folha do menu do celular é montada (demonstrações). Padrão: body. */
+  containerDoMenu?: HTMLElement | null;
 };
 
 const ROLADO_APOS = 8;
@@ -97,14 +111,22 @@ function CabecalhoDoSite({
   tela = "auto",
   textos,
   className,
+  acaoSecundaria,
+  transparenteNoTopo = true,
+  iconeAoRolar = true,
+  telaLarga = "md",
+  comoLink,
+  containerDoMenu,
 }: CabecalhoDoSiteProps) {
+  const A = (comoLink ?? "a") as React.ElementType;
   const tx = { principal: "Principal", menu: "Menu", abrirMenu: "Abrir menu", fecharMenu: "Fechar menu", ...textos };
   const [aberto, setAberto] = React.useState(false);
   const { rolado, escondido, mostrar } = useRolagem(raiz, esconderAoRolar, 72);
   const escuro = superficie === "escura" && !rolado;
   // Classes por tela: "auto" usa o ponto de quebra md; "celular"/"computador" fixam uma das duas (demonstrações).
-  const soComputador = tela === "auto" ? "hidden md:flex" : tela === "computador" ? "flex" : "hidden";
-  const soCelular = tela === "auto" ? "flex md:hidden" : tela === "celular" ? "flex" : "hidden";
+  const LARGA = { md: ["hidden md:flex", "flex md:hidden"], lg: ["hidden lg:flex", "flex lg:hidden"], xl: ["hidden xl:flex", "flex xl:hidden"] } as const;
+  const soComputador = tela === "auto" ? LARGA[telaLarga][0] : tela === "computador" ? "flex" : "hidden";
+  const soCelular = tela === "auto" ? LARGA[telaLarga][1] : tela === "celular" ? "flex" : "hidden";
   const pilulaNoComputador = modelo === "pilula";
 
   const simbolo = logo?.simbolo ?? <Logo variante="simbolo" className="h-10" />;
@@ -117,21 +139,21 @@ function CabecalhoDoSite({
   const links = (
     <nav aria-label={tx.principal} className="flex items-center gap-6 lg:gap-8">
       {itens.map(i => (
-        <a
+        <A
           key={i.id}
           href={i.href}
           aria-current={i.id === atual ? "page" : undefined}
           className={cn("whitespace-nowrap rounded-sm text-body-sm font-semibold decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] aria-[current=page]:underline", corLink, foco)}
         >
           {i.rotulo}
-        </a>
+        </A>
       ))}
     </nav>
   );
 
   const botaoAcao = acao && (
     React.createElement(
-      acao.href ? "a" : "button",
+      acao.href ? A : "button",
       {
         ...(acao.href ? { href: acao.href } : { type: "button" }),
         onClick: acao.onClick,
@@ -149,10 +171,27 @@ function CabecalhoDoSite({
     )
   );
 
+  const botaoSecundario = (extra?: string, aoClicar?: () => void) => acaoSecundaria && React.createElement(
+    acaoSecundaria.href ? A : "button",
+    {
+      ...(acaoSecundaria.href ? { href: acaoSecundaria.href } : { type: "button" }),
+      onClick: () => { aoClicar?.(); acaoSecundaria.onClick?.(); },
+      "data-slot": "cabecalho-acao-secundaria",
+      className: cn(
+        "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)] [&_svg]:size-4",
+        escuro ? "text-white hover:bg-white/15" : "text-foreground hover:bg-accent",
+        foco,
+        extra,
+      ),
+    },
+    acaoSecundaria.icone,
+    acaoSecundaria.rotulo,
+  );
+
   const linkInicio = (conteudo: React.ReactNode, extra?: string) => (
-    <a href={inicioHref} aria-label={rotuloInicio} className={cn("flex min-h-11 min-w-11 shrink-0 items-center rounded-sm", foco, extra)}>
+    <A href={inicioHref} aria-label={rotuloInicio} className={cn("flex min-h-11 min-w-11 shrink-0 items-center rounded-sm", foco, extra)}>
       {conteudo}
-    </a>
+    </A>
   );
 
   return (
@@ -183,16 +222,17 @@ function CabecalhoDoSite({
             {/* Dentro da pílula a superfície é sempre clara */}
             <nav aria-label={tx.principal} className="flex items-center gap-6 lg:gap-8">
               {itens.map(i => (
-                <a
+                <A
                   key={i.id}
                   href={i.href}
                   aria-current={i.id === atual ? "page" : undefined}
                   className={cn("whitespace-nowrap rounded-sm text-body-sm font-semibold text-foreground decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] hover:text-primary-text aria-[current=page]:text-primary-text aria-[current=page]:underline aria-[current=page]:decoration-primary", foco)}
                 >
                   {i.rotulo}
-                </a>
+                </A>
               ))}
             </nav>
+            {botaoSecundario("text-foreground hover:bg-accent")}
             {acao && React.cloneElement(botaoAcao as React.ReactElement<{ className?: string }>, {
               className: cn(
                 "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-foreground px-6 text-body-sm font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-foreground hover:text-background [&_svg]:size-4",
@@ -206,14 +246,15 @@ function CabecalhoDoSite({
           className={cn(
             soComputador,
             "border-b",
-            rolado ? "border-border bg-card/85 shadow-sm backdrop-blur-xl" : "border-transparent",
+            rolado || !transparenteNoTopo ? "border-border bg-card/85 shadow-sm backdrop-blur-xl" : "border-transparent",
             movimento,
           )}
         >
           <header className="mx-auto flex h-[4.5rem] w-full max-w-7xl items-center justify-between gap-6 px-6 lg:px-10">
-            {linkInicio(rolado ? <span className="motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95">{simbolo}</span> : completo)}
+            {linkInicio(rolado && iconeAoRolar ? <span className="motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95">{simbolo}</span> : completo)}
             <div className="flex items-center gap-6 lg:gap-8">
               {links}
+              {acaoSecundaria && <span className="-mr-4 flex">{botaoSecundario()}</span>}
               {botaoAcao}
             </div>
           </header>
@@ -242,10 +283,10 @@ function CabecalhoDoSite({
             >
               <Menu aria-hidden className="size-6" />
             </DialogPrimitive.Trigger>
-            <DialogPrimitive.Portal>
+            <DialogPrimitive.Portal container={containerDoMenu ?? undefined}>
               <DialogPrimitive.Overlay
                 data-slot="cabecalho-menu-fundo"
-                className="fixed inset-0 z-50 bg-sobreposicao backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 motion-reduce:animate-none"
+                className="fixed inset-0 z-50 bg-sobreposicao data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0 motion-reduce:animate-none"
               />
               <DialogPrimitive.Content
                 data-slot="cabecalho-menu"
@@ -264,7 +305,7 @@ function CabecalhoDoSite({
                 <DialogPrimitive.Title className="sr-only">{tx.menu}</DialogPrimitive.Title>
                 <nav aria-label={tx.principal} className="mt-1 grid gap-1 overflow-y-auto">
                   {itens.map(i => (
-                    <a
+                    <A
                       key={i.id}
                       href={i.href}
                       aria-current={i.id === atual ? "page" : undefined}
@@ -277,11 +318,11 @@ function CabecalhoDoSite({
                     >
                       {i.rotulo}
                       <ChevronRight aria-hidden className="size-4 text-primary-text" />
-                    </a>
+                    </A>
                   ))}
                 </nav>
                 {acao && React.createElement(
-                  acao.href ? "a" : "button",
+                  acao.href ? A : "button",
                   {
                     ...(acao.href ? { href: acao.href } : { type: "button" }),
                     onClick: () => { setAberto(false); acao.onClick?.(); },
@@ -293,6 +334,7 @@ function CabecalhoDoSite({
                   acao.icone,
                   acao.rotulo,
                 )}
+                {acaoSecundaria && botaoSecundario(cn("mt-2 h-12 w-full rounded-md border border-input text-body text-foreground hover:bg-accent", !acao && "mt-4"), () => setAberto(false))}
               </DialogPrimitive.Content>
             </DialogPrimitive.Portal>
           </DialogPrimitive.Root>

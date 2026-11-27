@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { UploadCloud, FileText, FileSpreadsheet, FileImage, File as FileIcon, X, RotateCcw, CheckCircle2, AlertCircle, Loader2, Camera, ImagePlus, Star, Trash2 } from "lucide-react";
+import { UploadCloud, FileText, FileSpreadsheet, FileImage, File as FileIcon, X, RotateCcw, CheckCircle2, Loader2, Camera, ImagePlus, Star, Trash2, XCircle } from "lucide-react";
 import { cn } from "./utils";
 
 /* ─────────────────────────────────────────────────────────────
@@ -213,13 +213,12 @@ export function UploadDropzone({
 
   return (
     <div className={cn("w-full", className)}>
+      {/* Acessibilidade (27/11/2026): a área não é mais um "botão" com outro botão dentro (nested-interactive). O campo de
+          arquivo de verdade recebe o foco (Tab) e abre a escolha com Enter ou espaço; o <label> dele cobre a área toda,
+          então clicar em qualquer lugar também abre; arrastar e soltar continua na área. O botão de foto fica por cima. */}
       <div
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        aria-disabled={disabled}
-        aria-describedby={`${id}-hint`}
-        onClick={() => !disabled && inputRef.current?.click()}
-        onKeyDown={e => { if ((e.key === "Enter" || e.key === " ") && !disabled) { e.preventDefault(); inputRef.current?.click(); } }}
+        data-slot="upload-dropzone"
+        data-disabled={disabled ? "" : undefined}
         onDragOver={e => { e.preventDefault(); if (!disabled) setDragging(true); }}
         onDragLeave={() => setDragging(false)}
         onDrop={e => { e.preventDefault(); setDragging(false); handle(e.dataTransfer.files); }}
@@ -229,18 +228,21 @@ export function UploadDropzone({
           disabled ? "cursor-not-allowed border-border bg-muted/40 opacity-60" :
           dragging ? "border-primary bg-[var(--primary-muted)] scale-[1.01] shadow-[var(--shadow-md)]" :
           error ? "border-error/60 bg-error/5" :
-          "border-border bg-card hover:border-[var(--border-strong)] hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "border-border bg-card hover:border-[var(--border-strong)] hover:bg-accent/60 has-[input:focus-visible]:ring-2 has-[input:focus-visible]:ring-ring has-[input:focus-visible]:ring-offset-2",
           size === "compact" && "flex-row justify-start gap-4 text-left rounded-lg",
         )}
       >
+        <label htmlFor={`${id}-arquivo`} className={cn("absolute inset-0 z-0 rounded-[inherit]", disabled ? "cursor-not-allowed" : "cursor-pointer")}>
+          <span className="sr-only">{typeof title === "string" ? title : (multiple ? tx.escolhaArquivos : tx.escolhaArquivo)}</span>
+        </label>
         <span className={cn(
-          "flex shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] transition-transform duration-200 group-hover:-translate-y-0.5",
+          "pointer-events-none relative flex shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] transition-transform duration-200 group-hover:-translate-y-0.5",
           size === "compact" ? "h-10 w-10" : "h-14 w-14",
           dragging && "scale-110",
         )}>
           {icon ?? <UploadCloud className={cn(primaryText, size === "compact" ? "h-5 w-5" : "h-6 w-6")} strokeWidth={1.75} aria-hidden />}
         </span>
-        <div className="min-w-0">
+        <div className="pointer-events-none relative min-w-0">
           <p className={cn("font-semibold text-foreground", size === "compact" ? "text-body-sm" : "text-body")}>
             {title ?? (dragging ? tx.solteParaEnviar : <>{tx.arrasteOu} <span className={cn(primaryText, "underline-offset-4 group-hover:underline")}>{multiple ? tx.escolhaArquivos : tx.escolhaArquivo}</span></>)}
           </p>
@@ -252,17 +254,17 @@ export function UploadDropzone({
           <button
             type="button"
             onClick={e => { e.stopPropagation(); captureRef.current?.click(); }}
-            className="mt-1 inline-flex h-9 items-center gap-2 rounded-full border border-border bg-background px-4 text-body-sm font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="relative z-10 mt-1 inline-flex h-9 items-center gap-2 rounded-full border border-input bg-background px-4 text-body-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Camera className="h-4 w-4" aria-hidden /> {actionLabel ?? tx.tirarFoto}
           </button>
         )}
-        <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} multiple={multiple} accept={accept?.join(",")} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />
-        {capture && <input ref={captureRef} type="file" className="sr-only" tabIndex={-1} accept="image/*" capture={capture} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />}
+        <input ref={inputRef} id={`${id}-arquivo`} type="file" className="sr-only" aria-describedby={description || hint ? `${id}-hint` : undefined} multiple={multiple} accept={accept?.join(",")} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />
+        {capture && <input ref={captureRef} type="file" className="sr-only" tabIndex={-1} aria-label={actionLabel ?? tx.tirarFoto} accept="image/*" capture={capture} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />}
       </div>
       {error && (
         <p role="alert" className="mt-2 flex items-start gap-1 text-body-sm text-error-text">
-          <AlertCircle className="mt-1 h-4 w-4 shrink-0" aria-hidden />{error}
+          <XCircle className="mt-1 h-4 w-4 shrink-0" aria-hidden />{error}
         </p>
       )}
     </div>
@@ -296,7 +298,7 @@ export function UploadItem({
             item.status === "concluido" ? "text-success" : item.status === "erro" ? "text-error-text" : "text-muted-foreground")}>
             {item.status === "enviando" && <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />}
             {item.status === "concluido" && <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />}
-            {item.status === "erro" && <AlertCircle className="h-3.5 w-3.5" aria-hidden />}
+            {item.status === "erro" && <XCircle className="h-3.5 w-3.5" aria-hidden />}
             {statusLabel}
           </span>
         </div>
@@ -375,8 +377,9 @@ export function ImageUpload({
             {maxSize && <span className="text-caption">{tx.ate(formatBytes(maxSize))}</span>}
           </span>
         )}
-        <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} accept={accept.join(",")} capture={capture} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
       </div>
+      {/* O campo de arquivo fica fora do botão (nenhum controle dentro de outro); ele só é aberto pelo botão. */}
+      <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} aria-label={label} accept={accept.join(",")} capture={capture} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
       {value && (
         <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 text-label font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
           <Trash2 className="h-3.5 w-3.5" aria-hidden /> {tx.removerBotao}
@@ -428,7 +431,7 @@ export function ImageGrid({
                   <span className="h-1.5 w-full overflow-hidden rounded-full bg-white/40"><span className="block h-full rounded-full bg-primary transition-[width]" style={{ width: `${img.progress ?? 0}%` }} /></span>
                 </span>
               )}
-              {img.status === "erro" && <span className="absolute inset-0 flex items-center justify-center bg-error/70 text-white"><AlertCircle className="h-6 w-6" aria-hidden /></span>}
+              {img.status === "erro" && <span className="absolute inset-0 flex items-center justify-center bg-error/70 text-white"><XCircle className="h-6 w-6" aria-hidden /></span>}
               {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-1 text-caption font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary-text" aria-hidden /> {tx.capa}</span>}
               <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 p-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label={tx.definirCapa} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
@@ -448,7 +451,7 @@ export function ImageGrid({
               <span className="px-2 text-center text-caption font-semibold leading-tight text-foreground">{addLabel}</span>
               <span className="text-caption">{images.length}/{max}</span>
             </button>
-            <input ref={inputRef} type="file" multiple className="sr-only" tabIndex={-1} accept={accept.join(",")} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
+            <input ref={inputRef} type="file" multiple className="sr-only" tabIndex={-1} aria-label={addLabel} accept={accept.join(",")} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
           </li>
         )}
       </ul>

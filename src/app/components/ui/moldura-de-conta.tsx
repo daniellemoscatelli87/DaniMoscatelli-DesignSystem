@@ -15,6 +15,8 @@ import { Selo } from "./selo";
  * Alinhamento: logo, selo, título e texto alinhados à esquerda na mesma borda do formulário (a mesma coluna); no
  * celular o card ocupa a largura toda com 16 px de margem e 24 px de respiro. O rodapé fica embaixo do formulário,
  * separado por um divisor, alinhado à mesma borda.
+ * `lateral`: a coluna da marca à esquerda do formulário, do 768 px em diante (no celular ela some); `comoLink`: o
+ * link do produto no logo. Mesma API da MolduraDeConta do DS FindLook (27/11/2026).
  * Acessibilidade: <main> com o título em <h1>; o link do logo tem nome ("Página inicial"); mensagens de erro e
  * sucesso vão num Alert dentro do formulário (aria-live no produto).
  */
@@ -32,6 +34,10 @@ export type MolduraDeContaProps = Omit<React.ComponentProps<"main">, "title"> & 
   rodape?: React.ReactNode;
   /** Ocupa a altura da tela (padrão) ou só o conteúdo (demonstrações). */
   telaCheia?: boolean;
+  /** Coluna da marca ao lado do formulário (768 px ou mais; no celular ela some). Mesma prop do DS FindLook. */
+  lateral?: React.ReactNode;
+  /** O link do produto no logo, no lugar do <a> (por exemplo, o Link do Next.js). */
+  comoLink?: React.ElementType;
 };
 
 function MolduraDeConta({
@@ -43,24 +49,32 @@ function MolduraDeConta({
   rotuloInicio = "Ir para a página inicial",
   rodape,
   telaCheia = true,
+  lateral,
+  comoLink,
   children,
   className,
   ...props
 }: MolduraDeContaProps) {
+  const Link = comoLink ?? "a";
   return (
     <main
       data-slot="moldura-de-conta"
       className={cn("flex w-full items-center justify-center bg-background px-4 py-12", telaCheia && "min-h-svh", className)}
       {...props}
     >
-      <div className="w-full max-w-md rounded-xl border border-border bg-card p-6 text-card-foreground sm:p-8 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-[var(--duration-slow)]">
-        <a
+      <div className={cn(
+        "w-full overflow-hidden rounded-xl border border-border bg-card text-card-foreground motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-[var(--duration-slow)]",
+        lateral ? "max-w-4xl md:grid md:grid-cols-[0.9fr_1.1fr]" : "max-w-md",
+      )}>
+        {lateral && <div className="hidden border-r border-border bg-primary-muted p-8 md:flex md:flex-col md:justify-center">{lateral}</div>}
+        <div className="p-6 sm:p-8">
+        <Link
           href={inicioHref}
           aria-label={rotuloInicio}
           className="mb-8 inline-flex rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           {logo ?? <Logo variante="horizontal" superficie="auto" className="h-12" />}
-        </a>
+        </Link>
         {selo && (
           <div className="mb-3">
             {typeof selo === "string" ? <Selo size="sm" tone="primary">{selo}</Selo> : selo}
@@ -74,6 +88,7 @@ function MolduraDeConta({
             {rodape}
           </div>
         )}
+        </div>
       </div>
     </main>
   );

@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { EstadoVazio } from "../ui/estado-vazio";
+import { Calendar } from "../ui/calendar";
 
 /* Campos (27/11/2026): o campo padrão, e-mail com sugestão, estado e cidade, máscaras, busca, copiar, vários e-mails,
    chips de filtro, cartões de escolha, botão com estados de envio e a tabela que se adapta. */
@@ -189,6 +190,17 @@ function DemoTabela() {
   );
 }
 
+function DemoCalendario() {
+  const [data, setData] = useState<Date | undefined>(new Date(2026, 10, 27));
+  return (
+    <ShowcaseCard>
+      <div className="mx-auto w-fit rounded-xl border border-border bg-card">
+        <Calendar mode="single" selected={data} onSelect={setData} defaultMonth={new Date(2026, 10, 1)} />
+      </div>
+    </ShowcaseCard>
+  );
+}
+
 export function CamposShowcase() {
   const { t } = useI18n();
   return (
@@ -316,6 +328,20 @@ export function CamposShowcase() {
 <Button variant="exclusao-contorno"><Trash2 /> Excluir</Button>`}
       >
         <DemoBotoes />
+      </SectionBlock>
+
+      <SectionBlock
+        id="campos-calendario"
+        titulo={t("Date picker (Calendar)", "Seletor de data (Calendar)")}
+        quando={t(
+          "The month to pick a date in a field. With a mouse, 32 px days; on touch screens, 40 px days with a 44 px touch area, so the whole month fits in 304 px and fits a phone card from 320 px. The chosen day uses the selected pink, today has an outline. To see the month with appointments, use AgendaDoMes.",
+          "O mês para escolher uma data num campo. Com mouse, dias de 32 px; no toque, dias de 40 px com área de toque de 44 px, para o mês inteiro caber em 304 px e entrar num card de celular a partir de 320 px. O dia escolhido fica no rosa de selecionado e hoje tem contorno. Para ver o mês com compromissos, use a AgendaDoMes.",
+        )}
+        arquivo="ui/calendar.tsx"
+        nomes={["Calendar"]}
+        api={`<Calendar mode="single" selected={data} onSelect={setData} />`}
+      >
+        <DemoCalendario />
       </SectionBlock>
 
       <SectionBlock

@@ -3,7 +3,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Selo } from "@/app/components/ui/selo";
 import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
-import { MapPin, Plus, SearchX, Sparkles } from "lucide-react";
+import { MapPin, Plus, SearchX, Sparkles, XCircle, AlertCircle } from "lucide-react";
 import {
   CheckCircle, CheckCircle2, AlertCircle, AlertTriangle, TriangleAlert, Info, X,
   Loader2, Clock, Check,
@@ -69,7 +69,7 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     border: "border-warning/20", iconColor: "text-warning-text", titleColor: "text-foreground",
   },
   error: {
-    icon: TriangleAlert, title: { en: "Deployment failed", pt: "Falha no deploy" },
+    icon: XCircle, title: { en: "Deployment failed", pt: "Falha no deploy" },
     msg: { en: "Build #1042 failed due to a type error in src/app/App.tsx.", pt: "O build #1042 falhou por um erro de tipo em src/app/App.tsx." },
     bg: "bg-[var(--error-muted,rgba(140,27,27,0.07))]",
     border: "border-error/20", iconColor: "text-error-text", titleColor: "text-foreground",
@@ -100,8 +100,8 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
 /* ── Toast ── */
 const toastTypes = [
   { tipo: "success", label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success-text", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
-  { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error-text", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
-  { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning-text",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
+  { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: XCircle, color: "text-error-text", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
+  { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertCircle,color: "text-warning-text",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
   { tipo: "loading", label: "Loading", icon: Loader2,     color: "text-info-text",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
 ];
 
@@ -244,7 +244,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
               {t("When the message fits in one sentence, use the Alert without AlertTitle. The sentence becomes the main information: it takes the main text colour, sits centred on the icon and wraps evenly. It is automatic: just leave out the title.", "Quando a mensagem cabe numa frase, use o Alert sem AlertTitle. A frase passa a ser a informação principal: fica na cor do texto principal, centralizada na altura do ícone e com a quebra de linha equilibrada. É automático: basta não usar o título.")}
             </p>
             <div className="space-y-3">
-              <UiAlert variant="error"><TriangleAlert aria-hidden /><AlertDescription>{t("Wrong email or password. Check them and try again.", "E-mail ou senha incorretos. Confira e tente de novo.")}</AlertDescription></UiAlert>
+              <UiAlert variant="error"><XCircle aria-hidden /><AlertDescription>{t("Wrong email or password. Check them and try again.", "E-mail ou senha incorretos. Confira e tente de novo.")}</AlertDescription></UiAlert>
               <UiAlert variant="success"><CheckCircle2 aria-hidden /><AlertDescription>{t("Changes saved.", "Alterações salvas.")}</AlertDescription></UiAlert>
               <UiAlert variant="info"><Info aria-hidden /><AlertDescription>{t("You can change this later in Settings.", "Você pode mudar isso depois em Configurações.")}</AlertDescription></UiAlert>
             </div>

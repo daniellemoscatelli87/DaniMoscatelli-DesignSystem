@@ -85,7 +85,7 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
                 type="button"
                 onClick={() => setPausadaPeloBotao(p => !p)}
                 aria-label={pausadaPeloBotao ? tx.continuar : tx.pausar}
-                className="flex size-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex size-11 shrink-0 items-center justify-center rounded-full border border-input bg-card text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {pausadaPeloBotao ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
               </button>

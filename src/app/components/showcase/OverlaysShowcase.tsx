@@ -20,6 +20,9 @@ import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } fr
 import { AlertDialog, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../ui/alert-dialog";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Calendar } from "../ui/calendar";
+import { CalendarDays } from "lucide-react";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -171,6 +174,43 @@ const accordionStyles = `
   .animate-accordion-up   { animation: accordion-up   0.18s ease-in; }
 `;
 
+/* Campo de data dentro de uma janela (27/11/2026): o Popover com o Calendar abre ancorado no campo, por cima da janela. */
+function DataNaJanela() {
+  const { t } = useI18n();
+  const [aberta, setAberta] = useState(false);
+  const [data, setData] = useState<Date | undefined>();
+  const [escolhendo, setEscolhendo] = useState(false);
+  const fmt = (d: Date) => d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+  return (
+    <>
+      <Button variant="outline" onClick={() => setAberta(true)} data-testid="abrir-janela-data">{t("Schedule a visit", "Agendar uma visita")}</Button>
+      <Dialog open={aberta} onOpenChange={setAberta}>
+        <DialogContent>
+          <DialogTitle>{t("Schedule a visit", "Agendar uma visita")}</DialogTitle>
+          <DialogDescription>{t("Choose the day of the visit.", "Escolha o dia da visita.")}</DialogDescription>
+          <div className="grid gap-2">
+            <label htmlFor="data-na-janela" className="text-body-sm font-semibold text-foreground">{t("Date", "Data")}</label>
+            <Popover open={escolhendo} onOpenChange={setEscolhendo}>
+              <PopoverTrigger asChild>
+                <Button id="data-na-janela" variant="outline" className="w-full justify-start font-normal" data-testid="campo-data">
+                  <CalendarDays aria-hidden />{data ? fmt(data) : t("Choose a date", "Escolha uma data")}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="start" className="w-auto p-0" data-testid="popover-data">
+                <Calendar mode="single" selected={data} onSelect={(d) => { setData(d); setEscolhendo(false); }} />
+              </PopoverContent>
+            </Popover>
+          </div>
+          <div className="flex justify-end gap-2">
+            <DialogClose asChild><Button variant="outline">{t("Cancel", "Cancelar")}</Button></DialogClose>
+            <Button onClick={() => setAberta(false)} disabled={!data}>{t("Schedule", "Agendar")}</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
+
 export function OverlaysShowcase() {
   const { t, bi } = useI18n();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -276,6 +316,13 @@ export function OverlaysShowcase() {
       {/* ── DIALOGS ── */}
       <section id="dialogs">
         <SectionHeader title={t("Dialogs & Modals", "Diálogos e modais")} description={t("Focused overlay panels for forms, confirmations, and contextual actions.", "Painéis sobrepostos e focados para formulários, confirmações e ações contextuais.")} />
+        <SubSection title={t("Date field inside a dialog", "Campo de data dentro de uma janela")}>
+          <ShowcaseCard>
+            <p className="mb-4 max-w-2xl text-body-sm text-muted-foreground">{t("The date picker (Popover + Calendar) opens anchored to the field, above the dialog, and closes on choosing.", "O seletor de data (Popover + Calendar) abre ancorado no campo, por cima da janela, e fecha ao escolher.")}</p>
+            <DataNaJanela />
+          </ShowcaseCard>
+        </SubSection>
+
         <SubSection title={t("Dialog Variants", "Variantes de diálogo")}>
           <ShowcaseCard>
             {/* Empilhados na largura toda no celular (mesma largura); lado a lado a partir de 640 px. */}
@@ -511,6 +558,7 @@ const overlaysTokenGroups = (t: TFn): TokenGroup[] => [
       { name: "--popover-foreground", description: t("Floating panel text", "Texto do painel flutuante"),          light: "#131A27",             dark: "#E4E9F0",             isColor: true },
       { name: "--card",               description: t("Dialog card background", "Fundo do card do diálogo"),       light: "#FFFFFF",             dark: "rgba(19,26,39,0.75)", isColor: true },
       { name: "--card-foreground",    description: t("Dialog card text", "Texto do card do diálogo"),             light: "#131A27",             dark: "#E4E9F0",             isColor: true },
+      { name: "--sobreposicao",       description: t("Overlay behind dialogs, sheets, drawers, the side panel and the phone menu", "Véu atrás de janelas, folhas, gavetas, do painel lateral e do menu do celular"), light: "rgba(13,17,25,0.50)", dark: "rgba(13,17,25,0.50)", isColor: true },
     ],
   },
   {

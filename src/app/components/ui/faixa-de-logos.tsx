@@ -74,7 +74,7 @@ function FaixaDeLogos({ logos, rotulo, duracao = 48, colorirAoPassar = true, tex
           type="button"
           onClick={() => setPausada(p => !p)}
           aria-label={pausada ? tx.continuar : tx.pausar}
-          className="flex size-11 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="flex size-11 items-center justify-center rounded-full border border-input bg-card text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {pausada ? <Play aria-hidden className="size-4" /> : <Pause aria-hidden className="size-4" />}
         </button>

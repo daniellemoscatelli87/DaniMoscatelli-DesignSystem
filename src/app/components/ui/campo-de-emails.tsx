@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AlertCircle, X } from "lucide-react";
+import { X, XCircle } from "lucide-react";
 import { cn } from "./utils";
 import { sugestoesDeEmail } from "./campo-de-email";
 
@@ -97,7 +97,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
               className="inline-flex min-h-8 toque:min-h-11 min-w-0 items-center gap-1 rounded-full px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`${tx.editar} ${email}${ok ? "" : ` (${tx.invalido})`}`}
             >
-              {!ok && <AlertCircle aria-hidden className="size-4 shrink-0" />}
+              {!ok && <XCircle aria-hidden className="size-4 shrink-0" />}
               <span className="truncate">{email}</span>
             </button>
             <button
@@ -150,7 +150,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
             type="button"
             onMouseDown={e => e.preventDefault()}
             onClick={() => { adicionar(o); setTexto(""); inputRef.current?.focus(); }}
-            className="inline-flex min-h-9 max-w-full items-center rounded-full border border-[var(--border-strong)] bg-card px-3 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring toque:min-h-11 toque:px-4"
+            className="inline-flex min-h-9 max-w-full items-center rounded-full border border-input bg-card px-3 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring toque:min-h-11 toque:px-4"
           >
             <span className="truncate">{o}</span>
           </button>

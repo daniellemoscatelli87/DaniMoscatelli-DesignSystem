@@ -66,7 +66,7 @@ function CampoCopiavel({ valor, rotulo, mostrarRotulo = false, textos, onCopiar,
           className={cn(
             "inline-flex h-10 toque:h-11 shrink-0 items-center justify-center gap-2 rounded-md border px-4 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-            estado === "copiado" ? "border-[var(--success-text)] bg-success-muted text-success-text" : "border-[var(--border-strong)] bg-card text-foreground hover:bg-accent",
+            estado === "copiado" ? "border-[var(--success-text)] bg-success-muted text-success-text" : "border-input bg-card text-foreground hover:bg-accent",
           )}
         >
           {estado === "copiado" ? <Check aria-hidden className="size-4 motion-safe:animate-in motion-safe:zoom-in-50" /> : <Copy aria-hidden className="size-4" />}

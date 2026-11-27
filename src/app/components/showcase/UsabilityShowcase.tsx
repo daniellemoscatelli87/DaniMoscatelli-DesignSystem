@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Eye, Compass, Undo2, MessageSquare, Gauge, Layers, Check, Loader2, Trash2, Inbox, AlertTriangle, RotateCcw, FileText,
+  Eye, Compass, Undo2, MessageSquare, Gauge, Layers, Check, Loader2, Trash2, Inbox, RotateCcw, FileText, XCircle,
 } from "lucide-react";
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { EstadoVazio } from "../ui/estado-vazio";
@@ -197,7 +197,7 @@ function StatesDemo() {
             <EstadoVazio
               tamanho="sm"
               nivel={3}
-              icone={<AlertTriangle />}
+              icone={<XCircle />}
               titulo={t("We couldn't load your projects", "Não foi possível carregar seus projetos")}
               descricao={t("Check your connection and try again. Your work is safe.", "Verifique sua conexão e tente novamente. Seu trabalho está seguro.")}
               acoes={<Button variant="outline">{t("Try again", "Tentar novamente")}</Button>}

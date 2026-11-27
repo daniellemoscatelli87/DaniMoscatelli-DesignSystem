@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CheckCircle2, AlertCircle, AlertTriangle, Info, Loader2 } from "lucide-react";
+import { CheckCircle2, AlertCircle, Info, Loader2, XCircle } from "lucide-react";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 /** Tema atual: segue a classe .dark do documento (sem depender de next-themes). */
@@ -30,8 +30,8 @@ const Toaster = ({ ...props }: ToasterProps) => {
       position="bottom-right"
       icons={{
         success: <CheckCircle2 className="h-[18px] w-[18px] text-success" aria-hidden />,
-        error: <AlertCircle className="h-[18px] w-[18px] text-error-text" aria-hidden />,
-        warning: <AlertTriangle className="h-[18px] w-[18px] text-warning-text" aria-hidden />,
+        error: <XCircle className="h-[18px] w-[18px] text-error-text" aria-hidden />,
+        warning: <AlertCircle className="h-[18px] w-[18px] text-warning-text" aria-hidden />,
         info: <Info className="h-[18px] w-[18px] text-info" aria-hidden />,
         loading: <Loader2 className="h-[18px] w-[18px] animate-spin text-info" aria-hidden />,
       }}

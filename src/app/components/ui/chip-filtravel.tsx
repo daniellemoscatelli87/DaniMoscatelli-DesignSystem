@@ -23,9 +23,11 @@ type ChipFiltravelProps = Omit<React.ComponentProps<"button">, "onChange"> & {
   onAtivoChange?: (ativo: boolean) => void;
   /** Quantidade opcional depois do texto ("Novas 3"). */
   contagem?: number;
+  /** Ícone antes do texto (some quando o chip liga: o check toma o lugar). Mesma prop do DS FindLook. */
+  icone?: React.ReactNode;
 };
 
-function ChipFiltravel({ ativo, onAtivoChange, contagem, className, children, onClick, ...props }: ChipFiltravelProps) {
+function ChipFiltravel({ ativo, onAtivoChange, contagem, icone, className, children, onClick, ...props }: ChipFiltravelProps) {
   return (
     <button
       type="button"
@@ -37,12 +39,16 @@ function ChipFiltravel({ ativo, onAtivoChange, contagem, className, children, on
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         ativo
           ? "border-primary/40 bg-primary-suave text-primary-text"
-          : "border-border bg-card text-foreground hover:border-[var(--border-strong)] hover:bg-accent",
+          : "border-input bg-card text-foreground hover:bg-accent",
         className,
       )}
       {...props}
     >
-      {ativo && <Check aria-hidden className="size-4 motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-[var(--duration-fast)]" />}
+      {ativo ? (
+        <Check aria-hidden className="size-4 motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-[var(--duration-fast)]" />
+      ) : (
+        icone && <span aria-hidden className="inline-flex text-muted-foreground [&>svg]:size-4">{icone}</span>
+      )}
       {children}
       {contagem !== undefined && (
         <span className={cn("rounded-full px-2 text-label font-semibold tabular-nums", ativo ? "bg-card text-primary-text" : "bg-muted text-muted-foreground")}>{contagem}</span>

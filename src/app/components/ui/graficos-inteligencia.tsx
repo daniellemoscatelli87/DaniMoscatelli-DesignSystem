@@ -6,6 +6,9 @@ import { ChevronDown, Info, Lightbulb } from "lucide-react";
 import { cn } from "./utils";
 import { TOTAL_DE_TONS, TOM_NEUTRO, tonsPorImportancia, tomDosOutros, tonsDeContexto } from "./graficos-paleta";
 
+
+// No servidor (renderização no servidor) não existe layout: useEffect lá, useLayoutEffect no navegador (27/11/2026).
+const useLayoutSeguro = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
 export { TOTAL_DE_TONS, TOM_NEUTRO, TONS_DA_ESCALA } from "./graficos-paleta";
 
 /**
@@ -179,7 +182,7 @@ export const soma = (xs: number[]) => xs.reduce((s, x) => s + x, 0);
 export function useLargura<T extends HTMLElement>() {
   const ref = React.useRef<T>(null);
   const [largura, setLargura] = React.useState(0);
-  React.useLayoutEffect(() => {
+  useLayoutSeguro(() => {
     const el = ref.current;
     if (!el) return;
     setLargura(Math.round(el.clientWidth));

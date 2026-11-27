@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useI18n } from "../../i18n";
 import {
-  Copy, Check, ChevronRight, AlertTriangle, Sparkles,
-  RefreshCw, Palette, Code2, Layers, Lightbulb, Bot,
+  Copy, Check, ChevronRight, Sparkles, RefreshCw, Palette, Code2, Layers, Lightbulb, Bot, XCircle,
 } from "lucide-react";
 import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
 import { DataTable } from "./shared/Guidance";
@@ -425,7 +424,7 @@ export function TokensShowcase() {
           {/* Pitfalls */}
           <div className="rounded-lg border border-destructive/30 bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             <div className="px-5 py-3 border-b border-destructive/20 flex items-center gap-2" style={{ background: "rgba(212,77,77,0.05)" }}>
-              <AlertTriangle className="h-4 w-4 text-error-text shrink-0" />
+              <XCircle className="h-4 w-4 text-error-text shrink-0" aria-hidden />
               <p className="text-body-sm font-bold text-foreground">{t("Common pitfalls", "Armadilhas comuns")}</p>
             </div>
             <div className="px-5 py-4 space-y-3">

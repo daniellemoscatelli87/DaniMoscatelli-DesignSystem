@@ -7,7 +7,7 @@ export const display = "font-[family-name:var(--font-display)]";
 
 export function Mono({ children }: { children: React.ReactNode }) {
   return (
-    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1 py-1 rounded-sm bg-muted text-foreground border border-border">
+    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1 py-1 rounded-sm bg-muted text-foreground border border-border [overflow-wrap:break-word] [word-break:normal] [box-decoration-break:clone]">
       {children}
     </code>
   );
@@ -80,13 +80,19 @@ export function PrincipleGrid({ items, cols = "lg:grid-cols-3" }: { items: Princ
 }
 
 /**
- * Tabela de documentação que nunca rola para o lado (regra do DS: card nunca tem rolagem horizontal).
- * A partir de 768 px, a tabela; abaixo disso, cada linha vira um bloco com "Coluna: valor", um embaixo do outro.
+ * Tabela de documentação (a mesma nos dois DS, 27/11/2026). Regra do DS: card nunca rola na horizontal.
+ * - Com espaço (a partir de 576 px de largura da própria tabela), a tabela de sempre.
+ * - No estreito (celular), toda tabela vira lista: cada linha vira um bloco com o primeiro valor em destaque (o nome
+ *   da prop, a tecla, o token) e, embaixo, os outros valores. Com 3 colunas ou mais, cada valor leva o nome da coluna
+ *   antes ("Teclas: Enter"); com 2, a descrição vem direto, sem rótulo repetido.
+ * - Código (Mono) nunca quebra no meio da palavra: a quebra só acontece entre palavras, e uma palavra maior que a
+ *   linha inteira quebra só nesse caso extremo (overflow-wrap: break-word, não anywhere).
  */
 export function DataTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
+  const comRotulo = head.length >= 3;
   return (
-    <Panel className="overflow-hidden">
-      <table className="hidden w-full text-left text-body-sm md:table">
+    <Panel className="@container overflow-hidden">
+      <table className="hidden w-full text-left text-body-sm @xl:table">
         <thead>
           <tr className="border-b border-border bg-muted/50">
             {head.map(h => (
@@ -100,7 +106,7 @@ export function DataTable({ head, rows }: { head: string[]; rows: React.ReactNod
           {rows.map((r, i) => (
             <tr key={i} className="border-b border-border last:border-0">
               {r.map((c, j) => (
-                <td key={j} className={`px-4 py-3 align-top [overflow-wrap:anywhere] ${j === 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}>
+                <td key={j} className={`px-4 py-3 align-top [overflow-wrap:break-word] ${j === 0 ? "text-foreground font-medium" : "text-muted-foreground"}`}>
                   {c}
                 </td>
               ))}
@@ -108,12 +114,13 @@ export function DataTable({ head, rows }: { head: string[]; rows: React.ReactNod
           ))}
         </tbody>
       </table>
-      <ul className="m-0 list-none p-0 md:hidden">
+      <ul className="m-0 list-none p-0 @xl:hidden">
         {rows.map((r, i) => (
-          <li key={i} className="space-y-1 border-b border-border px-4 py-3 text-body-sm last:border-0">
+          <li key={i} className="border-b border-border px-4 py-3 text-body-sm last:border-0">
             {r.map((c, j) => (
-              <div key={j} className={j === 0 ? "font-semibold text-foreground" : "text-muted-foreground [overflow-wrap:anywhere]"}>
-                {j > 0 && <span className="mr-1 font-medium text-foreground">{head[j]}:</span>}{c}
+              <div key={j} className={j === 0 ? "font-semibold text-foreground [overflow-wrap:break-word]" : "mt-1 text-muted-foreground [overflow-wrap:break-word]"}>
+                {j > 0 && comRotulo && <span className="mr-1 font-medium text-foreground">{head[j]}:</span>}
+                {c}
               </div>
             ))}
           </li>

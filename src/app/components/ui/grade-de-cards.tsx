@@ -4,6 +4,9 @@ import * as React from "react";
 
 import { cn } from "./utils";
 
+
+// No servidor (renderização no servidor) não existe layout: useEffect lá, useLayoutEffect no navegador (27/11/2026).
+const useLayoutSeguro = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
 /**
  * GradeDeCards (regra da dona do produto, 27/11/2026)
  *
@@ -168,7 +171,7 @@ export const GradeDeCards = React.forwardRef<HTMLDivElement, GradeDeCardsProps>(
   }, [decidir, aplicar]);
 
   // Medição com renderização (primeira vez e em lista): data-medindo e cards na vertical; decide antes da pintura.
-  React.useLayoutEffect(() => {
+  useLayoutSeguro(() => {
     if (!medindo) {
       // as mudanças de DOM causadas pela própria medição não pedem outra medição
       observador.current?.takeRecords();

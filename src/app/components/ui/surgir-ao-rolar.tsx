@@ -3,6 +3,9 @@
 import * as React from "react";
 import { cn } from "./utils";
 
+
+// No servidor (renderização no servidor) não existe layout: useEffect lá, useLayoutEffect no navegador (27/11/2026).
+const useLayoutSeguro = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect;
 /**
  * SurgirAoRolar e TituloQueSurge (entrada ao rolar)
  *
@@ -88,7 +91,7 @@ export function useSurgirAoRolar<T extends HTMLElement>({ raiz, limiar = 0.15, m
     return () => window.clearTimeout(id);
   }, [estado, duracao]);
 
-  React.useLayoutEffect(() => {
+  useLayoutSeguro(() => {
     const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduzir || !("IntersectionObserver" in window)) return;
     setEstado("oculto");

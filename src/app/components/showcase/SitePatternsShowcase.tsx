@@ -4,7 +4,7 @@ import { CardDeArtigo } from "../ui/card-de-artigo";
 import { useI18n } from "../../i18n";
 import { PageHeader } from "./GetStartedShowcase";
 import { SectionHeader } from "./shared/SectionHeader";
-import { Panel, SubTitle } from "./shared/Guidance";
+import { DataTable, Mono, Panel, SubTitle } from "./shared/Guidance";
 import { RodapeSite } from "../ui/rodape-site";
 import { BotaoWhatsApp, linkWhatsApp } from "../ui/botao-whatsapp";
 import { AvisoProjeto } from "../ui/aviso-projeto";
@@ -644,21 +644,17 @@ function SecaoFrentes() {
           </div>
         </ItemDaGrade>
       </GradeDeCards>
-      <Panel className="p-5">
-        <SubTitle>{t("Props", "Props")}</SubTitle>
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-2 text-body-sm leading-relaxed text-muted-foreground md:grid-cols-2">
-          {[
+      <DataTable
+        head={["Prop", t("What it does", "O que faz")]}
+        rows={[
             ["icone, titulo, subtitulo, descricao, temas", t("Content. Topics are short (1 or 2 words); on wide screens they stay on one line.", "Conteúdo. Os temas são curtos (1 ou 2 palavras); em telas largas ficam numa linha só.")],
             ["tom", t("“escuro” (default, site) or “claro”.", "“escuro” (padrão, site) ou “claro”.")],
             ["numero + mostrarNumero", t("Large decorative number at the top right. Hidden on the site today.", "Número grande decorativo no canto superior direito. Escondido no site hoje.")],
             ["barra", t("Red bar that grows at the top on hover. Hidden on the site today.", "Barra vermelha que cresce no topo no hover. Escondida no site hoje.")],
             ["nivelTitulo", t("Heading level of the title (h3 by default).", "Nível do título (h3 por padrão).")],
             ["GradeDeFrentes", t("Grid of 1/2/3 columns; carousel with snap on phones (84% per card).", "Grade de 1/2/3 colunas; carrossel com encaixe no celular (84% por card).")],
-          ].map(([nome, desc]) => (
-            <li key={nome}><code className="font-[family-name:var(--font-mono)] text-foreground">{nome}</code>: {desc}</li>
-          ))}
-        </ul>
-      </Panel>
+          ].map(([nome, desc]) => [<Mono>{nome}</Mono>, desc])}
+      />
       <Orientacoes
         quando={[
           t("Areas of work, services or fronts of a programme: 3 to 6 items of the same kind.", "Frentes de atuação, serviços ou eixos de um programa: de 3 a 6 itens do mesmo tipo."),

@@ -73,7 +73,7 @@ function CampoDeEmail({ valor, onValorChange, dominios, textos, onFocus, onBlur,
                     onMouseDown={e => e.preventDefault()}
                     onClick={() => { onValorChange(o); setEmFoco(false); focarCampo(); }}
                     className={cn(
-                      "inline-flex min-h-9 toque:min-h-11 max-w-full items-center rounded-full border border-[var(--border-strong)] bg-card px-4 text-body-sm font-medium text-foreground transition-colors sm:px-3",
+                      "inline-flex min-h-9 toque:min-h-11 max-w-full items-center rounded-full border border-input bg-card px-4 text-body-sm font-medium text-foreground transition-colors sm:px-3",
                       "hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     )}
                   >

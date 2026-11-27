@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, CheckCircle2, XCircle } from "lucide-react";
 import { cn } from "./utils";
 
 /**
@@ -14,6 +14,9 @@ import { cn } from "./utils";
  *   (ponto → check) e o leitor de tela ouve "atendido" ou "não atendido", então a cor nunca é o único sinal. Nada ali
  *   parece um controle: o círculo vazado de antes lembrava um botão de rádio (27/11/2026).
  * - Confirmação: avisa "As senhas não coincidem" (erro) ou "As senhas coincidem" (sucesso) depois que a pessoa digita.
+ * - Erros do formulário (opcionais, 27/11/2026): erroSenha e erroConfirmacao marcam o campo (aria-invalid) e mostram o
+ *   texto com ícone logo abaixo dele, ligado por aria-describedby; idSenha e idConfirmacao permitem levar o foco ao campo
+ *   (por exemplo, pelo resumo de erros do cadastro). Sem essas props, nada muda.
  */
 
 export type PasswordRule = { id: string; label: string; test: (v: string) => boolean };
@@ -83,7 +86,7 @@ export function PasswordInput({ label, value, onValueChange, textos, invalido, d
           aria-describedby={describedBy}
           spellCheck={false}
           autoCapitalize="none"
-          className={cn(inputCls, invalido ? "border-[var(--error)] focus-visible:ring-[var(--error)]/30" : "border-border hover:border-[var(--border-strong)]")}
+          className={cn(inputCls, invalido ? "border-[var(--error)] focus-visible:ring-[var(--error)]/30" : "border-input")}
           style={{ boxShadow: "var(--shadow-xs)" }}
           {...props}
         />
@@ -117,15 +120,21 @@ export type PasswordConfirmProps = {
   textos?: Partial<PasswordTexts>;
   /** Esconde o campo de confirmação (uso como campo único de criação de senha). */
   semConfirmacao?: boolean;
+  /** Erro do formulário no campo de senha (por exemplo, ao tentar continuar sem senha). */
+  erroSenha?: string | null;
+  /** Erro do formulário no campo de confirmação. */
+  erroConfirmacao?: string | null;
+  idSenha?: string;
+  idConfirmacao?: string;
   disabled?: boolean;
   className?: string;
 };
 
 /** Senha + confirmação, com força da senha, dicas com check e verificação de coincidência. */
-export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmacaoChange, regras = regrasPadrao, textos: tx, semConfirmacao = false, disabled, className }: PasswordConfirmProps) {
+export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmacaoChange, regras = regrasPadrao, textos: tx, semConfirmacao = false, erroSenha, erroConfirmacao, idSenha, idConfirmacao, disabled, className }: PasswordConfirmProps) {
   const textos = { ...textosPadrao, ...tx };
   const base = React.useId();
-  const forcaId = `${base}-forca`, dicasId = `${base}-dicas`, confId = `${base}-conf`;
+  const forcaId = `${base}-forca`, dicasId = `${base}-dicas`, confId = `${base}-conf`, erroId = `${base}-erro`, erroConfId = `${base}-erro-conf`;
   const forca = forcaDaSenha(senha, regras);
   const atendidas = regras.map((r) => r.test(senha));
   const mostrarConf = !semConfirmacao && confirmacao.length > 0;
@@ -135,14 +144,21 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
     <div className={cn("flex flex-col gap-4", className)}>
       <div className="flex flex-col gap-2">
         <PasswordInput
+          id={idSenha}
           label={textos.senha}
           value={senha}
           onValueChange={onSenhaChange}
           textos={textos}
           autoComplete="new-password"
-          describedBy={`${forcaId} ${dicasId}`}
+          invalido={Boolean(erroSenha)}
+          describedBy={[erroSenha ? erroId : null, forcaId, dicasId].filter(Boolean).join(" ")}
           disabled={disabled}
         />
+        {erroSenha && (
+          <p id={erroId} className="flex items-start gap-1 text-body-sm leading-5 font-medium text-[var(--error-text)]">
+            <XCircle className="mt-1 h-4 w-4 shrink-0" aria-hidden /> <span className="min-w-0">{erroSenha}</span>
+          </p>
+        )}
 
         {/* Força da senha */}
         <div className="flex gap-1" aria-hidden>
@@ -178,20 +194,26 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
       {!semConfirmacao && (
         <div className="flex flex-col gap-1">
           <PasswordInput
+            id={idConfirmacao}
             label={textos.confirmar}
             value={confirmacao}
             onValueChange={onConfirmacaoChange}
             textos={textos}
             autoComplete="new-password"
-            invalido={mostrarConf && !coincidem}
-            describedBy={confId}
+            invalido={(mostrarConf && !coincidem) || Boolean(erroConfirmacao)}
+            describedBy={[erroConfirmacao && !mostrarConf ? erroConfId : null, confId].filter(Boolean).join(" ")}
             disabled={disabled}
           />
+          {erroConfirmacao && !mostrarConf && (
+            <p id={erroConfId} className="flex items-start gap-1 text-body-sm leading-5 font-medium text-[var(--error-text)]">
+              <XCircle className="mt-1 h-4 w-4 shrink-0" aria-hidden /> <span className="min-w-0">{erroConfirmacao}</span>
+            </p>
+          )}
           <p id={confId} aria-live="polite" className="min-h-[1.25rem] text-body-sm">
             {mostrarConf && (coincidem ? (
               <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--success-text)]" aria-hidden />{textos.coincidem}</span>
             ) : (
-              <span className="inline-flex items-center gap-1 text-[var(--error-text)]"><AlertCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
+              <span className="inline-flex items-center gap-1 text-[var(--error-text)]"><XCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
             ))}
           </p>
         </div>
