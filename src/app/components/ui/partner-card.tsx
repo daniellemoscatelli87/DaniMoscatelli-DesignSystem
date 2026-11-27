@@ -3,12 +3,14 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "./utils";
 import { Selo } from "./selo";
 import { withHighlight } from "./heading";
+import { useOrientacaoDoCard } from "./grade-de-cards";
 
 /**
  * PartnerCard (card de convite ao parceiro)
  *
  * Card que convida ao cadastro: selo, título com destaque, texto curto, ação principal
- * e link secundário opcional. Vertical ou horizontal; tamanhos p, m e g.
+ * e link secundário opcional. Vertical ou horizontal; tamanhos p, m e g. Sem orientation, segue a GradeDeCards:
+ * horizontal quando a grade virou lista (regra da dona do produto, 27/11/2026).
  * Fundo de card com um brilho suave na cor primária no canto, como o hero do site.
  */
 type Size = "p" | "m" | "g";
@@ -42,9 +44,10 @@ const visualBox: Record<Size, string> = { p: "h-12 w-12", m: "h-16 w-16", g: "h-
 const ctaSize: Record<Size, string> = { p: "h-9 px-4 text-[0.8125rem]", m: "h-10 px-5 text-[0.875rem]", g: "h-12 px-6 text-[0.9375rem]" };
 
 export function PartnerCard({
-  orientation = "vertical", size = "m", eyebrow, title, description, cta, secondary, visual, surface = "card", className, ...props
+  orientation: orientacaoFixa, size = "m", eyebrow, title, description, cta, secondary, visual, surface = "card", className, ...props
 }: PartnerCardProps) {
-  const horizontal = orientation === "horizontal";
+  const daGrade = useOrientacaoDoCard();
+  const horizontal = (orientacaoFixa ?? daGrade ?? "vertical") === "horizontal";
   const dark = surface === "dark";
   const Cta = cta.href ? "a" : "button";
   const Sec = secondary?.href ? "a" : "button";
@@ -72,7 +75,7 @@ export function PartnerCard({
         </div>
       )}
 
-      <div className={cn("min-w-0", horizontal && "flex-1")}>
+      <div className={cn("min-w-0", horizontal ? "flex-1" : "flex flex-1 flex-col")}>
         {eyebrow && (
           <div className="mb-3">
             {dark ? (
@@ -86,7 +89,7 @@ export function PartnerCard({
           {withHighlight(title, "text-primary-text")}
         </h3>
         {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : "text-muted-foreground")}>{description}</p>}
-        <div className={cn("flex flex-wrap items-center gap-x-5 gap-y-3", size === "p" ? "mt-4" : "mt-6")}>
+        <div className={cn("mt-auto flex flex-wrap items-center gap-x-5 gap-y-3", size === "p" ? "pt-4" : "pt-6")}>
           <Cta
             {...(cta.href ? { href: cta.href } : { type: "button", onClick: cta.onClick })}
             className={cn("group inline-flex items-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", dark && "focus-visible:ring-offset-[var(--graphite-950)]", ctaSize[size])}

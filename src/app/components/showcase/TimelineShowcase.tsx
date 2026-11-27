@@ -6,6 +6,7 @@ import { Timeline, type TimelineStep } from "../ui/timeline";
 import { SegmentedControl } from "../ui/segmented-control";
 import { Callout, DataTable, DoDont, SubTitle, display } from "./shared/Guidance";
 import { TokenTable } from "./shared/TokenTable";
+import { GradeDeCards } from "../ui/grade-de-cards";
 
 const FINDLOOK = false;
 
@@ -71,7 +72,7 @@ export function TimelineShowcase() {
 
       <section id="timeline-motion" className="scroll-mt-32">
         <SectionHeader title={t("Motion: Step Indicator", "Movimento: Step Indicator")} description={t("The same scroll-driven logic as the site, in React.", "A mesma lógica de rolagem do site, em React.")} />
-        <div className="grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
+        <GradeDeCards className="gap-5 lg:grid-cols-2 [&>*]:min-w-0">
           <DataTable
             head={[t("Moment", "Momento"), t("What happens", "O que acontece")]}
             rows={[
@@ -99,12 +100,12 @@ import { Target, Search } from "lucide-react";
   checkNasFeitas={false}
 />`}</code></pre>
           </div>
-        </div>
+        </GradeDeCards>
       </section>
 
       <section id="timeline-usage" className="scroll-mt-32">
         <SectionHeader title={t("Usage", "Uso")} description={t("For sequences the person reads top to bottom: how a product works, a journey, a process.", "Para sequências que a pessoa lê de cima para baixo: como um produto funciona, uma jornada, um processo.")} />
-        <div className="grid gap-5 lg:grid-cols-2 [&>*]:min-w-0">
+        <GradeDeCards className="gap-5 lg:grid-cols-2 [&>*]:min-w-0">
           <DoDont
             dos={[
               t("Three to eight steps, each with one short title and one or two sentences.", "De três a oito etapas, cada uma com um título curto e uma ou duas frases."),
@@ -128,7 +129,7 @@ import { Target, Search } from "lucide-react";
               { name: "marker", description: t("Marker size", "Tamanho do marcador"), light: "44 px · 52 px (≥ 768 px)" },
             ],
           }]} />
-        </div>
+        </GradeDeCards>
       </section>
     </div>
   );
