@@ -225,8 +225,9 @@ function HierarchyDemo() {
           </p>
           <div className="rounded-md border border-border bg-background/40 p-4">
             <p className="text-body-sm font-medium text-foreground mb-3">{t("Discard unsaved draft?", "Descartar rascunho não salvo?")}</p>
-            {/* Empilhados com a mesma largura quando não cabem numa linha (celular); lado a lado a partir de 640 px. */}
-            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
+            {/* Empilhados na largura toda quando os três não cabem numa linha (menos de 28rem de largura); senão, lado a lado. */}
+            <div className="@container">
+            <div className="flex flex-col gap-2 @md:flex-row @md:items-center">
               {c.good ? (
                 <>
                   <Button>{t("Save draft", "Salvar rascunho")}</Button>
@@ -238,6 +239,7 @@ function HierarchyDemo() {
                   <Button key={l}>{l}</Button>
                 ))
               )}
+            </div>
             </div>
           </div>
         </div>

@@ -43,7 +43,7 @@ function BreadcrumbLink({
   return (
     <Comp
       data-slot="breadcrumb-link"
-      className={cn("hover:text-foreground transition-colors toque:inline-flex toque:min-h-11 toque:items-center", className)}
+      className={cn("hover:text-foreground transition-colors toque:inline-flex toque:min-h-11 toque:min-w-11 toque:items-center toque:justify-center", className)}
       {...props}
     />
   );

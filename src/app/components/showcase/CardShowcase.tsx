@@ -429,7 +429,7 @@ function ExemploDeAltura({ certo, titulo, children }: { certo: boolean; titulo: 
 /** Card pequeno dos exemplos certo e errado. */
 function CardDeExemplo({ titulo, texto, acao }: { titulo: string; texto: string; acao: string }) {
   return (
-    <Card className="gap-3 border-border">
+    <Card className="h-full gap-3 border-border">
       <CardHeader className="px-4 pt-4">
         <CardTitle className={`${display} text-body-sm font-semibold`}>{titulo}</CardTitle>
         <CardDescription className="text-label leading-relaxed">{texto}</CardDescription>

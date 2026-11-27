@@ -1257,7 +1257,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 277,
+          "linha": 279,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -3661,7 +3661,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 316,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -4043,7 +4043,7 @@
           "ancora": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 268,
+          "linha": 270,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -4055,7 +4055,7 @@
           "ancora": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 345,
+          "linha": 347,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5731,7 +5731,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 258,
+          "linha": 260,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -10202,7 +10202,7 @@
           "ancora": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 296
+          "linha": 298
         }
       ],
       "usaComponentes": [],
@@ -10223,7 +10223,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 316
+          "linha": 318
         }
       ],
       "usaComponentes": [],
@@ -10244,7 +10244,7 @@
           "ancora": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 369
+          "linha": 371
         }
       ],
       "usaComponentes": [],
@@ -10265,7 +10265,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 336
+          "linha": 338
         }
       ],
       "usaComponentes": [],
@@ -10286,7 +10286,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 277
+          "linha": 279
         }
       ],
       "usaComponentes": [
@@ -13847,7 +13847,7 @@
         "titulo": "Hierarquia de ações",
         "resumo": "Hierarquia de ações: principal, secundária e terciária",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 277
+        "linha": 279
       },
       {
         "ancora": "card-escolher",
@@ -13955,7 +13955,7 @@
         "titulo": "Ações destrutivas",
         "resumo": "Ações destrutivas: confirmação e desfazer",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 369
+        "linha": 371
       },
       {
         "ancora": "graficos-escolher",
@@ -14025,7 +14025,7 @@
         "ancora": "ux-checklist",
         "titulo": "Revisão rápida",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 378
+        "linha": 380
       },
       {
         "pagina": "accessibility",
@@ -14429,49 +14429,49 @@
           "id": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 268
+          "linha": 270
         },
         {
           "id": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 277
+          "linha": 279
         },
         {
           "id": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 296
+          "linha": 298
         },
         {
           "id": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 316
+          "linha": 318
         },
         {
           "id": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 336
+          "linha": 338
         },
         {
           "id": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 345
+          "linha": 347
         },
         {
           "id": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 369
+          "linha": 371
         },
         {
           "id": "ux-checklist",
           "titulo": "Revisão rápida",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 378
+          "linha": 380
         }
       ]
     },

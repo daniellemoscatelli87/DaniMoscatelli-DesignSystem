@@ -135,7 +135,7 @@ function ContrastChecker() {
           aria-label={t(`${label} color picker`, `Seletor de cor: ${label}`)}
           value={luminance(v) === null ? "#000000" : v.length === 4 ? "#" + v.slice(1).split("").map(c => c + c).join("") : v}
           onChange={e => set(e.target.value.toUpperCase())}
-          className="h-9 w-9 rounded-sm border border-border bg-transparent p-1 cursor-pointer"
+          className="h-9 w-9 toque:size-11 rounded-sm border border-border bg-transparent p-1 cursor-pointer"
         />
         <input
           id={id}
