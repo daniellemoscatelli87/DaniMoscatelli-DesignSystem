@@ -27,6 +27,11 @@ export type StepperEtapa = {
   titulo: string;
   /** Texto curto opcional; não aparece no visual de abas (fica para leitores de tela). */
   descricao?: string;
+  /**
+   * Segunda linha, embaixo do nome (uma data, "12/12, 14:00"), em cinza e menor (27/11/2026). Ponha a data aqui, e
+   * não no título: o nome continua curto e o Stepper só fica compacto quando os nomes não cabem de verdade.
+   */
+  detalhe?: string;
 };
 
 export type StepperProps = {
@@ -54,7 +59,7 @@ type Modo = "auto" | "completo" | "compacto";
 /* Classes de cada modo. No "auto", a regra é a container query do próprio Stepper (nomes a partir de 40rem). */
 const porModo = {
   cabecalho: { auto: "@min-[40rem]/stepper:hidden", completo: "hidden", compacto: "" },
-  nome: { auto: "hidden @min-[40rem]/stepper:inline", completo: "inline", compacto: "hidden" },
+  nome: { auto: "hidden @min-[40rem]/stepper:flex", completo: "flex", compacto: "hidden" },
   marcador: {
     auto: "h-8 w-8 text-label @min-[40rem]/stepper:h-10 @min-[40rem]/stepper:w-10 @min-[40rem]/stepper:text-body-sm",
     completo: "h-10 w-10 text-body-sm",
@@ -84,19 +89,21 @@ export function Stepper({ etapas, atual, concluidas, onIrPara, rotulo = "Etapas"
   const navRef = React.useRef<HTMLElement>(null);
   const medidaRef = React.useRef<HTMLOListElement>(null);
   const [modo, setModo] = React.useState<Modo>("auto");
-  const chaveDosNomes = etapas.map((e) => e.titulo).join("|");
+  const chaveDosNomes = etapas.map((e) => `${e.titulo}~${e.detalhe ?? ""}`).join("|");
 
-  // Mede se todos os nomes cabem inteiros: as etapas dividem a largura por igual, então a mais larga decide.
+  // Mede se todos os nomes cabem inteiros (27/11/2026): cada etapa ocupa a largura do próprio conteúdo (nome ou
+  // detalhe, o que for maior) e o espaço que sobra é dividido entre elas; vale a soma real das larguras, não a
+  // etapa mais larga vezes o número de etapas (que deixava o Stepper compacto cedo demais, com datas nos nomes).
   useLayoutSeguro(() => {
     const nav = navRef.current;
     const medida = medidaRef.current;
     if (!nav || !medida || typeof ResizeObserver === "undefined") return;
     const checar = () => {
       const itens = Array.from(medida.children) as HTMLElement[];
-      const maior = itens.reduce((m, el) => Math.max(m, el.getBoundingClientRect().width), 0);
+      const soma = itens.reduce((m, el) => m + el.getBoundingClientRect().width, 0);
       const largura = nav.getBoundingClientRect().width;
       if (!largura) return;
-      setModo(maior * itens.length <= largura + 0.5 ? "completo" : "compacto");
+      setModo(soma <= largura + 0.5 ? "completo" : "compacto");
     };
     checar();
     const ro = new ResizeObserver(checar);
@@ -114,7 +121,10 @@ export function Stepper({ etapas, atual, concluidas, onIrPara, rotulo = "Etapas"
           {etapas.map((e, i) => (
             <li key={i} className="flex w-max items-center gap-3 whitespace-nowrap px-2">
               <span className="h-10 w-10 shrink-0" />
-              <span className={nomeTexto}>{e.titulo}</span>
+              <span className="flex flex-col">
+                <span className={nomeTexto}>{e.titulo}</span>
+                {e.detalhe && <span className="text-label">{e.detalhe}</span>}
+              </span>
             </li>
           ))}
         </ol>
@@ -149,17 +159,18 @@ export function Stepper({ etapas, atual, concluidas, onIrPara, rotulo = "Etapas"
               >
                 {numero(i)}
               </span>
-              <span aria-hidden data-slot="stepper-nome" className={cn("min-w-0 truncate", nomeTexto, porModo.nome[modo], ehAtual ? "text-foreground" : "text-muted-foreground")}>
-                {e.titulo}
+              <span aria-hidden data-slot="stepper-nome" className={cn("min-w-0 flex-col text-left", porModo.nome[modo])}>
+                <span className={cn("whitespace-nowrap", nomeTexto, ehAtual ? "text-foreground" : "text-muted-foreground")}>{e.titulo}</span>
+                {e.detalhe && <span className="whitespace-nowrap text-label font-medium text-muted-foreground">{e.detalhe}</span>}
               </span>
               {/* Sublinhado da etapa atual. */}
               {ehAtual && <span aria-hidden className="absolute inset-x-0 -bottom-px h-1 rounded-full bg-primary" />}
-              <span className="sr-only">{`${clicavel ? `${tx.voltarPara} ${tx.etapa.toLowerCase()}` : tx.etapa} ${i + 1} ${tx.de} ${total}, ${e.titulo} (${estado})`}</span>
+              <span className="sr-only">{`${clicavel ? `${tx.voltarPara} ${tx.etapa.toLowerCase()}` : tx.etapa} ${i + 1} ${tx.de} ${total}, ${e.titulo}${e.detalhe ? `, ${e.detalhe}` : ""} (${estado})`}</span>
             </>
           );
           const classe = cn("relative flex min-h-11 w-full min-w-0 items-center justify-center gap-3 px-2", porModo.item[modo]);
           return (
-            <li key={i} className="flex min-w-0 flex-1" aria-current={ehAtual ? "step" : undefined}>
+            <li key={i} className={cn("flex min-w-0", modo === "completo" ? "flex-[1_1_auto]" : "flex-1")} aria-current={ehAtual ? "step" : undefined}>
               {clicavel ? (
                 <button
                   type="button"

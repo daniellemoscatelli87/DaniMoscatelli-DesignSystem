@@ -153,6 +153,16 @@ const MenuLateral = React.forwardRef<HTMLElement, MenuLateralProps>(function Men
     const id = window.requestAnimationFrame(() => setMontado(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
+  // Os nomes dos itens só entram com o esmaecer quando a pessoa abre ou recolhe o menu (27/11/2026). Quando quem muda
+  // é a largura da janela (o menu volta a expandir abaixo de 1024 px), eles aparecem prontos, sem repetir a animação.
+  const [escolhaAnterior, setEscolhaAnterior] = React.useState(escolha);
+  const [animar, setAnimar] = React.useState(false);
+  if (escolhaAnterior !== escolha) { setEscolhaAnterior(escolha); setAnimar(true); }
+  React.useEffect(() => {
+    if (!animar) return;
+    const id = window.setTimeout(() => setAnimar(false), 400);
+    return () => window.clearTimeout(id);
+  }, [animar]);
   const valor = React.useMemo(() => ({ recolhido, dentro: true, podeRecolher: larga }), [recolhido, larga]);
   return (
     <aside
@@ -160,7 +170,9 @@ const MenuLateral = React.forwardRef<HTMLElement, MenuLateralProps>(function Men
       aria-label="Menu lateral"
       data-slot="menu-lateral"
       data-recolhido={recolhido ? "" : undefined}
+      data-animar={animar ? "" : undefined}
       className={cn(
+        "group/menu",
         "flex shrink-0 flex-col border-r border-border bg-sidebar",
         // Coluna da página: estica até o fim da página; clip (e não hidden) para o conteúdo poder grudar no topo.
         grudarAbaixoDe === undefined ? "h-full overflow-hidden" : "self-stretch overflow-x-clip",
@@ -376,7 +388,7 @@ const ItemDoMenu = React.forwardRef<HTMLAnchorElement, ItemDoMenuProps>(function
         <span className="sr-only">{children}{!!contador && `, ${contador} ${rotuloContador}`}</span>
       ) : (
         <>
-          <span className="min-w-0 flex-1 truncate animate-in fade-in-0 duration-[var(--duration-normal)] motion-reduce:animate-none">{children}</span>
+          <span className="min-w-0 flex-1 truncate group-data-[animar]/menu:animate-in group-data-[animar]/menu:fade-in-0 duration-[var(--duration-normal)] motion-reduce:animate-none">{children}</span>
           {!!contador && <ContadorDoPainel valor={contador} rotulo={rotuloContador} />}
         </>
       )}

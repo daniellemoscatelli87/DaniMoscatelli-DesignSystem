@@ -5,8 +5,8 @@
  * Para cada arquivo de src/app/components/ui/ que existe nos dois, lista:
  *   - os componentes exportados (nomes com inicial maiúscula) que só um dos dois tem;
  *   - para cada componente que os dois têm, as props que só um dos dois aceita.
- * As props vêm do tipo do primeiro parâmetro do componente (o TypeScript lê o tipo; as props herdadas de elementos
- * HTML ou do React ficam de fora, só contam as declaradas no próprio DS).
+ * As props vêm do tipo do primeiro parâmetro do componente (o TypeScript lê o tipo). Contam as declaradas no próprio DS;
+ * uma prop declarada só num DS vale como igual quando o outro também a aceita por herança (do HTML, do React ou do Radix).
  *
  * Uso: node scripts/comparar-ds.mjs <pasta-do-outro-ds> [--md arquivo.md] [--json arquivo.json] [--ignorar arquivo.json]
  * Precisa do pacote "typescript" (do projeto ou global; ou passe o caminho em TYPESCRIPT_PATH).
@@ -75,18 +75,20 @@ function lerDs(raiz) {
       const assinaturas = tipo.getCallSignatures();
       if (!assinaturas.length) continue;
       const props = new Set();
+      const todas = new Set();
       for (const a of assinaturas) {
         const p0 = a.getParameters()[0]; if (!p0) continue;
         const tp = ch.getTypeOfSymbolAtLocation(p0, p0.valueDeclaration ?? decl);
         for (const pr of ch.getApparentType(tp).getProperties()) {
           const ds = pr.declarations ?? [];
+          todas.add(pr.getName());
           if (ds.some((d) => d.getSourceFile().fileName.includes("/components/ui/"))) props.add(pr.getName());
         }
       }
       // Só funções que parecem componentes: retornam JSX ou recebem props (ignora utilitários exportados com maiúscula).
       const retorno = ch.typeToString(assinaturas[0].getReturnType());
       if (!props.size && !/Element|ReactNode|ReactElement|any/.test(retorno)) continue;
-      comps[nome] = [...props].sort();
+      comps[nome] = { proprias: [...props].sort(), todas };
     }
     res[path.basename(arq)] = comps;
   }
@@ -108,8 +110,10 @@ for (const f of comuns) {
   if (expA.length || expB.length) difs.push({ componente: "(exports)", soAqui: expA, soNoOutro: expB });
   for (const c of Object.keys(ca).filter((c) => cb[c]).sort()) {
     const aceitas = new Set(marca[`${f}#${c}`] ?? []);
-    const pa = ca[c].filter((p) => !cb[c].includes(p) && !aceitas.has(p));
-    const pb = cb[c].filter((p) => !ca[c].includes(p) && !aceitas.has(p));
+    // Uma prop declarada só num DS conta como igual quando o outro também a aceita (herdada do elemento HTML ou do
+    // Radix, por exemplo className e children).
+    const pa = ca[c].proprias.filter((p) => !cb[c].todas.has(p) && !aceitas.has(p));
+    const pb = cb[c].proprias.filter((p) => !ca[c].todas.has(p) && !aceitas.has(p));
     if (pa.length || pb.length) difs.push({ componente: c, soAqui: pa, soNoOutro: pb });
   }
   pendentes += difs.length;

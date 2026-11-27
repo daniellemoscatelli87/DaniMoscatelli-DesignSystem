@@ -20,6 +20,7 @@ import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { EstadoVazio } from "../ui/estado-vazio";
 import { Calendar } from "../ui/calendar";
+import { CampoDeEndereco, type SugestaoDeEndereco } from "../ui/campo-de-endereco";
 
 /* Campos (27/11/2026): o campo padrão, e-mail com sugestão, estado e cidade, máscaras, busca, copiar, vários e-mails,
    chips de filtro, cartões de escolha, botão com estados de envio e a tabela que se adapta. */
@@ -201,6 +202,40 @@ function DemoCalendario() {
   );
 }
 
+/* Exemplo do CampoDeEndereco sem chamar serviço nenhum: uma lista de exemplo filtrada, com uma espera de 400 ms para
+   mostrar o "Procurando…". No produto, passe a busca de verdade (por exemplo, buscaNoPhoton()). */
+const ENDERECOS_DE_EXEMPLO: SugestaoDeEndereco[] = [
+  { id: "1", titulo: "Rua XV de Novembro, 700", linha: "Centro, Curitiba - PR, 80020-310" },
+  { id: "2", titulo: "Rua Comendador Araújo, 143", linha: "Centro, Curitiba - PR, 80420-000" },
+  { id: "3", titulo: "Avenida Sete de Setembro, 2775", linha: "Rebouças, Curitiba - PR, 80230-010" },
+  { id: "4", titulo: "Rua Mateus Leme, 1200", linha: "Centro Cívico, Curitiba - PR, 80530-010" },
+  { id: "5", titulo: "Praça Tiradentes", linha: "Centro, Curitiba - PR" },
+];
+const semAcento = (t: string) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+function buscaDeExemplo(texto: string, sinal: AbortSignal) {
+  return new Promise<SugestaoDeEndereco[]>((resolve, reject) => {
+    const id = window.setTimeout(() => resolve(ENDERECOS_DE_EXEMPLO.filter((e) => semAcento(`${e.titulo} ${e.linha}`).includes(semAcento(texto)))), 400);
+    sinal.addEventListener("abort", () => { window.clearTimeout(id); reject(new DOMException("cancelado", "AbortError")); });
+  });
+}
+function DemoEndereco() {
+  const [valor, setValor] = useState("");
+  return (
+    <ShowcaseCard>
+    <div className="max-w-xl">
+      <CampoDeEndereco
+        rotulo="Endereço"
+        valor={valor}
+        onValorChange={setValor}
+        buscar={buscaDeExemplo}
+        placeholder="Pesquise o endereço ou o nome do local"
+        ajuda="Confira o número e acrescente o complemento, se precisar. Exemplo: digite “rua” ou “centro”."
+      />
+    </div>
+    </ShowcaseCard>
+  );
+}
+
 export function CamposShowcase() {
   const { t } = useI18n();
   return (
@@ -342,6 +377,20 @@ export function CamposShowcase() {
         api={`<Calendar mode="single" selected={data} onSelect={setData} />`}
       >
         <DemoCalendario />
+      </SectionBlock>
+
+      <SectionBlock
+        id="campos-endereco"
+        titulo={t("Address with suggestions (CampoDeEndereco)", "Endereço com sugestões (CampoDeEndereco)")}
+        quando={t(
+          "Suggests addresses while the person types (from 3 letters, after a short pause), like the in-person meeting address of the restricted area. Arrows choose, Enter confirms, Esc closes; with no result, the person keeps typing by hand. The product does the search: pass buscar (for example buscaNoPhoton(), with OpenStreetMap data, the same request the HTML restricted area used).",
+          "Sugere endereços enquanto a pessoa digita (a partir de 3 letras, depois de uma pequena pausa), como o endereço da reunião presencial da área restrita. Setas escolhem, Enter confirma, Esc fecha; sem resultado, a pessoa continua escrevendo à mão. Quem busca é o produto: passe buscar (por exemplo, buscaNoPhoton(), com dados do OpenStreetMap, o mesmo pedido da área restrita em HTML).",
+        )}
+        arquivo="ui/campo-de-endereco.tsx"
+        nomes={["CampoDeEndereco", "buscaNoPhoton"]}
+        api={`<CampoDeEndereco rotulo="Endereço" valor={endereco} onValorChange={setEndereco} buscar={buscaNoPhoton()} />`}
+      >
+        <DemoEndereco />
       </SectionBlock>
 
       <SectionBlock

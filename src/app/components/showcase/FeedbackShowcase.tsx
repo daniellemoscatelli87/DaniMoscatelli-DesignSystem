@@ -3,9 +3,9 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Selo } from "@/app/components/ui/selo";
 import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
-import { MapPin, Plus, SearchX, Sparkles, XCircle, AlertCircle } from "lucide-react";
+import { MapPin, Plus, SearchX, Sparkles, XCircle } from "lucide-react";
 import {
-  CheckCircle, CheckCircle2, AlertCircle, AlertTriangle, TriangleAlert, Info, X,
+  CheckCircle, CheckCircle2, AlertCircle, Info, X,
   Loader2, Clock, Check,
 } from "lucide-react";
 import { useI18n } from "../../i18n";

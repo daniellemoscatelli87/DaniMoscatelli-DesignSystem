@@ -238,6 +238,11 @@ export function PecasAdminShowcase() {
         <ShowcaseCard rotulo="Stepper">
           <Stepper etapas={[{ titulo: t("Contact", "Contato") }, { titulo: t("Business", "Negócio") }, { titulo: t("Challenge", "Desafio") }, { titulo: t("Review", "Revisão") }]} atual={1} />
         </ShowcaseCard>
+        <ShowcaseCard rotulo={t("Stepper with a date under the name (detalhe)", "Stepper com a data embaixo do nome (detalhe)")}>
+          <div data-testid="stepper-com-data">
+            <Stepper etapas={[{ titulo: t("Contact", "Contato"), detalhe: "12/11" }, { titulo: t("Meeting", "Reunião"), detalhe: "19/11, 14:00" }, { titulo: t("Proposal", "Proposta"), detalhe: "26/11" }, { titulo: t("Review", "Revisão") }]} atual={1} />
+          </div>
+        </ShowcaseCard>
         <DemoCadastro />
       </SectionBlock>
 

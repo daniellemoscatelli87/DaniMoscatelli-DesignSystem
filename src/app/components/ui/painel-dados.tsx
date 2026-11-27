@@ -52,7 +52,7 @@ function formatarVariacao(n: number) {
 }
 
 /* ── Variação (seta + texto; nunca só cor) ───────────────────── */
-function Variacao({ valor, comparacao, className }: { valor: number; comparacao?: string; className?: string }) {
+function Variacao({ valor, comparacao, className }: { valor: number; comparacao?: string; /** Mantida por compatibilidade com o DS FindLook: não muda o desenho. */ pilula?: boolean; className?: string }) {
   const sobe = valor >= 0;
   const Icone = sobe ? ArrowUpRight : ArrowDownRight;
   const leitura = `${sobe ? "Alta" : "Queda"} de ${formatarVariacao(Math.abs(valor)).replace("+", "")}${comparacao ? ` ${comparacao}` : ""}`;

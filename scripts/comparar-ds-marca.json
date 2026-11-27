@@ -1,0 +1,12 @@
+{
+  "_sobre": "Diferenças aceitas entre os DS FindLook e Dani Moscatelli (27/11/2026): peças a mais que só um produto usa, no mesmo arquivo de um componente em comum, e o CardIndicador, que tem um desenho de marca em cada DS. Tudo o que não está aqui tem os mesmos componentes e as mesmas props nos dois.",
+  "cabecalho-do-site.tsx": ["MenuDoCelular"],
+  "chip-filtravel.tsx": ["GrupoDeChips", "ChipDeFiltro", "ListaDeFiltrosAtivos"],
+  "conversa.tsx": ["MolduraDeCelular", "CabecalhoDaConversa", "BotaoDeResposta", "CampoDeMensagem", "FolhaDeOpcoes"],
+  "pagination.tsx": ["PaginationStatus"],
+  "painel-cabecalho.tsx": ["SeletorDePeriodo", "BotaoDividido", "BannerPromocional"],
+  "painel-dados.tsx": ["GraficoDeDesempenho", "ItemDeAtividade", "ItemDeAcao", "ListaDeTendencias", "ItemDeChecklist", "AnelDePontuacao", "CarrosselDeDicas", "FaixaDeBeneficios", "CardDoPainel", "ConteudoRecolhivel", "PainelDeUso", "CardDeUso", "FaixaDeEstado", "ProgressoRotulado", "ResumoEmLinha"],
+  "painel-dados.tsx#CardIndicador": ["comoLink", "estilo", "grafico", "acao", "apoio", "as", "compacto", "selo", "soNumeroNoCelular", "tom"],
+  "painel-shell.tsx": ["SeletorDeLoja", "CardDePlano", "ContadorDoPainel"],
+  "upload.tsx": ["UploadTextsProvider"]
+}
