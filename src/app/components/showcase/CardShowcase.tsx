@@ -693,7 +693,12 @@ export function CardShowcase() {
             </Card>
           </ItemDaGrade>
         </GradeDeCards>
-        <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("Same Card, same parts: orientacao=\"horizontal\" puts the CardMidia on the left, the header and content in the middle and the footer on the right. Inside a GradeDeCards that became a list, the Card turns horizontal on its own.", "O mesmo Card, as mesmas partes: orientacao=\"horizontal\" põe a CardMidia à esquerda, o cabeçalho e o conteúdo no meio e o rodapé à direita. Dentro de uma GradeDeCards que virou lista, o Card fica horizontal sozinho.")}</p>
+        <p className="mt-3 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("Same Card, same parts: orientacao=\"horizontal\" puts the CardMidia on the left and the header and content in the rest of the width; the footer goes below, across the whole card. Inside a GradeDeCards that became a list, the Card turns horizontal on its own.", "O mesmo Card, as mesmas partes: orientacao=\"horizontal\" põe a CardMidia à esquerda e o cabeçalho e o conteúdo no resto da largura; o rodapé vai para baixo, na largura inteira do card. Dentro de uma GradeDeCards que virou lista, o Card fica horizontal sozinho.")}</p>
+        <div className="mt-4">
+          <Callout title={t("Card with an action: divider and button in the bottom-right corner", "Card com ação: divisor e botão no canto inferior direito")}>
+            <p>{t("Rule of the product owner (27/11/2026). In the horizontal card, the actions never form a column on the right, centred beside the content: the CardFooter becomes a full-width row below, with the card divider on top and the buttons aligned to the bottom-right corner. The vertical card keeps its footer at the bottom, as before.", "Regra da dona do produto (27/11/2026). No card horizontal, as ações nunca formam uma coluna à direita, centrada ao lado do conteúdo: o CardFooter vira uma linha de largura inteira embaixo, com o divisor do card em cima e os botões alinhados no canto inferior direito. O card vertical mantém o rodapé na base, como antes.")}</p>
+          </Callout>
+        </div>
       </section>
 
       <section id="card-mesma-altura" className="scroll-mt-32">
@@ -714,7 +719,7 @@ export function CardShowcase() {
                 <CardDeExemplo titulo={t("Evidence", "Evidências")} texto={t("Interviews, observations and records of each step.", "Entrevistas, observações e registros de cada etapa.")} acao={t("Open", "Abrir")} />
               </GradeDeCards>
             </ExemploDeAltura>
-            <ExemploDeAltura certo titulo={t("Very different content: horizontal cards, one per row.", "Conteúdo muito diferente: cards horizontais, um por linha.")}>
+            <ExemploDeAltura certo titulo={t("Very different content: horizontal cards, one per row, with the divider and the action in the bottom-right corner.", "Conteúdo muito diferente: cards horizontais, um por linha, com divisor e ação no canto inferior direito.")}>
               <GradeDeCards colunas={{ base: 1, sm: 2 }}>
                 <CardDeExemplo titulo={t("Journey map", "Mapa da jornada")} texto={t("Steps, people and channels.", "Etapas, pessoas e canais.")} acao={t("Edit", "Editar")} />
                 <CardDeExemplo titulo={t("Evidence", "Evidências")} texto={t("Interviews, observations and records of each step. Separate what a person said from what was observed and what was measured, and note the source and the date of each one, so the hypotheses that come next rest on evidence and not on impressions.", "Entrevistas, observações e registros de cada etapa. Separe o que a pessoa disse do que foi observado e do que foi medido, e anote a fonte e a data de cada um, para que as hipóteses seguintes partam de evidências e não de impressões.")} acao={t("Open", "Abrir")} />
@@ -740,6 +745,7 @@ export function CardShowcase() {
                 [t("Difference up to the limit", "Diferença até o limite"), t("Side by side; the grid stretches the cards to the same height and the footer goes to the bottom.", "Lado a lado; a grade estica os cards até a mesma altura e o rodapé desce para a base.")],
                 [t(`Difference above ${LIMITE_DE_DIFERENCA.px} px`, `Diferença acima de ${LIMITE_DE_DIFERENCA.px} px`), t("One per row, horizontal cards.", "Um por linha, cards horizontais.")],
                 [t("Difference above 1/3 of the tallest card (and at least 64 px)", "Diferença acima de 1/3 do card mais alto (e de pelo menos 64 px)"), t("One per row, horizontal cards.", "Um por linha, cards horizontais.")],
+                [t("Card with an action (one per row)", "Card com ação (um por linha)"), t("Card with an action: divider and button in the bottom-right corner.", "Card com ação: divisor e botão no canto inferior direito.")],
                 [t("Back to side by side", "Volta para lado a lado"), t("Only when the difference falls below 75% of the limit (90 px, or 1/4 and 48 px), so it does not flicker.", "Só quando a diferença cai abaixo de 75% do limite (90 px, ou 1/4 e 48 px), para não piscar.")],
                 [t("One column (phone)", "Uma coluna (celular)"), t("Nothing changes: the cards are already one per row, vertical.", "Nada muda: os cards já ficam um por linha, na vertical.")],
               ]}
@@ -762,7 +768,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
   <Card>
     <CardMidia tipo="icone"><Search /></CardMidia>      {/* ou tipo="imagem" com <img> */}
     <CardHeader><CardTitle>…</CardTitle></CardHeader>
-    <CardFooter><Button>…</Button></CardFooter>          {/* desce para a base */}
+    <CardFooter><Button>…</Button></CardFooter>          {/* na base; no horizontal: divisor e botão no canto inferior direito */}
   </Card>
   <ItemDaGrade><Rotulo>…</Rotulo><Card>…</Card></ItemDaGrade>  {/* rótulo + card */}
 </GradeDeCards>

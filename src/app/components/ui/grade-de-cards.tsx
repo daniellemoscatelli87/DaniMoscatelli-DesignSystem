@@ -14,7 +14,8 @@ import { cn } from "./utils";
  * 2. Troca automática: a grade mede a altura natural de cada item (sem esticar). Se, numa mesma linha, a diferença entre
  *    o mais alto e o mais baixo passa do limite, a grade vira lista (data-layout="lista"): um card por linha, na largura
  *    inteira, e os cards do sistema (Card, PartnerCard, ProductCard) passam à versão horizontal pelo contexto
- *    (useOrientacaoDoCard): mídia ou ícone à esquerda, conteúdo e ações à direita.
+ *    (useOrientacaoDoCard): mídia ou ícone à esquerda, conteúdo ao lado e, embaixo, divisor e ações no canto inferior
+ *    direito ("Card com ação: divisor e botão no canto inferior direito").
  *
  * Limite (LIMITE_DE_DIFERENCA): a diferença passa do limite quando é maior que 120 px, ou maior que 1/3 da altura do card
  * mais alto e de pelo menos 64 px. 120 px são cerca de 5 linhas de texto de 24 px: uma área vazia que se vê em qualquer
