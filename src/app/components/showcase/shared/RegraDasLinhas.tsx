@@ -8,7 +8,8 @@ import { Callout, DoDont, Mono } from "./Guidance";
 
 /*
  * Regras da dona do produto (24/11/2026) para linhas de listas, tabelas e grades, com exemplo certo e errado na
- * largura do celular. Mesmo arquivo nos dois design systems (FindLook e Dani Moscatelli).
+ * largura do celular, e a decisão de 27/11/2026: no celular, tags e ações descem para uma linha própria embaixo do
+ * texto (padrão da LinhaDeLista, quebraAcoes="estreito"). Mesmo arquivo nos dois design systems (FindLook e Dani Moscatelli).
  */
 
 type Estado = "andamento" | "afazer" | "feito";
@@ -49,7 +50,10 @@ function Tag({ estado }: { estado: Estado }) {
 
 const lixeira = "flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
-/** Moldura com a largura de um celular (360 px), para mostrar a linha como ela fica no telefone. */
+/**
+ * Moldura com a largura de um celular (360 px), para mostrar a linha como ela fica no telefone. É moldura de aparelho,
+ * não card de conteúdo: o par certo/errado fica fora da regra de mesma altura (data-cards-ignorar na grade do par).
+ */
 function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legenda: string; children: React.ReactNode }) {
   const { t } = useI18n();
   const certo = tipo === "certo";
@@ -73,7 +77,11 @@ function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legend
   );
 }
 
-/** Exemplo certo, com LinhaDeLista: texto na coluna dele, hover e seleção na linha inteira, sem cantos. */
+/**
+ * Exemplo certo, com LinhaDeLista: tags e ações numa linha própria embaixo do texto, hover e seleção na linha
+ * inteira, sem cantos. A moldura simula o celular, então mostra o padrão do celular (quebraAcoes="estreito") em
+ * qualquer tela, com quebraAcoes={true}.
+ */
 function ListaCerta() {
   const { t, bi } = useI18n();
   const [itens, setItens] = useState(ITENS);
@@ -86,6 +94,7 @@ function ListaCerta() {
           <LinhaDeLista
             key={i.id}
             as="li"
+            quebraAcoes
             selecionada={marcados.includes(i.id)}
             onClick={() => alternar(i.id)}
             inicio={<span className="flex h-5 items-center" onClick={e => e.stopPropagation()}><Checkbox aria-label={`${t("Select", "Selecionar")} ${bi(i.titulo)}`} checked={marcados.includes(i.id)} onCheckedChange={() => alternar(i.id)} /></span>}
@@ -140,17 +149,17 @@ function ListaErrada() {
   );
 }
 
-/** Saída permitida: sem espaço, as tags e ações descem para uma linha própria, abaixo de todo o texto. */
-function ListaComQuebra() {
+/** Opção quebraAcoes={false}: tags e ações ao lado do texto também no celular, com o texto na coluna dele. */
+function ListaAoLado() {
   const { t, bi } = useI18n();
   return (
-    <ul className="divide-y divide-border" aria-label={t("Tasks (actions below the text)", "Tarefas (ações abaixo do texto)")}>
+    <ul className="divide-y divide-border" aria-label={t("Tasks (actions beside the text)", "Tarefas (ações ao lado do texto)")}>
       {ITENS.slice(0, 2).map(i => (
         <LinhaDeLista
           key={i.id}
           as="li"
           interativa
-          quebraAcoes
+          quebraAcoes={false}
           titulo={bi(i.titulo)}
           descricao={bi(i.texto)}
           fim={
@@ -172,7 +181,8 @@ const codigo = `<ul className="divide-y divide-border">
     titulo="Revisar os textos da página inicial"
     descricao="Conferir os títulos e o botão principal."
     fim={<><Badge variant="outline">Em andamento</Badge><BotaoExcluir /></>}
-    quebraAcoes="estreito" /* opcional: no celular, tags e ações descem */
+    /* padrão: no celular, tags e ações descem para baixo do texto (quebraAcoes="estreito");
+       quebraAcoes={false} as mantém ao lado em qualquer largura */
   />
 </ul>`;
 
@@ -192,10 +202,15 @@ export function RegraDasLinhas() {
           "The hover background (--row-hover) is painted on the whole row, including the leading controls (checkbox, avatar) and the trailing tags and actions, with border-radius 0. The only exception is a row that is itself a standalone card: it keeps the card's radius. The selected or checked row has the same shape. Inner controls (checkbox, trash, menu) may keep their own small hover, but the row hover is never a rounded box around part of the row. Keyboard focus on the row: an inset outline, no radius.",
           "O fundo do hover (--row-hover) pinta a linha inteira, incluindo os controles do início (caixa de seleção, avatar) e as tags e ações do fim, com border-radius 0. A única exceção é a linha que é um card sozinho: ela mantém o raio do card. A linha selecionada ou marcada tem a mesma forma. Os controles internos (caixa de seleção, lixeira, menu) podem ter o hover pequeno deles, mas o hover da linha nunca é uma caixa arredondada em volta de parte da linha. Foco do teclado na linha: contorno por dentro, sem cantos.",
         )}</p>
+        <p className="mt-3 font-semibold text-foreground">{t("3. On phones, tags and actions move to their own row below the text (product owner's decision, 27/11/2026).", "3. No celular, tags e ações descem para uma linha própria embaixo do texto (decisão da dona do produto, 27/11/2026).")}</p>
+        <p className="mt-1">{t(
+          "This is the default for list rows: below 640 px, the tags, status and actions go to a row of their own below the whole text block, so the text uses the full width. In LinhaDeLista it is quebraAcoes=\"estreito\", the default; quebraAcoes={false} keeps them beside the text at every width (the text still stays in its own column), and quebraAcoes={true} puts them below at every width.",
+          "É o padrão das linhas de lista: abaixo de 640 px, as tags, o status e as ações vão para uma linha própria embaixo de todo o bloco de texto, e o texto usa a largura toda. Na LinhaDeLista é quebraAcoes=\"estreito\", o padrão; quebraAcoes={false} as mantém ao lado do texto em qualquer largura (o texto continua na coluna dele), e quebraAcoes={true} as põe embaixo em qualquer largura.",
+        )}</p>
       </Callout>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <Celular tipo="certo" legenda={t("text in its own column; full-row hover", "texto na coluna dele; hover na linha inteira")}>
+      <div data-cards-ignorar="" className="grid gap-6 md:grid-cols-2">
+        <Celular tipo="certo" legenda={t("tags and actions below the text; full-row hover", "tags e ações embaixo do texto; hover na linha inteira")}>
           <ListaCerta />
         </Celular>
         <Celular tipo="errado" legenda={t("text under the tag and the trash; hover only on the text", "texto sob a tag e a lixeira; hover só no texto")}>
@@ -209,21 +224,23 @@ export function RegraDasLinhas() {
 
       <div className="grid gap-6 md:grid-cols-2 md:items-start">
         <div className="min-w-0">
-          <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{t("When space is really too tight", "Quando o espaço é mesmo pouco")}</p>
+          <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{t("Where the tags and actions go", "Onde ficam as tags e ações")}</p>
           <ul className="list-disc space-y-1.5 pl-5 text-[0.8125rem] leading-relaxed text-muted-foreground">
-            <li>{t("The tags and actions move to their own row below the whole text block, aligned right or left (LinhaDeLista quebraAcoes; \"estreito\" does it on phones only).", "As tags e ações descem para uma linha própria, abaixo de todo o bloco de texto, alinhadas à direita ou à esquerda (LinhaDeLista quebraAcoes; \"estreito\" faz isso só no celular).")}</li>
-            <li>{t("Or the row becomes a stacked card.", "Ou a linha vira um card empilhado.")}</li>
+            <li>{t("Default: on phones, in their own row below the whole text block, aligned right or left (LinhaDeLista quebraAcoes=\"estreito\"); from 640 px, in the trailing column.", "Padrão: no celular, numa linha própria embaixo de todo o bloco de texto, alinhadas à direita ou à esquerda (LinhaDeLista quebraAcoes=\"estreito\"); a partir de 640 px, na coluna final.")}</li>
+            <li>{t("Beside the text at every width: quebraAcoes={false}. The text stays in its own column and wraps there.", "Ao lado do texto em qualquer largura: quebraAcoes={false}. O texto fica na coluna dele e quebra ali.")}</li>
+            <li>{t("Below the text at every width: quebraAcoes={true}. Or the row becomes a stacked card.", "Embaixo do texto em qualquer largura: quebraAcoes={true}. Ou a linha vira um card empilhado.")}</li>
             <li>{t("Never beside text that continues under them.", "Nunca ao lado de um texto que continua por baixo delas.")}</li>
           </ul>
         </div>
-        <Celular tipo="certo" legenda={t("actions below the whole text", "ações abaixo de todo o texto")}>
-          <ListaComQuebra />
+        <Celular tipo="certo" legenda={t("quebraAcoes={false}: beside the text, text in its own column", "quebraAcoes={false}: ao lado do texto, texto na coluna dele")}>
+          <ListaAoLado />
         </Celular>
       </div>
 
       <DoDont
         dos={[
           t("Use LinhaDeLista (ui/linha-de-lista.tsx): grid auto | minmax(0,1fr) | auto.", "Use a LinhaDeLista (ui/linha-de-lista.tsx): grade auto | minmax(0,1fr) | auto."),
+          t("On phones, put the tags and actions in their own row below the text (the default).", "No celular, ponha as tags e ações numa linha própria embaixo do texto (o padrão)."),
           t("Keep the trailing column at its width and top-aligned when the text wraps.", "Mantenha a coluna final na largura dela e no topo quando o texto quebra."),
           t("Wrap, clamp or truncate the text inside its own column.", "Quebre, limite as linhas ou encurte o texto dentro da coluna dele."),
           t("Paint the hover and the selection on the whole row, square.", "Pinte o hover e a seleção na linha inteira, sem cantos."),
@@ -252,7 +269,7 @@ export function ResumoDaRegraDasLinhas() {
       <p className="mt-3 font-semibold text-foreground">{t("Rule: in grids, text never goes past the tags or actions column.", "Regra: nos grids, o texto nunca ultrapassa a coluna de tags ou ações.")}</p>
       <ul className="mt-1 list-disc space-y-1 pl-5">
         <li>{t("The trailing column keeps its width; the text wraps or is shortened inside its own column, at every width.", "A coluna final mantém a largura; o texto quebra ou é encurtado dentro da coluna dele, em qualquer largura.")}</li>
-        <li>{t("Without room, tags and actions move below the whole text, or the row becomes a stacked card.", "Sem espaço, tags e ações descem para baixo de todo o texto, ou a linha vira um card empilhado.")}</li>
+        <li>{t("On phones, tags and actions move to their own row below the text, which uses the full width (default, 27/11/2026: LinhaDeLista quebraAcoes=\"estreito\"; quebraAcoes={false} keeps them beside it). Or the row becomes a stacked card.", "No celular, tags e ações descem para uma linha própria embaixo do texto, que usa a largura toda (padrão, 27/11/2026: LinhaDeLista quebraAcoes=\"estreito\"; quebraAcoes={false} as mantém ao lado). Ou a linha vira um card empilhado.")}</li>
       </ul>
       <p className="mt-3 font-semibold text-foreground">{t("Rule: row hover covers the whole row, edge to edge, with no rounded corners.", "Regra: o hover da linha cobre a linha inteira, de ponta a ponta, sem cantos arredondados.")}</p>
       <ul className="mt-1 list-disc space-y-1 pl-5">

@@ -10,6 +10,9 @@ import { cn } from "./utils";
  *    (minmax(0,1fr)) e quebra ou é encurtado ali dentro; a coluna do fim mantém a largura (auto). Sem espaço,
  *    as tags e ações descem para uma linha própria abaixo de todo o texto (quebraAcoes), nunca ao lado de um
  *    texto que continua por baixo delas.
+ *    Decisão da dona do produto (27/11/2026): no celular, tags e ações descem para uma linha própria embaixo do
+ *    texto, que usa a largura toda. É o padrão (quebraAcoes="estreito"); quebraAcoes={false} as mantém ao lado
+ *    do texto em qualquer largura, e quebraAcoes={true} as põe embaixo sempre.
  * 2. O hover da linha cobre a linha inteira, de ponta a ponta, sem cantos arredondados (--row-hover). A linha
  *    selecionada tem a mesma forma, e o foco do teclado é um contorno por dentro, também sem cantos.
  *
@@ -30,7 +33,10 @@ export type LinhaDeListaProps = Omit<React.HTMLAttributes<HTMLElement>, "title">
   descricao?: React.ReactNode;
   /** Coluna do fim: tags, status e ações. Mantém a largura; o texto nunca passa por baixo dela. */
   fim?: React.ReactNode;
-  /** true: as tags e ações ficam sempre numa linha própria, abaixo de todo o texto. "estreito": só no celular (abaixo de 640 px). */
+  /**
+   * "estreito" (padrão, decisão de 27/11/2026): no celular (abaixo de 640 px), as tags e ações descem para uma linha
+   * própria embaixo do texto, que usa a largura toda. true: embaixo sempre. false: ao lado do texto em qualquer largura.
+   */
   quebraAcoes?: boolean | "estreito";
   /** Lado das tags e ações quando descem para baixo do texto. */
   alinharAcoesAbaixo?: "fim" | "inicio";
@@ -54,7 +60,7 @@ export function LinhaDeLista({
   titulo,
   descricao,
   fim,
-  quebraAcoes = false,
+  quebraAcoes = "estreito",
   alinharAcoesAbaixo = "fim",
   alinhar = "inicio",
   interativa,
