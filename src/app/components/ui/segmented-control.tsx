@@ -107,7 +107,7 @@ export function SegmentedControl<T extends string = string>({
             "hover:bg-accent hover:text-foreground",
             "focus-visible:z-10 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset",
             "disabled:pointer-events-none disabled:opacity-50",
-            variant === "suave" && "data-[state=on]:bg-[var(--primary-muted)] data-[state=on]:text-[var(--primary-text,var(--primary))]",
+            variant === "suave" && "data-[state=on]:bg-[var(--primary-suave)] data-[state=on]:text-[var(--primary-text,var(--primary))] data-[state=on]:hover:bg-[var(--primary-suave)] data-[state=on]:hover:text-[var(--primary-text,var(--primary))]",
             variant === "solida" && "data-[state=on]:bg-primary data-[state=on]:text-primary-foreground data-[state=on]:hover:bg-[var(--primary-hover)]",
             s.item,
           )}

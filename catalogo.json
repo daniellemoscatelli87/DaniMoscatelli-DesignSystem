@@ -9,7 +9,7 @@
     "componentesExportados": 349,
     "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 46,
-    "tokens": 157,
+    "tokens": 158,
     "paginas": 29,
     "ancoras": 202,
     "propostas": 3
@@ -5298,7 +5298,7 @@
           "ancora": "typography",
           "titulo": "Tipografia",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 174,
+          "linha": 197,
           "uso": "direto",
           "exports": [
             "Heading"
@@ -6640,7 +6640,7 @@
         {
           "nome": "ItemDoMenu",
           "tipo": "componente",
-          "linha": 358,
+          "linha": 359,
           "descricao": "",
           "props": [
             "icone",
@@ -6656,7 +6656,7 @@
         {
           "nome": "GrupoDoMenu",
           "tipo": "componente",
-          "linha": 410,
+          "linha": 411,
           "descricao": "",
           "props": [
             "titulo",
@@ -6676,7 +6676,7 @@
         {
           "nome": "CardDeAjuda",
           "tipo": "componente",
-          "linha": 472,
+          "linha": 473,
           "descricao": "Card de ajuda (rodapé do menu)",
           "props": [
             "titulo",
@@ -6689,7 +6689,7 @@
         {
           "nome": "CampoDeBuscaGlobal",
           "tipo": "componente",
-          "linha": 518,
+          "linha": 519,
           "descricao": "Barra superior: busca, sino e conta",
           "props": [
             "placeholder",
@@ -6702,7 +6702,7 @@
         {
           "nome": "BotaoDeNotificacoes",
           "tipo": "componente",
-          "linha": 549,
+          "linha": 550,
           "descricao": "Sino de notificações (botão redondo de 44 px, o alvo de toque mínimo). Com não lidas, o ContadorDoPainel fica sobre o canto superior direito do sino (centro do contador no canto do ícone), com anel de 2 px na cor do cabeçalho.",
           "props": [
             "naoLidas",
@@ -6714,7 +6714,7 @@
         {
           "nome": "GatilhoDaConta",
           "tipo": "componente",
-          "linha": 575,
+          "linha": 576,
           "descricao": "",
           "props": [
             "nome",
@@ -11073,8 +11073,8 @@
       "ancora": "colors",
       "titulo": "Paleta de cores",
       "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-      "linha": 115,
-      "elementosFeitosAMao": 3,
+      "linha": 118,
+      "elementosFeitosAMao": 5,
       "usaComponentes": []
     },
     {
@@ -11083,7 +11083,7 @@
       "ancora": "typography",
       "titulo": "Tipografia",
       "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-      "linha": 174,
+      "linha": 197,
       "elementosFeitosAMao": 35,
       "usaComponentes": [
         "Heading"
@@ -12309,15 +12309,15 @@
       },
       {
         "nome": "--primary",
-        "claro": "var(--crimson-400)",
+        "claro": "#CC4545",
         "escuro": null,
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
         "nome": "--primary-hover",
-        "claro": "var(--crimson-400)",
-        "escuro": "#DC5E5E",
+        "claro": "var(--crimson-500)",
+        "escuro": null,
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
@@ -12329,8 +12329,15 @@
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
+        "nome": "--primary-suave",
+        "claro": "#FCEEEE",
+        "escuro": "rgba(212, 77, 77, 0.22)",
+        "papel": "selecionado no escuro: --primary-text (#E88080) com 5,3:1 sobre o card",
+        "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
+      },
+      {
         "nome": "--primary-muted",
-        "claro": "rgba(212, 77, 77, 0.1)",
+        "claro": "#FAE4E4",
         "escuro": "rgba(212, 77, 77, 0.15)",
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
@@ -12407,9 +12414,9 @@
       },
       {
         "nome": "--muted-foreground",
-        "claro": "var(--graphite-400)",
+        "claro": "#5A6A80",
         "escuro": "var(--graphite-300)",
-        "papel": "",
+        "papel": "4,83:1 no fundo #EDF0F5 e 5,6:1 no branco (dona do produto, 27/11/2026)",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
@@ -13182,37 +13189,37 @@
           "id": "colors",
           "titulo": "Paleta de cores",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 115
+          "linha": 118
         },
         {
           "id": "typography",
           "titulo": "Tipografia",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 174
+          "linha": 197
         },
         {
           "id": "spacing",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 487
+          "linha": 510
         },
         {
           "id": "radius",
           "titulo": "Raio",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 492
+          "linha": 515
         },
         {
           "id": "shadows",
           "titulo": "Sombras",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 511
+          "linha": 534
         },
         {
           "id": "colors-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 531
+          "linha": 554
         }
       ]
     },

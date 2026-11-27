@@ -323,7 +323,7 @@ const iconsTokenGroups: TokenGroup[] = [
     group: "Icon Containers",
     tokens: [
       { name: "--muted",            description: "Icon container background",  light: "#E8EDF3",              dark: "rgba(40,48,67,0.60)", isColor: true },
-      { name: "--primary-muted",    description: "Primary icon container bg",  light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
+      { name: "--primary-muted",    description: "Primary icon container bg",  light: "#FAE4E4", dark: "rgba(212,77,77,0.15)", isColor: true },
       { name: "--success-muted",    description: "Success icon container bg",  light: "rgba(79,181,123,0.10)",dark: "rgba(34,197,94,0.12)", isColor: true },
       { name: "--warning-muted",    description: "Warning icon container bg",  light: "rgba(240,160,32,0.14)",dark: "rgba(245,176,64,0.14)", isColor: true },
       { name: "--info-muted",       description: "Info icon container bg",     light: "rgba(68,138,188,0.10)",dark: "rgba(59,130,246,0.12)", isColor: true },

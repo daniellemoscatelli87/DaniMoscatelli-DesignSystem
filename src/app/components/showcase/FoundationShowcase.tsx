@@ -39,8 +39,11 @@ const semanticColors = [
   { name: "Background", pt: "Fundo",       token: "--background",        swatch: "bg-background",       text: "text-foreground", light: "#EDF0F5", dark: "#0D1119" },
   { name: "Surface (Card)", pt: "Superfície (Card)",   token: "--card",              swatch: "bg-card",             text: "text-card-foreground", light: "#FFFFFF", dark: "rgba(19,26,39,.75)" },
   { name: "Foreground", pt: "Texto (foreground)",       token: "--foreground",        swatch: "bg-foreground",       text: "text-background", light: "#131A27", dark: "#E4E9F0" },
-  { name: "Muted", pt: "Suave (muted)",            token: "--muted-foreground",  swatch: "bg-muted-foreground", text: "text-background", light: "#627288", dark: "#8898B0" },
-  { name: "Primary", pt: "Primária",          token: "--primary",           swatch: "bg-primary",          text: "text-primary-foreground", light: "#D44D4D", dark: "#D44D4D" },
+  { name: "Muted", pt: "Suave (muted)",            token: "--muted-foreground",  swatch: "bg-muted-foreground", text: "text-background", light: "#5A6A80", dark: "#8898B0" },
+  { name: "Primary", pt: "Primária",          token: "--primary",           swatch: "bg-primary",          text: "text-primary-foreground", light: "#CC4545", dark: "#CC4545" },
+  { name: "Selected", pt: "Selecionado",      token: "--primary-suave",     swatch: "bg-primary-suave",    text: "text-primary-text", light: "#FCEEEE", dark: "rgba(212,77,77,.22)" },
+  { name: "Highlight", pt: "Destaque",        token: "--primary-muted",     swatch: "bg-primary-muted",    text: "text-primary-text", light: "#FAE4E4", dark: "rgba(212,77,77,.15)" },
+  { name: "Hover", pt: "Hover",               token: "--accent",            swatch: "bg-accent",           text: "text-foreground", light: "#E8EDF3", dark: "rgba(40,48,67,.6)" },
   { name: "Border", pt: "Borda",           token: "--border",            swatch: "bg-border",           text: "text-foreground", light: "rgba(19,26,39,.09)", dark: "rgba(255,255,255,.07)" },
   { name: "Success", pt: "Sucesso",          token: "--success",           swatch: "bg-success",          text: "text-white", light: "#388459", dark: "#22C55E" },
   { name: "Warning", pt: "Aviso",          token: "--warning",           swatch: "bg-warning",          text: "text-warning-foreground", light: "#F0A020", dark: "#F5B040" },
@@ -143,6 +146,26 @@ export function FoundationShowcase() {
               </div>
             ))}
           </div>
+        </SubSection>
+
+        <SubSection title={t("Light pinks: selected, hover and highlight", "Rosas claros: selecionado, hover e destaque")}>
+          <div id="cores-selecao" className="grid gap-3 md:grid-cols-3">
+            {[
+              { token: "--primary-suave", nome: t("Selected", "Selecionado"), classe: "bg-[var(--primary-suave)] text-primary-text", uso: t("The middle pink. The active menu item, the selected chip, segment and row, the chosen plan. It stays pink when the pointer is over it. Text in --primary-text: 5.5:1.", "O rosa do meio. Item ativo do menu, chip, segmento e linha selecionados, plano escolhido. Continua rosa com o mouse em cima. Texto em --primary-text: 5,5:1.") },
+              { token: "--accent", nome: t("Hover", "Hover"), classe: "bg-accent text-foreground", uso: t("Light grey, never pink. Shows that an item that is not selected can be clicked. Text in --foreground (14.8:1) or --muted-foreground (4.7:1). Full-width list rows use --row-hover, a lighter grey.", "Cinza claro, nunca rosa. Mostra que um item não selecionado pode ser clicado. Texto em --foreground (14,8:1) ou --muted-foreground (4,7:1). Linhas de lista de ponta a ponta usam o --row-hover, um cinza mais claro.") },
+              { token: "--primary-muted", nome: t("Highlight", "Destaque"), classe: "bg-[var(--primary-muted)] text-primary-text", uso: t("Icon bases (IconeComBase marca), status chips and support bands. It never marks a selection. Text in --primary-text: 5.1:1.", "Bases de ícones (IconeComBase marca), chips de estado e faixas de apoio. Nunca marca seleção. Texto em --primary-text: 5,1:1.") },
+            ].map(n => (
+              <div key={n.token} className="rounded-xl border border-border bg-card p-4">
+                <div className={`flex h-10 items-center rounded-sm px-3 text-[0.875rem] font-medium ${n.classe}`}>{n.nome}</div>
+                <p className="mt-2 font-mono text-[0.75rem] text-muted-foreground">{n.token} · {valorDoToken(n.token)?.claro}</p>
+                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{n.uso}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 max-w-3xl text-[0.8125rem] leading-relaxed text-muted-foreground">{t(
+            "Product owner's decision (27/11/2026), the same in both design systems: the selected state uses the middle pink, hover becomes light grey, and the stronger pink is only for highlights. A selected item under the pointer keeps the selected pink.",
+            "Decisão da dona do produto (27/11/2026), igual nos dois design systems: o selecionado fica no rosa do meio, o hover passa a ser cinza claro e o rosa mais forte é só para destaque. Um item selecionado com o mouse em cima continua no rosa do selecionado.",
+          )}</p>
         </SubSection>
 
         <SubSection title={t("Semantic Tokens", "Tokens semânticos")}>
@@ -544,7 +567,7 @@ function getFoundationTokenGroups(t: (en: string, pt: string) => string): TokenG
       { name: "--primary",            description: t("Brand accent — crimson", "Acento da marca — carmim"),          light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--primary-text",       description: t("Crimson for text and links only (6.2:1 on white)", "Carmim só para texto e links (6,2:1 no branco)"), light: "#B82828", dark: "#E88080", isColor: true },
       { name: "--primary-foreground", description: t("Text on primary", "Texto sobre primária"),                 light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--primary-muted",      description: t("Tinted primary background", "Fundo com tom da primária"),       light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
+      { name: "--primary-muted",      description: t("Tinted primary background", "Fundo com tom da primária"),       light: "#FAE4E4", dark: "rgba(212,77,77,0.15)", isColor: true },
     ],
   },
   {

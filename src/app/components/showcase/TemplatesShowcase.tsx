@@ -283,7 +283,7 @@ function SettingsTemplate() {
           ].map(item => {
             const Icon = item.icon;
             return (
-              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-primary/10 text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
+              <button key={item.label} className={`flex items-center gap-2 px-2.5 py-1.5 rounded-sm text-[0.75rem] font-medium mb-0.5 w-full text-left transition-colors ${item.active ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>
                 <Icon className="h-3.5 w-3.5 shrink-0" />
                 {item.label}
               </button>
@@ -391,7 +391,7 @@ function SettingsTemplate() {
                           document.documentElement.classList.toggle("dark", newDark);
                         }}
                         className={`p-3 rounded-md border-2 flex flex-col items-center gap-2 transition-all
-                          ${th.active ? "border-primary bg-primary/5" : "border-border bg-card"}`}
+                          ${th.active ? "border-primary bg-[var(--primary-suave)]" : "border-border bg-card hover:bg-accent"}`}
                       >
                         <Icon className={`h-5 w-5 ${th.active ? "text-primary-text" : "text-muted-foreground"}`} />
                         <span className={`text-[0.75rem] font-medium ${th.active ? "text-primary-text" : "text-muted-foreground"}`}>{th.label}</span>
@@ -668,7 +668,7 @@ function TeamTemplate() {
                       <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
                         <Edit2 className="h-3 w-3" />
                       </button>
-                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary-text transition-colors">
+                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
                         <Trash2 className="h-3 w-3" />
                       </button>
                     </div>
@@ -755,7 +755,7 @@ function InboxTemplate() {
                   key={n.id}
                   onClick={() => { setSelected(n.id); markRead(n.id); }}
                   className={`w-full text-left px-4 py-3 border-b border-border transition-colors flex gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring
-                    ${selected === n.id ? "bg-primary/5 border-l-2 border-l-primary" : "hover:bg-[var(--row-hover)] border-l-2 border-l-transparent"}`}
+                    ${selected === n.id ? "bg-[var(--primary-suave)] border-l-2 border-l-primary" : "hover:bg-[var(--row-hover)] border-l-2 border-l-transparent"}`}
                 >
                   <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 mt-0.5 ${notifColor[n.type]}`}>
                     <Icon className="h-3.5 w-3.5" />
@@ -1035,8 +1035,8 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                     onClick={() => setSelecionado(plan.id)}
                     className={`h-10 w-full @[19rem]:w-auto px-4 rounded-md border border-primary text-[0.8125rem] font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                       ${ativo
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)]"}`}
+                        ? "bg-[var(--primary-suave)] text-[var(--primary-text,var(--primary))]"
+                        : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-accent"}`}
                   >
                     {ativo && <Check aria-hidden className="h-4 w-4" />}
                     {ativo ? t("Plan selected", "Plano selecionado") : t("Select Plan", "Selecionar Plano")}
@@ -1428,7 +1428,7 @@ const templatesTokenGroups = (t: (en: string, pt: string) => string): TokenGroup
     tokens: [
       { name: "--primary",            description: t("Primary CTA button / link", "Botão / link CTA primário"),  light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--primary-foreground", description: t("Text on CTA", "Texto sobre o CTA"),               light: "#FFFFFF", dark: "#FFFFFF", isColor: true },
-      { name: "--primary-muted",      description: t("Tinted CTA zone", "Área de CTA com tom"),           light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
+      { name: "--primary-muted",      description: t("Tinted CTA zone", "Área de CTA com tom"),           light: "#FAE4E4", dark: "rgba(212,77,77,0.15)", isColor: true },
     ],
   },
   {
@@ -2140,7 +2140,7 @@ function LandingTemplate() {
                         <div className="flex flex-wrap gap-1.5">
                           {[t("Support", "Suporte"), t("Sales", "Vendas"), "Demo", t("Partnership", "Parcerias"), t("Other", "Outro")].map(s => (
                             <button key={s} type="button"
-                              className="px-2.5 py-1 rounded-full border border-border bg-muted text-[0.625rem] font-medium text-muted-foreground hover:border-primary/40 hover:bg-primary/5 hover:text-primary-text transition-all">
+                              className="px-2.5 py-1 rounded-full border border-border bg-muted text-[0.625rem] font-medium text-muted-foreground hover:border-[var(--border-strong)] hover:bg-accent hover:text-foreground transition-all">
                               {s}
                             </button>
                           ))}

@@ -422,7 +422,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                     key={c.label}
                     onClick={() => setChipActive(prev => active ? prev.filter(x => x !== c.label) : [...prev, c.label])}
                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.8125rem] font-medium border transition-all duration-150
-                      ${active ? "bg-primary text-primary-foreground border-primary" : "bg-card text-foreground border-border hover:border-[var(--border-strong)]"}`}
+                      ${active ? "bg-[var(--primary-suave)] text-primary-text border-primary/30" : "bg-card text-foreground border-border hover:bg-accent hover:border-[var(--border-strong)]"}`}
                   >
                     {active && <Check className="h-3.5 w-3.5" />}
                     {lang === "en" ? c.label : c.pt}
@@ -717,7 +717,7 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
     group: t("Badge / Tag Colors", "Cores de badge / tag"),
     tokens: [
       { name: "--primary",      description: t("Primary badge fill", "Preenchimento do badge primário"),   light: "#D44D4D", dark: "#D44D4D", isColor: true },
-      { name: "--primary-muted",description: t("Primary badge tinted", "Badge primário com tom"), light: "rgba(212,77,77,0.10)", dark: "rgba(212,77,77,0.15)", isColor: true },
+      { name: "--primary-muted",description: t("Primary badge tinted", "Badge primário com tom"), light: "#FAE4E4", dark: "rgba(212,77,77,0.15)", isColor: true },
       { name: "--success",      description: t("Success badge", "Badge de sucesso"),        light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--success-muted",description: t("Success badge tinted", "Badge de sucesso com tom"), light: "rgba(79,181,123,0.10)", dark: "rgba(34,197,94,0.12)", isColor: true },
       { name: "--warning",      description: t("Warning badge", "Badge de aviso"),        light: "#F0A020", dark: "#F5B040", isColor: true },

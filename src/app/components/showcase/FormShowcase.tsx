@@ -48,7 +48,7 @@ const tamanhoExtra: Record<string, string> = { xl: "h-13 px-7 rounded-lg", "icon
 
 function Btn({ variant = "primary", size = "md", children, loading = false, disabled = false, icon, iconOnly = false, className = "" }:
   { variant?: "primary"|"outline"|"ghost"|"link"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; loading?: boolean; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; className?: string }) {
-  const contorno = variant === "crimson-outline" ? "border-primary text-[var(--primary-text,var(--primary))] hover:bg-[var(--primary-muted)] hover:text-[var(--primary-text,var(--primary))]" : "";
+  const contorno = variant === "crimson-outline" ? "border-primary text-[var(--primary-text,var(--primary))] hover:bg-accent hover:text-[var(--primary-text,var(--primary))]" : "";
   return (
     <Button
       variant={variantesUi[variant]}

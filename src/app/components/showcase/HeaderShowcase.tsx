@@ -578,7 +578,7 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
         aria-pressed={ativo}
         onClick={onAcao}
         className={`mt-4 inline-flex h-9 items-center justify-center gap-1.5 self-start rounded-md border border-primary px-3.5 text-[0.8125rem] font-semibold transition-colors ${foco}
-          ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-[var(--primary-muted)]`}`}
+          ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-accent`}`}
       >
         {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}
         {ativo ? rotuloAcao[1] : rotuloAcao[0]}

@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 157 tokens · 29 páginas e 202 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
+**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 158 tokens · 29 páginas e 202 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -1100,8 +1100,8 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Identidade de marca › Uso do símbolo (`brand#brand-symbol-usage`) | [src/app/components/showcase/BrandShowcase.tsx:320](src/app/components/showcase/BrandShowcase.tsx#L320) |  | 3 |
 | Identidade de marca › Responsividade (`brand#brand-responsive`) | [src/app/components/showcase/BrandShowcase.tsx:442](src/app/components/showcase/BrandShowcase.tsx#L442) |  | 17 |
 | Identidade de marca › Área de respiro (`brand#brand-clearspace`) | [src/app/components/showcase/BrandShowcase.tsx:705](src/app/components/showcase/BrandShowcase.tsx#L705) |  | 10 |
-| Fundamentos › Paleta de cores (`colors#colors`) | [src/app/components/showcase/FoundationShowcase.tsx:115](src/app/components/showcase/FoundationShowcase.tsx#L115) |  | 3 |
-| Fundamentos › Tipografia (`colors#typography`) | [src/app/components/showcase/FoundationShowcase.tsx:174](src/app/components/showcase/FoundationShowcase.tsx#L174) | `Heading` | 35 |
+| Fundamentos › Paleta de cores (`colors#colors`) | [src/app/components/showcase/FoundationShowcase.tsx:118](src/app/components/showcase/FoundationShowcase.tsx#L118) |  | 5 |
+| Fundamentos › Tipografia (`colors#typography`) | [src/app/components/showcase/FoundationShowcase.tsx:197](src/app/components/showcase/FoundationShowcase.tsx#L197) | `Heading` | 35 |
 | Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) | [src/app/components/showcase/GridShowcase.tsx:183](src/app/components/showcase/GridShowcase.tsx#L183) | `GradeDeCards` | 3 |
 | Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:217](src/app/components/showcase/GridShowcase.tsx#L217) |  | 3 |
 | Design Tokens › O que são tokens (`tokens#tokens-intro`) | [src/app/components/showcase/TokensShowcase.tsx:115](src/app/components/showcase/TokensShowcase.tsx#L115) | `GradeDeCards`, `ItemDaGrade` | 8 |
@@ -1148,11 +1148,11 @@ Todos em [src/styles/theme.css](src/styles/theme.css). No código, use sempre o 
 
 **Cor principal: qual token usar** (claro → escuro)
 
-- `--primary`: `--crimson-400 (#D44D4D)`
-- `--primary-hover`: `--crimson-400 (#D44D4D)` → `#DC5E5E`
+- `--primary`: `#CC4545`
+- `--primary-hover`: `--crimson-500 (#B82828)`
 - `--primary-foreground`: `#FFFFFF`
 - `--primary-text`: `--crimson-500 (#B82828)` → `--crimson-300 (#E88080)`
-- `--primary-muted`: `rgba(212, 77, 77, 0.1)` → `rgba(212, 77, 77, 0.15)`
+- `--primary-muted`: `#FAE4E4` → `rgba(212, 77, 77, 0.15)`
 - `--primary-muted-foreground`: `--crimson-400 (#D44D4D)` → `--crimson-300 (#E88080)`
 - `--ring`: `rgba(212, 77, 77, 0.35)` → `rgba(212, 77, 77, 0.4)`
 
@@ -1171,13 +1171,14 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--foreground` | `--graphite-900 (#131A27)` | `#E4E9F0` |  |
 | `--foreground-muted` | `--graphite-400 (#627288)` | `--graphite-300 (#8898B0)` |  |
 | `--foreground-subtle` | `--graphite-300 (#8898B0)` | `--graphite-400 (#627288)` |  |
-| `--primary` | `--crimson-400 (#D44D4D)` | igual |  |
-| `--primary-hover` | `--crimson-400 (#D44D4D)` | `#DC5E5E` |  |
+| `--primary` | `#CC4545` | igual |  |
+| `--primary-hover` | `--crimson-500 (#B82828)` | igual |  |
 | `--primary-foreground` | `#FFFFFF` | igual |  |
-| `--primary-muted` | `rgba(212, 77, 77, 0.1)` | `rgba(212, 77, 77, 0.15)` |  |
+| `--primary-suave` | `#FCEEEE` | `rgba(212, 77, 77, 0.22)` | selecionado no escuro: --primary-text (#E88080) com 5,3:1 sobre o card |
+| `--primary-muted` | `#FAE4E4` | `rgba(212, 77, 77, 0.15)` |  |
 | `--primary-muted-foreground` | `--crimson-400 (#D44D4D)` | `--crimson-300 (#E88080)` |  |
 | `--primary-text` | `--crimson-500 (#B82828)` | `--crimson-300 (#E88080)` |  |
-| `--surface-tint` | `--primary-muted (rgba(212, 77, 77, 0.1))` | igual | faixas e cards de apoio |
+| `--surface-tint` | `--primary-muted (#FAE4E4)` | igual | faixas e cards de apoio |
 | `--secondary` | `#E4E9F0` | `rgba(40, 48, 67, 0.8)` |  |
 | `--secondary-hover` | `--graphite-100 (#D6DCE6)` | `rgba(40, 48, 67, 1)` |  |
 | `--secondary-foreground` | `--graphite-900 (#131A27)` | `#E4E9F0` |  |
@@ -1185,7 +1186,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--disabled-foreground` | `--graphite-400 (#627288)` | `color-mix(in srgb, var(--graphite-300) 60%, var(--graphite-400))` |  |
 | `--row-hover` | `color-mix(in srgb, var(--graphite-50) 50%, var(--card))` | `rgba(255, 255, 255, 0.04)` |  |
 | `--muted` | `#E8EDF3` | `rgba(40, 48, 67, 0.6)` |  |
-| `--muted-foreground` | `--graphite-400 (#627288)` | `--graphite-300 (#8898B0)` |  |
+| `--muted-foreground` | `#5A6A80` | `--graphite-300 (#8898B0)` | 4,83:1 no fundo #EDF0F5 e 5,6:1 no branco (dona do produto, 27/11/2026) |
 | `--accent` | `#E8EDF3` | `rgba(40, 48, 67, 0.6)` |  |
 | `--accent-foreground` | `--graphite-900 (#131A27)` | `#E4E9F0` |  |
 | `--border` | `rgba(19, 26, 39, 0.09)` | `rgba(255, 255, 255, 0.07)` |  |

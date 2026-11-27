@@ -259,7 +259,7 @@ export function OverlaysShowcase() {
                     );
                   })}
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-primary/10 cursor-pointer outline-none">
+                  <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-[0.875rem] font-medium text-primary-text rounded-sm hover:bg-accent cursor-pointer outline-none">
                     <Trash2 className="h-4 w-4" />
                     {t("Delete", "Excluir")}
                   </DropdownMenuItem>

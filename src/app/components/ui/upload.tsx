@@ -229,7 +229,7 @@ export function UploadDropzone({
           disabled ? "cursor-not-allowed border-border bg-muted/40 opacity-60" :
           dragging ? "border-primary bg-[var(--primary-muted)] scale-[1.01] shadow-[var(--shadow-md)]" :
           error ? "border-error/60 bg-error/5" :
-          "border-border bg-card hover:border-primary/60 hover:bg-[var(--primary-muted)]/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "border-border bg-card hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           size === "compact" && "flex-row justify-start gap-4 text-left rounded-lg",
         )}
       >
@@ -357,7 +357,7 @@ export function ImageUpload({
         className={cn(
           "group relative flex cursor-pointer items-center justify-center overflow-hidden border-2 bg-muted/40 text-muted-foreground transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           shape === "circle" ? "rounded-full" : "rounded-lg",
-          value ? "border-solid border-border" : "border-dashed border-border hover:border-primary/60 hover:bg-[var(--primary-muted)]/60",
+          value ? "border-solid border-border" : "border-dashed border-border hover:border-primary/60 hover:bg-accent/60",
           dragging && "border-primary bg-[var(--primary-muted)]",
         )}
       >
@@ -442,7 +442,7 @@ export function ImageGrid({
             <button
               type="button" onClick={() => inputRef.current?.click()}
               onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); pick(e.dataTransfer.files); }}
-              className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-primary/60 hover:bg-[var(--primary-muted)]/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-primary/60 hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ImagePlus className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden />
               <span className="px-2 text-center text-[0.6875rem] font-semibold leading-tight text-foreground">{addLabel}</span>

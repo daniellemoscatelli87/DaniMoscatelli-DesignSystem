@@ -51,10 +51,17 @@
   --foreground-muted:  var(--graphite-400);
   --foreground-subtle: var(--graphite-300);
 
-  --primary:                  var(--crimson-400);
-  --primary-hover:             var(--crimson-400);
+  /* Cores aprovadas pela dona do produto (27/11/2026): primária #CC4545 (texto branco 4,66:1), hover crimson-500. */
+  --primary:                  #CC4545;
+  --primary-hover:             var(--crimson-500);
   --primary-foreground:        #FFFFFF;
-  --primary-muted:             rgba(212, 77, 77, 0.1);
+  /* Três rosas claros, cada um com um papel (dona do produto, 27/11/2026; cores sólidas):
+     --primary-suave  #FCEEEE  SELECIONADO: item ativo do menu, chip, segmento e linha selecionados (o "rosa do meio").
+                               Selecionado com o mouse em cima continua neste rosa. Texto --primary-text: 5,5:1.
+     --primary-muted  #FAE4E4  DESTAQUE: base de ícones (IconeComBase marca), chips de estado e faixas de apoio.
+     HOVER é cinza claro (--accent/--muted #E8EDF3), nunca rosa. */
+  --primary-suave:             #FCEEEE;
+  --primary-muted:             #FAE4E4;
   --primary-muted-foreground:  var(--crimson-400);
   --primary-text:              var(--crimson-500);
   --surface-tint:              var(--primary-muted);   /* faixas e cards de apoio */   /* vermelho só para texto: 6,2:1 no branco (decisão de 16/11/2026) */
@@ -70,7 +77,7 @@
   /* Hover de linha ou item dentro do card: cinza bem claro e sutil, metade do grafite-50 sobre o card (≈ #F6F8FA no branco); decisão de 23/11/2026 */
   --row-hover:           color-mix(in srgb, var(--graphite-50) 50%, var(--card));
   --muted:            #E8EDF3;
-  --muted-foreground: var(--graphite-400);
+  --muted-foreground: #5A6A80;   /* 4,83:1 no fundo #EDF0F5 e 5,6:1 no branco (dona do produto, 27/11/2026) */
   --accent:           #E8EDF3;
   --accent-foreground: var(--graphite-900);
 
@@ -167,10 +174,13 @@
   --foreground-muted:  var(--graphite-300);
   --foreground-subtle: var(--graphite-400);
 
-  --primary:                  var(--crimson-400);
-  --primary-hover:             #DC5E5E;
+  /* Escuro (27/11/2026): a mesma primária do claro, porque o texto branco do botão sobre #D44D4D ficava em 4,2:1 e
+     sobre o hover #DC5E5E em 3,7:1; agora 4,66:1 e, no hover crimson-500, 6,2:1. */
+  --primary:                  #CC4545;
+  --primary-hover:             var(--crimson-500);
   --primary-foreground:        #FFFFFF;
   --primary-muted:             rgba(212, 77, 77, 0.15);
+  --primary-suave:             rgba(212, 77, 77, 0.22);   /* selecionado no escuro: --primary-text (#E88080) com 5,3:1 sobre o card */
   --primary-muted-foreground:  var(--crimson-300);
   --primary-text:              var(--crimson-300);
   --surface-tint:              var(--primary-muted);
@@ -306,6 +316,7 @@
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-muted: var(--primary-muted);
+  --color-primary-suave: var(--primary-suave);
   --color-success-muted: var(--success-muted);
   --color-warning-muted: var(--warning-muted);
   --color-error-muted: var(--error-muted);

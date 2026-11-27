@@ -1016,7 +1016,7 @@ function AppShell() {
                         aria-expanded={item.items ? !!isExpanded : undefined}
                         className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
                           ${collapsed ? "lg:justify-center lg:px-0" : ""}
-                          ${isActive ? "bg-primary/10 text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                          ${isActive ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                       >
                         <span className="flex items-center gap-2.5 min-w-0">
                           <Icon className="h-4 w-4 shrink-0" />
@@ -1039,7 +1039,7 @@ function AppShell() {
                                 onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
                                 className={`w-full text-left px-3 py-1.5 rounded-sm text-[0.8125rem] transition-colors
                                   ${isSubActive
-                                    ? "text-primary-text font-medium bg-primary/8"
+                                    ? "text-primary-text font-medium bg-[var(--primary-suave)]"
                                     : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
                                   }`}
                               >
@@ -1071,7 +1071,7 @@ function AppShell() {
                       aria-expanded={groupOpen}
                       className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
                         ${collapsed ? "lg:justify-center lg:px-0" : ""}
-                        ${groupActive && !groupOpen ? "bg-primary/10 text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                        ${groupActive && !groupOpen ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                     >
                       <span className="flex items-center gap-2.5 min-w-0">
                         <GroupIcon className="h-4 w-4 shrink-0" />

@@ -98,7 +98,7 @@ export function LinhaDeLista({
         colunas,
         alinhar === "centro" ? "items-start sm:items-center" : "items-start",
         clicavel && "cursor-pointer transition-colors hover:bg-[var(--row-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
-        selecionada && "bg-[var(--primary-muted)] hover:bg-[var(--primary-muted)]",
+        selecionada && "bg-[var(--primary-suave)] hover:bg-[var(--primary-suave)]",
         className,
       )}
       {...props}
