@@ -83,6 +83,7 @@ const itens: Item[] = [
   { nome: "painel-shell", en: "Panel frame: store selector, side menu, search, notifications and account.", pt: "Moldura do painel: seletor de loja, menu lateral, busca, notificações e conta.", pagina: P.templates },
   { nome: "partner-card", en: "Invitation card with highlight, main action and secondary link.", pt: "Card de convite com destaque, ação principal e link secundário.", pagina: P.cards },
   { nome: "password-field", en: "Password with show/hide, strength and requirements.", pt: "Senha com mostrar/ocultar, força e requisitos.", pagina: P.form },
+  { nome: "pilula-de-acao", en: "Floating action pill beside the WhatsApp button, with the bottom band on phones.", pt: "Pílula de ação flutuante ao lado do botão do WhatsApp, com a faixa de baixo no celular.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "popover", en: "Floating panel anchored to a button.", pt: "Painel flutuante preso a um botão." },
   { nome: "product-card", en: "Item card with photo, price and condition.", pt: "Card de peça com foto, preço e condição.", pagina: P.cards },
   { nome: "progress", en: "Progress bar.", pt: "Barra de progresso.", pagina: P.feedback },

@@ -8,8 +8,9 @@ import { cn } from "./utils";
  * no WhatsApp em nova aba, com uma mensagem pronta. É o mesmo botão de todas as páginas do site (index.html e
  * public/whatsapp.js).
  *
- * Cor: o verde oficial do WhatsApp (#25D366) fica só neste botão, por ser a cor da marca do WhatsApp (escolha da
- * dona do produto, registrada no site como exceção ao design system). O resto (sombra, anel de foco, raio) é do DS.
+ * Cor: o verde oficial do WhatsApp (#25D366) fica só neste botão, por ser a cor da marca do WhatsApp (exceção da
+ * dona do produto ao design system, confirmada em 19/11/2026). O resto (sombra, anel de foco, raio) é do DS.
+ * Camada 45: fica acima da faixa (43) e dos outros flutuantes (44), como no site.
  *
  * fixo — true (padrão): position fixed na página. false: position absolute, para demonstrações dentro de uma caixa.
  */
@@ -57,7 +58,7 @@ function BotaoWhatsApp({
       title={titulo}
       className={cn(
         fixo ? "fixed" : "absolute",
-        "bottom-5 right-5 z-30 flex size-14 items-center justify-center rounded-full text-white shadow-md sm:bottom-6 sm:right-6",
+        "bottom-5 right-5 z-[45] flex size-14 items-center justify-center rounded-full text-white shadow-md sm:bottom-6 sm:right-6",
         "transition-transform duration-200 hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className,

@@ -121,7 +121,7 @@ function AvisoProjeto({
     <div
       data-slot="aviso-projeto"
       data-animar={animar ? "sim" : "nao"}
-      className={cn("dm-aviso-projeto z-30 font-sans", fixo ? "fixed" : "absolute", p.caixa, className)}
+      className={cn("dm-aviso-projeto z-[44] font-sans", fixo ? "fixed" : "absolute", p.caixa, className)}
     >
       <style>{CSS}</style>
       <div className="relative w-full rounded-lg border border-border bg-card text-foreground shadow-xl">
