@@ -124,6 +124,8 @@ const ptLabels: Record<string, string> = {
   "Shine Border": "Shine Border",
   "Motion Tokens": "Tokens de movimento",
   "Dashboard": "Dashboard",
+  "Panel": "Painel",
+  "Panel pieces": "Peças do painel",
   "Settings": "Configurações",
   "Auth": "Autenticação",
   "Team": "Equipe",
@@ -404,6 +406,8 @@ const navGroups: { group: string; items: NavItem[] }[] = [
     items: [
       { id: "templates", label: "Templates", icon: LayoutTemplate,
         items: [
+          { id: "template-painel",     label: "Panel",         sectionId: "templates" },
+          { id: "template-painel-pecas", label: "Panel pieces", sectionId: "templates" },
           { id: "template-dashboard",  label: "Dashboard",     sectionId: "templates" },
           { id: "template-settings",   label: "Settings",      sectionId: "templates" },
           { id: "template-auth",       label: "Auth",          sectionId: "templates" },

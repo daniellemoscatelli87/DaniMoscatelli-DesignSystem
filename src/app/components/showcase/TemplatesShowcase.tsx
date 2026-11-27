@@ -12,7 +12,7 @@ import {
   Moon, Sun, ChevronDown, Package,
   Phone, MapPin, MessageSquare, Send, AtSign,
   Globe, Sparkles, Layers, ArrowRight, PlayCircle,
-  ShieldCheck, Rocket, BarChart, Layout, Minus, Lightbulb, Star, ArrowRight,
+  ShieldCheck, Rocket, BarChart, Layout, Minus, Lightbulb, Star, ArrowRight, PanelsTopLeft,
 } from "lucide-react";
 import {
   AreaChart, Area, BarChart as ReBarChart, Bar,
@@ -22,6 +22,8 @@ import {
 import { useI18n } from "../../i18n";
 import { SectionHeader } from "./shared/SectionHeader";
 import { GradeDeCards } from "../ui/grade-de-cards";
+import { PainelTemplate, PecasDoPainel } from "./PainelTemplates";
+import { SegmentedControl } from "../ui/segmented-control";
 
 type L = { en: string; pt: string };
 
@@ -1294,6 +1296,7 @@ function ContactTemplate() {
 ───────────────────────────────────────────── */
 export function TemplatesShowcase() {
   const { t, bi } = useI18n();
+  const [estadoDoPainel, setEstadoDoPainel] = useState("pendencias");
   return (
     <div className="space-y-16">
       <div className="mb-2">
@@ -1302,6 +1305,34 @@ export function TemplatesShowcase() {
           {t("Ready-to-use layouts that combine design system components into real product screens.", "Layouts prontos para usar que combinam componentes do design system em telas reais de produto.")}
         </p>
       </div>
+
+      {/* 0 — Painel (casca + Início), com as peças do painel do DS */}
+      <section id="template-painel">
+        <TemplateLabel icon={PanelsTopLeft} label={t("Panel (shell and home)", "Painel (casca e Início)")} />
+        <p className="mb-4 max-w-3xl text-[0.9375rem] leading-relaxed text-muted-foreground">
+          {t(
+            "The approved panel frame: white top bar across the whole width, side menu with ≡ MENU that collapses from 240 to 64 px and pushes the content, grey page background, page header outside the cards and the content in border-only cards. Names and numbers are examples. Switch the state below to see the home page with pending items and all caught up.",
+            "A moldura aprovada dos painéis: barra superior branca na largura toda, menu lateral com ≡ MENU que recolhe de 240 para 64 px e empurra o conteúdo, fundo cinza, cabeçalho da página fora dos cards e o conteúdo em cards só com borda. Nomes e números são exemplos. Troque o estado abaixo para ver a Início com pendências e em dia.",
+          )}
+        </p>
+        <SegmentedControl
+          size="sm"
+          aria-label={t("Example state", "Estado do exemplo")}
+          value={estadoDoPainel}
+          onValueChange={setEstadoDoPainel}
+          options={[{ value: "pendencias", label: t("Pending items", "Com pendências") }, { value: "em-dia", label: t("All caught up", "Tudo em dia") }]}
+          className="mb-4"
+        />
+        <TemplateFrame><PainelTemplate emDia={estadoDoPainel === "em-dia"} /></TemplateFrame>
+      </section>
+
+      <section id="template-painel-pecas">
+        <SectionHeader
+          title={t("Panel pieces", "Peças do painel")}
+          description={t("The components of the panel template, with variations, states and accessibility.", "Os componentes do template do painel, com variações, estados e acessibilidade.")}
+        />
+        <PecasDoPainel />
+      </section>
 
       {/* 1 — Dashboard */}
       <section id="template-dashboard">

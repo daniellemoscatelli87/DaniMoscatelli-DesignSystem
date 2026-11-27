@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 79,
-    "componentesExportados": 324,
-    "templatesEPadroesSoEmDemonstracao": 74,
+    "arquivosDeComponentes": 82,
+    "componentesExportados": 347,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 46,
     "tokens": 157,
     "paginas": 29,
-    "ancoras": 199,
-    "propostas": 0
+    "ancoras": 201,
+    "propostas": 1
   },
   "componentes": [
     {
@@ -364,6 +364,20 @@
             "BotaoDoAlerta",
             "LinkDoAlerta"
           ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "AlertaComAcao",
+            "BotaoDoAlerta",
+            "LinkDoAlerta"
+          ]
         }
       ]
     },
@@ -635,6 +649,18 @@
         ]
       },
       "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Badge"
+          ]
+        },
         {
           "pagina": "cards",
           "paginaRotulo": "Cards",
@@ -1085,6 +1111,30 @@
           ]
         },
         {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
           "pagina": "cards",
           "paginaRotulo": "Cards",
           "ancora": "card-fundos",
@@ -1486,6 +1536,22 @@
             "CardDescription",
             "CardContent",
             "CardFooter"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Card",
+            "CardHeader",
+            "CardTitle",
+            "CardDescription",
+            "CardContent"
           ]
         }
       ]
@@ -2760,6 +2826,23 @@
             "DropdownMenuItem",
             "DropdownMenuSeparator"
           ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "DropdownMenu",
+            "DropdownMenuTrigger",
+            "DropdownMenuContent",
+            "DropdownMenuItem",
+            "DropdownMenuLabel",
+            "DropdownMenuSeparator"
+          ]
         }
       ]
     },
@@ -3513,10 +3596,34 @@
         {
           "pagina": "templates",
           "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
           "ancora": "template-dashboard",
           "titulo": "Dashboard",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1307,
+          "linha": 1338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3528,7 +3635,7 @@
           "ancora": "template-pricing",
           "titulo": "Preços",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1337,
+          "linha": 1368,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3540,7 +3647,7 @@
           "ancora": "template-landing",
           "titulo": "Landing page",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1349,
+          "linha": 1380,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5581,6 +5688,18 @@
       "variantes": {},
       "ondeVer": [
         {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "LinhaDeLista"
+          ]
+        },
+        {
           "pagina": "cards",
           "paginaRotulo": "Cards",
           "ancora": "card-layout",
@@ -6021,6 +6140,527 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/painel-cabecalho.tsx",
+      "nome": "painel-cabecalho",
+      "quandoUsar": "Cabeçalho da página do painel, \"Opção A\" (aprovada pela dona do produto para os painéis; trazido do FindLook Design System, ui/painel-cabecalho.tsx, com as cores e o Heading deste DS): saudação opcional, título (Heading tamanho \"page\", com o destaque entre ** ** em --primary-text), descrição, ações e, opcionalmente, as abas da página. Fica fora de qualquer card, direto no fundo cinza da página;",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CabecalhoDaPagina",
+          "tipo": "componente",
+          "linha": 35,
+          "descricao": "Texto primeiro, com largura garantida (base de 36rem): as ações ficam no alto, à direita, quando cabem na mesma linha; quando não cabem, descem juntas para baixo do texto, sem apertar o título.",
+          "props": [
+            "saudacao",
+            "titulo",
+            "descricao",
+            "acoes",
+            "abas",
+            "nivel",
+            "idDoTitulo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CabecalhoDaPaginaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CabecalhoDaPagina"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CabecalhoDaPagina"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/painel-dados.tsx",
+      "nome": "painel-dados",
+      "quandoUsar": "Dados do painel: ícone com base, card de indicador (KPI), card com cabeçalho de ícone, divisor suave e link \"ver tudo\". Trazidos do FindLook Design System (ui/painel-dados.tsx) com as cores deste DS. Os cards são o Card do DS (só borda, sem sombra parada, cantos do Card).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "IconeComBase",
+          "tipo": "componente",
+          "linha": 26,
+          "descricao": "",
+          "props": [
+            "tom",
+            "tamanho",
+            "redonda",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "formatarNumero",
+          "tipo": "utilitário",
+          "linha": 47,
+          "descricao": "",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "formatarVariacao",
+          "tipo": "utilitário",
+          "linha": 49,
+          "descricao": "+18,6% / −4% (sinal sempre visível; vírgula decimal).",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "Variacao",
+          "tipo": "componente",
+          "linha": 55,
+          "descricao": "Variação (seta + texto; nunca só cor)",
+          "props": [
+            "valor",
+            "comparacao",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "Explicacao",
+          "tipo": "componente",
+          "linha": 70,
+          "descricao": "Explicação acessível (toque, teclado e mouse)",
+          "props": [
+            "termo",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CardIndicador",
+          "tipo": "componente",
+          "linha": 117,
+          "descricao": "Card de indicador: rótulo em cima à esquerda, ícone com base no canto superior direito e, logo abaixo, o número grande. A linha do rótulo tem a altura de duas linhas de texto (a do ícone), então numa linha de cards os números ficam …",
+          "props": [
+            "icone",
+            "valor",
+            "total",
+            "rotulo",
+            "apoio",
+            "variacao",
+            "comparacao",
+            "explicacao",
+            "selo",
+            "acao",
+            "tom",
+            "href",
+            "as",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "DivisorSuave",
+          "tipo": "componente",
+          "linha": 175,
+          "descricao": "Linha de 1 px que some nas laterais: degradê transparente → --border-strong → transparente, com o esmaecimento nos últimos ~18% de cada lado. Separa partes de um card sem fechar uma caixa.",
+          "props": [
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CardComCabecalho",
+          "tipo": "componente",
+          "linha": 207,
+          "descricao": "",
+          "props": [
+            "icone",
+            "titulo",
+            "descricao",
+            "acao",
+            "tom",
+            "cabecalho",
+            "nivel",
+            "sangria",
+            "idDoTitulo",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "LinkVerTudo",
+          "tipo": "componente",
+          "linha": 243,
+          "descricao": "",
+          "props": [
+            "children",
+            "href",
+            "rotulo",
+            "onClick",
+            "tom",
+            "icone",
+            "as",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardComCabecalhoProps",
+        "CardIndicadorProps",
+        "EstiloDoCabecalhoDoCard",
+        "LinkVerTudoProps",
+        "TomDoIcone"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "IconeComBase",
+            "CardIndicador",
+            "CardComCabecalho",
+            "LinkVerTudo"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "IconeComBase",
+            "CardIndicador",
+            "CardComCabecalho",
+            "LinkVerTudo"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/painel-shell.tsx",
+      "nome": "painel-shell",
+      "quandoUsar": "Casca do painel (área restrita, painéis de produto): a moldura aprovada pela dona do produto para o site do design system e para a área restrita, trazida do FindLook Design System (ui/painel-shell.tsx) com as cores deste DS. BarraSuperiorDoPainel branca de ponta a ponta no alto (logo à esquerda;",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "LARGURA_EXPANDIDO",
+          "tipo": "utilitário",
+          "linha": 24,
+          "descricao": "Mesmas larguras do menu do site do design system (w-60 / w-16).",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "LARGURA_RECOLHIDO",
+          "tipo": "utilitário",
+          "linha": 25,
+          "descricao": "",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "MenuLateralProvider",
+          "tipo": "componente",
+          "linha": 75,
+          "descricao": "",
+          "props": [
+            "children",
+            "chave",
+            "padrao",
+            "recolhido",
+            "onRecolhidoChange"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "useMenuLateral",
+          "tipo": "utilitário",
+          "linha": 105,
+          "descricao": "Estado do menu lateral (fora de um MenuLateralProvider, devolve sempre expandido).",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "useMenuRecolhido",
+          "tipo": "utilitário",
+          "linha": 112,
+          "descricao": "Se o componente está dentro de um MenuLateral recolhido agora. Use para trocar o logo pelo símbolo, por exemplo.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "MenuLateral",
+          "tipo": "componente",
+          "linha": 139,
+          "descricao": "Coluna do menu lateral fixo (telas largas). Muda de largura entre 240 px e 64 px com os tokens de movimento; com \"menos movimento\", a troca é instantânea.",
+          "props": [
+            "midia",
+            "className",
+            "style",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "NavDoMenu",
+          "tipo": "componente",
+          "linha": 170,
+          "descricao": "<nav> do menu lateral, com o id que o BotaoRecolherMenu controla e a rolagem própria.",
+          "props": [
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "DivisorDoMenu",
+          "tipo": "componente",
+          "linha": 185,
+          "descricao": "Linha fina entre grupos do menu.",
+          "props": [
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "textoDoContador",
+          "tipo": "utilitário",
+          "linha": 205,
+          "descricao": "Mostra até 99; acima disso, \"99+\".",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ContadorDoPainel",
+          "tipo": "componente",
+          "linha": 224,
+          "descricao": "Contador redondo do painel: fundo vermelho e número branco em negrito, números tabulares. Círculo de 20 px com um algarismo; com dois ou mais, vira pílula com as pontas redondas (largura mínima de 20 px, nunca um oval alto).",
+          "props": [
+            "valor",
+            "rotulo",
+            "anel",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BotaoRecolherMenu",
+          "tipo": "componente",
+          "linha": 247,
+          "descricao": "",
+          "props": [
+            "className",
+            "onClick",
+            "rotulo",
+            "rotuloRecolher",
+            "rotuloExpandir"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "TopoDoMenu",
+          "tipo": "componente",
+          "linha": 280,
+          "descricao": "Topo do menu lateral (como no site do DS): o botão \"≡ Menu\", centralizado quando recolhido.",
+          "props": [
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BarraSuperiorDoPainel",
+          "tipo": "componente",
+          "linha": 296,
+          "descricao": "Faixa branca de ponta a ponta no alto do painel, acima do menu lateral, com linha fina embaixo. O logo fica à esquerda; busca e notificações à direita; o perfil (GatilhoDaConta) sempre na ponta direita.",
+          "props": [
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "iniciais",
+          "tipo": "utilitário",
+          "linha": 305,
+          "descricao": "Iniciais e avatar",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "AvatarPainel",
+          "tipo": "componente",
+          "linha": 310,
+          "descricao": "Avatar do painel (Avatar do DS, 36 px): foto, ou as iniciais na base rosa clara com texto --primary-text.",
+          "props": [
+            "nome",
+            "foto",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ItemDoMenu",
+          "tipo": "componente",
+          "linha": 343,
+          "descricao": "",
+          "props": [
+            "icone",
+            "ativo",
+            "contador",
+            "rotuloContador",
+            "as",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GrupoDoMenu",
+          "tipo": "componente",
+          "linha": 395,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "children",
+            "className",
+            "expansivel",
+            "icone",
+            "padraoAberto",
+            "aberto",
+            "onAbertoChange",
+            "contador",
+            "rotuloContador",
+            "ativo"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CardDeAjuda",
+          "tipo": "componente",
+          "linha": 457,
+          "descricao": "Card de ajuda (rodapé do menu)",
+          "props": [
+            "titulo",
+            "texto",
+            "href",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CampoDeBuscaGlobal",
+          "tipo": "componente",
+          "linha": 503,
+          "descricao": "Barra superior: busca, sino e conta",
+          "props": [
+            "placeholder",
+            "atalho",
+            "onAbrir",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BotaoDeNotificacoes",
+          "tipo": "componente",
+          "linha": 534,
+          "descricao": "Sino de notificações (botão redondo de 44 px, o alvo de toque mínimo). Com não lidas, o ContadorDoPainel fica sobre o canto superior direito do sino (centro do contador no canto do ícone), com anel de 2 px na cor do cabeçalho.",
+          "props": [
+            "naoLidas",
+            "indicador",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GatilhoDaConta",
+          "tipo": "componente",
+          "linha": 560,
+          "descricao": "",
+          "props": [
+            "nome",
+            "papel",
+            "foto",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "MenuLateralProvider",
+            "MenuLateral",
+            "NavDoMenu",
+            "TopoDoMenu",
+            "BarraSuperiorDoPainel",
+            "ItemDoMenu",
+            "GrupoDoMenu",
+            "BotaoDeNotificacoes",
+            "GatilhoDaConta"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "MenuLateralProvider",
+            "MenuLateral",
+            "ContadorDoPainel",
+            "TopoDoMenu",
+            "BarraSuperiorDoPainel",
+            "ItemDoMenu",
+            "GrupoDoMenu",
+            "CampoDeBuscaGlobal",
+            "BotaoDeNotificacoes"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/partner-card.tsx",
       "nome": "partner-card",
       "quandoUsar": "PartnerCard (card de convite ao parceiro): Card que convida ao cadastro: selo, título com destaque, texto curto, ação principal e link secundário opcional. Vertical ou horizontal; tamanhos p, m e g. Sem orientation, segue a GradeDeCards: horizontal quando a grade virou lista (regra da dona do produto, 27/11/2026). Fundo de card com um brilho suave na cor primária no canto, como o hero do site.",
@@ -6434,6 +7074,18 @@
       ],
       "variantes": {},
       "ondeVer": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
         {
           "pagina": "buttons",
           "paginaRotulo": "Botões",
@@ -7010,6 +7662,33 @@
             "SidePanelBody",
             "SidePanelActions",
             "SidePanelFooter"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "SidePanel",
+            "SidePanelContent",
+            "SidePanelHeader",
+            "SidePanelBody"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "SidePanel"
           ]
         }
       ]
@@ -7666,6 +8345,20 @@
             "TabsList",
             "TabsTrigger",
             "TabsContent"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Tabs",
+            "TabsList",
+            "TabsTrigger"
           ]
         }
       ]
@@ -8956,10 +9649,110 @@
       "elementosFeitosAMao": 3
     },
     {
+      "nome": "PainelTemplate",
+      "tipo": "template",
+      "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
+      "linha": 152,
+      "descricao": "Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início.",
+      "pagina": "templates",
+      "paginaRotulo": "Templates",
+      "onde": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310
+        }
+      ],
+      "usaComponentes": [
+        "AlertaComAcao",
+        "BarraSuperiorDoPainel",
+        "BotaoDeNotificacoes",
+        "BotaoDoAlerta",
+        "Button",
+        "CabecalhoDaPagina",
+        "CardComCabecalho",
+        "CardIndicador",
+        "DropdownMenu",
+        "DropdownMenuContent",
+        "DropdownMenuItem",
+        "DropdownMenuLabel",
+        "DropdownMenuSeparator",
+        "DropdownMenuTrigger",
+        "GatilhoDaConta",
+        "GradeDeCards",
+        "GrupoDoMenu",
+        "IconeComBase",
+        "ItemDoMenu",
+        "LinhaDeLista",
+        "LinkDoAlerta",
+        "LinkVerTudo",
+        "MenuLateral",
+        "MenuLateralProvider",
+        "NavDoMenu",
+        "SidePanel",
+        "SidePanelBody",
+        "SidePanelContent",
+        "SidePanelHeader",
+        "TopoDoMenu"
+      ],
+      "elementosFeitosAMao": 1
+    },
+    {
+      "nome": "PecasDoPainel",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
+      "linha": 215,
+      "descricao": "",
+      "pagina": "templates",
+      "paginaRotulo": "Templates",
+      "onde": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329
+        }
+      ],
+      "usaComponentes": [
+        "Badge",
+        "BarraSuperiorDoPainel",
+        "BotaoDeNotificacoes",
+        "Button",
+        "CabecalhoDaPagina",
+        "CampoDeBuscaGlobal",
+        "Card",
+        "CardComCabecalho",
+        "CardContent",
+        "CardDescription",
+        "CardHeader",
+        "CardIndicador",
+        "CardTitle",
+        "ContadorDoPainel",
+        "GradeDeCards",
+        "GrupoDoMenu",
+        "IconeComBase",
+        "ItemDoMenu",
+        "LinkVerTudo",
+        "MenuLateral",
+        "MenuLateralProvider",
+        "SidePanel",
+        "Tabs",
+        "TabsList",
+        "TabsTrigger",
+        "TopoDoMenu"
+      ],
+      "elementosFeitosAMao": 5
+    },
+    {
       "nome": "DashboardTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 95,
+      "linha": 97,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -8970,7 +9763,7 @@
           "ancora": "template-dashboard",
           "titulo": "Dashboard",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1307
+          "linha": 1338
         }
       ],
       "usaComponentes": [
@@ -8982,7 +9775,7 @@
       "nome": "SettingsTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 242,
+      "linha": 244,
       "descricao": "2. Settings Template",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -8993,7 +9786,7 @@
           "ancora": "template-settings",
           "titulo": "Configurações",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1313
+          "linha": 1344
         }
       ],
       "usaComponentes": [],
@@ -9003,7 +9796,7 @@
       "nome": "AuthTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 437,
+      "linha": 439,
       "descricao": "3. Login / Auth Template",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9014,7 +9807,7 @@
           "ancora": "template-auth",
           "titulo": "Autenticação",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1319
+          "linha": 1350
         }
       ],
       "usaComponentes": [],
@@ -9024,7 +9817,7 @@
       "nome": "TeamTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 585,
+      "linha": 587,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9035,7 +9828,7 @@
           "ancora": "template-team",
           "titulo": "Equipe",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1325
+          "linha": 1356
         }
       ],
       "usaComponentes": [],
@@ -9045,7 +9838,7 @@
       "nome": "InboxTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 721,
+      "linha": 723,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9056,7 +9849,7 @@
           "ancora": "template-inbox",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1331
+          "linha": 1362
         }
       ],
       "usaComponentes": [],
@@ -9066,7 +9859,7 @@
       "nome": "ChaveParaQuem",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 874,
+      "linha": 876,
       "descricao": "Controle só da demonstração: liga e desliga o bloco opcional \"Para quem\" nos cards de preço",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9077,7 +9870,7 @@
           "ancora": "template-pricing",
           "titulo": "Preços",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1337
+          "linha": 1368
         }
       ],
       "usaComponentes": [],
@@ -9087,7 +9880,7 @@
       "nome": "PricingTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 904,
+      "linha": 906,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9098,7 +9891,7 @@
           "ancora": "template-pricing",
           "titulo": "Preços",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1337
+          "linha": 1368
         }
       ],
       "usaComponentes": [
@@ -9110,7 +9903,7 @@
       "nome": "ContactTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 1089,
+      "linha": 1091,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9121,7 +9914,7 @@
           "ancora": "template-contact",
           "titulo": "Contato",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1343
+          "linha": 1374
         }
       ],
       "usaComponentes": [],
@@ -9131,7 +9924,7 @@
       "nome": "LandingTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-      "linha": 1490,
+      "linha": 1521,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -9142,7 +9935,7 @@
           "ancora": "template-landing",
           "titulo": "Landing page",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1349
+          "linha": 1380
         }
       ],
       "usaComponentes": [
@@ -12068,7 +12861,14 @@
       "propostas/README.md"
     ]
   },
-  "propostas": [],
+  "propostas": [
+    {
+      "arquivo": "propostas/2026-11-27-pecas-do-painel.md",
+      "titulo": "Peças do painel: casca, cabeçalho da página, card de indicador e ícone com base",
+      "status": "proposta",
+      "componente": "MenuLateralProvider, MenuLateral, TopoDoMenu, BotaoRecolherMenu, NavDoMenu, ItemDoMenu, GrupoDoMenu, BarraSuperiorDoPainel, BotaoDeNotificacoes, GatilhoDaConta, AvatarPainel, ContadorDoPainel, CampoDeBuscaGlobal, CardDeAjuda em src/app/components/ui/painel-shell.tsx; CabecalhoDaPagina em src/app/components/ui/painel-cabecalho.tsx; IconeComBase, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao em src/app/components/ui/painel-dados.tsx"
+    }
+  ],
   "paginas": [
     {
       "id": "overview",
@@ -12670,58 +13470,70 @@
       "grupo": "Templates",
       "ancoras": [
         {
+          "id": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1310
+        },
+        {
+          "id": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 1329
+        },
+        {
           "id": "template-dashboard",
           "titulo": "Dashboard",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1307
+          "linha": 1338
         },
         {
           "id": "template-settings",
           "titulo": "Configurações",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1313
+          "linha": 1344
         },
         {
           "id": "template-auth",
           "titulo": "Autenticação",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1319
+          "linha": 1350
         },
         {
           "id": "template-team",
           "titulo": "Equipe",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1325
+          "linha": 1356
         },
         {
           "id": "template-inbox",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1331
+          "linha": 1362
         },
         {
           "id": "template-pricing",
           "titulo": "Preços",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1337
+          "linha": 1368
         },
         {
           "id": "template-contact",
           "titulo": "Contato",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1343
+          "linha": 1374
         },
         {
           "id": "template-landing",
           "titulo": "Landing page",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1349
+          "linha": 1380
         },
         {
           "id": "templates-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 1355
+          "linha": 1386
         }
       ]
     },
