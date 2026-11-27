@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/gerar-catalogo.mjs",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "catalogo": "node scripts/gerar-catalogo.mjs",
+    "catalogo:check": "node scripts/gerar-catalogo.mjs --check"
   },
   "dependencies": {
     "@emotion/react": "11.14.0",
