@@ -8,7 +8,8 @@ import { EstadoVazio } from "./estado-vazio";
 /**
  * AgendaDoMes (calendário do mês com compromissos)
  *
- * O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido.
+ * O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido,
+ * num card só, separados por um divisor.
  * Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data
  * num campo; esta agenda serve para ver o mês e o que acontece em cada dia.
  *
@@ -129,9 +130,9 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
 
   return (
     <div data-slot="agenda-do-mes" className={cn("@container/agenda w-full", className)}>
-      <div className="grid gap-6 @min-[56rem]/agenda:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className="grid overflow-hidden rounded-xl border border-border bg-card @min-[56rem]/agenda:grid-cols-[minmax(0,1fr)_20rem]">
         {/* Mês */}
-        <div className="min-w-0 rounded-xl border border-border bg-card p-3 @min-[40rem]/agenda:p-6">
+        <div className="min-w-0 p-3 @min-[40rem]/agenda:p-6">
           <div className="mb-4 flex items-center justify-between gap-2 pl-1">
             <h3 aria-live="polite" className="text-subtitle font-semibold text-foreground first-letter:uppercase">{nomeDoMes}</h3>
             <div className="flex items-center gap-1">
@@ -199,7 +200,7 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
         </div>
 
         {/* Lista do dia */}
-        <section aria-labelledby={idDoDia} className="min-w-0 rounded-xl border border-border bg-card">
+        <section aria-labelledby={idDoDia} className="min-w-0 border-t border-border @min-[56rem]/agenda:border-l @min-[56rem]/agenda:border-t-0">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-4 @min-[40rem]/agenda:px-6">
             <div className="min-w-0">
               <h3 id={idDoDia} className="text-body font-semibold first-letter:uppercase text-foreground">{nomeCompleto(deIso(dia))}</h3>

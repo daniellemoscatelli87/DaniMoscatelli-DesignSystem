@@ -7,8 +7,8 @@
   "resumo": {
     "arquivosDeComponentes": 117,
     "componentesExportados": 401,
-    "templatesEPadroesSoEmDemonstracao": 81,
-    "secoesComMarcacaoAMao": 46,
+    "templatesEPadroesSoEmDemonstracao": 76,
+    "secoesComMarcacaoAMao": 45,
     "tokens": 160,
     "paginas": 33,
     "ancoras": 229,
@@ -86,13 +86,13 @@
     {
       "arquivo": "src/app/components/ui/agenda-do-mes.tsx",
       "nome": "agenda-do-mes",
-      "quandoUsar": "AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.",
+      "quandoUsar": "AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido, num card só, separados por um divisor. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "AgendaDoMes",
           "tipo": "componente",
-          "linha": 68,
+          "linha": 69,
           "descricao": "",
           "props": [
             "eventos",
@@ -122,7 +122,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 208,
+          "linha": 206,
           "uso": "direto",
           "exports": [
             "AgendaDoMes"
@@ -189,7 +189,7 @@
           "ancora": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 215,
+          "linha": 218,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Alert",
@@ -203,7 +203,7 @@
           "ancora": "alerta-sem-titulo",
           "titulo": "Alerta só com descrição",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 238,
+          "linha": 241,
           "uso": "direto",
           "exports": [
             "Alert",
@@ -217,7 +217,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 246,
+          "linha": 242,
           "uso": "direto",
           "exports": [
             "Alert",
@@ -231,7 +231,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "direto",
           "exports": [
             "Alert"
@@ -448,7 +448,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 251,
+          "linha": 254,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AlertaComAcao",
@@ -537,7 +537,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 190,
+          "linha": 188,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Avatar",
@@ -550,7 +550,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 243,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Avatar",
@@ -592,7 +592,7 @@
           "ancora": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 569,
+          "linha": 562,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -675,7 +675,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 329,
+          "linha": 330,
           "uso": "direto",
           "exports": [
             "AvisoCookies"
@@ -722,7 +722,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "AvisoProjeto"
@@ -920,7 +920,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 278,
+          "linha": 277,
           "uso": "direto",
           "exports": [
             "BotaoDeEnvio"
@@ -932,7 +932,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "BotaoDeEnvio"
@@ -975,7 +975,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "BotaoSubir"
@@ -1043,7 +1043,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "BotaoWhatsApp"
@@ -1220,6 +1220,18 @@
           ]
         },
         {
+          "pagina": "motion",
+          "paginaRotulo": "Motion Design",
+          "ancora": "micro",
+          "titulo": "Microinterações",
+          "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
+          "linha": 659,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
           "pagina": "cards",
           "paginaRotulo": "Cards",
           "ancora": "card-anatomy",
@@ -1321,7 +1333,19 @@
           "ancora": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 259,
+          "linha": 262,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "badges",
+          "paginaRotulo": "Rótulos",
+          "ancora": "empty-states",
+          "titulo": "Estados vazios",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 606,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1333,7 +1357,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1345,7 +1369,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 329,
+          "linha": 330,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1357,7 +1381,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1369,7 +1393,7 @@
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 179,
+          "linha": 175,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1381,8 +1405,32 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 278,
+          "linha": 277,
           "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "usability",
+          "paginaRotulo": "Usabilidade",
+          "ancora": "ux-states",
+          "titulo": "Estados de conteúdo",
+          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
+          "linha": 338,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "motion",
+          "paginaRotulo": "Motion Design",
+          "ancora": "loaders",
+          "titulo": "Loaders e progresso",
+          "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
+          "linha": 818,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
           ]
@@ -1429,7 +1477,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1441,7 +1489,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1453,7 +1501,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212,
+          "linha": 211,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1465,7 +1513,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1477,7 +1525,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 208,
+          "linha": 206,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1489,7 +1537,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1552,7 +1600,7 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 104,
+          "linha": 100,
           "uso": "direto",
           "exports": [
             "CabecalhoDoSite"
@@ -1700,7 +1748,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "direto",
           "exports": [
             "MolduraDoCadastro",
@@ -1765,7 +1813,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "direto",
           "exports": [
             "CaixaDeEntrada"
@@ -1921,7 +1969,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "direto",
           "exports": [
             "Campo",
@@ -1938,7 +1986,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo"
@@ -1950,7 +1998,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo"
@@ -1962,7 +2010,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo",
@@ -2004,7 +2052,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212,
+          "linha": 211,
           "uso": "direto",
           "exports": [
             "CampoCopiavel"
@@ -2048,7 +2096,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212,
+          "linha": 211,
           "uso": "direto",
           "exports": [
             "CampoDeBusca"
@@ -2106,7 +2154,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "direto",
           "exports": [
             "CampoDeEmail"
@@ -2118,7 +2166,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CampoDeEmail"
@@ -2162,7 +2210,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 230,
+          "linha": 229,
           "uso": "direto",
           "exports": [
             "CampoDeEmails"
@@ -2214,7 +2262,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "direto",
           "exports": [
             "CampoEstadoCidade"
@@ -2641,6 +2689,18 @@
           "exports": [
             "CardDeArtigo"
           ]
+        },
+        {
+          "pagina": "site",
+          "paginaRotulo": "Padrões do site",
+          "ancora": "site-entrada",
+          "titulo": "Entrada ao rolar",
+          "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
+          "linha": 559,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeArtigo"
+          ]
         }
       ]
     },
@@ -2724,6 +2784,66 @@
           "exports": [
             "CardDeNavegacao"
           ]
+        },
+        {
+          "pagina": "overview",
+          "paginaRotulo": "Início",
+          "ancora": "home-explore",
+          "titulo": "Tudo no sistema",
+          "arquivo": "src/app/components/showcase/HomeShowcase.tsx",
+          "linha": 160,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeNavegacao"
+          ]
+        },
+        {
+          "pagina": "get-started",
+          "paginaRotulo": "Primeiros passos",
+          "ancora": "gs-overview",
+          "titulo": "O que é o Design System Dani Moscatelli?",
+          "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
+          "linha": 182,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeNavegacao"
+          ]
+        },
+        {
+          "pagina": "get-started",
+          "paginaRotulo": "Primeiros passos",
+          "ancora": "gs-structure",
+          "titulo": "Usando o sistema",
+          "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
+          "linha": 206,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeNavegacao"
+          ]
+        },
+        {
+          "pagina": "get-started",
+          "paginaRotulo": "Primeiros passos",
+          "ancora": "gs-design",
+          "titulo": "Design",
+          "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeNavegacao"
+          ]
+        },
+        {
+          "pagina": "get-started",
+          "paginaRotulo": "Primeiros passos",
+          "ancora": "gs-develop",
+          "titulo": "Desenvolvimento",
+          "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
+          "linha": 233,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CardDeNavegacao"
+          ]
         }
       ]
     },
@@ -2781,7 +2901,7 @@
           "ancora": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 621,
+          "linha": 626,
           "uso": "direto",
           "exports": [
             "CardDeFrente",
@@ -2794,7 +2914,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CardDeFrente",
@@ -2941,7 +3061,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 260,
+          "linha": 259,
           "uso": "direto",
           "exports": [
             "GrupoDeCartoesDeEscolha",
@@ -3209,7 +3329,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -3221,7 +3341,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -3233,7 +3353,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 243,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -3286,12 +3406,24 @@
       "variantes": {},
       "ondeVer": [
         {
+          "pagina": "badges",
+          "paginaRotulo": "Rótulos",
+          "ancora": "badges",
+          "titulo": "Badges e tags",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 396,
+          "uso": "direto",
+          "exports": [
+            "GrupoDeChipsFiltraveis"
+          ]
+        },
+        {
           "pagina": "campos",
           "paginaRotulo": "Campos",
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 244,
           "uso": "direto",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -3825,7 +3957,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 190,
+          "linha": 188,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -3835,12 +3967,26 @@
           ]
         },
         {
+          "pagina": "motion",
+          "paginaRotulo": "Motion Design",
+          "ancora": "loaders",
+          "titulo": "Loaders e progresso",
+          "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
+          "linha": 818,
+          "uso": "direto",
+          "exports": [
+            "Conversa",
+            "BalaoDaConversa",
+            "IndicadorDeDigitacao"
+          ]
+        },
+        {
           "pagina": "pecas-admin",
           "paginaRotulo": "Peças da área restrita",
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -3853,7 +3999,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 208,
+          "linha": 206,
           "uso": "direto",
           "exports": [
             "Conversa"
@@ -3905,7 +4051,7 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 695,
+          "linha": 700,
           "uso": "direto",
           "exports": [
             "CurvaSecao"
@@ -3917,7 +4063,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CurvaSecao"
@@ -4522,12 +4668,24 @@
       "variantes": {},
       "ondeVer": [
         {
+          "pagina": "badges",
+          "paginaRotulo": "Rótulos",
+          "ancora": "empty-states",
+          "titulo": "Estados vazios",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 606,
+          "uso": "direto",
+          "exports": [
+            "EstadoVazio"
+          ]
+        },
+        {
           "pagina": "molduras",
           "paginaRotulo": "Molduras e estados",
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 179,
+          "linha": 175,
           "uso": "direto",
           "exports": [
             "EstadoVazio",
@@ -4536,12 +4694,24 @@
           ]
         },
         {
+          "pagina": "usability",
+          "paginaRotulo": "Usabilidade",
+          "ancora": "ux-states",
+          "titulo": "Estados de conteúdo",
+          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
+          "linha": 338,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "EstadoVazio"
+          ]
+        },
+        {
           "pagina": "campos",
           "paginaRotulo": "Campos",
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212,
+          "linha": 211,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -4553,7 +4723,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoFinal"
@@ -4926,7 +5096,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 308,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -4950,7 +5120,7 @@
           "ancora": "loaders",
           "titulo": "Loaders e progresso",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 815,
+          "linha": 818,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5150,7 +5320,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 551,
+          "linha": 543,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5162,7 +5332,7 @@
           "ancora": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 867,
+          "linha": 859,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5174,7 +5344,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 911,
+          "linha": 903,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5186,7 +5356,7 @@
           "ancora": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 968,
+          "linha": 960,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5198,7 +5368,19 @@
           "ancora": "graficos-acessibilidade",
           "titulo": "Acessibilidade dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1263,
+          "linha": 1255,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "badges",
+          "paginaRotulo": "Rótulos",
+          "ancora": "empty-states",
+          "titulo": "Estados vazios",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 606,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -5210,7 +5392,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -5223,7 +5405,7 @@
           "ancora": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 621,
+          "linha": 626,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -5236,7 +5418,7 @@
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 179,
+          "linha": 175,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -5249,7 +5431,7 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 265,
+          "linha": 261,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -5386,7 +5568,7 @@
           "ancora": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 266,
+          "linha": 276,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5398,7 +5580,7 @@
           "ancora": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 337,
+          "linha": 347,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5518,7 +5700,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366,
+          "linha": 358,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5530,7 +5712,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383,
+          "linha": 375,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5542,7 +5724,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415,
+          "linha": 407,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5554,7 +5736,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431,
+          "linha": 423,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5566,7 +5748,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466,
+          "linha": 458,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5578,7 +5760,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494,
+          "linha": 486,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5602,7 +5784,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 251,
+          "linha": 254,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5614,7 +5796,7 @@
           "ancora": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 129,
+          "linha": 130,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5626,7 +5808,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 329,
+          "linha": 330,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5638,7 +5820,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5650,7 +5832,7 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 695,
+          "linha": 700,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5662,7 +5844,7 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 104,
+          "linha": 100,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5674,7 +5856,7 @@
           "ancora": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 132,
+          "linha": 128,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5686,7 +5868,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5698,7 +5880,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 246,
+          "linha": 242,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5710,7 +5892,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5722,7 +5904,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212,
+          "linha": 211,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5734,7 +5916,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 230,
+          "linha": 229,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5746,7 +5928,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 244,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5758,7 +5940,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 260,
+          "linha": 259,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5770,7 +5952,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 278,
+          "linha": 277,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5782,7 +5964,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5794,7 +5976,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5806,7 +5988,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 190,
+          "linha": 188,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5818,7 +6000,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 208,
+          "linha": 206,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5830,7 +6012,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5842,7 +6024,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 243,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6373,7 +6555,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366,
+          "linha": 358,
           "uso": "direto",
           "exports": [
             "BarrasAgrupadas",
@@ -6387,7 +6569,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383,
+          "linha": 375,
           "uso": "direto",
           "exports": [
             "AreaEmpilhada",
@@ -6403,7 +6585,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415,
+          "linha": 407,
           "uso": "direto",
           "exports": [
             "Pizza",
@@ -6417,7 +6599,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431,
+          "linha": 423,
           "uso": "direto",
           "exports": [
             "Dispersao",
@@ -6434,7 +6616,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466,
+          "linha": 458,
           "uso": "direto",
           "exports": [
             "resumoDaDistribuicao",
@@ -6450,7 +6632,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494,
+          "linha": 486,
           "uso": "direto",
           "exports": [
             "MapaDePontos",
@@ -6463,7 +6645,7 @@
           "ancora": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1202,
+          "linha": 1194,
           "uso": "direto",
           "exports": [
             "BarrasAgrupadas",
@@ -7009,7 +7191,7 @@
           "ancora": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1135,
+          "linha": 1127,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -7022,7 +7204,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431,
+          "linha": 423,
           "uso": "direto",
           "exports": [
             "formatarNumero",
@@ -7035,7 +7217,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 551,
+          "linha": 543,
           "uso": "direto",
           "exports": [
             "formatarNumero",
@@ -7053,7 +7235,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 911,
+          "linha": 903,
           "uso": "direto",
           "exports": [
             "GraficoDeRosca"
@@ -7065,7 +7247,7 @@
           "ancora": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 968,
+          "linha": 960,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -7088,7 +7270,7 @@
           "ancora": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1202,
+          "linha": 1194,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -7112,7 +7294,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366,
+          "linha": 358,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -7124,7 +7306,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383,
+          "linha": 375,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -7136,7 +7318,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415,
+          "linha": 407,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -7148,7 +7330,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466,
+          "linha": 458,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -7160,7 +7342,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494,
+          "linha": 486,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -7290,7 +7472,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
-          "linha": 172,
+          "linha": 165,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -7326,7 +7508,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 256,
+          "linha": 266,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -7374,7 +7556,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 741,
+          "linha": 746,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -7733,7 +7915,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "direto",
           "exports": [
             "Label"
@@ -7757,7 +7939,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 230,
+          "linha": 229,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -7829,6 +8011,18 @@
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
           "linha": 372,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "LinhaDeLista"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 211,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -7949,7 +8143,7 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 265,
+          "linha": 261,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -8270,7 +8464,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "direto",
           "exports": [
             "MolduraDeConta"
@@ -8710,7 +8904,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "IconeComBase"
@@ -9163,7 +9357,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154,
+          "linha": 150,
           "uso": "dentro de outro exemplo",
           "exports": [
             "PasswordInput"
@@ -9212,7 +9406,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202,
+          "linha": 203,
           "uso": "direto",
           "exports": [
             "PilulaDeAcao"
@@ -9359,7 +9553,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 243,
+          "linha": 241,
           "uso": "direto",
           "exports": [
             "Quadro"
@@ -9496,7 +9690,7 @@
           "ancora": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 129,
+          "linha": 130,
           "uso": "direto",
           "exports": [
             "RodapeSite"
@@ -9508,7 +9702,7 @@
           "ancora": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 132,
+          "linha": 128,
           "uso": "direto",
           "exports": [
             "RodapeSite"
@@ -9609,7 +9803,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -9645,7 +9839,7 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 104,
+          "linha": 100,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -9794,7 +9988,7 @@
           "ancora": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 448,
+          "linha": 441,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -9806,7 +10000,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 483,
+          "linha": 476,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -9843,7 +10037,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 483,
+          "linha": 476,
           "uso": "direto",
           "exports": [
             "SeloSecao"
@@ -9855,7 +10049,7 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 695,
+          "linha": 700,
           "uso": "direto",
           "exports": [
             "SeloSecao"
@@ -9867,7 +10061,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SeloSecao"
@@ -10680,8 +10874,20 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222,
+          "linha": 220,
           "uso": "direto",
+          "exports": [
+            "Stepper"
+          ]
+        },
+        {
+          "pagina": "motion",
+          "paginaRotulo": "Motion Design",
+          "ancora": "loaders",
+          "titulo": "Loaders e progresso",
+          "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
+          "linha": 818,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "Stepper"
           ]
@@ -10758,7 +10964,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554,
+          "linha": 559,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SurgirAoRolar",
@@ -10850,8 +11056,32 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "direto",
+          "exports": [
+            "TabelaAdaptavel"
+          ]
+        },
+        {
+          "pagina": "graficos",
+          "paginaRotulo": "Gráficos",
+          "ancora": "graficos-escolher",
+          "titulo": "Como escolher",
+          "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
+          "linha": 859,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "TabelaAdaptavel"
+          ]
+        },
+        {
+          "pagina": "graficos",
+          "paginaRotulo": "Gráficos",
+          "ancora": "graficos-componentes",
+          "titulo": "Componentes e props",
+          "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
+          "linha": 1194,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaAdaptavel"
           ]
@@ -11005,7 +11235,7 @@
           "ancora": "tabs",
           "titulo": "Abas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 172,
+          "linha": 175,
           "uso": "direto",
           "exports": [
             "Tabs",
@@ -11056,7 +11286,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185,
+          "linha": 184,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -11068,7 +11298,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174,
+          "linha": 172,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -11820,7 +12050,7 @@
       "nome": "TargetDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 15,
+      "linha": 17,
       "descricao": "Touch targets",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -11831,7 +12061,7 @@
           "ancora": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 294
+          "linha": 304
         }
       ],
       "usaComponentes": [],
@@ -11841,7 +12071,7 @@
       "nome": "FeedbackDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 45,
+      "linha": 47,
       "descricao": "System status",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -11852,7 +12082,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 308
+          "linha": 318
         }
       ],
       "usaComponentes": [],
@@ -11862,7 +12092,7 @@
       "nome": "UndoDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 82,
+      "linha": 84,
       "descricao": "",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -11873,7 +12103,7 @@
           "ancora": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 361
+          "linha": 371
         }
       ],
       "usaComponentes": [],
@@ -11883,7 +12113,7 @@
       "nome": "StatesDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 146,
+      "linha": 148,
       "descricao": "",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -11894,17 +12124,20 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 328
+          "linha": 338
         }
       ],
-      "usaComponentes": [],
-      "elementosFeitosAMao": 6
+      "usaComponentes": [
+        "Button",
+        "EstadoVazio"
+      ],
+      "elementosFeitosAMao": 4
     },
     {
       "nome": "HierarchyDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 212,
+      "linha": 222,
       "descricao": "Button hierarchy",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -11915,7 +12148,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 275
+          "linha": 285
         }
       ],
       "usaComponentes": [],
@@ -12217,7 +12450,7 @@
       "nome": "SpringPlayground",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 309,
+      "linha": 312,
       "descricao": "",
       "pagina": "motion",
       "paginaRotulo": "Motion Design",
@@ -12228,7 +12461,7 @@
           "ancora": "spring",
           "titulo": "Física de mola",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 268
+          "linha": 271
         }
       ],
       "usaComponentes": [],
@@ -12238,7 +12471,7 @@
       "nome": "MagneticButton",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 609,
+      "linha": 612,
       "descricao": "",
       "pagina": "motion",
       "paginaRotulo": "Motion Design",
@@ -12249,38 +12482,17 @@
           "ancora": "hover",
           "titulo": "Interações de hover",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 467
+          "linha": 470
         }
       ],
       "usaComponentes": [],
       "elementosFeitosAMao": 1
     },
     {
-      "nome": "StepIndicator",
-      "tipo": "demonstração de conceito",
-      "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 960,
-      "descricao": "",
-      "pagina": "motion",
-      "paginaRotulo": "Motion Design",
-      "onde": [
-        {
-          "pagina": "motion",
-          "paginaRotulo": "Motion Design",
-          "ancora": "loaders",
-          "titulo": "Loaders e progresso",
-          "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 815
-        }
-      ],
-      "usaComponentes": [],
-      "elementosFeitosAMao": 3
-    },
-    {
       "nome": "DurationBars",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1125,
+      "linha": 1066,
       "descricao": "",
       "pagina": "motion",
       "paginaRotulo": "Motion Design",
@@ -12291,7 +12503,7 @@
           "ancora": "motion-tokens",
           "titulo": "Tokens de movimento",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1096
+          "linha": 1037
         }
       ],
       "usaComponentes": [],
@@ -12301,7 +12513,7 @@
       "nome": "OrbitCanvas",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1473,
+      "linha": 1414,
       "descricao": "",
       "pagina": "motion",
       "paginaRotulo": "Motion Design",
@@ -12312,7 +12524,7 @@
           "ancora": "orbiting-circles",
           "titulo": "Círculos orbitais",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1703
+          "linha": 1644
         }
       ],
       "usaComponentes": [],
@@ -12322,7 +12534,7 @@
       "nome": "AvatarOrbitCanvas",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1621,
+      "linha": 1562,
       "descricao": "",
       "pagina": "motion",
       "paginaRotulo": "Motion Design",
@@ -12333,7 +12545,7 @@
           "ancora": "orbiting-circles",
           "titulo": "Círculos orbitais",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1703
+          "linha": 1644
         }
       ],
       "usaComponentes": [],
@@ -12909,7 +13121,7 @@
       "nome": "WobbleCardConteudo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1926,
+      "linha": 1867,
       "descricao": "Card com wobble: demonstração com controles (usada na página Cards).",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -12930,7 +13142,7 @@
       "nome": "ShineBorderConteudo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 2030,
+      "linha": 1971,
       "descricao": "Shine Border: velocidades, combinações de cor, tokens e acessibilidade (usado na página Cards).",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -12953,7 +13165,7 @@
       "nome": "RoscaAntiga",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 25,
+      "linha": 26,
       "descricao": "Earlier donut, reproduced only for comparison (thick ring, number of parts in the centre, graphite as a peer series).",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -12964,46 +13176,17 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 911
+          "linha": 903
         }
       ],
       "usaComponentes": [],
       "elementosFeitosAMao": 1
     },
     {
-      "nome": "TabelaQueQuebra",
-      "tipo": "padrão de componente",
-      "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 59,
-      "descricao": "Tabela que vira lista no celular (card nunca rola na horizontal).",
-      "pagina": "graficos",
-      "paginaRotulo": "Gráficos",
-      "onde": [
-        {
-          "pagina": "graficos",
-          "paginaRotulo": "Gráficos",
-          "ancora": "graficos-escolher",
-          "titulo": "Como escolher",
-          "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 867
-        },
-        {
-          "pagina": "graficos",
-          "paginaRotulo": "Gráficos",
-          "ancora": "graficos-componentes",
-          "titulo": "Componentes e props",
-          "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1202
-        }
-      ],
-      "usaComponentes": [],
-      "elementosFeitosAMao": 3
-    },
-    {
       "nome": "Cartao",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 80,
+      "linha": 72,
       "descricao": "",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -13014,7 +13197,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 551
+          "linha": 543
         },
         {
           "pagina": "graficos",
@@ -13022,7 +13205,7 @@
           "ancora": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 867
+          "linha": 859
         },
         {
           "pagina": "graficos",
@@ -13030,7 +13213,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 911
+          "linha": 903
         },
         {
           "pagina": "graficos",
@@ -13038,7 +13221,7 @@
           "ancora": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1135
+          "linha": 1127
         }
       ],
       "usaComponentes": [],
@@ -13048,7 +13231,7 @@
       "nome": "CartaoDoCatalogo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 126,
+      "linha": 118,
       "descricao": "Catalog card: name, component, when to use, the chart, the reading caveat and See data.",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -13059,7 +13242,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366
+          "linha": 358
         },
         {
           "pagina": "graficos",
@@ -13067,7 +13250,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383
+          "linha": 375
         },
         {
           "pagina": "graficos",
@@ -13075,7 +13258,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415
+          "linha": 407
         },
         {
           "pagina": "graficos",
@@ -13083,7 +13266,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431
+          "linha": 423
         },
         {
           "pagina": "graficos",
@@ -13091,7 +13274,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466
+          "linha": 458
         },
         {
           "pagina": "graficos",
@@ -13099,7 +13282,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494
+          "linha": 486
         }
       ],
       "usaComponentes": [
@@ -13111,7 +13294,7 @@
       "nome": "Familia",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 161,
+      "linha": 153,
       "descricao": "",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -13122,7 +13305,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366
+          "linha": 358
         },
         {
           "pagina": "graficos",
@@ -13130,7 +13313,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383
+          "linha": 375
         },
         {
           "pagina": "graficos",
@@ -13138,7 +13321,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415
+          "linha": 407
         },
         {
           "pagina": "graficos",
@@ -13146,7 +13329,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431
+          "linha": 423
         },
         {
           "pagina": "graficos",
@@ -13154,7 +13337,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466
+          "linha": 458
         },
         {
           "pagina": "graficos",
@@ -13162,7 +13345,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494
+          "linha": 486
         }
       ],
       "usaComponentes": [
@@ -13277,7 +13460,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 251
+          "linha": 254
         }
       ],
       "usaComponentes": [
@@ -13302,7 +13485,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 251
+          "linha": 254
         }
       ],
       "usaComponentes": [
@@ -13317,7 +13500,7 @@
       "nome": "Alert",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 76,
+      "linha": 79,
       "descricao": "",
       "pagina": "feedback",
       "paginaRotulo": "Feedback",
@@ -13328,7 +13511,7 @@
           "ancora": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 215
+          "linha": 218
         }
       ],
       "usaComponentes": [
@@ -13342,7 +13525,7 @@
       "nome": "SkeletonPulse",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 106,
+      "linha": 109,
       "descricao": "Skeleton",
       "pagina": "feedback",
       "paginaRotulo": "Feedback",
@@ -13353,7 +13536,7 @@
           "ancora": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 345
+          "linha": 348
         }
       ],
       "usaComponentes": [],
@@ -13383,7 +13566,7 @@
       "nome": "SecaoEscopo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 467,
+      "linha": 468,
       "descricao": "A seção \"Onde podemos atuar\" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site.",
       "pagina": "site",
       "paginaRotulo": "Padrões do site",
@@ -13394,7 +13577,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554
+          "linha": 559
         }
       ],
       "usaComponentes": [
@@ -13409,7 +13592,7 @@
       "nome": "SecaoArtigos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 515,
+      "linha": 516,
       "descricao": "Cabeçalho da seção \"Insights & Artigos\" da Home, com o desfoque do site; os cards são blocos neutros.",
       "pagina": "site",
       "paginaRotulo": "Padrões do site",
@@ -13420,63 +13603,14 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554
+          "linha": 559
         }
       ],
       "usaComponentes": [
+        "CardDeArtigo",
         "SeloSecao",
         "SurgirAoRolar",
         "TituloQueSurge"
-      ],
-      "elementosFeitosAMao": 6
-    },
-    {
-      "nome": "DemoCabecalho",
-      "tipo": "padrão de componente",
-      "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-      "linha": 22,
-      "descricao": "Molduras e estados (27/11/2026): cabeçalho do site, rodapé, moldura das telas de conta, estados vazio/final/erro, alerta por tom e logo.",
-      "pagina": "molduras",
-      "paginaRotulo": "Molduras e estados",
-      "onde": [
-        {
-          "pagina": "molduras",
-          "paginaRotulo": "Molduras e estados",
-          "ancora": "molduras-cabecalho",
-          "titulo": "Cabeçalho do site",
-          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 104
-        }
-      ],
-      "usaComponentes": [
-        "CabecalhoDoSite",
-        "SegmentedControl"
-      ],
-      "elementosFeitosAMao": 5
-    },
-    {
-      "nome": "DemoConta",
-      "tipo": "padrão de componente",
-      "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-      "linha": 77,
-      "descricao": "",
-      "pagina": "molduras",
-      "paginaRotulo": "Molduras e estados",
-      "onde": [
-        {
-          "pagina": "molduras",
-          "paginaRotulo": "Molduras e estados",
-          "ancora": "molduras-conta",
-          "titulo": "Moldura de conta",
-          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154
-        }
-      ],
-      "usaComponentes": [
-        "Button",
-        "Campo",
-        "MolduraDeConta",
-        "PasswordInput"
       ],
       "elementosFeitosAMao": 1
     },
@@ -13484,7 +13618,7 @@
       "nome": "DemoCampos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 33,
+      "linha": 34,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -13495,7 +13629,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185
+          "linha": 184
         }
       ],
       "usaComponentes": [
@@ -13508,31 +13642,6 @@
         "GradeDeCampos",
         "ResumoDeErros",
         "Textarea"
-      ],
-      "elementosFeitosAMao": 2
-    },
-    {
-      "nome": "DemoBusca",
-      "tipo": "padrão de componente",
-      "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 69,
-      "descricao": "",
-      "pagina": "campos",
-      "paginaRotulo": "Campos",
-      "onde": [
-        {
-          "pagina": "campos",
-          "paginaRotulo": "Campos",
-          "ancora": "campos-busca",
-          "titulo": "Busca e copiar",
-          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212
-        }
-      ],
-      "usaComponentes": [
-        "Button",
-        "CampoDeBusca",
-        "EstadoVazio"
       ],
       "elementosFeitosAMao": 1
     },
@@ -13551,7 +13660,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174
+          "linha": 172
         }
       ],
       "usaComponentes": [
@@ -13564,7 +13673,7 @@
         "IconeComBase",
         "Textarea"
       ],
-      "elementosFeitosAMao": 2
+      "elementosFeitosAMao": 1
     },
     {
       "nome": "Segmentado",
@@ -13907,7 +14016,7 @@
       "ancora": "spring",
       "titulo": "Física de mola",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 268,
+      "linha": 271,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -13917,7 +14026,7 @@
       "ancora": "stagger",
       "titulo": "Stagger e sequências",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 407,
+      "linha": 410,
       "elementosFeitosAMao": 3,
       "usaComponentes": []
     },
@@ -13927,7 +14036,7 @@
       "ancora": "hover",
       "titulo": "Interações de hover",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 467,
+      "linha": 470,
       "elementosFeitosAMao": 8,
       "usaComponentes": []
     },
@@ -13937,9 +14046,11 @@
       "ancora": "micro",
       "titulo": "Microinterações",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 656,
+      "linha": 659,
       "elementosFeitosAMao": 6,
-      "usaComponentes": []
+      "usaComponentes": [
+        "Button"
+      ]
     },
     {
       "pagina": "motion",
@@ -13947,10 +14058,13 @@
       "ancora": "loaders",
       "titulo": "Loaders e progresso",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 815,
-      "elementosFeitosAMao": 13,
+      "linha": 818,
+      "elementosFeitosAMao": 11,
       "usaComponentes": [
-        "GradeDeCards"
+        "BalaoDaConversa",
+        "Conversa",
+        "GradeDeCards",
+        "IndicadorDeDigitacao"
       ]
     },
     {
@@ -13959,7 +14073,7 @@
       "ancora": "layout",
       "titulo": "Transições de layout",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1032,
+      "linha": 973,
       "elementosFeitosAMao": 6,
       "usaComponentes": []
     },
@@ -13969,7 +14083,7 @@
       "ancora": "animated-list",
       "titulo": "Lista animada",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1316,
+      "linha": 1257,
       "elementosFeitosAMao": 7,
       "usaComponentes": []
     },
@@ -13979,7 +14093,7 @@
       "ancora": "orbiting-circles",
       "titulo": "Círculos orbitais",
       "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-      "linha": 1703,
+      "linha": 1644,
       "elementosFeitosAMao": 6,
       "usaComponentes": []
     },
@@ -14049,7 +14163,7 @@
       "ancora": "graficos-cores",
       "titulo": "Cores dos gráficos",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 551,
+      "linha": 543,
       "elementosFeitosAMao": 9,
       "usaComponentes": [
         "BarrasEmpilhadas100",
@@ -14066,7 +14180,7 @@
       "ancora": "graficos-escolher",
       "titulo": "Como escolher",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 867,
+      "linha": 859,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "GradeDeCards"
@@ -14078,7 +14192,7 @@
       "ancora": "graficos-inteligencia",
       "titulo": "Design de inteligência",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 1135,
+      "linha": 1127,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "BarrasOrdenadas",
@@ -14111,7 +14225,7 @@
       "ancora": "progress",
       "titulo": "Progresso",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 302,
+      "linha": 305,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -14121,9 +14235,11 @@
       "ancora": "badges",
       "titulo": "Badges e tags",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 393,
+      "linha": 396,
       "elementosFeitosAMao": 5,
-      "usaComponentes": []
+      "usaComponentes": [
+        "GrupoDeChipsFiltraveis"
+      ]
     },
     {
       "pagina": "badges",
@@ -14131,7 +14247,7 @@
       "ancora": "selo",
       "titulo": "Selo (tag do hero)",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 448,
+      "linha": 441,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Selo"
@@ -14143,17 +14259,7 @@
       "ancora": "avatar",
       "titulo": "Avatar",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 522,
-      "elementosFeitosAMao": 4,
-      "usaComponentes": []
-    },
-    {
-      "pagina": "badges",
-      "paginaRotulo": "Rótulos",
-      "ancora": "empty-states",
-      "titulo": "Estados vazios",
-      "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 613,
+      "linha": 515,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -14228,7 +14334,7 @@
       "ancora": "site-flutuantes",
       "titulo": "Elementos flutuantes",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 202,
+      "linha": 203,
       "elementosFeitosAMao": 15,
       "usaComponentes": [
         "AvisoProjeto",
@@ -14246,7 +14352,7 @@
       "ancora": "site-curvas",
       "titulo": "Divisores curvos",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 695,
+      "linha": 700,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "CurvaSecao",
@@ -15486,7 +15592,7 @@
         "titulo": "Hierarquia de ações",
         "resumo": "Hierarquia de ações: principal, secundária e terciária",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 275
+        "linha": 285
       },
       {
         "ancora": "card-escolher",
@@ -15522,7 +15628,7 @@
         "titulo": "Alertas",
         "resumo": "Alertas: tipos e quando usar cada um",
         "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-        "linha": 215
+        "linha": 218
       },
       {
         "ancora": "alerta-com-acao",
@@ -15531,7 +15637,7 @@
         "titulo": "Alerta com ação",
         "resumo": "Alerta com ação: ações sempre embaixo do texto",
         "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-        "linha": 251
+        "linha": 254
       },
       {
         "ancora": "grid-colunas",
@@ -15585,7 +15691,7 @@
         "titulo": "Tokens de movimento",
         "resumo": "Durações e curvas oficiais de movimento",
         "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-        "linha": 1096
+        "linha": 1037
       },
       {
         "ancora": "ux-destructive",
@@ -15594,7 +15700,7 @@
         "titulo": "Ações destrutivas",
         "resumo": "Ações destrutivas: confirmação e desfazer",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 361
+        "linha": 371
       },
       {
         "ancora": "graficos-escolher",
@@ -15603,7 +15709,7 @@
         "titulo": "Como escolher",
         "resumo": "Gráficos: como escolher",
         "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-        "linha": 867
+        "linha": 859
       },
       {
         "ancora": "graficos-cores",
@@ -15612,7 +15718,7 @@
         "titulo": "Cores dos gráficos",
         "resumo": "Gráficos: cores e ordem dos tons",
         "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-        "linha": 551
+        "linha": 543
       },
       {
         "ancora": "header-usage",
@@ -15664,7 +15770,7 @@
         "ancora": "ux-checklist",
         "titulo": "Revisão rápida",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 370
+        "linha": 380
       },
       {
         "pagina": "accessibility",
@@ -15948,25 +16054,25 @@
           "id": "gs-overview",
           "titulo": "O que é o Design System Dani Moscatelli?",
           "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
-          "linha": 189
+          "linha": 182
         },
         {
           "id": "gs-structure",
           "titulo": "Usando o sistema",
           "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
-          "linha": 213
+          "linha": 206
         },
         {
           "id": "gs-design",
           "titulo": "Design",
           "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
-          "linha": 229
+          "linha": 222
         },
         {
           "id": "gs-develop",
           "titulo": "Desenvolvimento",
           "arquivo": "src/app/components/showcase/GetStartedShowcase.tsx",
-          "linha": 240
+          "linha": 233
         }
       ]
     },
@@ -16254,49 +16360,49 @@
           "id": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 266
+          "linha": 276
         },
         {
           "id": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 275
+          "linha": 285
         },
         {
           "id": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 294
+          "linha": 304
         },
         {
           "id": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 308
+          "linha": 318
         },
         {
           "id": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 328
+          "linha": 338
         },
         {
           "id": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 337
+          "linha": 347
         },
         {
           "id": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 361
+          "linha": 371
         },
         {
           "id": "ux-checklist",
           "titulo": "Revisão rápida",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 370
+          "linha": 380
         }
       ]
     },
@@ -16432,85 +16538,85 @@
           "id": "enter-presets",
           "titulo": "Presets de entrada e saída",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 143
+          "linha": 146
         },
         {
           "id": "easing",
           "titulo": "Referência de easing",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 202
+          "linha": 205
         },
         {
           "id": "spring",
           "titulo": "Física de mola",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 268
+          "linha": 271
         },
         {
           "id": "stagger",
           "titulo": "Stagger e sequências",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 407
+          "linha": 410
         },
         {
           "id": "hover",
           "titulo": "Interações de hover",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 467
+          "linha": 470
         },
         {
           "id": "micro",
           "titulo": "Microinterações",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 656
+          "linha": 659
         },
         {
           "id": "loaders",
           "titulo": "Loaders e progresso",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 815
+          "linha": 818
         },
         {
           "id": "layout",
           "titulo": "Transições de layout",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1032
+          "linha": 973
         },
         {
           "id": "motion-tokens",
           "titulo": "Tokens de movimento",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1096
+          "linha": 1037
         },
         {
           "id": "marquee",
           "titulo": "Marquee",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1246
+          "linha": 1187
         },
         {
           "id": "animated-list",
           "titulo": "Lista animada",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1316
+          "linha": 1257
         },
         {
           "id": "orbiting-circles",
           "titulo": "Círculos orbitais",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 1703
+          "linha": 1644
         },
         {
           "id": "wobble-card",
           "titulo": "Card com wobble",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 2023
+          "linha": 1964
         },
         {
           "id": "shine-border",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/MotionShowcase.tsx",
-          "linha": 2120
+          "linha": 2061
         }
       ]
     },
@@ -16797,85 +16903,85 @@
           "id": "graficos-catalogo",
           "titulo": "Catálogo completo",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 357
+          "linha": 349
         },
         {
           "id": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 366
+          "linha": 358
         },
         {
           "id": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 383
+          "linha": 375
         },
         {
           "id": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 415
+          "linha": 407
         },
         {
           "id": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 431
+          "linha": 423
         },
         {
           "id": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 466
+          "linha": 458
         },
         {
           "id": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 494
+          "linha": 486
         },
         {
           "id": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 551
+          "linha": 543
         },
         {
           "id": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 867
+          "linha": 859
         },
         {
           "id": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 911
+          "linha": 903
         },
         {
           "id": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 968
+          "linha": 960
         },
         {
           "id": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1135
+          "linha": 1127
         },
         {
           "id": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1202
+          "linha": 1194
         },
         {
           "id": "graficos-acessibilidade",
           "titulo": "Acessibilidade dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1263
+          "linha": 1255
         }
       ]
     },
@@ -16925,49 +17031,49 @@
           "id": "tabs",
           "titulo": "Abas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 172
+          "linha": 175
         },
         {
           "id": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 215
+          "linha": 218
         },
         {
           "id": "alerta-sem-titulo",
           "titulo": "Alerta só com descrição",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 238
+          "linha": 241
         },
         {
           "id": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 251
+          "linha": 254
         },
         {
           "id": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 259
+          "linha": 262
         },
         {
           "id": "progress",
           "titulo": "Progresso",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 302
+          "linha": 305
         },
         {
           "id": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 345
+          "linha": 348
         },
         {
           "id": "feedback-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 657
+          "linha": 637
         }
       ]
     },
@@ -16980,49 +17086,49 @@
           "id": "badges",
           "titulo": "Badges e tags",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 393
+          "linha": 396
         },
         {
           "id": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 448
+          "linha": 441
         },
         {
           "id": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 483
+          "linha": 476
         },
         {
           "id": "rotulos-timeline",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 515
+          "linha": 508
         },
         {
           "id": "avatar",
           "titulo": "Avatar",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 522
+          "linha": 515
         },
         {
           "id": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 569
+          "linha": 562
         },
         {
           "id": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 613
+          "linha": 606
         },
         {
           "id": "badges-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 668
+          "linha": 648
         }
       ]
     },
@@ -17109,37 +17215,37 @@
           "id": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 129
+          "linha": 130
         },
         {
           "id": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 202
+          "linha": 203
         },
         {
           "id": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 329
+          "linha": 330
         },
         {
           "id": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 554
+          "linha": 559
         },
         {
           "id": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 621
+          "linha": 626
         },
         {
           "id": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 695
+          "linha": 700
         }
       ]
     },
@@ -17152,37 +17258,37 @@
           "id": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 104
+          "linha": 100
         },
         {
           "id": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 132
+          "linha": 128
         },
         {
           "id": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 154
+          "linha": 150
         },
         {
           "id": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 179
+          "linha": 175
         },
         {
           "id": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 246
+          "linha": 242
         },
         {
           "id": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 265
+          "linha": 261
         }
       ]
     },
@@ -17195,43 +17301,43 @@
           "id": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 185
+          "linha": 184
         },
         {
           "id": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 212
+          "linha": 211
         },
         {
           "id": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 230
+          "linha": 229
         },
         {
           "id": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245
+          "linha": 244
         },
         {
           "id": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 260
+          "linha": 259
         },
         {
           "id": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 278
+          "linha": 277
         },
         {
           "id": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 293
+          "linha": 292
         }
       ]
     },
@@ -17244,31 +17350,31 @@
           "id": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 174
+          "linha": 172
         },
         {
           "id": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 190
+          "linha": 188
         },
         {
           "id": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 208
+          "linha": 206
         },
         {
           "id": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 222
+          "linha": 220
         },
         {
           "id": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 243
+          "linha": 241
         }
       ]
     },

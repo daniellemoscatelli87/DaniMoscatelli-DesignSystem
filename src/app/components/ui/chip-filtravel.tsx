@@ -66,7 +66,7 @@ type GrupoDeChipsFiltraveisProps = {
 
 function GrupoDeChipsFiltraveis({ opcoes, valor, onValorChange, multiplo = true, rotulo, className }: GrupoDeChipsFiltraveisProps) {
   return (
-    <div role="group" aria-label={rotulo} data-slot="grupo-de-chips-filtraveis" className={cn("flex flex-wrap items-center gap-2", className)}>
+    <div role="group" aria-label={rotulo} data-slot="grupo-de-filtros" className={cn("flex flex-wrap items-center gap-2", className)}>
       {opcoes.map(o => {
         const ativo = valor.includes(o.valor);
         return (

@@ -150,7 +150,7 @@ function CabecalhoDoSite({
   );
 
   const linkInicio = (conteudo: React.ReactNode, extra?: string) => (
-    <a href={inicioHref} aria-label={rotuloInicio} className={cn("flex shrink-0 items-center rounded-sm", foco, extra)}>
+    <a href={inicioHref} aria-label={rotuloInicio} className={cn("flex min-h-11 min-w-11 shrink-0 items-center rounded-sm", foco, extra)}>
       {conteudo}
     </a>
   );

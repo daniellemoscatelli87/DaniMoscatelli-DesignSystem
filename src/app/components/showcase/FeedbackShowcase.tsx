@@ -3,7 +3,7 @@ import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Selo } from "@/app/components/ui/selo";
 import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
-import { MapPin, Sparkles } from "lucide-react";
+import { MapPin, Plus, SearchX, Sparkles } from "lucide-react";
 import {
   CheckCircle, CheckCircle2, AlertCircle, AlertTriangle, TriangleAlert, Info, X,
   Loader2, Clock, Check,
@@ -15,6 +15,9 @@ import { AlertaComAcaoDoc } from "./AlertaComAcaoShowcase";
 import { VejaEm } from "./shared/VejaEm";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { EstadoVazio } from "../ui/estado-vazio";
+import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
+import { GradeDeCards } from "../ui/grade-de-cards";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
 
 type Bi = { en: string; pt: string };
@@ -414,22 +417,12 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
 
         <SubSection title={t("Chips (Filterable)", "Chips (filtráveis)")}>
           <ShowcaseCard>
-            <div className="flex flex-wrap gap-2">
-              {chipVariants.map(c => {
-                const active = chipActive.includes(c.label);
-                return (
-                  <button
-                    key={c.label}
-                    onClick={() => setChipActive(prev => active ? prev.filter(x => x !== c.label) : [...prev, c.label])}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[0.8125rem] font-medium border transition-all duration-150
-                      ${active ? "bg-[var(--primary-suave)] text-primary-text border-primary/30" : "bg-card text-foreground border-border hover:bg-accent hover:border-[var(--border-strong)]"}`}
-                  >
-                    {active && <Check className="h-3.5 w-3.5" />}
-                    {lang === "en" ? c.label : c.pt}
-                  </button>
-                );
-              })}
-            </div>
+            <GrupoDeChipsFiltraveis
+              rotulo={t("Filter by area", "Filtrar por área")}
+              valor={chipActive}
+              onValorChange={setChipActive}
+              opcoes={chipVariants.map(c => ({ valor: c.label, rotulo: lang === "en" ? c.label : c.pt }))}
+            />
           </ShowcaseCard>
         </SubSection>
 
@@ -612,43 +605,30 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       {parte === "rotulos" && (
       <section id="empty-states">
         <SectionHeader title={t("Empty States", "Estados vazios")} description={t("Clear, actionable empty states that guide users forward.", "Estados vazios claros e acionáveis que orientam o usuário.")} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <GradeDeCards className="grid-cols-1 md:grid-cols-2 gap-4">
           <ShowcaseCard>
-            <div className="flex flex-col items-center text-center py-8 gap-4">
-              <div className="h-16 w-16 rounded-[20px] bg-muted flex items-center justify-center">
-                <svg className="h-8 w-8 text-muted-foreground" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5L7.5 3h9L21 7.5v9L16.5 21h-9L3 16.5v-9z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="text-[1rem] font-semibold text-foreground mb-1">{t("No results found", "Nenhum resultado encontrado")}</h4>
-                <p className="text-[0.875rem] text-muted-foreground max-w-[220px]">{t("Try adjusting your search or filters to find what you're looking for.", "Tente ajustar sua busca ou os filtros para encontrar o que procura.")}</p>
-              </div>
-              <button className="inline-flex items-center gap-2 h-9 px-4 text-[0.875rem] font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors">
-                {t("Clear filters", "Limpar filtros")}
-              </button>
-            </div>
+            <EstadoVazio
+              tamanho="sm"
+              nivel={4}
+              icone={<SearchX />}
+              titulo={t("No results found", "Nenhum resultado encontrado")}
+              descricao={t("Try adjusting your search or filters to find what you're looking for.", "Tente ajustar sua busca ou os filtros para encontrar o que procura.")}
+              acoes={<Button variant="outline">{t("Clear filters", "Limpar filtros")}</Button>}
+            />
           </ShowcaseCard>
-
           <ShowcaseCard>
-            <div className="flex flex-col items-center text-center py-8 gap-4">
-              <div className="h-16 w-16 rounded-[20px] bg-primary/10 flex items-center justify-center">
-                <svg className="h-8 w-8 text-primary-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="text-[1rem] font-semibold text-foreground mb-1">{t("Create your first project", "Crie seu primeiro projeto")}</h4>
-                <p className="text-[0.875rem] text-muted-foreground max-w-[220px]">{t("Projects help you organize your work and collaborate with your team.", "Projetos ajudam você a organizar seu trabalho e colaborar com sua equipe.")}</p>
-              </div>
-              <button className="inline-flex items-center gap-2 h-9 px-4 text-[0.875rem] font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors">
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
-                {t("New Project", "Novo projeto")}
-              </button>
-            </div>
+            <EstadoVazio
+              tamanho="sm"
+              nivel={4}
+              tom="marca"
+              icone={<Plus />}
+              titulo={t("Create your first project", "Crie seu primeiro projeto")}
+              descricao={t("Projects help you organize your work and collaborate with your team.", "Projetos ajudam você a organizar seu trabalho e colaborar com sua equipe.")}
+              acoes={<Button><Plus aria-hidden />{t("New Project", "Novo projeto")}</Button>}
+            />
           </ShowcaseCard>
-        </div>
+        </GradeDeCards>
+        <p className="mt-3 text-body-sm text-muted-foreground">{t("Component: EstadoVazio (ui/estado-vazio.tsx). More in Frames & states.", "Componente: EstadoVazio (ui/estado-vazio.tsx). Mais em Molduras e estados.")}</p>
       </section>
       )}
 

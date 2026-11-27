@@ -60,3 +60,24 @@ export function ShowcaseCard({ children, className = "", rotulo }: { children: R
     </div>
   );
 }
+
+/** Moldura de uma demonstração que ocupa a caixa toda (tela de exemplo, página de exemplo). */
+export function Moldura({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <div className={`overflow-hidden rounded-xl border border-border ${className}`}>{children}</div>;
+}
+
+/** Blocos neutros só para dar rolagem a uma demonstração (decorativos). */
+export function ConteudoFalso() {
+  return (
+    <div aria-hidden className="space-y-6 px-6 pb-12 pt-10">
+      <div className="h-6 w-2/3 rounded-full bg-graphite-200" />
+      <div className="h-4 w-1/2 rounded-full bg-graphite-100" />
+      {[0, 1, 2, 3, 4].map(i => <div key={i} className="h-24 rounded-lg border border-border bg-card" />)}
+    </div>
+  );
+}
+
+/** Rodapé de ações de um formulário de demonstração: divisor e botões à direita. */
+export function Panel({ children }: { children: React.ReactNode }) {
+  return <div className="flex justify-end gap-3 border-t border-border pt-4">{children}</div>;
+}

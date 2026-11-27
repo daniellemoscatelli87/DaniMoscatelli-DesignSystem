@@ -84,9 +84,9 @@ function Quadro({ colunas, rotulo, textos, className }: QuadroProps) {
                       <span className="block text-body-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">{k.titulo}</span>
                       {k.descricao && <span className="mt-1 block text-body-sm text-muted-foreground [overflow-wrap:anywhere]">{k.descricao}</span>}
                       {(k.etiqueta || k.pessoa) && (
-                        <span className="mt-3 flex items-center justify-between gap-2">
-                          <span className="min-w-0">{k.etiqueta}</span>
+                        <span className="mt-3 flex flex-wrap items-center gap-2">
                           {k.pessoa && <span className="shrink-0">{k.pessoa}</span>}
+                          {k.etiqueta && <span className="min-w-0">{k.etiqueta}</span>}
                         </span>
                       )}
                     </>

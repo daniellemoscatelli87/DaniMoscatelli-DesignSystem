@@ -5,6 +5,7 @@ import {
   Component, Type, PenTool, SunMoon, Braces, ArrowLeftRight, FileCode2,
   Image, LayoutTemplate, Link as LinkIcon, Check,
 } from "lucide-react";
+import { CardDeNavegacao } from "../ui/card-de-navegacao";
 import { useI18n, type Bi } from "../../i18n";
 import { withHighlight } from "@/app/components/ui/heading";
 
@@ -35,24 +36,16 @@ export function NavCard({
   const Icon = item.icon;
   const { bi } = useI18n();
   const txt = (v: string | Bi) => (typeof v === "string" ? v : bi(v));
+  // O card de navegação é o componente CardDeNavegacao (ui/card-de-navegacao.tsx): card inteiro clicável, sem sombra
+  // parada, hover cinza e seta que anda.
   return (
-    <button
-      type="button"
+    <CardDeNavegacao
       onClick={() => onGo(item.target)}
-      className={`group flex flex-col text-left h-full bg-card border border-border rounded-[var(--radius)] shadow-[var(--shadow-sm)] transition-all duration-150 hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-        compact ? "p-4" : "p-5"
-      }`}
-    >
-      <Icon className="h-5 w-5 text-primary-text mb-4 shrink-0" strokeWidth={1.75} />
-      <h3 className={`${display} text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
-        {txt(item.title)}
-      </h3>
-      <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">{txt(item.desc)}</p>
-      <ArrowRight
-        className="mt-auto self-end h-4 w-4 text-muted-foreground transition-all duration-150 group-hover:text-primary-text group-hover:translate-x-0.5"
-        aria-hidden
-      />
-    </button>
+      icone={<Icon strokeWidth={1.75} />}
+      titulo={txt(item.title)}
+      descricao={txt(item.desc)}
+      className={compact ? "p-4" : undefined}
+    />
   );
 }
 

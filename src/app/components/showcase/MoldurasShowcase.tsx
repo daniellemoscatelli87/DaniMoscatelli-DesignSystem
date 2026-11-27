@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { FolderOpen, Mail, Monitor, Plus, SearchX, Smartphone } from "lucide-react";
 import { useI18n } from "../../i18n";
-import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
+import { SectionBlock, ShowcaseCard, Moldura, ConteudoFalso } from "./shared/SectionBlock";
 import { Callout } from "./shared/Guidance";
 import { CabecalhoDoSite } from "../ui/cabecalho-do-site";
 import { MolduraDeConta } from "../ui/moldura-de-conta";
@@ -53,8 +53,8 @@ function DemoCabecalho() {
         )}
       </div>
       <p className="mb-3 text-body-sm text-muted-foreground">{t("Scroll inside the box: the header hides when you scroll down and comes back when you scroll up.", "Role dentro da caixa: o cabeçalho some ao descer e volta ao subir.")}</p>
-      <div className={`mx-auto overflow-hidden rounded-lg border border-border ${tela === "celular" ? "max-w-[390px]" : ""}`}>
-        <div ref={rolagem} className="relative h-[26rem] overflow-y-auto bg-background">
+      <Moldura className={`mx-auto ${tela === "celular" ? "max-w-[390px]" : ""}`}>
+        <div ref={rolagem} className="relative h-[26rem] overflow-y-auto">
           <CabecalhoDoSite
             itens={itens}
             atual="projeto"
@@ -63,13 +63,9 @@ function DemoCabecalho() {
             raiz={rolagem}
             acao={{ rotulo: "Contato", icone: <Mail aria-hidden /> }}
           />
-          <div aria-hidden className="space-y-6 px-6 pb-12 pt-10">
-            <div className="h-6 w-2/3 rounded-full bg-graphite-200" />
-            <div className="h-4 w-1/2 rounded-full bg-graphite-100" />
-            {[0, 1, 2, 3, 4].map(i => <div key={i} className="h-24 rounded-lg border border-border bg-card" />)}
-          </div>
+          <ConteudoFalso />
         </div>
-      </div>
+      </Moldura>
     </ShowcaseCard>
   );
 }
@@ -78,7 +74,7 @@ function DemoConta() {
   const { t } = useI18n();
   const [senha, setSenha] = useState("");
   return (
-    <div className="overflow-hidden rounded-xl border border-border">
+    <Moldura>
       <MolduraDeConta
         telaCheia={false}
         selo={t("Restricted area", "Área restrita")}
@@ -93,7 +89,7 @@ function DemoConta() {
           <Button type="submit" size="lg" className="w-full">{t("Sign in", "Entrar")}</Button>
         </form>
       </MolduraDeConta>
-    </div>
+    </Moldura>
   );
 }
 

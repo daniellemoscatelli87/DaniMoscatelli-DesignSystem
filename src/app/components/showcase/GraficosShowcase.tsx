@@ -1,5 +1,6 @@
 import React from "react";
 import { ChartColumnBig, ChartLine, ChartPie, ChartScatter, ChartSpline, MapPinned, Check, X, MessageSquareText, ChartColumn, AlertTriangle, ChevronDown } from "lucide-react";
+import { TabelaAdaptavel } from "../ui/tabela-adaptavel";
 import { useI18n } from "../../i18n";
 import { SectionHeader } from "./shared/SectionHeader";
 import { VejaEm } from "./shared/VejaEm";
@@ -57,23 +58,14 @@ function RoscaAntiga({ t, partes }: { t: T; partes: { rotulo: string; valor: num
 
 /** Tabela que vira lista no celular (card nunca rola na horizontal). */
 function TabelaQueQuebra({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
+  // A tabela que vira lista é o componente TabelaAdaptavel (ui/tabela-adaptavel.tsx).
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-card">
-      <div className="hidden grid-cols-[1.2fr_1fr_1.3fr] gap-4 border-b border-border bg-muted/50 px-4 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground md:grid">
-        {head.map(h => <span key={h}>{h}</span>)}
-      </div>
-      <ul className="m-0 list-none p-0">
-        {rows.map((r, i) => (
-          <li key={i} className="grid grid-cols-1 gap-1 border-b border-border px-4 py-3 text-[0.8125rem] last:border-0 md:grid-cols-[1.2fr_1fr_1.3fr] md:gap-4">
-            {r.map((c, j) => (
-              <span key={j} className={j === 0 ? "font-semibold text-foreground" : "text-muted-foreground [overflow-wrap:anywhere]"}>
-                <span className="mr-1 font-medium text-foreground md:hidden">{j > 0 ? `${head[j]}:` : ""}</span>{c}
-              </span>
-            ))}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <TabelaAdaptavel
+      legenda={head.join(", ")}
+      linhas={rows.map((r, i) => ({ i, r }))}
+      chave={l => String(l.i)}
+      colunas={head.map((h, j) => ({ id: String(j), titulo: h, celula: (l: { r: React.ReactNode[] }) => l.r[j], principal: j === 0 }))}
+    />
   );
 }
 

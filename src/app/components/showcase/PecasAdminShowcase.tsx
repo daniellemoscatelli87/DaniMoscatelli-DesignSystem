@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { CalendarPlus, Mail, ShieldCheck } from "lucide-react";
 import { useI18n } from "../../i18n";
-import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
+import { SectionBlock, ShowcaseCard, Panel } from "./shared/SectionBlock";
 import { CaixaDeEntrada, type ItemDaCaixa } from "../ui/caixa-de-entrada";
 import { Conversa, BalaoDaConversa, SeparadorDaConversa, IndicadorDeDigitacao } from "../ui/conversa";
 import { AgendaDoMes } from "../ui/agenda-do-mes";
@@ -45,11 +45,9 @@ function DemoCaixa() {
               <BalaoDaConversa autor="outro" nome={item.titulo} quando={item.quando}>{item.resumo} {t("Could you tell me how it works?", "Pode me contar como funciona?")}</BalaoDaConversa>
               <BalaoDaConversa autor="eu" nome="Dani" quando="10:05" estado="lida">{t("Of course! I'll send the details by e-mail.", "Claro! Envio os detalhes por e-mail.")}</BalaoDaConversa>
             </Conversa>
-            <form onSubmit={e => { e.preventDefault(); setEstado("enviando"); window.setTimeout(() => setEstado("feito"), 1200); }} className="grid gap-3 border-t border-border pt-4">
+            <form onSubmit={e => { e.preventDefault(); setEstado("enviando"); window.setTimeout(() => setEstado("feito"), 1200); }} className="grid gap-3">
               <Campo rotulo={t("Reply", "Responder")}>{p => <Textarea {...p} rows={3} className="bg-card text-body" />}</Campo>
-              <div className="flex justify-end">
-                <BotaoDeEnvio type="submit" estado={estado} onVoltar={() => setEstado("parado")}>{t("Send reply", "Enviar resposta")}</BotaoDeEnvio>
-              </div>
+              <Panel><BotaoDeEnvio type="submit" estado={estado} onVoltar={() => setEstado("parado")}>{t("Send reply", "Enviar resposta")}</BotaoDeEnvio></Panel>
             </form>
           </div>
         )}

@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 117 arquivos de componentes em `src/app/components/ui/` com 401 componentes exportados · 81 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 160 tokens · 33 páginas e 229 âncoras no site (https://designsystem.danimoscatelli.com.br) · 34 propostas de componente.
+**Resumo:** 117 arquivos de componentes em `src/app/components/ui/` com 401 componentes exportados · 76 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 160 tokens · 33 páginas e 229 âncoras no site (https://designsystem.danimoscatelli.com.br) · 34 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -35,7 +35,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 ### agenda-do-mes
 
 - **Arquivo:** [src/app/components/ui/agenda-do-mes.tsx](src/app/components/ui/agenda-do-mes.tsx)
-- **Quando usar:** AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.
+- **Quando usar:** AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido, num card só, separados por um divisor. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.
 - **Componentes:**
   - `AgendaDoMes` (props: `eventos`, `dia`, `diaInicial`, `onDiaChange`, `hoje`, `renderEvento`, `acoesDoDia`, `locale`, `textos`, `className`)
 - **Onde ver:** Peças da área restrita › Agenda do mês (`pecas-admin#admin-agenda`)
@@ -198,7 +198,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `Button` (props: `className`, `variant`, `size`, `asChild`)
 - **Funções e constantes:** `buttonVariants`
 - **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon`
-- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 23 seções (ver `catalogo.json`)
+- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Motion Design › Microinterações (`motion#micro`) · e mais 27 seções (ver `catalogo.json`)
 
 ### cabecalho-do-site
 
@@ -316,7 +316,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** CardDeArtigo (artigo, insight ou notícia): Os cartões de "Insights & artigos" da página inicial (grade "bento": um destaque largo e cartões horizontais) e da seção de artigos das páginas de apresentação. Foto, categoria e data, título (o link), resumo em até 3 linhas e o rodapé com o tempo de leitura e "Ler artigo".
 - **Componentes:**
   - `CardDeArtigo` (props: `titulo`, `href`, `resumo`, `imagem`, `alt`, `categoria`, `data`, `tempoDeLeitura`, `selo`, `formato`, `novaAba`, `nivel`, `textos`, `className`)
-- **Onde ver:** Seções do site › Card de artigo (`secoes-site#secoes-artigos`)
+- **Onde ver:** Seções do site › Card de artigo (`secoes-site#secoes-artigos`) · Padrões do site › Entrada ao rolar (`site#site-entrada`)
 
 ### card-de-depoimento
 
@@ -332,7 +332,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** CardDeNavegacao (card que leva a outra página): Um card inteiro clicável que leva a outra página ou seção: ícone na base, título, uma frase e a seta. Era o NavCard da página Começar do DS (só demonstração) e serve às grades "Explore" e aos atalhos da área restrita. Para um item de ação dentro de uma lista, use a LinhaDeLista.
 - **Componentes:**
   - `CardDeNavegacao` (props: `titulo`, `descricao`, `icone`, `href`, `onClick`, `selo`, `className`)
-- **Onde ver:** Seções do site › Números e cards de navegação (`secoes-site#secoes-numeros`)
+- **Onde ver:** Seções do site › Números e cards de navegação (`secoes-site#secoes-numeros`) · Início › Tudo no sistema (`overview#home-explore`) · Primeiros passos › O que é o Design System Dani Moscatelli? (`get-started#gs-overview`) · e mais 3 seções (ver `catalogo.json`)
 
 ### card-frente
 
@@ -407,7 +407,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `ChipFiltravel` (props: `ativo`, `onAtivoChange`, `contagem`, `className`, `children`, `onClick`)
   - `GrupoDeChipsFiltraveis` (props: `opcoes`, `valor`, `onValorChange`, `multiplo`, `rotulo`, `className`)
-- **Onde ver:** Campos › Chips de filtro (`campos#campos-chips`)
+- **Onde ver:** Rótulos › Badges e tags (`badges#badges`) · Campos › Chips de filtro (`campos#campos-chips`)
 
 ### citacao
 
@@ -481,7 +481,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `BalaoDaConversa` (props: `autor`, `nome`, `quando`, `avatar`, `estado`, `depois`, `children`, `className`)
   - `SeparadorDaConversa` (props: `children`, `className`)
   - `IndicadorDeDigitacao` (props: `autor`, `avatar`, `rotulo`, `className`)
-- **Onde ver:** Peças da área restrita › Conversa (`pecas-admin#admin-conversa`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) · Peças da área restrita › Agenda do mês (`pecas-admin#admin-agenda`) · e mais 1 seções (ver `catalogo.json`)
+- **Onde ver:** Peças da área restrita › Conversa (`pecas-admin#admin-conversa`) · Motion Design › Loaders e progresso (`motion#loaders`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) · e mais 2 seções (ver `catalogo.json`)
 
 ### curva-secao
 
@@ -572,7 +572,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `EstadoVazio` (props: `icone`, `titulo`, `descricao`, `acoes`, `tom`, `tamanho`, `nivel`, `className`)
   - `EstadoFinal` (props: `tom`, `icone`, `titulo`, `descricao`, `acoes`, `nivel`, `focarAoAparecer`, `children`, `className`)
   - `PaginaDeErro` (props: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`, `className`)
-- **Onde ver:** Molduras e estados › Vazio, final e erro (`molduras#molduras-estados`) · Campos › Busca e copiar (`campos#campos-busca`) · Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+- **Onde ver:** Rótulos › Estados vazios (`badges#empty-states`) · Molduras e estados › Vazio, final e erro (`molduras#molduras-estados`) · Usabilidade › Estados de conteúdo (`usability#ux-states`) · e mais 2 seções (ver `catalogo.json`)
 
 ### faixa-de-logos
 
@@ -615,7 +615,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `GradeDeCards` (props: `colunas`, `larguraMinima`, `limiteDeDiferenca`, `layout`, `onLayoutChange`, `className`, `style`, `children`)
   - `ItemDaGrade` (props: `className`): ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.
 - **Funções e constantes:** `LIMITE_DE_DIFERENCA`, `FATOR_DE_VOLTA`, `passaDoLimite`, `useOrientacaoDoCard`
-- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 82 seções (ver `catalogo.json`)
+- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 83 seções (ver `catalogo.json`)
 
 ### graficos-catalogo
 
@@ -741,7 +741,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Linha de lista: início (caixa de seleção, avatar, ícone), conteúdo (título e descrição) e fim (tags, status, ações).
 - **Componentes:**
   - `LinhaDeLista` (props: `as`, `inicio`, `titulo`, `descricao`, `fim`, `quebraAcoes`, `alinharAcoesAbaixo`, `alinhar`, `interativa`, `selecionada`, `className`, `children`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Cards › Borda, sombra e raio (`cards#card-layout`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Cards › Borda, sombra e raio (`cards#card-layout`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) · e mais 1 seções (ver `catalogo.json`)
 
 ### link-saiba-mais
 
@@ -1144,7 +1144,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Stepper (indicador de etapas) — progresso de um formulário em várias telas: Trazido do FindLook Design System (mesmo nome e mesma API, 27/11/2026), com a escala deste DS: etapas em abas numeradas ("01", "02"…), lado a lado sobre uma linha. Serve ao cadastro de parceiro da Rede de Parceiros e a qualquer formulário em várias telas.
 - **Componentes:**
   - `Stepper` (props: `etapas`, `atual`, `concluidas`, `onIrPara`, `rotulo`, `textos`, `className`)
-- **Onde ver:** Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+- **Onde ver:** Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`) · Motion Design › Loaders e progresso (`motion#loaders`)
 
 ### surgir-ao-rolar
 
@@ -1170,7 +1170,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** TabelaAdaptavel (tabela que nunca rola para o lado): Regra do DS: card nunca tem rolagem horizontal. A tabela mostra as colunas que cabem na largura dela (não da tela): - prioridade 1 (padrão): sempre aparece; - prioridade 2: some abaixo de 36rem (576 px); - prioridade 3: some abaixo de 48rem (768 px); quando alguma coluna sai, um aviso curto embaixo diz quais ("Nesta largura, ficam de fora: Plano, Cidade").
 - **Componentes:**
   - `TabelaAdaptavel` (props: `colunas`, `linhas`, `chave`, `legenda`, `mostrarLegenda`, `acoes`, `vazio`, `textos`, `className`)
-- **Onde ver:** Campos › Tabela adaptável (`campos#campos-tabela`)
+- **Onde ver:** Campos › Tabela adaptável (`campos#campos-tabela`) · Gráficos › Como escolher (`graficos#graficos-escolher`) · Gráficos › Componentes e props (`graficos#graficos-componentes`)
 
 ### table
 
@@ -1294,7 +1294,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:1091](src/app/components/showcase/TemplatesShowcase.tsx#L1091) |  | 14 |
 | `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesShowcase.tsx:1521](src/app/components/showcase/TemplatesShowcase.tsx#L1521) | `GradeDeCards` | 82 |
 
-### 2.2 Padrões nas páginas de componentes (40)
+### 2.2 Padrões nas páginas de componentes (36)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
@@ -1311,29 +1311,25 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `DemoMesmaAltura`<br>Dois cards lado a lado; o interruptor põe muito conteúdo no segundo e a GradeDeCards troca para um por linha. | Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`) | [src/app/components/showcase/CardShowcase.tsx:358](src/app/components/showcase/CardShowcase.tsx#L358) | `Badge`, `Button`, `Card`, `CardContent`, `CardDescription`, `CardFooter`, `CardHeader`, `CardMidia` +4 | 2 |
 | `CardDeExemplo`<br>Card pequeno dos exemplos certo e errado. | Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`) | [src/app/components/showcase/CardShowcase.tsx:430](src/app/components/showcase/CardShowcase.tsx#L430) | `Button`, `Card`, `CardDescription`, `CardFooter`, `CardHeader`, `CardTitle` | 1 |
 | `CardsDeKpi`<br>Cards de KPI: métrica, ícone, minigráfico e tendência (usados na página Cards). | Cards › Arquitetura de informação (`cards#card-ia`) | [src/app/components/showcase/DataShowcase.tsx:442](src/app/components/showcase/DataShowcase.tsx#L442) | `GradeDeCards` | 2 |
-| `WobbleCardConteudo`<br>Card com wobble: demonstração com controles (usada na página Cards). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/MotionShowcase.tsx:1926](src/app/components/showcase/MotionShowcase.tsx#L1926) |  | 5 |
-| `ShineBorderConteudo`<br>Shine Border: velocidades, combinações de cor, tokens e acessibilidade (usado na página Cards). | Cards › Shine Border (`cards#card-shine`) | [src/app/components/showcase/MotionShowcase.tsx:2030](src/app/components/showcase/MotionShowcase.tsx#L2030) | `ShineBorder` | 5 |
-| `RoscaAntiga`<br>Earlier donut, reproduced only for comparison (thick ring, number of parts in the centre, graphite as a peer series). | Gráficos › Rosca (`graficos#graficos-rosca`) | [src/app/components/showcase/GraficosShowcase.tsx:25](src/app/components/showcase/GraficosShowcase.tsx#L25) |  | 1 |
-| `TabelaQueQuebra`<br>Tabela que vira lista no celular (card nunca rola na horizontal). | Gráficos › Como escolher (`graficos#graficos-escolher`) (+1) | [src/app/components/showcase/GraficosShowcase.tsx:59](src/app/components/showcase/GraficosShowcase.tsx#L59) |  | 3 |
-| `Cartao` | Gráficos › Cores dos gráficos (`graficos#graficos-cores`) (+3) | [src/app/components/showcase/GraficosShowcase.tsx:80](src/app/components/showcase/GraficosShowcase.tsx#L80) |  | 1 |
-| `CartaoDoCatalogo`<br>Catalog card: name, component, when to use, the chart, the reading caveat and See data. | Gráficos › (`graficos#graficos-catalogo-comparacao`) (+5) | [src/app/components/showcase/GraficosShowcase.tsx:126](src/app/components/showcase/GraficosShowcase.tsx#L126) | `TabelaDeDados` | 5 |
-| `Familia` | Gráficos › (`graficos#graficos-catalogo-comparacao`) (+5) | [src/app/components/showcase/GraficosShowcase.tsx:161](src/app/components/showcase/GraficosShowcase.tsx#L161) | `GradeDeCards` | 1 |
+| `WobbleCardConteudo`<br>Card com wobble: demonstração com controles (usada na página Cards). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/MotionShowcase.tsx:1867](src/app/components/showcase/MotionShowcase.tsx#L1867) |  | 5 |
+| `ShineBorderConteudo`<br>Shine Border: velocidades, combinações de cor, tokens e acessibilidade (usado na página Cards). | Cards › Shine Border (`cards#card-shine`) | [src/app/components/showcase/MotionShowcase.tsx:1971](src/app/components/showcase/MotionShowcase.tsx#L1971) | `ShineBorder` | 5 |
+| `RoscaAntiga`<br>Earlier donut, reproduced only for comparison (thick ring, number of parts in the centre, graphite as a peer series). | Gráficos › Rosca (`graficos#graficos-rosca`) | [src/app/components/showcase/GraficosShowcase.tsx:26](src/app/components/showcase/GraficosShowcase.tsx#L26) |  | 1 |
+| `Cartao` | Gráficos › Cores dos gráficos (`graficos#graficos-cores`) (+3) | [src/app/components/showcase/GraficosShowcase.tsx:72](src/app/components/showcase/GraficosShowcase.tsx#L72) |  | 1 |
+| `CartaoDoCatalogo`<br>Catalog card: name, component, when to use, the chart, the reading caveat and See data. | Gráficos › (`graficos#graficos-catalogo-comparacao`) (+5) | [src/app/components/showcase/GraficosShowcase.tsx:118](src/app/components/showcase/GraficosShowcase.tsx#L118) | `TabelaDeDados` | 5 |
+| `Familia` | Gráficos › (`graficos#graficos-catalogo-comparacao`) (+5) | [src/app/components/showcase/GraficosShowcase.tsx:153](src/app/components/showcase/GraficosShowcase.tsx#L153) | `GradeDeCards` | 1 |
 | `Tag` | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:45](src/app/components/showcase/shared/RegraDasLinhas.tsx#L45) | `Badge` | 1 |
 | `Celular`<br>Moldura com a largura de um celular (360 px), para mostrar a linha como ela fica no telefone. É moldura de aparelho, não card de conteúdo: o par certo/errado fica fora da regra de mesma altura (data-cards-ignorar na grade do par). | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:57](src/app/components/showcase/shared/RegraDasLinhas.tsx#L57) |  | 3 |
 | `ListaCerta`<br>Exemplo certo, com LinhaDeLista: tags e ações numa linha própria embaixo do texto, hover e seleção na linha inteira, sem cantos. | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:85](src/app/components/showcase/shared/RegraDasLinhas.tsx#L85) | `Badge`, `Checkbox`, `LinhaDeLista` | 2 |
 | `ListaErrada`<br>Exemplo errado (o erro que originou a regra): áreas de grid "l1 sit" / "res res" no celular. A segunda linha do texto passa por baixo da tag e da lixeira, e o hover é uma caixa cinza arredondada só no bloco do texto. | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:130](src/app/components/showcase/shared/RegraDasLinhas.tsx#L130) | `Badge` | 2 |
 | `DemoInfoFechavel` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:71](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L71) | `AlertaComAcao`, `BotaoDoAlerta`, `LinkDoAlerta` | 1 |
 | `AlertaComAcaoDoc` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:133](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L133) | `AlertaComAcao`, `BotaoDoAlerta`, `GradeDeCards`, `LinkDoAlerta` | 1 |
-| `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:76](src/app/components/showcase/FeedbackShowcase.tsx#L76) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
-| `SkeletonPulse`<br>Skeleton | Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:106](src/app/components/showcase/FeedbackShowcase.tsx#L106) |  | 1 |
+| `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:79](src/app/components/showcase/FeedbackShowcase.tsx#L79) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
+| `SkeletonPulse`<br>Skeleton | Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:109](src/app/components/showcase/FeedbackShowcase.tsx#L109) |  | 1 |
 | `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:128](src/app/components/showcase/OverlaysShowcase.tsx#L128) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
-| `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:467](src/app/components/showcase/SitePatternsShowcase.tsx#L467) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
-| `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:515](src/app/components/showcase/SitePatternsShowcase.tsx#L515) | `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 6 |
-| `DemoCabecalho`<br>Molduras e estados (27/11/2026): cabeçalho do site, rodapé, moldura das telas de conta, estados vazio/final/erro, alerta por tom e logo. | Molduras e estados › Cabeçalho do site (`molduras#molduras-cabecalho`) | [src/app/components/showcase/MoldurasShowcase.tsx:22](src/app/components/showcase/MoldurasShowcase.tsx#L22) | `CabecalhoDoSite`, `SegmentedControl` | 5 |
-| `DemoConta` | Molduras e estados › Moldura de conta (`molduras#molduras-conta`) | [src/app/components/showcase/MoldurasShowcase.tsx:77](src/app/components/showcase/MoldurasShowcase.tsx#L77) | `Button`, `Campo`, `MolduraDeConta`, `PasswordInput` | 1 |
-| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:33](src/app/components/showcase/CamposShowcase.tsx#L33) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 2 |
-| `DemoBusca` | Campos › Busca e copiar (`campos#campos-busca`) | [src/app/components/showcase/CamposShowcase.tsx:69](src/app/components/showcase/CamposShowcase.tsx#L69) | `Button`, `CampoDeBusca`, `EstadoVazio` | 1 |
-| `DemoCaixa`<br>Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo. | Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) | [src/app/components/showcase/PecasAdminShowcase.tsx:24](src/app/components/showcase/PecasAdminShowcase.tsx#L24) | `BalaoDaConversa`, `BotaoDeEnvio`, `CaixaDeEntrada`, `Campo`, `ChipDeEstado`, `Conversa`, `IconeComBase`, `Textarea` | 2 |
+| `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:468](src/app/components/showcase/SitePatternsShowcase.tsx#L468) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
+| `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:516](src/app/components/showcase/SitePatternsShowcase.tsx#L516) | `CardDeArtigo`, `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 1 |
+| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:34](src/app/components/showcase/CamposShowcase.tsx#L34) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
+| `DemoCaixa`<br>Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo. | Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) | [src/app/components/showcase/PecasAdminShowcase.tsx:24](src/app/components/showcase/PecasAdminShowcase.tsx#L24) | `BalaoDaConversa`, `BotaoDeEnvio`, `CaixaDeEntrada`, `Campo`, `ChipDeEstado`, `Conversa`, `IconeComBase`, `Textarea` | 1 |
 | `Segmentado`<br>Controles da demonstração | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:91](src/app/components/showcase/HeaderShowcase.tsx#L91) |  | 1 |
 | `Chave` | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:119](src/app/components/showcase/HeaderShowcase.tsx#L119) |  | 2 |
 | `Capa`<br>Fundos por trás do header | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:149](src/app/components/showcase/HeaderShowcase.tsx#L149) |  | 4 |
@@ -1341,7 +1337,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `CardOpcao`<br>Cards de explicação, com atalho para a demonstração | Header e menus › Modelos (`header#header-models`) (+3) | [src/app/components/showcase/HeaderShowcase.tsx:559](src/app/components/showcase/HeaderShowcase.tsx#L559) |  | 3 |
 | `ContactPanelDemo`<br>Variante: formulário de contato do site | Painel lateral › Comportamento (`sidepanel#sidepanel-behavior`) (+1) | [src/app/components/showcase/SidePanelShowcase.tsx:39](src/app/components/showcase/SidePanelShowcase.tsx#L39) | `SidePanel`, `SidePanelActions`, `SidePanelBody`, `SidePanelContent`, `SidePanelFooter`, `SidePanelHeader`, `SidePanelTrigger` | 10 |
 
-### 2.3 Demonstrações nas páginas de fundamentos e diretrizes (32)
+### 2.3 Demonstrações nas páginas de fundamentos e diretrizes (31)
 
 Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, tokens). Normalmente não vão para o produto como estão; servem de referência de comportamento.
 
@@ -1353,11 +1349,11 @@ Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, 
 | `RuleCard`<br>Do / Don't card | Identidade de marca › Regras de uso (`brand#brand-rules`) | [src/app/components/showcase/BrandShowcase.tsx:157](src/app/components/showcase/BrandShowcase.tsx#L157) |  | 2 |
 | `DemoDoGrid`<br>Demonstração do grid: as colunas, a margem e a calha da tela escolhida, em escala dentro da página. | Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) | [src/app/components/showcase/GridShowcase.tsx:31](src/app/components/showcase/GridShowcase.tsx#L31) |  | 3 |
 | `Bloco`<br>Exemplo de composição sobre o grid: blocos com span por tela. | Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:55](src/app/components/showcase/GridShowcase.tsx#L55) |  | 1 |
-| `TargetDemo`<br>Touch targets | Usabilidade › Tamanho de alvo (`usability#ux-targets`) | [src/app/components/showcase/UsabilityShowcase.tsx:15](src/app/components/showcase/UsabilityShowcase.tsx#L15) |  | 1 |
-| `FeedbackDemo`<br>System status | Usabilidade › Status do sistema (`usability#ux-feedback`) | [src/app/components/showcase/UsabilityShowcase.tsx:45](src/app/components/showcase/UsabilityShowcase.tsx#L45) |  | 1 |
-| `UndoDemo` | Usabilidade › Ações destrutivas (`usability#ux-destructive`) | [src/app/components/showcase/UsabilityShowcase.tsx:82](src/app/components/showcase/UsabilityShowcase.tsx#L82) |  | 6 |
-| `StatesDemo` | Usabilidade › Estados de conteúdo (`usability#ux-states`) | [src/app/components/showcase/UsabilityShowcase.tsx:146](src/app/components/showcase/UsabilityShowcase.tsx#L146) |  | 6 |
-| `HierarchyDemo`<br>Button hierarchy | Usabilidade › Hierarquia de ações (`usability#ux-hierarchy`) | [src/app/components/showcase/UsabilityShowcase.tsx:212](src/app/components/showcase/UsabilityShowcase.tsx#L212) |  | 5 |
+| `TargetDemo`<br>Touch targets | Usabilidade › Tamanho de alvo (`usability#ux-targets`) | [src/app/components/showcase/UsabilityShowcase.tsx:17](src/app/components/showcase/UsabilityShowcase.tsx#L17) |  | 1 |
+| `FeedbackDemo`<br>System status | Usabilidade › Status do sistema (`usability#ux-feedback`) | [src/app/components/showcase/UsabilityShowcase.tsx:47](src/app/components/showcase/UsabilityShowcase.tsx#L47) |  | 1 |
+| `UndoDemo` | Usabilidade › Ações destrutivas (`usability#ux-destructive`) | [src/app/components/showcase/UsabilityShowcase.tsx:84](src/app/components/showcase/UsabilityShowcase.tsx#L84) |  | 6 |
+| `StatesDemo` | Usabilidade › Estados de conteúdo (`usability#ux-states`) | [src/app/components/showcase/UsabilityShowcase.tsx:148](src/app/components/showcase/UsabilityShowcase.tsx#L148) | `Button`, `EstadoVazio` | 4 |
+| `HierarchyDemo`<br>Button hierarchy | Usabilidade › Hierarquia de ações (`usability#ux-hierarchy`) | [src/app/components/showcase/UsabilityShowcase.tsx:222](src/app/components/showcase/UsabilityShowcase.tsx#L222) |  | 5 |
 | `Descoberta` | Tom de voz e UX writing | [src/app/components/showcase/EscritaDeInteligencia.tsx:32](src/app/components/showcase/EscritaDeInteligencia.tsx#L32) |  | 4 |
 | `EscritaDeInteligencia` | Tom de voz e UX writing | [src/app/components/showcase/EscritaDeInteligencia.tsx:75](src/app/components/showcase/EscritaDeInteligencia.tsx#L75) | `GradeDeCards` | 8 |
 | `ContrastTable` | Acessibilidade › Contraste (`accessibility#a11y-contrast`) | [src/app/components/showcase/AccessibilityShowcase.tsx:68](src/app/components/showcase/AccessibilityShowcase.tsx#L68) |  | 3 |
@@ -1373,14 +1369,13 @@ Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, 
 | `BgLinesCard`<br>BG LINES CARD — previews with controls | Fundos › Linhas de fundo (`backgrounds#bg-lines-bg`) | [src/app/components/showcase/BackgroundsShowcase.tsx:1240](src/app/components/showcase/BackgroundsShowcase.tsx#L1240) |  | 6 |
 | `EffectCard` | Fundos | [src/app/components/showcase/BackgroundsShowcase.tsx:1488](src/app/components/showcase/BackgroundsShowcase.tsx#L1488) |  | 4 |
 | `DoodleTextureCard`<br>DOODLE TEXTURE — textura de ícones de traço | Fundos › Textura doodle (`backgrounds#doodle-bg`) | [src/app/components/showcase/BackgroundsShowcase.tsx:1637](src/app/components/showcase/BackgroundsShowcase.tsx#L1637) | `DoodleTexture` | 8 |
-| `SpringPlayground` | Motion Design › Física de mola (`motion#spring`) | [src/app/components/showcase/MotionShowcase.tsx:309](src/app/components/showcase/MotionShowcase.tsx#L309) |  | 3 |
-| `MagneticButton` | Motion Design › Interações de hover (`motion#hover`) | [src/app/components/showcase/MotionShowcase.tsx:609](src/app/components/showcase/MotionShowcase.tsx#L609) |  | 1 |
-| `StepIndicator` | Motion Design › Loaders e progresso (`motion#loaders`) | [src/app/components/showcase/MotionShowcase.tsx:960](src/app/components/showcase/MotionShowcase.tsx#L960) |  | 3 |
-| `DurationBars` | Motion Design › Tokens de movimento (`motion#motion-tokens`) | [src/app/components/showcase/MotionShowcase.tsx:1125](src/app/components/showcase/MotionShowcase.tsx#L1125) |  | 1 |
-| `OrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1473](src/app/components/showcase/MotionShowcase.tsx#L1473) |  | 1 |
-| `AvatarOrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1621](src/app/components/showcase/MotionShowcase.tsx#L1621) |  | 3 |
+| `SpringPlayground` | Motion Design › Física de mola (`motion#spring`) | [src/app/components/showcase/MotionShowcase.tsx:312](src/app/components/showcase/MotionShowcase.tsx#L312) |  | 3 |
+| `MagneticButton` | Motion Design › Interações de hover (`motion#hover`) | [src/app/components/showcase/MotionShowcase.tsx:612](src/app/components/showcase/MotionShowcase.tsx#L612) |  | 1 |
+| `DurationBars` | Motion Design › Tokens de movimento (`motion#motion-tokens`) | [src/app/components/showcase/MotionShowcase.tsx:1066](src/app/components/showcase/MotionShowcase.tsx#L1066) |  | 1 |
+| `OrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1414](src/app/components/showcase/MotionShowcase.tsx#L1414) |  | 1 |
+| `AvatarOrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1562](src/app/components/showcase/MotionShowcase.tsx#L1562) |  | 3 |
 
-### 2.4 Seções com marcação feita à mão no próprio corpo (46)
+### 2.4 Seções com marcação feita à mão no próprio corpo (45)
 
 Seções que montam peças direto na página, sem componente local, com 3 ou mais elementos de estilo próprio. Antes de copiar uma delas, confira se a peça já existe na seção 1.
 
@@ -1402,35 +1397,34 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Design Tokens › Implementação em código (`tokens#tokens-definition`) | [src/app/components/showcase/TokensShowcase.tsx:635](src/app/components/showcase/TokensShowcase.tsx#L635) |  | 12 |
 | Tom de voz e UX writing › Tipos de informação (`voice#escrita-tipos`) | [src/app/components/showcase/VoiceShowcase.tsx:125](src/app/components/showcase/VoiceShowcase.tsx#L125) |  | 3 |
 | Fundos › Guia de composição (`backgrounds#section-backgrounds`) | [src/app/components/showcase/BackgroundsShowcase.tsx:1787](src/app/components/showcase/BackgroundsShowcase.tsx#L1787) |  | 7 |
-| Motion Design › Física de mola (`motion#spring`) | [src/app/components/showcase/MotionShowcase.tsx:268](src/app/components/showcase/MotionShowcase.tsx#L268) |  | 4 |
-| Motion Design › Stagger e sequências (`motion#stagger`) | [src/app/components/showcase/MotionShowcase.tsx:407](src/app/components/showcase/MotionShowcase.tsx#L407) |  | 3 |
-| Motion Design › Interações de hover (`motion#hover`) | [src/app/components/showcase/MotionShowcase.tsx:467](src/app/components/showcase/MotionShowcase.tsx#L467) |  | 8 |
-| Motion Design › Microinterações (`motion#micro`) | [src/app/components/showcase/MotionShowcase.tsx:656](src/app/components/showcase/MotionShowcase.tsx#L656) |  | 6 |
-| Motion Design › Loaders e progresso (`motion#loaders`) | [src/app/components/showcase/MotionShowcase.tsx:815](src/app/components/showcase/MotionShowcase.tsx#L815) | `GradeDeCards` | 13 |
-| Motion Design › Transições de layout (`motion#layout`) | [src/app/components/showcase/MotionShowcase.tsx:1032](src/app/components/showcase/MotionShowcase.tsx#L1032) |  | 6 |
-| Motion Design › Lista animada (`motion#animated-list`) | [src/app/components/showcase/MotionShowcase.tsx:1316](src/app/components/showcase/MotionShowcase.tsx#L1316) |  | 7 |
-| Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1703](src/app/components/showcase/MotionShowcase.tsx#L1703) |  | 6 |
+| Motion Design › Física de mola (`motion#spring`) | [src/app/components/showcase/MotionShowcase.tsx:271](src/app/components/showcase/MotionShowcase.tsx#L271) |  | 4 |
+| Motion Design › Stagger e sequências (`motion#stagger`) | [src/app/components/showcase/MotionShowcase.tsx:410](src/app/components/showcase/MotionShowcase.tsx#L410) |  | 3 |
+| Motion Design › Interações de hover (`motion#hover`) | [src/app/components/showcase/MotionShowcase.tsx:470](src/app/components/showcase/MotionShowcase.tsx#L470) |  | 8 |
+| Motion Design › Microinterações (`motion#micro`) | [src/app/components/showcase/MotionShowcase.tsx:659](src/app/components/showcase/MotionShowcase.tsx#L659) | `Button` | 6 |
+| Motion Design › Loaders e progresso (`motion#loaders`) | [src/app/components/showcase/MotionShowcase.tsx:818](src/app/components/showcase/MotionShowcase.tsx#L818) | `BalaoDaConversa`, `Conversa`, `GradeDeCards`, `IndicadorDeDigitacao` | 11 |
+| Motion Design › Transições de layout (`motion#layout`) | [src/app/components/showcase/MotionShowcase.tsx:973](src/app/components/showcase/MotionShowcase.tsx#L973) |  | 6 |
+| Motion Design › Lista animada (`motion#animated-list`) | [src/app/components/showcase/MotionShowcase.tsx:1257](src/app/components/showcase/MotionShowcase.tsx#L1257) |  | 7 |
+| Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1644](src/app/components/showcase/MotionShowcase.tsx#L1644) |  | 6 |
 | Catálogo de componentes › Todos os componentes (`catalogo#catalogo-lista`) | [src/app/components/showcase/CatalogoShowcase.tsx:143](src/app/components/showcase/CatalogoShowcase.tsx#L143) | `Input` | 5 |
 | Cards › Borda, sombra e raio (`cards#card-layout`) | [src/app/components/showcase/CardShowcase.tsx:610](src/app/components/showcase/CardShowcase.tsx#L610) | `Card`, `GradeDeCards` | 3 |
 | Cards › Estados (`cards#card-states`) | [src/app/components/showcase/CardShowcase.tsx:945](src/app/components/showcase/CardShowcase.tsx#L945) | `Button`, `Card`, `CardDescription`, `CardFooter`, `CardHeader`, `CardTitle`, `GradeDeCards`, `ItemDaGrade` +1 | 3 |
 | Cards › Cards aninhados (`cards#card-nested`) | [src/app/components/showcase/CardShowcase.tsx:1091](src/app/components/showcase/CardShowcase.tsx#L1091) | `Card`, `CardDescription`, `CardTitle`, `GradeDeCards` | 5 |
-| Gráficos › Cores dos gráficos (`graficos#graficos-cores`) | [src/app/components/showcase/GraficosShowcase.tsx:551](src/app/components/showcase/GraficosShowcase.tsx#L551) | `BarrasEmpilhadas100`, `BarrasOrdenadas`, `GradeDeCards`, `GraficoDeLinhas`, `GraficoDeRosca`, `MapaDeCalorMatricial` | 9 |
-| Gráficos › Como escolher (`graficos#graficos-escolher`) | [src/app/components/showcase/GraficosShowcase.tsx:867](src/app/components/showcase/GraficosShowcase.tsx#L867) | `GradeDeCards` | 4 |
-| Gráficos › Design de inteligência (`graficos#graficos-inteligencia`) | [src/app/components/showcase/GraficosShowcase.tsx:1135](src/app/components/showcase/GraficosShowcase.tsx#L1135) | `BarrasOrdenadas`, `DescobertaVisual` | 3 |
+| Gráficos › Cores dos gráficos (`graficos#graficos-cores`) | [src/app/components/showcase/GraficosShowcase.tsx:543](src/app/components/showcase/GraficosShowcase.tsx#L543) | `BarrasEmpilhadas100`, `BarrasOrdenadas`, `GradeDeCards`, `GraficoDeLinhas`, `GraficoDeRosca`, `MapaDeCalorMatricial` | 9 |
+| Gráficos › Como escolher (`graficos#graficos-escolher`) | [src/app/components/showcase/GraficosShowcase.tsx:859](src/app/components/showcase/GraficosShowcase.tsx#L859) | `GradeDeCards` | 4 |
+| Gráficos › Design de inteligência (`graficos#graficos-inteligencia`) | [src/app/components/showcase/GraficosShowcase.tsx:1127](src/app/components/showcase/GraficosShowcase.tsx#L1127) | `BarrasOrdenadas`, `DescobertaVisual` | 3 |
 | Exibição de dados › Gráficos (`data#charts`) | [src/app/components/showcase/DataShowcase.tsx:183](src/app/components/showcase/DataShowcase.tsx#L183) |  | 3 |
 | Exibição de dados › Tabela (`data#table`) | [src/app/components/showcase/DataShowcase.tsx:276](src/app/components/showcase/DataShowcase.tsx#L276) |  | 10 |
-| Feedback › Progresso (`feedback#progress`) | [src/app/components/showcase/FeedbackShowcase.tsx:302](src/app/components/showcase/FeedbackShowcase.tsx#L302) |  | 4 |
-| Rótulos › Badges e tags (`badges#badges`) | [src/app/components/showcase/FeedbackShowcase.tsx:393](src/app/components/showcase/FeedbackShowcase.tsx#L393) |  | 5 |
-| Rótulos › Selo (tag do hero) (`badges#selo`) | [src/app/components/showcase/FeedbackShowcase.tsx:448](src/app/components/showcase/FeedbackShowcase.tsx#L448) | `Selo` | 3 |
-| Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:522](src/app/components/showcase/FeedbackShowcase.tsx#L522) |  | 4 |
-| Rótulos › Estados vazios (`badges#empty-states`) | [src/app/components/showcase/FeedbackShowcase.tsx:613](src/app/components/showcase/FeedbackShowcase.tsx#L613) |  | 4 |
+| Feedback › Progresso (`feedback#progress`) | [src/app/components/showcase/FeedbackShowcase.tsx:305](src/app/components/showcase/FeedbackShowcase.tsx#L305) |  | 4 |
+| Rótulos › Badges e tags (`badges#badges`) | [src/app/components/showcase/FeedbackShowcase.tsx:396](src/app/components/showcase/FeedbackShowcase.tsx#L396) | `GrupoDeChipsFiltraveis` | 5 |
+| Rótulos › Selo (tag do hero) (`badges#selo`) | [src/app/components/showcase/FeedbackShowcase.tsx:441](src/app/components/showcase/FeedbackShowcase.tsx#L441) | `Selo` | 3 |
+| Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:515](src/app/components/showcase/FeedbackShowcase.tsx#L515) |  | 4 |
 | Ícones › Tamanhos e cores (`icons#icon-sizes`) | [src/app/components/showcase/IconsShowcase.tsx:123](src/app/components/showcase/IconsShowcase.tsx#L123) |  | 7 |
 | Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:210](src/app/components/showcase/OverlaysShowcase.tsx#L210) | `Tooltip` | 3 |
 | Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:225](src/app/components/showcase/OverlaysShowcase.tsx#L225) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
 | Overlays › Diálogos (`overlays#dialogs`) | [src/app/components/showcase/OverlaysShowcase.tsx:273](src/app/components/showcase/OverlaysShowcase.tsx#L273) | `Dialog` | 3 |
 | Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:348](src/app/components/showcase/OverlaysShowcase.tsx#L348) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
-| Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:202](src/app/components/showcase/SitePatternsShowcase.tsx#L202) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade`, `PilulaDeAcao` | 15 |
-| Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:695](src/app/components/showcase/SitePatternsShowcase.tsx#L695) | `CurvaSecao`, `SeloSecao` | 4 |
+| Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:203](src/app/components/showcase/SitePatternsShowcase.tsx#L203) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade`, `PilulaDeAcao` | 15 |
+| Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:700](src/app/components/showcase/SitePatternsShowcase.tsx#L700) | `CurvaSecao`, `SeloSecao` | 4 |
 | Painel lateral › Anatomia (`sidepanel#sidepanel-anatomy`) | [src/app/components/showcase/SidePanelShowcase.tsx:235](src/app/components/showcase/SidePanelShowcase.tsx#L235) |  | 3 |
 
 ## 3. Tokens
@@ -1637,21 +1631,21 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 
 Regras documentadas no site. Antes de montar uma tela, leia as que valem para ela.
 
-- **Hierarquia de ações: principal, secundária e terciária** — Usabilidade › Hierarquia de ações (`usability#ux-hierarchy`) · [src/app/components/showcase/UsabilityShowcase.tsx:275](src/app/components/showcase/UsabilityShowcase.tsx#L275)
+- **Hierarquia de ações: principal, secundária e terciária** — Usabilidade › Hierarquia de ações (`usability#ux-hierarchy`) · [src/app/components/showcase/UsabilityShowcase.tsx:285](src/app/components/showcase/UsabilityShowcase.tsx#L285)
 - **Como escolher o card: pelo fundo, com borda ou com sombra** — Cards › Como escolher (`cards#card-escolher`) · [src/app/components/showcase/CardShowcase.tsx:527](src/app/components/showcase/CardShowcase.tsx#L527)
 - **Card: borda, sombra e raio** — Cards › Borda, sombra e raio (`cards#card-layout`) · [src/app/components/showcase/CardShowcase.tsx:610](src/app/components/showcase/CardShowcase.tsx#L610)
 - **Card: o que evitar** — Cards › O que evitar (`cards#card-guidelines`) · [src/app/components/showcase/CardShowcase.tsx:1274](src/app/components/showcase/CardShowcase.tsx#L1274)
-- **Alertas: tipos e quando usar cada um** — Feedback › Alertas (`feedback#alerts`) · [src/app/components/showcase/FeedbackShowcase.tsx:215](src/app/components/showcase/FeedbackShowcase.tsx#L215)
-- **Alerta com ação: ações sempre embaixo do texto** — Feedback › Alerta com ação (`feedback#alerta-com-acao`) · [src/app/components/showcase/FeedbackShowcase.tsx:251](src/app/components/showcase/FeedbackShowcase.tsx#L251)
+- **Alertas: tipos e quando usar cada um** — Feedback › Alertas (`feedback#alerts`) · [src/app/components/showcase/FeedbackShowcase.tsx:218](src/app/components/showcase/FeedbackShowcase.tsx#L218)
+- **Alerta com ação: ações sempre embaixo do texto** — Feedback › Alerta com ação (`feedback#alerta-com-acao`) · [src/app/components/showcase/FeedbackShowcase.tsx:254](src/app/components/showcase/FeedbackShowcase.tsx#L254)
 - **Grid de colunas: 4, 8 e 12 colunas por tela** — Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) · [src/app/components/showcase/GridShowcase.tsx:139](src/app/components/showcase/GridShowcase.tsx#L139)
 - **Grid e espaçamento: como usar** — Grid e espaçamento › Como usar (`grid#grid-uso`) · [src/app/components/showcase/GridShowcase.tsx:217](src/app/components/showcase/GridShowcase.tsx#L217)
 - **Grid e espaçamento: o que evitar** — Grid e espaçamento › O que evitar (`grid#grid-evitar`) · [src/app/components/showcase/GridShowcase.tsx:259](src/app/components/showcase/GridShowcase.tsx#L259)
 - **Contraste mínimo (WCAG 2.2 AA)** — Acessibilidade › Contraste (`accessibility#a11y-contrast`) · [src/app/components/showcase/AccessibilityShowcase.tsx:445](src/app/components/showcase/AccessibilityShowcase.tsx#L445)
 - **Respeitar a preferência por menos movimento** — Acessibilidade › Motion (`accessibility#a11y-motion`) · [src/app/components/showcase/AccessibilityShowcase.tsx:547](src/app/components/showcase/AccessibilityShowcase.tsx#L547)
-- **Durações e curvas oficiais de movimento** — Motion Design › Tokens de movimento (`motion#motion-tokens`) · [src/app/components/showcase/MotionShowcase.tsx:1096](src/app/components/showcase/MotionShowcase.tsx#L1096)
-- **Ações destrutivas: confirmação e desfazer** — Usabilidade › Ações destrutivas (`usability#ux-destructive`) · [src/app/components/showcase/UsabilityShowcase.tsx:361](src/app/components/showcase/UsabilityShowcase.tsx#L361)
-- **Gráficos: como escolher** — Gráficos › Como escolher (`graficos#graficos-escolher`) · [src/app/components/showcase/GraficosShowcase.tsx:867](src/app/components/showcase/GraficosShowcase.tsx#L867)
-- **Gráficos: cores e ordem dos tons** — Gráficos › Cores dos gráficos (`graficos#graficos-cores`) · [src/app/components/showcase/GraficosShowcase.tsx:551](src/app/components/showcase/GraficosShowcase.tsx#L551)
+- **Durações e curvas oficiais de movimento** — Motion Design › Tokens de movimento (`motion#motion-tokens`) · [src/app/components/showcase/MotionShowcase.tsx:1037](src/app/components/showcase/MotionShowcase.tsx#L1037)
+- **Ações destrutivas: confirmação e desfazer** — Usabilidade › Ações destrutivas (`usability#ux-destructive`) · [src/app/components/showcase/UsabilityShowcase.tsx:371](src/app/components/showcase/UsabilityShowcase.tsx#L371)
+- **Gráficos: como escolher** — Gráficos › Como escolher (`graficos#graficos-escolher`) · [src/app/components/showcase/GraficosShowcase.tsx:859](src/app/components/showcase/GraficosShowcase.tsx#L859)
+- **Gráficos: cores e ordem dos tons** — Gráficos › Cores dos gráficos (`graficos#graficos-cores`) · [src/app/components/showcase/GraficosShowcase.tsx:543](src/app/components/showcase/GraficosShowcase.tsx#L543)
 - **Cabeçalho: uso** — Header e menus › Uso (`header#header-usage`) · [src/app/components/showcase/HeaderShowcase.tsx:803](src/app/components/showcase/HeaderShowcase.tsx#L803)
 - **Escrita: princípios** — Tom de voz e UX writing › Princípios (`voice#escrita-principios`) · [src/app/components/showcase/VoiceShowcase.tsx:105](src/app/components/showcase/VoiceShowcase.tsx#L105)
 

@@ -3,6 +3,8 @@ import {
   Eye, Compass, Undo2, MessageSquare, Gauge, Layers, Check, Loader2, Trash2, Inbox, AlertTriangle, RotateCcw, FileText,
 } from "lucide-react";
 import { PageHeader, PageSection } from "./GetStartedShowcase";
+import { EstadoVazio } from "../ui/estado-vazio";
+import { Button } from "../ui/button";
 import { useI18n } from "../../i18n";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, display } from "./shared/Guidance";
 import { GradeDeCards } from "../ui/grade-de-cards";
@@ -178,19 +180,27 @@ function StatesDemo() {
           </div>
         )}
         {view === "empty" && (
-          <div className="m-auto text-center max-w-xs">
-            <Inbox className="h-6 w-6 text-muted-foreground mx-auto mb-3" aria-hidden />
-            <p className={`${display} text-[1rem] font-semibold text-foreground mb-1`}>{t("No projects yet", "Nenhum projeto ainda")}</p>
-            <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Projects you create appear here. Start with a template to see how it works.", "Os projetos que você criar aparecem aqui. Comece com um template para ver como funciona.")}</p>
-            <button type="button" className={`h-9 px-4 rounded-md bg-primary text-primary-foreground text-[0.8125rem] font-medium ${ring}`}>{t("Create project", "Criar projeto")}</button>
-          </div>
+          <EstadoVazio
+            tamanho="sm"
+            nivel={3}
+            tom="marca"
+            icone={<Inbox />}
+            titulo={t("No projects yet", "Nenhum projeto ainda")}
+            descricao={t("Projects you create appear here. Start with a template to see how it works.", "Os projetos que você criar aparecem aqui. Comece com um template para ver como funciona.")}
+            acoes={<Button>{t("Create project", "Criar projeto")}</Button>}
+            className="m-auto"
+          />
         )}
         {view === "error" && (
-          <div role="alert" className="m-auto text-center max-w-xs">
-            <AlertTriangle className="h-6 w-6 text-[var(--error)] mx-auto mb-3" aria-hidden />
-            <p className={`${display} text-[1rem] font-semibold text-foreground mb-1`}>{t("We couldn't load your projects", "Não foi possível carregar seus projetos")}</p>
-            <p className="text-[0.8125rem] text-muted-foreground mb-4">{t("Check your connection and try again. Your work is safe.", "Verifique sua conexão e tente novamente. Seu trabalho está seguro.")}</p>
-            <button type="button" className={`h-9 px-4 rounded-md border border-border bg-card text-foreground text-[0.8125rem] font-medium hover:bg-muted ${ring}`}>{t("Try again", "Tentar novamente")}</button>
+          <div role="alert" className="m-auto w-full">
+            <EstadoVazio
+              tamanho="sm"
+              nivel={3}
+              icone={<AlertTriangle />}
+              titulo={t("We couldn't load your projects", "Não foi possível carregar seus projetos")}
+              descricao={t("Check your connection and try again. Your work is safe.", "Verifique sua conexão e tente novamente. Seu trabalho está seguro.")}
+              acoes={<Button variant="outline">{t("Try again", "Tentar novamente")}</Button>}
+            />
           </div>
         )}
         {view === "content" && (

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Building2, Laptop, Send, Store, Trash2, User } from "lucide-react";
 import { useI18n } from "../../i18n";
-import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
+import { SectionBlock, ShowcaseCard, Panel } from "./shared/SectionBlock";
+import { LinhaDeLista } from "../ui/linha-de-lista";
 import { Campo, CampoDeCnpj, CampoDeTelefone, GradeDeCampos, ResumoDeErros, cnpjValido } from "../ui/campo";
 import { CampoDeEmail } from "../ui/campo-de-email";
 import { CampoEstadoCidade } from "../ui/campo-estado-cidade";
@@ -58,9 +59,7 @@ function DemoCampos() {
           </Campo>
         </GradeDeCampos>
         <CampoEstadoCidade uf={uf} cidade={cidade} onChange={(u, c) => { setUf(u); setCidade(c); }} carregarCidades={carregarCidadesDeExemplo} obrigatorio />
-        <div className="flex justify-end border-t border-border pt-4">
-          <Button type="submit">{t("Check form", "Conferir formulário")}</Button>
-        </div>
+        <Panel><Button type="submit">{t("Check form", "Conferir formulário")}</Button></Panel>
       </form>
     </ShowcaseCard>
   );
@@ -75,8 +74,8 @@ function DemoBusca() {
     <ShowcaseCard className="grid gap-4">
       <CampoDeBusca valor={busca} onValorChange={setBusca} rotulo={t("Search partners", "Buscar parceiros")} resultados={achados.length} />
       {achados.length ? (
-        <ul className="divide-y divide-border rounded-md border border-border">
-          {achados.map(n => <li key={n} className="px-4 py-3 text-body-sm text-foreground">{n}</li>)}
+        <ul className="divide-y divide-border">
+          {achados.map(n => <LinhaDeLista as="li" key={n} titulo={n} />)}
         </ul>
       ) : (
         <EstadoVazio tamanho="sm" nivel={3} titulo={t("No partner with this name", "Nenhum parceiro com este nome")} descricao={t("Check the spelling or search by surname.", "Confira a grafia ou busque pelo sobrenome.")} acoes={<Button variant="outline" onClick={() => setBusca("")}>{t("Clear search", "Limpar busca")}</Button>} />

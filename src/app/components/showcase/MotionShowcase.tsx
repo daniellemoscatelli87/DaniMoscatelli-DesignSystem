@@ -5,6 +5,9 @@ import {
   ArrowRight, ChevronDown, Sparkles, Loader, MousePointer2,
   Wind, Layers, Activity, Clock, Move, Users,
 } from "lucide-react";
+import { Conversa, BalaoDaConversa, IndicadorDeDigitacao } from "../ui/conversa";
+import { Stepper } from "../ui/stepper";
+import { Button } from "../ui/button";
 import { useI18n } from "../../i18n";
 import { VejaEm } from "./shared/VejaEm";
 import { ShineBorder, shinePresets, type ShinePreset } from "../ui/shine-border";
@@ -928,29 +931,10 @@ function LoadersSection() {
         {/* Typing dots */}
         <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="text-[0.75rem] font-bold text-foreground">{t("Chat States", "Estados de chat")}</div>
-          <div className="space-y-3">
-            <div className="flex items-end gap-2">
-              <div className="h-6 w-6 rounded-full bg-muted shrink-0" />
-              <div className="rounded-md rounded-bl-[2px] bg-muted px-3 py-2 flex gap-1 items-center">
-                {[0, 1, 2].map(i => (
-                  <motion.div key={i}
-                    animate={{ y: [0, -4, 0] }}
-                    transition={{ duration: 0.5, delay: i * 0.1, repeat: Infinity }}
-                    className="h-1.5 w-1.5 rounded-full bg-muted-foreground"
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="flex items-end gap-2 justify-end">
-              <motion.div
-                animate={{ opacity: [0, 1], y: [6, 0] }}
-                transition={{ duration: 0.3 }}
-                className="rounded-md rounded-br-[2px] bg-primary px-3 py-2 max-w-[140px]"
-              >
-                <p className="text-[0.6875rem] text-primary-foreground">{t("Message sent ✓", "Mensagem enviada ✓")}</p>
-              </motion.div>
-            </div>
-          </div>
+          <Conversa rotulo={t("Chat states", "Estados de chat")}>
+            <IndicadorDeDigitacao rotulo={t("Typing", "Digitando")} />
+            <BalaoDaConversa autor="eu" estado="enviada">{t("Message sent", "Mensagem enviada")}</BalaoDaConversa>
+          </Conversa>
         </div>
       </GradeDeCards>
     </Section>
@@ -958,59 +942,16 @@ function LoadersSection() {
 }
 
 function StepIndicator() {
-  const { t, bi } = useI18n();
+  const { t } = useI18n();
   const [step, setStep] = useState(1);
-  const steps = ["Setup", "Configure", "Done"];
-  const stepsPt = ["Preparar", "Configurar", "Pronto"];
-
+  const etapas = [{ titulo: t("Setup", "Preparar") }, { titulo: t("Configure", "Configurar") }, { titulo: t("Done", "Pronto") }];
+  // O indicador de etapas é o componente Stepper (ui/stepper.tsx), o mesmo do FindLook DS.
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-0">
-        {steps.map((s, i) => (
-          <React.Fragment key={s}>
-            <motion.div
-              animate={{ backgroundColor: i + 1 <= step ? "var(--primary)" : "var(--muted)", scale: i + 1 === step ? 1.15 : 1 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              className="h-6 w-6 rounded-full flex items-center justify-center shrink-0 cursor-pointer"
-              onClick={() => setStep(i + 1)}
-            >
-              <motion.div animate={{ scale: i + 1 <= step ? 1 : 0 }} transition={{ duration: 0.2 }}>
-                <Check className="h-3 w-3 text-primary-foreground" />
-              </motion.div>
-            </motion.div>
-            {i < steps.length - 1 && (
-              <div className="flex-1 h-px bg-muted overflow-hidden">
-                <motion.div
-                  animate={{ scaleX: i + 1 < step ? 1 : 0 }}
-                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                  style={{ transformOrigin: "left" }}
-                  className="h-full bg-primary"
-                />
-              </div>
-            )}
-          </React.Fragment>
-        ))}
-      </div>
-      <div className="flex justify-between gap-2">
-        {steps.map((s, i) => (
-          <span key={s} className={`text-[0.5625rem] font-semibold transition-colors duration-200 ${i + 1 <= step ? "text-primary-text" : "text-muted-foreground"}`}>
-            {t(s, stepsPt[i])}
-          </span>
-        ))}
-      </div>
-      <div className="flex gap-1.5 justify-center mt-1">
-        {step > 1 && (
-          <button onClick={() => setStep(s => s - 1)}
-            className="px-2.5 py-1 rounded-sm border border-border bg-muted text-[0.625rem] font-medium text-foreground hover:bg-accent transition-colors">
-            {t("Back", "Voltar")}
-          </button>
-        )}
-        {step < steps.length && (
-          <button onClick={() => setStep(s => s + 1)}
-            className="px-2.5 py-1 rounded-sm bg-primary text-primary-foreground text-[0.625rem] font-semibold hover:opacity-90 transition-opacity">
-            {t("Next", "Próximo")}
-          </button>
-        )}
+    <div className="space-y-4">
+      <Stepper etapas={etapas} atual={step - 1} onIrPara={i => setStep(i + 1)} rotulo={t("Steps", "Etapas")} />
+      <div className="flex flex-wrap gap-2">
+        <Button variant="outline" size="sm" disabled={step === 1} onClick={() => setStep(s => s - 1)}>{t("Back", "Voltar")}</Button>
+        <Button size="sm" disabled={step === etapas.length} onClick={() => setStep(s => s + 1)}>{t("Next", "Próximo")}</Button>
       </div>
     </div>
   );

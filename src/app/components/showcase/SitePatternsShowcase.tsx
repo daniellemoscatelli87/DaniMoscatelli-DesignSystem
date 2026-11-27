@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Building, Check, RotateCcw } from "lucide-react";
+import { CardDeArtigo } from "../ui/card-de-artigo";
 import { useI18n } from "../../i18n";
 import { PageHeader } from "./GetStartedShowcase";
 import { SectionHeader } from "./shared/SectionHeader";
@@ -531,13 +532,17 @@ function SecaoArtigos() {
         </p>
       </SurgirAoRolar>
       <SurgirAoRolar efeito="desfoque" escalonar className="mx-auto grid max-w-5xl grid-cols-1 gap-6 text-left md:grid-cols-3">
-        {[0, 1, 2].map(i => (
-          <div key={i} aria-hidden className="rounded-xl bg-background p-5 shadow-sm">
-            <div className="mb-4 h-32 rounded-lg bg-graphite-100 dark:bg-white/10" />
-            <div className="mb-2 h-3 w-1/3 rounded-full bg-graphite-200 dark:bg-white/10" />
-            <div className="mb-2 h-4 w-5/6 rounded-full bg-graphite-200 dark:bg-white/10" />
-            <div className="h-3 w-2/3 rounded-full bg-graphite-100 dark:bg-white/5" />
-          </div>
+        {[1, 2, 3].map(i => (
+          <CardDeArtigo
+            key={i}
+            titulo={t(`Example article ${i}`, `Artigo de exemplo ${i}`)}
+            href="#site-entrada"
+            imagem={`${import.meta.env.BASE_URL}fotos/projeto-piloto-hero.webp`}
+            categoria={t("Service design", "Design de serviços")}
+            data="01/09/2026"
+            tempoDeLeitura={t("8 min read", "8 min de leitura")}
+            resumo={t("Short example summary.", "Resumo curto de exemplo.")}
+          />
         ))}
       </SurgirAoRolar>
     </div>

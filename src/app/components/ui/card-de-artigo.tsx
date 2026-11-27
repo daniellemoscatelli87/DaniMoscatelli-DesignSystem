@@ -60,7 +60,7 @@ function CardDeArtigo({ titulo, href, resumo, imagem, alt = "", categoria, data,
             </p>
           )}
           <H className={cn("font-bold leading-snug text-foreground text-balance transition-colors group-hover/artigo:text-primary-text", formato === "destaque" ? "text-h4 @min-[48rem]/artigo:text-h3" : "text-body")}>
-            <a href={href} {...alvo} className="outline-none after:absolute after:inset-0 after:content-['']">
+            <a href={href} {...alvo} className="outline-none after:absolute after:inset-0 after:content-[''] toque:inline-flex toque:min-h-11 toque:items-center">
               {titulo}
               {novaAba && <span className="sr-only">{tx.novaAba}</span>}
             </a>
