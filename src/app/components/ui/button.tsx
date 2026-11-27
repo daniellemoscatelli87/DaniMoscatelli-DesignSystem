@@ -19,6 +19,11 @@ const buttonVariants = cva(
         // O botão secundário do DS é o de contorno (decisão da dona do produto, 20/11/2026)
         secondary:
           "border border-[var(--border-strong)] bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+        // Exclusão em contorno (27/11/2026): ação destrutiva que não é a principal da área (Excluir, Remover, Descartar).
+        // Borda no vermelho de exclusão (--destructive, 4,2:1 no branco), texto crimson-500 (6,2:1), hover cinza como os
+        // outros contornos (hover nunca rosa). A confirmação continua num AlertDialog com o botão destructive cheio.
+        "outline-destructive":
+          "border border-destructive bg-background text-[var(--crimson-500)] hover:bg-accent dark:bg-input/30 dark:text-crimson-300 dark:hover:bg-input/50",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 disabled:bg-transparent disabled:hover:bg-transparent dark:disabled:bg-transparent",
         link: "text-primary-text underline-offset-4 hover:underline disabled:bg-transparent disabled:hover:bg-transparent disabled:no-underline",

@@ -165,6 +165,12 @@
   --sidebar-accent-foreground: var(--graphite-900);
   --sidebar-border:            rgba(19, 26, 39, 0.09);
   --sidebar-ring:              rgba(212, 77, 77, 0.35);
+
+  /* Sobreposição (27/11/2026): o véu atrás de janelas, gavetas e do menu do celular. Antes cada peça tinha o seu
+     (preto a 50%, grafite a 40%); a área restrita definia o próprio --sobreposicao. Grafite 950 a 50%, igual no escuro. */
+  --sobreposicao: color-mix(in srgb, var(--graphite-950) 50%, transparent);
+  /* Raio de pílula (27/11/2026): para CSS puro (a área restrita em HTML definia o próprio). No Tailwind, rounded-full. */
+  --radius-full: 9999px;
 }
 
 /* ── DARK MODE ── */
@@ -339,6 +345,7 @@
   --color-input-background: var(--input-background);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
+  --color-sobreposicao: var(--sobreposicao);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);

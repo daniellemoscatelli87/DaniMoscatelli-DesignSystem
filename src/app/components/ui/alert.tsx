@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react";
 
 import { cn } from "./utils";
 
@@ -47,20 +48,44 @@ const alertVariants = cva(
   },
 );
 
+/**
+ * tom (27/11/2026): o mesmo alerta em português e com o ícone do estado já colocado, para a mesma mensagem ter sempre
+ * o mesmo sinal (semiótica). "neutro" Info cinza · "info" Info · "sucesso" CircleCheck · "aviso" TriangleAlert ·
+ * "erro" CircleAlert. Se você passar um svg filho, ele vale no lugar do ícone padrão. Com `tom`, `variant` é ignorado.
+ *   <Alert tom="erro"><AlertDescription>E-mail ou senha incorretos.</AlertDescription></Alert>
+ */
+type TomDoAlerta = "neutro" | "info" | "sucesso" | "aviso" | "erro";
+const DO_TOM: Record<TomDoAlerta, { variant: NonNullable<VariantProps<typeof alertVariants>["variant"]>; Icone: React.ElementType }> = {
+  neutro: { variant: "default", Icone: Info },
+  info: { variant: "info", Icone: Info },
+  sucesso: { variant: "success", Icone: CircleCheck },
+  aviso: { variant: "warning", Icone: TriangleAlert },
+  erro: { variant: "error", Icone: CircleAlert },
+};
+
 function Alert({
   className,
-  variant,
+  variant: variantProp,
+  tom,
+  children,
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
+}: React.ComponentProps<"div"> & VariantProps<typeof alertVariants> & { tom?: TomDoAlerta }) {
+  const variant = tom ? DO_TOM[tom].variant : variantProp;
   const urgente = variant === "warning" || variant === "error" || variant === "destructive";
+  const temIcone = React.Children.toArray(children).some(c => React.isValidElement(c) && c.type !== AlertTitle && c.type !== AlertDescription && typeof c.type !== "string" ? true : React.isValidElement(c) && c.type === "svg");
+  const Icone = tom ? DO_TOM[tom].Icone : null;
   return (
     <div
       data-slot="alert"
       data-variant={variant ?? "default"}
+      data-tom={tom}
       role={urgente ? "alert" : "status"}
       className={cn(alertVariants({ variant }), className)}
       {...props}
-    />
+    >
+      {Icone && !temIcone && <Icone aria-hidden />}
+      {children}
+    </div>
   );
 }
 
@@ -96,3 +121,4 @@ function AlertDescription({
 }
 
 export { Alert, AlertTitle, AlertDescription };
+export type { TomDoAlerta };

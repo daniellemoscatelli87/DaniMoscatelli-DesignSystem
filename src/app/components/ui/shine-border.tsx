@@ -68,3 +68,24 @@ export function ShineBorder({
     />
   );
 }
+
+/**
+ * Borda do card selecionado (trazido do FindLook Design System, 27/11/2026, mesmo nome e mesma API): o brilho que corre
+ * por cima da borda de 2 px na primária dos cards que se escolhem (CartaoDeEscolha). Fica exatamente sobre a borda
+ * (-inset de 2 px), então o card não pode ter overflow-hidden. Com "menos movimento", some e fica só a borda parada.
+ * É decorativo (aria-hidden, sem eventos de ponteiro): o estado continua no rádio, no ícone e no fundo.
+ */
+export function BrilhoDeSelecionado({ className, ...props }: Omit<ShineBorderProps, "borderWidth" | "preset" | "shineColor">) {
+  return <ShineBorder aria-hidden preset="primaria" borderWidth={2} duration={6} data-slot="brilho-de-selecionado" className={cn("-inset-[2px] size-auto motion-reduce:hidden", className)} {...props} />;
+}
+
+/**
+ * Moldura do card selecionável (regra dos rosas claros, 27/11/2026): selecionado = borda de 2 px na primária e fundo no
+ * rosa de selecionado (--primary-suave), que continua com o mouse em cima; não selecionado = borda neutra de 2 px (a
+ * mesma espessura, para nada pular) e hover cinza (--accent), nunca rosa.
+ */
+export function molduraDoSelecionavel(selecionado: boolean) {
+  return selecionado
+    ? "border-2 border-primary bg-primary-suave"
+    : "border-2 border-border bg-card hover:border-[var(--border-strong)] hover:bg-accent";
+}
