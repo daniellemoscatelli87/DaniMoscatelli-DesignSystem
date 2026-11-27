@@ -95,32 +95,41 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
             {topicos.map((t, i) => {
               const ativo = i === atual;
               return (
-                <button
+                <div
                   key={t.id}
-                  ref={el => { tabs.current[i] = el; }}
-                  type="button"
-                  role="tab"
-                  id={`${id}-aba-${t.id}`}
-                  aria-selected={ativo}
-                  aria-controls={`${id}-cena`}
-                  tabIndex={ativo ? 0 : -1}
-                  onClick={() => ir(i)}
-                  onKeyDown={e => {
-                    if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); ir(i + 1, true); }
-                    if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); ir(i - 1, true); }
-                    if (e.key === "Home") { e.preventDefault(); ir(0, true); }
-                    if (e.key === "End") { e.preventDefault(); ir(topicos.length - 1, true); }
-                  }}
+                  role="presentation"
                   className={cn(
                     "relative overflow-hidden rounded-md border px-4 py-3 text-left transition-colors duration-[var(--duration-fast)]",
-                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                     "before:absolute before:inset-y-0 before:left-0 before:w-1 before:transition-colors",
                     ativo ? "border-primary/30 bg-primary-suave before:bg-primary" : "border-transparent hover:bg-accent before:bg-transparent",
                   )}
                 >
-                  <span className={cn("block text-body-sm font-semibold", ativo ? "text-primary-text" : "text-foreground")}>{t.titulo}</span>
+                  {/* O botão é o título e se estende sobre o tópico inteiro (::after). */}
+                  <button
+                    ref={el => { tabs.current[i] = el; }}
+                    type="button"
+                    role="tab"
+                    id={`${id}-aba-${t.id}`}
+                    aria-selected={ativo}
+                    aria-controls={`${id}-cena`}
+                    aria-describedby={t.descricao ? `${id}-desc-${t.id}` : undefined}
+                    tabIndex={ativo ? 0 : -1}
+                    onClick={() => ir(i)}
+                    onKeyDown={e => {
+                      if (e.key === "ArrowDown" || e.key === "ArrowRight") { e.preventDefault(); ir(i + 1, true); }
+                      if (e.key === "ArrowUp" || e.key === "ArrowLeft") { e.preventDefault(); ir(i - 1, true); }
+                      if (e.key === "Home") { e.preventDefault(); ir(0, true); }
+                      if (e.key === "End") { e.preventDefault(); ir(topicos.length - 1, true); }
+                    }}
+                    className={cn(
+                      "block w-full text-left text-body-sm font-semibold outline-none after:absolute after:inset-0 after:rounded-md after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-ring",
+                      ativo ? "text-primary-text" : "text-foreground",
+                    )}
+                  >
+                    {t.titulo}
+                  </button>
                   {t.descricao && (
-                    <span className={cn("block text-body-sm text-muted-foreground transition-[grid-template-rows,opacity] duration-[var(--duration-normal)]", ativo ? "mt-1 opacity-100" : "sr-only @min-[48rem]/simulacao:not-sr-only @min-[48rem]/simulacao:mt-1")}>
+                    <span id={`${id}-desc-${t.id}`} className={cn("block text-body-sm text-muted-foreground", ativo ? "mt-1" : "sr-only @min-[48rem]/simulacao:not-sr-only @min-[48rem]/simulacao:mt-1")}>
                       {t.descricao}
                     </span>
                   )}
@@ -135,7 +144,7 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
                       transition={{ duration: intervalo / 1000, ease: "linear" }}
                     />
                   )}
-                </button>
+                </div>
               );
             })}
           </div>

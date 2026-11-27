@@ -224,12 +224,12 @@ export function UploadDropzone({
         onDragLeave={() => setDragging(false)}
         onDrop={e => { e.preventDefault(); setDragging(false); handle(e.dataTransfer.files); }}
         className={cn(
-          "group relative flex w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-[20px] border-2 border-dashed text-center transition-all duration-200 outline-none",
+          "group relative flex w-full cursor-pointer flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed text-center transition-all duration-200 outline-none",
           pad,
           disabled ? "cursor-not-allowed border-border bg-muted/40 opacity-60" :
           dragging ? "border-primary bg-[var(--primary-muted)] scale-[1.01] shadow-[var(--shadow-md)]" :
           error ? "border-error/60 bg-error/5" :
-          "border-border bg-card hover:border-primary/60 hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "border-border bg-card hover:border-[var(--border-strong)] hover:bg-accent/60 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           size === "compact" && "flex-row justify-start gap-4 text-left rounded-lg",
         )}
       >
@@ -241,18 +241,18 @@ export function UploadDropzone({
           {icon ?? <UploadCloud className={cn(primaryText, size === "compact" ? "h-5 w-5" : "h-6 w-6")} strokeWidth={1.75} aria-hidden />}
         </span>
         <div className="min-w-0">
-          <p className={cn("font-semibold text-foreground", size === "compact" ? "text-[0.875rem]" : "text-[1rem]")}>
+          <p className={cn("font-semibold text-foreground", size === "compact" ? "text-body-sm" : "text-body")}>
             {title ?? (dragging ? tx.solteParaEnviar : <>{tx.arrasteOu} <span className={cn(primaryText, "underline-offset-4 group-hover:underline")}>{multiple ? tx.escolhaArquivos : tx.escolhaArquivo}</span></>)}
           </p>
           {(description || hint) && (
-            <p id={`${id}-hint`} className="mt-1 text-[0.8125rem] text-muted-foreground">{description ?? hint}</p>
+            <p id={`${id}-hint`} className="mt-1 text-body-sm text-muted-foreground">{description ?? hint}</p>
           )}
         </div>
         {capture && (
           <button
             type="button"
             onClick={e => { e.stopPropagation(); captureRef.current?.click(); }}
-            className="mt-1 inline-flex h-9 items-center gap-2 rounded-full border border-border bg-background px-4 text-[0.8125rem] font-semibold text-foreground transition-colors hover:border-primary hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="mt-1 inline-flex h-9 items-center gap-2 rounded-full border border-border bg-background px-4 text-body-sm font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Camera className="h-4 w-4" aria-hidden /> {actionLabel ?? tx.tirarFoto}
           </button>
@@ -261,8 +261,8 @@ export function UploadDropzone({
         {capture && <input ref={captureRef} type="file" className="sr-only" tabIndex={-1} accept="image/*" capture={capture} disabled={disabled} onChange={e => { handle(e.target.files); e.target.value = ""; }} />}
       </div>
       {error && (
-        <p role="alert" className="mt-2 flex items-start gap-1.5 text-[0.8125rem] text-error-text">
-          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />{error}
+        <p role="alert" className="mt-2 flex items-start gap-1 text-body-sm text-error-text">
+          <AlertCircle className="mt-1 h-4 w-4 shrink-0" aria-hidden />{error}
         </p>
       )}
     </div>
@@ -283,16 +283,16 @@ export function UploadItem({
       </span>
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-3">
-          <p className="truncate text-[0.875rem] font-semibold text-foreground">{item.name}</p>
-          <span className="shrink-0 text-[0.75rem] text-muted-foreground">{formatBytes(item.size)}</span>
+          <p className="truncate text-body-sm font-semibold text-foreground">{item.name}</p>
+          <span className="shrink-0 text-label text-muted-foreground">{formatBytes(item.size)}</span>
         </div>
-        <div className="mt-1.5 flex items-center gap-2">
+        <div className="mt-1 flex items-center gap-2">
           {item.status === "enviando" && (
             <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(item.progress ?? 0)} aria-label={tx.envioDe(item.name)}>
               <div className="h-full rounded-full bg-primary transition-[width] duration-200" style={{ width: `${item.progress ?? 0}%` }} />
             </div>
           )}
-          <span className={cn("flex shrink-0 items-center gap-1 text-[0.75rem]",
+          <span className={cn("flex shrink-0 items-center gap-1 text-label",
             item.status === "concluido" ? "text-success" : item.status === "erro" ? "text-error-text" : "text-muted-foreground")}>
             {item.status === "enviando" && <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />}
             {item.status === "concluido" && <CheckCircle2 className="h-3.5 w-3.5" aria-hidden />}
@@ -357,7 +357,7 @@ export function ImageUpload({
         className={cn(
           "group relative flex cursor-pointer items-center justify-center overflow-hidden border-2 bg-muted/40 text-muted-foreground transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           shape === "circle" ? "rounded-full" : "rounded-lg",
-          value ? "border-solid border-border" : "border-dashed border-border hover:border-primary/60 hover:bg-accent/60",
+          value ? "border-solid border-border" : "border-dashed border-border hover:border-[var(--border-strong)] hover:bg-accent/60",
           dragging && "border-primary bg-[var(--primary-muted)]",
         )}
       >
@@ -365,20 +365,20 @@ export function ImageUpload({
           <>
             <img src={value} alt={label} className="h-full w-full object-cover" />
             <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-all group-hover:bg-foreground/45 group-hover:opacity-100 group-focus-visible:bg-foreground/45 group-focus-visible:opacity-100">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-background/95 px-3 py-1.5 text-[0.75rem] font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> {tx.trocar}</span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-background/95 px-3 py-1 text-label font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> {tx.trocar}</span>
             </span>
           </>
         ) : (
-          <span className="flex flex-col items-center gap-1.5 px-3 text-center">
+          <span className="flex flex-col items-center gap-1 px-3 text-center">
             {capture ? <Camera className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden /> : <ImagePlus className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden />}
-            <span className="text-[0.75rem] font-medium text-foreground">{label}</span>
-            {maxSize && <span className="text-[0.6875rem]">{tx.ate(formatBytes(maxSize))}</span>}
+            <span className="text-label font-medium text-foreground">{label}</span>
+            {maxSize && <span className="text-caption">{tx.ate(formatBytes(maxSize))}</span>}
           </span>
         )}
         <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} accept={accept.join(",")} capture={capture} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
       </div>
       {value && (
-        <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 text-[0.75rem] font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded">
+        <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 text-label font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
           <Trash2 className="h-3.5 w-3.5" aria-hidden /> {tx.removerBotao}
         </button>
       )}
@@ -429,8 +429,8 @@ export function ImageGrid({
                 </span>
               )}
               {img.status === "erro" && <span className="absolute inset-0 flex items-center justify-center bg-error/70 text-white"><AlertCircle className="h-6 w-6" aria-hidden /></span>}
-              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary-text" aria-hidden /> {tx.capa}</span>}
-              <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 p-1.5 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
+              {cover && <span className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-background/95 px-2 py-1 text-caption font-bold uppercase tracking-[0.08em] text-foreground"><Star className="h-3 w-3 fill-current text-primary-text" aria-hidden /> {tx.capa}</span>}
+              <span className="absolute inset-x-0 bottom-0 flex items-center justify-end gap-1 p-1 opacity-0 transition-opacity group-hover:opacity-100 group-focus-within:opacity-100">
                 {onSetCover && !cover && <button type="button" onClick={() => onSetCover(img.id)} aria-label={tx.definirCapa} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-primary-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Star className="h-3.5 w-3.5" aria-hidden /></button>}
                 {onRemove && <button type="button" onClick={() => onRemove(img.id)} aria-label={tx.removerFoto} className="flex h-7 w-7 items-center justify-center rounded-full bg-background/95 text-foreground hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><Trash2 className="h-3.5 w-3.5" aria-hidden /></button>}
               </span>
@@ -442,11 +442,11 @@ export function ImageGrid({
             <button
               type="button" onClick={() => inputRef.current?.click()}
               onDragOver={e => e.preventDefault()} onDrop={e => { e.preventDefault(); pick(e.dataTransfer.files); }}
-              className="flex aspect-square w-full flex-col items-center justify-center gap-1.5 rounded-lg border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-primary/60 hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="flex aspect-square w-full flex-col items-center justify-center gap-1 rounded-lg border-2 border-dashed border-border bg-card text-muted-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <ImagePlus className={cn("h-6 w-6", primaryText)} strokeWidth={1.75} aria-hidden />
-              <span className="px-2 text-center text-[0.6875rem] font-semibold leading-tight text-foreground">{addLabel}</span>
-              <span className="text-[0.625rem]">{images.length}/{max}</span>
+              <span className="px-2 text-center text-caption font-semibold leading-tight text-foreground">{addLabel}</span>
+              <span className="text-caption">{images.length}/{max}</span>
             </button>
             <input ref={inputRef} type="file" multiple className="sr-only" tabIndex={-1} accept={accept.join(",")} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
           </li>

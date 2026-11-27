@@ -13,7 +13,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
   return <div className={`rounded-lg border border-border bg-card p-6 ${className}`} style={{ boxShadow: "var(--shadow-xs)" }}>{children}</div>;
 }
 function SubTitle({ children }: { children: React.ReactNode }) {
-  return <p className="mb-3 text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</p>;
+  return <p className="mb-3 text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground">{children}</p>;
 }
 
 /* Simulação de envio só para a demonstração: o produto troca por sua API. */
@@ -146,13 +146,13 @@ function UploadShowcaseConteudo() {
             maxFiles={6}
             description={ex.dropDesc}
           />
-          <p className="mt-3 text-[0.8125rem] text-muted-foreground">{t("Try it: drop a few files, or one too large, to see the states. The second file of a batch fails on purpose to show the retry.", "Experimente: solte alguns arquivos, ou um grande demais, para ver os estados. O segundo arquivo de um lote falha de propósito para mostrar o “tentar de novo”.")}</p>
+          <p className="mt-3 text-body-sm text-muted-foreground">{t("Try it: drop a few files, or one too large, to see the states. The second file of a batch fails on purpose to show the retry.", "Experimente: solte alguns arquivos, ou um grande demais, para ver os estados. O segundo arquivo de um lote falha de propósito para mostrar o “tentar de novo”.")}</p>
           <div id="upload-list" className="mt-6 scroll-mt-32">
             <SubTitle>{ex.listTitle}</SubTitle>
             {docs.items.length ? (
               <UploadList items={docs.items} onRemove={docs.remove} onRetry={docs.retry} />
             ) : (
-              <p className="rounded-md border border-dashed border-border px-4 py-6 text-center text-[0.8125rem] text-muted-foreground">{t("No files yet. The list appears below the drop area as soon as a file arrives.", "Nenhum arquivo ainda. A lista aparece abaixo da área de soltar assim que um arquivo chega.")}</p>
+              <p className="rounded-md border border-dashed border-border px-4 py-6 text-center text-body-sm text-muted-foreground">{t("No files yet. The list appears below the drop area as soon as a file arrives.", "Nenhum arquivo ainda. A lista aparece abaixo da área de soltar assim que um arquivo chega.")}</p>
             )}
           </div>
         </ShowcaseCard>
@@ -161,7 +161,7 @@ function UploadShowcaseConteudo() {
           <ShowcaseCard>
             <SubTitle>{t("Compact", "Compacta")}</SubTitle>
             <UploadDropzone size="compact" multiple={false} accept={[".pdf"]} maxSize={5 * 1024 * 1024} title={t("Attach a PDF", "Anexar um PDF")} description={t("One file, up to 5 MB", "Um arquivo, até 5 MB")} onFiles={files => docs.add(files)} onError={setDocsError} />
-            <p className="mt-3 text-[0.8125rem] text-muted-foreground">{t("For forms and side panels, where height matters.", "Para formulários e painéis laterais, onde a altura importa.")}</p>
+            <p className="mt-3 text-body-sm text-muted-foreground">{t("For forms and side panels, where height matters.", "Para formulários e painéis laterais, onde a altura importa.")}</p>
           </ShowcaseCard>
           <ShowcaseCard>
             <SubTitle>{t("Photo with camera (mobile)", "Foto com câmera (celular)")}</SubTitle>
@@ -174,11 +174,11 @@ function UploadShowcaseConteudo() {
             {photo && (
               <div className="mt-3 flex items-center gap-3">
                 <img src={photo} alt="" className="h-16 w-16 rounded-md object-cover" />
-                <span className="inline-flex items-center gap-1 text-[0.8125rem] text-success"><Check className="h-4 w-4" aria-hidden />{t("Photo ready", "Foto pronta")}</span>
-                <button type="button" onClick={() => setPhoto(null)} className="ml-auto text-[0.75rem] font-semibold text-muted-foreground hover:text-foreground">{t("Remove", "Remover")}</button>
+                <span className="inline-flex items-center gap-1 text-body-sm text-success-text"><Check className="h-4 w-4" aria-hidden />{t("Photo ready", "Foto pronta")}</span>
+                <button type="button" onClick={() => setPhoto(null)} className="ml-auto text-label font-semibold text-muted-foreground hover:text-foreground">{t("Remove", "Remover")}</button>
               </div>
             )}
-            <p className="mt-3 text-[0.8125rem] text-muted-foreground">{t("On the phone, “Take photo” opens the camera directly; on desktop it opens the file picker.", "No celular, “Tirar foto” abre a câmera direto; no computador, abre o seletor de arquivos.")}</p>
+            <p className="mt-3 text-body-sm text-muted-foreground">{t("On the phone, “Take photo” opens the camera directly; on desktop it opens the file picker.", "No celular, “Tirar foto” abre a câmera direto; no computador, abre o seletor de arquivos.")}</p>
           </ShowcaseCard>
         </GradeDeCards>
       </section>
@@ -200,7 +200,7 @@ function UploadShowcaseConteudo() {
               <ImageUpload shape="wide" size={140} label={ex.coverLabel} value={cover} onChange={(_, url) => setCover(url)} maxSize={8 * 1024 * 1024} onError={setImgError} />
             </div>
           </div>
-          {imgError && <p role="alert" className="mt-3 text-[0.8125rem] text-error-text">{imgError}</p>}
+          {imgError && <p role="alert" className="mt-3 text-body-sm text-error-text">{imgError}</p>}
         </ShowcaseCard>
       </section>
 
@@ -208,8 +208,8 @@ function UploadShowcaseConteudo() {
         <SectionHeader title={ex.galleryTitle} description={ex.galleryDesc} />
         <ShowcaseCard>
           <ImageGrid images={gallery} onAdd={files => { setGalError(null); addToGallery(files); }} onRemove={id => setGallery(g => g.filter(x => x.id !== id))} onSetCover={setCoverId} coverId={coverId} max={8} maxSize={10 * 1024 * 1024} onError={setGalError} addLabel={t("Add photos", "Adicionar fotos")} />
-          {galError && <p role="alert" className="mt-3 text-[0.8125rem] text-error-text">{galError}</p>}
-          <p className="mt-4 text-[0.8125rem] text-muted-foreground">{t("Each thumbnail shows its own progress; the cover badge marks the first image unless another is chosen.", "Cada miniatura mostra o próprio progresso; o selo “Capa” marca a primeira imagem, a menos que outra seja escolhida.")}</p>
+          {galError && <p role="alert" className="mt-3 text-body-sm text-error-text">{galError}</p>}
+          <p className="mt-4 text-body-sm text-muted-foreground">{t("Each thumbnail shows its own progress; the cover badge marks the first image unless another is chosen.", "Cada miniatura mostra o próprio progresso; o selo “Capa” marca a primeira imagem, a menos que outra seja escolhida.")}</p>
         </ShowcaseCard>
       </section>
 
@@ -235,8 +235,8 @@ function UploadShowcaseConteudo() {
             [t("Messages", "Mensagens"), t("“… is not an accepted format.” · “… is larger than 10 MB.” · “Upload at most 8 files.” Always with the file name.", "“… não é um formato aceito.” · “… passa de 10 MB.” · “Envie no máximo 8 arquivos.” Sempre com o nome do arquivo.")],
           ].map(([title, desc]) => (
             <div key={title} className="rounded-lg border border-border bg-card p-4">
-              <p className="mb-1 text-[0.875rem] font-semibold text-foreground">{title}</p>
-              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
+              <p className="mb-1 text-body-sm font-semibold text-foreground">{title}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground">{desc}</p>
             </div>
           ))}
         </GradeDeCards>
@@ -256,7 +256,7 @@ function UploadShowcaseConteudo() {
               t("Touch targets of at least 44 px; thumbnails show actions on focus, not only on hover.", "Alvos de toque de pelo menos 44 px; miniaturas mostram as ações no foco, não só no hover."),
               t("Previews use object URLs released when the item is removed.", "As prévias usam object URLs liberadas quando o item é removido."),
             ].map(item => (
-              <li key={item} className="flex items-start gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{item}</li>
+              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-success-text" aria-hidden />{item}</li>
             ))}
           </ul>
         </ShowcaseCard>
@@ -264,8 +264,8 @@ function UploadShowcaseConteudo() {
 
       <section id="upload-usage">
         <SectionHeader title={t("Usage", "Uso")} description={t("Composition in code. The product owns the upload call and updates the item status.", "Composição em código. O produto faz a chamada de envio e atualiza o estado de cada item.")} />
-        <ShowcaseCard className="overflow-x-auto">
-          <pre className="text-[0.75rem] leading-relaxed text-muted-foreground"><code>{`import { UploadDropzone, UploadList, ImageUpload, ImageGrid, type UploadFile } from "@/app/components/ui/upload";
+        <ShowcaseCard>
+          <pre className="text-label leading-relaxed text-muted-foreground whitespace-pre-wrap break-words"><code>{`import { UploadDropzone, UploadList, ImageUpload, ImageGrid, type UploadFile } from "@/app/components/ui/upload";
 
 <UploadDropzone accept={["image/*", ".pdf"]} maxSize={10 * 1024 * 1024} maxFiles={6}
   onFiles={files => enviar(files)} onError={setErro} error={erro} />
@@ -273,7 +273,7 @@ function UploadShowcaseConteudo() {
 
 <ImageUpload shape="circle" label="${ex.avatarLabel}" value={url} onChange={(file, url) => …} />
 <ImageGrid images={fotos} onAdd={adicionar} onRemove={remover} onSetCover={definirCapa} max={8} />`}</code></pre>
-          <p className="mt-3 text-[0.75rem] text-muted-foreground">{t("UploadFile.status: pendente · enviando · concluido · erro. Update progress (0 to 100) while sending.", "UploadFile.status: pendente · enviando · concluido · erro. Atualize progress (0 a 100) durante o envio.")} {t("Sizes shown with", "Tamanhos exibidos com")} <code>formatBytes</code> ({formatBytes(10 * 1024 * 1024)}).</p>
+          <p className="mt-3 text-label text-muted-foreground">{t("UploadFile.status: pendente · enviando · concluido · erro. Update progress (0 to 100) while sending.", "UploadFile.status: pendente · enviando · concluido · erro. Atualize progress (0 a 100) durante o envio.")} {t("Sizes shown with", "Tamanhos exibidos com")} <code>formatBytes</code> ({formatBytes(10 * 1024 * 1024)}).</p>
         </ShowcaseCard>
       </section>
 

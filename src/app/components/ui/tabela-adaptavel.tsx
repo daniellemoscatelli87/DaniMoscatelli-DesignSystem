@@ -1,7 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { ArrowDown, ArrowUp, ArrowUpDown } from "lucide-react";
 import { cn } from "./utils";
+import { LinhaDeLista } from "./linha-de-lista";
 
 /**
  * TabelaAdaptavel (tabela que nunca rola para o lado)
@@ -10,9 +12,12 @@ import { cn } from "./utils";
  * - prioridade 1 (padrão): sempre aparece;
  * - prioridade 2: some abaixo de 36rem (576 px);
  * - prioridade 3: some abaixo de 48rem (768 px);
- * quando alguma coluna sai, um aviso curto embaixo diz quais ("Nesta largura, ficam de fora: Plano, Cidade").
- * Abaixo de 30rem (480 px) ela vira lista: cada linha é um bloco com a coluna principal como título e as outras em
- * pares "rótulo: valor", alinhados à mesma borda esquerda; as ações vão para uma linha própria embaixo do texto.
+ * quando alguma coluna sai, um aviso curto embaixo diz quantas e quais ("2 colunas ficaram de fora nesta largura:
+ * Plano, Cidade").
+ * Abaixo de 30rem (480 px) ela vira lista de LinhaDeLista: a coluna principal como título e as outras em pares
+ * "rótulo: valor", alinhados à mesma borda esquerda; as ações vão para uma linha própria embaixo do texto.
+ * Ordenação (especificação da área restrita, ADMIN_REACT.md §7.1): colunas com `ordenavel` viram botões no cabeçalho
+ * (crescente, decrescente; aria-sort no cabeçalho); na lista do celular a ordem escolhida continua valendo.
  * Era o padrão "TabelaQueQuebra" das demonstrações e resolve as tabelas que rolavam nas páginas do DS e na área
  * restrita (parceiros, pesquisas).
  *
@@ -29,6 +34,10 @@ export type ColunaDaTabela<T> = {
   alinhar?: "inicio" | "fim";
   /** A coluna que vira título na lista (padrão: a primeira). */
   principal?: boolean;
+  /** A coluna pode ordenar a tabela (botão no cabeçalho). */
+  ordenavel?: boolean;
+  /** Valor usado para ordenar (padrão: o texto da célula, quando for texto ou número). */
+  valorParaOrdenar?: (linha: T) => string | number;
 };
 
 export type TabelaAdaptavelProps<T> = {
@@ -41,14 +50,34 @@ export type TabelaAdaptavelProps<T> = {
   /** Ações de cada linha (botões, menu), numa coluna própria no fim. */
   acoes?: (linha: T) => React.ReactNode;
   vazio?: React.ReactNode;
-  textos?: { foraDaTela?: string; acoes?: string };
+  /** Ordem inicial: { coluna: id, direcao: "asc" | "desc" }. */
+  ordemInicial?: { coluna: string; direcao: "asc" | "desc" };
+  textos?: { foraDaTela?: string; acoes?: string; coluna?: string; colunas?: string; ordenar?: string };
   className?: string;
 };
 
 const ESCONDE = { 1: "", 2: "hidden @min-[36rem]/tabela:table-cell", 3: "hidden @min-[48rem]/tabela:table-cell" } as const;
 
-function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = false, acoes, vazio, textos, className }: TabelaAdaptavelProps<T>) {
-  const tx = { foraDaTela: "Nesta largura, ficam de fora", acoes: "Ações", ...textos };
+function TabelaAdaptavel<T>({ colunas, linhas: linhasProp, chave, legenda, mostrarLegenda = false, acoes, vazio, ordemInicial, textos, className }: TabelaAdaptavelProps<T>) {
+  const tx = { foraDaTela: "ficaram de fora nesta largura", acoes: "Ações", coluna: "coluna", colunas: "colunas", ordenar: "Ordenar por", ...textos };
+  const [ordem, setOrdem] = React.useState(ordemInicial ?? null);
+  const linhas = React.useMemo(() => {
+    if (!ordem) return linhasProp;
+    const c = colunas.find(x => x.id === ordem.coluna);
+    if (!c) return linhasProp;
+    const valor = (l: T) => {
+      if (c.valorParaOrdenar) return c.valorParaOrdenar(l);
+      const v = c.celula(l);
+      return typeof v === "string" || typeof v === "number" ? v : "";
+    };
+    const r = [...linhasProp].sort((a, b) => {
+      const va = valor(a), vb = valor(b);
+      return typeof va === "number" && typeof vb === "number" ? va - vb : String(va).localeCompare(String(vb), "pt-BR", { numeric: true });
+    });
+    return ordem.direcao === "desc" ? r.reverse() : r;
+  }, [linhasProp, ordem, colunas]);
+  const ordenar = (id: string) => setOrdem(o => (o?.coluna === id ? { coluna: id, direcao: o.direcao === "asc" ? "desc" : "asc" } : { coluna: id, direcao: "asc" }));
+  const fora = (l: string[]) => `${l.length} ${l.length === 1 ? tx.coluna : tx.colunas} ${tx.foraDaTela}: ${l.join(", ")}.`;
   const principal = colunas.find(c => c.principal) ?? colunas[0];
   const outras = colunas.filter(c => c !== principal);
   const p2 = colunas.filter(c => c.prioridade === 2).map(c => c.titulo);
@@ -67,9 +96,30 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
             <caption className="sr-only">{legenda}</caption>
             <thead>
               <tr className="border-b border-border bg-muted/50">
-                {colunas.map(c => (
-                  <th key={c.id} scope="col" className={cn(celulaBase(c), "py-3 text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground")}>{c.titulo}</th>
-                ))}
+                {colunas.map(c => {
+                  const ativa = ordem?.coluna === c.id;
+                  const Seta = !ativa ? ArrowUpDown : ordem!.direcao === "asc" ? ArrowUp : ArrowDown;
+                  return (
+                    <th
+                      key={c.id}
+                      scope="col"
+                      aria-sort={c.ordenavel ? (ativa ? (ordem!.direcao === "asc" ? "ascending" : "descending") : "none") : undefined}
+                      className={cn(celulaBase(c), "py-3 text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground")}
+                    >
+                      {c.ordenavel ? (
+                        <button
+                          type="button"
+                          onClick={() => ordenar(c.id)}
+                          aria-label={`${tx.ordenar} ${c.titulo}`}
+                          className={cn("-mx-2 inline-flex min-h-8 items-center gap-1 rounded-sm px-2 uppercase tracking-[0.06em] transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", ativa && "text-foreground")}
+                        >
+                          {c.titulo}
+                          <Seta aria-hidden className="size-3.5" />
+                        </button>
+                      ) : c.titulo}
+                    </th>
+                  );
+                })}
                 {acoes && <th scope="col" className="w-px whitespace-nowrap px-4 py-3 text-right text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground"><span className="sr-only">{tx.acoes}</span></th>}
               </tr>
             </thead>
@@ -86,16 +136,15 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
           </table>
           {(p2.length > 0 || p3.length > 0) && (
             <p className="hidden border-t border-border px-4 py-2 text-label text-muted-foreground @min-[30rem]/tabela:block @min-[48rem]/tabela:hidden">
-              <span className="@min-[36rem]/tabela:hidden">{tx.foraDaTela}: {[...p2, ...p3].join(", ")}.</span>
-              <span className="hidden @min-[36rem]/tabela:inline">{p3.length ? `${tx.foraDaTela}: ${p3.join(", ")}.` : ""}</span>
+              <span className="@min-[36rem]/tabela:hidden">{fora([...p2, ...p3])}</span>
+              <span className="hidden @min-[36rem]/tabela:inline">{p3.length ? fora(p3) : ""}</span>
             </p>
           )}
 
           {/* Lista (abaixo de 30rem) */}
           <ul aria-label={legenda} className="divide-y divide-border @min-[30rem]/tabela:hidden">
             {linhas.map(l => (
-              <li key={chave(l)} className="px-4 py-4 transition-colors hover:bg-[var(--row-hover)]">
-                <p className="text-body-sm font-semibold text-foreground [overflow-wrap:anywhere]">{principal.celula(l)}</p>
+              <LinhaDeLista key={chave(l)} as="li" titulo={principal.celula(l)} fim={acoes?.(l)} quebraAcoes className="py-4">
                 <dl className="mt-2 grid gap-1 text-body-sm">
                   {outras.map(c => (
                     <div key={c.id} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
@@ -104,8 +153,7 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
                     </div>
                   ))}
                 </dl>
-                {acoes && <div className="mt-3 flex flex-wrap gap-2">{acoes(l)}</div>}
-              </li>
+              </LinhaDeLista>
             ))}
           </ul>
         </>

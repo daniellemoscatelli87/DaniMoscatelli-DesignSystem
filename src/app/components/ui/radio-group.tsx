@@ -19,6 +19,7 @@ function RadioGroup({
   );
 }
 
+/** Opção de rádio: desenho de 20 px; no toque, área clicável de 44 × 44 px em volta, sem mudar o desenho (27/11/2026). */
 function RadioGroupItem({
   className,
   ...props
@@ -27,17 +28,23 @@ function RadioGroupItem({
     <RadioGroupPrimitive.Item
       data-slot="radio-group-item"
       className={cn(
-        "border-input text-primary-text focus-visible:border-ring focus-visible:ring-ring aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-5 shrink-0 rounded-full border-2 shadow-xs cursor-pointer data-[state=checked]:border-primary transition-[color,box-shadow] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+        "group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-full outline-none disabled:cursor-not-allowed disabled:opacity-50 toque:-m-3 toque:size-11",
         className,
       )}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator
-        data-slot="radio-group-indicator"
-        className="relative flex items-center justify-center"
+      <span
+        aria-hidden
+        data-slot="radio-group-circulo"
+        className="relative flex aspect-square size-5 shrink-0 items-center justify-center rounded-full border-2 border-input shadow-xs transition-[color,box-shadow] dark:bg-input/30 group-data-[state=checked]:border-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-destructive"
       >
-        <CircleIcon className="fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
-      </RadioGroupPrimitive.Indicator>
+        <RadioGroupPrimitive.Indicator
+          data-slot="radio-group-indicator"
+          className="relative flex items-center justify-center"
+        >
+          <CircleIcon className="fill-primary text-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
+        </RadioGroupPrimitive.Indicator>
+      </span>
     </RadioGroupPrimitive.Item>
   );
 }

@@ -6,7 +6,8 @@ import { cn } from "./utils";
  * CardDeDepoimento (depoimento de cliente ou par)
  *
  * O cartão dos depoimentos da página inicial (21 recomendações do LinkedIn, `testimonial-card`) e das páginas de
- * apresentação: foto, nome e cargo em cima, o depoimento embaixo e, opcional, a origem ("Recomendação no LinkedIn").
+ * apresentação: o depoimento em cima e, depois de um divisor, a pessoa (foto, nome e cargo) e, opcional, a origem
+ * ("Recomendação no LinkedIn"). A frase vem primeiro e começa na borda do card; a pessoa assina embaixo.
  * Use dentro do Carousel (um por vez no celular, dois no tablet, três no computador) ou numa GradeDeCards.
  *
  * - Card do DS só com borda (sem sombra parada); altura total da célula (h-full), para os vizinhos ficarem iguais.
@@ -34,7 +35,11 @@ function CardDeDepoimento({ nome, cargo, foto, origem, children, className, ...p
       className={cn("flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6 text-left text-card-foreground transition-colors duration-[var(--duration-normal)] hover:border-[var(--border-strong)]", className)}
       {...props}
     >
-      <figcaption className="flex items-center gap-3">
+      <blockquote className="relative flex-1 text-body-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
+        <Quote aria-hidden className="mb-2 size-5 text-primary-text" />
+        {children}
+      </blockquote>
+      <figcaption className="flex items-center gap-3 border-t border-border pt-4">
         {foto ? (
           <img src={foto} alt="" loading="lazy" className="size-12 shrink-0 rounded-full object-cover ring-2 ring-primary-muted" />
         ) : (
@@ -43,13 +48,9 @@ function CardDeDepoimento({ nome, cargo, foto, origem, children, className, ...p
         <span className="min-w-0">
           <span className="block text-body-sm font-bold text-foreground">{nome}</span>
           {cargo && <span className="block truncate text-label text-muted-foreground" title={cargo}>{cargo}</span>}
+          {origem && <span className="mt-1 block text-label font-medium text-primary-text">{origem}</span>}
         </span>
       </figcaption>
-      <blockquote className="relative flex-1 text-body-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
-        <Quote aria-hidden className="mb-2 size-5 text-primary-text" />
-        {children}
-      </blockquote>
-      {origem && <p className="border-t border-border pt-4 text-label font-medium text-muted-foreground">{origem}</p>}
     </figure>
   );
 }

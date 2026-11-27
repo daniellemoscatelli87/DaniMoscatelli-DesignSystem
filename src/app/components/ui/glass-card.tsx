@@ -92,7 +92,7 @@ export function GlassCard({ finish = "padrao", intensity = "media", tone = "clar
       data-finish={finish}
       style={{ ...livre, ...style }}
       className={cn(
-        "relative isolate overflow-hidden rounded-[20px] border p-6 backdrop-saturate-150",
+        "relative isolate overflow-hidden rounded-lg border p-6 backdrop-saturate-150",
         f ? f.blur : blur[intensity],
         escura
           ? cn(f ? f.escura[intensity] : escuraBg[intensity], "border-white/15 text-white shadow-[0_8px_32px_rgba(6,6,8,0.25)]")

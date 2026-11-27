@@ -238,7 +238,7 @@ export type DadosDaTabela = { colunas: string[]; linhas: (string | number)[][] }
 export function TabelaDeDados({ dados, legenda, className }: { dados: DadosDaTabela; legenda?: string; className?: string }) {
   return (
     <div className={cn("w-full", className)}>
-      <table className="w-full table-fixed border-collapse text-left text-[0.8125rem]">
+      <table className="w-full table-fixed border-collapse text-left text-body-sm">
         {legenda && <caption className="sr-only">{legenda}</caption>}
         <thead>
           <tr className="border-b border-border">
@@ -288,7 +288,7 @@ export type DescobertaVisualProps = {
 
 function Passo({ n, mostrar }: { n: string; mostrar?: boolean }) {
   if (!mostrar) return null;
-  return <span aria-hidden className="mr-2 inline-flex h-5 min-w-5 items-center justify-center rounded-sm bg-[var(--primary-muted)] px-1 text-[0.6875rem] font-bold tabular-nums text-[var(--primary-text,var(--primary))]">{n}</span>;
+  return <span aria-hidden className="mr-2 inline-flex h-5 min-w-5 items-center justify-center rounded-sm bg-[var(--primary-muted)] px-1 text-caption font-bold tabular-nums text-[var(--primary-text,var(--primary))]">{n}</span>;
 }
 
 /** Card de descoberta: conclusão, gráfico, por que importa, próximo passo e dados (recolhidos). */
@@ -300,12 +300,12 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
     <article className={cn("flex min-w-0 flex-col rounded-lg border border-border bg-card p-5 sm:p-6", className)}>
       {(tema || selo) && (
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-          {tema && <p className="text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))]">{tema}</p>}
-          {selo && <span className="inline-flex h-6 items-center rounded-sm border border-border px-2 text-[0.6875rem] font-medium text-muted-foreground">{selo}</span>}
+          {tema && <p className="text-label font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))]">{tema}</p>}
+          {selo && <span className="inline-flex h-6 items-center rounded-sm border border-border px-2 text-caption font-medium text-muted-foreground">{selo}</span>}
         </div>
       )}
-      <h3 className="flex items-start text-[1.0625rem] font-bold leading-snug tracking-[-0.01em] text-foreground"><Passo n="01" mostrar={numerar} /><span>{conclusao}</span></h3>
-      {contexto && <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{contexto}</p>}
+      <h3 className="flex items-start text-body-lg font-bold leading-snug tracking-[-0.01em] text-foreground"><Passo n="01" mostrar={numerar} /><span>{conclusao}</span></h3>
+      {contexto && <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{contexto}</p>}
       <div className="relative mt-5 min-w-0">
         {numerar && <span className="absolute -top-3 left-0"><Passo n="02" mostrar /></span>}
         <div className={cn(numerar && "pt-4")}>{children}</div>
@@ -314,14 +314,14 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
         <div className="mt-5 grid grid-cols-1 gap-3 border-t border-border pt-4 sm:grid-cols-2">
           {porQueImporta && (
             <div>
-              <p className="mb-1 flex items-center text-[0.75rem] font-semibold text-muted-foreground"><Passo n="03" mostrar={numerar} /><Info aria-hidden className="mr-1.5 h-3.5 w-3.5" />{r.porQue}</p>
-              <p className="text-[0.8125rem] leading-relaxed text-foreground">{porQueImporta}</p>
+              <p className="mb-1 flex items-center text-label font-semibold text-muted-foreground"><Passo n="03" mostrar={numerar} /><Info aria-hidden className="mr-1 h-3.5 w-3.5" />{r.porQue}</p>
+              <p className="text-body-sm leading-relaxed text-foreground">{porQueImporta}</p>
             </div>
           )}
           {acao && (
             <div>
-              <p className="mb-1 flex items-center text-[0.75rem] font-semibold text-[var(--primary-text,var(--primary))]"><Passo n="04" mostrar={numerar} /><Lightbulb aria-hidden className="mr-1.5 h-3.5 w-3.5" />{r.acao}</p>
-              <p className="text-[0.8125rem] leading-relaxed text-foreground">{acao}</p>
+              <p className="mb-1 flex items-center text-label font-semibold text-[var(--primary-text,var(--primary))]"><Passo n="04" mostrar={numerar} /><Lightbulb aria-hidden className="mr-1 h-3.5 w-3.5" />{r.acao}</p>
+              <p className="text-body-sm leading-relaxed text-foreground">{acao}</p>
             </div>
           )}
         </div>
@@ -333,7 +333,7 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
             aria-expanded={aberto}
             aria-controls={id}
             onClick={() => setAberto(v => !v)}
-            className="inline-flex items-center gap-1 rounded-sm text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {aberto ? r.ocultarDados : r.verDados}
             <ChevronDown aria-hidden className={cn("h-4 w-4 transition-transform motion-reduce:transition-none", aberto && "rotate-180")} />
@@ -351,9 +351,9 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
 
 export function LegendaDoGrafico({ itens, className }: { itens: { rotulo: string; cor: string; forma?: "ponto" | "linha" | "anel" }[]; className?: string }) {
   return (
-    <ul className={cn("m-0 flex list-none flex-wrap gap-x-4 gap-y-1.5 p-0 text-[0.75rem] text-muted-foreground", className)}>
+    <ul className={cn("m-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-label text-muted-foreground", className)}>
       {itens.map(i => (
-        <li key={i.rotulo} className="flex items-center gap-1.5">
+        <li key={i.rotulo} className="flex items-center gap-1">
           {i.forma === "linha"
             ? <span aria-hidden className="inline-block h-[2px] w-3.5 rounded-sm" style={{ background: i.cor }} />
             : i.forma === "anel"
@@ -442,15 +442,15 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
           const s = Math.sin(f.meio);
           const ancora = Math.abs(s) < 0.3 ? "middle" : s > 0 ? "start" : "end";
           return (
-            <text key={f.rotulo} x={lx} y={ly + 4} textAnchor={ancora} className="fill-foreground text-[12px] font-semibold tabular-nums">
+            <text key={f.rotulo} x={lx} y={ly + 4} textAnchor={ancora} className="fill-foreground text-label font-semibold tabular-nums">
               {formatarPercentual(p, 0, localidade)}
             </text>
           );
         })}
-        <text x={c} y={c - 2} textAnchor="middle" className="fill-foreground text-[28px] font-bold tabular-nums tracking-[-0.02em]">
+        <text x={c} y={c - 2} textAnchor="middle" className="fill-foreground text-h2 font-bold tabular-nums tracking-[-0.02em]">
           {parteAtiva ? formatarPercentual(pct(parteAtiva.valor), 0, localidade) : centro.valor}
         </text>
-        <text x={c} y={c + 18} textAnchor="middle" className="fill-muted-foreground text-[11px]">
+        <text x={c} y={c + 18} textAnchor="middle" className="fill-muted-foreground text-caption">
           {parteAtiva ? parteAtiva.rotulo : centro.rotulo}
         </text>
       </svg>
@@ -459,11 +459,11 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
           <li
             key={f.rotulo}
             onMouseEnter={() => setAtiva(i)}
-            className={cn("flex items-center gap-2.5 rounded-sm px-2 py-1.5 text-[0.875rem] transition-colors motion-reduce:transition-none", ativa === i && "bg-muted")}
+            className={cn("flex items-center gap-2 rounded-sm px-2 py-1 text-body-sm transition-colors motion-reduce:transition-none", ativa === i && "bg-muted")}
           >
             <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: f.cor }} />
             <span className={cn("min-w-0 flex-1 leading-snug", f.neutro ? "text-muted-foreground" : "text-foreground")}>{f.rotulo}</span>
-            {formatarQuantidade && <span className="shrink-0 text-[0.8125rem] tabular-nums text-muted-foreground">{formatarQuantidade(f.valor)}</span>}
+            {formatarQuantidade && <span className="shrink-0 text-body-sm tabular-nums text-muted-foreground">{formatarQuantidade(f.valor)}</span>}
             <span className="w-11 shrink-0 text-right font-semibold tabular-nums text-foreground">{formatarPercentual(pct(f.valor), 0, localidade)}</span>
           </li>
         ))}
@@ -503,8 +503,8 @@ export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao 
         const destaque = i < destaques;
         return (
           <div key={item.rotulo} className="min-w-0">
-            <p className={cn("mb-1 text-[0.8125rem] leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>
-              {posicao && <span className="mr-1.5 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
+            <p className={cn("mb-1 text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>
+              {posicao && <span className="mr-1 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
             </p>
             <div className="flex items-center gap-2">
               <motion.div
@@ -515,7 +515,7 @@ export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao 
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
               />
-              <span className={cn("shrink-0 text-[0.8125rem] tabular-nums", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>{formatar(item.valor)}</span>
+              <span className={cn("shrink-0 text-body-sm tabular-nums", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>{formatar(item.valor)}</span>
             </div>
           </div>
         );
@@ -554,10 +554,10 @@ export function faixa(v: number, min: number, max: number) {
 
 export function LegendaSequencial({ menos, mais }: { menos: string; mais: string }) {
   return (
-    <div aria-hidden className="flex items-center gap-2 text-[0.75rem] text-muted-foreground">
+    <div aria-hidden className="flex items-center gap-2 text-label text-muted-foreground">
       <span>{menos}</span>
-      <span className="flex gap-0.5">
-        {ESCALA_SEQUENCIAL.map(e => <span key={e.cor} className="h-2.5 w-6 rounded-[3px]" style={{ background: e.cor }} />)}
+      <span className="flex gap-1">
+        {ESCALA_SEQUENCIAL.map(e => <span key={e.cor} className="h-2.5 w-6 rounded-sm" style={{ background: e.cor }} />)}
       </span>
       <span>{mais}</span>
     </div>
@@ -585,7 +585,7 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
       <div
         role="img"
         aria-label={resumo}
-        className="grid gap-x-1.5 gap-y-2"
+        className="grid gap-x-1 gap-y-2"
         style={{ gridTemplateColumns: `repeat(${colunas}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${linhas}, minmax(4.25rem, auto))` }}
       >
         {regioes.map((x, i) => {
@@ -602,7 +602,7 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: menos ? 0 : 0.03 * i }}
             >
-              <span className={cn("text-[0.6875rem] leading-tight text-foreground [overflow-wrap:anywhere]", marcado ? "font-bold" : "font-medium")}>{x.rotulo}</span>
+              <span className={cn("text-caption leading-tight text-foreground [overflow-wrap:anywhere]", marcado ? "font-bold" : "font-medium")}>{x.rotulo}</span>
               <span
                 className={cn(
                   "block min-h-8 flex-1 rounded-sm transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0",
@@ -616,9 +616,9 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <LegendaSequencial menos={r.menos} mais={r.mais} />
-        {marcada && <p className="text-[0.75rem] font-semibold tabular-nums text-foreground">{r.destaque(marcada.rotulo, formatar(marcada.valor))}</p>}
+        {marcada && <p className="text-label font-semibold tabular-nums text-foreground">{r.destaque(marcada.rotulo, formatar(marcada.valor))}</p>}
       </div>
-      <p className="text-[0.6875rem] text-muted-foreground">{r.nota}</p>
+      <p className="text-caption text-muted-foreground">{r.nota}</p>
     </div>
   );
 }
@@ -644,14 +644,14 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
   return (
     <div className={cn("space-y-4", className)}>
       <LegendaDoGrafico itens={[{ rotulo: series[0], cor: "var(--chart-6)", forma: "anel" }, { rotulo: series[1], cor: "var(--chart-1)" }]} />
-      <div role="img" aria-label={resumo} className="space-y-3.5">
+      <div role="img" aria-label={resumo} className="space-y-3">
         {itens.map((item, i) => {
           const menor = Math.min(item.a, item.b), maior = Math.max(item.a, item.b);
           const aEsquerda = item.a <= item.b;
           const dif = item.b - item.a;
           return (
             <div key={item.rotulo}>
-              <div className="flex items-baseline justify-between gap-3 text-[0.8125rem]">
+              <div className="flex items-baseline justify-between gap-3 text-body-sm">
                 <span className="min-w-0 font-medium text-foreground">{item.rotulo}</span>
                 {formatarDiferenca && <span className={cn("shrink-0 tabular-nums", dif > 0 ? "font-semibold text-[var(--primary-text,var(--primary))]" : "text-muted-foreground")}>{formatarDiferenca(dif)}</span>}
               </div>
@@ -671,11 +671,11 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
                   <span aria-hidden className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-card" style={{ left: pos(item.a), borderColor: "var(--chart-6)" }} />
                   {/* b: ponto cheio no tom de destaque */}
                   <span aria-hidden className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ left: pos(item.b), background: "var(--chart-1)" }} />
-                  <span aria-hidden className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-[0.75rem] tabular-nums text-muted-foreground"
+                  <span aria-hidden className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-label tabular-nums text-muted-foreground"
                     style={aEsquerda ? { right: `calc(100% - ${pos(item.a)} + 0.6rem)` } : { left: `calc(${pos(item.a)} + 0.6rem)` }}>
                     {formatar(item.a)}
                   </span>
-                  <span aria-hidden className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-[0.75rem] font-semibold tabular-nums text-foreground"
+                  <span aria-hidden className="absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-label font-semibold tabular-nums text-foreground"
                     style={aEsquerda ? { left: `calc(${pos(item.b)} + 0.6rem)` } : { right: `calc(100% - ${pos(item.b)} + 0.6rem)` }}>
                     {formatar(item.b)}
                   </span>
@@ -767,11 +767,11 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
           {marcas.map(v => (
             <g key={v}>
               <line x1={m.l} x2={m.l + w} y1={y(v)} y2={y(v)} stroke={COR_GRADE} strokeWidth={1} strokeDasharray={area ? TRACO_DA_GRADE : undefined} />
-              <text x={m.l - 8} y={y(v) + 4} textAnchor="end" className="fill-muted-foreground text-[11px] tabular-nums">{formatar(v)}</text>
+              <text x={m.l - 8} y={y(v) + 4} textAnchor="end" className="fill-muted-foreground text-caption tabular-nums">{formatar(v)}</text>
             </g>
           ))}
           {rotulosX.map((r, i) => (i % passoX === 0 || i === n - 1) && (i === n - 1 || n - 1 - i >= passoX) ? (
-            <text key={r + i} x={x(i)} y={altura - 6} textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"} className="fill-muted-foreground text-[11px]">{r}</text>
+            <text key={r + i} x={x(i)} y={altura - 6} textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"} className="fill-muted-foreground text-caption">{r}</text>
           ) : null)}
           {series.map((s, si) => s.destaque && area ? (
             <motion.path key={"a" + s.rotulo} d={`${caminho(s.valores)} L ${x(s.valores.length - 1)} ${m.t + h} L ${x(0)} ${m.t + h} Z`} fill={`url(#${idGrad})`}
@@ -789,8 +789,8 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
             return (
               <g key={"r" + s.rotulo}>
                 <circle cx={x(ult)} cy={y(s.valores[ult] ?? 0)} r={3} fill={cores[si]} />
-                <text x={x(ult) + 10} y={yy - 2} className={cn("text-[11px]", s.destaque ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{s.rotulo}</text>
-                <text x={x(ult) + 10} y={yy + 12} className={cn("text-[12px] tabular-nums", s.destaque ? "fill-foreground font-bold" : "fill-muted-foreground")}>{formatar(s.valores[ult] ?? 0)}</text>
+                <text x={x(ult) + 10} y={yy - 2} className={cn("text-caption", s.destaque ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{s.rotulo}</text>
+                <text x={x(ult) + 10} y={yy + 12} className={cn("text-label tabular-nums", s.destaque ? "fill-foreground font-bold" : "fill-muted-foreground")}>{formatar(s.valores[ult] ?? 0)}</text>
               </g>
             );
           })}
@@ -804,12 +804,12 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
         </svg>
       )}
       {indice != null && largura > 0 && (
-        <div aria-hidden className="pointer-events-none absolute top-0 z-10 rounded-md border border-border bg-card px-2.5 py-1.5 text-[0.75rem] shadow-md"
+        <div aria-hidden className="pointer-events-none absolute top-0 z-10 rounded-md border border-border bg-card px-2 py-1 text-label shadow-md"
           style={{ left: Math.min(Math.max(0, x(indice) - 70), largura - 150), width: 140 }}>
-          <p className="mb-0.5 font-semibold text-foreground">{rotulosX[indice]}</p>
+          <p className="mb-1 font-semibold text-foreground">{rotulosX[indice]}</p>
           {series.map((s, si) => (
             <p key={s.rotulo} className="flex items-center justify-between gap-2 text-muted-foreground">
-              <span className="flex min-w-0 items-center gap-1.5"><span className="h-2 w-2 shrink-0 rounded-full" style={{ background: cores[si] }} /><span className="truncate">{s.rotulo}</span></span>
+              <span className="flex min-w-0 items-center gap-1"><span className="h-2 w-2 shrink-0 rounded-full" style={{ background: cores[si] }} /><span className="truncate">{s.rotulo}</span></span>
               <span className="tabular-nums text-foreground">{formatar(s.valores[indice] ?? 0)}</span>
             </p>
           ))}
@@ -850,8 +850,8 @@ export function GraficoDeInclinacao({ itens, periodos, destaques, altura = 260, 
     <div ref={ref} className={cn("w-full", className)}>
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-          <text x={x0} y={12} textAnchor="middle" className="fill-muted-foreground text-[11px] font-semibold uppercase tracking-[0.06em]">{periodos[0]}</text>
-          <text x={x1} y={12} textAnchor="middle" className="fill-muted-foreground text-[11px] font-semibold uppercase tracking-[0.06em]">{periodos[1]}</text>
+          <text x={x0} y={12} textAnchor="middle" className="fill-muted-foreground text-caption font-semibold uppercase tracking-[0.06em]">{periodos[0]}</text>
+          <text x={x1} y={12} textAnchor="middle" className="fill-muted-foreground text-caption font-semibold uppercase tracking-[0.06em]">{periodos[1]}</text>
           <line x1={x0} x2={x0} y1={m.t - 6} y2={m.t + h + 4} stroke={COR_GRADE} />
           <line x1={x1} x2={x1} y1={m.t - 6} y2={m.t + h + 4} stroke={COR_GRADE} />
           {ordem.map(({ it, i }) => {
@@ -863,8 +863,8 @@ export function GraficoDeInclinacao({ itens, periodos, destaques, altura = 260, 
                   initial={menos ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: menos ? 0 : 0.05 * i }} />
                 <circle cx={x0} cy={y(it.inicio)} r={d ? 3.5 : 2.5} fill={cor} />
                 <circle cx={x1} cy={y(it.fim)} r={d ? 3.5 : 2.5} fill={cor} />
-                <text x={x0 - 8} y={ysIni[i]! + 4} textAnchor="end" className={cn("text-[12px] tabular-nums", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{formatar(it.inicio)}</text>
-                <text x={x1 + 8} y={ysFim[i]! + 4} className={cn("text-[12px]", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>
+                <text x={x0 - 8} y={ysIni[i]! + 4} textAnchor="end" className={cn("text-label tabular-nums", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{formatar(it.inicio)}</text>
+                <text x={x1 + 8} y={ysFim[i]! + 4} className={cn("text-label", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>
                   <tspan className="tabular-nums">{formatar(it.fim)}</tspan><tspan dx={6}>{it.rotulo}</tspan>
                 </text>
               </g>
@@ -957,12 +957,12 @@ export function Mosaico({ itens, altura = 260, rotulo, localidade = "pt-BR", cla
             );
           })}
         </div>
-        <ul className="m-0 w-full min-w-0 list-none space-y-0.5 p-0 @min-[36rem]:flex-1" onMouseLeave={() => setAtivo(null)}>
+        <ul className="m-0 w-full min-w-0 list-none space-y-1 p-0 @min-[36rem]:flex-1" onMouseLeave={() => setAtivo(null)}>
           {lista.map((item, i) => (
             <li
               key={item.rotulo}
               onMouseEnter={() => setAtivo(i)}
-              className={cn("flex items-center gap-2.5 rounded-sm px-2 py-1 text-[0.8125rem] transition-colors motion-reduce:transition-none", ativo === i && "bg-muted")}
+              className={cn("flex items-center gap-2 rounded-sm px-2 py-1 text-body-sm transition-colors motion-reduce:transition-none", ativo === i && "bg-muted")}
             >
               <PontoDaCor cor={cores[i]!} className="h-2.5 w-2.5" />
               <span className={cn("min-w-0 flex-1 leading-snug", item.neutro ? "text-muted-foreground" : "text-foreground")}>{item.rotulo}</span>
@@ -999,15 +999,15 @@ export function BarrasEmpilhadas100({ categorias, linhas, minimoParaRotulo = 9, 
           const t = soma(l.valores) || 1;
           return (
             <div key={l.rotulo}>
-              <p className="mb-1 text-[0.8125rem] font-medium text-foreground">{l.rotulo}</p>
-              <div className="flex gap-[2px]" aria-hidden>
+              <p className="mb-1 text-body-sm font-medium text-foreground">{l.rotulo}</p>
+              <div className="flex gap-1" aria-hidden>
                 {l.valores.map((v, i) => (
-                  <span key={i} className="min-w-0 text-center text-[0.75rem] font-semibold tabular-nums text-foreground" style={{ flex: `${v} 1 0` }}>
+                  <span key={i} className="min-w-0 text-center text-label font-semibold tabular-nums text-foreground" style={{ flex: `${v} 1 0` }}>
                     {(v / t) * 100 >= minimoParaRotulo ? formatarPercentual((v / t) * 100, 0, localidade) : ""}
                   </span>
                 ))}
               </div>
-              <motion.div className="mt-0.5 flex h-3 gap-[2px] overflow-hidden rounded-sm" style={{ originX: 0 }}
+              <motion.div className="mt-1 flex h-3 gap-1 overflow-hidden rounded-sm" style={{ originX: 0 }}
                 initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: menos ? 0 : 0.08 * li, ease: [0.22, 1, 0.36, 1] }}>
                 {l.valores.map((v, i) => <span key={i} className="block h-full min-w-0" style={{ flex: `${v} 1 0`, background: cores[i] }} />)}
               </motion.div>
@@ -1056,17 +1056,17 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
       <div ref={ref} className="w-full">
         {largura > 0 && (
           <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
-            <text x={m.l} y={10} className="fill-muted-foreground text-[11px] font-semibold">{eixoY.rotulo} ↑</text>
+            <text x={m.l} y={10} className="fill-muted-foreground text-caption font-semibold">{eixoY.rotulo} ↑</text>
             {my.map(v => (
               <g key={"y" + v}>
                 <line x1={m.l} x2={m.l + w} y1={Y(v)} y2={Y(v)} stroke={COR_GRADE} />
-                <text x={m.l - 6} y={Y(v) + 4} textAnchor="end" className="fill-muted-foreground text-[11px] tabular-nums">{fy(v)}</text>
+                <text x={m.l - 6} y={Y(v) + 4} textAnchor="end" className="fill-muted-foreground text-caption tabular-nums">{fy(v)}</text>
               </g>
             ))}
             {mx.map((v, i) => i % passoX === 0 && (
-              <text key={"x" + v} x={X(v)} y={m.t + h + 16} textAnchor={i === 0 ? "start" : "middle"} className="fill-muted-foreground text-[11px] tabular-nums">{fx(v)}</text>
+              <text key={"x" + v} x={X(v)} y={m.t + h + 16} textAnchor={i === 0 ? "start" : "middle"} className="fill-muted-foreground text-caption tabular-nums">{fx(v)}</text>
             ))}
-            <text x={m.l + w} y={altura - 2} textAnchor="end" className="fill-muted-foreground text-[11px] font-semibold">{eixoX.rotulo} →</text>
+            <text x={m.l + w} y={altura - 2} textAnchor="end" className="fill-muted-foreground text-caption font-semibold">{eixoX.rotulo} →</text>
             {[...itens].sort((a, b) => Number(!!a.destaque) - Number(!!b.destaque) || b.tamanho - a.tamanho).map((b, i) => {
               const cor = corDe.get(b)!;
               const cx = X(b.x), cy = Y(b.y), r = R(b.tamanho);
@@ -1079,15 +1079,15 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
                     initial={menos ? false : { scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }}
                     style={{ transformOrigin: `${cx}px ${cy}px` }} transition={{ duration: 0.45, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }} />
                   <text x={direita ? cx + r + 5 : cx - r - 5} y={cy + 4} textAnchor={direita ? "start" : "end"}
-                    className={cn("text-[11px]", b.destaque ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{b.rotulo}</text>
+                    className={cn("text-caption", b.destaque ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{b.rotulo}</text>
                 </g>
               );
             })}
           </svg>
         )}
       </div>
-      <p className="flex items-center gap-2 text-[0.75rem] text-muted-foreground">
-        <span aria-hidden className="flex items-end gap-0.5"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
+      <p className="flex items-center gap-2 text-label text-muted-foreground">
+        <span aria-hidden className="flex items-end gap-1"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
         {rotuloTamanho}
       </p>
     </div>
@@ -1125,18 +1125,18 @@ export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = 
   const valorAlvo = valores[alvo[0]]?.[alvo[1]];
   return (
     <div className={cn("space-y-3", className)}>
-      <table className="w-full table-fixed border-separate border-spacing-[3px] text-[0.8125rem]">
+      <table className="w-full table-fixed border-separate border-spacing-[3px] text-body-sm">
         <caption className="sr-only">{rotulo}</caption>
         <thead>
           <tr>
-            <th scope="col" className="w-[30%] pb-1 text-left text-[0.6875rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground">{rotuloLinhas}</th>
-            {colunas.map(c => <th key={c} scope="col" className="pb-1 text-center text-[0.75rem] font-semibold leading-tight text-muted-foreground [overflow-wrap:anywhere]">{c}</th>)}
+            <th scope="col" className="w-[30%] pb-1 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{rotuloLinhas}</th>
+            {colunas.map(c => <th key={c} scope="col" className="pb-1 text-center text-label font-semibold leading-tight text-muted-foreground [overflow-wrap:anywhere]">{c}</th>)}
           </tr>
         </thead>
         <tbody>
           {linhas.map((l, li) => (
             <tr key={l}>
-              <th scope="row" className="pr-1 text-left text-[0.8125rem] font-medium leading-tight text-foreground [overflow-wrap:anywhere]">{l}</th>
+              <th scope="row" className="pr-1 text-left text-body-sm font-medium leading-tight text-foreground [overflow-wrap:anywhere]">{l}</th>
               {colunas.map((c, ci) => {
                 const v = valores[li]?.[ci] ?? 0;
                 const e = ESCALA_SEQUENCIAL[faixa(v, min, max)]!;
@@ -1157,7 +1157,7 @@ export function MapaDeCalorMatricial({ linhas, colunas, valores, rotuloLinhas = 
       <div className="flex flex-wrap items-center justify-between gap-2">
         <LegendaSequencial menos={r.menos} mais={r.mais} />
         {valorAlvo != null && linhas[alvo[0]] != null && colunas[alvo[1]] != null && (
-          <p className="text-[0.75rem] font-semibold tabular-nums text-foreground">{r.destaque(linhas[alvo[0]]!, colunas[alvo[1]]!, formatar(valorAlvo))}</p>
+          <p className="text-label font-semibold tabular-nums text-foreground">{r.destaque(linhas[alvo[0]]!, colunas[alvo[1]]!, formatar(valorAlvo))}</p>
         )}
       </div>
     </div>
@@ -1201,10 +1201,10 @@ export function GraficoDeRanking({ series, periodos, rotulo, formatarPosicao = p
       {largura > 0 && (
         <svg width={largura} height={altura} role="img" aria-label={resumo} className="block overflow-visible">
           {periodos.map((p, i) => (i % passo === 0 || i === n - 1) && (i === n - 1 || n - 1 - i >= passo) ? (
-            <text key={p + i} x={X(i)} y={11} textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"} className="fill-muted-foreground text-[11px]">{p}</text>
+            <text key={p + i} x={X(i)} y={11} textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"} className="fill-muted-foreground text-caption">{p}</text>
           ) : null)}
           {Array.from({ length: total }, (_, k) => (
-            <text key={k} x={0} y={Y(k + 1) + 4} className="fill-muted-foreground text-[11px] tabular-nums">{formatarPosicao(k + 1)}</text>
+            <text key={k} x={0} y={Y(k + 1) + 4} className="fill-muted-foreground text-caption tabular-nums">{formatarPosicao(k + 1)}</text>
           ))}
           {ordem.map(({ s, i }) => {
             const apagada = ativa != null && ativa !== s.rotulo;
@@ -1215,7 +1215,7 @@ export function GraficoDeRanking({ series, periodos, rotulo, formatarPosicao = p
                 <motion.path d={curva(s.posicoes)} fill="none" stroke={cores[i]} strokeWidth={d ? 2.5 : 1.5} strokeLinecap="round"
                   initial={menos ? false : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, delay: menos ? 0 : 0.06 * i }} />
                 {s.posicoes.map((p, pi) => <circle key={pi} cx={X(pi)} cy={Y(p)} r={d ? 4 : 3} fill={d ? cores[i] : "var(--card)"} stroke={cores[i]} strokeWidth={1.5} />)}
-                <text x={X(n - 1) + 10} y={Y(fim) + 4} className={cn("text-[12px]", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{s.rotulo}</text>
+                <text x={X(n - 1) + 10} y={Y(fim) + 4} className={cn("text-label", d ? "fill-foreground font-semibold" : "fill-muted-foreground")}>{s.rotulo}</text>
               </g>
             );
           })}
@@ -1256,13 +1256,13 @@ export function Funil({ etapas, destacarMaiorPerda = true, rotulo, formatar = fm
       {etapas.map((e, i) => (
         <li key={e.rotulo}>
           {i > 0 && (
-            <p className={cn("my-1.5 flex items-center justify-center gap-1.5 text-[0.75rem] tabular-nums", i - 1 === piorPassagem ? "font-semibold text-[var(--primary-text,var(--primary))]" : "text-muted-foreground")}>
+            <p className={cn("my-1 flex items-center justify-center gap-1 text-label tabular-nums", i - 1 === piorPassagem ? "font-semibold text-[var(--primary-text,var(--primary))]" : "text-muted-foreground")}>
               <span aria-hidden>↓</span>
               {r.seguiram(formatarPercentual(taxas[i - 1]! * 100, 0, localidade))}
-              {i - 1 === piorPassagem && <span className="rounded-sm border border-current px-1.5 py-px text-[0.6875rem]">{r.maiorPerda}</span>}
+              {i - 1 === piorPassagem && <span className="rounded-sm border border-current px-1 py-px text-caption">{r.maiorPerda}</span>}
             </p>
           )}
-          <div className="mb-1 flex items-baseline justify-between gap-3 text-[0.8125rem]">
+          <div className="mb-1 flex items-baseline justify-between gap-3 text-body-sm">
             <span className="min-w-0 font-medium text-foreground">{e.rotulo}</span>
             <span className="shrink-0 font-semibold tabular-nums text-foreground">{formatar(e.valor)}</span>
           </div>

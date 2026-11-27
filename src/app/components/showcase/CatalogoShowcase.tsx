@@ -147,28 +147,28 @@ export function CatalogoShowcase() {
           <Input id="catalogo-busca" value={busca} onChange={e => setBusca(e.target.value)} placeholder={t("Search by name or purpose", "Buscar por nome ou uso")} className="pl-9" />
         </div>
         <div className="overflow-hidden rounded-lg border border-border bg-card">
-          <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] border-b border-border bg-muted/30 px-5 py-3 text-[0.75rem] font-semibold uppercase tracking-wider text-muted-foreground md:grid">
+          <div className="hidden grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] border-b border-border bg-muted/30 px-5 py-3 text-label font-semibold uppercase tracking-wider text-muted-foreground md:grid">
             <span>{t("Component", "Componente")}</span><span>{t("What it does", "Para que serve")}</span><span>{t("Where to see", "Onde ver")}</span>
           </div>
           {lista.map((i, n) => (
-            <div key={i.nome} className={`grid grid-cols-1 gap-1.5 px-5 py-3.5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] md:gap-4 ${n < lista.length - 1 ? "border-b border-border" : ""}`}>
+            <div key={i.nome} className={`grid grid-cols-1 gap-1 px-5 py-3 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] md:gap-4 ${n < lista.length - 1 ? "border-b border-border" : ""}`}>
               <div className="min-w-0">
-                <p className="text-[0.9375rem] font-semibold text-foreground">{i.nome}</p>
-                <code className="block truncate text-[0.6875rem] text-muted-foreground" title={`@/app/components/ui/${i.nome}`}>ui/{i.nome}</code>
+                <p className="text-body font-semibold text-foreground">{i.nome}</p>
+                <code className="block truncate text-caption text-muted-foreground" title={`@/app/components/ui/${i.nome}`}>ui/{i.nome}</code>
               </div>
-              <p className="text-[0.875rem] leading-relaxed text-muted-foreground">{t(i.en, i.pt)}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground">{t(i.en, i.pt)}</p>
               <div className="flex items-start">
                 {i.pagina ? (
-                  <button type="button" onClick={() => navegarPara(i.pagina!.secao, i.pagina!.ancora)} className="inline-flex items-center gap-1 rounded-sm text-[0.8125rem] font-semibold text-[var(--primary-text,var(--primary))] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                  <button type="button" onClick={() => navegarPara(i.pagina!.secao, i.pagina!.ancora)} className="inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                     {t(i.pagina.rotulo[0], i.pagina.rotulo[1])} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
                   </button>
                 ) : (
-                  <span className="inline-flex h-6 items-center rounded-full border border-border bg-muted px-2.5 text-[0.6875rem] font-semibold text-muted-foreground">{t("Code only, no demo yet", "Só no código, sem demonstração")}</span>
+                  <span className="inline-flex h-6 items-center rounded-full border border-border bg-muted px-2 text-caption font-semibold text-muted-foreground">{t("Code only, no demo yet", "Só no código, sem demonstração")}</span>
                 )}
               </div>
             </div>
           ))}
-          {lista.length === 0 && <p className="px-5 py-6 text-[0.875rem] text-muted-foreground">{t("No component matches this search.", "Nenhum componente com essa busca.")}</p>}
+          {lista.length === 0 && <p className="px-5 py-6 text-body-sm text-muted-foreground">{t("No component matches this search.", "Nenhum componente com essa busca.")}</p>}
         </div>
       </section>
     </div>

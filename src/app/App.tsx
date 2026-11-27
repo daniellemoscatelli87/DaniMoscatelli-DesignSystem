@@ -212,6 +212,7 @@ const ptLabels: Record<string, string> = {
   "Field and masks": "Campo e máscaras",
   "Search and copy": "Busca e copiar",
   "Several e-mails": "Vários e-mails",
+  "Time field": "Campo de horário",
   "Filter chips": "Chips de filtro",
   "Choice cards": "Cartões de escolha",
   "Send and delete buttons": "Botões de envio e exclusão",
@@ -583,6 +584,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
         items: [
           { id: "campos-campo",   label: "Field and masks",     sectionId: "campos" },
           { id: "campos-busca",   label: "Search and copy",     sectionId: "campos" },
+          { id: "campos-horario", label: "Time field",          sectionId: "campos" },
           { id: "campos-emails",  label: "Several e-mails",     sectionId: "campos" },
           { id: "campos-chips",   label: "Filter chips",        sectionId: "campos" },
           { id: "campos-escolha", label: "Choice cards",        sectionId: "campos" },
@@ -965,25 +967,25 @@ function AppShell() {
           }
           @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
-        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2.5 min-w-0 text-left">
+        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2 min-w-0 text-left">
           <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
           {/* Celular (26/11/2026): só o símbolo abaixo de 420 px; "| Design System" só a partir de 640 px, para nunca encostar nos seletores */}
           <div className="hidden min-[420px]:flex items-center gap-0 min-w-0">
             <span
-              className="ds-wordmark text-[1.0625rem] font-semibold tracking-tight whitespace-nowrap"
+              className="ds-wordmark text-body-lg font-semibold tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
             >
               Dani Moscatelli
             </span>
             <span
               aria-hidden
-              className="hidden sm:inline mx-2 text-[1.0625rem] font-light"
+              className="hidden sm:inline mx-2 text-body-lg font-light"
               style={{ color: "#627288", opacity: 0.4 }}
             >
               |
             </span>
             <span
-              className="hidden sm:inline text-[1.0625rem] font-normal tracking-tight whitespace-nowrap"
+              className="hidden sm:inline text-body-lg font-normal tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
             >
               <span className="ds-shimmer">Design System</span>
@@ -998,16 +1000,16 @@ function AppShell() {
           type="button"
           onClick={() => setSearchOpen(true)}
           aria-label={t("Search the design system", "Buscar no design system")}
-          className="hidden md:flex items-center gap-2 h-7 px-3 rounded-sm border border-border bg-background/60 text-muted-foreground text-[0.75rem] hover:border-[var(--border-strong)] hover:bg-background transition-colors"
+          className="hidden md:flex items-center gap-2 h-7 px-3 rounded-sm border border-border bg-background/60 text-muted-foreground text-label hover:border-[var(--border-strong)] hover:bg-background transition-colors"
         >
           <Search className="h-3 w-3" />
           <span>{t("Search", "Buscar")}</span>
-          <kbd className="ml-1.5 px-1 py-0.5 text-[0.5625rem] rounded-[3px] bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
+          <kbd className="ml-1 px-1 py-1 text-caption rounded-sm bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
         </button>
 
 
         {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
           {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
             <button
               key={code}
@@ -1016,7 +1018,7 @@ function AppShell() {
               aria-pressed={lang === code}
               title={full}
               aria-label={full}
-              className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
                 lang === code
                   ? "bg-card text-foreground shadow-sm border border-border"
                   : "text-muted-foreground hover:text-foreground"
@@ -1028,10 +1030,10 @@ function AppShell() {
         </div>
 
         {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
+        <div className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
           <button
             onClick={() => setDark(false)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
               !dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -1042,7 +1044,7 @@ function AppShell() {
           </button>
           <button
             onClick={() => setDark(true)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-[0.75rem] font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
               dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -1103,11 +1105,11 @@ function AppShell() {
                         title={collapsed ? tl(label) : undefined}
                         aria-label={tl(label)}
                         aria-expanded={item.items ? !!isExpanded : undefined}
-                        className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-1
                           ${collapsed ? "lg:justify-center lg:px-0" : ""}
                           ${isActive ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                       >
-                        <span className="flex items-center gap-2.5 min-w-0">
+                        <span className="flex items-center gap-2 min-w-0">
                           <Icon className="h-4 w-4 shrink-0" />
                           <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(label)}</span>
                         </span>
@@ -1117,7 +1119,7 @@ function AppShell() {
                       </button>
 
                       {item.items && isExpanded && (
-                        <div className={`mb-1 space-y-0.5 ${nested ? "ml-9" : "ml-3 pl-2 border-l border-border"} ${collapsed ? "lg:hidden" : ""}`}>
+                        <div className={`mb-1 space-y-1 ${nested ? "ml-9" : "ml-3 pl-2 border-l border-border"} ${collapsed ? "lg:hidden" : ""}`}>
                           {item.items.map(sub => {
                             const isSubActive =
                               activeSection === sub.sectionId &&
@@ -1126,7 +1128,7 @@ function AppShell() {
                               <button
                                 key={sub.id}
                                 onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
-                                className={`w-full text-left px-3 py-1.5 rounded-sm text-[0.8125rem] transition-colors
+                                className={`w-full text-left px-3 py-1 rounded-sm text-body-sm transition-colors
                                   ${isSubActive
                                     ? "text-primary-text font-medium bg-[var(--primary-suave)]"
                                     : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
@@ -1158,11 +1160,11 @@ function AppShell() {
                       title={collapsed ? tl(group.group) : undefined}
                       aria-label={tl(group.group)}
                       aria-expanded={groupOpen}
-                      className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-[0.875rem] font-medium transition-all duration-150 mb-0.5
+                      className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-1
                         ${collapsed ? "lg:justify-center lg:px-0" : ""}
                         ${groupActive && !groupOpen ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                     >
-                      <span className="flex items-center gap-2.5 min-w-0">
+                      <span className="flex items-center gap-2 min-w-0">
                         <GroupIcon className="h-4 w-4 shrink-0" />
                         <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(group.group)}</span>
                       </span>
@@ -1185,7 +1187,7 @@ function AppShell() {
         <main className={`flex-1 ${collapsed ? "lg:ml-16" : "lg:ml-60"} min-w-0 flex flex-col transition-[margin] duration-[var(--duration-normal)] ease-[var(--ease-snappy)] motion-reduce:transition-none`}>
           {/* Section header bar */}
           <div className="sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-b border-border px-6 md:px-10 py-3">
-            <nav className="max-w-5xl mx-auto w-full flex items-center gap-1.5 text-[0.8125rem]">
+            <nav className="max-w-5xl mx-auto w-full flex items-center gap-1 text-body-sm">
               <img src={logoVermelho} alt="" className="h-4 w-4 object-contain opacity-70" />
               <span className="text-muted-foreground">Dani Moscatelli</span>
               <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -1201,7 +1203,7 @@ function AppShell() {
 
           <footer className="relative z-10 border-t border-border px-6 md:px-10 py-6">
             <div className="max-w-5xl mx-auto flex items-center justify-center text-center">
-              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">
+              <p className="text-body-sm leading-relaxed text-muted-foreground">
                 © 2026{" "}
                 <a
                   href="https://www.danimoscatelli.com.br"
@@ -1230,7 +1232,7 @@ function AppShell() {
             aria-modal="true"
             aria-labelledby="global-search-title"
             aria-describedby="global-search-description"
-            className="w-full max-w-xl overflow-hidden rounded-[var(--radius)] border border-border bg-popover text-popover-foreground shadow-[var(--shadow-xl)]"
+            className="w-full max-w-xl overflow-hidden rounded-md border border-border bg-popover text-popover-foreground shadow-[var(--shadow-xl)]"
           >
             <div className="sr-only">
               <h2 id="global-search-title">{t("Search the design system", "Buscar no design system")}</h2>
@@ -1249,7 +1251,7 @@ function AppShell() {
                 onChange={event => setSearchQuery(event.target.value)}
                 placeholder={t("Search pages and sections...", "Buscar páginas e seções...")}
                 aria-label={t("Search pages and sections", "Buscar páginas e seções")}
-                className="h-full min-w-0 flex-1 bg-transparent text-[0.875rem] text-foreground outline-none placeholder:text-muted-foreground"
+                className="h-full min-w-0 flex-1 bg-transparent text-body-sm text-foreground outline-none placeholder:text-muted-foreground"
               />
               <button
                 type="button"
@@ -1264,8 +1266,8 @@ function AppShell() {
               {searchResults.length === 0 ? (
                 <div className="px-4 py-10 text-center">
                   <Search className="mx-auto mb-3 h-6 w-6 text-muted-foreground/50" aria-hidden />
-                  <p className="text-[0.875rem] font-medium text-foreground">{t("No results found", "Nenhum resultado encontrado")}</p>
-                  <p className="mt-1 text-[0.75rem] text-muted-foreground">{t("Try another page or section name.", "Tente outro nome de página ou seção.")}</p>
+                  <p className="text-body-sm font-medium text-foreground">{t("No results found", "Nenhum resultado encontrado")}</p>
+                  <p className="mt-1 text-label text-muted-foreground">{t("Try another page or section name.", "Tente outro nome de página ou seção.")}</p>
                 </div>
               ) : (
                 searchResults.map(result => {
@@ -1275,14 +1277,14 @@ function AppShell() {
                       key={`${result.sectionId}-${result.key}`}
                       type="button"
                       onClick={() => selectSearchResult(result.sectionId, result.anchor)}
-                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
+                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground">
                         <ResultIcon className="h-4 w-4" aria-hidden />
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block truncate text-[0.875rem] font-medium text-foreground">{result.label}</span>
-                        <span className="block truncate text-[0.6875rem] text-muted-foreground">{result.group}</span>
+                        <span className="block truncate text-body-sm font-medium text-foreground">{result.label}</span>
+                        <span className="block truncate text-caption text-muted-foreground">{result.group}</span>
                       </span>
                       <ChevronRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50" aria-hidden />
                     </button>
@@ -1290,7 +1292,7 @@ function AppShell() {
                 })
               )}
             </div>
-            <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2 text-[0.6875rem] text-muted-foreground">
+            <div className="flex items-center justify-between border-t border-border bg-muted/40 px-4 py-2 text-caption text-muted-foreground">
               <span>{t(`${searchResults.length} results`, `${searchResults.length} resultados`)}</span>
               <span>{t("Esc to close", "Esc para fechar")}</span>
             </div>

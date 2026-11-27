@@ -32,7 +32,7 @@ function ratio(fg: string, bg: string) {
 function Result({ ok, label }: { ok: boolean; label: string }) {
   const { t } = useI18n();
   return (
-    <span className={`inline-flex items-center gap-1 text-[0.75rem] font-medium whitespace-nowrap ${ok ? "text-foreground" : "text-muted-foreground"}`}>
+    <span className={`inline-flex items-center gap-1 text-label font-medium whitespace-nowrap ${ok ? "text-foreground" : "text-muted-foreground"}`}>
       {ok ? <Check className="h-3.5 w-3.5 text-primary-text" aria-hidden /> : <X className="h-3.5 w-3.5" aria-hidden />}
       {label}: {ok ? t("Pass", "Aprovado") : t("Fail", "Reprovado")}
     </span>
@@ -71,14 +71,14 @@ function ContrastTable() {
   const pairs = mode === "light" ? lightPairs : darkPairs;
   return (
     <div className="space-y-3">
-      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-0.5 rounded-md bg-muted border border-border gap-0.5">
+      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-1 rounded-md bg-muted border border-border gap-1">
         {(["light", "dark"] as const).map(m => (
           <button
             key={m}
             type="button"
             aria-pressed={mode === m}
             onClick={() => setMode(m)}
-            className={`h-8 px-3 rounded-sm text-[0.75rem] font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-8 px-3 rounded-sm text-label font-medium capitalize transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               mode === m ? "bg-card text-foreground border border-border shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -93,20 +93,20 @@ function ContrastTable() {
             return (
               <li key={p.name} className="grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-x-5 gap-y-2 px-4 py-3 border-b border-border last:border-0">
                 <span
-                  className="h-10 w-24 rounded-sm border border-border flex items-center justify-center text-[0.9375rem] font-semibold"
+                  className="h-10 w-24 rounded-sm border border-border flex items-center justify-center text-body font-semibold"
                   style={{ color: p.fg, background: p.bg }}
                   aria-hidden
                 >
                   Aa 12
                 </span>
                 <div className="min-w-0">
-                  <p className="text-[0.8125rem] font-medium text-foreground">{p.name}</p>
-                  <p className="text-[0.75rem] text-muted-foreground">
+                  <p className="text-body-sm font-medium text-foreground">{p.name}</p>
+                  <p className="text-label text-muted-foreground">
                     {bi(p.usage)} · <span className="font-[family-name:var(--font-mono)]">{p.fg} {t("on", "sobre")} {p.bg}</span>
                   </p>
                 </div>
-                <div className="flex flex-wrap md:flex-col md:items-end gap-x-4 gap-y-0.5">
-                  <span className={`${display} text-[1.125rem] font-semibold text-foreground tabular-nums`}>{r.toFixed(2)}:1</span>
+                <div className="flex flex-wrap md:flex-col md:items-start gap-x-4 gap-y-1">
+                  <span className={`${display} text-body-lg font-semibold text-foreground tabular-nums`}>{r.toFixed(2)}:1</span>
                   <Result ok={r >= 4.5} label={t("Text AA", "Texto AA")} />
                   <Result ok={r >= 3} label={t("UI / large", "UI / grande")} />
                 </div>
@@ -128,14 +128,14 @@ function ContrastChecker() {
   const idBg = useId();
   const field = (id: string, label: string, v: string, set: (s: string) => void) => (
     <div>
-      <label htmlFor={id} className="block text-[0.75rem] font-medium text-foreground mb-1.5">{label}</label>
+      <label htmlFor={id} className="block text-label font-medium text-foreground mb-1">{label}</label>
       <div className="flex items-center gap-2">
         <input
           type="color"
           aria-label={t(`${label} color picker`, `Seletor de cor: ${label}`)}
           value={luminance(v) === null ? "#000000" : v.length === 4 ? "#" + v.slice(1).split("").map(c => c + c).join("") : v}
           onChange={e => set(e.target.value.toUpperCase())}
-          className="h-9 w-9 rounded-sm border border-border bg-transparent p-0.5 cursor-pointer"
+          className="h-9 w-9 toque:size-11 rounded-sm border border-border bg-transparent p-1 cursor-pointer"
         />
         <input
           id={id}
@@ -144,7 +144,7 @@ function ContrastChecker() {
           maxLength={7}
           spellCheck={false}
           aria-invalid={luminance(v) === null}
-          className="h-9 w-28 rounded-sm border border-border bg-[var(--input-background)] px-3 text-[0.8125rem] font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="h-9 w-28 rounded-sm border border-border bg-[var(--input-background)] px-3 text-body-sm font-[family-name:var(--font-mono)] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         />
       </div>
     </div>
@@ -154,22 +154,22 @@ function ContrastChecker() {
       <div className="space-y-4">
         {field(idFg, t("Text color", "Cor do texto"), fg, setFg)}
         {field(idBg, t("Background color", "Cor de fundo"), bg, setBg)}
-        <p className="text-[0.75rem] text-muted-foreground">{t("Paste any hex value from the token table.", "Cole qualquer valor hex da tabela de tokens.")}</p>
+        <p className="text-label text-muted-foreground">{t("Paste any hex value from the token table.", "Cole qualquer valor hex da tabela de tokens.")}</p>
       </div>
       <div className="space-y-3">
         <div
-          className="rounded-[var(--radius)] border border-border p-5"
+          className="rounded-md border border-border p-5"
           style={{ color: luminance(fg) === null ? "#000" : fg, background: luminance(bg) === null ? "#fff" : bg }}
         >
-          <p className="text-[1.5rem] font-semibold leading-tight">{t("Large text, 24px", "Texto grande, 24px")}</p>
-          <p className="text-[0.875rem] mt-1">{t("Body text at 14px must reach 4.5:1.", "Texto de corpo em 14px deve atingir 4,5:1.")}</p>
+          <p className="text-h3 font-semibold leading-tight">{t("Large text, 24px", "Texto grande, 24px")}</p>
+          <p className="text-body-sm mt-1">{t("Body text at 14px must reach 4.5:1.", "Texto de corpo em 14px deve atingir 4,5:1.")}</p>
         </div>
         <div aria-live="polite" className="flex flex-wrap items-center gap-x-4 gap-y-1">
           {r === null ? (
-            <span className="text-[0.8125rem] text-muted-foreground">{t("Enter a valid 6-digit hex value.", "Informe um valor hex válido de 6 dígitos.")}</span>
+            <span className="text-body-sm text-muted-foreground">{t("Enter a valid 6-digit hex value.", "Informe um valor hex válido de 6 dígitos.")}</span>
           ) : (
             <>
-              <span className={`${display} text-[1.5rem] font-semibold text-foreground tabular-nums`}>{r.toFixed(2)}:1</span>
+              <span className={`${display} text-h3 font-semibold text-foreground tabular-nums`}>{r.toFixed(2)}:1</span>
               <Result ok={r >= 4.5} label={t("Text AA", "Texto AA")} />
               <Result ok={r >= 3} label={t("Large / UI", "Grande / UI")} />
               <Result ok={r >= 7} label="AAA" />
@@ -186,23 +186,23 @@ function FocusDemo() {
   const { t, lang } = useI18n();
   return (
     <Panel className="p-5">
-      <p className="text-[0.8125rem] text-muted-foreground mb-4">
-        {t("Press", "Pressione")} <kbd className="px-1.5 py-0.5 rounded-[4px] border border-border bg-muted text-[0.6875rem] font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
+      <p className="text-body-sm text-muted-foreground mb-4">
+        {t("Press", "Pressione")} <kbd className="px-1 py-1 rounded-sm border border-border bg-muted text-caption font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
       </p>
       <div className="flex flex-wrap items-center gap-3">
-        <button className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Primary", "Primário")}
         </button>
-        <button className="h-10 px-4 rounded-md border border-border bg-card text-foreground text-[0.875rem] font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-md border border-border bg-card text-foreground text-body-sm font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Secondary", "Secundário")}
         </button>
-        <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-[0.875rem] font-medium text-primary-text underline underline-offset-4 rounded-[4px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-body-sm font-medium text-primary-text underline underline-offset-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           {t("Text link", "Link de texto")}
         </a>
         <input
           aria-label={t("Sample input", "Campo de exemplo")}
           placeholder={t("Input", "Campo")}
-          className="h-10 w-36 rounded-md border border-border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
+          className="h-10 w-36 rounded-md border border-border bg-[var(--input-background)] px-3 text-body-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:border-primary"
         />
       </div>
     </Panel>
@@ -229,7 +229,7 @@ function TabsDemo() {
   };
   return (
     <Panel className="p-5">
-      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-0.5 rounded-md bg-muted border border-border">
+      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-1 rounded-md bg-muted border border-border">
         {tabs.map((tab, i) => (
           <button
             key={tab.en}
@@ -241,7 +241,7 @@ function TabsDemo() {
             tabIndex={active === i ? 0 : -1}
             onClick={() => setActive(i)}
             onKeyDown={e => onKey(e, i)}
-            className={`h-8 px-3 rounded-sm text-[0.8125rem] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-8 px-3 rounded-sm text-body-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               active === i ? "bg-card text-foreground border border-border shadow-sm" : "text-muted-foreground hover:text-foreground"
             }`}
           >
@@ -249,7 +249,7 @@ function TabsDemo() {
           </button>
         ))}
       </div>
-      <div role="tabpanel" id={`${base}-p${active}`} aria-labelledby={`${base}-t${active}`} tabIndex={0} className="mt-4 text-[0.8125rem] text-muted-foreground rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <div role="tabpanel" id={`${base}-p${active}`} aria-labelledby={`${base}-t${active}`} tabIndex={0} className="mt-4 text-body-sm text-muted-foreground rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
         {t("Panel for", "Painel de")} <span className="text-foreground font-medium">{bi(tabs[active])}</span>. {t("Only the active tab is in the Tab order; arrows, Home and End move between tabs.", "Apenas a aba ativa entra na ordem do Tab; setas, Home e End alternam entre as abas.")}
       </div>
     </Panel>
@@ -282,7 +282,7 @@ function FormDemo() {
         className="max-w-sm space-y-3"
       >
         <div>
-          <label htmlFor={id} className="block text-[0.8125rem] font-medium text-foreground mb-1.5">
+          <label htmlFor={id} className="block text-body-sm font-medium text-foreground mb-1">
             {t("Work email", "E-mail corporativo")} <span className="text-muted-foreground font-normal">{t("(required)", "(obrigatório)")}</span>
           </label>
           <input
@@ -295,19 +295,19 @@ function FormDemo() {
             aria-required="true"
             aria-invalid={show}
             aria-describedby={`${id}-hint ${show ? `${id}-err` : ""}`.trim()}
-            className={`h-10 w-full rounded-md border bg-[var(--input-background)] px-3 text-[0.875rem] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+            className={`h-10 w-full rounded-md border bg-[var(--input-background)] px-3 text-body-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               show ? "border-[var(--error)]" : "border-border focus-visible:border-primary"
             }`}
           />
-          <p id={`${id}-hint`} className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("We only use it to send the invite.", "Usamos apenas para enviar o convite.")}</p>
-          <p id={`${id}-err`} role={show ? "alert" : undefined} className="mt-1.5 text-[0.75rem] font-medium text-foreground flex items-center gap-1.5 min-h-[1rem]">
+          <p id={`${id}-hint`} className="mt-1 text-label text-muted-foreground">{t("We only use it to send the invite.", "Usamos apenas para enviar o convite.")}</p>
+          <p id={`${id}-err`} role={show ? "alert" : undefined} className="mt-1 text-label font-medium text-foreground flex items-center gap-1 min-h-[1rem]">
             {show && (<><AlertCircle className="h-3.5 w-3.5 text-[var(--error)] shrink-0" aria-hidden />{error}</>)}
           </p>
         </div>
-        <button type="submit" className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-[0.875rem] font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button type="submit" className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Send invite", "Enviar convite")}
         </button>
-        <p role="status" className="text-[0.8125rem] text-foreground min-h-[1.25rem]">{sent ? t("Invite sent to ", "Convite enviado para ") + email : ""}</p>
+        <p role="status" className="text-body-sm text-foreground min-h-[1.25rem]">{sent ? t("Invite sent to ", "Convite enviado para ") + email : ""}</p>
       </form>
     </Panel>
   );
@@ -340,7 +340,7 @@ function MotionDemo() {
         .a11y-reduced .a11y-mover { animation: none; }
         @media (prefers-reduced-motion: reduce) { .a11y-mover { animation: none; } }
       `}</style>
-      <label className="inline-flex items-center gap-2.5 text-[0.8125rem] font-medium text-foreground cursor-pointer mb-4">
+      <label className="inline-flex items-center gap-2 text-body-sm font-medium text-foreground cursor-pointer mb-4">
         <input
           type="checkbox"
           checked={reduced}
@@ -354,7 +354,7 @@ function MotionDemo() {
           <div className="a11y-mover h-8 rounded-sm bg-primary" />
         </div>
       </div>
-      <p className="mt-3 text-[0.75rem] text-muted-foreground">
+      <p className="mt-3 text-label text-muted-foreground">
         {reduced ? t("Motion removed. State is still communicated by position and label.", "Movimento removido. O estado ainda é comunicado pela posição e pelo rótulo.") : t("Decorative motion is running. It stops automatically when the OS asks for less motion.", "O movimento decorativo está ativo. Ele para automaticamente quando o sistema pede menos movimento.")}
       </p>
     </Panel>
@@ -388,12 +388,12 @@ function Checklist() {
   return (
     <Panel className="p-5">
       <div className="flex items-center justify-between gap-4 mb-4">
-        <p className="text-[0.8125rem] font-medium text-foreground" aria-live="polite">{count} {t("of", "de")} {checklistItems.length} {t("checked", "marcados")}</p>
+        <p className="text-body-sm font-medium text-foreground" aria-live="polite">{count} {t("of", "de")} {checklistItems.length} {t("checked", "marcados")}</p>
         <div className="flex items-center gap-3 flex-1 max-w-[220px]">
           <div role="progressbar" aria-label={t("Checklist progress", "Progresso do checklist")} aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} className="h-1.5 flex-1 rounded-full bg-muted overflow-hidden">
             <div className="h-full bg-primary transition-[width] duration-300" style={{ width: `${pct}%` }} />
           </div>
-          <span className="text-[0.75rem] tabular-nums text-muted-foreground w-9 text-right">{pct}%</span>
+          <span className="text-label tabular-nums text-muted-foreground w-9 text-right">{pct}%</span>
         </div>
       </div>
       <ul className="space-y-1">
@@ -404,9 +404,9 @@ function Checklist() {
                 type="checkbox"
                 checked={!!done[i]}
                 onChange={e => setDone(d => ({ ...d, [i]: e.target.checked }))}
-                className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--primary)]"
+                className="mt-1 h-4 w-4 shrink-0 accent-[var(--primary)]"
               />
-              <span className={`text-[0.8125rem] leading-relaxed ${done[i] ? "text-muted-foreground line-through" : "text-foreground"}`}>{bi(item)}</span>
+              <span className={`text-body-sm leading-relaxed ${done[i] ? "text-muted-foreground line-through" : "text-foreground"}`}>{bi(item)}</span>
             </label>
           </li>
         ))}
@@ -511,10 +511,10 @@ export function AccessibilityShowcase() {
           <FormDemo />
           <div className="space-y-4 min-w-0">
             <Panel className="overflow-hidden">
-              <pre className="px-4 py-4 text-[0.75rem] leading-relaxed font-[family-name:var(--font-mono)] text-foreground overflow-x-auto"><code>{formCode}</code></pre>
+              <pre className="px-4 py-4 text-label leading-relaxed font-[family-name:var(--font-mono)] text-foreground whitespace-pre-wrap break-words"><code>{formCode}</code></pre>
             </Panel>
             <Panel className="overflow-hidden">
-              <pre className="px-4 py-4 text-[0.75rem] leading-relaxed font-[family-name:var(--font-mono)] text-foreground overflow-x-auto"><code>{iconButtonCode}</code></pre>
+              <pre className="px-4 py-4 text-label leading-relaxed font-[family-name:var(--font-mono)] text-foreground whitespace-pre-wrap break-words"><code>{iconButtonCode}</code></pre>
             </Panel>
           </div>
         </div>
@@ -553,7 +553,7 @@ export function AccessibilityShowcase() {
         <GradeDeCards className="lg:grid-cols-2 gap-4">
           <MotionDemo />
           <Panel className="overflow-hidden">
-            <pre className="px-4 py-4 text-[0.75rem] leading-relaxed font-[family-name:var(--font-mono)] text-foreground overflow-x-auto"><code>{motionCode}</code></pre>
+            <pre className="px-4 py-4 text-label leading-relaxed font-[family-name:var(--font-mono)] text-foreground whitespace-pre-wrap break-words"><code>{motionCode}</code></pre>
           </Panel>
         </GradeDeCards>
       </PageSection>

@@ -110,12 +110,12 @@ export function VoiceShowcase() {
       >
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {principios.map(p => (
-            <article key={p.titulo} className="flex flex-col rounded-[var(--radius)] border border-border bg-card p-5">
-              <p className="mb-2 text-[0.75rem] font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))]">{p.titulo}</p>
-              <p className="mb-5 text-[0.9375rem] leading-relaxed text-foreground">{p.regra}</p>
+            <article key={p.titulo} className="flex flex-col rounded-md border border-border bg-card p-5">
+              <p className="mb-2 text-label font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))]">{p.titulo}</p>
+              <p className="mb-5 text-body leading-relaxed text-foreground">{p.regra}</p>
               <div className="mt-auto space-y-3">
-                <p className="flex items-start gap-2 text-[1rem] font-bold tracking-[-0.01em] text-foreground"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{p.fazer}</p>
-                <p className="flex items-start gap-2 text-[0.875rem] text-muted-foreground line-through decoration-error/50"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-error" aria-hidden />{p.evitar}</p>
+                <p className="flex items-start gap-2 text-body font-bold tracking-[-0.01em] text-foreground"><CheckCircle className="mt-1 h-4 w-4 shrink-0 text-success-text" aria-hidden />{p.fazer}</p>
+                <p className="flex items-start gap-2 text-body-sm text-muted-foreground line-through decoration-error/50"><XCircle className="mt-1 h-4 w-4 shrink-0 text-error" aria-hidden />{p.evitar}</p>
               </div>
             </article>
           ))}
@@ -128,12 +128,12 @@ export function VoiceShowcase() {
         title={t("Every piece of information has an origin", "Toda informação tem origem")}
         intro={<p>{t("Statement, observation, record, measurement, hypothesis and conclusion are not the same thing. The text must make the difference visible.", "Declaração, observação, registro, medição, hipótese e conclusão não são a mesma coisa. O texto precisa deixar a diferença visível.")}</p>}
       >
-        <div className="overflow-hidden rounded-[var(--radius)] border border-border bg-card">
-          <div className="hidden grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] border-b border-border bg-muted/30 px-5 py-3 text-[0.75rem] font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
+        <div className="overflow-hidden rounded-md border border-border bg-card">
+          <div className="hidden grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] border-b border-border bg-muted/30 px-5 py-3 text-label font-semibold uppercase tracking-wider text-muted-foreground sm:grid">
             <span>{t("Type", "Tipo")}</span><span>{t("When", "Quando")}</span><span>{t("How to write", "Como escrever")}</span>
           </div>
           {tipos.map((x, i) => (
-            <div key={x.tipo} className={`grid grid-cols-1 gap-1 px-5 py-3.5 text-[0.8125rem] sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] sm:gap-4 ${i < tipos.length - 1 ? "border-b border-border" : ""}`}>
+            <div key={x.tipo} className={`grid grid-cols-1 gap-1 px-5 py-3 text-body-sm sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] sm:gap-4 ${i < tipos.length - 1 ? "border-b border-border" : ""}`}>
               <span className="font-semibold text-foreground">{x.tipo}</span>
               <span className="text-muted-foreground">{x.quando}</span>
               <span className="text-foreground">{x.escrever}</span>

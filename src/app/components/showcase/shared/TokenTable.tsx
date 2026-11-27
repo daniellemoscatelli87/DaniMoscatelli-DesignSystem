@@ -33,14 +33,14 @@ function Swatch({ value }: { value: string }) {
   if (value.toLowerCase() === "transparent") {
     return (
       <div
-        className="h-4 w-4 rounded-[4px] border border-border shrink-0"
+        className="h-4 w-4 rounded-sm border border-border shrink-0"
         style={{ background: "repeating-linear-gradient(45deg,#ccc 0,#ccc 2px,#fff 2px,#fff 6px)" }}
       />
     );
   }
   return (
     <div
-      className="h-4 w-4 rounded-[4px] border border-black/10 shrink-0"
+      className="h-4 w-4 rounded-sm border border-black/10 shrink-0"
       style={{ background: value }}
     />
   );
@@ -55,13 +55,13 @@ function TokenRowItem({ token: digitado, isDark }: { token: TokenRow; isDark: bo
   const hasDarkVariant = !!token.dark && token.dark !== token.light;
 
   return (
-    <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 py-2.5 border-b border-border last:border-0">
-      <code className="text-[0.75rem] font-mono text-primary-text truncate">{token.name}</code>
-      <span className="text-[0.75rem] text-muted-foreground leading-tight">{token.description}</span>
+    <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3 py-2 border-b border-border last:border-0">
+      <code className="text-label font-mono text-primary-text truncate">{token.name}</code>
+      <span className="text-label text-muted-foreground leading-tight">{token.description}</span>
 
-      <div className="flex items-center gap-1.5 justify-end">
+      <div className="flex items-center gap-1 justify-end">
         {token.isColor && <Swatch value={value} />}
-        <code title={value} className="max-w-[16rem] truncate text-[0.6875rem] font-mono text-foreground/70 whitespace-nowrap">{value}</code>
+        <code title={value} className="max-w-[16rem] truncate text-caption font-mono text-foreground/70 whitespace-nowrap">{value}</code>
         {/* Dot indicator when a dark variant exists but isn't currently shown */}
         {hasDarkVariant && (
           <span
@@ -81,14 +81,14 @@ export function TokenTable({ groups }: { groups: TokenGroup[] }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 pb-2 border-b border-border">
-        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Token", "Token")}</span>
-        <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Usage", "Uso")}</span>
+      <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3 pb-2 border-b border-border">
+        <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Token", "Token")}</span>
+        <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Usage", "Uso")}</span>
         <div className="flex items-center gap-2 justify-end">
-          <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+          <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">
             {t("Value", "Valor")}
           </span>
-          <span className="inline-flex items-center px-1.5 py-0.5 rounded-[4px] text-[0.5625rem] font-semibold uppercase tracking-wide bg-primary/10 text-primary-text">
+          <span className="inline-flex items-center px-1 py-1 rounded-sm text-caption font-semibold uppercase tracking-wide bg-primary/10 text-primary-text">
             {isDark ? t("Dark", "Escuro") : t("Light", "Claro")}
           </span>
         </div>
@@ -96,7 +96,7 @@ export function TokenTable({ groups }: { groups: TokenGroup[] }) {
 
       {groups.map(g => (
         <div key={g.group}>
-          <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.07em] text-muted-foreground/60 mb-2 px-1">
+          <p className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground/60 mb-2 px-1">
             {g.group}
           </p>
           <div className="rounded-md border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>

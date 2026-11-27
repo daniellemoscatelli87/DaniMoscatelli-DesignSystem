@@ -72,15 +72,15 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
           <img src={logoVermelho} alt="" className="hidden sm:block h-24 w-24 object-contain shrink-0 opacity-90" />
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/12 text-primary-text border border-primary/25 text-[0.75rem] font-semibold uppercase tracking-[0.08em]">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/12 text-primary-text border border-primary/25 text-label font-semibold uppercase tracking-[0.08em]">
                 Design System
               </span>
-              <span className="text-[0.625rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">v1.0</span>
+              <span className="text-caption font-semibold uppercase tracking-[0.12em] text-muted-foreground">v1.0</span>
             </div>
-            <h1 className={`${display} text-[2rem] sm:text-[2.5rem] tracking-[-0.035em] text-foreground mb-3 leading-none`}>
+            <h1 className={`${display} text-h2 sm:text-h1 tracking-[-0.035em] text-foreground mb-3 leading-none`}>
               Dani Moscatelli
             </h1>
-            <p className="text-[1.0625rem] text-muted-foreground max-w-xl leading-relaxed mb-6">
+            <p className="text-body-lg text-muted-foreground max-w-xl leading-relaxed mb-6">
               {t(
                 "A design system for vibe coders. Named tokens, accessible components and clear guidelines, so Claude, Cursor, Bolt and Lovable build interfaces that look and behave like yours.",
                 "Um design system para vibe coders. Tokens nomeados, componentes acessíveis e diretrizes claras, para que Claude, Cursor, Bolt e Lovable criem interfaces com a cara e o comportamento das suas."
@@ -89,14 +89,14 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
             <div className="flex flex-wrap items-center gap-3 mb-5">
               <button
                 onClick={() => onNavigate("get-started")}
-                className="group inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-[0.875rem] font-semibold hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
+                className="group inline-flex items-center gap-2 h-10 px-5 rounded-full bg-primary text-primary-foreground text-body-sm font-semibold hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card"
               >
                 {t("Get started", "Começar")}
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <button
                 onClick={() => go({ scroll: "whats-new" })}
-                className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border text-[0.875rem] font-medium text-foreground hover:border-[var(--border-strong)] hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border text-body-sm font-medium text-foreground hover:border-[var(--border-strong)] hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Sparkles className="h-4 w-4 text-primary-text" />
                 {t("What's new", "Novidades")}
@@ -109,7 +109,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
                 { en: "Radix UI primitives", pt: "Primitivos Radix UI" },
                 { en: "Usability and a11y guidelines", pt: "Diretrizes de usabilidade e a11y" },
               ].map((tag, i) => (
-                <span key={tag.en} className={`inline-flex items-center px-3 py-1 rounded-full text-[0.8125rem] font-medium ${i === 0 ? "bg-primary/12 text-primary-text" : "bg-muted text-foreground"}`}>
+                <span key={tag.en} className={`inline-flex items-center px-3 py-1 rounded-full text-body-sm font-medium ${i === 0 ? "bg-primary/12 text-primary-text" : "bg-muted text-foreground"}`}>
                   {bi(tag)}
                 </span>
               ))}
@@ -121,13 +121,13 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
       <section id="whats-new" className="scroll-mt-32">
         <SectionLabel>{t("Changelog", "Histórico de mudanças")}</SectionLabel>
         <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-          <h2 className={`${display} text-[1.5rem] tracking-[-0.02em] text-foreground`}>{t("What's New", "Novidades")}</h2>
-          <p className="text-[0.8125rem] text-muted-foreground">{t("Latest", "Mais recente")}: {bi(latest.title)} · {fmtDate(latest.date)}</p>
+          <h2 className={`${display} text-h3 tracking-[-0.02em] text-foreground`}>{t("What's New", "Novidades")}</h2>
+          <p className="text-body-sm text-muted-foreground">{t("Latest", "Mais recente")}: {bi(latest.title)} · {fmtDate(latest.date)}</p>
         </div>
-        <p className="max-w-2xl mb-6 text-[0.9375rem] leading-relaxed text-muted-foreground">
+        <p className="max-w-2xl mb-6 text-body leading-relaxed text-muted-foreground">
           {t("Every addition, change and removal in the design system, newest first.", "Toda adição, mudança e remoção no design system, da mais recente para a mais antiga.")}
         </p>
-        <ol className="relative border-l border-border ml-1.5 space-y-3">
+        <ol className="relative border-l border-border ml-1 space-y-3">
           {changelog.map((e, i) => {
             const Tag = e.page ? "button" : "div";
             return (
@@ -138,18 +138,18 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
                 />
                 <Tag
                   {...(e.page ? { type: "button" as const, onClick: () => onNavigate(e.page!, e.anchor) } : {})}
-                  className={`group w-full text-left flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-4 rounded-[var(--radius)] bg-card border border-border shadow-[var(--shadow-xs)] ${
+                  className={`group w-full text-left flex flex-col sm:flex-row sm:items-start gap-2 sm:gap-4 p-4 rounded-md bg-card border border-border shadow-[var(--shadow-xs)] ${
                     e.page ? "transition-all hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" : ""
                   }`}
                 >
-                  <span className={`shrink-0 self-start inline-flex items-center px-2 py-0.5 rounded-full border text-[0.6875rem] font-semibold uppercase tracking-[0.06em] sm:mt-0.5 ${kindStyle[e.kind]}`}>
+                  <span className={`shrink-0 self-start inline-flex items-center px-2 py-1 rounded-full border text-caption font-semibold uppercase tracking-[0.06em] sm:mt-1 ${kindStyle[e.kind]}`}>
                     {t(e.kind, kindPt[e.kind])}
                   </span>
                   <span className="flex-1 min-w-0">
-                    <span className={`${display} block text-[0.9375rem] font-semibold tracking-[-0.01em] text-foreground mb-0.5`}>{bi(e.title)}</span>
-                    <span className="block text-[0.8125rem] leading-relaxed text-muted-foreground">{bi(e.desc)}</span>
+                    <span className={`${display} block text-body font-semibold tracking-[-0.01em] text-foreground mb-1`}>{bi(e.title)}</span>
+                    <span className="block text-body-sm leading-relaxed text-muted-foreground">{bi(e.desc)}</span>
                   </span>
-                  <span className="shrink-0 text-[0.75rem] text-muted-foreground sm:mt-0.5">{fmtDate(e.date)}</span>
+                  <span className="shrink-0 text-label text-muted-foreground sm:mt-1">{fmtDate(e.date)}</span>
                 </Tag>
               </li>
             );
@@ -160,12 +160,12 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
       <section id="home-explore" className="scroll-mt-32 space-y-8">
         <div>
           <SectionLabel>{t("Explore", "Explorar")}</SectionLabel>
-          <h2 className={`${display} text-[1.5rem] tracking-[-0.02em] text-foreground`}>{t("Everything in the system", "Tudo no sistema")}</h2>
+          <h2 className={`${display} text-h3 tracking-[-0.02em] text-foreground`}>{t("Everything in the system", "Tudo no sistema")}</h2>
         </div>
         {explore.map(g => (
           <div key={g.label.en}>
-            <p className="text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">{bi(g.label)}</p>
-            <CardGrid items={g.items} onGo={go} cols={g.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"} compact />
+            <p className="text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">{bi(g.label)}</p>
+            <CardGrid items={g.items} onGo={go} cols={g.items.length === 4 ? "lg:grid-cols-4" : g.items.length === 3 ? "md:grid-cols-3" : "lg:grid-cols-3"} compact />
           </div>
         ))}
       </section>
@@ -177,7 +177,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
           <div className="w-px bg-background/20" />
           {crimson.map(c => <div key={c} className="flex-1" style={{ backgroundColor: c }} />)}
         </div>
-        <div className="flex justify-between text-[0.6875rem] text-muted-foreground mt-2 px-1">
+        <div className="flex justify-between text-caption text-muted-foreground mt-2 px-1">
           <span>{t("Graphite scale, 50 to 950", "Escala Graphite, de 50 a 950")}</span>
           <span>{t("Crimson scale, 50 to 950", "Escala Crimson, de 50 a 950")}</span>
         </div>

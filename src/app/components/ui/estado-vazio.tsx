@@ -46,11 +46,29 @@ export type EstadoVazioProps = Omit<React.ComponentProps<"div">, "title"> & {
   tom?: "neutro" | "marca";
   /** "sm" dentro de cards e painéis estreitos; "md" (padrão) no lugar de uma lista ou página. */
   tamanho?: "sm" | "md";
+  /**
+   * "pagina" (padrão): centralizado, no lugar de uma lista ou página. "lista": dentro de um card, alinhado à esquerda
+   * como uma linha da lista (ícone à esquerda, frase e ação na coluna do texto). Especificação da área restrita
+   * (ADMIN_REACT.md §7.1).
+   */
+  variante?: "pagina" | "lista";
   nivel?: Nivel;
 };
 
-function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "neutro", tamanho = "md", nivel = 2, className, ...props }: EstadoVazioProps) {
+function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "neutro", tamanho = "md", variante = "pagina", nivel = 2, className, ...props }: EstadoVazioProps) {
   const H = titulo(nivel);
+  if (variante === "lista") {
+    return (
+      <div data-slot="estado-vazio" data-tom={tom} data-variante="lista" className={cn("grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 px-4 py-4", className)} {...props}>
+        {icone ? <IconeComBase tom={tom} tamanho="md">{icone}</IconeComBase> : <span />}
+        <div className="min-w-0 self-center">
+          <H className="text-body-sm font-semibold text-foreground text-pretty">{t}</H>
+          {descricao && <p className="mt-1 text-body-sm text-pretty text-muted-foreground">{descricao}</p>}
+          {acoes && <div className="mt-3 flex flex-wrap items-center gap-3">{acoes}</div>}
+        </div>
+      </div>
+    );
+  }
   return (
     <div
       data-slot="estado-vazio"

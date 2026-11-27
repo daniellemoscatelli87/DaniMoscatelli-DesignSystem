@@ -14,6 +14,10 @@ import { useOrientacaoDoCard } from "./grade-de-cards";
  * e link secundário opcional. Vertical ou horizontal; tamanhos p, m e g. Sem orientation, segue a GradeDeCards:
  * horizontal quando a grade virou lista (regra da dona do produto, 27/11/2026).
  * Fundo de card com um brilho suave na cor primária no canto, como o hero do site.
+ *
+ * Ações (regra do DS, 27/11/2026): ação principal e link secundário ficam lado a lado quando cabem. Quando não cabem
+ * (card com menos de 22rem de conteúdo, como no celular), viram um grupo empilhado: os dois na largura toda, um
+ * embaixo do outro, o secundário como botão de contorno. O link nunca fica sozinho embaixo do botão. Alvos de 44 px.
  */
 type Size = "p" | "m" | "g";
 
@@ -37,13 +41,13 @@ export type PartnerCardProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const pad: Record<Size, string> = { p: "p-5", m: "p-6 sm:p-8", g: "p-8 sm:p-12" };
 const titleSize: Record<Size, string> = {
-  p: "text-[1.125rem] leading-snug tracking-[-0.015em]",
-  m: "text-[1.5rem] sm:text-[1.75rem] leading-tight tracking-[-0.025em]",
-  g: "text-[2rem] sm:text-[2.5rem] leading-[1.1] tracking-[-0.03em]",
+  p: "text-body-lg leading-snug tracking-[-0.015em]",
+  m: "text-h3 sm:text-h2 leading-tight tracking-[-0.025em]",
+  g: "text-h2 sm:text-h1 leading-[1.1] tracking-[-0.03em]",
 };
-const descSize: Record<Size, string> = { p: "text-[0.8125rem]", m: "text-[0.9375rem]", g: "text-[1.0625rem]" };
+const descSize: Record<Size, string> = { p: "text-body-sm", m: "text-body", g: "text-body-lg" };
 const visualBox: Record<Size, string> = { p: "h-12 w-12", m: "h-16 w-16", g: "h-24 w-24" };
-const ctaSize: Record<Size, string> = { p: "h-9 px-4 text-[0.8125rem]", m: "h-10 px-5 text-[0.875rem]", g: "h-12 px-6 text-[0.9375rem]" };
+const ctaSize: Record<Size, string> = { p: "min-h-11 px-4 text-body-sm", m: "min-h-11 px-5 text-body-sm", g: "min-h-12 px-6 text-body" };
 
 export function PartnerCard({
   orientation: orientacaoFixa, size = "m", eyebrow, title, description, cta, secondary, visual, surface = "card", className, ...props
@@ -81,20 +85,21 @@ export function PartnerCard({
         {eyebrow && (
           <div className="mb-3">
             {dark ? (
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-white/85"><span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />{eyebrow}</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-caption font-semibold uppercase tracking-[0.14em] text-white/85"><span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />{eyebrow}</span>
             ) : (
               <Selo size="sm">{eyebrow}</Selo>
             )}
           </div>
         )}
-        <h3 className={cn("font-bold [text-wrap:balance]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
+        <h3 className={cn("font-bold [text-wrap:pretty]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
           {withHighlight(title, "text-primary-text")}
         </h3>
         {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : surface === "tint" ? "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]" : "text-muted-foreground")}>{description}</p>}
-        <div className={cn("mt-auto flex flex-wrap items-center gap-x-5 gap-y-3", size === "p" ? "pt-4" : "pt-6")}>
+        <div className={cn("@container/acoes mt-auto", size === "p" ? "pt-4" : "pt-6")}>
+        <div className="flex flex-col items-stretch gap-3 @[22rem]/acoes:flex-row @[22rem]/acoes:flex-wrap @[22rem]/acoes:items-center @[22rem]/acoes:gap-x-5">
           <Cta
             {...(cta.href ? { href: cta.href } : { type: "button", onClick: cta.onClick })}
-            className={cn("group inline-flex items-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", dark && "focus-visible:ring-offset-[var(--graphite-950)]", ctaSize[size])}
+            className={cn("group inline-flex items-center justify-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", dark && "focus-visible:ring-offset-[var(--graphite-950)]", ctaSize[size])}
           >
             {cta.label}
             <ArrowRight className={cn("transition-transform group-hover:translate-x-0.5", size === "g" ? "h-5 w-5" : "h-4 w-4")} aria-hidden />
@@ -102,11 +107,16 @@ export function PartnerCard({
           {secondary && (
             <Sec
               {...(secondary.href ? { href: secondary.href } : { type: "button", onClick: secondary.onClick })}
-              className={cn("text-[0.8125rem] font-semibold underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded", dark ? "text-white/80" : "text-[var(--primary-text,var(--primary))]")}
+              className={cn(
+                "inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-body-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "@[22rem]/acoes:justify-start @[22rem]/acoes:rounded-sm @[22rem]/acoes:border-transparent @[22rem]/acoes:px-1 @[22rem]/acoes:underline-offset-4 @[22rem]/acoes:hover:underline",
+                dark ? "border-white/25 text-white/85 hover:bg-white/10 @[22rem]/acoes:hover:bg-transparent" : "border-[var(--border-strong)] text-[var(--primary-text,var(--primary))] hover:bg-accent @[22rem]/acoes:hover:bg-transparent",
+              )}
             >
               {secondary.label}
             </Sec>
           )}
+        </div>
         </div>
       </div>
     </div>

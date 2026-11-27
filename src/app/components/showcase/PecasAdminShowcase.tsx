@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { CalendarPlus, Mail, ShieldCheck } from "lucide-react";
+import { CalendarPlus, ShieldCheck } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { SectionBlock, ShowcaseCard, Panel } from "./shared/SectionBlock";
 import { CaixaDeEntrada, type ItemDaCaixa } from "../ui/caixa-de-entrada";
@@ -11,7 +11,6 @@ import { Campo, GradeDeCampos } from "../ui/campo";
 import { CampoDeEmail } from "../ui/campo-de-email";
 import { Quadro } from "../ui/quadro";
 import { ChipDeEstado } from "../ui/chip-de-estado";
-import { IconeComBase } from "../ui/painel-dados";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
@@ -24,10 +23,11 @@ import { EstadoFinal } from "../ui/estado-vazio";
 function DemoCaixa() {
   const { t } = useI18n();
   const [estado, setEstado] = useState<EstadoDoEnvio>("parado");
+  const pessoa = (s: string) => <Avatar className="size-9"><AvatarFallback className="text-label font-semibold">{s}</AvatarFallback></Avatar>;
   const itens: ItemDaCaixa[] = [
-    { id: "1", titulo: t("Example contact 1", "Contato de exemplo 1"), resumo: t("I'd like to understand the Pilot Project…", "Gostaria de entender o Projeto Piloto…"), quando: "09:42", lida: false, inicio: <IconeComBase tom="marca" tamanho="sm"><Mail /></IconeComBase>, etiqueta: <ChipDeEstado tom="marca">{t("New", "Nova")}</ChipDeEstado> },
-    { id: "2", titulo: t("Example contact 2", "Contato de exemplo 2"), resumo: t("Thanks for the meeting yesterday.", "Obrigado pela reunião de ontem."), quando: t("Yesterday", "Ontem"), lida: true, inicio: <IconeComBase tom="neutro" tamanho="sm"><Mail /></IconeComBase> },
-    { id: "3", titulo: t("Example contact 3", "Contato de exemplo 3"), resumo: t("Can we move the call to Thursday?", "Podemos passar a conversa para quinta?"), quando: "24/11", lida: true, inicio: <IconeComBase tom="neutro" tamanho="sm"><Mail /></IconeComBase> },
+    { id: "1", titulo: t("Example contact 1", "Contato de exemplo 1"), resumo: t("I'd like to understand the Pilot Project…", "Gostaria de entender o Projeto Piloto…"), quando: "09:42", lida: false, inicio: pessoa("C1"), etiqueta: <ChipDeEstado tom="marca">{t("New", "Nova")}</ChipDeEstado> },
+    { id: "2", titulo: t("Example contact 2", "Contato de exemplo 2"), resumo: t("Thanks for the meeting yesterday.", "Obrigado pela reunião de ontem."), quando: t("Yesterday", "Ontem"), lida: true, inicio: pessoa("C2") },
+    { id: "3", titulo: t("Example contact 3", "Contato de exemplo 3"), resumo: t("Can we move the call to Thursday?", "Podemos passar a conversa para quinta?"), quando: "24/11", lida: true, inicio: pessoa("C3") },
   ];
   return (
     <div className="h-[34rem]">
@@ -42,8 +42,8 @@ function DemoCaixa() {
               <p className="text-body-sm text-muted-foreground">{t("Example message", "Mensagem de exemplo")} · {item.quando}</p>
             </div>
             <Conversa>
-              <BalaoDaConversa autor="outro" nome={item.titulo} quando={item.quando}>{item.resumo} {t("Could you tell me how it works?", "Pode me contar como funciona?")}</BalaoDaConversa>
-              <BalaoDaConversa autor="eu" nome="Dani" quando="10:05" estado="lida">{t("Of course! I'll send the details by e-mail.", "Claro! Envio os detalhes por e-mail.")}</BalaoDaConversa>
+              <BalaoDaConversa autor="outro" nome={item.titulo} quando={item.quando} naoLida={item.lida === false}>{item.resumo} {t("Could you tell me how it works?", "Pode me contar como funciona?")}</BalaoDaConversa>
+              <BalaoDaConversa autor="eu" nome="Dani" quando="10:05" estado="aberto">{t("Of course! I'll send the details by e-mail.", "Claro! Envio os detalhes por e-mail.")}</BalaoDaConversa>
             </Conversa>
             <form onSubmit={e => { e.preventDefault(); setEstado("enviando"); window.setTimeout(() => setEstado("feito"), 1200); }} className="grid gap-3">
               <Campo rotulo={t("Reply", "Responder")}>{p => <Textarea {...p} rows={3} className="bg-card text-body" />}</Campo>
@@ -65,7 +65,7 @@ function DemoConversa() {
         <SeparadorDaConversa>{t("Today", "Hoje")}</SeparadorDaConversa>
         <BalaoDaConversa autor="eu" avatar={av("DM")} quando="14:02" estado="lida">{t("Hello! We have a Health challenge that matches your profile. Interested?", "Olá! Temos um desafio em Saúde que combina com o seu perfil. Tem interesse?")}</BalaoDaConversa>
         <BalaoDaConversa autor="outro" avatar={av("PE")} nome={t("Example partner", "Parceira de exemplo")} quando="14:10">{t("Yes! Can we talk this week?", "Tenho! Podemos conversar esta semana?")}</BalaoDaConversa>
-        <BalaoDaConversa autor="eu" avatar={av("DM")} quando="14:12" estado="erro">{t("Thursday at 10 am works for me.", "Quinta às 10h fica bom para mim.")}</BalaoDaConversa>
+        <BalaoDaConversa autor="eu" avatar={av("DM")} quando="14:12" estado="clicado">{t("Thursday at 10 am works for me.", "Quinta às 10h fica bom para mim.")}</BalaoDaConversa>
         <IndicadorDeDigitacao avatar={av("PE")} />
       </Conversa>
     </ShowcaseCard>
@@ -119,7 +119,7 @@ function DemoCadastro() {
           obrigatorios={t("* Required fields", "* Campos obrigatórios")}
           onSubmit={e => { e.preventDefault(); ir(1); }}
           lateral={<LateralDaEtapa icone={<ShieldCheck />} titulo={t("Your data is safe", "Seus dados estão seguros")} paragrafos={[t("We only use these details to contact you about projects.", "Usamos esses dados só para falar com você sobre projetos.")]} />}
-          barra={<BarraDaEtapa />}
+          barra={<BarraDaEtapa className="static" />}
         >
           <GradeDeCampos>
             <Campo rotulo={t("Full name", "Nome completo")} obrigatorio value={nome} onChange={e => setNome(e.target.value)} />
@@ -128,12 +128,12 @@ function DemoCadastro() {
         </EtapaDoCadastro>
       )}
       {atual === 1 && (
-        <EtapaDoCadastro titulo={t("Your expertise", "Sua atuação")} tituloRef={titulo} onSubmit={e => { e.preventDefault(); ir(2); }} barra={<BarraDaEtapa onVoltar={() => ir(0)} />}>
+        <EtapaDoCadastro titulo={t("Your expertise", "Sua atuação")} tituloRef={titulo} onSubmit={e => { e.preventDefault(); ir(2); }} barra={<BarraDaEtapa className="static" onVoltar={() => ir(0)} />}>
           <Campo rotulo={t("Main specialty", "Especialidade principal")} placeholder="UX Research" value={area} onChange={e => setArea(e.target.value)} />
         </EtapaDoCadastro>
       )}
       {atual === 2 && (
-        <EtapaDoCadastro titulo={t("Check before sending", "Confira antes de enviar")} tituloRef={titulo} onSubmit={e => { e.preventDefault(); setFim(true); }} barra={<BarraDaEtapa onVoltar={() => ir(1)} rotuloContinuar={t("Send sign-up", "Enviar cadastro")} />}>
+        <EtapaDoCadastro titulo={t("Check before sending", "Confira antes de enviar")} tituloRef={titulo} onSubmit={e => { e.preventDefault(); setFim(true); }} barra={<BarraDaEtapa className="static" onVoltar={() => ir(1)} rotuloContinuar={t("Send sign-up", "Enviar cadastro")} />}>
           <ListaDeRevisao valoresAbertos={["voce"]}>
             <BlocoDeRevisao valor="voce" titulo={`01 · ${t("You", "Você")}`} nomeEtapa={t("You", "Você")} resumo={[nome, email]} onEditar={() => ir(0)}>
               <LinhaDeDado rotulo={t("Full name", "Nome completo")} valor={nome} />
@@ -194,7 +194,7 @@ export function PecasAdminShowcase() {
         )}
         arquivo="ui/conversa.tsx"
         nomes={["Conversa", "BalaoDaConversa", "SeparadorDaConversa", "IndicadorDeDigitacao"]}
-        api={`<Conversa>
+        api={`<Conversa alinhamento="lados">   // "lados" (chat): enviadas à direita; "esquerda" (padrão): histórico de e-mails
   <SeparadorDaConversa>Hoje</SeparadorDaConversa>
   <BalaoDaConversa autor="outro" nome="Ana" quando="09:42">…</BalaoDaConversa>
   <BalaoDaConversa autor="eu" quando="10:05" estado="lida">…</BalaoDaConversa>
@@ -212,7 +212,10 @@ export function PecasAdminShowcase() {
         )}
         arquivo="ui/agenda-do-mes.tsx"
         nomes={["AgendaDoMes"]}
-        api={`<AgendaDoMes eventos={[{ id, data: "2026-11-27", hora: "10:00", titulo: "Conversa", tom: "marca" }]} onDiaChange={setDia} />`}
+        api={`// Como na especificação da área restrita (ADMIN_REACT.md §7.1):
+<AgendaDoMes mes={mes} aoMudarMes={setMes} selecionado={dia} aoSelecionar={setDia}
+  eventos={[{ data: new Date(2026, 10, 27), titulo: "Conversa", hora: "10:00" }, { data: ontem, passado: true }]}
+  diasSemEventos="inativos" rotuloDoDia={(d, ev) => \`\${d.toLocaleDateString("pt-BR")}: \${ev.length} reuniões\`} />`}
       >
         <DemoAgenda />
       </SectionBlock>

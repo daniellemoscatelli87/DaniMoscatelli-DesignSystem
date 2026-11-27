@@ -36,9 +36,9 @@ function CabecalhoDaPagina({ saudacao, titulo, descricao, acoes, abas, nivel = 1
   const topo = (
     <header data-slot="cabecalho-da-pagina" className={cn("flex flex-wrap items-start justify-between gap-x-8 gap-y-4", !abas && className)}>
       <div className="min-w-0 flex-[1_1_36rem]">
-        {saudacao && <p className="mb-2 text-[0.9375rem] font-semibold text-primary-text">{saudacao}</p>}
+        {saudacao && <p className="mb-2 text-body font-semibold text-primary-text">{saudacao}</p>}
         <Heading level={nivel} size="page" id={idDoTitulo} tabIndex={idDoTitulo ? -1 : undefined} className="outline-none">{titulo}</Heading>
-        {descricao && <p className="mt-3 max-w-[70ch] text-[1rem] leading-relaxed text-foreground [text-wrap:pretty]">{descricao}</p>}
+        {descricao && <p className="mt-3 max-w-[70ch] text-body leading-relaxed text-foreground [text-wrap:pretty]">{descricao}</p>}
       </div>
       {acoes && <div data-slot="acoes-da-pagina" className="flex max-w-full flex-wrap items-center gap-2">{acoes}</div>}
     </header>

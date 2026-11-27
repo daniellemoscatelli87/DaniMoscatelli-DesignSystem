@@ -33,10 +33,10 @@ const WHATS = linkWhatsApp("5541997485414", "Olá, Dani! Vim pelo site danimosca
 
 function Lista({ itens }: { itens: string[] }) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="space-y-2">
       {itens.map(item => (
-        <li key={item} className="flex gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground">
-          <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-success" /> {item}
+        <li key={item} className="flex gap-2 text-body-sm leading-relaxed text-muted-foreground">
+          <Check aria-hidden className="mt-1 h-4 w-4 shrink-0 text-success-text" /> {item}
         </li>
       ))}
     </ul>
@@ -64,16 +64,16 @@ function Codigo({ children }: { children: string }) {
   return (
     <Panel className="min-w-0 p-5">
       <SubTitle>{t("Code", "Código")}</SubTitle>
-      <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 font-[family-name:var(--font-mono)] text-[0.75rem] leading-relaxed text-muted-foreground"><code>{children}</code></pre>
+      <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 font-[family-name:var(--font-mono)] text-label leading-relaxed text-muted-foreground"><code>{children}</code></pre>
     </Panel>
   );
 }
 
 function Rotulo({ titulo, desc }: { titulo: string; desc: string }) {
   return (
-    <div className="mb-2.5">
-      <p className="text-[0.875rem] font-semibold text-foreground">{titulo}</p>
-      <p className="text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
+    <div className="mb-2">
+      <p className="text-body-sm font-semibold text-foreground">{titulo}</p>
+      <p className="text-body-sm leading-relaxed text-muted-foreground">{desc}</p>
     </div>
   );
 }
@@ -208,11 +208,9 @@ function SecaoFlutuantes() {
           "Fixos no canto inferior direito de todas as páginas do site: o botão do WhatsApp; na Home, o aviso “Tem um projeto?” apontando para ele; no Seja Parceiro e no Projeto Piloto, a pílula de ação ao lado dele; e, quando o rodapé aparece, o botão de voltar ao topo. O verde do WhatsApp é a única cor fora do DS (exceção da dona do produto, 19/11/2026).",
         )}
       />
-      <div className="flex justify-end">
-        <Button type="button" variant="outline" size="sm" onClick={() => setChave(k => k + 1)}>
-          <RotateCcw aria-hidden /> {t("Show the notices again", "Mostrar os avisos de novo")}
-        </Button>
-      </div>
+      <Button type="button" variant="outline" size="sm" onClick={() => setChave(k => k + 1)}>
+        <RotateCcw aria-hidden /> {t("Show the notices again", "Mostrar os avisos de novo")}
+      </Button>
       <GradeDeCards className="gap-6 lg:grid-cols-2">
         <ItemDaGrade>
           <Rotulo titulo={t("Computer: notice above the button", "Computador: aviso acima do botão")} desc={t("From 1024 px, the notice floats above the WhatsApp button, with the arrow pointing down.", "A partir de 1024 px, o aviso flutua acima do botão do WhatsApp, com a seta para baixo.")} />
@@ -353,7 +351,7 @@ function SecaoCookies() {
         />
         {!aberto && (
           <div className="absolute inset-x-0 bottom-4 flex flex-col items-center gap-2">
-            <p aria-live="polite" className="text-[0.8125rem] text-muted-foreground">{t("Choice:", "Escolha:")} <strong className="text-foreground">{escolha}</strong></p>
+            <p aria-live="polite" className="text-body-sm text-muted-foreground">{t("Choice:", "Escolha:")} <strong className="text-foreground">{escolha}</strong></p>
             <Button type="button" variant="outline" size="sm" onClick={() => setAberto(true)}>{t("Cookie preferences", "Preferências de cookies")}</Button>
           </div>
         )}
@@ -474,10 +472,10 @@ function SecaoEscopo() {
       <CurvaSecao posicao="base" cor="var(--background)" />
       <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SurgirAoRolar escalonar passo={80} duracao={1400} className="mx-auto mb-8 max-w-3xl text-center sm:mb-16">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-300">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-300">
             <span aria-hidden className="size-1.5 rounded-full bg-crimson-300" />{t("Scope of work", "Escopo de atuação")}
           </p>
-          <h3 id="escopo-demo-titulo" className="mb-4 text-3xl font-bold tracking-[-0.02em] text-graphite-50 sm:text-4xl">{t("Where we can work", "Onde podemos atuar")}</h3>
+          <h3 id="escopo-demo-titulo" className="mb-4 text-h2 font-bold tracking-[-0.02em] text-graphite-50 sm:text-display-md">{t("Where we can work", "Onde podemos atuar")}</h3>
           <p className="mb-3 text-base font-medium leading-snug text-crimson-300 sm:text-lg">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-graphite-300 sm:text-base">
             {t(
@@ -522,7 +520,7 @@ function SecaoArtigos() {
       <SurgirAoRolar efeito="desfoque">
         <SeloSecao className="mb-3">{t("Insights & articles", "Insights & artigos")}</SeloSecao>
       </SurgirAoRolar>
-      <TituloQueSurge as="h3" destaque={destaque} className="mx-auto mb-3 max-w-3xl text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-[2.25rem]">{titulo}</TituloQueSurge>
+      <TituloQueSurge as="h3" destaque={destaque} className="mx-auto mb-3 max-w-3xl text-2xl font-bold leading-tight text-foreground sm:text-h2 md:text-display-md">{titulo}</TituloQueSurge>
       <SurgirAoRolar efeito="desfoque" atraso={200 + titulo.split(" ").length * 45}>
         <p className="mx-auto mb-12 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           {t(
@@ -648,7 +646,7 @@ function SecaoFrentes() {
       </GradeDeCards>
       <Panel className="p-5">
         <SubTitle>{t("Props", "Props")}</SubTitle>
-        <ul className="grid grid-cols-1 gap-x-8 gap-y-2 text-[0.8125rem] leading-relaxed text-muted-foreground md:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-x-8 gap-y-2 text-body-sm leading-relaxed text-muted-foreground md:grid-cols-2">
           {[
             ["icone, titulo, subtitulo, descricao, temas", t("Content. Topics are short (1 or 2 words); on wide screens they stay on one line.", "Conteúdo. Os temas são curtos (1 ou 2 palavras); em telas largas ficam numa linha só.")],
             ["tom", t("“escuro” (default, site) or “claro”.", "“escuro” (padrão, site) ou “claro”.")],
@@ -707,17 +705,17 @@ function SecaoCurvas() {
       />
       <Moldura rotulo={t("Curved dividers demo", "Demonstração dos divisores curvos")}>
         <div className="bg-background px-5 py-8 text-center">
-          <p className="text-[0.8125rem] font-semibold text-muted-foreground">{t("Light section", "Seção clara")}</p>
+          <p className="text-body-sm font-semibold text-muted-foreground">{t("Light section", "Seção clara")}</p>
         </div>
         <div className="relative overflow-hidden bg-graphite-900 px-5 pb-20 pt-20 text-center sm:pb-28 sm:pt-28 lg:pb-32 lg:pt-32">
           <CurvaSecao posicao="topo" cor="var(--background)" />
           <SeloSecao size="sm" className="mb-3 border-crimson-300/60 bg-transparent text-crimson-300">{t("Scope of work", "Escopo de atuação")}</SeloSecao>
-          <p className="text-[1.375rem] font-extrabold tracking-tight text-white">{t("Where we can work", "Onde podemos atuar")}</p>
-          <p className="mx-auto mt-1 max-w-md text-[0.875rem] leading-relaxed text-graphite-200">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
+          <p className="text-h3 font-extrabold tracking-tight text-white">{t("Where we can work", "Onde podemos atuar")}</p>
+          <p className="mx-auto mt-1 max-w-md text-body-sm leading-relaxed text-graphite-200">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
           <CurvaSecao posicao="base" cor="var(--card)" />
         </div>
         <div className="bg-card px-5 py-8 text-center">
-          <p className="text-[0.8125rem] font-semibold text-muted-foreground">{t("Next light section", "Próxima seção clara")}</p>
+          <p className="text-body-sm font-semibold text-muted-foreground">{t("Next light section", "Próxima seção clara")}</p>
         </div>
       </Moldura>
       <Orientacoes

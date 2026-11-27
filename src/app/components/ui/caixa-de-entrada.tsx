@@ -114,20 +114,27 @@ function CaixaDeEntrada({
                 const selecionada = i.id === aberta;
                 return (
                   <li key={i.id}>
+                    {/* A linha inteira abre a mensagem: o botão é o título e se estende sobre a linha (::after). */}
                     <LinhaDeLista
-                      as="button"
-                      data-id={i.id}
-                      aria-current={selecionada ? "true" : undefined}
+                      interativa
                       selecionada={selecionada}
-                      onClick={() => abrir(i.id)}
                       quebraAcoes={false}
                       inicio={i.inicio}
                       className={cn("relative py-4 before:absolute before:inset-y-0 before:left-0 before:w-1 before:bg-transparent", selecionada && "before:bg-primary")}
                       titulo={
-                        <span className={cn("block truncate", i.lida === false ? "font-bold text-foreground" : "font-semibold text-foreground")}>
+                        <button
+                          type="button"
+                          data-id={i.id}
+                          aria-current={selecionada ? "true" : undefined}
+                          onClick={() => abrir(i.id)}
+                          className={cn(
+                            "block w-full truncate text-left outline-none after:absolute after:inset-0 after:content-[''] focus-visible:after:ring-2 focus-visible:after:ring-inset focus-visible:after:ring-ring",
+                            i.lida === false ? "font-bold text-foreground" : "font-semibold text-foreground",
+                          )}
+                        >
                           {i.titulo}
                           {i.lida === false && <span className="sr-only"> ({tx.naoLida})</span>}
-                        </span>
+                        </button>
                       }
                       descricao={i.resumo != null ? <span className="block truncate text-body-sm">{i.resumo}</span> : undefined}
                       fim={

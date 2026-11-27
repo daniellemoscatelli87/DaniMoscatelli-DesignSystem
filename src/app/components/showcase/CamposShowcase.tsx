@@ -8,6 +8,8 @@ import { CampoDeEmail } from "../ui/campo-de-email";
 import { CampoEstadoCidade } from "../ui/campo-estado-cidade";
 import { CampoDeBusca } from "../ui/campo-de-busca";
 import { CampoCopiavel } from "../ui/campo-copiavel";
+import { CampoDeHorario } from "../ui/campo-de-horario";
+import { Calendar } from "../ui/calendar";
 import { CampoDeEmails } from "../ui/campo-de-emails";
 import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
 import { GrupoDeCartoesDeEscolha, CartaoDeEscolha } from "../ui/cartao-de-escolha";
@@ -84,6 +86,18 @@ function DemoBusca() {
   );
 }
 
+function DemoHorario() {
+  const { t } = useI18n();
+  const [hora, setHora] = useState("");
+  const [data, setData] = useState<Date | undefined>(new Date());
+  return (
+    <ShowcaseCard className="grid gap-6 md:grid-cols-[auto_minmax(0,1fr)] md:items-start">
+      <Calendar mode="single" selected={data} onSelect={setData} className="justify-self-start rounded-lg border border-border" />
+      <CampoDeHorario rotulo={t("Meeting time", "Horário da reunião")} valor={hora} onValorChange={setHora} indisponiveis={["09:00", "09:15", "14:30"]} obrigatorio />
+    </ShowcaseCard>
+  );
+}
+
 function DemoEmails() {
   const { t } = useI18n();
   const [para, setPara] = useState<string[]>(["ana@exemplo.com", "bruno@exemplo"]);
@@ -107,7 +121,8 @@ function DemoChips() {
         onValorChange={setValor}
         opcoes={[
           { valor: "novas", rotulo: t("New", "Novas"), contagem: 3 },
-          { valor: "respondidas", rotulo: t("Answered", "Respondidas"), contagem: 12 },
+          { valor: "lidas", rotulo: t("Read", "Lidas"), contagem: 12 },
+          { valor: "respondidas", rotulo: t("Answered", "Respondidas") },
           { valor: "arquivadas", rotulo: t("Archived", "Arquivadas") },
         ]}
       />
@@ -142,9 +157,9 @@ function DemoBotoes() {
   return (
     <ShowcaseCard className="grid gap-4">
       <p className="text-body-sm text-muted-foreground">{t("Click: sending, then sent with a check, then back. Every second click fails, to show “Try again”.", "Clique: enviando, depois enviado com check, depois volta. Um clique sim, outro não, a demonstração falha, para mostrar o “Tentar de novo”.")}</p>
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="grid gap-3 sm:flex sm:flex-wrap sm:items-center">
         <BotaoDeEnvio estado={estado} onClick={enviar} onVoltar={() => setEstado("parado")} icone={<Send aria-hidden />}>{t("Notify me", "Quero ser avisado")}</BotaoDeEnvio>
-        <Button variant="outline-destructive"><Trash2 aria-hidden />{t("Delete announcement", "Excluir comunicado")}</Button>
+        <Button variant="exclusao-contorno"><Trash2 aria-hidden />{t("Delete announcement", "Excluir comunicado")}</Button>
       </div>
     </ShowcaseCard>
   );
@@ -242,6 +257,23 @@ export function CamposShowcase() {
       </SectionBlock>
 
       <SectionBlock
+        id="campos-horario"
+        titulo={t("Time field", "Campo de horário")}
+        quando={t(
+          "The time of a meeting or a scheduled send, in 15-minute steps, with the time zone written below. Pairs with the Calendar for the date.",
+          "A hora de uma reunião ou de um envio agendado, em passos de 15 minutos, com o fuso escrito embaixo. Faz par com o Calendar para a data.",
+        )}
+        arquivo="ui/campo-de-horario.tsx"
+        nomes={["CampoDeHorario"]}
+        api={`<CampoDeHorario rotulo="Horário da reunião" valor={hora} onValorChange={setHora}
+  passo={15} inicio="07:00" fim="21:00" indisponiveis={["09:00"]} fuso="Horário de Brasília (UTC−3)" />`}
+        faca={[t("Always write the time zone.", "Escreva sempre o fuso.")]}
+        naoFaca={[t("Don't ask for minutes outside the 15-minute steps.", "Não peça minutos fora dos passos de 15 minutos.")]}
+      >
+        <DemoHorario />
+      </SectionBlock>
+
+      <SectionBlock
         id="campos-chips"
         titulo={t("Filter chips", "Chips de filtro")}
         quando={t(
@@ -278,13 +310,13 @@ export function CamposShowcase() {
         id="campos-botoes"
         titulo={t("Send button and delete in outline", "Botão de envio e exclusão em contorno")}
         quando={t(
-          "BotaoDeEnvio gives feedback for each send without changing size (sending, sent with a check, try again). The outline-destructive Button is for deleting when it isn't the main action; the confirmation keeps the filled destructive button.",
-          "BotaoDeEnvio dá o retorno de cada envio sem mudar de tamanho (enviando, enviado com check, tentar de novo). O Button outline-destructive é para excluir quando não é a ação principal; a confirmação continua com o botão destructive cheio.",
+          "BotaoDeEnvio gives feedback for each send without changing size (sending, sent with a check, try again). The exclusao-contorno Button (error-tone border and text, error-tinted hover) is for deleting when it isn't the main action; the confirmation keeps the filled destructive button.",
+          "BotaoDeEnvio dá o retorno de cada envio sem mudar de tamanho (enviando, enviado com check, tentar de novo). O Button exclusao-contorno (borda e texto no tom de erro, hover com o fundo de erro) é para excluir quando não é a ação principal; a confirmação continua com o botão destructive cheio.",
         )}
         arquivo="ui/botao-de-envio.tsx · ui/button.tsx"
-        nomes={["BotaoDeEnvio", 'Button variant="outline-destructive"']}
+        nomes={["BotaoDeEnvio", 'Button variant="exclusao-contorno"']}
         api={`<BotaoDeEnvio estado={estado} onClick={enviar} onVoltar={() => setEstado("parado")}>Quero ser avisado</BotaoDeEnvio>
-<Button variant="outline-destructive"><Trash2 /> Excluir</Button>`}
+<Button variant="exclusao-contorno"><Trash2 /> Excluir</Button>`}
       >
         <DemoBotoes />
       </SectionBlock>

@@ -21,7 +21,7 @@ import { SectionHeader } from "./shared/SectionHeader";
 function SubSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-12">
-      <h3 className="text-[0.8125rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
+      <h3 className="text-body-sm font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-5">{title}</h3>
       {children}
     </div>
   );
@@ -69,8 +69,8 @@ function InputField({
   leftIcon?: React.ReactNode; rightElement?: React.ReactNode; disabled?: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
-      {label && <label className="text-[0.875rem] font-medium text-foreground">{label}</label>}
+    <div className="flex flex-col gap-1">
+      {label && <label className="text-body-sm font-medium text-foreground">{label}</label>}
       <div className="relative">
         {leftIcon && (
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">{leftIcon}</span>
@@ -86,8 +86,8 @@ function InputField({
           <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">{rightElement}</span>
         )}
       </div>
-      {error && <p className="text-[0.8125rem] text-error-text flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
-      {hint && !error && <p className="text-[0.8125rem] text-muted-foreground">{hint}</p>}
+      {error && <p className="text-body-sm text-error-text flex items-center gap-1"><AlertCircle className="h-3.5 w-3.5" />{error}</p>}
+      {hint && !error && <p className="text-body-sm text-muted-foreground">{hint}</p>}
     </div>
   );
 }
@@ -133,8 +133,8 @@ export function FormShowcase() {
         <SubSection title={t("Ghost and Link Buttons", "Botões Ghost e Link")}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <ShowcaseCard>
-              <p className="text-[0.875rem] font-semibold text-foreground mb-1">{t("Ghost button", "Botão ghost")}</p>
-              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+              <p className="text-body-sm font-semibold text-foreground mb-1">{t("Ghost button", "Botão ghost")}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground mb-5">
                 {t("Use for tertiary or contextual actions that should remain available without competing with the primary action.", "Use para ações terciárias ou contextuais que devem continuar disponíveis sem competir com a ação principal.")}
               </p>
               <div className="flex flex-wrap items-center gap-2">
@@ -144,8 +144,8 @@ export function FormShowcase() {
               </div>
             </ShowcaseCard>
             <ShowcaseCard>
-              <p className="text-[0.875rem] font-semibold text-foreground mb-1">{t("Link button", "Botão link")}</p>
-              <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+              <p className="text-body-sm font-semibold text-foreground mb-1">{t("Link button", "Botão link")}</p>
+              <p className="text-body-sm leading-relaxed text-muted-foreground mb-5">
                 {t("Use for low-emphasis navigation. Keep mutation, submission and destructive actions in standard button variants.", "Use para navegação de baixa ênfase. Mantenha ações de alteração, envio e exclusão nas variantes padrão de botão.")}
               </p>
               <div className="flex flex-wrap items-center gap-5">
@@ -223,20 +223,20 @@ export function FormShowcase() {
         <SubSection title={t("Password", "Senha")}>
           <div id="password" className="scroll-mt-32" />
           <ShowcaseCard>
-            <p className="mb-5 text-[0.8125rem] leading-relaxed text-muted-foreground">
+            <p className="mb-5 text-body-sm leading-relaxed text-muted-foreground">
               {t("Password and confirmation fields, each with a show/hide button. Strength in four bars plus a text label, calculated from the requirements met. The hint list gives each requirement a green check as soon as it is met; the icon changes shape and screen readers hear \"met\", so colour is never the only signal. The confirmation shows whether the passwords match after the person types.", "Campos de senha e de confirmação, cada um com botão de exibir/ocultar. Força em quatro barras mais um rótulo em texto, calculada pelos requisitos atendidos. A lista de dicas dá um check verde a cada requisito assim que ele é atendido; o ícone muda de forma e o leitor de tela ouve \"atendido\", então a cor nunca é o único sinal. A confirmação mostra se as senhas coincidem depois que a pessoa digita.")}
             </p>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
               <div>
-                <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it: create and confirm", "Experimente: criar e confirmar")}</p>
+                <p className="mb-3 text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it: create and confirm", "Experimente: criar e confirmar")}</p>
                 <PasswordConfirm senha={senha} confirmacao={confirmacao} onSenhaChange={setSenha} onConfirmacaoChange={setConfirmacao} regras={regrasPadrao.map((r) => ({ ...r, label: ({ tamanho: t("8 characters or more", "8 caracteres ou mais"), caixa: t("Upper and lower case", "Maiúsculas e minúsculas"), numero: t("At least one number", "Pelo menos um número"), simbolo: t("A special symbol", "Um símbolo especial") } as Record<string, string>)[r.id] }))} textos={{ senha: t("Password", "Senha"), confirmar: t("Confirm password", "Confirmar senha"), mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha"), forca: t("Password strength", "Força da senha"), niveis: ["—", t("Weak", "Fraca"), t("Fair", "Razoável"), t("Good", "Boa"), t("Strong", "Forte")], dicaTitulo: t("To create your password, use:", "Para criar sua senha, use:"), atendido: t("met", "atendido"), naoAtendido: t("not met", "não atendido"), naoCoincidem: t("Passwords do not match", "As senhas não coincidem"), coincidem: t("Passwords match", "As senhas coincidem") }} />
               </div>
               <div>
-                <p className="mb-3 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("All requirements met (single field)", "Todos os requisitos atendidos (campo único)")}</p>
+                <p className="mb-3 text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("All requirements met (single field)", "Todos os requisitos atendidos (campo único)")}</p>
                 <PasswordConfirm semConfirmacao senha={senhaUnica} confirmacao="" onSenhaChange={setSenhaUnica} onConfirmacaoChange={() => {}} regras={regrasPadrao.map((r) => ({ ...r, label: ({ tamanho: t("8 characters or more", "8 caracteres ou mais"), caixa: t("Upper and lower case", "Maiúsculas e minúsculas"), numero: t("At least one number", "Pelo menos um número"), simbolo: t("A special symbol", "Um símbolo especial") } as Record<string, string>)[r.id] }))} textos={{ senha: t("Password", "Senha"), confirmar: t("Confirm password", "Confirmar senha"), mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha"), forca: t("Password strength", "Força da senha"), niveis: ["—", t("Weak", "Fraca"), t("Fair", "Razoável"), t("Good", "Boa"), t("Strong", "Forte")], dicaTitulo: t("To create your password, use:", "Para criar sua senha, use:"), atendido: t("met", "atendido"), naoAtendido: t("not met", "não atendido"), naoCoincidem: t("Passwords do not match", "As senhas não coincidem"), coincidem: t("Passwords match", "As senhas coincidem") }} />
               </div>
             </div>
-            <pre className="mt-6 overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { PasswordConfirm } from "@/app/components/ui/password-field";
+            <pre className="mt-6 whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { PasswordConfirm } from "@/app/components/ui/password-field";
 
 const [senha, setSenha] = useState("");
 const [confirmacao, setConfirmacao] = useState("");
@@ -248,7 +248,7 @@ const [confirmacao, setConfirmacao] = useState("");
 
 // Campo único (troca de senha em etapas, por exemplo):
 <PasswordConfirm semConfirmacao … />`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("Requirements: 8+ characters, upper and lower case, a number, a special symbol. Override with the regras prop (id, label, test).", "Requisitos: 8 ou mais caracteres, maiúsculas e minúsculas, um número, um símbolo especial. Troque com a prop regras (id, label, test).")}</li>
               <li>• {t("Strength = requirements met (0–4): Weak, Fair, Good, Strong. Bars in the primary colour, label in text.", "Força = requisitos atendidos (0–4): Fraca, Razoável, Boa, Forte. Barras na cor primária, rótulo em texto.")}</li>
               <li>• {t("Show/hide: 36 px button inside the field, aria-pressed and \"Show/Hide password\" label; each field toggles on its own.", "Exibir/ocultar: botão de 36 px dentro do campo, aria-pressed e rótulo \"Mostrar/Ocultar senha\"; cada campo alterna sozinho.")}</li>
@@ -260,21 +260,21 @@ const [confirmacao, setConfirmacao] = useState("");
         <SubSection title="Textarea">
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Message", "Mensagem")}</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-body-sm font-medium text-foreground">{t("Message", "Mensagem")}</label>
                 <textarea
                   placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
               </div>
-              <div className="flex flex-col gap-1.5">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Notes", "Notas")}</label>
+              <div className="flex flex-col gap-1">
+                <label className="text-body-sm font-medium text-foreground">{t("Notes", "Notas")}</label>
                 <textarea
                   placeholder={t("Add notes...", "Adicione notas...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
                   disabled
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
@@ -287,10 +287,10 @@ const [confirmacao, setConfirmacao] = useState("");
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[t("Default Select", "Select padrão"), t("With Label", "Com rótulo")].map((lbl, i) => (
-                <div key={i} className="flex flex-col gap-1.5">
-                  <label className="text-[0.875rem] font-medium text-foreground">{lbl}</label>
+                <div key={i} className="flex flex-col gap-1">
+                  <label className="text-body-sm font-medium text-foreground">{lbl}</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-md px-3 py-2.5 text-[0.9375rem] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
+                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-md px-3 py-2 text-body outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
                       <option>{t("Select an option...", "Selecione uma opção...")}</option>
                       <option>{t("Option Alpha", "Opção Alfa")}</option>
                       <option>{t("Option Beta", "Opção Beta")}</option>
@@ -312,14 +312,14 @@ const [confirmacao, setConfirmacao] = useState("");
                 { id: "unchecked", label: t("Unchecked", "Desmarcado"), state: checkB, setter: setCheckB },
                 { id: "indeterminate", label: t("Indeterminate", "Indeterminado"), state: checkC, setter: setCheckC },
               ].map(({ id, label, state, setter }) => (
-                <label key={id} className="flex items-center gap-2.5 cursor-pointer select-none group">
+                <label key={id} className="flex items-center gap-2 cursor-pointer select-none group">
                   <Checkbox checked={state} onCheckedChange={setter} />
-                  <span className="text-[0.9375rem] text-foreground group-hover:text-foreground transition-colors">{label}</span>
+                  <span className="text-body text-foreground group-hover:text-foreground transition-colors">{label}</span>
                 </label>
               ))}
-              <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
+              <label className="flex items-center gap-2 cursor-not-allowed select-none opacity-40">
                 <Checkbox disabled />
-                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
+                <span className="text-body text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
             </div>
           </ShowcaseCard>
@@ -329,14 +329,14 @@ const [confirmacao, setConfirmacao] = useState("");
           <ShowcaseCard>
             <RadioGroup value={radio} onValueChange={setRadio} className="flex flex-wrap gap-6">
               {["a", "b", "c"].map((val) => (
-                <label key={val} className="flex items-center gap-2.5 cursor-pointer select-none">
+                <label key={val} className="flex items-center gap-2 cursor-pointer select-none">
                   <RadioGroupItem value={val} />
-                  <span className="text-[0.9375rem] text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
+                  <span className="text-body text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
                 </label>
               ))}
-              <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
+              <label className="flex items-center gap-2 cursor-not-allowed select-none opacity-40">
                 <RadioGroupItem value="d" disabled />
-                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
+                <span className="text-body text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
             </RadioGroup>
           </ShowcaseCard>
@@ -345,29 +345,29 @@ const [confirmacao, setConfirmacao] = useState("");
         <SubSection title={t("Segmented control", "Controle segmentado")}>
           <div id="segmented" className="scroll-mt-32" />
           <ShowcaseCard>
-            <p className="text-[0.8125rem] leading-relaxed text-muted-foreground mb-5">
+            <p className="text-body-sm leading-relaxed text-muted-foreground mb-5">
               {t("Coupled options that are tapped like buttons; exactly one is always selected. For short, exclusive choices with two to five options and one- or two-word labels: condition, period, view mode. For long lists use Select; for independent choices use Checkbox or Switch.", "Opções acopladas que se tocam como botões; sempre há exatamente uma selecionada. Para escolhas curtas e exclusivas, de duas a cinco opções com rótulos de uma ou duas palavras: condição, período, modo de exibição. Para listas longas use Select; para escolhas independentes use Checkbox ou Switch.")}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Item condition", "Condição do item")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("Item condition", "Condição do item")}</label>
                 <SegmentedControl aria-label={t("Item condition", "Condição do item")} value={condicao} onValueChange={setCondicao} options={[{ value: "nova", label: t("New", "Nova") }, { value: "usada", label: t("Used", "Usada") }, { value: "tanto-faz", label: t("Either", "Tanto faz") }]} />
-                <p className="text-[0.75rem] text-muted-foreground">{t("Selected: ", "Opção escolhida: ")}<span className="font-medium text-foreground">{condicao}</span></p>
+                <p className="text-label text-muted-foreground">{t("Selected: ", "Opção escolhida: ")}<span className="font-medium text-foreground">{condicao}</span></p>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Billing", "Cobrança")} <span className="text-muted-foreground font-normal">· variant="solida"</span></label>
+                <label className="text-body-sm font-medium text-foreground">{t("Billing", "Cobrança")} <span className="text-muted-foreground font-normal">· variant="solida"</span></label>
                 <SegmentedControl aria-label={t("Billing", "Cobrança")} variant="solida" options={[{ value: "mensal", label: t("Monthly", "Mensal") }, { value: "anual", label: t("Yearly", "Anual") }]} />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("With icons", "Com ícones")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("With icons", "Com ícones")}</label>
                 <SegmentedControl aria-label={t("View mode", "Modo de exibição")} options={[{ value: "lista", label: t("List", "Lista"), icon: <List /> }, { value: "grade", label: t("Grid", "Grade"), icon: <LayoutGrid /> }, { value: "mapa", label: t("Map", "Mapa"), icon: <MapIcon /> }]} />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Full width", "Largura total")} <span className="text-muted-foreground font-normal">· fullWidth</span></label>
+                <label className="text-body-sm font-medium text-foreground">{t("Full width", "Largura total")} <span className="text-muted-foreground font-normal">· fullWidth</span></label>
                 <SegmentedControl aria-label={t("Period", "Período")} fullWidth options={[{ value: "pf", label: t("Individual", "Pessoa física") }, { value: "pj", label: t("Company", "Pessoa jurídica") }]} />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Sizes", "Tamanhos")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("Sizes", "Tamanhos")}</label>
                 <div className="flex flex-col items-start gap-3">
                   <SegmentedControl size="sm" aria-label={t("Period", "Período")} options={[{ value: "hoje", label: t("Today", "Hoje") }, { value: "semana", label: t("This week", "Esta semana") }, { value: "mes", label: t("This month", "Este mês") }]} />
                   <SegmentedControl size="md" aria-label={t("Period", "Período")} options={[{ value: "hoje", label: t("Today", "Hoje") }, { value: "semana", label: t("This week", "Esta semana") }, { value: "mes", label: t("This month", "Este mês") }]} />
@@ -375,11 +375,11 @@ const [confirmacao, setConfirmacao] = useState("");
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <label className="text-[0.875rem] font-medium text-foreground">{t("Disabled option", "Opção desabilitada")}</label>
+                <label className="text-body-sm font-medium text-foreground">{t("Disabled option", "Opção desabilitada")}</label>
                 <SegmentedControl aria-label={t("Delivery", "Entrega")} options={[{ value: "online", label: "Online" }, { value: "presencial", label: t("In person", "Presencial"), disabled: true }]} />
               </div>
             </div>
-            <pre className="mt-5 overflow-x-auto rounded-md bg-muted/60 p-3 text-[0.75rem] text-muted-foreground"><code>{`import { SegmentedControl } from "@/app/components/ui/segmented-control";
+            <pre className="mt-5 whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { SegmentedControl } from "@/app/components/ui/segmented-control";
 
 <SegmentedControl
   aria-label="Condição"
@@ -391,7 +391,7 @@ const [confirmacao, setConfirmacao] = useState("");
     { value: "tanto-faz", label: "Tanto faz" },
   ]}
 />`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-[0.8125rem] text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.", "Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.")}</li>
               <li>• {t("Keyboard: arrows move the selection, Tab enters and leaves the group. Minimum height 32 px (sm), 40 px (md) and 44 px (lg).", "Teclado: setas movem a seleção, Tab entra e sai do grupo. Altura mínima de 32 px (sm), 40 px (md) e 44 px (lg).")}</li>
               <li>• {t("The selection is never removed by tapping again: there is always one active option.", "A seleção nunca é removida ao tocar de novo: sempre há uma opção ativa.")}</li>
@@ -409,12 +409,12 @@ const [confirmacao, setConfirmacao] = useState("");
               ].map(({ id, label, state, setter }) => (
                 <div key={id} className="flex items-center gap-3">
                   <Switch id={`sw-${id}`} checked={state} onCheckedChange={setter} />
-                  <label htmlFor={`sw-${id}`} className="text-[0.9375rem] text-foreground cursor-pointer">{label}</label>
+                  <label htmlFor={`sw-${id}`} className="text-body text-foreground cursor-pointer">{label}</label>
                 </div>
               ))}
               <div className="flex items-center gap-3 opacity-40 cursor-not-allowed">
                 <div className="h-6 w-11 rounded-full bg-switch-background" />
-                <span className="text-[0.9375rem] text-foreground">{t("Disabled", "Desabilitado")}</span>
+                <span className="text-body text-foreground">{t("Disabled", "Desabilitado")}</span>
               </div>
             </div>
           </ShowcaseCard>
@@ -427,11 +427,11 @@ const [confirmacao, setConfirmacao] = useState("");
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <input
                   placeholder={t("Search anything...", "Busque qualquer coisa...")}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md pl-10 pr-4 py-3 text-[0.9375rem] outline-none transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md pl-10 pr-4 py-3 text-body outline-none transition-all duration-150 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60"
                   style={{ boxShadow: "var(--shadow-sm)" }}
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                  <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-[4px] bg-muted text-muted-foreground text-[0.625rem] font-medium border border-border">⌘K</kbd>
+                  <kbd className="hidden sm:inline-flex items-center px-1 py-1 rounded-sm bg-muted text-muted-foreground text-caption font-medium border border-border">⌘K</kbd>
                 </div>
               </div>
             </div>
@@ -442,8 +442,8 @@ const [confirmacao, setConfirmacao] = useState("");
       {/* ── Tokens ── */}
       <section id="buttons-tokens" className="space-y-5">
         <div>
-          <h2 className="font-[family-name:var(--font-display)] text-[1.5rem] font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-[0.8125rem] text-muted-foreground mt-0.5">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
+          <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
         </div>
         <TokenTable groups={formTokenGroups} />
       </section>

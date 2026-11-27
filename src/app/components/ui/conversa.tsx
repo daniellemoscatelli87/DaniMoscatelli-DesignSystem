@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { AlertCircle, Check, CheckCheck, Clock } from "lucide-react";
+import { AlertCircle, Check, CheckCheck, Clock, Eye, MousePointerClick } from "lucide-react";
 import { cn } from "./utils";
 
 /**
@@ -15,8 +15,8 @@ import { cn } from "./utils";
  * alinhamento: "esquerda" (padrão) põe todas as mensagens na mesma borda esquerda, como um histórico de e-mails:
  * quem escreveu aparece no nome e na cor do balão; "lados" põe as suas à direita, como num chat (use só em chat).
  *
- * Peças: Conversa (a lista, role="log"), BalaoDaConversa (uma mensagem: nome, texto, hora e o estado do envio em
- * ícone + texto para leitores de tela), SeparadorDaConversa ("Hoje", "24 de novembro") e IndicadorDeDigitacao
+ * Peças: Conversa (a lista, role="log"), BalaoDaConversa (uma mensagem: nome, texto, hora, anexos em `depois`, a
+ * marca de não lida e o estado do envio em ícone + texto: enviando, enviada, lida, aberto, clicado, não enviada), SeparadorDaConversa ("Hoje", "24 de novembro") e IndicadorDeDigitacao
  * (três pontos que pulsam; parados com "menos movimento").
  * Alinhamento: o balão tem no máximo 80% da largura (85% no celular); nome e hora ficam dentro do balão, na mesma
  * borda do texto. O avatar (opcional) fica fora, na borda de baixo do balão.
@@ -36,10 +36,13 @@ function Conversa({ className, children, rotulo = "Conversa", alinhamento = "esq
   );
 }
 
+/* Estado da mensagem enviada, sempre em ícone + texto visível (e-mail: aberto, clicado). */
 const ESTADOS = {
   enviando: { Icone: Clock, texto: "Enviando" },
   enviada: { Icone: Check, texto: "Enviada" },
   lida: { Icone: CheckCheck, texto: "Lida" },
+  aberto: { Icone: Eye, texto: "Aberto" },
+  clicado: { Icone: MousePointerClick, texto: "Clicado" },
   erro: { Icone: AlertCircle, texto: "Não enviada" },
 } as const;
 
@@ -49,12 +52,16 @@ export type BalaoDaConversaProps = Omit<React.ComponentProps<"div">, "children">
   quando?: React.ReactNode;
   avatar?: React.ReactNode;
   estado?: keyof typeof ESTADOS;
-  /** Anexos ou ações depois do texto (UploadList, botões). */
+  /** Troca o texto do estado (por exemplo, "Aberto 2 vezes"). */
+  textoDoEstado?: string;
+  /** Mensagem recebida que ainda não foi lida: ponto na primária e "Não lida" em texto. */
+  naoLida?: boolean;
+  /** Anexos ou ações depois do texto (UploadItem só leitura, botões). */
   depois?: React.ReactNode;
   children: React.ReactNode;
 };
 
-function BalaoDaConversa({ autor, nome, quando, avatar, estado, depois, children, className, ...props }: BalaoDaConversaProps) {
+function BalaoDaConversa({ autor, nome, quando, avatar, estado, textoDoEstado, naoLida, depois, children, className, ...props }: BalaoDaConversaProps) {
   const reduzir = useReducedMotion();
   const eu = autor === "eu";
   const alinhamento = React.useContext(AlinhamentoDaConversa);
@@ -78,7 +85,12 @@ function BalaoDaConversa({ autor, nome, quando, avatar, estado, depois, children
           aDireita ? "rounded-br-sm" : "rounded-bl-sm",
         )}
       >
-        {nome && <p className="mb-1 text-label font-semibold text-foreground">{nome}</p>}
+        {(nome || naoLida) && (
+          <p className="mb-1 flex flex-wrap items-center gap-x-2 text-label font-semibold text-foreground">
+            {nome}
+            {naoLida && <span className="inline-flex items-center gap-1 text-primary-text"><span aria-hidden className="size-2 rounded-full bg-primary" />Não lida</span>}
+          </p>
+        )}
         <div className="whitespace-pre-line [overflow-wrap:anywhere]">{children}</div>
         {depois && <div className="mt-3">{depois}</div>}
         {(quando || est) && (
@@ -87,7 +99,7 @@ function BalaoDaConversa({ autor, nome, quando, avatar, estado, depois, children
             {est && (
               <span className={cn("inline-flex items-center gap-1", estado === "erro" && "font-semibold text-error-text")}>
                 <est.Icone aria-hidden className="size-3.5" />
-                <span className={estado === "erro" ? undefined : "sr-only"}>{est.texto}</span>
+                <span>{textoDoEstado ?? est.texto}</span>
               </span>
             )}
           </p>

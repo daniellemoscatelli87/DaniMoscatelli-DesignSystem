@@ -15,8 +15,7 @@ import { IconeComBase } from "./painel-dados";
  * Responsiva pela própria largura:
  * - a partir de 40rem: pilares lado a lado, com a linha que liga os ícones (desenhada da esquerda para a direita
  *   quando a lista aparece na tela; parada e completa com "menos movimento");
- * - abaixo disso: um embaixo do outro, ícone à esquerda e texto à direita (o texto começa sempre na mesma borda), com
- *   a linha vertical ligando os ícones.
+ * - abaixo disso: um embaixo do outro, cada um com o ícone em cima e o texto embaixo, tudo na mesma borda esquerda.
  * É uma lista ordenada (<ol>) quando a ordem importa (`ordenada`, padrão) e mostra o número no rótulo para leitores
  * de tela. Pilares com mesma altura (a grade estica as linhas).
  */
@@ -69,17 +68,13 @@ function ListaDePilares({ pilares, rotulo, ordenada = true, linha = true, nivel 
         {pilares.map((p, i) => (
           <motion.li
             key={p.titulo}
-            className="relative grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 @min-[40rem]/pilares:grid-cols-1 @min-[40rem]/pilares:justify-items-center @min-[40rem]/pilares:text-center"
+            className="relative grid justify-items-start gap-4 @min-[40rem]/pilares:justify-items-center @min-[40rem]/pilares:text-center"
             initial={reduzir ? false : { opacity: 0, y: 12 }}
             animate={visivel || reduzir ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             transition={{ duration: 0.4, delay: reduzir ? 0 : 0.15 + i * 0.12, ease: [0, 0, 0.58, 1] }}
           >
-            {/* Linha vertical (um embaixo do outro) */}
-            {linha && i < pilares.length - 1 && (
-              <span aria-hidden className="absolute left-6 top-14 h-[calc(100%-1.5rem)] w-px bg-[var(--crimson-200)] @min-[40rem]/pilares:hidden" />
-            )}
             <IconeComBase tom="marca" tamanho="lg" redonda className="relative z-10 ring-4 ring-card">{p.icone}</IconeComBase>
-            <div className="min-w-0 @min-[40rem]/pilares:mt-4">
+            <div className="min-w-0">
               <H className="text-subtitle font-bold leading-snug text-foreground">
                 {ordenada && <span className="sr-only">{i + 1}. </span>}
                 {p.titulo}

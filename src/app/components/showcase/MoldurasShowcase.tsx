@@ -220,6 +220,16 @@ export function MoldurasShowcase() {
             </ShowcaseCard>
           </ItemDaGrade>
         </GradeDeCards>
+        <ShowcaseCard rotulo={t("Empty · inside a list (variante=\"lista\")", "Vazio · dentro de uma lista (variante=\"lista\")")}>
+          <EstadoVazio
+            variante="lista"
+            nivel={3}
+            icone={<FolderOpen />}
+            titulo={t("No partner waiting for a reply", "Nenhum parceiro esperando resposta")}
+            descricao={t("New sign-ups appear here.", "Os cadastros novos aparecem aqui.")}
+            acoes={<Button variant="outline" size="sm">{t("See all partners", "Ver todos os parceiros")}</Button>}
+          />
+        </ShowcaseCard>
         <ShowcaseCard rotulo={t("Final state", "Estado final")}>
           <EstadoFinal
             focarAoAparecer={false}

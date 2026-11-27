@@ -49,26 +49,26 @@ const POS = {
   acima: {
     caixa: "right-6 bottom-24 w-max max-w-[calc(100%-3rem)]",
     seta: "-bottom-[7px] right-[21px] rotate-[225deg]",
-    botao: "gap-3 py-3.5 pl-4 pr-11",
+    botao: "gap-3 py-3 pl-4 pr-11",
     icone: "size-10",
-    titulo: "text-sm sm:text-[0.9375rem]",
-    texto: "text-[0.8125rem] sm:text-sm",
+    titulo: "text-sm sm:text-body",
+    texto: "text-body-sm sm:text-sm",
   },
   "ao-lado": {
     caixa: "left-5 right-[5.5rem] bottom-5 flex min-h-14 items-center sm:left-6 sm:right-[5.75rem] sm:bottom-6",
     seta: "top-[calc(50%-7px)] -right-[7px] rotate-[135deg]",
-    botao: "gap-2.5 py-2.5 pl-3 pr-10",
+    botao: "gap-2 py-2 pl-3 pr-10",
     icone: "size-8",
-    titulo: "text-[0.8125rem]",
+    titulo: "text-body-sm",
     texto: "text-xs",
   },
   auto: {
     caixa:
       "left-5 right-[5.5rem] bottom-5 flex min-h-14 items-center sm:left-6 sm:right-[5.75rem] sm:bottom-6 lg:left-auto lg:right-6 lg:bottom-24 lg:block lg:min-h-0 lg:w-max lg:max-w-[calc(100%-3rem)]",
     seta: "top-[calc(50%-7px)] -right-[7px] rotate-[135deg] lg:top-auto lg:-bottom-[7px] lg:right-[21px] lg:rotate-[225deg]",
-    botao: "gap-2.5 py-2.5 pl-3 pr-10 lg:gap-3 lg:py-3.5 lg:pl-4 lg:pr-11",
+    botao: "gap-2 py-2 pl-3 pr-10 lg:gap-3 lg:py-3 lg:pl-4 lg:pr-11",
     icone: "size-8 lg:size-10",
-    titulo: "text-[0.8125rem] lg:text-[0.9375rem]",
+    titulo: "text-body-sm lg:text-body",
     texto: "text-xs lg:text-sm",
   },
 };
@@ -112,7 +112,7 @@ function AvisoProjeto({
       </span>
       <span className="block">
         <span className={cn("block font-bold leading-snug text-foreground", p.titulo)}>{titulo}</span>
-        <span className={cn("mt-0.5 block leading-relaxed text-muted-foreground", p.texto)}>{texto}</span>
+        <span className={cn("mt-1 block leading-relaxed text-muted-foreground", p.texto)}>{texto}</span>
       </span>
     </>
   );

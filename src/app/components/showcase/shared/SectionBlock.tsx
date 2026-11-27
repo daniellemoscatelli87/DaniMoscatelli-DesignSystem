@@ -77,7 +77,7 @@ export function ConteudoFalso() {
   );
 }
 
-/** Rodapé de ações de um formulário de demonstração: divisor e botões à direita. */
+/** Ações no fim de um formulário de demonstração: divisor e botões alinhados à borda esquerda dos campos. */
 export function Panel({ children }: { children: React.ReactNode }) {
-  return <div className="flex justify-end gap-3 border-t border-border pt-4">{children}</div>;
+  return <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">{children}</div>;
 }

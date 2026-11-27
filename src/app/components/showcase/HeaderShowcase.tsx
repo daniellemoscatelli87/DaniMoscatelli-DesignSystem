@@ -4,6 +4,8 @@ import {
   Maximize2, Menu, Minimize2, Monitor, Moon, PanelBottom, PanelRight, PanelTop, Palette, Pill, Settings,
   Smartphone, Sun, SunDim, Users, X,
 } from "lucide-react";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
 import { useI18n } from "../../i18n";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { Callout, DoDont, Panel } from "./shared/Guidance";
@@ -93,7 +95,7 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
 }) {
   return (
     <div className="min-w-0">
-      <p className="mb-1.5 text-[0.6875rem] font-semibold uppercase tracking-[0.08em] text-muted-foreground">{rotulo}</p>
+      <p className="mb-1 text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{rotulo}</p>
       <div role="group" aria-label={rotulo} className="inline-flex max-w-full flex-wrap gap-1 rounded-md bg-muted p-1">
         {opcoes.map(o => {
           const ativo = o.id === valor;
@@ -103,7 +105,7 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
               type="button"
               aria-pressed={ativo}
               onClick={() => onChange(o.id)}
-              className={`inline-flex h-8 items-center gap-1.5 rounded-sm px-2.5 text-[0.75rem] font-medium transition-colors ${foco}
+              className={`inline-flex h-8 items-center gap-1 rounded-sm px-2 text-label font-medium transition-colors ${foco}
                 ${ativo ? "bg-card text-foreground shadow-[var(--shadow-xs)]" : "text-muted-foreground hover:text-foreground"}`}
             >
               <o.Icone aria-hidden className="h-3.5 w-3.5" />
@@ -118,19 +120,9 @@ function Segmentado<T extends string>({ rotulo, valor, opcoes, onChange }: {
 
 function Chave({ id, rotulo, ligado, onChange }: { id: string; rotulo: string; ligado: boolean; onChange: (v: boolean) => void }) {
   return (
-    <div className="flex items-center gap-2.5">
-      <button
-        type="button"
-        role="switch"
-        aria-checked={ligado}
-        aria-labelledby={id}
-        onClick={() => onChange(!ligado)}
-        className={`relative flex w-10 shrink-0 items-center rounded-full transition-colors ${foco} ${ligado ? "bg-primary" : "bg-muted-foreground/30"}`}
-        style={{ height: "22px" }}
-      >
-        <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${ligado ? "left-[22px]" : "left-0.5"}`} />
-      </button>
-      <span id={id} className="text-[0.8125rem] font-medium text-foreground">{rotulo}</span>
+    <div className="flex items-center gap-3">
+      <Switch id={id} checked={ligado} onCheckedChange={onChange} />
+      <Label htmlFor={id} className="font-medium text-foreground">{rotulo}</Label>
     </div>
   );
 }
@@ -290,8 +282,8 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
           aria-current={atual === l.id ? "page" : undefined}
           onClick={e => { e.preventDefault(); irPara(l.id); }}
           style={sombraTexto}
-          className={`whitespace-nowrap rounded-[4px] text-[0.875rem] font-semibold decoration-2 underline-offset-[6px] transition-colors aria-[current=page]:underline aria-[current=page]:decoration-primary ${foco}
-            ${pilula ? "font-medium text-[0.9375rem] text-foreground hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))]" : corLink}`}
+          className={`whitespace-nowrap rounded-sm text-body-sm font-semibold decoration-2 underline-offset-[6px] transition-colors aria-[current=page]:underline aria-[current=page]:decoration-primary ${foco}
+            ${pilula ? "font-medium text-body text-foreground hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))]" : corLink}`}
         >
           {bi(l.rotulo)}
         </a>
@@ -307,14 +299,14 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
       >
         {/* Barra do navegador */}
         <div className="flex h-9 items-center gap-2 border-b border-border bg-muted/60 px-4">
-          <div aria-hidden className="flex gap-1.5">
+          <div aria-hidden className="flex gap-1">
             <div className="h-2.5 w-2.5 rounded-full bg-primary/50" />
             <div className="h-2.5 w-2.5 rounded-full bg-warning/50" />
             <div className="h-2.5 w-2.5 rounded-full bg-success/50" />
           </div>
           <div className="mx-4 flex-1">
             <div className="mx-auto flex h-5 max-w-[280px] items-center rounded-sm bg-background/70 px-3">
-              <span className="truncate text-[0.625rem] text-muted-foreground">{MARCA.endereco}</span>
+              <span className="truncate text-caption text-muted-foreground">{MARCA.endereco}</span>
             </div>
           </div>
         </div>
@@ -331,7 +323,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                 onFocusCapture={() => setEscondido(false)}
                 className={`absolute inset-x-0 top-0 transition-[translate,background-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none
                   ${escondido && !menuAberto ? "-translate-y-full" : "translate-y-0"}
-                  ${pilula ? "pt-[37px] pb-1" : ""}
+                  ${pilula ? "pt-9 pb-1" : ""}
                   ${!pilula && !transparente ? (modelo === "pilula" ? "bg-background" : "border-b border-border bg-card/85 backdrop-blur-xl") : !pilula ? "border-b border-transparent" : ""}`}
                 style={{ boxShadow: !pilula && !transparente ? (modelo === "pilula" ? "0 8px 24px -16px rgb(0 0 0 / .45)" : "var(--shadow-sm)") : "none" }}
               >
@@ -355,21 +347,21 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     <>
                       {Links}
                       {MARCA.entrar && (
-                        <a href="#" onClick={e => e.preventDefault()} className={`-mr-6 whitespace-nowrap rounded-[4px] text-[0.9375rem] font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.entrar)}</a>
+                        <a href="#" onClick={e => e.preventDefault()} className={`-mr-6 whitespace-nowrap rounded-sm text-body font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.entrar)}</a>
                       )}
-                      <a href="#" onClick={e => e.preventDefault()} className={`whitespace-nowrap rounded-[4px] text-[0.9375rem] font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.acao)}</a>
+                      <a href="#" onClick={e => e.preventDefault()} className={`whitespace-nowrap rounded-sm text-body font-medium text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] ${foco}`}>{bi(MARCA.acao)}</a>
                     </>
                   ) : (
                     <>
                       {mostraLinks && Links}
                       <div className="flex items-center gap-2">
                         {mostraLinks && MARCA.entrar && (
-                          <a href="#" onClick={e => e.preventDefault()} style={sombraTexto} className={`inline-flex h-9 items-center rounded-full px-3 text-[0.875rem] font-medium transition-colors ${corLink} ${foco}`}>{bi(MARCA.entrar)}</a>
+                          <a href="#" onClick={e => e.preventDefault()} style={sombraTexto} className={`inline-flex h-9 items-center rounded-full px-3 text-body-sm font-medium transition-colors ${corLink} ${foco}`}>{bi(MARCA.entrar)}</a>
                         )}
                         {mostraLinks && (
                           modelo === "pilula"
-                            ? <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full border px-6 text-[0.875rem] font-semibold transition-colors ${foco} ${sobreEscuro ? "border-white/85 text-white hover:bg-white hover:text-[var(--graphite-900)]" : "border-foreground text-foreground hover:bg-foreground hover:text-background"}`}>{bi(MARCA.acao)}</a>
-                            : <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full bg-primary px-5 text-[0.875rem] font-semibold text-primary-foreground transition-opacity hover:opacity-90 whitespace-nowrap ${foco}`}>{bi(MARCA.acao)}</a>
+                            ? <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full border px-6 text-body-sm font-semibold transition-colors ${foco} ${sobreEscuro ? "border-white/85 text-white hover:bg-white hover:text-[var(--graphite-900)]" : "border-foreground text-foreground hover:bg-foreground hover:text-background"}`}>{bi(MARCA.acao)}</a>
+                            : <a href="#" onClick={e => e.preventDefault()} className={`inline-flex h-10 items-center rounded-full bg-primary px-5 text-body-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 whitespace-nowrap ${foco}`}>{bi(MARCA.acao)}</a>
                         )}
                         {!desktop && !comBarra && (
                           <button
@@ -392,11 +384,11 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
             </div>
 
             <Capa fundo={fundo} escuro={escuro}>
-              <div className={`mx-auto max-w-2xl px-5 pb-14 text-center ${pilula ? "pt-[150px]" : desktop ? "pt-[120px]" : "pt-[104px]"}`}>
-                <h1 className={`text-[1.625rem] font-extrabold leading-tight tracking-tight ${desktop ? "text-[2.25rem]" : ""} ${fundo === "foto" ? "text-white" : "text-foreground"}`}>
+              <div className={`mx-auto max-w-2xl px-5 pb-14 text-center ${pilula ? "pt-38" : desktop ? "pt-[120px]" : "pt-[104px]"}`}>
+                <h1 className={`text-h3 font-extrabold leading-tight tracking-tight ${desktop ? "text-display-md" : ""} ${fundo === "foto" ? "text-white" : "text-foreground"}`}>
                   {bi(MARCA.heroTitulo)}
                 </h1>
-                <p className={`mx-auto mt-3 max-w-xl text-[0.9375rem] font-semibold leading-snug ${fundo === "foto" ? "text-white/90" : "text-muted-foreground"}`}>
+                <p className={`mx-auto mt-3 max-w-xl text-body font-semibold leading-snug ${fundo === "foto" ? "text-white/90" : "text-muted-foreground"}`}>
                   {bi(MARCA.heroTexto)}
                 </p>
               </div>
@@ -407,7 +399,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
               {(MARCA.tipoLinks === "secoes" ? MARCA.links.map(l => ({ id: l.id, titulo: bi(l.rotulo) })) : [0, 1, 2, 3].map(i => ({ id: `bloco-${i}`, titulo: "" }))).map(s => (
                 <section key={s.id} data-secao={s.id} aria-label={s.titulo || undefined}>
                   {s.titulo
-                    ? <h2 className="mb-4 text-[1.125rem] font-bold tracking-tight text-foreground">{s.titulo}</h2>
+                    ? <h2 className="mb-4 text-body-lg font-bold tracking-tight text-foreground">{s.titulo}</h2>
                     : <div aria-hidden className="mb-4 h-4 w-40 rounded-full bg-muted" />}
                   <Linhas n={3} />
                   <div aria-hidden className={`mt-5 grid gap-3 ${desktop ? "grid-cols-3" : "grid-cols-1"}`}>
@@ -429,11 +421,11 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     type="button"
                     aria-current={ehAtual ? "page" : undefined}
                     onClick={() => setAtualApp(item.id)}
-                    className={`relative flex flex-col items-center justify-center gap-1 text-[0.625rem] font-medium transition-colors ${foco} ${ehAtual ? textoMarca : "text-muted-foreground hover:text-foreground"}`}
+                    className={`relative flex flex-col items-center justify-center gap-1 text-caption font-medium transition-colors ${foco} ${ehAtual ? textoMarca : "text-muted-foreground hover:text-foreground"}`}
                   >
                     {ehAtual && <span aria-hidden className="absolute top-0 h-0.5 w-8 rounded-full bg-primary" />}
                     <item.Icone aria-hidden className="h-5 w-5" />
-                    <span className="max-w-full truncate px-0.5">{bi(item.rotulo)}</span>
+                    <span className="max-w-full truncate px-1">{bi(item.rotulo)}</span>
                   </button>
                 );
               })}
@@ -468,16 +460,16 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     href={`#${l.id}`}
                     aria-current={atual === l.id ? "page" : undefined}
                     onClick={e => { e.preventDefault(); irPara(l.id); }}
-                    className={`flex items-center justify-between rounded-md px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}
+                    className={`flex items-center justify-between rounded-md px-4 py-3 text-body font-semibold text-foreground hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}
                   >
                     {bi(l.rotulo)} <ChevronRight aria-hidden className={`h-4 w-4 ${textoMarca}`} />
                   </a>
                 ))}
               </nav>
               {MARCA.entrar && (
-                <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center rounded-md border border-border px-4 py-3.5 text-[0.9375rem] font-semibold text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+                <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center rounded-md border border-border px-4 py-3 text-body font-semibold text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
               )}
-              <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3.5 text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+              <a href="#" onClick={e => e.preventDefault()} className={`mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-primary px-4 py-3 text-body font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
                 <MARCA.acaoIcone aria-hidden className="h-4 w-4" /> {bi(MARCA.acao)}
               </a>
             </div>
@@ -501,16 +493,16 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
               </div>
               <nav aria-label={t("Main", "Principal")} className="flex-1 overflow-y-auto p-3">
                 {MARCA.links.map(l => (
-                  <a key={l.id} href={`#${l.id}`} aria-current={atual === l.id ? "page" : undefined} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-md px-3 text-[0.9375rem] font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}>
+                  <a key={l.id} href={`#${l.id}`} aria-current={atual === l.id ? "page" : undefined} onClick={e => { e.preventDefault(); irPara(l.id); }} className={`flex h-12 items-center rounded-md px-3 text-body font-medium text-foreground transition-colors hover:bg-muted aria-[current=page]:bg-[var(--primary-muted)] aria-[current=page]:text-[var(--primary-text,var(--primary))] ${foco}`}>
                     {bi(l.rotulo)}
                   </a>
                 ))}
               </nav>
               <div className="space-y-2 border-t border-border p-4">
                 {MARCA.entrar && (
-                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center rounded-full border border-border text-[0.875rem] font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center rounded-full border border-border text-body-sm font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
                 )}
-                <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-[0.875rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+                <a href="#" onClick={e => e.preventDefault()} className={`flex h-11 items-center justify-center gap-2 rounded-full bg-primary text-body-sm font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
                   {bi(MARCA.acao)} <ArrowRight aria-hidden className="h-4 w-4" />
                 </a>
               </div>
@@ -532,7 +524,7 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
                     href={`#${l.id}`}
                     aria-current={atual === l.id ? "page" : undefined}
                     onClick={e => { e.preventDefault(); irPara(l.id); }}
-                    className={`block rounded-sm py-2.5 text-[1.625rem] font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
+                    className={`block rounded-sm py-2 text-h3 font-black tracking-[-0.03em] text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] aria-[current=page]:text-[var(--primary-text,var(--primary))] motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 ${foco}`}
                     style={{ animationDelay: `${i * 40}ms`, animationFillMode: "both" }}
                   >
                     {bi(l.rotulo)}
@@ -541,9 +533,9 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
               </nav>
               <div className="space-y-2 p-6">
                 {MARCA.entrar && (
-                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center rounded-full border border-border text-[0.9375rem] font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
+                  <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center rounded-full border border-border text-body font-medium text-foreground hover:bg-muted ${foco}`}>{bi(MARCA.entrar)}</a>
                 )}
-                <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center gap-2 rounded-full bg-primary text-[0.9375rem] font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
+                <a href="#" onClick={e => e.preventDefault()} className={`flex h-12 items-center justify-center gap-2 rounded-full bg-primary text-body font-semibold text-primary-foreground hover:opacity-90 ${foco}`}>
                   {bi(MARCA.acao)} <ArrowRight aria-hidden className="h-4 w-4" />
                 </a>
               </div>
@@ -566,18 +558,18 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-muted)]">
           <Icone aria-hidden className={`h-4 w-4 ${textoMarca}`} />
         </div>
-        {selo && <span className={`rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-[0.06em] ${textoMarca}`}>{selo}</span>}
+        {selo && <span className={`rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2 py-1 text-caption font-bold uppercase tracking-[0.06em] ${textoMarca}`}>{selo}</span>}
       </div>
-      <h3 className="text-[1rem] font-bold tracking-tight text-foreground">{titulo}</h3>
-      <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted-foreground">{desc}</p>
-      <p className="mt-3 flex-1 text-[0.8125rem] leading-relaxed text-foreground">
+      <h3 className="text-body font-bold tracking-tight text-foreground">{titulo}</h3>
+      <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{desc}</p>
+      <p className="mt-3 flex-1 text-body-sm leading-relaxed text-foreground">
         <strong className="font-semibold">{t("When to use:", "Quando usar:")}</strong> {quando}
       </p>
       <button
         type="button"
         aria-pressed={ativo}
         onClick={onAcao}
-        className={`mt-4 inline-flex h-9 items-center justify-center gap-1.5 self-start rounded-md border border-primary px-3.5 text-[0.8125rem] font-semibold transition-colors ${foco}
+        className={`mt-4 inline-flex h-9 items-center justify-center gap-1 self-start rounded-md border border-primary px-3 text-body-sm font-semibold transition-colors ${foco}
           ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-accent`}`}
       >
         {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}
@@ -779,7 +771,7 @@ export function HeaderShowcase() {
       <section id="header-a11y">
         <SectionHeader title={t("Accessibility checklist", "Checklist de acessibilidade")} />
         <Panel className="p-5">
-          <ul className="grid grid-cols-1 gap-x-8 gap-y-2.5 md:grid-cols-2">
+          <ul className="grid grid-cols-1 gap-x-8 gap-y-2 md:grid-cols-2">
             {[
               t("The menu button has aria-expanded, aria-controls and a name (“Open menu”).", "O botão de menu tem aria-expanded, aria-controls e nome (“Abrir menu”)."),
               t("When the menu opens, focus goes to the first link; Tab stays inside the menu.", "Ao abrir o menu, o foco vai para o primeiro link; o Tab fica dentro do menu."),
@@ -792,8 +784,8 @@ export function HeaderShowcase() {
               t("Touch targets of at least 44 × 44px.", "Áreas de toque de pelo menos 44 × 44px."),
               t("Links in a nav with a name (“Main”).", "Links dentro de um nav com nome (“Principal”)."),
             ].map(item => (
-              <li key={item} className="flex gap-2 text-[0.8125rem] leading-relaxed text-muted-foreground">
-                <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-success" /> {item}
+              <li key={item} className="flex gap-2 text-body-sm leading-relaxed text-muted-foreground">
+                <Check aria-hidden className="mt-1 h-4 w-4 shrink-0 text-success-text" /> {item}
               </li>
             ))}
           </ul>

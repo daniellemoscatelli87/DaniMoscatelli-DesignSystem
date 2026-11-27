@@ -94,8 +94,8 @@ function AlertaComAcao({
         className={cn(
           variaveisDoTom({ tom }),
           "[--alerta-tinta:color-mix(in_oklab,var(--alerta-cor)_var(--alerta-fundo),transparent)]",
-          "@container/alerta relative grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-3 rounded-lg border border-[color:color-mix(in_oklab,var(--alerta-cor)_22%,transparent)] bg-card bg-[image:linear-gradient(var(--alerta-tinta),var(--alerta-tinta))] px-4 py-4 text-left sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:gap-x-[18px] sm:px-[22px] sm:py-5",
-          onFechar && "pr-12 sm:pr-[52px]",
+          "@container/alerta relative grid grid-cols-[2.25rem_minmax(0,1fr)] items-start gap-x-3 rounded-lg border border-[color:color-mix(in_oklab,var(--alerta-cor)_22%,transparent)] bg-card bg-[image:linear-gradient(var(--alerta-tinta),var(--alerta-tinta))] px-4 py-4 text-left sm:grid-cols-[2.75rem_minmax(0,1fr)] sm:gap-x-4 sm:px-6 sm:py-5",
+          onFechar && "pr-12 sm:pr-12",
           className,
         )}
         {...props}
@@ -108,14 +108,14 @@ function AlertaComAcao({
           {icone ?? <Icone />}
         </span>
         {/* Celular: título ao lado do ícone, centralizado com ele. Computador: título no alto da coluna do texto. */}
-        <div data-slot="alerta-com-acao-titulo" className="col-start-2 row-start-1 min-w-0 self-center text-[0.9375rem] font-bold leading-[1.35] text-foreground sm:self-start sm:pt-[3px]">
+        <div data-slot="alerta-com-acao-titulo" className="col-start-2 row-start-1 min-w-0 self-center text-body font-bold leading-[1.35] text-foreground sm:self-start sm:pt-1">
           {titulo}
         </div>
         {/* Celular: descrição na largura toda, a partir da borda do respiro (alinhada com a base do ícone). */}
         {children != null && (
           <div
             data-slot="alerta-com-acao-descricao"
-            className="col-span-2 col-start-1 row-start-2 mt-3 min-w-0 text-sm leading-[1.6] text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))] sm:col-span-1 sm:col-start-2 sm:mt-1 [&_strong]:font-semibold [&_strong]:text-foreground [&>p+p]:mt-1.5"
+            className="col-span-2 col-start-1 row-start-2 mt-3 min-w-0 text-body-sm leading-[1.6] text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))] sm:col-span-1 sm:col-start-2 sm:mt-1 [&_strong]:font-semibold [&_strong]:text-foreground [&>p+p]:mt-1"
           >
             {children}
           </div>
@@ -126,7 +126,7 @@ function AlertaComAcao({
         {acoes != null && (
           <div
             data-slot="alerta-com-acao-acoes"
-            className="col-span-2 col-start-1 row-start-3 mt-4 flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2 sm:col-span-1 sm:col-start-2 sm:mt-3.5 sm:gap-x-2 sm:@max-[22rem]/alerta:col-span-2 sm:@max-[22rem]/alerta:col-start-1 max-sm:[&>[data-slot=link-do-alerta]]:px-0"
+            className="col-span-2 col-start-1 row-start-3 mt-4 flex min-w-0 flex-wrap items-center gap-x-3 gap-y-2 sm:col-span-1 sm:col-start-2 sm:mt-3 sm:gap-x-2 sm:@max-[22rem]/alerta:col-span-2 sm:@max-[22rem]/alerta:col-start-1 max-sm:[&>[data-slot=link-do-alerta]]:px-0"
           >
             {acoes}
           </div>
@@ -167,7 +167,7 @@ function BotaoDoAlerta({ tom, asChild = false, className, ...props }: BotaoDoAle
       data-tom={tomFinal}
       className={cn(
         variaveisDoTom({ tom: tomFinal }),
-        "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-md border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3.5 py-1.5 text-left text-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
+        "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-md toque:min-h-11 border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3 py-1 text-left text-body-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
         "hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_8%,transparent)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground aria-disabled:pointer-events-none aria-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground",
         transicao,
@@ -188,7 +188,7 @@ function LinkDoAlerta({ asChild = false, className, ...props }: LinkDoAlertaProp
     <Comp
       data-slot="link-do-alerta"
       className={cn(
-        "inline-flex min-h-10 max-w-full items-center gap-2 rounded-sm bg-transparent px-1.5 text-left text-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex min-h-10 max-w-full items-center gap-2 rounded-sm bg-transparent toque:min-h-11 px-1 text-left text-body-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:text-disabled-foreground disabled:no-underline aria-disabled:pointer-events-none aria-disabled:text-disabled-foreground aria-disabled:no-underline",
         transicao,
         foco,

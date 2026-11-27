@@ -23,8 +23,9 @@ import { cn } from "./utils";
  * Temas numa linha só quando o card tem largura para isso (o conteúdo do card a partir de 320 px, consulta de
  * contêiner); abaixo disso, quebram em mais linhas. No site, a regra era pela tela (a partir de 1280 px).
  *
- * GradeDeFrentes: 1 coluna até 767 px como carrossel (rolagem lateral com encaixe, cada card com 84% da largura,
- * sempre mostrando parte do próximo), 2 colunas a partir de 768 px e 3 a partir de 1024 px, 24 px entre os cards.
+ * GradeDeFrentes: 1 coluna até 767 px, um card embaixo do outro (sem rolagem lateral: regra do DS de 27/11/2026, que
+ * trocou o carrossel do celular), 2 colunas a partir de 768 px e 3 a partir de 1024 px, 24 px entre os cards. Cards
+ * lado a lado sempre com a mesma altura.
  */
 
 const CSS = `
@@ -36,7 +37,6 @@ const CSS = `
 [data-surgir][data-estado="visto"] [data-frente-icone] { animation: frente-pop .55s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--surgir-i, 0) * .03s + .1s); }
 [data-surgir][data-estado="visto"] [data-frente-tag] { animation: frente-tag .45s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--surgir-i, 0) * .03s + .2s + var(--frente-t, 0) * .04s); }
 [data-surgir][data-estado="visto"] [data-slot="card-frente"]:hover [data-frente-icone] { animation: frente-balanco .6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-[data-slot="grade-frentes"]::-webkit-scrollbar { display: none; }
 @media (prefers-reduced-motion: reduce) {
   [data-slot="card-frente"] [data-frente-icone], [data-slot="card-frente"] [data-frente-tag] { animation: none !important; opacity: 1 !important; }
 }
@@ -67,7 +67,7 @@ const TONS = {
     tema: "border-white/20 bg-transparent text-graphite-200",
   },
   claro: {
-    card: "border-border bg-card shadow-sm hover:border-crimson-200 hover:shadow-xl",
+    card: "border-border bg-card shadow-sm hover:border-[var(--border-strong)] hover:shadow-xl",
     brilhoTopo: false,
     luz: "color-mix(in srgb, var(--primary) 8%, transparent)",
     numero: "text-graphite-100 group-hover:text-crimson-50",
@@ -148,7 +148,7 @@ function CardDeFrente({
         <span
           aria-hidden
           className={cn(
-            "pointer-events-none absolute right-5 top-3 select-none text-[3rem] font-bold leading-none transition-[color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-1 group-hover:scale-[1.06] motion-reduce:transition-none",
+            "pointer-events-none absolute right-5 top-3 select-none text-display-lg font-bold leading-none transition-[color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-1 group-hover:scale-[1.06] motion-reduce:transition-none",
             c.numero,
           )}
         >
@@ -172,17 +172,17 @@ function CardDeFrente({
         >
           {icone}
         </span>
-        <Titulo id={id} className={cn("mb-1.5 text-xl font-semibold leading-7", c.titulo)}>{titulo}</Titulo>
+        <Titulo id={id} className={cn("mb-1 text-xl font-semibold leading-7", c.titulo)}>{titulo}</Titulo>
         <p className={cn("mb-3 text-sm font-semibold", c.subtitulo)}>{subtitulo}</p>
         <p className={cn("mb-6 text-sm leading-relaxed", c.descricao)}>{descricao}</p>
       </div>
-      <ul aria-label={rotuloTemas} className={cn("relative flex flex-wrap gap-1.5 border-t pt-4 @min-[20rem]:flex-nowrap @min-[20rem]:gap-1", c.divisor)}>
+      <ul aria-label={rotuloTemas} className={cn("relative flex flex-wrap gap-1 border-t pt-4 @min-[20rem]:flex-nowrap @min-[20rem]:gap-1", c.divisor)}>
         {temas.map((tema, j) => (
           <li
             key={tema}
             data-frente-tag=""
             style={{ "--frente-t": j } as React.CSSProperties}
-            className={cn("rounded-full border px-2.5 py-1 text-xs font-medium transition-colors duration-200 @min-[20rem]:whitespace-nowrap @min-[20rem]:px-[7px]", c.tema)}
+            className={cn("rounded-full border px-2 py-1 text-xs font-medium transition-colors duration-200 @min-[20rem]:whitespace-nowrap @min-[20rem]:px-2", c.tema)}
           >
             {tema}
           </li>
@@ -197,7 +197,7 @@ export type GradeDeFrentesProps = React.HTMLAttributes<HTMLDivElement> & {
   rotulo?: string;
 };
 
-/** Grade de 3/2 colunas; no celular, carrossel com encaixe. Para a entrada em cascata do site:
+/** Grade de 3/2 colunas; no celular, um card por linha. Para a entrada em cascata do site:
  *  <SurgirAoRolar as={GradeDeFrentes} escalonar>…cards…</SurgirAoRolar>. */
 const GradeDeFrentes = React.forwardRef<HTMLDivElement, GradeDeFrentesProps>(function GradeDeFrentes(
   { rotulo = "Frentes de atuação", className, children, ...props },
@@ -209,12 +209,10 @@ const GradeDeFrentes = React.forwardRef<HTMLDivElement, GradeDeFrentesProps>(fun
       ref={ref}
       role="region"
       aria-label={rotulo}
-      tabIndex={0}
       data-slot="grade-frentes"
       className={cn(
-        "-mx-4 flex snap-x snap-mandatory scroll-px-4 items-stretch gap-4 overflow-x-auto overscroll-x-contain px-4 pb-4 pt-1 [scrollbar-width:none]",
-        "[&>*]:shrink-0 [&>*]:grow-0 [&>*]:basis-[84%] [&>*]:snap-start",
-        "md:mx-auto md:grid md:max-w-5xl md:grid-cols-2 md:gap-6 md:overflow-visible md:p-0 md:[&>*]:basis-auto lg:max-w-7xl lg:grid-cols-3",
+        "grid grid-cols-1 items-stretch gap-4 [&>*]:h-full",
+        "md:mx-auto md:max-w-5xl md:grid-cols-2 md:gap-6 lg:max-w-7xl lg:grid-cols-3",
         "rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         className,
       )}

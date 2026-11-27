@@ -14,6 +14,10 @@ import { cn } from "./utils";
  *
  * O botão "Preferências de cookies" chama `onPreferenciasCookies` (por exemplo, abrirAvisoCookies() do AvisoCookies).
  * Com `espacoFlutuante`, o rodapé reserva 96 px embaixo para o botão do WhatsApp não cobrir os links (como o site faz).
+ *
+ * Largura (regra do DS, 27/11/2026, pela largura do próprio rodapé): abaixo de 64rem, tudo alinhado à esquerda, com os
+ * links numa grade de colunas alinhadas (2, 3 ou 4, conforme couber), para nenhum link ficar sozinho no meio de uma
+ * linha; a partir de 64rem, logo e links lado a lado numa linha só. No toque, cada link tem 44 px de altura.
  */
 
 export type RodapeLink = { href: string; rotulo: string };
@@ -98,14 +102,14 @@ function RodapeSite({
 }: RodapeSiteProps) {
   const cor = CORES[variante === "escuro" ? "escuro" : "claro"];
   const compacto = variante === "compacto";
-  const itemLink = cn("inline-flex min-h-6 items-center bg-transparent p-0 text-left [font-weight:inherit] [line-height:inherit] transition-colors", cor.link, foco);
+  const itemLink = cn("inline-flex min-h-6 items-center toque:min-h-11 bg-transparent p-0 text-left [font-weight:inherit] [line-height:inherit] transition-colors", cor.link, foco);
   const preferencias = (
     <button type="button" onClick={onPreferenciasCookies} className={cn(itemLink, "cursor-pointer")}>{rotuloPreferencias}</button>
   );
   const restrita = areaRestrita && <a href={areaRestrita.href} className={itemLink}>{areaRestrita.rotulo}</a>;
   const copy = (
     <p className="m-0">
-      {copyright} <span aria-hidden className={cn("mx-1.5", cor.ponto)}>•</span> {cidade}
+      {copyright} <span aria-hidden className={cn("mx-1", cor.ponto)}>•</span> {cidade}
     </p>
   );
 
@@ -113,20 +117,20 @@ function RodapeSite({
     <footer
       data-slot="rodape-site"
       data-variante={variante}
-      className={cn("w-full font-sans", cor.superficie, compacto ? "py-6" : "py-10 sm:py-12", espacoFlutuante && "pb-24 sm:pb-24", className)}
+      className={cn("@container/rodape w-full font-sans", cor.superficie, compacto ? "py-6" : "py-10 sm:py-12", espacoFlutuante && "pb-24 sm:pb-24", className)}
       {...props}
     >
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
         {!compacto && (
-          <div className={cn("flex flex-col items-center gap-5 border-b pb-5 md:flex-row md:justify-between", cor.divisor)}>
-            <a href={inicioHref} aria-label={rotuloLogo} className={cn("inline-flex shrink-0", foco)}>
+          <div className={cn("flex flex-col items-start gap-5 border-b pb-5 @5xl/rodape:flex-row @5xl/rodape:items-center @5xl/rodape:justify-between", cor.divisor)}>
+            <a href={inicioHref} aria-label={rotuloLogo} className={cn("inline-flex shrink-0 items-center toque:min-h-11", foco)}>
               {logo ? (
-                <img src={logo} alt="" className="block h-[3.25rem] w-auto" />
+                <img src={logo} alt="" className="block h-12 w-auto" />
               ) : (
                 <span className={cn("text-base font-bold", cor.link)}>Dani Moscatelli</span>
               )}
             </a>
-            <nav aria-label={rotuloNav} className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium md:justify-end">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-6 gap-y-1 text-sm font-medium @xl/rodape:grid-cols-3 @3xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               {links.map(l => <a key={l.href + l.rotulo} href={l.href} className={itemLink}>{l.rotulo}</a>)}
               {preferencias}
               {restrita}
@@ -135,14 +139,14 @@ function RodapeSite({
         )}
         <div
           className={cn(
-            "flex flex-col items-center gap-2 text-center text-xs leading-relaxed sm:flex-row sm:justify-between sm:text-left",
+            "flex flex-col items-start gap-2 text-left text-xs leading-relaxed @5xl/rodape:flex-row @5xl/rodape:items-center @5xl/rodape:justify-between",
             cor.base,
             !compacto && "pt-5",
           )}
         >
           {copy}
           {compacto ? (
-            <nav aria-label={rotuloNav} className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs font-normal sm:justify-end">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-5 text-xs font-normal @xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               <a href={privacidade.href} className={cn(itemLink, cor.base)}>{privacidade.rotulo}</a>
               <button type="button" onClick={onPreferenciasCookies} className={cn(itemLink, cor.base, "cursor-pointer")}>{rotuloPreferencias}</button>
               {areaRestrita && <a href={areaRestrita.href} className={cn(itemLink, cor.base)}>{areaRestrita.rotulo}</a>}

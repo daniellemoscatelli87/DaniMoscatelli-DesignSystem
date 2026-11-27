@@ -3,11 +3,13 @@
 import * as React from "react";
 import { AlertCircle, X } from "lucide-react";
 import { cn } from "./utils";
+import { sugestoesDeEmail } from "./campo-de-email";
 
 /**
  * CampoDeEmails (vários e-mails em etiquetas)
  *
- * Para (destinatários), Cc e Cco de um e-mail novo, convites para várias pessoas. Cada e-mail digitado vira uma
+ * Para (destinatários), Cc e Cco de um e-mail novo, convites para várias pessoas. Enquanto a pessoa digita, aparecem
+ * as sugestões de domínio do CampoDeEmail ("ana@gm" → "ana@gmail.com"). Cada e-mail digitado vira uma
  * etiqueta quando a pessoa aperta Enter, vírgula, ponto e vírgula, espaço ou sai do campo; colar uma lista separa os
  * e-mails sozinho. Veio do "Novo e-mail" do Contato da área restrita (etiquetas `ne-tag` feitas à mão).
  *
@@ -40,6 +42,7 @@ export type CampoDeEmailsProps = {
 function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.com", maximo, desabilitado = false, invalido, textos, className, ...aria }: CampoDeEmailsProps) {
   const tx = { remover: "Remover", invalido: "formato inválido", editar: "Editar", ...textos };
   const [texto, setTexto] = React.useState("");
+  const [emFoco, setEmFoco] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const cheio = maximo !== undefined && valor.length >= maximo;
 
@@ -60,8 +63,10 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
   };
 
   const algumInvalido = valor.some(v => !FORMATO.test(v));
+  const sugestoes = emFoco && !cheio ? sugestoesDeEmail(texto) : [];
 
   return (
+    <div className={cn("min-w-0", className)}>
     <div
       data-slot="campo-de-emails"
       onClick={() => inputRef.current?.focus()}
@@ -71,7 +76,6 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
         "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
         (invalido || algumInvalido) && "border-destructive",
         desabilitado && "cursor-not-allowed opacity-50",
-        className,
       )}
     >
       {valor.map(email => {
@@ -132,9 +136,27 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
           const colado = e.clipboardData.getData("text");
           if (/[,;\s]/.test(colado.trim())) { e.preventDefault(); adicionar(texto + colado); setTexto(""); }
         }}
-        onBlur={() => { if (texto.trim()) { adicionar(texto); setTexto(""); } }}
+        onFocus={() => setEmFoco(true)}
+        onBlur={() => { setEmFoco(false); if (texto.trim()) { adicionar(texto); setTexto(""); } }}
         className="h-8 toque:h-11 min-w-[10rem] flex-1 bg-transparent px-2 text-body outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed sm:text-body-sm"
       />
+    </div>
+    <span className="sr-only" aria-live="polite">{sugestoes.length ? `${sugestoes.length} sugestões de e-mail` : ""}</span>
+    {sugestoes.length > 0 && (
+      <div data-slot="sugestoes-de-email" className="mt-2 flex flex-wrap gap-2 motion-safe:animate-in motion-safe:fade-in">
+        {sugestoes.map(o => (
+          <button
+            key={o}
+            type="button"
+            onMouseDown={e => e.preventDefault()}
+            onClick={() => { adicionar(o); setTexto(""); inputRef.current?.focus(); }}
+            className="inline-flex min-h-9 max-w-full items-center rounded-full border border-[var(--border-strong)] bg-card px-3 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring toque:min-h-11 toque:px-4"
+          >
+            <span className="truncate">{o}</span>
+          </button>
+        ))}
+      </div>
+    )}
     </div>
   );
 }

@@ -28,7 +28,7 @@ export interface AvatarCirclesProps {
 }
 
 const sizes = {
-  sm: { box: "h-8 w-8 text-[0.625rem]", px: 32, gap: "-space-x-3" },
+  sm: { box: "h-8 w-8 text-caption", px: 32, gap: "-space-x-3" },
   md: { box: "h-10 w-10 text-xs", px: 40, gap: "-space-x-4" },
   lg: { box: "h-12 w-12 text-sm", px: 48, gap: "-space-x-4" },
 } as const;
