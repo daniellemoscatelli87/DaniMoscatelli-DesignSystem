@@ -59,10 +59,10 @@ const semanticColors = [
 const PX_DO_TOKEN: Record<string, string> = {
   "text-caption": "11px", "text-label": "12px", "text-body-sm": "14px", "text-body": "16px", "text-body-lg": "18px",
   "text-h4": "20px", "text-h3": "24px", "text-h2": "32px", "text-h1": "40px",
-  "text-display-m": "36px", "text-display-l": "48px", "text-display-xl": "64px",
+  "text-display-md": "36px", "text-display-lg": "48px", "text-display-xl": "64px",
 };
 
-const DISPLAY_TOKEN: Record<string, string> = { "4rem": "text-display-xl", "3rem": "text-display-l", "2.25rem": "text-display-m", "1.5rem": "text-h3" };
+const DISPLAY_TOKEN: Record<string, string> = { "4rem": "text-display-xl", "3rem": "text-display-lg", "2.25rem": "text-display-md", "1.5rem": "text-h3" };
 
 const typeScaleItems = [
   { label: "H1",          size: "text-h1",   weight: "font-bold",     tracking: "tracking-[-0.02em]",  sample: "Heading One", ptLabel: "H1", ptSample: "Título Um" },
@@ -126,9 +126,9 @@ export function FoundationShowcase() {
         <SectionHeader title={t("Color Palette", "Paleta de cores")} description={t("A cold graphite gray system with subtle blue undertones paired with a burnt crimson accent.", "Um sistema de cinza grafite frio com sutis tons de azul, combinado a um acento carmim queimado.")} />
 
         <SubSection title={t("Graphite Scale", "Escala Graphite")}>
-          <div className="grid grid-cols-11 gap-1.5">
+          <div className="grid grid-cols-11 gap-1">
             {graphiteScale.map((c) => (
-              <div key={c.name} className="flex flex-col gap-1.5">
+              <div key={c.name} className="flex flex-col gap-1">
                 <div
                   className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
@@ -141,9 +141,9 @@ export function FoundationShowcase() {
         </SubSection>
 
         <SubSection title={t("Crimson Scale", "Escala Crimson")}>
-          <div className="grid grid-cols-11 gap-1.5">
+          <div className="grid grid-cols-11 gap-1">
             {crimsonScale.map((c) => (
-              <div key={c.name} className="flex flex-col gap-1.5">
+              <div key={c.name} className="flex flex-col gap-1">
                 <div
                   className="h-14 rounded-sm border border-border/40"
                   style={{ backgroundColor: c.hex }}
@@ -183,7 +183,7 @@ export function FoundationShowcase() {
                 <div>
                   <div className="text-body-sm font-medium text-foreground">{bi({ en: c.name, pt: c.pt })}</div>
                   <div className="text-caption text-muted-foreground font-mono">{c.token}</div>
-                  <div className="mt-1.5 space-y-0.5 font-mono text-caption">
+                  <div className="mt-1 space-y-1 font-mono text-caption">
                     <div className="flex items-center justify-between gap-2 text-muted-foreground">
                       <span className="uppercase tracking-[0.08em] opacity-70">{t("Light", "Claro")}</span>
                       <span className="text-foreground/80">{valorDoToken(c.token)?.claro ?? c.light}</span>
@@ -212,7 +212,7 @@ export function FoundationShowcase() {
               <div><p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Page title", "Título de página")}</p><Heading level={3} size="page">{t("Design **principles**", "Princípios de **design**")}</Heading></div>
               <div><p className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">{t("Section / card", "Seção / card")}</p><Heading level={3} size="section">{t("Join the **Partner Network**", "Faça parte da **Rede de Parceiros**")}</Heading></div>
             </div>
-            <ul className="grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("One highlight per title, one to three words, in the primary color; never the whole title.", "Um destaque por título, de uma a três palavras, na cor primária; nunca o título inteiro.")}</li>
               <li>• {t("Highlight the expression that carries the value (“strategic asset”), not a connector.", "Destaque a expressão que carrega o valor (“ativo estratégico”), não um conectivo.")}</li>
               <li>• {t("Plus Jakarta Sans Bold (700), as on the site hero. Hero: tracking -0.03em, line height 1.1. Page: -0.035em. Section: -0.02em.", "Plus Jakarta Sans Bold (700), como no hero do site. Hero: tracking -0,03em, entrelinha 1,1. Página: -0,035em. Seção: -0,02em.")}</li>
@@ -244,7 +244,7 @@ export function FoundationShowcase() {
               family: "Space Grotesk",
               token: "--font-display",
               proportion: "20%",
-              pillColor: "bg-info/10 text-info border-info/20",
+              pillColor: "bg-info/10 text-info-text border-info/20",
               barColor: "bg-info",
               traits: [t("Innovation", "Inovação"), t("Impact", "Impacto"), t("Technology", "Tecnologia"), t("Energy", "Energia")],
               uses: t("Hero headlines · Campaigns · Numbers · Statements · Strategic sections", "Títulos hero · Campanhas · Números · Declarações · Seções estratégicas"),
@@ -269,13 +269,13 @@ export function FoundationShowcase() {
             <div key={f.role} className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow-xs)" }}>
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <span className={`inline-block px-2 py-0.5 rounded-sm border text-caption font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
-                  <p className="mt-1.5 text-body font-bold text-foreground leading-tight break-words">{f.family}</p>
-                  <p className="text-caption font-mono text-muted-foreground mt-0.5">{f.token}</p>
+                  <span className={`inline-block px-2 py-1 rounded-sm border text-caption font-bold tracking-[0.08em] ${f.pillColor}`}>{f.roleLabel}</span>
+                  <p className="mt-1 text-body font-bold text-foreground leading-tight break-words">{f.family}</p>
+                  <p className="text-caption font-mono text-muted-foreground mt-1">{f.token}</p>
                 </div>
                 <div className="text-right shrink-0">
                   <p className="text-h3 font-black text-foreground leading-none">{f.proportion}</p>
-                  <p className="text-caption text-muted-foreground mt-0.5">{t("of usage", "de uso")}</p>
+                  <p className="text-caption text-muted-foreground mt-1">{t("of usage", "de uso")}</p>
                 </div>
               </div>
 
@@ -287,7 +287,7 @@ export function FoundationShowcase() {
               {/* Traits */}
               <div className="flex flex-wrap gap-1">
                 {f.traits.map((tr, ti) => (
-                  <span key={ti} className="px-2 py-0.5 rounded-sm bg-muted text-caption font-semibold text-muted-foreground">{tr}</span>
+                  <span key={ti} className="px-2 py-1 rounded-sm bg-muted text-caption font-semibold text-muted-foreground">{tr}</span>
                 ))}
               </div>
 
@@ -297,7 +297,7 @@ export function FoundationShowcase() {
               </div>
 
               {/* Meta */}
-              <div className="space-y-1.5 text-caption">
+              <div className="space-y-1 text-caption">
                 <p className="text-muted-foreground leading-relaxed"><span className="font-semibold text-foreground/70">{t("Use in:", "Usar em:")}</span> {f.uses}</p>
                 <p className="text-muted-foreground"><span className="font-semibold text-foreground/70">{t("Weights:", "Pesos:")}</span> {f.weights}</p>
               </div>
@@ -311,6 +311,12 @@ export function FoundationShowcase() {
             <h3 className="text-body-sm font-bold text-foreground uppercase tracking-[0.07em]">Plus Jakarta Sans — {t("Type scale", "Escala tipográfica")}</h3>
             <div className="h-px flex-1 bg-border" />
           </div>
+          <p className="max-w-3xl text-body-sm leading-relaxed text-muted-foreground">
+            {t(
+              "Each size of the scale is a token: text-caption (11 px), text-label (12), text-body-sm and text-button (14), text-body (16), text-body-lg and text-subtitle (18), text-h4 and text-subtitle-lg (20), text-h3 (24), text-h2 (32), text-h1 (40) and text-display-md, -lg and -xl (36, 48 and 64). Use only these classes, never a size typed by hand. A size outside the scale goes to the nearest step: 13 px becomes 14, 15 becomes 16, 10 becomes 11, 28 becomes 32. The names are the same in the FindLook Design System. Headings break lines with text-wrap: pretty, so no word is left alone on the last line.",
+              "Cada tamanho da escala é um token: text-caption (11 px), text-label (12), text-body-sm e text-button (14), text-body (16), text-body-lg e text-subtitle (18), text-h4 e text-subtitle-lg (20), text-h3 (24), text-h2 (32), text-h1 (40) e text-display-md, -lg e -xl (36, 48 e 64). Use só essas classes, nunca um tamanho digitado à mão. Um tamanho fora da escala vai para o passo mais perto: 13 px vira 14, 15 vira 16, 10 vira 11, 28 vira 32. Os nomes são os mesmos no FindLook Design System. Os títulos quebram as linhas com text-wrap: pretty, para nenhuma palavra ficar sozinha na última linha.",
+            )}
+          </p>
           <div className="bg-card rounded-lg border border-border overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
             {typeScaleItems.map((item, i) => (
               <div
@@ -408,7 +414,7 @@ export function FoundationShowcase() {
                     <p className="text-caption font-bold" style={{ color: "var(--success)" }}>{t("Use as an accent", "Use como acento")}</p>
                   </div>
                 </div>
-                <ul className="px-4 py-3 space-y-2.5">
+                <ul className="px-4 py-3 space-y-2">
                   {[t("Last word of a headline", "Última palavra de um título"), t("Quotes and manifestos", "Citações e manifestos"), t("Editorial statements", "Declarações editoriais"), t("Italic for contrast", "Itálico para contraste"), t("Special editorial headings", "Títulos editoriais especiais")].map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full shrink-0 bg-success opacity-70" />
@@ -428,7 +434,7 @@ export function FoundationShowcase() {
                     <p className="text-caption font-bold" style={{ color: "#D44D4D" }}>{t("Avoid", "Evitar")}</p>
                   </div>
                 </div>
-                <ul className="px-4 py-3 space-y-2.5">
+                <ul className="px-4 py-3 space-y-2">
                   {[t("Long interface text", "Textos longos de interface"), t("Buttons and functional labels", "Botões e rótulos funcionais"), t("Navigation and menus", "Navegação e menus"), t("Standard body text", "Texto de corpo padrão"), t("Functional components", "Componentes funcionais")].map(item => (
                     <li key={item} className="flex items-start gap-2">
                       <span className="mt-1 h-1.5 w-1.5 rounded-full shrink-0" style={{ background: "#D44D4D", opacity: 0.6 }} />
@@ -450,7 +456,7 @@ export function FoundationShowcase() {
                     { label: "Bold 700",    specimen: "Aa", italic: false, allowed: false },
                     { label: "Extra 800",   specimen: "Aa", italic: false, allowed: false },
                   ].map(w => (
-                    <div key={w.label} className="flex items-center gap-2.5">
+                    <div key={w.label} className="flex items-center gap-2">
                       <div className={`h-7 w-7 rounded-sm flex items-center justify-center shrink-0 ${w.allowed ? "bg-muted/50" : "bg-muted/20"}`}>
                         <span style={{
                           fontFamily: "var(--font-accent)",
@@ -463,9 +469,9 @@ export function FoundationShowcase() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className={`text-caption font-semibold leading-none ${w.allowed ? "text-foreground" : "text-muted-foreground line-through"}`}>{w.label}</p>
-                        <p className="text-caption text-muted-foreground mt-0.5">{w.allowed ? t("recommended", "recomendado") : t("do not use", "não use")}</p>
+                        <p className="text-caption text-muted-foreground mt-1">{w.allowed ? t("recommended", "recomendado") : t("do not use", "não use")}</p>
                       </div>
-                      <span className={`text-caption font-bold ${w.allowed ? "text-success" : "text-destructive/60"}`}>{w.allowed ? "✓" : "✕"}</span>
+                      <span className={`text-caption font-bold ${w.allowed ? "text-success-text" : "text-destructive/60"}`}>{w.allowed ? "✓" : "✕"}</span>
                     </div>
                   ))}
                 </div>
@@ -478,7 +484,7 @@ export function FoundationShowcase() {
                 </div>
                 <div className="px-4 py-3 space-y-3">
                   {/* Stacked bar */}
-                  <div className="space-y-1.5">
+                  <div className="space-y-1">
                     <p className="text-caption font-semibold text-muted-foreground uppercase tracking-[0.07em]">{t("Ideal composition", "Composição ideal")}</p>
                     <div className="flex h-4 w-full rounded-full overflow-hidden gap-px">
                       <div className="h-full rounded-l-full" style={{ width: "70%", background: "var(--primary)" }} />

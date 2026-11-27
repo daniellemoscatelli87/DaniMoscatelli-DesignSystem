@@ -44,7 +44,7 @@ export function NavCard({
       }`}
     >
       <Icon className="h-5 w-5 text-primary-text mb-4 shrink-0" strokeWidth={1.75} />
-      <h3 className={`${display} text-body font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
+      <h3 className={`${display} text-body font-semibold tracking-[-0.01em] text-foreground mb-1`}>
         {txt(item.title)}
       </h3>
       <p className="text-body-sm leading-relaxed text-muted-foreground mb-5">{txt(item.desc)}</p>
@@ -74,7 +74,7 @@ export function PageHeader({
   return (
     <header>
       <p className="text-label font-semibold uppercase tracking-[0.12em] text-primary-text mb-3">{eyebrow}</p>
-      <h1 className={`${display} text-h2 sm:text-h1 font-bold tracking-[-0.035em] leading-none text-foreground mb-4 [text-wrap:balance]`}>{withHighlight(title)}</h1>
+      <h1 className={`${display} text-h2 sm:text-h1 font-bold tracking-[-0.035em] leading-none text-foreground mb-4 [text-wrap:pretty]`}>{withHighlight(title)}</h1>
       <p className="text-body-lg text-muted-foreground max-w-2xl leading-relaxed">{description}</p>
     </header>
   );
@@ -101,7 +101,7 @@ export function CopyLinkButton({ id }: { id: string }) {
       </button>
       <span
         role="tooltip"
-        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1.5 whitespace-nowrap rounded-sm bg-foreground px-2 py-1 text-caption font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap rounded-sm bg-foreground px-2 py-1 text-caption font-medium text-background opacity-0 group-hover/link:opacity-100 group-focus-within/link:opacity-100 transition-opacity z-10"
       >
         {copied ? t("Copied", "Copiado") : t("Copy link", "Copiar link")}
       </span>

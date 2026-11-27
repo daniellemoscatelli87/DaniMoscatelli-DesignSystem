@@ -314,13 +314,13 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
         <div className="mt-5 grid grid-cols-1 gap-3 border-t border-border pt-4 sm:grid-cols-2">
           {porQueImporta && (
             <div>
-              <p className="mb-1 flex items-center text-label font-semibold text-muted-foreground"><Passo n="03" mostrar={numerar} /><Info aria-hidden className="mr-1.5 h-3.5 w-3.5" />{r.porQue}</p>
+              <p className="mb-1 flex items-center text-label font-semibold text-muted-foreground"><Passo n="03" mostrar={numerar} /><Info aria-hidden className="mr-1 h-3.5 w-3.5" />{r.porQue}</p>
               <p className="text-body-sm leading-relaxed text-foreground">{porQueImporta}</p>
             </div>
           )}
           {acao && (
             <div>
-              <p className="mb-1 flex items-center text-label font-semibold text-[var(--primary-text,var(--primary))]"><Passo n="04" mostrar={numerar} /><Lightbulb aria-hidden className="mr-1.5 h-3.5 w-3.5" />{r.acao}</p>
+              <p className="mb-1 flex items-center text-label font-semibold text-[var(--primary-text,var(--primary))]"><Passo n="04" mostrar={numerar} /><Lightbulb aria-hidden className="mr-1 h-3.5 w-3.5" />{r.acao}</p>
               <p className="text-body-sm leading-relaxed text-foreground">{acao}</p>
             </div>
           )}
@@ -351,9 +351,9 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
 
 export function LegendaDoGrafico({ itens, className }: { itens: { rotulo: string; cor: string; forma?: "ponto" | "linha" | "anel" }[]; className?: string }) {
   return (
-    <ul className={cn("m-0 flex list-none flex-wrap gap-x-4 gap-y-1.5 p-0 text-label text-muted-foreground", className)}>
+    <ul className={cn("m-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-label text-muted-foreground", className)}>
       {itens.map(i => (
-        <li key={i.rotulo} className="flex items-center gap-1.5">
+        <li key={i.rotulo} className="flex items-center gap-1">
           {i.forma === "linha"
             ? <span aria-hidden className="inline-block h-[2px] w-3.5 rounded-sm" style={{ background: i.cor }} />
             : i.forma === "anel"
@@ -459,7 +459,7 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
           <li
             key={f.rotulo}
             onMouseEnter={() => setAtiva(i)}
-            className={cn("flex items-center gap-2.5 rounded-sm px-2 py-1.5 text-body-sm transition-colors motion-reduce:transition-none", ativa === i && "bg-muted")}
+            className={cn("flex items-center gap-2 rounded-sm px-2 py-1 text-body-sm transition-colors motion-reduce:transition-none", ativa === i && "bg-muted")}
           >
             <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: f.cor }} />
             <span className={cn("min-w-0 flex-1 leading-snug", f.neutro ? "text-muted-foreground" : "text-foreground")}>{f.rotulo}</span>
@@ -504,7 +504,7 @@ export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao 
         return (
           <div key={item.rotulo} className="min-w-0">
             <p className={cn("mb-1 text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>
-              {posicao && <span className="mr-1.5 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
+              {posicao && <span className="mr-1 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
             </p>
             <div className="flex items-center gap-2">
               <motion.div
@@ -556,7 +556,7 @@ export function LegendaSequencial({ menos, mais }: { menos: string; mais: string
   return (
     <div aria-hidden className="flex items-center gap-2 text-label text-muted-foreground">
       <span>{menos}</span>
-      <span className="flex gap-0.5">
+      <span className="flex gap-1">
         {ESCALA_SEQUENCIAL.map(e => <span key={e.cor} className="h-2.5 w-6 rounded-sm" style={{ background: e.cor }} />)}
       </span>
       <span>{mais}</span>
@@ -585,7 +585,7 @@ export function MapaDeCalorPorRegiao({ regioes, colunas, linhas, destaque, rotul
       <div
         role="img"
         aria-label={resumo}
-        className="grid gap-x-1.5 gap-y-2"
+        className="grid gap-x-1 gap-y-2"
         style={{ gridTemplateColumns: `repeat(${colunas}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${linhas}, minmax(4.25rem, auto))` }}
       >
         {regioes.map((x, i) => {
@@ -644,7 +644,7 @@ export function GraficoDeHalteres({ itens, series, maximo, rotulo, formatar = fm
   return (
     <div className={cn("space-y-4", className)}>
       <LegendaDoGrafico itens={[{ rotulo: series[0], cor: "var(--chart-6)", forma: "anel" }, { rotulo: series[1], cor: "var(--chart-1)" }]} />
-      <div role="img" aria-label={resumo} className="space-y-3.5">
+      <div role="img" aria-label={resumo} className="space-y-3">
         {itens.map((item, i) => {
           const menor = Math.min(item.a, item.b), maior = Math.max(item.a, item.b);
           const aEsquerda = item.a <= item.b;
@@ -804,12 +804,12 @@ export function GraficoDeLinhas({ series, rotulosX, area, altura = 240, zero = t
         </svg>
       )}
       {indice != null && largura > 0 && (
-        <div aria-hidden className="pointer-events-none absolute top-0 z-10 rounded-md border border-border bg-card px-2.5 py-1.5 text-label shadow-md"
+        <div aria-hidden className="pointer-events-none absolute top-0 z-10 rounded-md border border-border bg-card px-2 py-1 text-label shadow-md"
           style={{ left: Math.min(Math.max(0, x(indice) - 70), largura - 150), width: 140 }}>
-          <p className="mb-0.5 font-semibold text-foreground">{rotulosX[indice]}</p>
+          <p className="mb-1 font-semibold text-foreground">{rotulosX[indice]}</p>
           {series.map((s, si) => (
             <p key={s.rotulo} className="flex items-center justify-between gap-2 text-muted-foreground">
-              <span className="flex min-w-0 items-center gap-1.5"><span className="h-2 w-2 shrink-0 rounded-full" style={{ background: cores[si] }} /><span className="truncate">{s.rotulo}</span></span>
+              <span className="flex min-w-0 items-center gap-1"><span className="h-2 w-2 shrink-0 rounded-full" style={{ background: cores[si] }} /><span className="truncate">{s.rotulo}</span></span>
               <span className="tabular-nums text-foreground">{formatar(s.valores[indice] ?? 0)}</span>
             </p>
           ))}
@@ -957,12 +957,12 @@ export function Mosaico({ itens, altura = 260, rotulo, localidade = "pt-BR", cla
             );
           })}
         </div>
-        <ul className="m-0 w-full min-w-0 list-none space-y-0.5 p-0 @min-[36rem]:flex-1" onMouseLeave={() => setAtivo(null)}>
+        <ul className="m-0 w-full min-w-0 list-none space-y-1 p-0 @min-[36rem]:flex-1" onMouseLeave={() => setAtivo(null)}>
           {lista.map((item, i) => (
             <li
               key={item.rotulo}
               onMouseEnter={() => setAtivo(i)}
-              className={cn("flex items-center gap-2.5 rounded-sm px-2 py-1 text-body-sm transition-colors motion-reduce:transition-none", ativo === i && "bg-muted")}
+              className={cn("flex items-center gap-2 rounded-sm px-2 py-1 text-body-sm transition-colors motion-reduce:transition-none", ativo === i && "bg-muted")}
             >
               <PontoDaCor cor={cores[i]!} className="h-2.5 w-2.5" />
               <span className={cn("min-w-0 flex-1 leading-snug", item.neutro ? "text-muted-foreground" : "text-foreground")}>{item.rotulo}</span>
@@ -1000,14 +1000,14 @@ export function BarrasEmpilhadas100({ categorias, linhas, minimoParaRotulo = 9, 
           return (
             <div key={l.rotulo}>
               <p className="mb-1 text-body-sm font-medium text-foreground">{l.rotulo}</p>
-              <div className="flex gap-[2px]" aria-hidden>
+              <div className="flex gap-1" aria-hidden>
                 {l.valores.map((v, i) => (
                   <span key={i} className="min-w-0 text-center text-label font-semibold tabular-nums text-foreground" style={{ flex: `${v} 1 0` }}>
                     {(v / t) * 100 >= minimoParaRotulo ? formatarPercentual((v / t) * 100, 0, localidade) : ""}
                   </span>
                 ))}
               </div>
-              <motion.div className="mt-0.5 flex h-3 gap-[2px] overflow-hidden rounded-sm" style={{ originX: 0 }}
+              <motion.div className="mt-1 flex h-3 gap-1 overflow-hidden rounded-sm" style={{ originX: 0 }}
                 initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: menos ? 0 : 0.08 * li, ease: [0.22, 1, 0.36, 1] }}>
                 {l.valores.map((v, i) => <span key={i} className="block h-full min-w-0" style={{ flex: `${v} 1 0`, background: cores[i] }} />)}
               </motion.div>
@@ -1087,7 +1087,7 @@ export function GraficoDeBolhas({ itens, eixoX, eixoY, rotuloTamanho, formatarTa
         )}
       </div>
       <p className="flex items-center gap-2 text-label text-muted-foreground">
-        <span aria-hidden className="flex items-end gap-0.5"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
+        <span aria-hidden className="flex items-end gap-1"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
         {rotuloTamanho}
       </p>
     </div>
@@ -1256,10 +1256,10 @@ export function Funil({ etapas, destacarMaiorPerda = true, rotulo, formatar = fm
       {etapas.map((e, i) => (
         <li key={e.rotulo}>
           {i > 0 && (
-            <p className={cn("my-1.5 flex items-center justify-center gap-1.5 text-label tabular-nums", i - 1 === piorPassagem ? "font-semibold text-[var(--primary-text,var(--primary))]" : "text-muted-foreground")}>
+            <p className={cn("my-1 flex items-center justify-center gap-1 text-label tabular-nums", i - 1 === piorPassagem ? "font-semibold text-[var(--primary-text,var(--primary))]" : "text-muted-foreground")}>
               <span aria-hidden>↓</span>
               {r.seguiram(formatarPercentual(taxas[i - 1]! * 100, 0, localidade))}
-              {i - 1 === piorPassagem && <span className="rounded-sm border border-current px-1.5 py-px text-caption">{r.maiorPerda}</span>}
+              {i - 1 === piorPassagem && <span className="rounded-sm border border-current px-1 py-px text-caption">{r.maiorPerda}</span>}
             </p>
           )}
           <div className="mb-1 flex items-baseline justify-between gap-3 text-body-sm">

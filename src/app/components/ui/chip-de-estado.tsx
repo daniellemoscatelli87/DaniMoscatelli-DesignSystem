@@ -38,7 +38,7 @@ function ChipDeEstado({ tom = "neutro", icone, tamanho = "sm", className, childr
       data-tom={tom}
       className={cn(
         "inline-flex shrink-0 items-center whitespace-nowrap rounded-full border font-semibold leading-none [&>svg]:shrink-0",
-        tamanho === "sm" ? "h-6 gap-1 px-2.5 text-xs [&>svg]:size-3.5" : "h-7 gap-1.5 px-3 text-body-sm [&>svg]:size-4",
+        tamanho === "sm" ? "h-6 gap-1 px-2 text-xs [&>svg]:size-3.5" : "h-7 gap-1 px-3 text-body-sm [&>svg]:size-4",
         TONS[tom],
         className,
       )}

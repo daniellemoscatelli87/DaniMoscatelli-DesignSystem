@@ -148,7 +148,7 @@ function CardDeFrente({
         <span
           aria-hidden
           className={cn(
-            "pointer-events-none absolute right-5 top-3 select-none text-display-l font-bold leading-none transition-[color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-1 group-hover:scale-[1.06] motion-reduce:transition-none",
+            "pointer-events-none absolute right-5 top-3 select-none text-display-lg font-bold leading-none transition-[color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-1 group-hover:scale-[1.06] motion-reduce:transition-none",
             c.numero,
           )}
         >
@@ -172,17 +172,17 @@ function CardDeFrente({
         >
           {icone}
         </span>
-        <Titulo id={id} className={cn("mb-1.5 text-xl font-semibold leading-7", c.titulo)}>{titulo}</Titulo>
+        <Titulo id={id} className={cn("mb-1 text-xl font-semibold leading-7", c.titulo)}>{titulo}</Titulo>
         <p className={cn("mb-3 text-sm font-semibold", c.subtitulo)}>{subtitulo}</p>
         <p className={cn("mb-6 text-sm leading-relaxed", c.descricao)}>{descricao}</p>
       </div>
-      <ul aria-label={rotuloTemas} className={cn("relative flex flex-wrap gap-1.5 border-t pt-4 @min-[20rem]:flex-nowrap @min-[20rem]:gap-1", c.divisor)}>
+      <ul aria-label={rotuloTemas} className={cn("relative flex flex-wrap gap-1 border-t pt-4 @min-[20rem]:flex-nowrap @min-[20rem]:gap-1", c.divisor)}>
         {temas.map((tema, j) => (
           <li
             key={tema}
             data-frente-tag=""
             style={{ "--frente-t": j } as React.CSSProperties}
-            className={cn("rounded-full border px-2.5 py-1 text-xs font-medium transition-colors duration-200 @min-[20rem]:whitespace-nowrap @min-[20rem]:px-2", c.tema)}
+            className={cn("rounded-full border px-2 py-1 text-xs font-medium transition-colors duration-200 @min-[20rem]:whitespace-nowrap @min-[20rem]:px-2", c.tema)}
           >
             {tema}
           </li>

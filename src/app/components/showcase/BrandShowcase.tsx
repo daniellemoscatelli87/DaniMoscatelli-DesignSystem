@@ -46,7 +46,7 @@ function downloadSvg(markup: string, filename: string) {
 function DownloadButtons({ asset }: { asset: DownloadAsset }) {
   const { t } = useI18n();
   const btn =
-    "inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3 py-1.5 text-label font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+    "inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1 text-label font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   return (
     <div className="flex shrink-0 items-center gap-2">
       <button
@@ -107,11 +107,11 @@ function LogoCard({
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-body-sm font-semibold text-foreground">{label}</p>
-            {description && <p className="text-body-sm text-muted-foreground mt-0.5">{description}</p>}
+            {description && <p className="text-body-sm text-muted-foreground mt-1">{description}</p>}
           </div>
           {download && <DownloadButtons asset={download} />}
           {!download && badge && (
-            <span className="text-caption font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-muted text-muted-foreground">
+            <span className="text-caption font-semibold uppercase tracking-wider px-2 py-1 rounded-full bg-muted text-muted-foreground">
               {badge}
             </span>
           )}
@@ -136,7 +136,7 @@ function ColorChip({ name, hex, textColor = "text-foreground" }: { name: string;
     <button
       onClick={copy}
       aria-label={t(`Copy ${hex}`, `Copiar ${hex}`)}
-      className="group flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 hover:border-primary/40 transition-all w-full text-left"
+      className="group flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3 hover:border-[var(--border-strong)] transition-all w-full text-left"
     >
       <div
         className="h-9 w-9 rounded-lg shrink-0 border border-border/40"
@@ -147,7 +147,7 @@ function ColorChip({ name, hex, textColor = "text-foreground" }: { name: string;
         <p className="text-body-sm text-muted-foreground font-mono">{hex}</p>
       </div>
       <span className="text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
-        {copied ? <Check className="h-4 w-4 text-success" /> : <Copy className="h-4 w-4" />}
+        {copied ? <Check className="h-4 w-4 text-success-text" /> : <Copy className="h-4 w-4" />}
       </span>
     </button>
   );
@@ -172,15 +172,15 @@ function RuleCard({
       <div className="px-4 py-3 bg-card border-t border-border">
         <div className="flex items-center gap-2">
           {type === "do" ? (
-            <CheckCircle className="h-4 w-4 text-success shrink-0" />
+            <CheckCircle className="h-4 w-4 text-success-text shrink-0" />
           ) : (
             <XCircle className="h-4 w-4 text-error shrink-0" />
           )}
-          <span className={`text-body-sm font-medium ${type === "do" ? "text-success" : "text-error-text"}`}>
+          <span className={`text-body-sm font-medium ${type === "do" ? "text-success-text" : "text-error-text"}`}>
             {type === "do" ? t("Correct", "Correto") : t("Incorrect", "Incorreto")}
           </span>
         </div>
-        <p className="mt-0.5 text-body-sm text-muted-foreground pl-6">— {label}</p>
+        <p className="mt-1 text-body-sm text-muted-foreground pl-6">— {label}</p>
       </div>
     </div>
   );
@@ -393,7 +393,7 @@ export function BrandShowcase() {
           ].map(({ icon: Icon, label, desc, bg, preview, previewSize }) => (
             <div key={label.en} className={`rounded-lg border border-border ${bg} p-5 flex flex-col gap-4`}>
               <div className="flex items-start justify-between">
-                <Icon className="h-4 w-4 text-muted-foreground mt-0.5" />
+                <Icon className="h-4 w-4 text-muted-foreground mt-1" />
                 <ImageWithFallback
                   src={preview}
                   alt={t(`DM symbol — ${label.en}`, `Símbolo DM — ${label.pt}`)}
@@ -402,7 +402,7 @@ export function BrandShowcase() {
               </div>
               <div>
                 <p className="text-body-sm font-semibold text-foreground">{bi(label)}</p>
-                <p className="text-label text-muted-foreground mt-0.5 leading-snug">{bi(desc)}</p>
+                <p className="text-label text-muted-foreground mt-1 leading-snug">{bi(desc)}</p>
               </div>
             </div>
           ))}
@@ -546,7 +546,7 @@ export function BrandShowcase() {
           ].map(({ device, bp, version, size }, i, arr) => (
             <div
               key={device}
-              className={`grid grid-cols-4 px-5 py-3.5 text-body-sm ${i < arr.length - 1 ? "border-b border-border" : ""}`}
+              className={`grid grid-cols-4 px-5 py-3 text-body-sm ${i < arr.length - 1 ? "border-b border-border" : ""}`}
             >
               <span className="font-medium text-foreground">{device === "Favicon / Tab" ? t("Favicon / Tab", "Favicon / Aba") : device}</span>
               <span className="text-muted-foreground font-mono">{bp}</span>
@@ -713,18 +713,18 @@ export function BrandShowcase() {
             <div className="absolute inset-0 -m-10 border-2 border-dashed border-primary/30 rounded-lg pointer-events-none" />
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
               <div className="w-px h-8 bg-primary/40" />
-              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1 py-1 rounded-sm">1×</span>
             </div>
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1">
-              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1 py-1 rounded-sm">1×</span>
               <div className="w-px h-8 bg-primary/40" />
             </div>
             <div className="absolute -left-10 top-1/2 -translate-y-1/2 flex items-center gap-1">
               <div className="h-px w-8 bg-primary/40" />
-              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm rotate-0">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1 py-1 rounded-sm rotate-0">1×</span>
             </div>
             <div className="absolute -right-10 top-1/2 -translate-y-1/2 flex items-center gap-1">
-              <span className="text-caption font-mono text-primary/60 bg-card px-1.5 py-0.5 rounded-sm">1×</span>
+              <span className="text-caption font-mono text-primary/60 bg-card px-1 py-1 rounded-sm">1×</span>
               <div className="h-px w-8 bg-primary/40" />
             </div>
             {/* Versão de texto escuro no tema claro e de texto branco no tema escuro */}

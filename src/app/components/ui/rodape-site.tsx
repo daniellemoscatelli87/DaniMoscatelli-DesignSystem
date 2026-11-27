@@ -15,9 +15,9 @@ import { cn } from "./utils";
  * O botão "Preferências de cookies" chama `onPreferenciasCookies` (por exemplo, abrirAvisoCookies() do AvisoCookies).
  * Com `espacoFlutuante`, o rodapé reserva 96 px embaixo para o botão do WhatsApp não cobrir os links (como o site faz).
  *
- * Celular (regra do DS, 27/11/2026): tudo alinhado à esquerda, os links em duas colunas alinhadas e cada link com 44 px
- * de altura para o toque; nenhum link fica sozinho no meio de uma linha. A linha de base só fica lado a lado quando o
- * rodapé tem pelo menos 64rem de largura; antes disso, texto em cima e links embaixo.
+ * Largura (regra do DS, 27/11/2026, pela largura do próprio rodapé): abaixo de 64rem, tudo alinhado à esquerda, com os
+ * links numa grade de colunas alinhadas (2, 3 ou 4, conforme couber), para nenhum link ficar sozinho no meio de uma
+ * linha; a partir de 64rem, logo e links lado a lado numa linha só. No toque, cada link tem 44 px de altura.
  */
 
 export type RodapeLink = { href: string; rotulo: string };
@@ -102,7 +102,7 @@ function RodapeSite({
 }: RodapeSiteProps) {
   const cor = CORES[variante === "escuro" ? "escuro" : "claro"];
   const compacto = variante === "compacto";
-  const itemLink = cn("inline-flex min-h-6 items-center max-md:min-h-11 bg-transparent p-0 text-left [font-weight:inherit] [line-height:inherit] transition-colors", cor.link, foco);
+  const itemLink = cn("inline-flex min-h-6 items-center toque:min-h-11 bg-transparent p-0 text-left [font-weight:inherit] [line-height:inherit] transition-colors", cor.link, foco);
   const preferencias = (
     <button type="button" onClick={onPreferenciasCookies} className={cn(itemLink, "cursor-pointer")}>{rotuloPreferencias}</button>
   );
@@ -122,15 +122,15 @@ function RodapeSite({
     >
       <div className="mx-auto w-full max-w-7xl px-6 lg:px-10">
         {!compacto && (
-          <div className={cn("flex flex-col items-start gap-5 border-b pb-5 md:flex-row md:items-center md:justify-between", cor.divisor)}>
-            <a href={inicioHref} aria-label={rotuloLogo} className={cn("inline-flex shrink-0", foco)}>
+          <div className={cn("flex flex-col items-start gap-5 border-b pb-5 @5xl/rodape:flex-row @5xl/rodape:items-center @5xl/rodape:justify-between", cor.divisor)}>
+            <a href={inicioHref} aria-label={rotuloLogo} className={cn("inline-flex shrink-0 items-center toque:min-h-11", foco)}>
               {logo ? (
                 <img src={logo} alt="" className="block h-12 w-auto" />
               ) : (
                 <span className={cn("text-base font-bold", cor.link)}>Dani Moscatelli</span>
               )}
             </a>
-            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-6 text-sm font-medium md:flex md:w-auto md:flex-wrap md:justify-end md:gap-y-2">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-6 gap-y-1 text-sm font-medium @xl/rodape:grid-cols-3 @3xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               {links.map(l => <a key={l.href + l.rotulo} href={l.href} className={itemLink}>{l.rotulo}</a>)}
               {preferencias}
               {restrita}
@@ -146,7 +146,7 @@ function RodapeSite({
         >
           {copy}
           {compacto ? (
-            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-5 text-xs font-normal md:flex md:w-auto md:flex-wrap md:gap-y-1 @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
+            <nav aria-label={rotuloNav} className="grid w-full grid-cols-2 gap-x-5 text-xs font-normal @xl/rodape:grid-cols-4 @5xl/rodape:flex @5xl/rodape:w-auto @5xl/rodape:flex-nowrap @5xl/rodape:justify-end">
               <a href={privacidade.href} className={cn(itemLink, cor.base)}>{privacidade.rotulo}</a>
               <button type="button" onClick={onPreferenciasCookies} className={cn(itemLink, cor.base, "cursor-pointer")}>{rotuloPreferencias}</button>
               {areaRestrita && <a href={areaRestrita.href} className={cn(itemLink, cor.base)}>{areaRestrita.rotulo}</a>}

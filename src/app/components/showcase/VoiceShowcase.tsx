@@ -114,8 +114,8 @@ export function VoiceShowcase() {
               <p className="mb-2 text-label font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))]">{p.titulo}</p>
               <p className="mb-5 text-body leading-relaxed text-foreground">{p.regra}</p>
               <div className="mt-auto space-y-3">
-                <p className="flex items-start gap-2 text-body font-bold tracking-[-0.01em] text-foreground"><CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{p.fazer}</p>
-                <p className="flex items-start gap-2 text-body-sm text-muted-foreground line-through decoration-error/50"><XCircle className="mt-0.5 h-4 w-4 shrink-0 text-error" aria-hidden />{p.evitar}</p>
+                <p className="flex items-start gap-2 text-body font-bold tracking-[-0.01em] text-foreground"><CheckCircle className="mt-1 h-4 w-4 shrink-0 text-success-text" aria-hidden />{p.fazer}</p>
+                <p className="flex items-start gap-2 text-body-sm text-muted-foreground line-through decoration-error/50"><XCircle className="mt-1 h-4 w-4 shrink-0 text-error" aria-hidden />{p.evitar}</p>
               </div>
             </article>
           ))}
@@ -133,7 +133,7 @@ export function VoiceShowcase() {
             <span>{t("Type", "Tipo")}</span><span>{t("When", "Quando")}</span><span>{t("How to write", "Como escrever")}</span>
           </div>
           {tipos.map((x, i) => (
-            <div key={x.tipo} className={`grid grid-cols-1 gap-1 px-5 py-3.5 text-body-sm sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] sm:gap-4 ${i < tipos.length - 1 ? "border-b border-border" : ""}`}>
+            <div key={x.tipo} className={`grid grid-cols-1 gap-1 px-5 py-3 text-body-sm sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)_minmax(0,1.4fr)] sm:gap-4 ${i < tipos.length - 1 ? "border-b border-border" : ""}`}>
               <span className="font-semibold text-foreground">{x.tipo}</span>
               <span className="text-muted-foreground">{x.quando}</span>
               <span className="text-foreground">{x.escrever}</span>

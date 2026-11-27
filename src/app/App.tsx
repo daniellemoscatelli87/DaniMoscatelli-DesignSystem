@@ -876,7 +876,7 @@ function AppShell() {
           }
           @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
-        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2.5 min-w-0 text-left">
+        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2 min-w-0 text-left">
           <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
           {/* Celular (26/11/2026): só o símbolo abaixo de 420 px; "| Design System" só a partir de 640 px, para nunca encostar nos seletores */}
           <div className="hidden min-[420px]:flex items-center gap-0 min-w-0">
@@ -913,12 +913,12 @@ function AppShell() {
         >
           <Search className="h-3 w-3" />
           <span>{t("Search", "Buscar")}</span>
-          <kbd className="ml-1.5 px-1 py-0.5 text-caption rounded-sm bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
+          <kbd className="ml-1 px-1 py-1 text-caption rounded-sm bg-muted font-medium border border-border tracking-wide">⌘K</kbd>
         </button>
 
 
         {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
           {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
             <button
               key={code}
@@ -927,7 +927,7 @@ function AppShell() {
               aria-pressed={lang === code}
               title={full}
               aria-label={full}
-              className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-label font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
                 lang === code
                   ? "bg-card text-foreground shadow-sm border border-border"
                   : "text-muted-foreground hover:text-foreground"
@@ -939,10 +939,10 @@ function AppShell() {
         </div>
 
         {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-8 p-0.5 rounded-md bg-muted border border-border gap-0.5">
+        <div className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
           <button
             onClick={() => setDark(false)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-label font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
               !dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -953,7 +953,7 @@ function AppShell() {
           </button>
           <button
             onClick={() => setDark(true)}
-            className={`flex items-center gap-1.5 h-7 px-2.5 rounded-sm text-label font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
               dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -1014,11 +1014,11 @@ function AppShell() {
                         title={collapsed ? tl(label) : undefined}
                         aria-label={tl(label)}
                         aria-expanded={item.items ? !!isExpanded : undefined}
-                        className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-0.5
+                        className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-1
                           ${collapsed ? "lg:justify-center lg:px-0" : ""}
                           ${isActive ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                       >
-                        <span className="flex items-center gap-2.5 min-w-0">
+                        <span className="flex items-center gap-2 min-w-0">
                           <Icon className="h-4 w-4 shrink-0" />
                           <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(label)}</span>
                         </span>
@@ -1028,7 +1028,7 @@ function AppShell() {
                       </button>
 
                       {item.items && isExpanded && (
-                        <div className={`mb-1 space-y-0.5 ${nested ? "ml-9" : "ml-3 pl-2 border-l border-border"} ${collapsed ? "lg:hidden" : ""}`}>
+                        <div className={`mb-1 space-y-1 ${nested ? "ml-9" : "ml-3 pl-2 border-l border-border"} ${collapsed ? "lg:hidden" : ""}`}>
                           {item.items.map(sub => {
                             const isSubActive =
                               activeSection === sub.sectionId &&
@@ -1037,7 +1037,7 @@ function AppShell() {
                               <button
                                 key={sub.id}
                                 onClick={() => handleSubItemClick(sub.sectionId, sub.id)}
-                                className={`w-full text-left px-3 py-1.5 rounded-sm text-body-sm transition-colors
+                                className={`w-full text-left px-3 py-1 rounded-sm text-body-sm transition-colors
                                   ${isSubActive
                                     ? "text-primary-text font-medium bg-[var(--primary-suave)]"
                                     : "text-muted-foreground hover:text-foreground hover:bg-accent font-normal"
@@ -1069,11 +1069,11 @@ function AppShell() {
                       title={collapsed ? tl(group.group) : undefined}
                       aria-label={tl(group.group)}
                       aria-expanded={groupOpen}
-                      className={`w-full flex items-center justify-between gap-2.5 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-0.5
+                      className={`w-full flex items-center justify-between gap-2 px-3 py-2 rounded-sm text-body-sm font-medium transition-all duration-150 mb-1
                         ${collapsed ? "lg:justify-center lg:px-0" : ""}
                         ${groupActive && !groupOpen ? "bg-[var(--primary-suave)] text-primary-text" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                     >
-                      <span className="flex items-center gap-2.5 min-w-0">
+                      <span className="flex items-center gap-2 min-w-0">
                         <GroupIcon className="h-4 w-4 shrink-0" />
                         <span className={`whitespace-nowrap truncate ${collapsed ? "lg:hidden" : ""}`}>{tl(group.group)}</span>
                       </span>
@@ -1096,7 +1096,7 @@ function AppShell() {
         <main className={`flex-1 ${collapsed ? "lg:ml-16" : "lg:ml-60"} min-w-0 flex flex-col transition-[margin] duration-[var(--duration-normal)] ease-[var(--ease-snappy)] motion-reduce:transition-none`}>
           {/* Section header bar */}
           <div className="sticky top-16 z-20 bg-background/80 backdrop-blur-xl border-b border-border px-6 md:px-10 py-3">
-            <nav className="max-w-5xl mx-auto w-full flex items-center gap-1.5 text-body-sm">
+            <nav className="max-w-5xl mx-auto w-full flex items-center gap-1 text-body-sm">
               <img src={logoVermelho} alt="" className="h-4 w-4 object-contain opacity-70" />
               <span className="text-muted-foreground">Dani Moscatelli</span>
               <ChevronRight className="h-3.5 w-3.5 text-muted-foreground/50" />
@@ -1186,7 +1186,7 @@ function AppShell() {
                       key={`${result.sectionId}-${result.key}`}
                       type="button"
                       onClick={() => selectSearchResult(result.sectionId, result.anchor)}
-                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2.5 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
+                      className="flex w-full items-center gap-3 rounded-sm px-3 py-2 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground">
                         <ResultIcon className="h-4 w-4" aria-hidden />

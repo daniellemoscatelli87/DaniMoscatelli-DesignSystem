@@ -70,7 +70,7 @@ function Variacao({ valor, comparacao, className }: { valor: number; comparacao?
 function Explicacao({ termo, children }: { termo: string; children: React.ReactNode }) {
   return (
     <Popover>
-      <PopoverTrigger aria-label={`O que é ${termo}?`} className={cn("inline-flex h-6 w-6 max-sm:-m-2.5 max-sm:h-11 max-sm:w-11 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground", foco)}>
+      <PopoverTrigger aria-label={`O que é ${termo}?`} data-alvo-compacto="" className={cn("relative inline-flex h-6 w-6 items-center after:absolute after:-inset-2.5 after:content-[''] justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground", foco)}>
         <Info aria-hidden className="h-4 w-4" />
       </PopoverTrigger>
       <PopoverContent className="w-64 text-body-sm leading-relaxed">{children}</PopoverContent>
@@ -132,7 +132,7 @@ function CardIndicador({ icone, valor, total, rotulo, apoio, variacao, comparaca
       {palavras.length > 0 && `${palavras.join(" ")} `}
       <span className="whitespace-nowrap">
         {ultima}
-        {explicacao && <span className="relative z-10 ml-0.5 inline-flex align-middle"><Explicacao termo={rotulo}>{explicacao}</Explicacao></span>}
+        {explicacao && <span className="relative z-10 ml-1 inline-flex align-middle"><Explicacao termo={rotulo}>{explicacao}</Explicacao></span>}
       </span>
     </>
   );
@@ -150,7 +150,7 @@ function CardIndicador({ icone, valor, total, rotulo, apoio, variacao, comparaca
       {...props}
     >
       <div className={cn("flex items-start justify-between", compacto ? "min-h-8 gap-3" : "min-h-10 gap-4", soNumeroNoCelular && "max-sm:min-h-10")}>
-        <p className={cn("min-w-0 pt-0.5 font-medium leading-snug text-muted-foreground", compacto ? "text-body-sm" : "text-body")}>
+        <p className={cn("min-w-0 pt-1 font-medium leading-snug text-muted-foreground", compacto ? "text-body-sm" : "text-body")}>
           {href ? (
             // O link cobre o card inteiro (after:inset-0); o nome acessível é o rótulo seguido do número.
             <Link href={href} className="text-foreground outline-none after:absolute after:inset-0 after:rounded-xl after:content-['']">{textoDoRotulo}</Link>
@@ -228,7 +228,7 @@ function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabec
         <div data-slot="cabecalho-do-card" className={cn("grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 px-5 sm:px-6", acao && "@xs:grid-cols-[auto_minmax(0,1fr)_auto]", temConteudo && cabecalho === "simples" && "mb-5")}>
           <IconeComBase tom={tom} className="self-start">{icone}</IconeComBase>
           <div className="min-w-0 self-center">
-            <Titulo id={tid} className="text-body-lg font-bold leading-snug tracking-[-0.01em] text-foreground [text-wrap:balance]">{titulo}</Titulo>
+            <Titulo id={tid} className="text-body-lg font-bold leading-snug tracking-[-0.01em] text-foreground [text-wrap:pretty]">{titulo}</Titulo>
             {descricao && <p className="mt-1 text-body-sm leading-snug text-muted-foreground [text-wrap:pretty]">{descricao}</p>}
           </div>
           {acao && <div data-slot="acao-do-cabecalho" className="col-start-2 flex min-w-0 flex-wrap items-center gap-2 justify-self-start @xs:col-start-3 @xs:row-start-1 @xs:justify-self-end">{acao}</div>}
@@ -256,14 +256,14 @@ type LinkVerTudoProps = Omit<React.ComponentProps<"a">, "children"> & {
 };
 function LinkVerTudo({ children = "Ver tudo", href, rotulo, onClick, tom = "marca", icone, as, className, ...props }: LinkVerTudoProps) {
   const classe = cn(
-    "group inline-flex min-h-6 shrink-0 items-center gap-1 rounded-sm text-body-sm font-semibold max-sm:min-h-11 underline-offset-2 hover:underline [&>svg]:h-4 [&>svg]:w-4",
+    "group inline-flex min-h-6 shrink-0 items-center gap-1 rounded-sm text-body-sm font-semibold toque:min-h-11 underline-offset-2 hover:underline [&>svg]:h-4 [&>svg]:w-4",
     tom === "marca" ? "text-primary-text" : "text-muted-foreground hover:text-foreground",
     foco,
     className,
   );
   const conteudo = (
     <>
-      {icone && <span aria-hidden className="mr-0.5 inline-flex [&>svg]:h-4 [&>svg]:w-4">{icone}</span>}
+      {icone && <span aria-hidden className="mr-1 inline-flex [&>svg]:h-4 [&>svg]:w-4">{icone}</span>}
       {children} <ArrowRight aria-hidden className="transition-transform motion-safe:group-hover:translate-x-0.5" />
     </>
   );

@@ -121,7 +121,7 @@ function ListaDePartes({ partes, total, localidade, formatarQuantidade }: { part
   return (
     <ul className="m-0 w-full min-w-0 flex-1 list-none space-y-1 p-0">
       {partes.map(p => (
-        <li key={p.rotulo} className="flex items-center gap-2.5 px-2 py-1 text-body-sm">
+        <li key={p.rotulo} className="flex items-center gap-2 px-2 py-1 text-body-sm">
           <span aria-hidden className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: p.cor }} />
           <span className={cn("min-w-0 flex-1 leading-snug", p.neutro ? "text-muted-foreground" : "text-foreground")}>{p.rotulo}</span>
           {formatarQuantidade && <span className="shrink-0 text-body-sm tabular-nums text-muted-foreground">{formatarQuantidade(p.valor)}</span>}
@@ -267,7 +267,7 @@ export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPad
           <div key={l.rotulo}>
             <p className="mb-1 text-body-sm font-medium text-foreground">{l.rotulo}</p>
             <div className="flex items-center gap-2">
-              <motion.div className="flex h-4 shrink-0 gap-[2px] overflow-hidden rounded-sm" style={{ width: (totais[li]! / max) * trilho, originX: 0 }}
+              <motion.div className="flex h-4 shrink-0 gap-1 overflow-hidden rounded-sm" style={{ width: (totais[li]! / max) * trilho, originX: 0 }}
                 initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: menos ? 0 : 0.08 * li, ease: [0.22, 1, 0.36, 1] }}>
                 {l.valores.map((v, i) => (
                   <span key={i} title={`${categorias[i]?.rotulo}: ${formatar(v)}`} className="block h-full min-w-0" style={{ flex: `${v} 1 0`, background: cores[i] }} />
@@ -275,7 +275,7 @@ export function BarrasEmpilhadas({ categorias, linhas, rotulo, formatar = fmtPad
               </motion.div>
               <span className="shrink-0 text-body-sm font-semibold tabular-nums text-foreground">{formatar(totais[li]!)}</span>
             </div>
-            <ul className="m-0 mt-1 flex list-none flex-wrap gap-x-3 gap-y-0.5 p-0 text-label tabular-nums text-foreground">
+            <ul className="m-0 mt-1 flex list-none flex-wrap gap-x-3 gap-y-1 p-0 text-label tabular-nums text-foreground">
               {l.valores.map((v, i) => (
                 <li key={i} className="flex items-center gap-1"><PontoDaCor cor={cores[i]!} />{formatar(v)}</li>
               ))}
@@ -317,13 +317,13 @@ export function Pirulito({ itens, destaques = 1, ordenar = true, referencia, max
           <span aria-hidden className="absolute bottom-0 top-6 border-l border-dashed" style={{ left: pos(referencia.valor), borderColor: COR_REFERENCIA }} />
         </>
       )}
-      <div className="space-y-2.5">
+      <div className="space-y-2">
         {lista.map((item, i) => {
           const d = i < destaques;
           const cor = cores[i]!;
           return (
             <div key={item.rotulo} className="min-w-0">
-              <p className={cn("mb-0.5 text-body-sm leading-snug", d ? "font-semibold text-foreground" : "text-muted-foreground")}><span className="relative bg-card pr-1 [box-decoration-break:clone]">{item.rotulo}</span></p>
+              <p className={cn("mb-1 text-body-sm leading-snug", d ? "font-semibold text-foreground" : "text-muted-foreground")}><span className="relative bg-card pr-1 [box-decoration-break:clone]">{item.rotulo}</span></p>
               <div className="relative flex h-4 items-center">
                 <motion.span aria-hidden className="block h-[2px] rounded-sm" style={{ width: pos(item.valor), background: cor, originX: 0 }}
                   initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.05 * i }} />
@@ -824,7 +824,7 @@ export function Piramide({ faixas, esquerda, direita, maximo, rotulo, formatar =
   const centro = Math.min(110, Math.max(40, ...faixas.map(f => larguraTexto(f, 12))) + 8);
   const resumo = `${rotulo}: ${faixas.map((f, i) => `${f}, ${esquerda.rotulo} ${formatar(esquerda.valores[i] ?? 0)}, ${direita.rotulo} ${formatar(direita.valores[i] ?? 0)}`).join("; ")}.`;
   const barra = (v: number, lado: "e" | "d", i: number) => (
-    <div className={cn("flex min-w-0 items-center gap-1.5", lado === "e" && "flex-row-reverse @min-[28rem]:order-none", lado === "d" && "@min-[28rem]:order-none")}>
+    <div className={cn("flex min-w-0 items-center gap-1", lado === "e" && "flex-row-reverse @min-[28rem]:order-none", lado === "d" && "@min-[28rem]:order-none")}>
       <motion.span aria-hidden className="block h-4 shrink-0 rounded-sm"
         style={{ width: `calc((100% - 3rem) * ${v / max})`, background: lado === "e" ? "var(--chart-1)" : "var(--chart-6)", originX: lado === "e" ? 1 : 0 }}
         initial={menos ? false : { scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: menos ? 0 : 0.04 * i }} />
@@ -834,11 +834,11 @@ export function Piramide({ faixas, esquerda, direita, maximo, rotulo, formatar =
   return (
     <div className={cn("@container space-y-2", className)} style={{ "--centro": `${centro}px` } as React.CSSProperties}>
       <div className="grid grid-cols-2 items-end gap-x-2 text-label font-semibold @min-[28rem]:grid-cols-[1fr_auto_1fr]">
-        <span className="flex items-center justify-end gap-1.5 text-foreground">{esquerda.rotulo}<span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-1)" }} /></span>
+        <span className="flex items-center justify-end gap-1 text-foreground">{esquerda.rotulo}<span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-1)" }} /></span>
         <span className="hidden @min-[28rem]:block @min-[28rem]:w-[var(--centro)]" />
-        <span className="flex items-center gap-1.5 text-foreground"><span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-6)" }} />{direita.rotulo}</span>
+        <span className="flex items-center gap-1 text-foreground"><span aria-hidden className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--chart-6)" }} />{direita.rotulo}</span>
       </div>
-      <div role="img" aria-label={resumo} className="space-y-1.5">
+      <div role="img" aria-label={resumo} className="space-y-1">
         {faixas.map((f, i) => (
           <div key={f} className="grid grid-cols-2 items-center gap-x-2 @min-[28rem]:grid-cols-[1fr_auto_1fr]">
             {barra(esquerda.valores[i] ?? 0, "e", i)}
@@ -922,7 +922,7 @@ export function Dispersao({ pontos, eixoX, eixoY, tendencia, altura = 280, rotul
       )}
       {/* o nome da linha de tendência fica fora do desenho, para não cruzar os pontos */}
       {tendencia && largura > 0 && (
-        <p className="mt-1 flex items-center gap-1.5 text-label font-semibold text-muted-foreground">
+        <p className="mt-1 flex items-center gap-1 text-label font-semibold text-muted-foreground">
           <svg aria-hidden width={18} height={4} className="shrink-0"><line x1={0} x2={18} y1={2} y2={2} stroke={COR_REFERENCIA} strokeWidth={1.5} strokeDasharray="5 4" /></svg>
           {r.tendencia}
         </p>
@@ -1710,9 +1710,9 @@ export function MapaDePontos({ regioes, colunas, linhas, pontos, tipos = [], alt
   return (
     <div className={cn("space-y-2", className)}>
       {tipos.length > 0 && (
-        <ul className="m-0 flex list-none flex-wrap gap-x-4 gap-y-1.5 p-0 text-label text-muted-foreground">
+        <ul className="m-0 flex list-none flex-wrap gap-x-4 gap-y-1 p-0 text-label text-muted-foreground">
           {tipos.map((t, i) => (
-            <li key={t} className="flex items-center gap-1.5">
+            <li key={t} className="flex items-center gap-1">
               <svg aria-hidden width={12} height={12} className="overflow-visible"><MarcaDoTipo tipo={i} x={6} y={6} r={4.5} /></svg>{t}
             </li>
           ))}
@@ -1795,7 +1795,7 @@ export function MapaDeBolhas({ regioes, colunas, linhas, bolhas, rotuloTamanho, 
       </div>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="flex items-center gap-2 text-label text-muted-foreground">
-          <span aria-hidden className="flex items-end gap-0.5"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
+          <span aria-hidden className="flex items-end gap-1"><span className="h-2 w-2 rounded-full border border-current" /><span className="h-3.5 w-3.5 rounded-full border border-current" /></span>
           {rotuloTamanho}
         </p>
         <p className="text-caption text-muted-foreground">{r.nota}</p>

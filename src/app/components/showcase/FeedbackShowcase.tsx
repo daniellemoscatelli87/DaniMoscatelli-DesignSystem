@@ -51,13 +51,13 @@ const alertConfig: Record<AlertKind, { icon: React.ElementType; title: Bi; msg: 
     icon: CheckCircle2, title: { en: "Changes saved", pt: "Alterações salvas" },
     msg: { en: "Your configuration has been updated successfully.", pt: "Sua configuração foi atualizada com sucesso." },
     bg: "bg-[var(--success-muted,rgba(21,128,61,0.07))]",
-    border: "border-success/20", iconColor: "text-success", titleColor: "text-foreground",
+    border: "border-success/20", iconColor: "text-success-text", titleColor: "text-foreground",
   },
   info: {
     icon: Info, title: { en: "New features available", pt: "Novos recursos disponíveis" },
     msg: { en: "We've shipped several improvements to the dashboard.", pt: "Lançamos várias melhorias no painel." },
     bg: "bg-[var(--info-muted,rgba(29,78,216,0.07))]",
-    border: "border-info/20", iconColor: "text-info", titleColor: "text-foreground",
+    border: "border-info/20", iconColor: "text-info-text", titleColor: "text-foreground",
   },
   warning: {
     icon: AlertCircle, title: { en: "Subscription expiring", pt: "Assinatura prestes a expirar" },
@@ -96,10 +96,10 @@ function Alert({ kind, dismissible = false }: { kind: AlertKind; dismissible?: b
 
 /* ── Toast ── */
 const toastTypes = [
-  { tipo: "success", label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
+  { tipo: "success", label: { en: "Success", pt: "Sucesso" }, icon: CheckCircle, color: "text-success-text", bg: "bg-card", msg: { en: "Report exported successfully!", pt: "Relatório exportado com sucesso!" } },
   { tipo: "error", label: { en: "Error", pt: "Erro" },   icon: AlertCircle, color: "text-error-text", bg: "bg-card", msg: { en: "Failed to connect to server.", pt: "Falha ao conectar ao servidor." } },
   { tipo: "warning", label: { en: "Warning", pt: "Aviso" }, icon: AlertTriangle,color: "text-warning-text",bg: "bg-card", msg: { en: "Low disk space — 2 GB remaining.", pt: "Pouco espaço em disco — restam 2 GB." } },
-  { tipo: "loading", label: "Loading", icon: Loader2,     color: "text-info",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
+  { tipo: "loading", label: "Loading", icon: Loader2,     color: "text-info-text",   bg: "bg-card", msg: { en: "Syncing your data...", pt: "Sincronizando seus dados..." } },
 ];
 
 /* ── Skeleton ── */
@@ -127,10 +127,10 @@ const tabItems = [
 const badgeVariants = [
   { label: { en: "Default", pt: "Padrão" },  cls: "bg-muted text-foreground border-border" },
   { label: { en: "Primary", pt: "Primário" },  cls: "bg-primary/10 text-primary-text border-primary/20" },
-  { label: { en: "Success", pt: "Sucesso" },  cls: "bg-success/10 text-success border-success/20" },
+  { label: { en: "Success", pt: "Sucesso" },  cls: "bg-success/10 text-success-text border-success/20" },
   { label: { en: "Warning", pt: "Aviso" },  cls: "bg-warning/10 text-warning-text border-warning/20" },
   { label: { en: "Error", pt: "Erro" },    cls: "bg-error/10 text-error-text border-error/20" },
-  { label: { en: "Info", pt: "Info" },     cls: "bg-info/10 text-info border-info/20" },
+  { label: { en: "Info", pt: "Info" },     cls: "bg-info/10 text-info-text border-info/20" },
 ];
 
 const chipVariants = [
@@ -142,10 +142,10 @@ const chipVariants = [
 ];
 
 const tagVariants = [
-  { label: "react", color: "bg-info/10 text-info border-info/20 dark:text-info" },
+  { label: "react", color: "bg-info/10 text-info-text border-info/20 dark:text-info-text" },
   { label: "typescript", color: "bg-violet/10 text-violet border-violet/20 dark:text-violet" },
   { label: "ui-design", color: "bg-primary/10 text-primary-text border-primary/20" },
-  { label: "performance", color: "bg-success/10 text-success border-success/20" },
+  { label: "performance", color: "bg-success/10 text-success-text border-success/20" },
   { label: "api", color: "bg-muted text-muted-foreground border-border" },
 ];
 
@@ -195,7 +195,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                 <button
                   key={tab.id}
                   onClick={() => setUnderlineTab(tab.id)}
-                  className={`px-4 py-2.5 text-body-sm font-medium transition-all duration-150 border-b-2 -mb-px outline-none
+                  className={`px-4 py-2 text-body-sm font-medium transition-all duration-150 border-b-2 -mb-px outline-none
                     ${underlineTab === tab.id ? "border-primary text-primary-text" : "border-transparent text-muted-foreground hover:text-foreground hover:border-border"}`}
                 >
                   {bi(tab.label)}
@@ -306,7 +306,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
             <div className="space-y-5">
               {progressItems.map(p => (
                 <div key={p.label.en}>
-                  <div className="flex justify-between text-body-sm mb-1.5">
+                  <div className="flex justify-between text-body-sm mb-1">
                     <span className="font-medium text-foreground">{bi(p.label)}</span>
                     <span className="text-muted-foreground font-mono">{p.value}%</span>
                   </div>
@@ -368,13 +368,13 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
 
             {/* Table skeleton */}
             <ShowcaseCard className="p-0 overflow-hidden">
-              <div className="px-5 py-3.5 border-b border-border">
+              <div className="px-5 py-3 border-b border-border">
                 <SkeletonPulse className="h-4 w-28" />
               </div>
               {[1, 2, 3, 4].map(i => (
-                <div key={i} className="flex items-center gap-3 px-5 py-3.5 border-b border-border/50">
+                <div key={i} className="flex items-center gap-3 px-5 py-3 border-b border-border/50">
                   <SkeletonPulse className="h-8 w-8 rounded-full shrink-0" />
-                  <div className="flex-1 space-y-1.5">
+                  <div className="flex-1 space-y-1">
                     <SkeletonPulse className="h-3.5 w-36" />
                     <SkeletonPulse className="h-3 w-24" />
                   </div>
@@ -397,15 +397,15 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
           <ShowcaseCard>
             <div className="flex flex-wrap gap-2">
               {badgeVariants.map(b => (
-                <span key={b.label.en} className={`inline-flex items-center px-2.5 py-0.5 rounded-sm text-label font-semibold border ${b.cls}`}>
+                <span key={b.label.en} className={`inline-flex items-center px-2 py-1 rounded-sm text-label font-semibold border ${b.cls}`}>
                   {bi(b.label)}
                 </span>
               ))}
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-sm text-label font-semibold border bg-primary/10 text-primary-text border-primary/20">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-sm text-label font-semibold border bg-primary/10 text-primary-text border-primary/20">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {t("Live", "Ao vivo")}
               </span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-caption font-bold bg-primary text-primary-foreground">
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-caption font-bold bg-primary text-primary-foreground">
                 42
               </span>
             </div>
@@ -421,7 +421,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
                   <button
                     key={c.label}
                     onClick={() => setChipActive(prev => active ? prev.filter(x => x !== c.label) : [...prev, c.label])}
-                    className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-body-sm font-medium border transition-all duration-150
+                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-body-sm font-medium border transition-all duration-150
                       ${active ? "bg-[var(--primary-suave)] text-primary-text border-primary/30" : "bg-card text-foreground border-border hover:bg-accent hover:border-[var(--border-strong)]"}`}
                   >
                     {active && <Check className="h-3.5 w-3.5" />}
@@ -437,7 +437,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
           <ShowcaseCard>
             <div className="flex flex-wrap gap-2">
               {tagVariants.map(tag => (
-                <span key={tag.label} className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-sm text-label font-medium border ${tag.color}`}>
+                <span key={tag.label} className={`inline-flex items-center gap-1 px-2 py-1 rounded-sm text-label font-medium border ${tag.color}`}>
                   <span className="opacity-60">#</span>{tag.label}
                 </span>
               ))}
@@ -464,10 +464,10 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
             <div className="mt-4 rounded-md bg-foreground p-5">
               <p className="mb-3 text-caption font-semibold uppercase tracking-[0.08em] text-background/60">{t("On a dark surface", "Sobre superfície escura")}</p>
               <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-label font-semibold uppercase tracking-[0.14em] text-white/85"><span aria-hidden className="h-2 w-2 rounded-full bg-primary" />{t("Inverted", "Invertido")}</span>
+                <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-label font-semibold uppercase tracking-[0.14em] text-white/85"><span aria-hidden className="h-2 w-2 rounded-full bg-primary" />{t("Inverted", "Invertido")}</span>
               </div>
             </div>
-            <ul className="mt-4 grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("One hero tag per page or section; it comes right above the title.", "Um selo por página ou seção; ele vem logo acima do título.")}</li>
               <li>• {t("Short text (two to four words), uppercase by the component, never a sentence.", "Texto curto (duas a quatro palavras), caixa alta pelo componente, nunca uma frase.")}</li>
               <li>• {t("Dot or one icon in the primary color, never both.", "Ponto ou um ícone na cor primária, nunca os dois.")}</li>
@@ -499,7 +499,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
 
 <SeloSecao>Cenário atual</SeloSecao>
 <h2>…</h2>`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("One per section, above the title, centred when the title is centred.", "Um por seção, acima do título, centralizado quando o título é centralizado.")}</li>
               <li>• {t("One to three words naming the subject; never status, count or action.", "De uma a três palavras nomeando o assunto; nunca status, contagem ou ação.")}</li>
               <li>• {t("Tokens: --primary-muted (fill), primary at 25 % (border), --primary-text (text), --shadow-xs.", "Tokens: --primary-muted (fundo), primária a 25 % (borda), --primary-text (texto), --shadow-xs.")}</li>
@@ -597,7 +597,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
     { imageUrl: "/avatares/avatar-2.svg", profileUrl: "/perfil/bruno", name: "Bruno" },
   ]}
 />`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("Props: avatarUrls (imageUrl, profileUrl, name), numPeople, moreHref, size sm | md | lg, className.", "Props: avatarUrls (imageUrl, profileUrl, name), numPeople, moreHref, size sm | md | lg, className.")}</li>
               <li>• {t("Three to six avatars; beyond that, the “+N” carries the rest.", "De três a seis avatares; acima disso, o “+N” resume o restante.")}</li>
               <li>• {t("Always pass name: it becomes the image alt text and the tooltip.", "Sempre informe name: vira o texto alternativo da imagem e o tooltip.")}</li>
@@ -657,7 +657,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       <section id="feedback-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Tokens — Feedback", "Tokens — Feedback")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by alerts, toasts, and status components.", "Propriedades CSS customizadas usadas por alertas, toasts e componentes de status.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by alerts, toasts, and status components.", "Propriedades CSS customizadas usadas por alertas, toasts e componentes de status.")}</p>
         </div>
         <TokenTable groups={feedbackTokenGroups(t)} />
       </section>
@@ -668,7 +668,7 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
       <section id="badges-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Tokens — Labels & Badges", "Tokens — Rótulos e badges")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by badges, tags, avatars, and status pills.", "Propriedades CSS customizadas usadas por badges, tags, avatares e pílulas de status.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by badges, tags, avatars, and status pills.", "Propriedades CSS customizadas usadas por badges, tags, avatares e pílulas de status.")}</p>
         </div>
         <TokenTable groups={badgesTokenGroups(t)} />
       </section>

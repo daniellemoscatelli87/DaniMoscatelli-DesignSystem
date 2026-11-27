@@ -7,7 +7,7 @@ export const display = "font-[family-name:var(--font-display)]";
 
 export function Mono({ children }: { children: React.ReactNode }) {
   return (
-    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-sm bg-muted text-foreground border border-border">
+    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1 py-1 rounded-sm bg-muted text-foreground border border-border">
       {children}
     </code>
   );
@@ -28,9 +28,9 @@ export function SubTitle({ children }: { children: React.ReactNode }) {
 export function Callout({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-3 rounded-md border border-border bg-muted/60 p-4">
-      <Info className="h-4 w-4 mt-0.5 text-primary-text shrink-0" aria-hidden />
+      <Info className="h-4 w-4 mt-1 text-primary-text shrink-0" aria-hidden />
       <div className="text-body-sm leading-relaxed text-muted-foreground">
-        <p className="font-semibold text-foreground mb-0.5">{title}</p>
+        <p className="font-semibold text-foreground mb-1">{title}</p>
         {children}
       </div>
     </div>
@@ -71,7 +71,7 @@ export function PrincipleGrid({ items, cols = "lg:grid-cols-3" }: { items: Princ
       {items.map(p => (
         <Panel key={p.title} className="p-5">
           <p.icon className="h-5 w-5 text-primary-text mb-4" strokeWidth={1.75} aria-hidden />
-          <h3 className={`${display} text-body font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>{p.title}</h3>
+          <h3 className={`${display} text-body font-semibold tracking-[-0.01em] text-foreground mb-1`}>{p.title}</h3>
           <p className="text-body-sm leading-relaxed text-muted-foreground">{p.desc}</p>
         </Panel>
       ))}

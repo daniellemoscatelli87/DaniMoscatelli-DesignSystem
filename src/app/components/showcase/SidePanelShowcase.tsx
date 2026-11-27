@@ -24,7 +24,7 @@ function ShowcaseCard({ children, className = "" }: { children: React.ReactNode;
 }
 
 const field =
-  "w-full rounded-md border border-border bg-muted/40 px-4 py-2.5 text-body-sm leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
+  "w-full rounded-md border border-border bg-muted/40 px-4 py-2 text-body-sm leading-relaxed text-foreground placeholder:text-muted-foreground outline-none transition-colors focus:border-primary focus:bg-card focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring aria-[invalid=true]:border-error";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 function maskPhone(v: string) {
@@ -104,14 +104,14 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                 <h3 className="text-h4 font-bold text-foreground">{t("Message sent successfully!", "Mensagem enviada com sucesso!")}</h3>
                 <p className="mx-auto mt-2 max-w-xs text-body-sm text-muted-foreground">{t("We will get in touch soon to schedule our conversation.", "Entraremos em contato em breve para agendarmos a nossa conversa.")}</p>
               </div>
-              <button type="button" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-muted px-6 py-2.5 text-label font-semibold text-foreground transition-colors hover:bg-accent">{t("Close", "Fechar")}</button>
+              <button type="button" onClick={() => setOpen(false)} className="mt-4 rounded-full bg-muted px-6 py-2 text-label font-semibold text-foreground transition-colors hover:bg-accent">{t("Close", "Fechar")}</button>
             </div>
           ) : (
-            <form id="ds-contact-form" noValidate onSubmit={submit} className="flex flex-col gap-2.5">
+            <form id="ds-contact-form" noValidate onSubmit={submit} className="flex flex-col gap-2">
               <input className={field} aria-invalid={!!invalid.nome} placeholder={t("Full name *", "Nome completo *")} aria-label={t("Full name", "Nome completo")} autoComplete="name" value={values.nome} onChange={set("nome")} />
               <input className={field} aria-invalid={!!invalid.email} type="email" placeholder={t("Corporate e-mail *", "E-mail corporativo *")} aria-label={t("Corporate e-mail", "E-mail corporativo")} autoComplete="email" value={values.email} onChange={set("email")} />
               <input className={field} aria-invalid={!!invalid.telefone} type="tel" placeholder={t("Phone / WhatsApp *", "Telefone / WhatsApp *")} aria-label={t("Phone / WhatsApp", "Telefone / WhatsApp")} autoComplete="tel" value={values.telefone} onChange={set("telefone")} />
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <input className={field} aria-invalid={!!invalid.empresa} placeholder={t("Company name *", "Nome da Empresa *")} aria-label={t("Company name", "Nome da Empresa")} autoComplete="organization" value={values.empresa} onChange={set("empresa")} />
                 <input className={field} aria-invalid={!!invalid.cargo} placeholder={t("Role *", "Cargo / Função *")} aria-label={t("Role", "Cargo / Função")} autoComplete="organization-title" value={values.cargo} onChange={set("cargo")} />
               </div>
@@ -123,23 +123,23 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
                   <ChevronDown className={`h-4 w-4 shrink-0 text-muted-foreground transition-transform ${bizOpen ? "rotate-180" : ""}`} aria-hidden />
                 </button>
                 {bizOpen && (
-                  <div id="ds-biz-body" className="space-y-1.5 border-t border-border px-3 pb-3 pt-2">
+                  <div id="ds-biz-body" className="space-y-1 border-t border-border px-3 pb-3 pt-2">
                     {[
                       [t("A digital product/service", "Um produto/serviço digital"), t("(SaaS, E-commerce, Marketplace, App, System, Software)", "(SaaS, E-commerce, Marketplace, APP, Sistema, Software)")],
                       [t("A physical business", "Um Negócio Físico"), t("(Clinics, salons, pet shops, hotels, restaurants, stores)", "(Clínicas, Salões, Petshops, Hotéis, Restaurantes, Lojas)")],
                       [t("A physical and digital business", "Um Negócio Físico e Digital"), ""],
                     ].map(([label, hint]) => (
-                      <label key={label} className="flex cursor-pointer items-start gap-2.5 rounded-md border border-border/60 bg-card/70 p-2 transition-colors hover:bg-card">
-                        <input type="radio" name="ds-tipo" className="mt-0.5 h-4 w-4 accent-[var(--primary)]" checked={values.tipo === label} onChange={() => setValues(v => ({ ...v, tipo: label }))} />
-                        <span className="flex-1"><span className="block text-body-sm font-medium leading-snug text-foreground">{label}</span>{hint && <span className="mt-0.5 block text-caption leading-snug text-muted-foreground">{hint}</span>}</span>
+                      <label key={label} className="flex cursor-pointer items-start gap-2 rounded-md border border-border/60 bg-card/70 p-2 transition-colors hover:bg-card">
+                        <input type="radio" name="ds-tipo" className="mt-1 h-4 w-4 accent-[var(--primary)]" checked={values.tipo === label} onChange={() => setValues(v => ({ ...v, tipo: label }))} />
+                        <span className="flex-1"><span className="block text-body-sm font-medium leading-snug text-foreground">{label}</span>{hint && <span className="mt-1 block text-caption leading-snug text-muted-foreground">{hint}</span>}</span>
                       </label>
                     ))}
                     <div className="flex items-center gap-2 rounded-md border border-border/60 bg-card/70 p-2">
-                      <label className="flex shrink-0 cursor-pointer items-center gap-2.5">
+                      <label className="flex shrink-0 cursor-pointer items-center gap-2">
                         <input type="radio" name="ds-tipo" className="h-4 w-4 accent-[var(--primary)]" checked={values.tipo === "Outro"} onChange={() => setValues(v => ({ ...v, tipo: "Outro" }))} />
                         <span className="text-body-sm font-medium text-foreground">{t("Other:", "Outro:")}</span>
                       </label>
-                      <input className="min-w-0 flex-1 rounded-sm border border-border bg-card px-2.5 py-1 text-body-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
+                      <input className="min-w-0 flex-1 rounded-sm border border-border bg-card px-2 py-1 text-body-sm text-foreground outline-none placeholder:text-muted-foreground focus:border-primary" placeholder={t("Which? Describe briefly...", "Qual? Descreva brevemente...")} aria-label={t("Other business type", "Outro tipo de negócio")} value={values.outro} onFocus={() => setValues(v => ({ ...v, tipo: "Outro" }))} onChange={set("outro")} />
                     </div>
                   </div>
                 )}
@@ -155,7 +155,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
 
               <textarea className={`${field} h-[90px] resize-none`} aria-invalid={!!invalid.mensagem} rows={3} aria-label={t("Tell us about your challenge", "Conte um pouco sobre seu desafio")} placeholder={t("Tell us a bit about your challenge (which goals, pains or ideas would you like to work on with us?) *", "Conte um pouco sobre seu desafio (Quais objetivos, dores ou ideias você gostaria de trabalhar conosco?) *")} value={values.mensagem} onChange={set("mensagem")} />
 
-              <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <div className={`flex flex-col justify-center rounded-md border bg-muted/40 px-3 py-2 ${invalid.dias ? "border-error" : "border-border"}`}>
                   <div className="mb-1 flex items-center justify-between">
                     <span className="text-label font-semibold text-foreground">{t("Best weekday *", "Melhor dia da semana *")}</span>
@@ -194,7 +194,7 @@ function ContactPanelDemo({ triggerLabel, outline = false }: { triggerLabel?: st
               </button>
             </SidePanelActions>
             <SidePanelFooter>
-              <span className="inline-flex items-center gap-1.5"><Lock className="h-3 w-3" aria-hidden /> {t("Secure environment.", "Ambiente seguro.")}</span>
+              <span className="inline-flex items-center gap-1"><Lock className="h-3 w-3" aria-hidden /> {t("Secure environment.", "Ambiente seguro.")}</span>
               <span className="font-medium text-foreground">Dani Moscatelli Studio</span>
             </SidePanelFooter>
           </>
@@ -287,7 +287,7 @@ export function SidePanelShowcase() {
                 const I = Icon as React.ElementType;
                 return (
                   <li key={i} className="flex items-start gap-3 text-body-sm leading-relaxed text-muted-foreground">
-                    <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary-text"><I className="h-3.5 w-3.5" aria-hidden /></span>
+                    <span className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-primary-text"><I className="h-3.5 w-3.5" aria-hidden /></span>
                     <span>{text as string}</span>
                   </li>
                 );
@@ -339,7 +339,7 @@ export function SidePanelShowcase() {
               t("Touch targets of at least 44 px on the action bar and the weekday chips.", "Alvos de toque de pelo menos 44 px na barra de ação e nos chips de dia."),
               t("Respects prefers-reduced-motion through the system's animation utilities.", "Respeita prefers-reduced-motion pelas utilidades de animação do sistema."),
             ].map(item => (
-              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{item}</li>
+              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-success-text" aria-hidden />{item}</li>
             ))}
           </ul>
         </ShowcaseCard>

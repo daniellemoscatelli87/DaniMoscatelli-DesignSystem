@@ -428,7 +428,7 @@ export function InboxTemplate() {
               <div className="flex items-start gap-3">
                 <IconeComBase tom="marca">{React.createElement(atual.icone)}</IconeComBase>
                 <div className="min-w-0">
-                  <h3 className="text-body-lg font-semibold text-foreground [text-wrap:balance]">{bi(atual.titulo)}</h3>
+                  <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(atual.titulo)}</h3>
                   <p className="text-body-sm text-muted-foreground">{bi(atual.quando)}</p>
                 </div>
               </div>
@@ -506,7 +506,7 @@ function Secao({ selo, titulo, children, faixa = false, className = "" }: { selo
       {(selo || titulo) && (
         <div className="mx-auto mb-8 max-w-2xl text-center">
           {selo && <p className="mb-2 text-label font-semibold uppercase tracking-[0.1em] text-primary-text">{selo}</p>}
-          {titulo && <h2 className="text-h4 font-bold tracking-tight text-foreground [text-wrap:balance] @2xl/landing:text-h3">{titulo}</h2>}
+          {titulo && <h2 className="text-h4 font-bold tracking-tight text-foreground [text-wrap:pretty] @2xl/landing:text-h3">{titulo}</h2>}
         </div>
       )}
       {children}
@@ -575,7 +575,7 @@ export function LandingTemplate() {
           <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-[var(--primary-muted)] px-3 py-1 text-label font-semibold text-primary-text">
             <Sparkles aria-hidden className="size-3.5" /> {t("New: built-in AI in the dashboard", "Novo: IA integrada ao dashboard")}
           </span>
-          <h1 className="mb-4 text-h2 font-black leading-[1.1] tracking-[-0.04em] text-foreground [text-wrap:balance] @2xl/landing:text-display-m">
+          <h1 className="mb-4 text-h2 font-black leading-[1.1] tracking-[-0.04em] text-foreground [text-wrap:pretty] @2xl/landing:text-display-md">
             {t("The SaaS platform that ", "A plataforma SaaS que ")}<span className="text-primary-text">{t("accelerates your growth", "acelera o seu crescimento")}</span>{t(" for real", " de verdade")}
           </h1>
           <p className="mx-auto mb-8 max-w-lg text-body leading-relaxed text-muted-foreground [text-wrap:pretty]">
@@ -654,7 +654,7 @@ export function LandingTemplate() {
           ].map(c => (
             <Card key={c.titulo} className={`gap-3 p-5 ${c.largo ? "@2xl/landing:col-span-2" : ""}`}>
               <IconeComBase tom="marca" tamanho="sm">{c.icone}</IconeComBase>
-              <h3 className="text-body font-bold text-foreground [text-wrap:balance]">{c.titulo}</h3>
+              <h3 className="text-body font-bold text-foreground [text-wrap:pretty]">{c.titulo}</h3>
               <p className="text-body-sm leading-snug text-muted-foreground">{c.texto}</p>
               {c.chips.length > 0 && <div className="flex flex-wrap gap-2">{c.chips.map(ch => <ChipDeEstado key={ch} tom="neutro">{ch}</ChipDeEstado>)}</div>}
             </Card>
@@ -810,7 +810,7 @@ export function LandingTemplate() {
                   { icone: Rocket, texto: t("Free guided onboarding", "Implantação guiada gratuita") },
                 ].map(item => {
                   const Icone = item.icone;
-                  return <li key={item.texto} className="flex items-start gap-2 text-body-sm text-muted-foreground"><Icone aria-hidden className="mt-0.5 size-4 shrink-0 text-primary-text" />{item.texto}</li>;
+                  return <li key={item.texto} className="flex items-start gap-2 text-body-sm text-muted-foreground"><Icone aria-hidden className="mt-1 size-4 shrink-0 text-primary-text" />{item.texto}</li>;
                 })}
               </ul>
             </div>
@@ -845,7 +845,7 @@ export function LandingTemplate() {
                     </div>
                     <div className="space-y-2"><Label htmlFor="tpl-ct-msg">{t("Message", "Mensagem")} *</Label><Textarea id="tpl-ct-msg" required rows={3} placeholder={t("Describe your question or project.", "Descreva sua dúvida ou projeto.")} /></div>
                     <div className="flex items-start gap-3">
-                      <Checkbox id="tpl-ct-termos" required className="mt-0.5" />
+                      <Checkbox id="tpl-ct-termos" required className="mt-1" />
                       <Label htmlFor="tpl-ct-termos" className="text-body-sm font-normal leading-snug text-muted-foreground">{t("I agree to the Terms and the Privacy Policy.", "Concordo com os Termos e a Política de privacidade.")}</Label>
                     </div>
                   </CardContent>

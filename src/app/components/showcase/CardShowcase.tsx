@@ -57,7 +57,7 @@ function SpecCard({
 }) {
   return (
     <Card className={`gap-5 border-border shadow-none ${className}`}>
-      <CardHeader className="gap-1.5">
+      <CardHeader className="gap-1">
         <CardTitle className={`${display} text-body font-semibold tracking-[-0.01em]`}>{title}</CardTitle>
         <CardDescription className="text-body-sm leading-relaxed">{description}</CardDescription>
         {action && <CardAction>{action}</CardAction>}
@@ -197,7 +197,7 @@ function GlassTestCard({ finish, tone = "clara", intensity = "media", opacity, b
       )}
       {/* avaliação de contraste: sempre visível; vira alerta quando abaixo do mínimo AA */}
       {result && (
-        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2.5 py-1.5 text-caption leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
+        <div role={ok ? undefined : "alert"} className={cn("mt-3 flex items-start gap-2 rounded-md border px-2 py-1 text-caption leading-snug", ok ? "border-border/60 bg-card/80 text-muted-foreground" : "border-[var(--warning)] bg-card text-foreground shadow-[var(--shadow-sm)]")}>
           {ok ? <CheckCircle2 className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--success)]" aria-hidden /> : <AlertTriangle className="mt-px h-3.5 w-3.5 shrink-0 text-[var(--warning-text)]" aria-hidden />}
           <span>
             {ok ? t("Contrast OK", "Contraste OK") : t("Accessibility compromised", "Acessibilidade comprometida")}{" "}<span className="opacity-70">({naFoto ? t("worst case: any area of the photo, from black to white", "pior caso: qualquer área da foto, do preto ao branco") : comTextura ? t("worst case: text over the background or a texture stroke", "pior caso: texto sobre o fundo ou um traço da textura") : t("solid background", "fundo sólido")})</span>
@@ -245,29 +245,29 @@ function GlassFinishPicker() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-        <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
+        <div className="flex min-w-0 max-w-full flex-col gap-1 overflow-x-auto">
           <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Finish", "Acabamento")}</span>
           <SegmentedControl size="sm" aria-label={t("Finish", "Acabamento")} value={finish} onValueChange={setFinish} options={finishes.map(x => ({ value: x.value, label: x.label }))} />
         </div>
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1">
           <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Tone", "Tom")}</span>
           <SegmentedControl size="sm" aria-label={t("Tone", "Tom")} value={tone} onValueChange={setTone} options={[{ value: "clara", label: t("Light", "Claro") }, { value: "escura", label: t("Dark", "Escuro") }]} />
         </div>
-        <div className="flex flex-col gap-1.5">
+        <div className="flex flex-col gap-1">
           <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Opacity", "Opacidade")}</span>
           <SegmentedControl size="sm" aria-label={t("Opacity", "Opacidade")} value={intensity} onValueChange={setIntensity} options={[{ value: "leve", label: t("Light", "Leve") }, { value: "media", label: t("Medium", "Média") }, { value: "forte", label: t("Strong", "Forte") }]} />
         </div>
       </div>
       <div className="flex flex-wrap items-end gap-x-6 gap-y-3">
-        <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
+        <div className="flex min-w-0 max-w-full flex-col gap-1 overflow-x-auto">
           <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Test background", "Fundo de teste")}</span>
           <SegmentedControl size="sm" aria-label={t("Test background", "Fundo de teste")} value={cena.fundo} onValueChange={v => setCena(c => ({ ...c, fundo: v }))} options={fundos} />
         </div>
         {cena.fundo === "solida" && (
-          <div className="flex min-w-0 max-w-full flex-col gap-1.5 overflow-x-auto">
+          <div className="flex min-w-0 max-w-full flex-col gap-1 overflow-x-auto">
             <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Colour", "Cor")}</span>
             <SegmentedControl size="sm" aria-label={t("Colour", "Cor")} value={cena.cor} onValueChange={v => setCena(c => ({ ...c, cor: v }))}
-              options={cores.map(x => ({ value: x.value, label: <span className="inline-flex items-center gap-1.5"><span aria-hidden className="h-3 w-3 rounded-full border border-border" style={{ backgroundColor: coresSolidas[x.value] }} />{x.label}</span> }))} />
+              options={cores.map(x => ({ value: x.value, label: <span className="inline-flex items-center gap-1"><span aria-hidden className="h-3 w-3 rounded-full border border-border" style={{ backgroundColor: coresSolidas[x.value] }} />{x.label}</span> }))} />
           </div>
         )}
       </div>
@@ -289,7 +289,7 @@ function GlassFinishPicker() {
           <p className="text-caption text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
         </div>
         <button type="button" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}
-          className="h-9 rounded-full border border-border bg-card px-4 text-label font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text disabled:opacity-40 disabled:pointer-events-none">
+          className="h-9 rounded-full border border-border bg-card px-4 text-label font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent disabled:opacity-40 disabled:pointer-events-none">
           {t("Back to finish", "Voltar ao acabamento")}
         </button>
       </div>
@@ -374,7 +374,7 @@ function DemoMesmaAltura() {
           <Switch id={id} checked={mais} onCheckedChange={setMais} />
           <Label htmlFor={id} className="text-body-sm">{t("Much more content in the second card", "Muito mais conteúdo no segundo card")}</Label>
         </div>
-        <Badge variant="outline" role="status" className="gap-1.5 px-2.5 py-1 text-label">
+        <Badge variant="outline" role="status" className="gap-1 px-2 py-1 text-label">
           {layout === "grade" ? <Columns2 aria-hidden /> : <Rows2 aria-hidden />}
           {layout === "grade" ? t("Side by side · same height", "Lado a lado · mesma altura") : t("One per row · horizontal cards", "Um por linha · cards horizontais")}
         </Badge>
@@ -416,7 +416,7 @@ function ExemploDeAltura({ certo, titulo, children }: { certo: boolean; titulo: 
   return (
     <div className="min-w-0">
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <Badge variant="outline" className={cn("gap-1 px-2 py-0.5", certo ? "text-[var(--success-text,var(--success))]" : "text-[var(--error-text,var(--destructive))]")}>
+        <Badge variant="outline" className={cn("gap-1 px-2 py-1", certo ? "text-[var(--success-text,var(--success))]" : "text-[var(--error-text,var(--destructive))]")}>
           {certo ? <Check aria-hidden /> : <X aria-hidden />}{certo ? t("Correct", "Certo") : t("Incorrect", "Errado")}
         </Badge>
         <p className="text-body-sm text-muted-foreground">{titulo}</p>
@@ -434,7 +434,7 @@ function CardDeExemplo({ titulo, texto, acao }: { titulo: string; texto: string;
         <CardTitle className={`${display} text-body-sm font-semibold`}>{titulo}</CardTitle>
         <CardDescription className="text-label leading-relaxed">{texto}</CardDescription>
       </CardHeader>
-      <CardFooter className="px-4 pb-4"><Button variant="outline" size="sm">{acao}</Button></CardFooter>
+      <CardFooter className="justify-end border-t px-4 pb-4 pt-4"><Button variant="outline" size="sm">{acao}</Button></CardFooter>
     </Card>
   );
 }
@@ -1057,7 +1057,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             <Card className="relative gap-5 overflow-hidden border-border">
               <ShineBorder borderWidth={1} duration={7} shineColor={["var(--primary)", "var(--chart-2)", "var(--primary)"]} />
               <CardHeader>
-                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2.5 py-1 text-caption font-semibold text-primary-text">{t("Recommended", "Recomendado")}</span>
+                <span className="mb-2 inline-flex w-fit items-center rounded-full border border-primary/20 bg-primary/10 px-2 py-1 text-caption font-semibold text-primary-text">{t("Recommended", "Recomendado")}</span>
                 <CardTitle className={`${display} text-body-lg font-semibold`}>{t("Studio plan", "Plano Studio")}</CardTitle>
                 <CardDescription>{t("Use Shine Border to call attention to one exceptional option.", "Use Shine Border para chamar atenção para uma única opção excepcional.")}</CardDescription>
               </CardHeader>
@@ -1105,7 +1105,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
                   <CardTitle className={`${display} text-body-sm font-semibold`}>{t("Delivery status", "Status da entrega")}</CardTitle>
                   <CardDescription className="mt-1 text-label">{t("This inner card uses a border and no shadow.", "Este card interno usa borda e nenhuma sombra.")}</CardDescription>
                 </div>
-                <span className="inline-flex shrink-0 items-center rounded-full border border-success/20 bg-success/10 px-2.5 py-1 text-caption font-semibold text-success">{t("On track", "Em dia")}</span>
+                <span className="inline-flex shrink-0 items-center rounded-full border border-success/20 bg-success/10 px-2 py-1 text-caption font-semibold text-success-text">{t("On track", "Em dia")}</span>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full w-3/4 rounded-full bg-primary" /></div>
             </Card>
@@ -1234,7 +1234,7 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
               <GradeDeCards className="gap-5 md:grid-cols-3">
                 <GlassCard {...vidroConteudo}>
                   <p className={`text-caption font-semibold uppercase tracking-[0.08em] ${corSub(vidroConteudo)}`}>{t("Challenges in progress", "Desafios em andamento")}</p>
-                  <p className={`${display} mt-2 text-display-m font-bold leading-none tracking-[-0.03em]`}>12</p>
+                  <p className={`${display} mt-2 text-display-md font-bold leading-none tracking-[-0.03em]`}>12</p>
                   <p className={`mt-2 text-body-sm ${corSub(vidroConteudo)}`}>{t("3 with evidence collected this week", "3 com evidências coletadas nesta semana")}</p>
                 </GlassCard>
                 <GlassCard {...vidroConteudo} interactive tabIndex={0} role="link">

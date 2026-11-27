@@ -71,7 +71,7 @@ function ContrastTable() {
   const pairs = mode === "light" ? lightPairs : darkPairs;
   return (
     <div className="space-y-3">
-      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-0.5 rounded-md bg-muted border border-border gap-0.5">
+      <div role="group" aria-label={t("Theme", "Tema")} className="inline-flex p-1 rounded-md bg-muted border border-border gap-1">
         {(["light", "dark"] as const).map(m => (
           <button
             key={m}
@@ -105,7 +105,7 @@ function ContrastTable() {
                     {bi(p.usage)} · <span className="font-[family-name:var(--font-mono)]">{p.fg} {t("on", "sobre")} {p.bg}</span>
                   </p>
                 </div>
-                <div className="flex flex-wrap md:flex-col md:items-end gap-x-4 gap-y-0.5">
+                <div className="flex flex-wrap md:flex-col md:items-start gap-x-4 gap-y-1">
                   <span className={`${display} text-body-lg font-semibold text-foreground tabular-nums`}>{r.toFixed(2)}:1</span>
                   <Result ok={r >= 4.5} label={t("Text AA", "Texto AA")} />
                   <Result ok={r >= 3} label={t("UI / large", "UI / grande")} />
@@ -128,14 +128,14 @@ function ContrastChecker() {
   const idBg = useId();
   const field = (id: string, label: string, v: string, set: (s: string) => void) => (
     <div>
-      <label htmlFor={id} className="block text-label font-medium text-foreground mb-1.5">{label}</label>
+      <label htmlFor={id} className="block text-label font-medium text-foreground mb-1">{label}</label>
       <div className="flex items-center gap-2">
         <input
           type="color"
           aria-label={t(`${label} color picker`, `Seletor de cor: ${label}`)}
           value={luminance(v) === null ? "#000000" : v.length === 4 ? "#" + v.slice(1).split("").map(c => c + c).join("") : v}
           onChange={e => set(e.target.value.toUpperCase())}
-          className="h-9 w-9 rounded-sm border border-border bg-transparent p-0.5 cursor-pointer"
+          className="h-9 w-9 rounded-sm border border-border bg-transparent p-1 cursor-pointer"
         />
         <input
           id={id}
@@ -187,7 +187,7 @@ function FocusDemo() {
   return (
     <Panel className="p-5">
       <p className="text-body-sm text-muted-foreground mb-4">
-        {t("Press", "Pressione")} <kbd className="px-1.5 py-0.5 rounded-sm border border-border bg-muted text-caption font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
+        {t("Press", "Pressione")} <kbd className="px-1 py-1 rounded-sm border border-border bg-muted text-caption font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
       </p>
       <div className="flex flex-wrap items-center gap-3">
         <button className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
@@ -229,7 +229,7 @@ function TabsDemo() {
   };
   return (
     <Panel className="p-5">
-      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-0.5 rounded-md bg-muted border border-border">
+      <div role="tablist" aria-label={t("Sample tabs", "Abas de exemplo")} className="inline-flex gap-1 p-1 rounded-md bg-muted border border-border">
         {tabs.map((tab, i) => (
           <button
             key={tab.en}
@@ -282,7 +282,7 @@ function FormDemo() {
         className="max-w-sm space-y-3"
       >
         <div>
-          <label htmlFor={id} className="block text-body-sm font-medium text-foreground mb-1.5">
+          <label htmlFor={id} className="block text-body-sm font-medium text-foreground mb-1">
             {t("Work email", "E-mail corporativo")} <span className="text-muted-foreground font-normal">{t("(required)", "(obrigatório)")}</span>
           </label>
           <input
@@ -299,8 +299,8 @@ function FormDemo() {
               show ? "border-[var(--error)]" : "border-border focus-visible:border-primary"
             }`}
           />
-          <p id={`${id}-hint`} className="mt-1.5 text-label text-muted-foreground">{t("We only use it to send the invite.", "Usamos apenas para enviar o convite.")}</p>
-          <p id={`${id}-err`} role={show ? "alert" : undefined} className="mt-1.5 text-label font-medium text-foreground flex items-center gap-1.5 min-h-[1rem]">
+          <p id={`${id}-hint`} className="mt-1 text-label text-muted-foreground">{t("We only use it to send the invite.", "Usamos apenas para enviar o convite.")}</p>
+          <p id={`${id}-err`} role={show ? "alert" : undefined} className="mt-1 text-label font-medium text-foreground flex items-center gap-1 min-h-[1rem]">
             {show && (<><AlertCircle className="h-3.5 w-3.5 text-[var(--error)] shrink-0" aria-hidden />{error}</>)}
           </p>
         </div>
@@ -340,7 +340,7 @@ function MotionDemo() {
         .a11y-reduced .a11y-mover { animation: none; }
         @media (prefers-reduced-motion: reduce) { .a11y-mover { animation: none; } }
       `}</style>
-      <label className="inline-flex items-center gap-2.5 text-body-sm font-medium text-foreground cursor-pointer mb-4">
+      <label className="inline-flex items-center gap-2 text-body-sm font-medium text-foreground cursor-pointer mb-4">
         <input
           type="checkbox"
           checked={reduced}
@@ -404,7 +404,7 @@ function Checklist() {
                 type="checkbox"
                 checked={!!done[i]}
                 onChange={e => setDone(d => ({ ...d, [i]: e.target.checked }))}
-                className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--primary)]"
+                className="mt-1 h-4 w-4 shrink-0 accent-[var(--primary)]"
               />
               <span className={`text-body-sm leading-relaxed ${done[i] ? "text-muted-foreground line-through" : "text-foreground"}`}>{bi(item)}</span>
             </label>

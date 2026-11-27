@@ -110,7 +110,7 @@ function PrincipleCard({ p, onGo }: { p: PrincipleItem; onGo: (t: Target) => voi
       </p>
       <ul className="space-y-2 mb-6">
         {p.practice.map(item => (
-          <li key={item.en} className="flex items-start gap-2.5 text-body-sm leading-relaxed text-muted-foreground">
+          <li key={item.en} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground">
             <span aria-hidden className="mt-[0.5em] h-1 w-1 rounded-full bg-primary shrink-0" />
             <span>{bi(item)}</span>
           </li>
@@ -120,7 +120,7 @@ function PrincipleCard({ p, onGo }: { p: PrincipleItem; onGo: (t: Target) => voi
       <button
         type="button"
         onClick={() => onGo(p.target)}
-        className="group mt-auto self-start inline-flex items-center gap-1.5 rounded-sm text-body-sm font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="group mt-auto self-start inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span>
           {t("Learn more", "Saiba mais")}

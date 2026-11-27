@@ -37,16 +37,16 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
     <article className="rounded-md border border-border bg-card p-5">
       <p className="text-label font-semibold uppercase tracking-[0.1em] text-[var(--primary-text,var(--primary))] mb-2">{card.tema}</p>
       <h3 className="text-body-lg font-bold tracking-[-0.015em] text-foreground leading-snug">{card.titulo}</h3>
-      <p className="mt-1.5 text-body text-muted-foreground leading-relaxed">{card.contexto}</p>
+      <p className="mt-1 text-body text-muted-foreground leading-relaxed">{card.contexto}</p>
       {card.leitura && (
         <p className="mt-3 flex items-start gap-2 text-body-sm text-foreground">
-          <span className="mt-0.5 inline-flex h-5 shrink-0 items-center rounded-full border border-border bg-muted px-2 text-caption font-semibold text-muted-foreground">{t("Hypothesis", "Hipótese")}</span>
+          <span className="mt-1 inline-flex h-5 shrink-0 items-center rounded-full border border-border bg-muted px-2 text-caption font-semibold text-muted-foreground">{t("Hypothesis", "Hipótese")}</span>
           {card.leitura}
         </p>
       )}
       {card.passo && (
         <p className="mt-2 flex items-start gap-2 text-body-sm text-foreground">
-          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />
+          <Lightbulb className="mt-1 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />
           {card.passo}
         </p>
       )}
@@ -124,7 +124,7 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
         <GradeDeCards className="gap-3 md:grid-cols-2">
           {regras.map(r => (
             <div key={r.titulo} className="rounded-md border border-border bg-card p-4">
-              <p className="flex items-start gap-2 text-body font-semibold text-foreground"><MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{r.titulo}</p>
+              <p className="flex items-start gap-2 text-body font-semibold text-foreground"><MessagesSquare className="mt-1 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{r.titulo}</p>
               <p className="mt-1 pl-6 text-body-sm leading-relaxed text-muted-foreground">{r.texto}</p>
             </div>
           ))}
@@ -168,12 +168,12 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
               <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{ex.regra}</p>
               <GradeDeCards className="gap-3 md:grid-cols-2">
                 <div className="rounded-md border border-border bg-muted/40 p-4">
-                  <p className="mb-1.5 flex items-center gap-1.5 text-label font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
+                  <p className="mb-1 flex items-center gap-1 text-label font-semibold text-muted-foreground"><XCircle className="h-4 w-4 text-error" aria-hidden />{t("Avoid", "Evitar")}</p>
                   <p className="text-body font-semibold text-foreground/70 line-through decoration-error/40">{ex.evitar.titulo}</p>
                   {ex.evitar.texto && <p className="mt-1 text-body-sm text-muted-foreground">{ex.evitar.texto}</p>}
                 </div>
                 <div className="rounded-md border border-success/25 bg-[var(--success-muted)] p-4">
-                  <p className="mb-1.5 flex items-center gap-1.5 text-label font-semibold text-foreground"><CheckCircle className="h-4 w-4 text-success" aria-hidden />{t("Prefer", "Preferir")}</p>
+                  <p className="mb-1 flex items-center gap-1 text-label font-semibold text-foreground"><CheckCircle className="h-4 w-4 text-success-text" aria-hidden />{t("Prefer", "Preferir")}</p>
                   <p className="text-body font-semibold text-foreground">{ex.recomendado.titulo}</p>
                   {ex.recomendado.texto && <p className="mt-1 text-body-sm text-foreground/80">{ex.recomendado.texto}</p>}
                   {ex.recomendado.detalhe && <p className="mt-2 border-t border-success/20 pt-2 text-label text-muted-foreground"><span className="font-semibold">{t("In the details:", "No detalhamento:")}</span> {ex.recomendado.detalhe}</p>}
@@ -193,7 +193,7 @@ export function EscritaDeInteligencia({ prefixo, exemplos, card }: Props) {
         <ul className="grid grid-cols-1 gap-2 md:grid-cols-2">
           {checklist.map(c => (
             <li key={c} className="flex items-start gap-2 rounded-md border border-border bg-card px-4 py-3 text-body-sm text-foreground">
-              <ListChecks className="mt-0.5 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{c}
+              <ListChecks className="mt-1 h-4 w-4 shrink-0 text-[var(--primary-text,var(--primary))]" aria-hidden />{c}
             </li>
           ))}
         </ul>

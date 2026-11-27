@@ -92,7 +92,7 @@ function AvisoCookies({
       data-slot="aviso-cookies"
       className={cn(
         fixo ? "fixed" : "absolute",
-        "inset-x-4 bottom-4 z-[60] mx-auto flex max-w-[720px] flex-wrap items-center gap-x-5 gap-y-3 rounded-lg border border-border bg-card px-[18px] py-4 font-sans text-sm leading-normal text-foreground shadow-lg",
+        "inset-x-4 bottom-4 z-[60] mx-auto flex max-w-[720px] flex-wrap items-center gap-x-5 gap-y-3 rounded-lg border border-border bg-card px-4 py-4 font-sans text-sm leading-normal text-foreground shadow-lg",
         className,
       )}
     >

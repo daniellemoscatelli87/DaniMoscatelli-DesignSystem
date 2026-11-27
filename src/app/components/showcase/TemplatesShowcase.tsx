@@ -24,6 +24,17 @@ import { SectionHeader } from "./shared/SectionHeader";
 import { GradeDeCards } from "../ui/grade-de-cards";
 import { PainelTemplate, PecasDoPainel } from "./PainelTemplates";
 import { SegmentedControl } from "../ui/segmented-control";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Switch } from "../ui/switch";
+import { Label } from "../ui/label";
+import { Checkbox } from "../ui/checkbox";
+import { Textarea } from "../ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { ChipDeEstado } from "../ui/chip-de-estado";
+import { LinhaDeLista } from "../ui/linha-de-lista";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "../ui/pagination";
+
 import { DashboardTemplate, SettingsTemplate, InboxTemplate, LandingTemplate } from "./TemplatesResponsivos";
 
 type L = { en: string; pt: string };
@@ -49,7 +60,7 @@ function TemplateFrame({ children, className = "" }: { children: React.ReactNode
     <div className={`rounded-lg border border-border overflow-hidden ${className}`} style={{ boxShadow: "var(--shadow-lg)" }}>
       {/* Browser chrome */}
       <div className="h-9 bg-muted/60 border-b border-border flex items-center px-4 gap-2 shrink-0">
-        <div className="flex gap-1.5">
+        <div className="flex gap-1">
           <div className="h-2.5 w-2.5 rounded-full bg-primary/50" />
           <div className="h-2.5 w-2.5 rounded-full bg-warning/50" />
           <div className="h-2.5 w-2.5 rounded-full bg-success/50" />
@@ -91,7 +102,7 @@ function AuthTemplate() {
             <div className="mt-6 space-y-2">
               {[t("40+ Components", "Mais de 40 componentes"), t("Dark & Light Mode", "Modo escuro e claro"), t("Radix UI Powered", "Baseado em Radix UI")].map(f => (
                 <div key={f} className="flex items-center gap-2 text-label text-muted-foreground">
-                  <Check className="h-3.5 w-3.5 text-success shrink-0" />
+                  <Check className="h-3.5 w-3.5 text-success-text shrink-0" />
                   {f}
                 </div>
               ))}
@@ -103,12 +114,12 @@ function AuthTemplate() {
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="w-full max-w-[280px]">
             {/* Toggle */}
-            <div className="flex rounded-md border border-border bg-muted/40 p-0.5 mb-6">
+            <div className="flex rounded-md border border-border bg-muted/40 p-1 mb-6">
               {(["login", "signup"] as const).map(tb => (
                 <button
                   key={tb}
                   onClick={() => setTab(tb)}
-                  className={`flex-1 py-1.5 rounded-sm text-label font-semibold transition-all
+                  className={`flex-1 py-1 rounded-sm text-label font-semibold transition-all
                     ${tab === tb ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}
                 >
                   {tb === "login" ? t("Sign In", "Entrar") : t("Sign Up", "Cadastrar")}
@@ -120,7 +131,7 @@ function AuthTemplate() {
               <h1 className="text-body-lg font-bold text-foreground">
                 {tab === "login" ? t("Welcome back", "Bem-vindo de volta") : t("Create account", "Criar conta")}
               </h1>
-              <p className="text-label text-muted-foreground mt-0.5">
+              <p className="text-label text-muted-foreground mt-1">
                 {tab === "login" ? t("Sign in to your workspace", "Entre no seu workspace") : t("Get started for free", "Comece gratuitamente")}
               </p>
             </div>
@@ -156,7 +167,7 @@ function AuthTemplate() {
                 </div>
               </div>
 
-              <button className="w-full h-9 rounded-sm bg-primary text-primary-foreground text-body-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 mt-1">
+              <button className="w-full h-9 rounded-sm bg-primary text-primary-foreground text-body-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-1 mt-1">
                 <LogIn className="h-3.5 w-3.5" />
                 {tab === "login" ? t("Sign In", "Entrar") : t("Create Account", "Criar conta")}
               </button>
@@ -190,12 +201,7 @@ const teamMembers = [
   { name: "Fernanda Paiva",   email: "fer@moscatelli.co",    role: "Viewer",    status: "Active",   avatar: "FP" },
 ];
 
-const roleColor: Record<string, string> = {
-  Admin:     "bg-primary/10 text-primary-text",
-  Editor:    "bg-info/10 text-info",
-  Viewer:    "bg-muted text-muted-foreground",
-  Developer: "bg-success/10 text-success",
-};
+const tomDaFuncao: Record<string, "marca" | "info" | "neutro" | "sucesso"> = { Admin: "marca", Editor: "info", Viewer: "neutro", Developer: "sucesso" };
 
 const roleLabel: Record<string, L> = {
   Admin:     { en: "Admin", pt: "Admin" },
@@ -210,12 +216,12 @@ const statusLabel: Record<string, L> = {
   Pending:  { en: "Pending", pt: "Pendente" },
 };
 
-const statusColor: Record<string, string> = {
-  Active:   "bg-success/10 text-success border-success/20",
-  Inactive: "bg-muted text-muted-foreground border-border",
-  Pending:  "bg-warning/10 text-warning-text border-warning/20",
-};
+const tomDoStatus: Record<string, "sucesso" | "neutro" | "aviso"> = { Active: "sucesso", Inactive: "neutro", Pending: "aviso" };
 
+/**
+ * Equipe: card nunca rola para o lado. Abaixo de 40rem de largura, a tabela vira lista (LinhaDeLista, com função,
+ * situação e ações embaixo do texto); a partir dela, a tabela, com a coluna Entrada só a partir de 48rem.
+ */
 function TeamTemplate() {
   const { t, bi } = useI18n();
   const [search, setSearch] = useState("");
@@ -223,109 +229,113 @@ function TeamTemplate() {
     m => m.name.toLowerCase().includes(search.toLowerCase()) ||
          m.email.toLowerCase().includes(search.toLowerCase())
   );
+  const acoes = (m: typeof teamMembers[number]) => (
+    <span className="flex items-center gap-1">
+      <Button variant="ghost" size="icon" aria-label={t(`Edit ${m.name}`, `Editar ${m.name}`)}><Edit2 aria-hidden /></Button>
+      <Button variant="ghost" size="icon" aria-label={t(`Remove ${m.name}`, `Remover ${m.name}`)}><Trash2 aria-hidden /></Button>
+    </span>
+  );
+  const avatar = (m: typeof teamMembers[number]) => (
+    <span aria-hidden className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] text-caption font-bold text-primary-text">{m.avatar}</span>
+  );
 
   return (
     <TemplateFrame>
-      <div className="bg-background h-[520px] overflow-hidden flex flex-col">
-        {/* Header */}
-        <div className="border-b border-border px-6 py-4 flex items-center justify-between shrink-0">
-          <div>
-            <h1 className="text-body font-bold text-foreground">{t("Team Members", "Membros da equipe")}</h1>
-            <p className="text-caption text-muted-foreground">{teamMembers.length} {t("members in your workspace", "membros no seu workspace")}</p>
+      <div className="@container/equipe flex h-[520px] flex-col overflow-hidden bg-background">
+        {/* Cabeçalho: título e ações; no celular, as ações descem para baixo do título, na mesma borda */}
+        <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-3 border-b border-border px-4 py-4 @2xl/equipe:px-6">
+          <div className="min-w-0 flex-1">
+            <h3 className="text-body font-bold text-foreground">{t("Team Members", "Membros da equipe")}</h3>
+            <p className="text-label text-muted-foreground">{teamMembers.length} {t("members in your workspace", "membros no seu espaço de trabalho")}</p>
           </div>
-          <div className="flex items-center gap-2">
-            <button className="h-8 px-3 rounded-sm border border-border bg-card text-label font-medium text-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
-              <Download className="h-3.5 w-3.5" /> {t("Export", "Exportar")}
-            </button>
-            <button className="h-8 px-3 rounded-sm bg-primary text-primary-foreground text-label font-semibold flex items-center gap-1.5 hover:opacity-90 transition-opacity">
-              <UserPlus className="h-3.5 w-3.5" /> {t("Invite", "Convidar")}
-            </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button variant="outline" size="sm"><Download aria-hidden /> {t("Export", "Exportar")}</Button>
+            <Button size="sm"><UserPlus aria-hidden /> {t("Invite", "Convidar")}</Button>
           </div>
         </div>
 
-        {/* Toolbar */}
-        <div className="px-6 py-3 flex items-center gap-3 border-b border-border shrink-0">
-          <div className="relative flex-1 max-w-xs">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
-            <input
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              placeholder={t("Search members...", "Buscar membros...")}
-              className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-1.5 text-label text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
-            />
+        {/* Busca e filtro */}
+        <div className="flex shrink-0 items-center gap-3 border-b border-border px-4 py-3 @2xl/equipe:px-6">
+          <div className="relative min-w-0 flex-1 @2xl/equipe:max-w-xs">
+            <Search aria-hidden className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input value={search} onChange={e => setSearch(e.target.value)} aria-label={t("Search members", "Buscar membros")} placeholder={t("Search members...", "Buscar membros…")} className="pl-9" />
           </div>
-          <button className="h-8 px-3 rounded-sm border border-border bg-card text-label font-medium text-muted-foreground flex items-center gap-1.5 hover:bg-accent transition-colors">
-            <Filter className="h-3.5 w-3.5" /> {t("Filter", "Filtrar")}
-          </button>
+          <Button variant="outline" size="sm"><Filter aria-hidden /> {t("Filter", "Filtrar")}</Button>
         </div>
 
-        {/* Table */}
-        <div className="flex-1 overflow-y-auto">
-          <table className="w-full">
-            <thead className="sticky top-0 bg-muted/40 border-b border-border">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <ul className="m-0 list-none p-0 @xl/equipe:hidden">
+            {filtered.map(m => (
+              <li key={m.email} className="border-b border-border">
+                <LinhaDeLista
+                  inicio={avatar(m)}
+                  titulo={m.name}
+                  descricao={<span className="[overflow-wrap:anywhere]">{m.email}</span>}
+                  quebraAcoes
+                  fim={
+                    <span className="flex flex-wrap items-center gap-2">
+                      <ChipDeEstado tom={tomDaFuncao[m.role]}>{bi(roleLabel[m.role])}</ChipDeEstado>
+                      <ChipDeEstado tom={tomDoStatus[m.status]}>{bi(statusLabel[m.status])}</ChipDeEstado>
+                      {acoes(m)}
+                    </span>
+                  }
+                  className="px-4"
+                />
+              </li>
+            ))}
+          </ul>
+          <table className="hidden w-full @xl/equipe:table">
+            <thead className="sticky top-0 border-b border-border bg-muted">
               <tr>
-                {[t("Member", "Membro"), t("Role", "Função"), "Status", t("Joined", "Entrada"), ""].map((h, hi) => (
-                  <th key={hi} className="text-left px-6 py-2.5 text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{h}</th>
-                ))}
+                <th scope="col" className="px-4 py-2 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Member", "Membro")}</th>
+                <th scope="col" className="px-4 py-2 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Role", "Função")}</th>
+                <th scope="col" className="px-4 py-2 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">Status</th>
+                <th scope="col" className="hidden px-4 py-2 text-left text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground @3xl/equipe:table-cell">{t("Joined", "Entrada")}</th>
+                <th scope="col" className="px-4 py-2"><span className="sr-only">{t("Actions", "Ações")}</span></th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((m, i) => (
-                <tr key={m.email} className={`border-b border-border hover:bg-[var(--row-hover)] transition-colors ${i % 2 === 0 ? "" : ""}`}>
-                  <td className="px-6 py-3">
+              {filtered.map(m => (
+                <tr key={m.email} className="border-b border-border transition-colors hover:bg-[var(--row-hover)]">
+                  <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="h-7 w-7 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
-                        <span className="text-caption font-bold text-primary-text">{m.avatar}</span>
-                      </div>
-                      <div>
+                      {avatar(m)}
+                      <div className="min-w-0">
                         <div className="text-body-sm font-medium text-foreground">{m.name}</div>
-                        <div className="text-caption text-muted-foreground">{m.email}</div>
+                        <div className="text-label text-muted-foreground [overflow-wrap:anywhere]">{m.email}</div>
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-caption font-semibold ${roleColor[m.role]}`}>
-                      {bi(roleLabel[m.role])}
-                    </span>
-                  </td>
-                  <td className="px-6 py-3">
-                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-caption font-medium border ${statusColor[m.status]}`}>
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ background: "currentColor" }} />
-                      {bi(statusLabel[m.status])}
-                    </span>
-                  </td>
-                  <td className="px-6 py-3 text-label text-muted-foreground">{t("Jul 2026", "jul de 2026")}</td>
-                  <td className="px-6 py-3">
-                    <div className="flex items-center gap-1 justify-end">
-                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
-                        <Edit2 className="h-3 w-3" />
-                      </button>
-                      <button className="h-6 w-6 rounded-sm flex items-center justify-center text-muted-foreground hover:bg-accent hover:text-foreground transition-colors">
-                        <Trash2 className="h-3 w-3" />
-                      </button>
-                    </div>
-                  </td>
+                  <td className="px-4 py-3"><ChipDeEstado tom={tomDaFuncao[m.role]}>{bi(roleLabel[m.role])}</ChipDeEstado></td>
+                  <td className="px-4 py-3"><ChipDeEstado tom={tomDoStatus[m.status]}>{bi(statusLabel[m.status])}</ChipDeEstado></td>
+                  <td className="hidden px-4 py-3 text-label text-muted-foreground @3xl/equipe:table-cell">{t("Jul 2026", "jul. de 2026")}</td>
+                  <td className="px-4 py-3"><div className="flex justify-end">{acoes(m)}</div></td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <p className="hidden px-4 py-2 text-label text-muted-foreground @xl/equipe:block @3xl/equipe:hidden">
+            {t("The Joined column appears on wider screens.", "A coluna Entrada aparece em telas mais largas.")}
+          </p>
 
           {filtered.length === 0 && (
-            <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-              <Search className="h-6 w-6 mb-2 opacity-30" />
+            <div className="flex flex-col items-center justify-center gap-2 py-12 text-muted-foreground">
+              <Search aria-hidden className="size-6" />
               <p className="text-body-sm">{t("No members found for", "Nenhum membro encontrado para")} "<strong className="text-foreground">{search}</strong>"</p>
             </div>
           )}
         </div>
 
-        {/* Pagination */}
-        <div className="border-t border-border px-6 py-2.5 flex items-center justify-between shrink-0 bg-background">
-          <span className="text-caption text-muted-foreground">{filtered.length} {t("of", "de")} {teamMembers.length} {t("results", "resultados")}</span>
-          <div className="flex items-center gap-1">
-            {[1, 2, 3].map(p => (
-              <button key={p} className={`h-6 w-6 rounded-sm text-caption font-medium transition-colors ${p === 1 ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}>{p}</button>
-            ))}
-          </div>
+        {/* Paginação: numa linha só */}
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-t border-border bg-background px-4 py-2 @2xl/equipe:px-6">
+          <span className="text-label text-muted-foreground">{filtered.length} {t("of", "de")} {teamMembers.length} {t("results", "resultados")}</span>
+          <Pagination className="mx-0 w-auto">
+            <PaginationContent>
+              {[1, 2, 3].map(p => (
+                <PaginationItem key={p}><PaginationLink href="#" onClick={e => e.preventDefault()} isActive={p === 1}>{p}</PaginationLink></PaginationItem>
+              ))}
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </TemplateFrame>
@@ -388,19 +398,9 @@ const plans: Plano[] = [
 function ChaveParaQuem({ ligado, onChange }: { ligado: boolean; onChange: (v: boolean) => void }) {
   const { t } = useI18n();
   return (
-    <div className="mb-4 flex items-center gap-2.5">
-      <button
-        type="button"
-        role="switch"
-        aria-checked={ligado}
-        aria-labelledby="rotulo-chave-para-quem"
-        onClick={() => onChange(!ligado)}
-        className={`w-10 shrink-0 rounded-full transition-colors relative flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${ligado ? "bg-primary" : "bg-muted-foreground/30"}`}
-        style={{ height: "22px" }}
-      >
-        <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${ligado ? "left-[22px]" : "left-0.5"}`} />
-      </button>
-      <span id="rotulo-chave-para-quem" className="text-body-sm font-medium text-foreground">{t("Show “Who it's for”", "Mostrar “Para quem”")}</span>
+    <div className="mb-4 flex items-center gap-3">
+      <Switch id="chave-para-quem" checked={ligado} onCheckedChange={onChange} />
+      <Label htmlFor="chave-para-quem" className="font-medium text-foreground">{t("Show “Who it's for”", "Mostrar “Para quem”")}</Label>
     </div>
   );
 }
@@ -431,20 +431,10 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
           {/* Toggle */}
           <div className="inline-flex items-center gap-3">
             <span className={`text-label font-medium ${!annual ? "text-foreground" : "text-muted-foreground"}`}>{t("Monthly", "Mensal")}</span>
-            <button
-              type="button"
-              role="switch"
-              aria-checked={annual}
-              aria-label={t("Yearly billing", "Cobrança anual")}
-              onClick={() => setAnnual(v => !v)}
-              className={`w-10 rounded-full transition-colors relative flex items-center ${annual ? "bg-primary" : "bg-muted-foreground/30"}`}
-              style={{ height: "22px" }}
-            >
-              <span className={`absolute h-4 w-4 rounded-full bg-white transition-all ${annual ? "left-[22px]" : "left-0.5"}`} />
-            </button>
+            <Switch checked={annual} onCheckedChange={setAnnual} aria-label={t("Yearly billing", "Cobrança anual")} />
             <span className={`text-label font-medium ${annual ? "text-foreground" : "text-muted-foreground"}`}>
               {t("Yearly", "Anual")}
-              <span className="ml-1.5 px-1.5 py-0.5 rounded-full bg-success/10 text-success text-caption font-bold">-20%</span>
+              <span className="ml-1 px-1 py-1 rounded-full bg-success/10 text-success-text text-caption font-bold">-20%</span>
             </span>
           </div>
         </div>
@@ -472,7 +462,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                     <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))] dark:text-muted-foreground" />
                   </div>
                   {plan.highlight && (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2.5 py-1 text-caption font-bold uppercase tracking-[0.06em] text-[var(--primary-text,var(--primary))] whitespace-nowrap">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2 py-1 text-caption font-bold uppercase tracking-[0.06em] text-[var(--primary-text,var(--primary))] whitespace-nowrap">
                       <Star aria-hidden className="h-3 w-3 fill-current" />
                       {t("Recommended", "Recomendado")}
                     </span>
@@ -484,8 +474,8 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
 
                 {/* "Para quem": no máximo 4 linhas, sem reticências; altura de 4 linhas em todos os cards (só cresce, em vez de vazar, quando o card fica estreito demais). No escuro, caixa neutra e só a lâmpada em amarelo */}
                 {forWhom && (
-                <div className="mb-5 flex gap-2 sm:gap-2.5 rounded-md border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2.5 sm:px-3 py-2.5">
-                  <Lightbulb aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning-text" />
+                <div className="mb-5 flex gap-2 sm:gap-2 rounded-md border border-warning/30 bg-[var(--warning-muted)] dark:border-border dark:bg-muted px-2 sm:px-3 py-2">
+                  <Lightbulb aria-hidden className="mt-1 h-4 w-4 shrink-0 text-warning-text" />
                   <p className="min-h-[5.5em] text-body-sm leading-snug text-foreground">
                     <strong className="font-bold">{t("Who it's for:", "Para quem:")}</strong> {forWhom}
                   </p>
@@ -498,21 +488,21 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                   aria-expanded={recursosAbertos}
                   aria-controls={idLista}
                   onClick={() => setRecursosAbertos(v => !v)}
-                  className="mb-3 -mx-1 flex items-center justify-between gap-2 rounded-sm px-1 py-1.5 text-left text-body-sm font-semibold text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="mb-3 -mx-1 flex items-center justify-between gap-2 rounded-sm px-1 py-1 text-left text-body-sm font-semibold text-foreground transition-colors hover:text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <span>{recursosAbertos ? t("Hide plan features", "Ocultar recursos do plano") : t("Show plan features", "Ver recursos do plano")}</span>
-                  <span className="flex items-center gap-1.5 text-label font-medium text-muted-foreground whitespace-nowrap">
+                  <span className="flex items-center gap-1 text-label font-medium text-muted-foreground whitespace-nowrap">
                     {t(`${plan.included} of ${pricingFeatures.length}`, `${plan.included} de ${pricingFeatures.length}`)}
                     <ChevronDown aria-hidden className={`h-4 w-4 transition-transform ${recursosAbertos ? "rotate-180" : ""}`} />
                   </span>
                 </button>
 
                 {recursosAbertos ? (
-                <ul id={idLista} className="space-y-2.5 flex-1 mb-5">
+                <ul id={idLista} className="space-y-2 flex-1 mb-5">
                   {pricingFeatures.map((f, i) => {
                     const inclui = i < plan.included;
                     return (
-                      <li key={f.en} className={`flex items-start gap-2.5 text-body-sm leading-snug ${inclui ? "text-foreground" : "text-muted-foreground"}`}>
+                      <li key={f.en} className={`flex items-start gap-2 text-body-sm leading-snug ${inclui ? "text-foreground" : "text-muted-foreground"}`}>
                         <span aria-hidden className={`mt-px h-4 w-4 shrink-0 rounded-full flex items-center justify-center ${inclui ? "bg-[var(--primary-muted)]" : "bg-muted"}`}>
                           {inclui
                             ? <Check className="h-2.5 w-2.5 text-[var(--primary-text,var(--primary))]" strokeWidth={3} />
@@ -545,7 +535,7 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
                       ? `${t("Plan selected", "Plano selecionado")}: ${bi(plan.name)}`
                       : `${t("Select Plan", "Selecionar Plano")} ${bi(plan.name)}`}
                     onClick={() => setSelecionado(plan.id)}
-                    className={`h-10 w-full @[19rem]:w-auto px-4 rounded-md border border-primary text-body-sm font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+                    className={`h-10 w-full @[19rem]:w-auto px-4 rounded-md border border-primary text-body-sm font-semibold whitespace-nowrap transition-colors inline-flex items-center justify-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
                       ${ativo
                         ? "bg-[var(--primary-suave)] text-[var(--primary-text,var(--primary))]"
                         : "bg-card text-[var(--primary-text,var(--primary))] hover:bg-accent"}`}
@@ -574,14 +564,14 @@ const contactChannels = [
     label: { en: "Email", pt: "Email" },
     value: "contato@danimos.co",
     desc: { en: "Response within 24h", pt: "Resposta em até 24h" },
-    color: "bg-info/10 text-info",
+    color: "bg-info/10 text-info-text",
   },
   {
     icon: Phone,
     label: { en: "Phone", pt: "Telefone" },
     value: "+55 (11) 9 9999-0000",
     desc: { en: "Mon–Fri, 9am–6pm BRT", pt: "Seg–Sex, 9h–18h BRT" },
-    color: "bg-success/10 text-success",
+    color: "bg-success/10 text-success-text",
   },
   {
     icon: MapPin,
@@ -604,8 +594,7 @@ function ContactTemplate() {
   const { t, bi } = useI18n();
   const [sent, setSent] = useState(false);
   const [subject, setSubject] = useState("Technical support");
-  const [subjectOpen, setSubjectOpen] = useState(false);
-
+  
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
@@ -639,8 +628,8 @@ function ContactTemplate() {
                   <div className={`h-8 w-8 rounded-sm flex items-center justify-center shrink-0 ${ch.color}`}>
                     <Icon className="h-4 w-4" />
                   </div>
-                  <div>
-                    <div className="text-label font-semibold text-foreground">{typeof ch.value === "string" ? ch.value : bi(ch.value)}</div>
+                  <div className="min-w-0">
+                    <div className="text-label font-semibold text-foreground [overflow-wrap:anywhere]">{typeof ch.value === "string" ? ch.value : bi(ch.value)}</div>
                     <div className="text-caption text-muted-foreground">{bi(ch.desc)}</div>
                   </div>
                 </div>
@@ -653,148 +642,81 @@ function ContactTemplate() {
             <p className="text-caption text-muted-foreground mb-3">{t("Follow us", "Siga-nos")}</p>
             <div className="flex items-center gap-2">
               {["LinkedIn", "Twitter", "GitHub"].map(s => (
-                <button
-                  key={s}
-                  className="h-7 px-2.5 rounded-sm border border-border bg-background text-caption font-medium text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-                >
-                  {s}
-                </button>
+                <Button key={s} variant="outline" size="sm">{s}</Button>
               ))}
             </div>
           </div>
         </div>
 
         {/* Right panel — form */}
-        <div className="flex-1 p-6 overflow-y-auto">
+        <div className="@container/contato min-w-0 flex-1 overflow-y-auto p-4 sm:p-6">
           {sent ? (
             <div className="flex flex-col items-center justify-center h-full py-12 text-center">
               <div className="h-16 w-16 rounded-full bg-success/10 flex items-center justify-center mb-4">
-                <CheckCircle className="h-8 w-8 text-success" />
+                <CheckCircle className="h-8 w-8 text-success-text" />
               </div>
               <h3 className="text-body-lg font-bold text-foreground mb-2">{t("Message sent!", "Mensagem enviada!")}</h3>
               <p className="text-body-sm text-muted-foreground max-w-xs mb-6">
                 {t("Thanks for reaching out. Our team will get back to you within 24 business hours.", "Obrigado pelo contato. Nossa equipe responderá em até 24 horas úteis.")}
               </p>
-              <button
-                onClick={() => setSent(false)}
-                className="h-9 px-5 rounded-md border border-border bg-card text-body-sm font-medium text-foreground hover:bg-accent transition-colors"
-              >
-                {t("Send another message", "Enviar outra mensagem")}
-              </button>
+              <Button variant="outline" onClick={() => setSent(false)}>{t("Send another message", "Enviar outra mensagem")}</Button>
             </div>
           ) : (
             <form onSubmit={handleSend} className="space-y-4 max-w-md">
               <div>
-                <h3 className="text-body font-bold text-foreground mb-0.5">{t("New message", "Nova mensagem")}</h3>
+                <h3 className="text-body font-bold text-foreground mb-1">{t("New message", "Nova mensagem")}</h3>
                 <p className="text-label text-muted-foreground">{t("Fill out the form below and we will get back to you shortly.", "Preencha o formulário abaixo e retornaremos em breve.")}</p>
               </div>
 
-              {/* Name + Email row */}
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-label font-medium text-foreground mb-1">{t("Name", "Nome")}</label>
+              {/* Nome e e-mail: um por linha no celular, lado a lado a partir de 28rem */}
+              <div className="grid gap-4 @md/contato:grid-cols-2">
+                <div className="space-y-2">
+                  <Label htmlFor="ct-nome">{t("Name", "Nome")}</Label>
                   <div className="relative">
-                    <User className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-                    <input
-                      required
-                      type="text"
-                      placeholder={t("Your name", "Seu nome")}
-                      className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
-                    />
+                    <User aria-hidden className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input id="ct-nome" required type="text" placeholder={t("Your name", "Seu nome")} className="pl-9" />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-label font-medium text-foreground mb-1">Email</label>
+                <div className="space-y-2">
+                  <Label htmlFor="ct-email">E-mail</Label>
                   <div className="relative">
-                    <AtSign className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-                    <input
-                      required
-                      type="email"
-                      placeholder={t("you@email.com", "voce@email.com")}
-                      className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
-                    />
+                    <AtSign aria-hidden className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input id="ct-email" required type="email" placeholder={t("you@email.com", "voce@email.com")} className="pl-9" />
                   </div>
                 </div>
               </div>
 
-              {/* Phone */}
-              <div>
-                <label className="block text-label font-medium text-foreground mb-1">
-                  {t("Phone", "Telefone")} <span className="text-muted-foreground font-normal">({t("optional", "opcional")})</span>
-                </label>
+              <div className="space-y-2">
+                <Label htmlFor="ct-tel">{t("Phone", "Telefone")} <span className="font-normal text-muted-foreground">({t("optional", "opcional")})</span></Label>
                 <div className="relative">
-                  <Phone className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground pointer-events-none" />
-                  <input
-                    type="tel"
-                    placeholder="+55 (11) 9 0000-0000"
-                    className="w-full bg-background border border-border rounded-sm pl-8 pr-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
-                  />
+                  <Phone aria-hidden className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input id="ct-tel" type="tel" placeholder="+55 (11) 9 0000-0000" className="pl-9" />
                 </div>
               </div>
 
-              {/* Subject dropdown */}
-              <div>
-                <label className="block text-label font-medium text-foreground mb-1">{t("Subject", "Assunto")}</label>
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setSubjectOpen(v => !v)}
-                    className="w-full bg-background border border-border rounded-sm px-3 py-2 text-body-sm text-foreground text-left flex items-center justify-between outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all"
-                  >
-                    {bi(subjects.find(x => x.en === subject) ?? subjects[0])}
-                    <ChevronDown className={`h-3.5 w-3.5 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
-                  </button>
-                  {subjectOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-1 z-20 bg-popover border border-border rounded-md py-1 shadow-lg" style={{ boxShadow: "var(--shadow-md)" }}>
-                      {subjects.map(s => (
-                        <button
-                          key={s.en}
-                          type="button"
-                          onClick={() => { setSubject(s.en); setSubjectOpen(false); }}
-                          className={`w-full text-left px-3 py-2 text-body-sm transition-colors flex items-center justify-between
-                            ${subject === s.en ? "text-primary-text font-medium bg-primary/5" : "text-foreground hover:bg-accent"}`}
-                        >
-                          {bi(s)}
-                          {subject === s.en && <Check className="h-3 w-3 text-primary-text" />}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="ct-assunto">{t("Subject", "Assunto")}</Label>
+                <Select value={subject} onValueChange={setSubject}>
+                  <SelectTrigger id="ct-assunto" className="w-full"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {subjects.map(x => <SelectItem key={x.en} value={x.en}>{bi(x)}</SelectItem>)}
+                  </SelectContent>
+                </Select>
               </div>
 
-              {/* Message */}
-              <div>
-                <label className="block text-label font-medium text-foreground mb-1">{t("Message", "Mensagem")}</label>
-                <textarea
-                  required
-                  rows={4}
-                  placeholder={t("Describe your question or request in detail...", "Descreva sua dúvida ou solicitação em detalhes...")}
-                  className="w-full bg-background border border-border rounded-sm px-3 py-2 text-body-sm text-foreground placeholder:text-muted-foreground outline-none focus-visible:ring-1 focus-visible:ring-ring transition-all resize-none"
-                />
+              <div className="space-y-2">
+                <Label htmlFor="ct-msg">{t("Message", "Mensagem")}</Label>
+                <Textarea id="ct-msg" required rows={4} placeholder={t("Describe your question or request in detail...", "Descreva sua dúvida ou solicitação em detalhes…")} />
               </div>
 
-              {/* Consent */}
-              <div className="flex items-start gap-2.5">
-                <input
-                  type="checkbox"
-                  required
-                  id="consent"
-                  className="mt-0.5 h-3.5 w-3.5 rounded-sm accent-[var(--primary)] shrink-0"
-                />
-                <label htmlFor="consent" className="text-caption text-muted-foreground leading-snug cursor-pointer">
-                  {t("I agree to the ", "Concordo com os ")}<span className="text-primary-text underline underline-offset-2 cursor-pointer">{t("Terms of Use", "Termos de Uso")}</span>{t(" and ", " e a ")}<span className="text-primary-text underline underline-offset-2 cursor-pointer">{t("Privacy Policy", "Política de Privacidade")}</span>.
-                </label>
+              <div className="flex items-start gap-3">
+                <Checkbox id="consent" required className="mt-0.5" />
+                <Label htmlFor="consent" className="text-body-sm font-normal leading-snug text-muted-foreground">
+                  {t("I agree to the Terms of Use and the Privacy Policy.", "Concordo com os Termos de Uso e a Política de Privacidade.")}
+                </Label>
               </div>
 
-              {/* Submit */}
-              <button
-                type="submit"
-                className="w-full h-10 rounded-md bg-primary text-primary-foreground text-body-sm font-semibold hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
-              >
-                <Send className="h-4 w-4" />
-                {t("Send message", "Enviar mensagem")}
-              </button>
+              <Button type="submit" className="w-full"><Send aria-hidden />{t("Send message", "Enviar mensagem")}</Button>
             </form>
           )}
         </div>
@@ -898,7 +820,7 @@ export function TemplatesShowcase() {
       <section id="templates-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("Core CSS custom properties shared across all templates.", "Propriedades CSS personalizadas principais compartilhadas por todos os templates.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("Core CSS custom properties shared across all templates.", "Propriedades CSS personalizadas principais compartilhadas por todos os templates.")}</p>
         </div>
         <TokenTable groups={templatesTokenGroups(t)} />
       </section>

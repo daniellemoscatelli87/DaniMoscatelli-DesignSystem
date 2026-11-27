@@ -55,11 +55,11 @@ function TokenRowItem({ token: digitado, isDark }: { token: TokenRow; isDark: bo
   const hasDarkVariant = !!token.dark && token.dark !== token.light;
 
   return (
-    <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 py-2.5 border-b border-border last:border-0">
+    <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3 py-2 border-b border-border last:border-0">
       <code className="text-label font-mono text-primary-text truncate">{token.name}</code>
       <span className="text-label text-muted-foreground leading-tight">{token.description}</span>
 
-      <div className="flex items-center gap-1.5 justify-end">
+      <div className="flex items-center gap-1 justify-end">
         {token.isColor && <Swatch value={value} />}
         <code title={value} className="max-w-[16rem] truncate text-caption font-mono text-foreground/70 whitespace-nowrap">{value}</code>
         {/* Dot indicator when a dark variant exists but isn't currently shown */}
@@ -81,14 +81,14 @@ export function TokenTable({ groups }: { groups: TokenGroup[] }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3.5 pb-2 border-b border-border">
+      <div className="grid grid-cols-[1fr_1.5fr_1fr] items-center gap-4 px-3 pb-2 border-b border-border">
         <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Token", "Token")}</span>
         <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">{t("Usage", "Uso")}</span>
         <div className="flex items-center gap-2 justify-end">
           <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">
             {t("Value", "Valor")}
           </span>
-          <span className="inline-flex items-center px-1.5 py-0.5 rounded-sm text-caption font-semibold uppercase tracking-wide bg-primary/10 text-primary-text">
+          <span className="inline-flex items-center px-1 py-1 rounded-sm text-caption font-semibold uppercase tracking-wide bg-primary/10 text-primary-text">
             {isDark ? t("Dark", "Escuro") : t("Light", "Claro")}
           </span>
         </div>

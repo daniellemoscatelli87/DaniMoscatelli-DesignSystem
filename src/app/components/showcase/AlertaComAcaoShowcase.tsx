@@ -94,7 +94,7 @@ function DemoInfoFechavel() {
           {t("Deliverables now show their stage in the list. You can change this in settings.", "As entregas agora mostram a etapa na lista. Você pode mudar isso nas configurações.")}
         </AlertaComAcao>
       ) : (
-        <div className="flex h-full min-h-[120px] flex-col items-start justify-center gap-3 rounded-lg border border-dashed border-border px-[22px] py-5">
+        <div className="flex h-full min-h-[120px] flex-col items-start justify-center gap-3 rounded-lg border border-dashed border-border px-6 py-5">
           <p className="text-body-sm text-muted-foreground">{t("You closed the notice.", "Você fechou o aviso.")}</p>
           <LinkDoAlerta onClick={() => setAberto(true)}>{t("Show again", "Mostrar de novo")}</LinkDoAlerta>
         </div>
@@ -190,7 +190,7 @@ export function AlertaComAcaoDoc() {
         <Rotulo>{t("Button text colours and contrast", "Cores de texto dos botões e contraste")}</Rotulo>
         <Panel className="divide-y divide-border">
           {CONTRASTES.map(c => (
-            <div key={c.tom} className="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3.5">
+            <div key={c.tom} className="flex flex-wrap items-center gap-x-4 gap-y-2 px-5 py-3">
               <span aria-hidden className={`h-6 w-6 shrink-0 rounded-sm border-[1.5px] ${BORDA_DO_TOM[c.tom]}`} style={{ backgroundColor: `var(${c.token})` }} />
               <span className="min-w-[7.5rem] text-body-sm font-semibold text-foreground">{t(c.nome[0], c.nome[1])}</span>
               <Mono>{c.token}</Mono>

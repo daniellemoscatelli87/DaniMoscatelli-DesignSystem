@@ -26,7 +26,7 @@ function Selo({ className, dot = true, icon, tone = "neutral", size = "md", chil
       data-slot="selo"
       className={cn(
         "inline-flex w-fit items-center whitespace-nowrap rounded-full border border-border bg-card font-semibold uppercase",
-        size === "md" ? "gap-2 px-3.5 py-1.5 text-label tracking-[0.14em]" : "gap-1.5 px-3 py-1 text-caption tracking-[0.12em]",
+        size === "md" ? "gap-2 px-3 py-1 text-label tracking-[0.14em]" : "gap-1 px-3 py-1 text-caption tracking-[0.12em]",
         tone === "primary" ? "text-primary-text" : "text-graphite-700 dark:text-graphite-300",
         className,
       )}

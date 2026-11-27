@@ -241,7 +241,7 @@ function ContadorDoPainel({ valor, rotulo, anel, className, ...props }: Contador
     <span
       data-slot="contador-do-painel"
       className={cn(
-        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary px-1.5 text-caption font-bold leading-none tabular-nums text-primary-foreground",
+        "inline-flex h-5 min-w-5 shrink-0 items-center justify-center whitespace-nowrap rounded-full bg-primary px-1 text-caption font-bold leading-none tabular-nums text-primary-foreground",
         anel && "ring-2 ring-card",
         className,
       )}
@@ -348,7 +348,7 @@ const classeDoItem = (ativo: boolean | undefined, recolhido: boolean, dentro: bo
   cn(
     // Fora do MenuLateral (gaveta do celular e do tablet), alvo de toque de 44 px; no menu fixo do computador, 36 px.
     dentro ? "min-h-9" : "min-h-11",
-    "group relative flex w-full items-center gap-2.5 rounded-sm px-3 py-2 text-left text-body-sm font-medium transition-[background-color,color] duration-150",
+    "group relative flex w-full items-center gap-2 rounded-sm px-3 py-2 text-left text-body-sm font-medium transition-[background-color,color] duration-150",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     // Regra dos rosas claros (dona do produto, 27/11/2026): ativo no rosa do meio (--primary-suave) com --primary-text,
     // e continua rosa com o mouse em cima; hover dos outros itens no cinza claro (--accent), nunca rosa.
@@ -415,7 +415,7 @@ function GrupoDoMenu({ titulo, children, className, expansivel, icone, padraoAbe
   const [abertoInterno, setAbertoInterno] = React.useState(padraoAberto);
   if (!expansivel) {
     return (
-      <div data-slot="grupo-do-menu" className={cn("space-y-0.5", className)} role="group" aria-labelledby={titulo ? id : undefined}>
+      <div data-slot="grupo-do-menu" className={cn("space-y-1", className)} role="group" aria-labelledby={titulo ? id : undefined}>
         {titulo && <p id={id} className={recolhido ? "sr-only" : "px-3 pb-1 pt-3 text-label font-semibold text-muted-foreground"}>{titulo}</p>}
         {/* Recolhido: o título vira uma linha fina (que some se já houver um divisor logo antes do grupo). */}
         {titulo && recolhido && <div aria-hidden data-slot="divisor-do-grupo" className="my-2 border-t border-border [.border-t+[data-slot=grupo-do-menu]_&]:hidden" />}
@@ -458,10 +458,10 @@ function GrupoDoMenu({ titulo, children, className, expansivel, icone, padraoAbe
     </button>
   );
   return (
-    <div data-slot="grupo-do-menu" data-expansivel="" className={cn("space-y-0.5", className)}>
+    <div data-slot="grupo-do-menu" data-expansivel="" className={cn("space-y-1", className)}>
       {dentro ? <DicaDoMenu texto={<>{titulo}{leituraDoContador}</>} ativa={recolhido}>{botao}</DicaDoMenu> : botao}
       {mostrarFilhos && (
-        <div id={idFilhos} role="group" aria-labelledby={id} className="ml-3 space-y-0.5 border-l border-border pl-2">
+        <div id={idFilhos} role="group" aria-labelledby={id} className="ml-3 space-y-1 border-l border-border pl-2">
           {children}
         </div>
       )}
@@ -531,7 +531,7 @@ function CampoDeBuscaGlobal({ placeholder = "Buscar no painel", atalho = "Ctrl +
     >
       <Search aria-hidden className="h-4 w-4 shrink-0" />
       <span className="min-w-0 flex-1 truncate">{placeholder}</span>
-      {atalho && <kbd className="hidden shrink-0 rounded-sm border border-border bg-muted px-1.5 py-0.5 font-sans text-caption font-medium sm:inline">{atalho}</kbd>}
+      {atalho && <kbd className="hidden shrink-0 rounded-sm border border-border bg-muted px-1 py-1 font-sans text-caption font-medium sm:inline">{atalho}</kbd>}
     </button>
   );
 }
@@ -580,7 +580,7 @@ const GatilhoDaConta = React.forwardRef<HTMLButtonElement, GatilhoDaContaProps>(
       type="button"
       aria-label={`Conta de ${nome}${papel ? `, ${papel}` : ""}. Abrir menu da conta`}
       className={cn(
-        "flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5 text-left transition-colors hover:bg-accent",
+        "flex min-w-0 items-center gap-2 rounded-md px-2 py-1 text-left transition-colors hover:bg-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className,
       )}

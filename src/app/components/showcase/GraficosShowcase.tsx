@@ -44,7 +44,7 @@ function RoscaAntiga({ t, partes }: { t: T; partes: { rotulo: string; valor: num
       </svg>
       <ul className="m-0 min-w-[10rem] flex-1 list-none space-y-2 p-0 text-body-sm">
         {partes.map((p, i) => (
-          <li key={p.rotulo} className="flex items-start gap-2.5">
+          <li key={p.rotulo} className="flex items-start gap-2">
             <span aria-hidden className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ background: cores[i] }} />
             <span className="min-w-0 flex-1 leading-snug text-foreground">{p.rotulo}</span>
             <span className="shrink-0 font-semibold tabular-nums text-foreground">{Math.round((p.valor / total) * 100)}%</span>
@@ -59,7 +59,7 @@ function RoscaAntiga({ t, partes }: { t: T; partes: { rotulo: string; valor: num
 function TabelaQueQuebra({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card">
-      <div className="hidden grid-cols-[1.2fr_1fr_1.3fr] gap-4 border-b border-border bg-muted/50 px-4 py-2.5 text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground md:grid">
+      <div className="hidden grid-cols-[1.2fr_1fr_1.3fr] gap-4 border-b border-border bg-muted/50 px-4 py-2 text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground md:grid">
         {head.map(h => <span key={h}>{h}</span>)}
       </div>
       <ul className="m-0 list-none p-0">
@@ -140,7 +140,7 @@ function CartaoDoCatalogo({ nome, componente, quando, cuidado, dados, children }
       <div className="mt-5 min-w-0 flex-1">{children}</div>
       {cuidado && (
         <p className="mt-4 flex gap-2 rounded-md bg-[var(--warning-muted)] px-3 py-2 text-body-sm leading-relaxed text-foreground">
-          <AlertTriangle aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-warning-text" />
+          <AlertTriangle aria-hidden className="mt-1 h-4 w-4 shrink-0 text-warning-text" />
           <span><span className="font-semibold">{t("Careful: ", "Cuidado: ")}</span>{cuidado}</span>
         </p>
       )}
@@ -562,7 +562,7 @@ function SecaoCores() {
           {PALETA.map((hex, i) => (
             <li key={hex} className="min-w-0">
               <span aria-hidden className="block h-14 rounded-md border border-border" style={{ background: `var(--chart-${i + 1})` }} />
-              <p className="mt-1.5 text-body-sm font-bold tabular-nums text-foreground">{i + 1}</p>
+              <p className="mt-1 text-body-sm font-bold tabular-nums text-foreground">{i + 1}</p>
               <p className="font-mono text-caption text-muted-foreground [overflow-wrap:anywhere]">{hex}</p>
               <p className="font-mono text-caption text-muted-foreground [overflow-wrap:anywhere]">--chart-{i + 1}</p>
             </li>
@@ -575,11 +575,11 @@ function SecaoCores() {
         <ul className="m-0 mt-5 grid list-none grid-cols-1 gap-3 border-t border-border p-0 pt-5 sm:grid-cols-3">
           {FAIXAS_DA_PALETA.map(f => (
             <li key={f.nome} className="min-w-0 rounded-md border border-border p-3">
-              <span aria-hidden className="mb-2 flex h-2.5 gap-[2px] overflow-hidden rounded-sm">
+              <span aria-hidden className="mb-2 flex h-2.5 gap-1 overflow-hidden rounded-sm">
                 {f.tons.map(tm => <span key={tm} className="flex-1" style={{ background: `var(--chart-${tm})` }} />)}
               </span>
               <p className="text-body-sm font-bold text-foreground">{f.nome} <span className="font-semibold tabular-nums text-muted-foreground">· {t("tones", "tons")} {f.tons[0]}–{f.tons[f.tons.length - 1]}</span></p>
-              <p className="mt-0.5 text-body-sm leading-relaxed text-muted-foreground">{f.d}</p>
+              <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{f.d}</p>
             </li>
           ))}
         </ul>
@@ -597,7 +597,7 @@ function SecaoCores() {
               <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] text-label font-bold text-[var(--primary-text)]">{i + 1}</span>
               <div className="min-w-0">
                 <p className="text-body-sm font-semibold leading-snug text-foreground">{r.t}</p>
-                <p className="mt-0.5 text-body-sm leading-relaxed text-muted-foreground">{r.d}</p>
+                <p className="mt-1 text-body-sm leading-relaxed text-muted-foreground">{r.d}</p>
               </div>
             </li>
           ))}
@@ -661,14 +661,14 @@ function SecaoCores() {
       </Cartao>
       <GradeDeCards className="mt-4 gap-4 md:grid-cols-2">
         <Cartao>
-          <p className="mb-3 flex items-center gap-1.5 text-body-sm font-semibold text-foreground"><Check aria-hidden className="h-4 w-4 text-success" />{t("Like this: importance in order, Other in gray", "Assim: importância em ordem, Outros em cinza")}</p>
+          <p className="mb-3 flex items-center gap-1 text-body-sm font-semibold text-foreground"><Check aria-hidden className="h-4 w-4 text-success-text" />{t("Like this: importance in order, Other in gray", "Assim: importância em ordem, Outros em cinza")}</p>
           <BarrasEmpilhadas100 localidade={loc} rotulo={t("Correct example", "Exemplo correto")}
             categorias={[{ rotulo: "WhatsApp" }, { rotulo: t("Phone", "Telefone") }, { rotulo: t("In person", "Presencial") }, { rotulo: t("Other", "Outros"), neutro: true }]}
             linhas={[{ rotulo: t("Contacts", "Atendimentos"), valores: [34, 26, 16, 24] }]} />
         </Cartao>
         <Cartao>
-          <p className="mb-3 flex items-center gap-1.5 text-body-sm font-semibold text-foreground"><X aria-hidden className="h-4 w-4 text-error" />{t("Not like this: every part highlighted", "Não assim: destaque em todas as partes")}</p>
-          <div aria-hidden className="flex h-3 gap-[2px] overflow-hidden rounded-sm">
+          <p className="mb-3 flex items-center gap-1 text-body-sm font-semibold text-foreground"><X aria-hidden className="h-4 w-4 text-error" />{t("Not like this: every part highlighted", "Não assim: destaque em todas as partes")}</p>
+          <div aria-hidden className="flex h-3 gap-1 overflow-hidden rounded-sm">
             <span style={{ flex: "34 1 0", background: "var(--chart-1)" }} />
             <span style={{ flex: "26 1 0", background: "var(--chart-2)" }} />
             <span style={{ flex: "16 1 0", background: "var(--chart-1)" }} />
@@ -891,8 +891,8 @@ export function GraficosShowcase() {
                 <h3 className="text-body font-bold text-foreground">{f.nome}</h3>
               </div>
               <p className="text-body-sm leading-relaxed text-foreground">{f.quando}</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {f.tipos.map(tp => <li key={tp} className="rounded-sm border border-border px-2 py-0.5 text-label text-muted-foreground">{tp}</li>)}
+              <ul className="mt-3 flex flex-wrap gap-1">
+                {f.tipos.map(tp => <li key={tp} className="rounded-sm border border-border px-2 py-1 text-label text-muted-foreground">{tp}</li>)}
               </ul>
               <p className="mt-3 text-label text-muted-foreground"><span className="font-semibold text-foreground">{t("In the DS:", "No DS:")}</span> {f.ds}</p>
             </Cartao>
@@ -922,14 +922,14 @@ export function GraficosShowcase() {
             <h3 className="mb-4 text-body font-bold text-foreground">{t("Contacts by channel", "Atendimentos por canal")}</h3>
             <RoscaAntiga t={t} partes={CANAIS_ANTES} />
             <p className="mt-3 text-label text-muted-foreground">{t("123 contacts in the month (example data).", "123 atendimentos no mês (dados de exemplo).")}</p>
-            <ul className="mt-5 space-y-1.5 border-t border-border pt-4 text-body-sm text-muted-foreground">
+            <ul className="mt-5 space-y-1 border-t border-border pt-4 text-body-sm text-muted-foreground">
               {[
                 t("Thick ring with a gray track behind it: it weighs more than the information.", "Anel grosso, com trilho cinza por trás: pesa mais que a informação."),
                 t("The centre shows 8 channels, but the legend has 4 rows: the number does not explain itself.", "O centro mostra 8 canais, mas a legenda tem 4 linhas: o número não se explica."),
                 t("Dark graphite as a peer series of the red: Phone looks disabled.", "Grafite escuro como série par do vermelho: o Telefone parece desativado."),
                 t("Other (51%) has the same visual weight as the highlighted parts.", "Outros (51%) tem a mesma força visual das partes em destaque."),
                 t("Percentages only in the legend, far from the parts.", "Percentuais só na legenda, longe das partes."),
-              ].map(p => <li key={p} className="flex gap-2"><X aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-error" />{p}</li>)}
+              ].map(p => <li key={p} className="flex gap-2"><X aria-hidden className="mt-1 h-3.5 w-3.5 shrink-0 text-error" />{p}</li>)}
             </ul>
           </Cartao>
           <Cartao>
@@ -943,14 +943,14 @@ export function GraficosShowcase() {
               centro={{ valor: "123", rotulo: t("contacts", "atendimentos") }}
               formatarQuantidade={v => n(v)}
             />
-            <ul className="mt-5 space-y-1.5 border-t border-border pt-4 text-body-sm text-muted-foreground">
+            <ul className="mt-5 space-y-1 border-t border-border pt-4 text-body-sm text-muted-foreground">
               {[
                 t("Thin ring (10 px), no track, 2 px of breathing room between parts.", "Anel fino (10 px), sem trilho, com 2 px de respiro entre as partes."),
                 t("The centre shows the total (a quantity); hovering the list shows the part.", "Centro com o total (quantidade); ao passar o cursor na lista, mostra a parte."),
                 t("Tones by importance from largest to smallest; Other in context gray, last.", "Tons por importância da maior para a menor; Outros em cinza de contexto e por último."),
                 t("Percentage written next to each part; the list has quantity and percentage.", "Percentual escrito junto de cada parte; a lista traz quantidade e percentual."),
                 t("The title states the discovery, in natural language.", "Título diz a descoberta, em linguagem natural."),
-              ].map(p => <li key={p} className="flex gap-2"><Check aria-hidden className="mt-0.5 h-3.5 w-3.5 shrink-0 text-success" />{p}</li>)}
+              ].map(p => <li key={p} className="flex gap-2"><Check aria-hidden className="mt-1 h-3.5 w-3.5 shrink-0 text-success-text" />{p}</li>)}
             </ul>
           </Cartao>
         </GradeDeCards>
@@ -1181,7 +1181,7 @@ export function GraficosShowcase() {
                   <p className="text-body-sm text-foreground">{t("Percentage distribution of requests by type (n = 4,812)", "Distribuição percentual de demandas por tipo (n = 4.812)")}</p>
                 </div>
                 <div className="rounded-md bg-[var(--success-muted)] p-3">
-                  <p className="mb-1 flex items-center gap-1 text-label font-semibold text-foreground"><Check aria-hidden className="h-3.5 w-3.5 text-success" />{t("Prefer", "Preferir")}</p>
+                  <p className="mb-1 flex items-center gap-1 text-label font-semibold text-foreground"><Check aria-hidden className="h-3.5 w-3.5 text-success-text" />{t("Prefer", "Preferir")}</p>
                   <p className="text-body-sm text-foreground">{t("Booking and questions are half of all requests", "Agendamento e dúvidas são metade das demandas")}</p>
                 </div>
               </div>

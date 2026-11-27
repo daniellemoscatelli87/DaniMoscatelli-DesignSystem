@@ -174,7 +174,7 @@ function UploadShowcaseConteudo() {
             {photo && (
               <div className="mt-3 flex items-center gap-3">
                 <img src={photo} alt="" className="h-16 w-16 rounded-md object-cover" />
-                <span className="inline-flex items-center gap-1 text-body-sm text-success"><Check className="h-4 w-4" aria-hidden />{t("Photo ready", "Foto pronta")}</span>
+                <span className="inline-flex items-center gap-1 text-body-sm text-success-text"><Check className="h-4 w-4" aria-hidden />{t("Photo ready", "Foto pronta")}</span>
                 <button type="button" onClick={() => setPhoto(null)} className="ml-auto text-label font-semibold text-muted-foreground hover:text-foreground">{t("Remove", "Remover")}</button>
               </div>
             )}
@@ -256,7 +256,7 @@ function UploadShowcaseConteudo() {
               t("Touch targets of at least 44 px; thumbnails show actions on focus, not only on hover.", "Alvos de toque de pelo menos 44 px; miniaturas mostram as ações no foco, não só no hover."),
               t("Previews use object URLs released when the item is removed.", "As prévias usam object URLs liberadas quando o item é removido."),
             ].map(item => (
-              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />{item}</li>
+              <li key={item} className="flex items-start gap-2 text-body-sm leading-relaxed text-muted-foreground"><Check className="mt-1 h-4 w-4 shrink-0 text-success-text" aria-hidden />{item}</li>
             ))}
           </ul>
         </ShowcaseCard>

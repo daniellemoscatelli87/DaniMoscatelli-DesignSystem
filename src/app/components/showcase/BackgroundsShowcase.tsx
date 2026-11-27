@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { DoodleTexture, doodleTextureFiles } from "@/app/components/ui/doodle-texture";
 import { Download } from "lucide-react";
+import { Button } from "../ui/button";
 import { DataTable } from "./shared/Guidance";
 import { useI18n } from "../../i18n";
 import { VejaEm } from "./shared/VejaEm";
@@ -162,9 +163,9 @@ function GradientControls({
         <span className="text-caption font-semibold uppercase tracking-[0.07em] text-muted-foreground">
           {t("Blob colors", "Cores dos blobs")}
         </span>
-        <span className={`text-caption font-bold px-2 py-0.5 rounded-full ${
+        <span className={`text-caption font-bold px-2 py-1 rounded-full ${
           maxReached
-            ? "bg-destructive/10 text-destructive"
+            ? "bg-destructive/10 text-error-text"
             : "bg-muted text-muted-foreground"
         }`}>
           {activeIds.length}/{MAX_BLOBS} {t("active", "ativas")}
@@ -256,11 +257,11 @@ function GradientAnimCard() {
         <div className="flex items-start gap-3 justify-between">
           <div>
             <h3 className="text-body font-black text-foreground tracking-[-0.025em]">{name}</h3>
-            <p className="text-body-sm text-muted-foreground mt-0.5 leading-relaxed">{description}</p>
+            <p className="text-body-sm text-muted-foreground mt-1 leading-relaxed">{description}</p>
           </div>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
                 {bi(TAG_LABEL[tg])}
               </span>
@@ -282,13 +283,13 @@ function GradientAnimCard() {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
-              <p className="text-body-sm text-foreground/80 mt-0.5 leading-relaxed">{technique}</p>
+              <p className="text-body-sm text-foreground/80 mt-1 leading-relaxed">{technique}</p>
             </div>
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
-              <div className="flex flex-wrap gap-1.5 mt-1.5">
+              <div className="flex flex-wrap gap-1 mt-1">
                 {components.map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-1 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -299,10 +300,10 @@ function GradientAnimCard() {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
+              <ul className="mt-1 space-y-1">
                 {useWhen.map((w, i) => (
                   <li key={i} className="text-body-sm text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-1" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>
@@ -535,19 +536,19 @@ export function CanvasRevealCard() {
       </div>
 
       {/* Controls */}
-      <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+      <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {CANVAS_PRESETS.map(p => (
               <button key={p.id} onClick={() => setPresetId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${presetId === p.id ? "#D44D4D" : ctrl}`,
                   background: presetId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: presetId === p.id ? "#D44D4D" : idle,
                 }}>
-                <span className="flex gap-0.5">
+                <span className="flex gap-1">
                   {p.swatches.map(hex => (
                     <span key={hex} style={{ width:7, height:7, borderRadius:2, background:hex, display:"inline-block" }} />
                   ))}
@@ -563,7 +564,7 @@ export function CanvasRevealCard() {
           <div className="flex gap-1">
             {DOT_SIZES.map(s => (
               <button key={s.id} onClick={() => setDotSizeId(s.id)}
-                className="w-9 py-1.5 rounded-sm text-caption font-bold transition-all"
+                className="w-9 py-1 rounded-sm text-caption font-bold transition-all"
                 style={{
                   border: `1.5px solid ${dotSizeId === s.id ? "#D44D4D" : ctrl}`,
                   background: dotSizeId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -580,7 +581,7 @@ export function CanvasRevealCard() {
           <div className="flex gap-1">
             {ANIM_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -598,13 +599,13 @@ export function CanvasRevealCard() {
         <div className="flex items-start gap-3 justify-between">
           <div>
             <h3 className="text-body font-black text-foreground tracking-[-0.025em]">Canvas Reveal</h3>
-            <p className="text-body-sm text-muted-foreground mt-0.5 leading-relaxed">
+            <p className="text-body-sm text-muted-foreground mt-1 leading-relaxed">
               {t("Hover over the cards. Animated colored dots fill the card on hover — the icon rises and the title appears.", "Passe o mouse sobre os cards. Pontos coloridos animados preenchem o card no hover — o ícone sobe e o título aparece.")}
             </p>
           </div>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -623,15 +624,15 @@ export function CanvasRevealCard() {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
-              <p className="text-body-sm text-foreground/80 mt-0.5 leading-relaxed">
+              <p className="text-body-sm text-foreground/80 mt-1 leading-relaxed">
                 {lang === "pt" ? <>Canvas 2D com uma grade de pontos — cada ponto tem uma <code className="text-primary-text text-caption">phase</code> aleatória em uma onda senoidal, criando pulsos independentes. <code className="text-primary-text text-caption">AnimatePresence</code> monta/desmonta o canvas no hover com um fade. O conteúdo usa <code className="text-primary-text text-caption">motion.div</code> para o deslize do título.</> : <>2D canvas with a dot grid — each dot has a random <code className="text-primary-text text-caption">phase</code> on a sine wave, creating independent pulsing. <code className="text-primary-text text-caption">AnimatePresence</code> mounts/unmounts the canvas on hover with a fade. Content uses <code className="text-primary-text text-caption">motion.div</code> for the title slide.</>}
               </p>
             </div>
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
-              <div className="flex flex-wrap gap-1.5 mt-1.5">
+              <div className="flex flex-wrap gap-1 mt-1">
                 {[t("Feature cards", "Cards de funcionalidades"), t("Pricing cards", "Cards de preços"), t("Testimonials", "Depoimentos"), t("Product showcase", "Vitrine de produto")].map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-1 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -642,20 +643,20 @@ export function CanvasRevealCard() {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
+              <ul className="mt-1 space-y-1">
                 {[t("Feature cards or product differentiators.", "Cards de funcionalidades ou diferenciais do produto."), t("Exploration sections where the user has time.", "Seções de exploração em que o usuário tem tempo."), t("When you want to create a wow moment without distraction.", "Quando você quer criar um momento uau sem distração.")].map((w, i) => (
                   <li key={i} className="text-body-sm text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-1" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-caption font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
+              <p className="text-caption font-semibold uppercase tracking-[0.06em] text-error-text">✕ {t("Avoid when", "Evitar quando")}</p>
+              <ul className="mt-1 space-y-1">
                 {[t("Mobile — hover doesn't exist on touch.", "Mobile — hover não existe em telas touch."), t("Cards with a lot of internal information.", "Cards com muita informação interna."), t("Contexts with a reduced-motion preference.", "Contextos com preferência por movimento reduzido.")].map((w, i) => (
                   <li key={i} className="text-body-sm text-muted-foreground flex items-start gap-2">
-                    <span className="text-destructive shrink-0 mt-0.5 text-label">✕</span>{w}
+                    <span className="text-error-text shrink-0 mt-1 text-label">✕</span>{w}
                   </li>
                 ))}
               </ul>
@@ -1169,13 +1170,13 @@ function BigBangCard() {
       </div>
 
       {/* Controls */}
-      <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+      <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
             {BB_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1189,16 +1190,16 @@ function BigBangCard() {
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {BB_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
                   background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: paletteId === p.id ? "#D44D4D" : idle,
                 }}>
-                <span className="flex gap-0.5">
+                <span className="flex gap-1">
                   {p.swatches.slice(0, 2).map((hex, i) => (
                     <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} />
                   ))}
@@ -1215,13 +1216,13 @@ function BigBangCard() {
         <div className="flex items-start gap-3 justify-between">
           <div>
             <h3 className="text-body font-black text-foreground tracking-[-0.025em]">{ef.name}</h3>
-            <p className="text-body-sm text-muted-foreground mt-0.5 leading-relaxed">
+            <p className="text-body-sm text-muted-foreground mt-1 leading-relaxed">
               {t("Cyclic cosmic explosion: particles burst from the center with concentric shockwaves, light trails and a nebular glow. Conveys scale, power and impact.", "Explosão cósmica cíclica: partículas saem do centro com ondas de choque concêntricas, rastros de luz e um brilho nebular. Transmite escala, poder e impacto.")}
             </p>
           </div>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -1263,13 +1264,13 @@ function BgLinesCard() {
       </div>
 
       {/* Controls */}
-      <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+      <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
             {BGL_SPEEDS.map(s => (
               <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
                   background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1286,7 +1287,7 @@ function BgLinesCard() {
           <div className="flex gap-1">
             {BGL_DENSITIES.map(d => (
               <button key={d.id} onClick={() => setDensityId(d.id)}
-                className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${densityId === d.id ? "#D44D4D" : ctrl}`,
                   background: densityId === d.id ? "rgba(212,77,77,0.08)" : "transparent",
@@ -1300,16 +1301,16 @@ function BgLinesCard() {
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {BGL_PALETTES.map(p => (
               <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={{
                   border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
                   background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
                   color: paletteId === p.id ? "#D44D4D" : idle,
                 }}>
-                <span className="flex gap-0.5">
+                <span className="flex gap-1">
                   {p.swatches.map((hex, i) => (
                     <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} />
                   ))}
@@ -1326,13 +1327,13 @@ function BgLinesCard() {
         <div className="flex items-start gap-3 justify-between">
           <div>
             <h3 className="text-body font-black text-foreground tracking-[-0.025em]">{ef.name}</h3>
-            <p className="text-body-sm text-muted-foreground mt-0.5 leading-relaxed">
+            <p className="text-body-sm text-muted-foreground mt-1 leading-relaxed">
               {t("Horizontal streams and vertical drops with lit gradients, scanner beam and sparkles at intersections. Evokes data flow, pipelines and infrastructure.", "Fluxos horizontais e gotas verticais com gradientes luminosos, feixe de scanner e faíscas nas interseções. Evoca fluxo de dados, pipelines e infraestrutura.")}
             </p>
           </div>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
@@ -1505,11 +1506,11 @@ function EffectCard({ ef }: { ef: EffectDef }) {
         <div className="flex items-start gap-3 justify-between">
           <div>
             <h3 className="text-body font-black text-foreground tracking-[-0.025em]">{ef.name}</h3>
-            <p className="text-body-sm text-muted-foreground mt-0.5 leading-relaxed">{ef.description}</p>
+            <p className="text-body-sm text-muted-foreground mt-1 leading-relaxed">{ef.description}</p>
           </div>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {ef.tags.map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>
                 {bi(TAG_LABEL[tg])}
               </span>
@@ -1531,13 +1532,13 @@ function EffectCard({ ef }: { ef: EffectDef }) {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Implementation", "Implementação")}</p>
-              <p className="text-body-sm text-foreground/80 mt-0.5 leading-relaxed">{ef.technique}</p>
+              <p className="text-body-sm text-foreground/80 mt-1 leading-relaxed">{ef.technique}</p>
             </div>
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em] text-muted-foreground">{t("Compatible components", "Componentes compatíveis")}</p>
-              <div className="flex flex-wrap gap-1.5 mt-1.5">
+              <div className="flex flex-wrap gap-1 mt-1">
                 {ef.components.map(c => (
-                  <span key={c} className="px-2 py-0.5 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
+                  <span key={c} className="px-2 py-1 rounded-sm bg-muted text-label text-foreground/80">{c}</span>
                 ))}
               </div>
             </div>
@@ -1548,20 +1549,20 @@ function EffectCard({ ef }: { ef: EffectDef }) {
           <div className="space-y-3">
             <div>
               <p className="text-caption font-semibold uppercase tracking-[0.06em]" style={{ color: "#388459" }}>✓ {t("Use when", "Usar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
+              <ul className="mt-1 space-y-1">
                 {ef.useWhen.map((w, i) => (
                   <li key={i} className="text-body-sm text-muted-foreground flex items-start gap-2">
-                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5" style={{ color: "#388459" }} />{w}
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-1" style={{ color: "#388459" }} />{w}
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <p className="text-caption font-semibold uppercase tracking-[0.06em] text-destructive">✕ {t("Avoid when", "Evitar quando")}</p>
-              <ul className="mt-1.5 space-y-1">
+              <p className="text-caption font-semibold uppercase tracking-[0.06em] text-error-text">✕ {t("Avoid when", "Evitar quando")}</p>
+              <ul className="mt-1 space-y-1">
                 {ef.avoidWhen.map((w, i) => (
                   <li key={i} className="text-body-sm text-muted-foreground flex items-start gap-2">
-                    <span className="text-destructive shrink-0 mt-0.5 text-label">✕</span>{w}
+                    <span className="text-error-text shrink-0 mt-1 text-label">✕</span>{w}
                   </li>
                 ))}
               </ul>
@@ -1655,7 +1656,7 @@ function DoodleTextureCard() {
     [t("PNG light 1600 px", "PNG claro 1600 px"), doodleTextureFiles.pngClaro], [t("PNG dark 1600 px", "PNG escuro 1600 px"), doodleTextureFiles.pngEscuro],
   ];
   const Btn = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
-    <button onClick={onClick} className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+    <button onClick={onClick} className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
       style={{ border: `1.5px solid ${active ? "var(--primary)" : ctrl}`, background: active ? "var(--primary-muted)" : "transparent", color: active ? "var(--primary-text, var(--primary))" : idle }}>
       {children}
     </button>
@@ -1671,7 +1672,7 @@ function DoodleTextureCard() {
           </div>
         </div>
       </div>
-      <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+      <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Scale", "Escala")}</span>
           <div className="flex gap-1">{(["p", "m", "g"] as const).map(s => <Btn key={s} active={scale === s} onClick={() => setScale(s)}>{s.toUpperCase()}</Btn>)}</div>
@@ -1684,19 +1685,20 @@ function DoodleTextureCard() {
       <div className="border-t border-border px-5 py-4 space-y-4">
         <div className="flex items-start gap-3 justify-between">
           <h3 className="text-body font-black text-foreground tracking-[-0.025em]">{t("Doodle Texture", "Textura doodle")}</h3>
-          <div className="flex flex-wrap gap-1.5 justify-end shrink-0">
+          <div className="flex flex-wrap gap-1 justify-end shrink-0">
             {(["SVG"] as EffectTag[]).map(tg => (
-              <span key={tg} className="px-2 py-0.5 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
+              <span key={tg} className="px-2 py-1 rounded-sm text-caption font-bold uppercase tracking-wide whitespace-nowrap"
                 style={{ background: tagColors[tg].bg, color: tagColors[tg].color }}>{bi(TAG_LABEL[tg])}</span>
             ))}
           </div>
         </div>
         <p className="text-body-sm leading-relaxed text-muted-foreground max-w-3xl">{t("A seamless pattern of line icons from the studio's universe: research, innovation, UX, UI, people, journeys, sticky notes and design thinking. Sixty-six distinct drawings on an 800 px tile.", 'Padrão sem emenda de ícones de traço do universo do estúdio: pesquisa, inovação, UX, UI, pessoas, jornadas, post-its e design thinking. Sessenta e seis desenhos distintos em um ladrilho de 800 px.')} {t("Strokes are solid colors, never transparent: graphite-200 on the light theme and graphite-800 on the dark theme by default, as in the reference wallpaper. In React the drawing is applied as a mask, so the stroke can take any token.", "Os traços são cores sólidas, nunca transparentes: grafite-200 no tema claro e grafite-800 no escuro por padrão, como no papel de parede de referência. No React o desenho é aplicado como máscara, então o traço aceita qualquer token.")}</p>
-        <div className="flex flex-wrap gap-2">
+        {/* Grade de colunas iguais (2 no celular, 3 a partir de 768 px): nenhum botão sozinho com largura diferente. */}
+        <div className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-2 md:grid-cols-3">
           {downloads.map(([label, file]) => (
-            <a key={file} href={base + file} download className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-label font-semibold text-foreground transition-colors hover:border-primary hover:text-primary-text">
-              <Download className="h-3.5 w-3.5" aria-hidden /> {label}
-            </a>
+            <Button key={file} asChild variant="outline" size="sm" className="justify-start">
+              <a href={base + file} download><Download aria-hidden /> {label}</a>
+            </Button>
           ))}
         </div>
         <pre className="whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { DoodleTexture } from "@/app/components/ui/doodle-texture";
@@ -1709,7 +1711,7 @@ function DoodleTextureCard() {
 
 /* fora do React (CSS) */
 background: var(--background) url("/texturas/doodle-studio-claro.svg") 0 0 / 640px repeat;`}</code></pre>
-        <ul className="grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+        <ul className="grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
           <li>• {t("Use behind heroes, empty states, onboarding and waiting screens; never behind long text.", "Use atrás de heros, estados vazios, onboarding e telas de espera; nunca atrás de texto longo.")}</li>
           <li>• {t("Keep the default grays for a quiet background; the primary stroke is for small areas or brand moments.", "Mantenha os cinzas padrão para um fundo discreto; o traço primário é para áreas pequenas ou momentos de marca.")}</li>
           <li>• {t("The tile is seamless in both directions; keep the scale between 480 and 800 px so the icons read.", "O ladrilho não tem emenda nas duas direções; mantenha a escala entre 480 e 800 px para os ícones lerem.")}</li>
@@ -1740,7 +1742,7 @@ export function BackgroundsShowcase() {
         {/* Legend */}
         <div className="flex flex-wrap gap-2">
           {(Object.entries(tagColors) as [EffectTag, { bg: string; color: string }][]).map(([tag, style]) => (
-            <span key={tag} className="px-2.5 py-1 rounded-sm text-caption font-semibold"
+            <span key={tag} className="px-2 py-1 rounded-sm text-caption font-semibold"
               style={{ background: style.bg, color: style.color }}>
               {bi(TAG_LABEL[tag])}
             </span>
@@ -1788,7 +1790,7 @@ export function BackgroundsShowcase() {
       <section id="section-backgrounds" className="space-y-4">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Composition guide", "Guia de composição")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("How to combine the four effects on a landing page — with a palette suggestion for each section.", "Como combinar os quatro efeitos em uma landing page — com sugestão de paleta para cada seção.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("How to combine the four effects on a landing page — with a palette suggestion for each section.", "Como combinar os quatro efeitos em uma landing page — com sugestão de paleta para cada seção.")}</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {[
@@ -1832,7 +1834,7 @@ export function BackgroundsShowcase() {
               <div className="px-4 py-3 border-b border-border flex items-center justify-between">
                 <div>
                   <p className="text-body-sm font-bold text-foreground">{guide.title}</p>
-                  <p className="text-caption font-semibold uppercase tracking-[0.07em] mt-0.5"
+                  <p className="text-caption font-semibold uppercase tracking-[0.07em] mt-1"
                     style={{ color: guide.accent }}>{guide.mode}</p>
                 </div>
                 <div className="h-2.5 w-2.5 rounded-full" style={{ background: guide.accent }} />
@@ -1844,17 +1846,17 @@ export function BackgroundsShowcase() {
                   <div key={i} className="flex items-stretch">
                     {/* Color swatch strip — full height, labeled */}
                     <div className="w-1.5 shrink-0" style={{ background: s.accent, opacity: 0.7 }} />
-                    <div className="flex-1 px-3 py-2.5 flex items-start gap-3"
+                    <div className="flex-1 px-3 py-2 flex items-start gap-3"
                       style={{ background: `${s.band}12` }}>
                       {/* Section label badge */}
-                      <div className="pt-0.5 shrink-0">
-                        <span className="inline-block text-caption font-bold uppercase tracking-[0.08em] px-1.5 py-0.5 rounded-sm text-foreground/60 border border-border bg-muted/40"
+                      <div className="pt-1 shrink-0">
+                        <span className="inline-block text-caption font-bold uppercase tracking-[0.08em] px-1 py-1 rounded-sm text-foreground/60 border border-border bg-muted/40"
                           style={{ minWidth: 52, textAlign: "center" }}>{s.label}</span>
                       </div>
                       {/* Effect name + description */}
                       <div className="min-w-0">
                         <p className="text-caption font-semibold text-foreground leading-tight truncate">{s.effect}</p>
-                        <p className="text-caption text-muted-foreground leading-snug mt-0.5">{s.note}</p>
+                        <p className="text-caption text-muted-foreground leading-snug mt-1">{s.note}</p>
                       </div>
                     </div>
                   </div>
@@ -1868,7 +1870,7 @@ export function BackgroundsShowcase() {
         <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
           <div className="px-4 py-3 border-b border-border">
             <p className="text-body-sm font-bold text-foreground">{t("Palettes × Usage context", "Paletas × Contexto de uso")}</p>
-            <p className="text-caption text-muted-foreground mt-0.5">{t("Quick guide to which palette to use for each section type.", "Guia rápido de qual paleta usar em cada tipo de seção.")}</p>
+            <p className="text-caption text-muted-foreground mt-1">{t("Quick guide to which palette to use for each section type.", "Guia rápido de qual paleta usar em cada tipo de seção.")}</p>
           </div>
           {/* Card nunca rola para o lado: tabela a partir de 768 px; antes, um bloco por paleta. */}
           <div className="[&>div]:rounded-none [&>div]:border-0">
@@ -1897,7 +1899,7 @@ export function BackgroundsShowcase() {
       <section id="backgrounds-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Color tokens", "Tokens de cor")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">
+          <p className="text-body-sm text-muted-foreground mt-1">
             {t("Reference values for the system's four Canvas patterns. Big Bang and Background Lines use interchangeable palettes — the tokens below document the default palette (Crimson).", "Valores de referência para os quatro padrões Canvas do sistema. Big Bang e Background Lines usam paletas intercambiáveis — os tokens abaixo documentam a paleta padrão (Crimson).")}
           </p>
         </div>

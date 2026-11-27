@@ -47,11 +47,11 @@ function ConteudoDoMenu({ ativo, ir, t }: { ativo: Pagina; ir: (p: Pagina) => vo
           {item("contato", <Mail />, t("Contact", "Contato"), 3)}
           {item("reunioes", <CalendarCheck />, t("Meetings", "Reuniões"))}
         </GrupoDoMenu>
-        <GrupoDoMenu expansivel padraoAberto titulo={t("Partners", "Parceiros")} icone={<Users />} contador={2} rotuloContador={t("not seen", "não vistas")} className="mt-0.5">
+        <GrupoDoMenu expansivel padraoAberto titulo={t("Partners", "Parceiros")} icone={<Users />} contador={2} rotuloContador={t("not seen", "não vistas")} className="mt-1">
           {item("perfis", null, t("Profiles and applications", "Perfis e candidaturas"))}
           {item("comunicados", null, t("Announcements", "Comunicados"))}
         </GrupoDoMenu>
-        <GrupoDoMenu className="mt-0.5">
+        <GrupoDoMenu className="mt-1">
           {item("projetos", <ClipboardList />, t("Projects", "Projetos"))}
           {item("lancamento", <Rocket />, t("Launch", "Lançamento"))}
         </GrupoDoMenu>
@@ -134,14 +134,14 @@ function PaginaInicio({ t, bi, emDia }: { t: Tr; bi: (v: { en: string; pt: strin
                 titulo={m.nome}
                 descricao={m.detalhe}
                 fim={
-                  <span className="flex items-center gap-2 sm:flex-col sm:items-end sm:gap-1.5">
+                  <span className="flex items-center gap-2 sm:flex-col sm:items-end sm:gap-1">
                     <ChipDeEstado tom={m.tom}>{bi(m.estado)}</ChipDeEstado>
                     <span className="text-sm tabular-nums text-muted-foreground">{m.quando}</span>
                   </span>
                 }
                 className="px-5 sm:px-6"
               >
-                <span className="mt-0.5 block text-sm text-foreground">{bi(m.assunto)}</span>
+                <span className="mt-1 block text-sm text-foreground">{bi(m.assunto)}</span>
               </LinhaDeLista>
             </li>
           ))}
@@ -170,7 +170,7 @@ export function PainelTemplate({ emDia = false }: { emDia?: boolean }) {
           <Button variant="ghost" size="icon" onClick={() => setGaveta(true)} aria-label={t("Open menu", "Abrir menu")} aria-expanded={gaveta} className="size-11 @4xl/painel:hidden">
             <Menu aria-hidden className="size-5" />
           </Button>
-          <span className="flex min-w-0 items-center gap-2.5">
+          <span className="flex min-w-0 items-center gap-2">
             <img src={logoIconRed} alt="Dani Moscatelli" className="h-8 w-8 shrink-0 object-contain @md/painel:hidden" />
             <img src={logoIconRed} alt="" aria-hidden className="hidden h-8 w-8 shrink-0 object-contain @md/painel:block" />
             {/* Telas estreitas: só o símbolo (como no site do DS), para o nome nunca ser cortado */}
@@ -237,7 +237,7 @@ export function PecasDoPainel() {
         </p>
         <GradeDeCards className="gap-4 md:grid-cols-2">
           <Exemplo titulo={t("Menu items and states", "Itens do menu e estados")} descricao={t("Default, active (bg-primary/10 + --primary-text), with counter, and a group. Hover: --accent. Focus: ring.", "Padrão, ativo (bg-primary/10 + --primary-text), com contador e grupo. Hover: --accent. Foco: anel.")}>
-            <nav aria-label={t("Example menu", "Menu de exemplo")} className="max-w-[240px] space-y-0.5">
+            <nav aria-label={t("Example menu", "Menu de exemplo")} className="max-w-[240px] space-y-1">
               <ItemDoMenu href="#" icone={<House />} ativo onClick={e => e.preventDefault()}>{t("Home (active)", "Início (ativo)")}</ItemDoMenu>
               <ItemDoMenu href="#" icone={<Mail />} contador={3} rotuloContador={t("unread", "não lidas")} onClick={e => e.preventDefault()}>{t("Contact", "Contato")}</ItemDoMenu>
               <GrupoDoMenu expansivel padraoAberto titulo={t("Partners", "Parceiros")} icone={<Users />} contador={12} rotuloContador={t("not seen", "não vistas")}>
@@ -318,14 +318,19 @@ export function PecasDoPainel() {
             "Só três jeitos de mostrar um ícone, nunca misturados: base rosa + ícone vermelho (tom=\"marca\": foco, algo para agir, ativo), base cinza + ícone cinza (tom=\"neutro\": só identifica; padrão em grades de cards iguais; itens pausados ou só de registro), ou sem base (inline, ao lado do texto, sem este componente). Tamanhos sm 32 px, md 40 px (padrão), lg 48 px; redonda para linhas de lista.",
           )}
         </p>
-        <div className="flex flex-wrap items-center gap-4 rounded-xl border border-border bg-card p-5">
-          {(["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`m${tm}`} tom="marca" tamanho={tm}><Mail /></IconeComBase>)}
-          <span aria-hidden className="h-8 w-px bg-border" />
-          {(["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`n${tm}`} tom="neutro" tamanho={tm}><MailCheck /></IconeComBase>)}
-          <span aria-hidden className="h-8 w-px bg-border" />
-          <IconeComBase tom="marca" redonda><Mail /></IconeComBase>
-          <IconeComBase tom="neutro" redonda><CalendarCheck /></IconeComBase>
-        </div>
+        {/* Um grupo por linha (marca, neutro, redonda): sem divisor solto no fim de uma linha quebrada. */}
+        <dl className="divide-y divide-border rounded-xl border border-border bg-card">
+          {[
+            { rotulo: t("Brand", "Marca"), icones: (["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`m${tm}`} tom="marca" tamanho={tm}><Mail /></IconeComBase>) },
+            { rotulo: t("Neutral", "Neutro"), icones: (["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`n${tm}`} tom="neutro" tamanho={tm}><MailCheck /></IconeComBase>) },
+            { rotulo: t("Round (list rows)", "Redonda (linhas de lista)"), icones: [<IconeComBase key="rm" tom="marca" redonda><Mail /></IconeComBase>, <IconeComBase key="rn" tom="neutro" redonda><CalendarCheck /></IconeComBase>] },
+          ].map(g => (
+            <div key={g.rotulo} className="flex flex-wrap items-center gap-x-6 gap-y-3 px-5 py-4">
+              <dt className="w-40 text-body-sm font-semibold text-foreground">{g.rotulo}</dt>
+              <dd className="flex items-center gap-4">{g.icones}</dd>
+            </div>
+          ))}
+        </dl>
         <DoDont
           dos={[
             t("Pink base with red icon for what needs action; grey base with grey icon for what only identifies.", "Base rosa com ícone vermelho para o que pede ação; base cinza com ícone cinza para o que só identifica."),
@@ -400,7 +405,7 @@ export function PecasDoPainel() {
 
       <div className="space-y-3">
         <SubTitle>{t("Accessibility", "Acessibilidade")}</SubTitle>
-        <ul className="max-w-3xl list-disc space-y-1.5 pl-5 text-body leading-relaxed text-muted-foreground">
+        <ul className="max-w-3xl list-disc space-y-1 pl-5 text-body leading-relaxed text-muted-foreground">
           <li>{t("Menu: <nav> with a name; the current page has aria-current=\"page\"; the ≡ MENU button says the action (Collapse/Expand menu) with aria-expanded and aria-controls; collapsed items and groups keep their name for screen readers and show a tooltip on hover and keyboard focus.", "Menu: <nav> com nome; a página atual tem aria-current=\"page\"; o botão ≡ MENU diz a ação (Recolher/Expandir menu) com aria-expanded e aria-controls; itens e grupos recolhidos mantêm o nome para leitores de tela e mostram dica no hover e no foco do teclado.")}</li>
           <li>{t("Counters are read with their meaning (\"3 unread\"), never a bare number; the bell's name carries the count (\"Notifications, 7 unread\") and its visible number is aria-hidden.", "Contadores são lidos com o sentido (\"3 não lidas\"), nunca o número solto; o nome do sino leva a contagem (\"Notificações, 7 não lidas\") e o número visível é aria-hidden.")}</li>
           <li>{t("Targets: bell and account 44 px; menu items 36 px in the fixed menu (pointer) and 44 px in the drawer (touch).", "Alvos: sino e conta com 44 px; itens do menu com 36 px no menu fixo (mouse) e 44 px na gaveta (toque).")}</li>
@@ -408,7 +413,7 @@ export function PecasDoPainel() {
           <li>{t("Reduced motion: the menu width, the item fade and the arrow nudge do not animate.", "Menos movimento: a largura do menu, o esmaecimento dos itens e o deslize da seta não animam.")}</li>
         </ul>
         <p className="flex max-w-3xl items-start gap-2 text-body-sm text-muted-foreground">
-          <Info aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-primary-text" />
+          <Info aria-hidden className="mt-1 h-4 w-4 shrink-0 text-primary-text" />
           <span>{t("Brought from the FindLook Design System with this DS's colours. Not brought: SeletorDeLoja and CardDePlano (store-specific).", "Trazidas do FindLook Design System com as cores deste DS. Não trazidos: SeletorDeLoja e CardDePlano (próprios de loja).")} <Mono>painel-shell</Mono> <Mono>painel-cabecalho</Mono> <Mono>painel-dados</Mono></span>
         </p>
       </div>

@@ -123,7 +123,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
         <p className="max-w-2xl mb-6 text-body leading-relaxed text-muted-foreground">
           {t("Every addition, change and removal in the design system, newest first.", "Toda adição, mudança e remoção no design system, da mais recente para a mais antiga.")}
         </p>
-        <ol className="relative border-l border-border ml-1.5 space-y-3">
+        <ol className="relative border-l border-border ml-1 space-y-3">
           {changelog.map((e, i) => {
             const Tag = e.page ? "button" : "div";
             return (
@@ -138,14 +138,14 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
                     e.page ? "transition-all hover:border-[var(--border-strong)] hover:shadow-[var(--shadow-sm)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" : ""
                   }`}
                 >
-                  <span className={`shrink-0 self-start inline-flex items-center px-2 py-0.5 rounded-full border text-caption font-semibold uppercase tracking-[0.06em] sm:mt-0.5 ${kindStyle[e.kind]}`}>
+                  <span className={`shrink-0 self-start inline-flex items-center px-2 py-1 rounded-full border text-caption font-semibold uppercase tracking-[0.06em] sm:mt-1 ${kindStyle[e.kind]}`}>
                     {t(e.kind, kindPt[e.kind])}
                   </span>
                   <span className="flex-1 min-w-0">
-                    <span className={`${display} block text-body font-semibold tracking-[-0.01em] text-foreground mb-0.5`}>{bi(e.title)}</span>
+                    <span className={`${display} block text-body font-semibold tracking-[-0.01em] text-foreground mb-1`}>{bi(e.title)}</span>
                     <span className="block text-body-sm leading-relaxed text-muted-foreground">{bi(e.desc)}</span>
                   </span>
-                  <span className="shrink-0 text-label text-muted-foreground sm:mt-0.5">{fmtDate(e.date)}</span>
+                  <span className="shrink-0 text-label text-muted-foreground sm:mt-1">{fmtDate(e.date)}</span>
                 </Tag>
               </li>
             );
@@ -161,7 +161,7 @@ export function HomeShowcase({ onNavigate }: { onNavigate: Navigate }) {
         {explore.map(g => (
           <div key={g.label.en}>
             <p className="text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">{bi(g.label)}</p>
-            <CardGrid items={g.items} onGo={go} cols={g.items.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"} compact />
+            <CardGrid items={g.items} onGo={go} cols={g.items.length === 4 ? "lg:grid-cols-4" : g.items.length === 3 ? "md:grid-cols-3" : "lg:grid-cols-3"} compact />
           </div>
         ))}
       </section>

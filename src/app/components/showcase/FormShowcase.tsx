@@ -69,7 +69,7 @@ function InputField({
   leftIcon?: React.ReactNode; rightElement?: React.ReactNode; disabled?: boolean;
 }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       {label && <label className="text-body-sm font-medium text-foreground">{label}</label>}
       <div className="relative">
         {leftIcon && (
@@ -248,7 +248,7 @@ const [confirmacao, setConfirmacao] = useState("");
 
 // Campo único (troca de senha em etapas, por exemplo):
 <PasswordConfirm semConfirmacao … />`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("Requirements: 8+ characters, upper and lower case, a number, a special symbol. Override with the regras prop (id, label, test).", "Requisitos: 8 ou mais caracteres, maiúsculas e minúsculas, um número, um símbolo especial. Troque com a prop regras (id, label, test).")}</li>
               <li>• {t("Strength = requirements met (0–4): Weak, Fair, Good, Strong. Bars in the primary colour, label in text.", "Força = requisitos atendidos (0–4): Fraca, Razoável, Boa, Forte. Barras na cor primária, rótulo em texto.")}</li>
               <li>• {t("Show/hide: 36 px button inside the field, aria-pressed and \"Show/Hide password\" label; each field toggles on its own.", "Exibir/ocultar: botão de 36 px dentro do campo, aria-pressed e rótulo \"Mostrar/Ocultar senha\"; cada campo alterna sozinho.")}</li>
@@ -260,21 +260,21 @@ const [confirmacao, setConfirmacao] = useState("");
         <SubSection title="Textarea">
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <label className="text-body-sm font-medium text-foreground">{t("Message", "Mensagem")}</label>
                 <textarea
                   placeholder={t("Write your message here...", "Escreva sua mensagem aqui...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)]"
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <label className="text-body-sm font-medium text-foreground">{t("Notes", "Notas")}</label>
                 <textarea
                   placeholder={t("Add notes...", "Adicione notas...")}
                   rows={4}
-                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2.5 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
+                  className="w-full bg-card border border-border text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-body outline-none transition-all duration-150 resize-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] opacity-50 cursor-not-allowed"
                   disabled
                   style={{ boxShadow: "var(--shadow-xs)" }}
                 />
@@ -287,10 +287,10 @@ const [confirmacao, setConfirmacao] = useState("");
           <ShowcaseCard>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {[t("Default Select", "Select padrão"), t("With Label", "Com rótulo")].map((lbl, i) => (
-                <div key={i} className="flex flex-col gap-1.5">
+                <div key={i} className="flex flex-col gap-1">
                   <label className="text-body-sm font-medium text-foreground">{lbl}</label>
                   <div className="relative">
-                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-md px-3 py-2.5 text-body outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
+                    <select className="w-full appearance-none bg-card border border-border text-foreground rounded-md px-3 py-2 text-body outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 hover:border-[var(--border-strong)] pr-9 cursor-pointer transition-all duration-150" style={{ boxShadow: "var(--shadow-xs)" }}>
                       <option>{t("Select an option...", "Selecione uma opção...")}</option>
                       <option>{t("Option Alpha", "Opção Alfa")}</option>
                       <option>{t("Option Beta", "Opção Beta")}</option>
@@ -312,12 +312,12 @@ const [confirmacao, setConfirmacao] = useState("");
                 { id: "unchecked", label: t("Unchecked", "Desmarcado"), state: checkB, setter: setCheckB },
                 { id: "indeterminate", label: t("Indeterminate", "Indeterminado"), state: checkC, setter: setCheckC },
               ].map(({ id, label, state, setter }) => (
-                <label key={id} className="flex items-center gap-2.5 cursor-pointer select-none group">
+                <label key={id} className="flex items-center gap-2 cursor-pointer select-none group">
                   <Checkbox checked={state} onCheckedChange={setter} />
                   <span className="text-body text-foreground group-hover:text-foreground transition-colors">{label}</span>
                 </label>
               ))}
-              <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
+              <label className="flex items-center gap-2 cursor-not-allowed select-none opacity-40">
                 <Checkbox disabled />
                 <span className="text-body text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
@@ -329,12 +329,12 @@ const [confirmacao, setConfirmacao] = useState("");
           <ShowcaseCard>
             <RadioGroup value={radio} onValueChange={setRadio} className="flex flex-wrap gap-6">
               {["a", "b", "c"].map((val) => (
-                <label key={val} className="flex items-center gap-2.5 cursor-pointer select-none">
+                <label key={val} className="flex items-center gap-2 cursor-pointer select-none">
                   <RadioGroupItem value={val} />
                   <span className="text-body text-foreground">{t("Option", "Opção")} {val.toUpperCase()}</span>
                 </label>
               ))}
-              <label className="flex items-center gap-2.5 cursor-not-allowed select-none opacity-40">
+              <label className="flex items-center gap-2 cursor-not-allowed select-none opacity-40">
                 <RadioGroupItem value="d" disabled />
                 <span className="text-body text-foreground">{t("Disabled", "Desabilitado")}</span>
               </label>
@@ -391,7 +391,7 @@ const [confirmacao, setConfirmacao] = useState("");
     { value: "tanto-faz", label: "Tanto faz" },
   ]}
 />`}</code></pre>
-            <ul className="mt-4 grid gap-1.5 text-body-sm text-muted-foreground sm:grid-cols-2">
+            <ul className="mt-4 grid gap-1 text-body-sm text-muted-foreground sm:grid-cols-2">
               <li>• {t("Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.", "Props: options (value, label, icon, disabled), value, defaultValue, onValueChange, variant suave | solida, size sm | md | lg, fullWidth, aria-label.")}</li>
               <li>• {t("Keyboard: arrows move the selection, Tab enters and leaves the group. Minimum height 32 px (sm), 40 px (md) and 44 px (lg).", "Teclado: setas movem a seleção, Tab entra e sai do grupo. Altura mínima de 32 px (sm), 40 px (md) e 44 px (lg).")}</li>
               <li>• {t("The selection is never removed by tapping again: there is always one active option.", "A seleção nunca é removida ao tocar de novo: sempre há uma opção ativa.")}</li>
@@ -431,7 +431,7 @@ const [confirmacao, setConfirmacao] = useState("");
                   style={{ boxShadow: "var(--shadow-sm)" }}
                 />
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                  <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-sm bg-muted text-muted-foreground text-caption font-medium border border-border">⌘K</kbd>
+                  <kbd className="hidden sm:inline-flex items-center px-1 py-1 rounded-sm bg-muted text-muted-foreground text-caption font-medium border border-border">⌘K</kbd>
                 </div>
               </div>
             </div>
@@ -443,7 +443,7 @@ const [confirmacao, setConfirmacao] = useState("");
       <section id="buttons-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by buttons and form controls.", "CSS custom properties usadas por botões e controles de formulário.")}</p>
         </div>
         <TokenTable groups={formTokenGroups} />
       </section>

@@ -149,7 +149,7 @@ export function GridShowcase() {
             ["desktop", "Desktop", Monitor],
           ] as [Tela, string, React.ElementType][]).map(([id, rotulo, Icone]) => (
             <button key={id} type="button" aria-pressed={tela === id} onClick={() => setTela(id)}
-              className={cn("inline-flex h-8 items-center gap-1.5 rounded-sm px-2.5 text-label font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              className={cn("inline-flex h-8 items-center gap-1 rounded-sm px-2 text-label font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 tela === id ? "bg-card text-foreground shadow-[var(--shadow-xs)]" : "text-muted-foreground hover:text-foreground")}>
               <Icone aria-hidden className="h-3.5 w-3.5" />{rotulo}
             </button>
@@ -171,7 +171,7 @@ export function GridShowcase() {
             { nome: t("Wide", "Larga"), px: 1280, classe: ".ds-container-wide", uso: t("Panels, dashboards and wide tables.", "Painéis, dashboards e tabelas largas.") },
           ].map(l => (
             <div key={l.px}>
-              <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-2">
+              <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
                 <p className="text-body-sm font-semibold text-foreground">{l.nome} · {l.px} px <span className="font-mono text-label font-normal text-muted-foreground">{l.classe}</span></p>
                 <p className="text-body-sm text-muted-foreground">{l.uso}</p>
               </div>

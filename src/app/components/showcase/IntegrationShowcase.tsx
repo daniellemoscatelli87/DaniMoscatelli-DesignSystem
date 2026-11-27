@@ -10,7 +10,7 @@ function CopyBtn({ text }: { text: string }) {
     <button
       onClick={() => { navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1400); }}
       className="h-5 w-5 rounded-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors shrink-0">
-      {copied ? <Check className="h-3 w-3 text-success" /> : <Copy className="h-3 w-3" />}
+      {copied ? <Check className="h-3 w-3 text-success-text" /> : <Copy className="h-3 w-3" />}
     </button>
   );
 }
@@ -79,7 +79,7 @@ export function IntegrationShowcase() {
       <section className="space-y-4">
         <div>
           <p className="text-caption font-bold uppercase tracking-[0.1em] text-primary-text">{t("Concepts", "Conceitos")}</p>
-          <h1 className="text-display-m font-black text-foreground tracking-[-0.04em] leading-none mt-1">
+          <h1 className="text-display-md font-black text-foreground tracking-[-0.04em] leading-none mt-1">
             {t("Connecting to your project", "Conectando ao seu projeto")}
           </h1>
           <p className="text-body text-muted-foreground max-w-2xl leading-relaxed mt-2">
@@ -90,7 +90,7 @@ export function IntegrationShowcase() {
         {/* Two paths */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="rounded-lg border border-violet/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-sm bg-violet/10 flex items-center justify-center">
                 <Figma className="h-4 w-4 text-violet" />
               </div>
@@ -109,19 +109,19 @@ export function IntegrationShowcase() {
           </div>
 
           <div className="rounded-lg border border-info/30 bg-card p-5 space-y-3" style={{ boxShadow: "var(--shadow-xs)" }}>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-sm bg-info/10 flex items-center justify-center">
-                <Code2 className="h-4 w-4 text-info" />
+                <Code2 className="h-4 w-4 text-info-text" />
               </div>
               <div>
                 <p className="text-body-sm font-bold text-foreground">{t("Developer path", "Caminho do desenvolvedor")}</p>
-                <p className="text-caption font-semibold uppercase tracking-[0.07em] text-info">CSS + Tailwind v4</p>
+                <p className="text-caption font-semibold uppercase tracking-[0.07em] text-info-text">CSS + Tailwind v4</p>
               </div>
             </div>
             <p className="text-label text-muted-foreground leading-relaxed">
               {t("Copy the token files into the project, configure Tailwind to read the custom properties, and use semantic classes in all components.", "Copie os arquivos de tokens para o projeto, configure o Tailwind para ler as custom properties e use classes semânticas em todos os componentes.")}
             </p>
-            <div className="flex items-center gap-1 text-caption text-info font-semibold">
+            <div className="flex items-center gap-1 text-caption text-info-text font-semibold">
               <span>{t("View step by step", "Ver passo a passo")}</span>
               <ChevronRight className="h-3.5 w-3.5" />
             </div>
@@ -152,9 +152,9 @@ export function IntegrationShowcase() {
                 <p className="text-label text-muted-foreground leading-relaxed">
                   {t("The design system lives as a shared Figma file with the component and variable library enabled. Ask your Figma admin to add it to your team under ", "O design system vive em um arquivo Figma compartilhado, com a biblioteca de componentes e variáveis ativada. Peça ao admin do Figma para adicioná-lo ao seu time em ")}<strong className="text-foreground">{t("Team → Libraries", "Team → Libraries")}</strong>.
                 </p>
-                <div className="rounded-sm bg-muted/40 border border-border px-3 py-2.5 space-y-1">
+                <div className="rounded-sm bg-muted/40 border border-border px-3 py-2 space-y-1">
                   <p className="text-caption font-bold uppercase tracking-[0.07em] text-muted-foreground/60">{t("In Figma", "No Figma")}</p>
-                  <div className="flex flex-wrap gap-1.5 text-caption">
+                  <div className="flex flex-wrap gap-1 text-caption">
                     {[t("Main Menu", "Menu principal"), "Libraries", t("Design System — [Project Name]", "Design System — [Nome do Projeto]"), t("Enable", "Ativar")].map((s, i, arr) => (
                       <React.Fragment key={i}>
                         <span className="font-semibold text-foreground">{s}</span>
@@ -181,7 +181,7 @@ export function IntegrationShowcase() {
                     { name: "Primitives", desc: t("Full palette of raw colors. Do not use directly in components.", "Paleta completa de cores brutas. Não use diretamente nos componentes."), color: "bg-muted/50 border-border" },
                     { name: "Semantics", desc: t("Intent tokens: Primary, Background, Muted. Use these in components.", "Tokens de intenção: Primary, Background, Muted. Use estes nos componentes."), color: "bg-primary/5 border-primary/20" },
                   ].map(c => (
-                    <div key={c.name} className={`rounded-sm border p-2.5 space-y-1 ${c.color}`}>
+                    <div key={c.name} className={`rounded-sm border p-2 space-y-1 ${c.color}`}>
                       <p className="text-caption font-bold text-foreground">{c.name}</p>
                       <p className="text-caption text-muted-foreground leading-snug">{c.desc}</p>
                     </div>
@@ -200,7 +200,7 @@ export function IntegrationShowcase() {
                 <p className="text-label text-muted-foreground leading-relaxed">
                   {t("The Semantics collection has two modes. To switch in your file: select a frame or component, go to ", "A coleção Semantics tem dois modos. Para alternar no seu arquivo: selecione um frame ou componente, vá em ")}<strong className="text-foreground">Variables → Semantics</strong>{t(" and choose the desired mode. This switches all linked tokens at once — no need to adjust color by color.", " e escolha o modo desejado. Isso troca todos os tokens vinculados de uma vez — sem precisar ajustar cor por cor.")}
                 </p>
-                <div className="rounded-sm bg-muted/40 border border-border p-2.5 flex items-center gap-4 text-caption">
+                <div className="rounded-sm bg-muted/40 border border-border p-2 flex items-center gap-4 text-caption">
                   <div className="flex items-center gap-2">
                     <div className="h-5 w-5 rounded-md border border-border bg-card flex items-center justify-center">
                       <div className="h-2.5 w-2.5 rounded-full" style={{ background: "var(--graphite-50)" }} />
@@ -244,7 +244,7 @@ export function IntegrationShowcase() {
       <section className="space-y-5">
         <div className="flex items-center gap-3">
           <div className="h-8 w-8 rounded-sm bg-info/10 flex items-center justify-center shrink-0">
-            <Code2 className="h-4 w-4 text-info" />
+            <Code2 className="h-4 w-4 text-info-text" />
           </div>
           <div>
             <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("For the development team", "Para o time de desenvolvimento")}</h2>
@@ -261,7 +261,7 @@ export function IntegrationShowcase() {
               <div className="space-y-1">
                 <p className="text-body-sm font-bold text-foreground">{t("Install Tailwind v4 and dependencies", "Instale o Tailwind v4 e as dependências")}</p>
                 <p className="text-label text-muted-foreground leading-relaxed">
-                  {t("This design system uses Tailwind v4 with the new ", "Este design system usa o Tailwind v4 com o novo sistema ")}<code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">@theme inline</code>{t(" system. Make sure you are on the correct version.", ". Confirme que você está na versão correta.")}
+                  {t("This design system uses Tailwind v4 with the new ", "Este design system usa o Tailwind v4 com o novo sistema ")}<code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">@theme inline</code>{t(" system. Make sure you are on the correct version.", ". Confirme que você está na versão correta.")}
                 </p>
               </div>
             </div>
@@ -282,7 +282,7 @@ export function IntegrationShowcase() {
               <div className="space-y-1">
                 <p className="text-body-sm font-bold text-foreground">{t("Copy the token files", "Copie os arquivos de tokens")}</p>
                 <p className="text-label text-muted-foreground leading-relaxed">
-                  {t("Copy the three files below into your project's ", "Copie os três arquivos abaixo para a pasta ")}<code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">src/styles/</code>{t(" folder. They are the only files needed to get the whole token system working.", " do seu projeto. São os únicos arquivos necessários para todo o sistema de tokens funcionar.")}
+                  {t("Copy the three files below into your project's ", "Copie os três arquivos abaixo para a pasta ")}<code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">src/styles/</code>{t(" folder. They are the only files needed to get the whole token system working.", " do seu projeto. São os únicos arquivos necessários para todo o sistema de tokens funcionar.")}
                 </p>
               </div>
             </div>
@@ -290,13 +290,13 @@ export function IntegrationShowcase() {
               {[
                 { file: "theme.css",   desc: t("Primitives, semantics, dark mode — the source of truth for tokens", "Primitivos, semânticos, dark mode — a fonte da verdade dos tokens"), icon: FileCode, color: "text-violet" },
                 { file: "fonts.css",   desc: t("Google Fonts import (Plus Jakarta Sans, Space Grotesk, Fraunces)", "Import do Google Fonts (Plus Jakarta Sans, Space Grotesk, Fraunces)"), icon: FileCode, color: "text-warning" },
-                { file: "index.css",   desc: t("@import of the three files + @theme inline that exposes tokens to Tailwind", "@import dos três arquivos + @theme inline que expõe os tokens ao Tailwind"), icon: FileCode, color: "text-info" },
+                { file: "index.css",   desc: t("@import of the three files + @theme inline that exposes tokens to Tailwind", "@import dos três arquivos + @theme inline que expõe os tokens ao Tailwind"), icon: FileCode, color: "text-info-text" },
               ].map((f, i, arr) => (
                 <div key={f.file} className={`flex items-center gap-3 px-4 py-3 ${i < arr.length - 1 ? "border-b border-border" : ""}`}>
                   <f.icon className={`h-4 w-4 shrink-0 ${f.color}`} />
                   <div className="flex-1 min-w-0">
                     <code className="text-caption font-mono text-foreground">{f.file}</code>
-                    <p className="text-caption text-muted-foreground mt-0.5">{f.desc}</p>
+                    <p className="text-caption text-muted-foreground mt-1">{f.desc}</p>
                   </div>
                   <CopyBtn text={`src/styles/${f.file}`} />
                 </div>
@@ -311,7 +311,7 @@ export function IntegrationShowcase() {
               <div className="space-y-1">
                 <p className="text-body-sm font-bold text-foreground">{t("Configure the CSS entry point", "Configure o ponto de entrada do CSS")}</p>
                 <p className="text-label text-muted-foreground leading-relaxed">
-                  <code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">index.css</code> {t("imports the other files and exposes the tokens as Tailwind classes via", "importa os outros arquivos e expõe os tokens como classes do Tailwind via")} <code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">@theme inline</code>.
+                  <code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">index.css</code> {t("imports the other files and exposes the tokens as Tailwind classes via", "importa os outros arquivos e expõe os tokens como classes do Tailwind via")} <code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">@theme inline</code>.
                 </p>
               </div>
             </div>
@@ -356,7 +356,7 @@ export function IntegrationShowcase() {
               <div className="space-y-1">
                 <p className="text-body-sm font-bold text-foreground">{t("Enable dark mode via class", "Ative o dark mode via classe")}</p>
                 <p className="text-label text-muted-foreground leading-relaxed">
-                  {t("Dark mode is activated by adding the ", "O dark mode é ativado adicionando a classe ")}<code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">.dark</code>{t(" class to the ", " ao elemento ")}<code className="text-caption font-mono px-1 py-0.5 rounded-sm bg-muted/60 border border-border">{"<html>"}</code>{t(" element. All semantic tokens switch automatically.", ". Todos os tokens semânticos mudam automaticamente.")}
+                  {t("Dark mode is activated by adding the ", "O dark mode é ativado adicionando a classe ")}<code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">.dark</code>{t(" class to the ", " ao elemento ")}<code className="text-caption font-mono px-1 py-1 rounded-sm bg-muted/60 border border-border">{"<html>"}</code>{t(" element. All semantic tokens switch automatically.", ". Todos os tokens semânticos mudam automaticamente.")}
                 </p>
               </div>
             </div>
@@ -439,7 +439,7 @@ export function IntegrationShowcase() {
       <section className="space-y-4">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Recommended file structure", "Estrutura de arquivos recomendada")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("How to organize token files in a React project.", "Como organizar os arquivos de tokens em um projeto React.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("How to organize token files in a React project.", "Como organizar os arquivos de tokens em um projeto React.")}</p>
         </div>
 
         <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -451,7 +451,7 @@ export function IntegrationShowcase() {
             {[
               { indent: 0, name: "src/",            type: "dir" },
               { indent: 1, name: "styles/",          type: "dir" },
-              { indent: 2, name: "index.css",        type: "file", note: { en: "entry point — imports everything", pt: "ponto de entrada — importa tudo" }, color: "text-info" },
+              { indent: 2, name: "index.css",        type: "file", note: { en: "entry point — imports everything", pt: "ponto de entrada — importa tudo" }, color: "text-info-text" },
               { indent: 2, name: "theme.css",        type: "file", note: { en: "primitive + semantic tokens", pt: "tokens primitivos + semânticos" }, color: "text-violet" },
               { indent: 2, name: "fonts.css",        type: "file", note: { en: "font imports", pt: "imports de fontes" }, color: "text-warning-text" },
               { indent: 1, name: "app/",             type: "dir" },
@@ -482,7 +482,7 @@ export function IntegrationShowcase() {
       <section className="space-y-4">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Full flow: from token to component", "Fluxo completo: do token ao componente")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("How a design decision becomes code, step by step.", "Como uma decisão de design vira código, passo a passo.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("How a design decision becomes code, step by step.", "Como uma decisão de design vira código, passo a passo.")}</p>
         </div>
 
         <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-xs)" }}>
@@ -498,7 +498,7 @@ export function IntegrationShowcase() {
               },
               {
                 who: "Dev",
-                whoColor: "text-info",
+                whoColor: "text-info-text",
                 whoBg: "bg-info/10",
                 action: t("Declares the same mapping in CSS", "Declara o mesmo mapeamento no CSS"),
                 tool: "theme.css: --primary: var(--crimson-400)",
@@ -506,7 +506,7 @@ export function IntegrationShowcase() {
               },
               {
                 who: "Dev",
-                whoColor: "text-info",
+                whoColor: "text-info-text",
                 whoBg: "bg-info/10",
                 action: t("Exposes the token as a Tailwind class", "Expõe o token como classe do Tailwind"),
                 tool: "index.css @theme inline: --color-primary: var(--primary)",
@@ -514,7 +514,7 @@ export function IntegrationShowcase() {
               },
               {
                 who: "Dev",
-                whoColor: "text-info",
+                whoColor: "text-info-text",
                 whoBg: "bg-info/10",
                 action: t("Uses the class in the component", "Usa a classe no componente"),
                 tool: 'Button.tsx: className="bg-primary text-primary-foreground"',
@@ -529,15 +529,15 @@ export function IntegrationShowcase() {
                 output: t("The whole interface — design AND code — updates together", "A interface inteira — design E código — se atualiza junta"),
               },
             ].map((row, i) => (
-              <div key={i} className="px-5 py-3.5 flex items-start gap-4">
-                <span className={`text-caption font-black uppercase tracking-[0.07em] px-2 py-1 rounded-full shrink-0 mt-0.5 ${row.whoBg} ${row.whoColor}`}>
+              <div key={i} className="px-5 py-3 flex items-start gap-4">
+                <span className={`text-caption font-black uppercase tracking-[0.07em] px-2 py-1 rounded-full shrink-0 mt-1 ${row.whoBg} ${row.whoColor}`}>
                   {row.who}
                 </span>
-                <div className="flex-1 min-w-0 space-y-0.5">
+                <div className="flex-1 min-w-0 space-y-1">
                   <p className="text-label font-semibold text-foreground">{row.action}</p>
                   <code className="text-caption text-muted-foreground/70 block">{row.tool}</code>
                 </div>
-                <div className="hidden md:flex items-center gap-1.5 shrink-0 max-w-[200px]">
+                <div className="hidden md:flex items-center gap-1 shrink-0 max-w-[200px]">
                   <ArrowRight className="h-3 w-3 text-muted-foreground/30 shrink-0" />
                   <p className="text-caption text-muted-foreground/60 leading-snug">{row.output}</p>
                 </div>
@@ -552,13 +552,13 @@ export function IntegrationShowcase() {
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Integration checklist", "Checklist de integração")}</h2>
-            <p className="text-body-sm text-muted-foreground mt-0.5">{t("Everything that must be done for the design system to be correctly connected.", "Tudo o que precisa ser feito para o design system ficar conectado corretamente.")}</p>
+            <p className="text-body-sm text-muted-foreground mt-1">{t("Everything that must be done for the design system to be correctly connected.", "Tudo o que precisa ser feito para o design system ficar conectado corretamente.")}</p>
           </div>
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div className="flex items-center gap-1 flex-wrap">
             {(["all", "design", "dev", "both"] as const).map(f => (
               <button key={f}
                 onClick={() => setFilter(f)}
-                className={`text-caption font-bold uppercase tracking-[0.07em] px-2.5 py-1 rounded-full border transition-colors ${
+                className={`text-caption font-bold uppercase tracking-[0.07em] px-2 py-1 rounded-full border transition-colors ${
                   filter === f ? "bg-primary text-primary-foreground border-primary" : "bg-muted/40 text-muted-foreground border-border hover:bg-muted/70"
                 }`}>
                 {f === "all" ? t("All", "Todos") : f === "design" ? "Design" : f === "dev" ? "Dev" : t("Both", "Ambos")}
@@ -578,10 +578,10 @@ export function IntegrationShowcase() {
           </span>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           {visible.map(item => {
             const done = checked.has(item.id);
-            const teamColor = item.team === "design" ? "text-violet bg-violet/10" : item.team === "dev" ? "text-info bg-info/10" : "text-warning-text bg-warning/10";
+            const teamColor = item.team === "design" ? "text-violet bg-violet/10" : item.team === "dev" ? "text-info-text bg-info/10" : "text-warning-text bg-warning/10";
             const teamLabel = item.team === "design" ? "Design" : item.team === "dev" ? "Dev" : t("Both", "Ambos");
             return (
               <button key={item.id} onClick={() => toggle(item.id)}
@@ -590,12 +590,12 @@ export function IntegrationShowcase() {
                 }`}
                 style={{ boxShadow: "var(--shadow-xs)" }}>
                 {done
-                  ? <CheckCircle2 className="h-4 w-4 text-success shrink-0" />
+                  ? <CheckCircle2 className="h-4 w-4 text-success-text shrink-0" />
                   : <Circle className="h-4 w-4 text-muted-foreground/40 shrink-0" />}
                 <span className={`text-label font-medium flex-1 ${done ? "text-muted-foreground line-through" : "text-foreground"}`}>
                   {bi(item.label)}
                 </span>
-                <span className={`text-caption font-bold uppercase tracking-[0.07em] px-1.5 py-0.5 rounded-full shrink-0 ${teamColor}`}>
+                <span className={`text-caption font-bold uppercase tracking-[0.07em] px-1 py-1 rounded-full shrink-0 ${teamColor}`}>
                   {teamLabel}
                 </span>
               </button>
@@ -605,7 +605,7 @@ export function IntegrationShowcase() {
 
         {doneCount === visible.length && visible.length > 0 && (
           <div className="rounded-md border border-success/30 bg-success/8 px-5 py-4 flex items-center gap-3">
-            <CheckCircle2 className="h-5 w-5 text-success shrink-0" />
+            <CheckCircle2 className="h-5 w-5 text-success-text shrink-0" />
             <p className="text-body-sm font-bold text-foreground">
               {t("All done! The design system is correctly integrated into the project.", "Tudo pronto! O design system está integrado corretamente ao projeto.")}
             </p>

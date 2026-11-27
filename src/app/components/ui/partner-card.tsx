@@ -91,7 +91,7 @@ export function PartnerCard({
             )}
           </div>
         )}
-        <h3 className={cn("font-bold [text-wrap:balance]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
+        <h3 className={cn("font-bold [text-wrap:pretty]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
           {withHighlight(title, "text-primary-text")}
         </h3>
         {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : surface === "tint" ? "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]" : "text-muted-foreground")}>{description}</p>}

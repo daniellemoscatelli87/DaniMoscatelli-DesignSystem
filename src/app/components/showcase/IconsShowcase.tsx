@@ -57,9 +57,9 @@ const colorVariants = [
   { label: "Foreground",  cls: "text-foreground" },
   { label: "Muted",       cls: "text-muted-foreground" },
   { label: "Primary",     cls: "text-primary-text" },
-  { label: "Success",     cls: "text-success" },
+  { label: "Success",     cls: "text-success-text" },
   { label: "Warning",     cls: "text-warning-text" },
-  { label: "Info",        cls: "text-info" },
+  { label: "Info",        cls: "text-info-text" },
 ];
 
 
@@ -205,13 +205,13 @@ export function IconsShowcase() {
                   <Icon className="w-4 h-4" strokeWidth={1.75} />
                 </button>
               ))}
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-body-sm font-medium bg-success/10 text-success border border-success/20">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-sm text-body-sm font-medium bg-success/10 text-success-text border border-success/20">
                 <CheckCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Active", "Ativo")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-body-sm font-medium bg-primary/10 text-primary-text border border-primary/20">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-sm text-body-sm font-medium bg-primary/10 text-primary-text border border-primary/20">
                 <AlertCircle className="w-3.5 h-3.5" strokeWidth={2} /> {t("Alert", "Alerta")}
               </span>
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-body-sm font-medium bg-warning/10 text-warning-text border border-warning/20">
+              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-sm text-body-sm font-medium bg-warning/10 text-warning-text border border-warning/20">
                 <Clock className="w-3.5 h-3.5" strokeWidth={2} /> {t("Pending", "Pendente")}
               </span>
             </div>
@@ -295,7 +295,7 @@ export function IconsShowcase() {
       <section id="icons-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties for icon color, sizing, and context.", "Propriedades CSS customizadas para cor, tamanho e contexto dos ícones.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties for icon color, sizing, and context.", "Propriedades CSS customizadas para cor, tamanho e contexto dos ícones.")}</p>
         </div>
         <TokenTable groups={localizedTokenGroups} />
       </section>

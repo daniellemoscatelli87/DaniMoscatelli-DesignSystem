@@ -14,3 +14,21 @@
   - **Selecionado** `--primary-suave` #FCEEEE (o rosa do meio): item ativo do menu, chip, segmento e linha selecionados, plano escolhido. Selecionado com o mouse em cima continua neste rosa. Texto `--primary-text`: 5,5:1.
   - **Hover** cinza claro `--accent` #E8EDF3, nunca rosa (linhas de lista de ponta a ponta: `--row-hover`, cinza mais claro). Texto `--foreground` 14,8:1 ou `--muted-foreground` 4,7:1.
   - **Destaque** `--primary-muted` #FAE4E4: bases de ícone (IconeComBase marca), chips de estado, faixas de apoio. Nunca marca seleção. Texto `--primary-text`: 5,1:1.
+
+## Correções da auditoria de celular (27/11/2026)
+
+Regras aplicadas em todo o DS, nos componentes, nas demonstrações e nos templates:
+
+- **Alvos de toque.** No celular (abaixo de 640 px) e em qualquer tela usada com o dedo, todo botão, aba, campo e lista de opções tem pelo menos 44 × 44 px; com mouse no computador, botões e campos ficam com 40 px. No código: a variante `toque:` (`h-10 toque:h-11`, `size-10 toque:size-11`) e uma regra de segurança na camada base do `theme.css`. Caixa de seleção, rádio e interruptor guardam o desenho de 20 a 24 px num `span` interno; a área de toque cresce em volta com margem negativa (`toque:-m-3 toque:size-11`). Botões dentro de uma linha de texto (como o "i" de explicação) usam `data-alvo-compacto` e ganham a área de toque com uma margem invisível.
+- **Tamanho de texto só por token.** Classes `text-caption`, `text-label`, `text-body-sm`, `text-button`, `text-body`, `text-body-lg`, `text-subtitle`, `text-subtitle-lg`, `text-h4`, `text-h3`, `text-h2`, `text-h1`, `text-display-md`, `text-display-lg`, `text-display-xl` (mesmos nomes no FindLook). Nada de `text-[…]`. Fora da escala vai para o passo mais perto (13 → 14, 15 → 16, 10 → 11, 28 → 32). O `cn()` conhece esses nomes (não os confunde com cor).
+- **Raios só por token:** `rounded-sm` (8), `rounded-md` (12), `rounded-lg` (16), `rounded-xl` (24) e `rounded-full`. Os cards de vidro passaram de 20 para 16 px.
+- **Espaçamento no ritmo de 4/8 px:** nada de `*-0.5`, `*-1.5`, `*-2.5`, `*-3.5` nem `[Npx]` em padding, margem e espaço entre itens (2 → 4, 6 → 4, 10 → 8, 14 → 12). Margens negativas que compensam uma área de toque ficam.
+- **Títulos** quebram as linhas com `text-wrap: pretty`: nenhuma palavra sozinha na última linha e nenhuma primeira linha curta demais.
+- **Abas** nunca rolam para o lado: quebram de linha; no celular viram uma grade de colunas iguais.
+- **Paginação** fica numa linha só; no celular, "4 de 12" entre as setas.
+- **Tabelas dentro de card** nunca rolam para o lado: mostram as colunas que cabem, com aviso, ou viram lista abaixo de 768 px (`DataTable` da documentação faz isso sozinha). Blocos de código quebram a linha.
+- **Ação no cabeçalho de card** (`CardComCabecalho`): na linha do título, à direita; em card estreito, embaixo do texto, na mesma borda esquerda dele, nunca na borda do ícone.
+- **Botão e link lado a lado** (`PartnerCard`, `VejaEm`): na mesma linha quando cabem; quando não cabem, um grupo empilhado com os dois na largura toda. O link nunca fica sozinho embaixo do botão.
+- **Hover é cinza:** borda `--border-strong` e fundo `--accent`; rosa só para selecionado (`--primary-suave`).
+- **Templates antigos** (Dashboard, Configurações, Caixa de entrada) usam a casca do painel: menu lateral que vira gaveta abaixo de 56rem. A Landing se adapta pela própria largura: menu em folha inferior, números 2 × 2, um card por linha, um card por plano e formulário embaixo da lista de confiança.
+- **Textos de acessibilidade em português** nos componentes (Fechar, Anterior, Próxima, Mais páginas, Paginação, Trilha de navegação).

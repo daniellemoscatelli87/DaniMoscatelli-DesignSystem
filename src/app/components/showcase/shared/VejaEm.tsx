@@ -23,7 +23,7 @@ export function VejaEm({ secao, ancora, titulo, texto, rotuloBotao }: { secao: s
       <span aria-hidden className="col-start-1 row-start-1 flex size-9 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] sm:row-span-2 sm:self-start">
         <Layers className="h-4 w-4 text-[var(--primary-text,var(--primary))]" />
       </span>
-      <p className="col-start-2 row-start-1 min-w-0 text-body-sm font-semibold text-foreground [text-wrap:balance] sm:self-end">{titulo}</p>
+      <p className="col-start-2 row-start-1 min-w-0 text-body-sm font-semibold text-foreground [text-wrap:pretty] sm:self-end">{titulo}</p>
       <p className="col-span-2 col-start-1 row-start-2 min-w-0 text-body-sm leading-relaxed text-muted-foreground sm:col-span-1 sm:col-start-2 sm:self-start">{texto}</p>
       <Button
         type="button"

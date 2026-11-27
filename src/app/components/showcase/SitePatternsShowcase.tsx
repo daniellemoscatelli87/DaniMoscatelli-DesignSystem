@@ -31,10 +31,10 @@ const WHATS = linkWhatsApp("5541997485414", "Olá, Dani! Vim pelo site danimosca
 
 function Lista({ itens }: { itens: string[] }) {
   return (
-    <ul className="space-y-2.5">
+    <ul className="space-y-2">
       {itens.map(item => (
         <li key={item} className="flex gap-2 text-body-sm leading-relaxed text-muted-foreground">
-          <Check aria-hidden className="mt-0.5 h-4 w-4 shrink-0 text-success" /> {item}
+          <Check aria-hidden className="mt-1 h-4 w-4 shrink-0 text-success-text" /> {item}
         </li>
       ))}
     </ul>
@@ -69,7 +69,7 @@ function Codigo({ children }: { children: string }) {
 
 function Rotulo({ titulo, desc }: { titulo: string; desc: string }) {
   return (
-    <div className="mb-2.5">
+    <div className="mb-2">
       <p className="text-body-sm font-semibold text-foreground">{titulo}</p>
       <p className="text-body-sm leading-relaxed text-muted-foreground">{desc}</p>
     </div>
@@ -201,11 +201,9 @@ function SecaoFlutuantes() {
           "Fixos no canto inferior direito de todas as páginas do site: o botão do WhatsApp; na Home, o aviso “Tem um projeto?” apontando para ele; e, quando o rodapé aparece, o botão de voltar ao topo ao lado dele.",
         )}
       />
-      <div className="flex justify-end">
-        <Button type="button" variant="outline" size="sm" onClick={() => setChave(k => k + 1)}>
-          <RotateCcw aria-hidden /> {t("Show the notices again", "Mostrar os avisos de novo")}
-        </Button>
-      </div>
+      <Button type="button" variant="outline" size="sm" onClick={() => setChave(k => k + 1)}>
+        <RotateCcw aria-hidden /> {t("Show the notices again", "Mostrar os avisos de novo")}
+      </Button>
       <GradeDeCards className="gap-6 lg:grid-cols-2">
         <ItemDaGrade>
           <Rotulo titulo={t("Computer: notice above the button", "Computador: aviso acima do botão")} desc={t("From 1024 px, the notice floats above the WhatsApp button, with the arrow pointing down.", "A partir de 1024 px, o aviso flutua acima do botão do WhatsApp, com a seta para baixo.")} />
@@ -260,8 +258,8 @@ import { AvisoProjeto } from "@/app/components/ui/aviso-projeto";
 import { BotaoSubir } from "@/app/components/ui/botao-subir";
 
 <BotaoWhatsApp numero="5541997485414" mensagem="Olá, Dani! ..." />
-<AvisoProjeto href={linkWhatsApp("5541997485414")} />   {/* só na Home */}
-<BotaoSubir />                                          {/* aparece com o rodapé */}`}</Codigo>
+<AvisoProjeto href={linkWhatsApp("5541997485414")} /> {/* só na Home */}
+<BotaoSubir /> {/* aparece com o rodapé */}`}</Codigo>
     </section>
   );
 }
@@ -420,10 +418,10 @@ function SecaoEscopo() {
       <CurvaSecao posicao="base" cor="var(--background)" />
       <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SurgirAoRolar escalonar passo={80} duracao={1400} className="mx-auto mb-8 max-w-3xl text-center sm:mb-16">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-300">
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-crimson-300/60 bg-transparent px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-crimson-300">
             <span aria-hidden className="size-1.5 rounded-full bg-crimson-300" />{t("Scope of work", "Escopo de atuação")}
           </p>
-          <h3 id="escopo-demo-titulo" className="mb-4 text-h2 font-bold tracking-[-0.02em] text-graphite-50 sm:text-display-m">{t("Where we can work", "Onde podemos atuar")}</h3>
+          <h3 id="escopo-demo-titulo" className="mb-4 text-h2 font-bold tracking-[-0.02em] text-graphite-50 sm:text-display-md">{t("Where we can work", "Onde podemos atuar")}</h3>
           <p className="mb-3 text-base font-medium leading-snug text-crimson-300 sm:text-lg">{t("Different challenges. A systemic view of the experience.", "Diferentes desafios. Uma visão sistêmica da experiência.")}</p>
           <p className="mx-auto max-w-2xl text-sm leading-relaxed text-graphite-300 sm:text-base">
             {t(
@@ -468,7 +466,7 @@ function SecaoArtigos() {
       <SurgirAoRolar efeito="desfoque">
         <SeloSecao className="mb-3">{t("Insights & articles", "Insights & artigos")}</SeloSecao>
       </SurgirAoRolar>
-      <TituloQueSurge as="h3" destaque={destaque} className="mx-auto mb-3 max-w-3xl text-2xl font-bold leading-tight text-foreground sm:text-h2 md:text-display-m">{titulo}</TituloQueSurge>
+      <TituloQueSurge as="h3" destaque={destaque} className="mx-auto mb-3 max-w-3xl text-2xl font-bold leading-tight text-foreground sm:text-h2 md:text-display-md">{titulo}</TituloQueSurge>
       <SurgirAoRolar efeito="desfoque" atraso={200 + titulo.split(" ").length * 45}>
         <p className="mx-auto mb-12 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
           {t(

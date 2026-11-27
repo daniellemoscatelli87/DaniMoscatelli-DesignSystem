@@ -98,9 +98,9 @@ function SidePanelHeader({
   className?: string;
 }) {
   return (
-    <div data-slot="side-panel-header" className={cn("relative z-10 shrink-0 border-b border-border bg-card px-6 pb-3.5 pt-5 pr-14 sm:px-8 sm:pr-16", className)}>
+    <div data-slot="side-panel-header" className={cn("relative z-10 shrink-0 border-b border-border bg-card px-6 pb-3 pt-5 pr-14 sm:px-8 sm:pr-16", className)}>
       {eyebrow && (
-        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-0.5 text-caption font-bold uppercase tracking-[0.2em] text-primary-text">
+        <div className="mb-1 inline-flex items-center gap-2 rounded-full bg-[var(--primary-muted)] px-3 py-1 text-caption font-bold uppercase tracking-[0.2em] text-primary-text">
           <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-primary" />
           {eyebrow}
         </div>
@@ -134,7 +134,7 @@ function SidePanelFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="side-panel-footer"
-      className={cn("flex shrink-0 items-center justify-between gap-3 border-t border-border bg-muted/60 px-6 py-2.5 text-caption text-muted-foreground sm:px-8", className)}
+      className={cn("flex shrink-0 items-center justify-between gap-3 border-t border-border bg-muted/60 px-6 py-2 text-caption text-muted-foreground sm:px-8", className)}
       {...props}
     />
   );

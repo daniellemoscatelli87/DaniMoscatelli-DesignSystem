@@ -188,8 +188,8 @@ export function DataShowcase() {
                 <p className="text-body-sm text-muted-foreground">{t("Monthly revenue & user growth", "Receita mensal e crescimento de usuários")}</p>
               </div>
               <div className="flex items-center gap-4 text-label text-muted-foreground">
-                <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-1 inline-block" />{t("Revenue", "Receita")}</span>
-                <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-chart-6 inline-block" />{t("Users", "Usuários")}</span>
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-chart-1 inline-block" />{t("Revenue", "Receita")}</span>
+                <span className="flex items-center gap-1"><span className="h-2 w-2 rounded-full bg-chart-6 inline-block" />{t("Users", "Usuários")}</span>
               </div>
             </div>
             <ResponsiveContainer width="100%" height={220}>
@@ -377,7 +377,7 @@ export function DataShowcase() {
       <section id="data-tokens" className="space-y-5">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">Tokens</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by data display components.", "CSS custom properties usadas por componentes de exibição de dados.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by data display components.", "CSS custom properties usadas por componentes de exibição de dados.")}</p>
         </div>
         <TokenTable groups={dataTokenGroups} />
       </section>
@@ -439,7 +439,7 @@ export function CardsDeKpi() {
       {kpis.map((kpi) => {
         const Icon = kpi.icon;
         const TrendIcon = kpi.trend === "up" ? ArrowUpRight : ArrowDownRight;
-        const trendColor = kpi.trend === "up" ? "text-success" : "text-primary-text";
+        const trendColor = kpi.trend === "up" ? "text-success-text" : "text-primary-text";
         return (
           <div key={kpi.label} className="bg-card rounded-lg border border-border p-5 flex flex-col gap-4" style={{ boxShadow: "var(--shadow)" }}>
             <div className="flex items-start justify-between">

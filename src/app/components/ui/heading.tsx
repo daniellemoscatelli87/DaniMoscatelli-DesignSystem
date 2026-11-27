@@ -7,11 +7,12 @@ import { cn } from "./utils";
  * Padrão do hero do site do estúdio: Plus Jakarta Sans 700, tracking apertado, entrelinha 1,1 e a expressão-chave
  * na cor primária (`.destaque`). Escreva o destaque entre dois asteriscos:
  *   <Heading level={1}>Transforme a experiência das pessoas em **ativo estratégico** para o seu negócio.</Heading>
- * Regras: um destaque por título, de uma a três palavras, nunca o título inteiro.
+ * Regras: um destaque por título, de uma a três palavras, nunca o título inteiro. As linhas quebram com
+ * text-wrap: pretty (sem palavra sozinha na última linha e sem primeira linha curta demais, 27/11/2026).
  */
 
 const sizes = {
-  hero: "text-h2 sm:text-h1 lg:text-display-l leading-[1.1] tracking-[-0.03em] font-bold",
+  hero: "text-h2 sm:text-h1 lg:text-display-lg leading-[1.1] tracking-[-0.03em] font-bold",
   page: "text-h2 sm:text-h1 leading-none tracking-[-0.035em] font-bold",
   section: "text-h3 leading-tight tracking-[-0.02em] font-bold",
   card: "text-h4 leading-snug tracking-[-0.015em] font-bold",
@@ -39,7 +40,7 @@ export function Heading({ level = 2, size, tone = "primary", className, children
   return (
     <Tag
       data-slot="heading"
-      className={cn("text-foreground [text-wrap:balance]", sizes[sz], className)}
+      className={cn("text-foreground [text-wrap:pretty]", sizes[sz], className)}
       style={{ fontFamily: "var(--font-sans)" }}
       {...props}
     >

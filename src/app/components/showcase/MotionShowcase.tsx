@@ -27,7 +27,7 @@ function Section({ id, title, sub, children }: { id: string; title: string; sub:
 /* ── Token pill ── */
 function Token({ name, value }: { name: string; value: string }) {
   return (
-    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-0.5 rounded-md border border-border bg-card px-3.5 py-2.5" style={{ boxShadow: "var(--shadow-xs)" }}>
+    <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 rounded-md border border-border bg-card px-3 py-2" style={{ boxShadow: "var(--shadow-xs)" }}>
       <code className="whitespace-nowrap text-label font-mono text-primary-text">{name}</code>
       <span className="min-w-0 text-caption text-muted-foreground font-mono">{value}</span>
     </div>
@@ -161,8 +161,8 @@ function EnterPresets() {
               </motion.div>
             </div>
             <div className="text-center w-full">
-              <div className="text-label font-bold text-foreground [text-wrap:balance]">{t(preset.label, (preset as any).labelPt)}</div>
-              <div className="text-caption text-muted-foreground font-mono mt-0.5">{(preset as any).descPt ? t(preset.desc, (preset as any).descPt) : preset.desc}</div>
+              <div className="text-label font-bold text-foreground [text-wrap:pretty]">{t(preset.label, (preset as any).labelPt)}</div>
+              <div className="text-caption text-muted-foreground font-mono mt-1">{(preset as any).descPt ? t(preset.desc, (preset as any).descPt) : preset.desc}</div>
             </div>
             <ReplayBtn onClick={() => replay(i)} />
           </div>
@@ -201,7 +201,7 @@ function EasingReference() {
     <Section id="easing" title={t("Easing Reference", "Referência de easing")} sub={t("Visual comparison of cubic-bezier curves used across the design system.", "Comparação visual das curvas cubic-bezier usadas em todo o design system.")}>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         {easings.map((e, i) => (
-          <div key={e.label} className="rounded-lg border border-border bg-card p-4 space-y-3 cursor-pointer hover:border-primary/30 transition-colors group" style={{ boxShadow: "var(--shadow-xs)" }} onClick={() => run(i)}>
+          <div key={e.label} className="rounded-lg border border-border bg-card p-4 space-y-3 cursor-pointer hover:border-[var(--border-strong)] transition-colors group" style={{ boxShadow: "var(--shadow-xs)" }} onClick={() => run(i)}>
             {/* Curve SVG */}
             <div className="flex items-center justify-center">
               <svg width="80" height="80" viewBox="0 0 80 80" className="overflow-visible">
@@ -225,7 +225,7 @@ function EasingReference() {
             </div>
             <div className="text-center">
               <div className="text-label font-bold text-foreground group-hover:text-primary-text transition-colors">{t(e.label, e.labelPt)}</div>
-              <div className="text-caption font-mono text-muted-foreground mt-0.5">
+              <div className="text-caption font-mono text-muted-foreground mt-1">
                 {typeof e.value === "string" ? e.value : `[${e.value.join(", ")}]`}
               </div>
             </div>
@@ -241,11 +241,11 @@ function EasingReference() {
    SECTION 3 — Spring Physics
 ══════════════════════════════════════ */
 const springPresets = [
-  { label: "Gentle", labelPt: "Suave",   stiffness: 120,  damping: 14,  mass: 1,   color: "bg-info/15 border-info/25 text-info" },
+  { label: "Gentle", labelPt: "Suave",   stiffness: 120,  damping: 14,  mass: 1,   color: "bg-info/15 border-info/25 text-info-text" },
   { label: "Default", labelPt: "Padrão",  stiffness: 260,  damping: 20,  mass: 1,   color: "bg-primary/15 border-primary/25 text-primary-text" },
   { label: "Snappy", labelPt: "Ágil",   stiffness: 400,  damping: 25,  mass: 1,   color: "bg-warning/15 border-warning/25 text-warning-text" },
-  { label: "Bouncy", labelPt: "Elástica",   stiffness: 600,  damping: 8,   mass: 1,   color: "bg-success/15 border-success/25 text-success" },
-  { label: "Stiff", labelPt: "Rígida",    stiffness: 900,  damping: 40,  mass: 1,   color: "bg-destructive/15 border-destructive/25 text-destructive" },
+  { label: "Bouncy", labelPt: "Elástica",   stiffness: 600,  damping: 8,   mass: 1,   color: "bg-success/15 border-success/25 text-success-text" },
+  { label: "Stiff", labelPt: "Rígida",    stiffness: 900,  damping: 40,  mass: 1,   color: "bg-destructive/15 border-destructive/25 text-error-text" },
   { label: "Wobbly", labelPt: "Oscilante",   stiffness: 180,  damping: 6,   mass: 1.2, color: "bg-chart-4/15 border-chart-4/25 text-chart-4" },
 ];
 
@@ -265,15 +265,13 @@ function SpringPhysics() {
 
   return (
     <Section id="spring" title={t("Spring Physics", "Física de spring")} sub={t("Physics-based animation presets. Click a card to see the spring in action.", "Presets de animação baseados em física. Clique em um card para ver o spring em ação.")}>
-      <div className="flex justify-end">
-        <button onClick={triggerAll} className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-card text-label font-medium text-foreground hover:bg-accent transition-colors">
-          <Play className="h-3.5 w-3.5" /> {t("Play all", "Tocar todos")}
-        </button>
-      </div>
+      <Button variant="outline" size="sm" onClick={triggerAll}>
+        <Play aria-hidden /> {t("Play all", "Tocar todos")}
+      </Button>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {springPresets.map((p, i) => (
           <div key={p.label} onClick={() => trigger(i)}
-            className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4 cursor-pointer hover:border-primary/30 transition-all group" style={{ boxShadow: "var(--shadow-xs)" }}>
+            className="rounded-lg border border-border bg-card p-5 flex flex-col gap-4 cursor-pointer hover:border-[var(--border-strong)] transition-all group" style={{ boxShadow: "var(--shadow-xs)" }}>
             {/* Ball track */}
             <div className="relative h-10 bg-muted/40 rounded-full overflow-hidden border border-border">
               <motion.div
@@ -321,7 +319,7 @@ function SpringPlayground() {
           <div className="text-body-sm font-bold text-foreground">{t("Spring Playground", "Playground de spring")}</div>
           <div className="text-caption text-muted-foreground">{t("Tune stiffness, damping, and mass live.", "Ajuste rigidez, amortecimento e massa em tempo real.")}</div>
         </div>
-        <button onClick={run} className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-primary text-primary-foreground text-label font-semibold hover:opacity-90 transition-opacity">
+        <button onClick={run} className="flex items-center gap-1 px-3 py-1 rounded-sm bg-primary text-primary-foreground text-label font-semibold hover:opacity-90 transition-opacity">
           <Play className="h-3.5 w-3.5" /> {t("Play", "Tocar")}
         </button>
       </div>
@@ -332,14 +330,14 @@ function SpringPlayground() {
           { label: "Damping", labelPt: "Amortecimento", min: 0,  max: 60,   step: 1,  value: damping,   set: setDamping   },
           { label: "Mass", labelPt: "Massa", min: 0.1,max: 5,    step: 0.1,value: mass,      set: setMass      },
         ].map(ctrl => (
-          <div key={ctrl.label} className="space-y-1.5">
+          <div key={ctrl.label} className="space-y-1">
             <div className="flex items-center justify-between">
               <label className="text-caption font-semibold text-foreground">{t(ctrl.label, ctrl.labelPt)}</label>
               <span className="text-caption font-mono text-primary-text">{ctrl.value}</span>
             </div>
             <input type="range" min={ctrl.min} max={ctrl.max} step={ctrl.step} value={ctrl.value}
               onChange={e => ctrl.set(Number(e.target.value))}
-              className="w-full accent-[var(--primary)] h-1 rounded-full cursor-pointer" />
+              className="w-full accent-[var(--primary)] h-1 rounded-full cursor-pointer toque:h-11" />
           </div>
         ))}
       </div>
@@ -410,11 +408,11 @@ function StaggerSection() {
             <label className="text-caption font-semibold text-foreground">{t("Stagger delay", "Atraso do stagger")}</label>
             <input type="range" min={0.02} max={0.2} step={0.01} value={staggerDelay}
               onChange={e => setStaggerDelay(Number(e.target.value))}
-              className="w-28 accent-[var(--primary)] h-1 rounded-full cursor-pointer" />
+              className="w-28 accent-[var(--primary)] h-1 rounded-full cursor-pointer toque:h-11" />
             <span className="text-caption font-mono text-primary-text">{staggerDelay}s</span>
           </div>
           <button onClick={() => setKey(k => k + 1)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm border border-border bg-muted text-label font-medium text-foreground hover:bg-accent transition-colors">
+            className="flex items-center gap-1 px-3 py-1 rounded-sm border border-border bg-muted text-label font-medium text-foreground hover:bg-accent transition-colors">
             <RefreshCw className="h-3.5 w-3.5" /> {t("Replay", "Repetir")}
           </button>
         </div>
@@ -422,7 +420,7 @@ function StaggerSection() {
         <motion.div key={key} variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-2">
           {staggerItems.map((item, i) => (
             <motion.div key={item} variants={staggerChild}
-              className="flex items-center gap-2.5 rounded-md border border-border bg-muted/30 px-3 py-2.5 hover:bg-accent transition-colors">
+              className="flex items-center gap-2 rounded-md border border-border bg-muted/30 px-3 py-2 hover:bg-accent transition-colors">
               <div className="h-6 w-6 rounded-sm bg-primary/12 flex items-center justify-center shrink-0">
                 <span className="text-caption font-black text-primary-text">{String(i + 1).padStart(2, "0")}</span>
               </div>
@@ -530,7 +528,7 @@ function HoverSection() {
               <motion.div className="absolute inset-0 rounded-lg" style={{ background: sheenBg }} />
               {/* Floating content layer (raised via translateZ) */}
               <div
-                className="absolute inset-0 flex flex-col items-center justify-center gap-1.5"
+                className="absolute inset-0 flex flex-col items-center justify-center gap-1"
                 style={{ transform: "translateZ(20px)" }}
               >
                 <Move className="text-primary-text" style={{ height: 20, width: 20 }} />
@@ -549,7 +547,7 @@ function HoverSection() {
               initial={{ backgroundSize: "0% 2px" }}
               whileHover={{ backgroundSize: "100% 2px" }}
               transition={{ duration: 0.3 }}
-              className="px-3 py-1.5 text-label font-semibold text-foreground cursor-pointer"
+              className="px-3 py-1 text-label font-semibold text-foreground cursor-pointer"
               style={{ backgroundImage: "linear-gradient(var(--primary), var(--primary))", backgroundRepeat: "no-repeat", backgroundPosition: "bottom left" }}
             >
               {t("Hover me", "Passe o mouse")}
@@ -663,7 +661,7 @@ function MicroInteractions() {
               animate={{ scale: liked ? [1, 1.4, 1] : 1 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Heart className={`h-8 w-8 transition-colors duration-200 ${liked ? "fill-destructive text-destructive" : "text-muted-foreground"}`} />
+              <Heart className={`h-8 w-8 transition-colors duration-200 ${liked ? "fill-destructive text-error-text" : "text-muted-foreground"}`} />
             </motion.div>
             <AnimatePresence>
               {liked && (
@@ -997,16 +995,16 @@ function StepIndicator() {
           </span>
         ))}
       </div>
-      <div className="flex gap-1.5 justify-center mt-1">
+      <div className="flex gap-1 justify-center mt-1">
         {step > 1 && (
           <button onClick={() => setStep(s => s - 1)}
-            className="px-2.5 py-1 rounded-sm border border-border bg-muted text-caption font-medium text-foreground hover:bg-accent transition-colors">
+            className="px-2 py-1 rounded-sm border border-border bg-muted text-caption font-medium text-foreground hover:bg-accent transition-colors">
             {t("Back", "Voltar")}
           </button>
         )}
         {step < steps.length && (
           <button onClick={() => setStep(s => s + 1)}
-            className="px-2.5 py-1 rounded-sm bg-primary text-primary-foreground text-caption font-semibold hover:opacity-90 transition-opacity">
+            className="px-2 py-1 rounded-sm bg-primary text-primary-foreground text-caption font-semibold hover:opacity-90 transition-opacity">
             {t("Next", "Próximo")}
           </button>
         )}
@@ -1035,10 +1033,10 @@ function LayoutTransitions() {
         <div className="rounded-lg border border-border bg-card p-5 space-y-4" style={{ boxShadow: "var(--shadow-sm)" }}>
           <div className="flex items-center justify-between">
             <div className="text-label font-bold text-foreground">{t("Grid ↔ List", "Grade ↔ Lista")}</div>
-            <div className="flex gap-1 p-0.5 bg-muted rounded-sm">
+            <div className="flex gap-1 p-1 bg-muted rounded-sm">
               {(["grid", "list"] as const).map(v => (
                 <button key={v} onClick={() => setView(v)}
-                  className={`relative px-2.5 py-1 rounded-sm text-caption font-semibold transition-colors ${view === v ? "text-foreground" : "text-muted-foreground"}`}>
+                  className={`relative px-2 py-1 rounded-sm text-caption font-semibold transition-colors ${view === v ? "text-foreground" : "text-muted-foreground"}`}>
                   {view === v && (
                     <motion.div layoutId="view-pill" className="absolute inset-0 bg-card rounded-sm" style={{ boxShadow: "var(--shadow-xs)" }} />
                   )}
@@ -1050,7 +1048,7 @@ function LayoutTransitions() {
           <motion.div layout className={`gap-2 ${view === "grid" ? "grid grid-cols-3" : "flex flex-col"}`}>
             {items.map((item, idx) => (
               <motion.div key={item} layout
-                className={`bg-muted/40 border border-border rounded-sm flex items-center gap-2 ${view === "grid" ? "flex-col p-2.5 text-center" : "px-3 py-2"}`}>
+                className={`bg-muted/40 border border-border rounded-sm flex items-center gap-2 ${view === "grid" ? "flex-col p-2 text-center" : "px-3 py-2"}`}>
                 <div className="h-5 w-5 rounded-sm bg-primary/15 shrink-0" />
                 <span className="text-caption font-medium text-foreground">{t(item, itemsPt[idx])}</span>
               </motion.div>
@@ -1211,7 +1209,7 @@ function MarqueeSection() {
   const featureCards = marqueeFeatures.map((f, i) => {
     const Icon = f.icon;
     return (
-      <div key={i} className="flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
+      <div key={i} className="flex items-center gap-2 px-3 py-2 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)" }}>
         <div className="h-7 w-7 rounded-sm bg-primary/10 flex items-center justify-center shrink-0">
           <Icon className="h-3.5 w-3.5 text-primary-text" />
         </div>
@@ -1224,12 +1222,12 @@ function MarqueeSection() {
   });
 
   const reviewCards = marqueeReviews.map((r, i) => (
-    <div key={i} className="flex flex-col gap-1.5 px-4 py-3 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)", width: 220 }}>
-      <div className="flex gap-0.5">
+    <div key={i} className="flex flex-col gap-1 px-4 py-3 rounded-md border border-border bg-card" style={{ boxShadow: "var(--shadow-xs)", width: 220 }}>
+      <div className="flex gap-1">
         {Array.from({ length: r.stars }).map((_, j) => <Star key={j} className="h-2.5 w-2.5 fill-warning text-warning" />)}
       </div>
       <p className="text-caption text-foreground italic leading-snug">"{t(r.quote, r.quotePt)}"</p>
-      <div className="flex items-center gap-1.5 mt-0.5">
+      <div className="flex items-center gap-1 mt-1">
         <div className="h-5 w-5 rounded-full bg-primary/12 flex items-center justify-center shrink-0">
           <span className="text-caption font-black text-primary-text">{r.name.split(" ").map(w => w[0]).join("")}</span>
         </div>
@@ -1282,11 +1280,11 @@ type NotifItem = {
 
 const notifPool: Omit<NotifItem, "id">[] = [
   { icon: Star,       iconCls: "bg-warning/12 text-warning-text",     title: "New review",     desc: "Ana Souza gave the project 5 stars.", titlePt: "Nova avaliação", descPt: "Ana Souza deu 5 estrelas ao projeto.",    time: "now",  action: "View", actionPt: "Ver"      },
-  { icon: Check,      iconCls: "bg-success/12 text-success",     title: "Deploy complete",   desc: "v2.4.1 in production with no errors.", titlePt: "Deploy concluído", descPt: "v2.4.1 em produção sem erros.",         time: "2s"                        },
+  { icon: Check,      iconCls: "bg-success/12 text-success-text",     title: "Deploy complete",   desc: "v2.4.1 in production with no errors.", titlePt: "Deploy concluído", descPt: "v2.4.1 em produção sem erros.",         time: "2s"                        },
   { icon: Bell,       iconCls: "bg-primary/12 text-primary-text",     title: "Payment received", desc: "$1,290 from Company X confirmed.", titlePt: "Pagamento recebido", descPt: "US$ 1.290 da Empresa X confirmados.",           time: "5s",     action: "View", actionPt: "Ver"      },
-  { icon: ArrowRight, iconCls: "bg-info/12 text-info",           title: "New user",       desc: "Pedro Lima joined the Pro plan.", titlePt: "Novo usuário", descPt: "Pedro Lima entrou no plano Pro.",             time: "8s"                        },
+  { icon: ArrowRight, iconCls: "bg-info/12 text-info-text",           title: "New user",       desc: "Pedro Lima joined the Pro plan.", titlePt: "Novo usuário", descPt: "Pedro Lima entrou no plano Pro.",             time: "8s"                        },
   { icon: Activity,   iconCls: "bg-chart-4/12 text-chart-4",     title: "Goal reached",      desc: "100 conversions today — monthly record!", titlePt: "Meta atingida", descPt: "100 conversões hoje — recorde do mês!",       time: "12s",    action: "Celebrate", actionPt: "Comemorar" },
-  { icon: Zap,        iconCls: "bg-destructive/12 text-destructive", title: "Usage alert",  desc: "API rate limit at 80% — check now.", titlePt: "Alerta de uso", descPt: "Limite de requisições da API em 80% — confira agora.",   time: "16s"                       },
+  { icon: Zap,        iconCls: "bg-destructive/12 text-error-text", title: "Usage alert",  desc: "API rate limit at 80% — check now.", titlePt: "Alerta de uso", descPt: "Limite de requisições da API em 80% — confira agora.",   time: "16s"                       },
   { icon: Layers,     iconCls: "bg-primary/12 text-primary-text",     title: "Integration active",   desc: "Slack connected successfully.", titlePt: "Integração ativa", descPt: "Slack conectado com sucesso.",                time: "20s"                       },
   { icon: Sparkles,   iconCls: "bg-warning/12 text-warning-text",     title: "Report ready",   desc: "Q4 analysis available for download.", titlePt: "Relatório pronto", descPt: "Análise do T4 disponível para download.",     time: "25s",    action: "Download", actionPt: "Baixar"   },
 ];
@@ -1327,11 +1325,11 @@ function AnimatedListSection() {
             </div>
             <button
               onClick={() => setPaused(p => !p)}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm border border-border bg-muted text-caption font-semibold text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1 px-2 py-1 rounded-sm border border-border bg-muted text-caption font-semibold text-muted-foreground hover:text-foreground transition-colors"
             >
               {paused
                 ? <><Play className="h-2.5 w-2.5" /> {t("Resume", "Retomar")}</>
-                : <><span className="flex gap-0.5 items-center"><span className="block h-2.5 w-0.5 bg-current rounded-full"/><span className="block h-2.5 w-0.5 bg-current rounded-full"/></span> {t("Pause", "Pausar")}</>
+                : <><span className="flex gap-1 items-center"><span className="block h-2.5 w-0.5 bg-current rounded-full"/><span className="block h-2.5 w-0.5 bg-current rounded-full"/></span> {t("Pause", "Pausar")}</>
               }
             </button>
           </div>
@@ -1349,7 +1347,7 @@ function AnimatedListSection() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, x: 60, scale: 0.9, transition: { duration: 0.2 } }}
                     transition={{ type: "spring", stiffness: 340, damping: 28 }}
-                    className="flex items-center gap-2.5 rounded-md border border-border bg-background/60 px-3 py-2.5 mb-2 last:mb-0"
+                    className="flex items-center gap-2 rounded-md border border-border bg-background/60 px-3 py-2 mb-2 last:mb-0"
                     style={{ boxShadow: "var(--shadow-xs)" }}
                   >
                     <div className={`h-8 w-8 rounded-sm flex items-center justify-center shrink-0 ${item.iconCls}`}>
@@ -1360,7 +1358,7 @@ function AnimatedListSection() {
                         <span className="text-label font-bold text-foreground">{t(item.title, item.titlePt)}</span>
                         <span className="text-caption text-muted-foreground shrink-0 font-mono">{item.time === "now" ? t("now", "agora") : item.time}</span>
                       </div>
-                      <p className="text-caption text-muted-foreground mt-0.5 truncate">{t(item.desc, item.descPt)}</p>
+                      <p className="text-caption text-muted-foreground mt-1 truncate">{t(item.desc, item.descPt)}</p>
                     </div>
                     {item.action && (
                       <button className="shrink-0 px-2 py-1 rounded-sm bg-primary/10 text-caption font-bold text-primary-text hover:bg-primary/20 transition-colors whitespace-nowrap">
@@ -1410,15 +1408,15 @@ const orbitRings: OrbitRingDef[] = [
   {
     radius: 108, duration: 14,
     icons: [
-      { icon: Check,    bg: "bg-success/15", border: "border-success/40", color: "text-success", angleOffset: 0,   size: 36 },
+      { icon: Check,    bg: "bg-success/15", border: "border-success/40", color: "text-success-text", angleOffset: 0,   size: 36 },
       { icon: Sparkles, bg: "bg-violet/15",  border: "border-violet/40",  color: "text-violet",  angleOffset: 120, size: 36 },
-      { icon: Layers,   bg: "bg-info/15",    border: "border-info/40",    color: "text-info",    angleOffset: 240, size: 36 },
+      { icon: Layers,   bg: "bg-info/15",    border: "border-info/40",    color: "text-info-text",    angleOffset: 240, size: 36 },
     ],
   },
   {
     radius: 152, duration: 20,
     icons: [
-      { icon: Activity, bg: "bg-destructive/15", border: "border-destructive/40", color: "text-destructive", angleOffset: 0,   size: 40 },
+      { icon: Activity, bg: "bg-destructive/15", border: "border-destructive/40", color: "text-error-text", angleOffset: 0,   size: 40 },
       { icon: Clock,    bg: "bg-orange/15",      border: "border-orange/40",      color: "text-orange",      angleOffset: 180, size: 40 },
     ],
   },
@@ -1683,7 +1681,7 @@ function AvatarOrbitCanvas() {
               style={{ boxShadow: "var(--shadow-md)" }}
             >
               <div className="text-label font-bold leading-tight">{hovered.person.name}</div>
-              <div className="text-caption text-muted-foreground leading-tight mt-0.5">{hovered.person.role}</div>
+              <div className="text-caption text-muted-foreground leading-tight mt-1">{hovered.person.role}</div>
             </div>
             {/* Arrow */}
             <div className="absolute top-full left-1/2 -translate-x-1/2 overflow-hidden" style={{ width: 12, height: 7 }}>
@@ -1741,7 +1739,7 @@ function OrbitingCirclesSection() {
         <div className="@container overflow-hidden rounded-lg border border-border bg-card flex flex-col items-center gap-1 p-6 lg:col-span-2">
           <div className="flex items-center justify-between w-full mb-1">
             <div className="text-label font-bold text-foreground">{t("Solid icons", "Ícones sólidos")}</div>
-            <span className="text-caption text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">{t("solid background", "fundo sólido")}</span>
+            <span className="text-caption text-muted-foreground px-2 py-1 rounded-full border border-border bg-muted">{t("solid background", "fundo sólido")}</span>
           </div>
           <OrbitCanvas
             solid
@@ -1765,7 +1763,7 @@ function OrbitingCirclesSection() {
               <div className="text-label font-bold text-foreground">{t("Avatars with tooltip", "Avatares com tooltip")}</div>
               <div className="text-caption text-muted-foreground">{t("Hover over an avatar to pause and see the name", "Passe o mouse sobre um avatar para pausar e ver o nome")}</div>
             </div>
-            <span className="text-caption text-muted-foreground px-2 py-0.5 rounded-full border border-border bg-muted">{t("hover to pause", "passe o mouse para pausar")}</span>
+            <span className="text-caption text-muted-foreground px-2 py-1 rounded-full border border-border bg-muted">{t("hover to pause", "passe o mouse para pausar")}</span>
           </div>
           <AvatarOrbitCanvas />
         </div>
@@ -1943,18 +1941,18 @@ export function WobbleCardConteudo() {
         </div>
 
         {/* Controls */}
-        <div className="border-t border-border bg-card px-5 py-3.5 flex flex-wrap items-center gap-6">
+        <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
 
           {/* Spotlight color */}
           <div className="flex items-center gap-3">
             <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">Spotlight</span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1">
               {SPOTLIGHT_OPTIONS.map(opt => (
                 <button
                   key={opt.id}
                   onClick={() => setSpotlightId(opt.id)}
                   title={t(opt.label, opt.labelPt)}
-                  className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                  className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
                   style={spotlightId === opt.id
                     ? activeStyle
                     : { border: `1.5px solid ${ctrl}`, background: "transparent", color: idleColor }}
@@ -1977,7 +1975,7 @@ export function WobbleCardConteudo() {
               <button
                 key={String(opt.id)}
                 onClick={() => setWobbleEnabled(opt.id)}
-                className="px-3 py-1.5 rounded-sm text-caption font-semibold transition-all"
+                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
                 style={wobbleEnabled === opt.id
                   ? activeStyle
                   : { border: `1.5px solid ${ctrl}`, background: "transparent", color: idleColor }}
@@ -2000,8 +1998,8 @@ export function WobbleCardConteudo() {
             <p className="text-caption font-bold text-muted-foreground uppercase tracking-wider mb-2">{t("Use when", "Quando usar")}</p>
             <ul className="space-y-1">
               {[t("Pricing card for a recommended plan.", "Card de preço para um plano recomendado."), t("Feature card that needs to stand out.", "Card de recurso que precisa se destacar."), t("Premium product or testimonial card.", "Card de produto premium ou depoimento.")].map(w => (
-                <li key={w} className="flex items-start gap-1.5 text-label text-foreground">
-                  <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 text-success" />{w}
+                <li key={w} className="flex items-start gap-1 text-label text-foreground">
+                  <Check className="h-3.5 w-3.5 shrink-0 mt-1 text-success-text" />{w}
                 </li>
               ))}
             </ul>
@@ -2082,7 +2080,7 @@ export function ShineBorderConteudo() {
             return (
               <div key={name} className="relative overflow-hidden rounded-lg border border-border bg-card p-5 shadow-[var(--shadow-sm)]">
                 <ShineBorder preset={name} duration={7} borderWidth={name === "dourada" || name === "ouro" ? 2 : 1} />
-                <div className="mb-3 flex gap-1.5">
+                <div className="mb-3 flex gap-1">
                   {shinePresets[name].slice(0, 2).map((c, i) => (
                     <span key={i} className="h-3 w-3 rounded-full border border-border" style={{ background: c }} />
                   ))}
@@ -2164,9 +2162,9 @@ export function MotionShowcase() {
           ].map(p => {
             const Icon = p.icon;
             return (
-              <div key={p.label} className="rounded-md border border-border bg-muted/30 p-3.5">
+              <div key={p.label} className="rounded-md border border-border bg-muted/30 p-3">
                 <Icon className="h-4 w-4 text-primary-text mb-2" />
-                <div className="text-label font-bold text-foreground mb-0.5">{t(p.label, p.labelPt)}</div>
+                <div className="text-label font-bold text-foreground mb-1">{t(p.label, p.labelPt)}</div>
                 <div className="text-caption text-muted-foreground leading-snug">{t(p.desc, p.descPt)}</div>
               </div>
             );

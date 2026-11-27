@@ -150,7 +150,7 @@ export function CatalogoShowcase() {
             <span>{t("Component", "Componente")}</span><span>{t("What it does", "Para que serve")}</span><span>{t("Where to see", "Onde ver")}</span>
           </div>
           {lista.map((i, n) => (
-            <div key={i.nome} className={`grid grid-cols-1 gap-1.5 px-5 py-3.5 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] md:gap-4 ${n < lista.length - 1 ? "border-b border-border" : ""}`}>
+            <div key={i.nome} className={`grid grid-cols-1 gap-1 px-5 py-3 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)_minmax(0,0.9fr)] md:gap-4 ${n < lista.length - 1 ? "border-b border-border" : ""}`}>
               <div className="min-w-0">
                 <p className="text-body font-semibold text-foreground">{i.nome}</p>
                 <code className="block truncate text-caption text-muted-foreground" title={`@/app/components/ui/${i.nome}`}>ui/{i.nome}</code>
@@ -162,7 +162,7 @@ export function CatalogoShowcase() {
                     {t(i.pagina.rotulo[0], i.pagina.rotulo[1])} <ArrowRight aria-hidden className="h-3.5 w-3.5" />
                   </button>
                 ) : (
-                  <span className="inline-flex h-6 items-center rounded-full border border-border bg-muted px-2.5 text-caption font-semibold text-muted-foreground">{t("Code only, no demo yet", "Só no código, sem demonstração")}</span>
+                  <span className="inline-flex h-6 items-center rounded-full border border-border bg-muted px-2 text-caption font-semibold text-muted-foreground">{t("Code only, no demo yet", "Só no código, sem demonstração")}</span>
                 )}
               </div>
             </div>

@@ -35,7 +35,7 @@ function BarraDeComposicao({ titulo, partes, ocultarZeros = true, formatarQuanti
       <div
         role="img"
         aria-label={resumo}
-        className="mt-3 flex h-3 gap-[2px] overflow-hidden rounded-full motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-left-4 motion-safe:duration-[var(--duration-slow)]"
+        className="mt-3 flex h-3 gap-1 overflow-hidden rounded-full motion-safe:animate-in motion-safe:fade-in-0 motion-safe:slide-in-from-left-4 motion-safe:duration-[var(--duration-slow)]"
       >
         {visiveis.map(p => <span key={p.rotulo} className="block h-full min-w-1" style={{ flex: `${p.valor} 1 0`, background: corDoTom(p.tom) }} />)}
       </div>

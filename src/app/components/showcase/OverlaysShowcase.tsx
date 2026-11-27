@@ -142,7 +142,7 @@ function DrawerDemo({ open, onClose }: { open: boolean; onClose: () => void }) {
           <p className="text-body-sm text-muted-foreground">{t("This is a slide-in drawer panel. It overlays the content and provides contextual actions or additional details.", "Este é um painel lateral deslizante. Ele se sobrepõe ao conteúdo e oferece ações contextuais ou detalhes adicionais.")}</p>
           <div className="space-y-3">
             {[["Profile Settings", "Configurações do perfil"], ["Notifications", "Notificações"], ["Store data", "Dados da loja"], ["Opening hours", "Horário de funcionamento"]].map(([en, pt]) => (
-              <button key={en} className="flex w-full items-center justify-between rounded-md px-3 py-2.5 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <button key={en} className="flex w-full items-center justify-between rounded-md px-3 py-2 text-body-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 {t(en, pt)}
                 <ChevronRight className="h-4 w-4 text-muted-foreground" />
               </button>
@@ -219,7 +219,7 @@ export function OverlaysShowcase() {
               <TooltipDemo content={{ en: "View notifications", pt: "Ver notificações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Bell className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
               <TooltipDemo content={{ en: "Open settings", pt: "Abrir configurações" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><Settings className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
               <TooltipDemo content={{ en: "Get help and documentation", pt: "Obter ajuda e documentação" }}><button className="h-10 w-10 rounded-md border border-border bg-card flex items-center justify-center text-muted-foreground hover:bg-accent transition-colors"><HelpCircle className="h-4.5 w-4.5" style={{ height: "18px", width: "18px" }} /></button></TooltipDemo>
-              <TooltipDemo content={{ en: "Important information about this field", pt: "Informação importante sobre este campo" }}><button className="inline-flex items-center gap-1.5 text-body-sm text-muted-foreground underline underline-offset-2 decoration-dashed hover:text-foreground transition-colors"><Info className="h-4 w-4" />{t("Learn more", "Saiba mais")}</button></TooltipDemo>
+              <TooltipDemo content={{ en: "Important information about this field", pt: "Informação importante sobre este campo" }}><button className="inline-flex items-center gap-1 text-body-sm text-muted-foreground underline underline-offset-2 decoration-dashed hover:text-foreground transition-colors"><Info className="h-4 w-4" />{t("Learn more", "Saiba mais")}</button></TooltipDemo>
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -240,7 +240,7 @@ export function OverlaysShowcase() {
                 <DropdownMenuContent
                   sideOffset={6}
                   align="start"
-                  className="z-50 min-w-[180px] bg-card border border-border rounded-md p-1.5 shadow-lg animate-in fade-in-0 zoom-in-95"
+                  className="z-50 min-w-[180px] bg-card border border-border rounded-md p-1 shadow-lg animate-in fade-in-0 zoom-in-95"
                   style={{ boxShadow: "var(--shadow-lg)" }}
                 >
                   {[
@@ -278,25 +278,11 @@ export function OverlaysShowcase() {
         <SectionHeader title={t("Dialogs & Modals", "Diálogos e modais")} description={t("Focused overlay panels for forms, confirmations, and contextual actions.", "Painéis sobrepostos e focados para formulários, confirmações e ações contextuais.")} />
         <SubSection title={t("Dialog Variants", "Variantes de diálogo")}>
           <ShowcaseCard>
-            <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setDialogOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md bg-primary text-primary-foreground hover:bg-[var(--primary-hover)] transition-colors"
-              >
-                {t("Open Dialog", "Abrir diálogo")}
-              </button>
-              <button
-                onClick={() => setConfirmOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
-              >
-                {t("Confirm Dialog", "Diálogo de confirmação")}
-              </button>
-              <button
-                onClick={() => setDrawerOpen(true)}
-                className="inline-flex items-center gap-2 h-10 px-4 text-body font-semibold rounded-md border border-border bg-card hover:bg-accent text-foreground transition-colors"
-              >
-                {t("Open Drawer", "Abrir painel lateral")}
-              </button>
+            {/* Empilhados na largura toda no celular (mesma largura); lado a lado a partir de 640 px. */}
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button onClick={() => setDialogOpen(true)}>{t("Open Dialog", "Abrir diálogo")}</Button>
+              <Button variant="outline" onClick={() => setConfirmOpen(true)}>{t("Confirm Dialog", "Diálogo de confirmação")}</Button>
+              <Button variant="outline" onClick={() => setDrawerOpen(true)}>{t("Open Drawer", "Abrir painel lateral")}</Button>
             </div>
           </ShowcaseCard>
         </SubSection>
@@ -308,15 +294,15 @@ export function OverlaysShowcase() {
             <div className="mb-5 pr-8">
               <div>
                 <DialogTitle className="text-body-lg font-semibold text-foreground">{t("Create Project", "Criar projeto")}</DialogTitle>
-                <DialogDescription className="text-body-sm text-muted-foreground mt-0.5">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogDescription>
+                <DialogDescription className="text-body-sm text-muted-foreground mt-1">{t("Set up a new workspace project.", "Configure um novo projeto no workspace.")}</DialogDescription>
               </div>
             </div>
             <div className="space-y-4">
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <label className="text-body-sm font-medium text-foreground">{t("Project Name", "Nome do projeto")}</label>
                 <Input placeholder={t("Enter project name...", "Digite o nome do projeto...")} />
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1">
                 <label className="text-body-sm font-medium text-foreground">{t("Description", "Descrição")}</label>
                 <Textarea rows={3} placeholder={t("Describe your project...", "Descreva seu projeto...")} />
               </div>
@@ -352,7 +338,7 @@ export function OverlaysShowcase() {
       <section id="accordion" className="space-y-5 mt-10">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Accordion", "Sanfona (accordion)")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("Collapsible content panels powered by Radix UI. Three style variants.", "Painéis de conteúdo recolhíveis com Radix UI. Três variantes de estilo.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("Collapsible content panels powered by Radix UI. Three style variants.", "Painéis de conteúdo recolhíveis com Radix UI. Três variantes de estilo.")}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-8">
@@ -411,7 +397,7 @@ export function OverlaysShowcase() {
                   value={item.value}
                   className="rounded-md border border-border bg-background overflow-hidden data-[state=open]:border-primary/40 data-[state=open]:bg-primary/[0.03] transition-colors"
                 >
-                    <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-3.5 text-body-sm font-semibold text-foreground">
+                    <AccordionTrigger className="group flex w-full items-center justify-between px-4 py-3 text-body-sm font-semibold text-foreground">
                       <span className="text-left">{bi(item.label)}</span>
                     </AccordionTrigger>
                   <AccordionContent className="pb-0">
@@ -430,7 +416,7 @@ export function OverlaysShowcase() {
       <section id="overlays-tokens" className="space-y-5 mt-10">
         <div>
           <h2 className="font-[family-name:var(--font-display)] text-h3 font-semibold tracking-[-0.02em] text-foreground">{t("Tokens", "Tokens")}</h2>
-          <p className="text-body-sm text-muted-foreground mt-0.5">{t("CSS custom properties used by popovers, dialogs, tooltips, and navigation.", "Propriedades CSS customizadas usadas por popovers, diálogos, tooltips e navegação.")}</p>
+          <p className="text-body-sm text-muted-foreground mt-1">{t("CSS custom properties used by popovers, dialogs, tooltips, and navigation.", "Propriedades CSS customizadas usadas por popovers, diálogos, tooltips e navegação.")}</p>
         </div>
         <TokenTable groups={overlaysTokenGroups(t)} />
       </section>

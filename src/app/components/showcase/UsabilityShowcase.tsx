@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { useI18n } from "../../i18n";
+import { Button } from "../ui/button";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, display } from "./shared/Guidance";
 import { GradeDeCards } from "../ui/grade-de-cards";
 
@@ -102,7 +103,7 @@ function UndoDemo() {
       <ul className="divide-y divide-border rounded-md border border-border overflow-hidden">
         {docs.map((d, i) => (
           <li key={d.en} className="flex items-center justify-between gap-3 px-3 py-2 bg-background/40">
-            <span className="flex items-center gap-2.5 text-body-sm text-foreground"><FileText className="h-4 w-4 text-muted-foreground" aria-hidden />{bi(d)}</span>
+            <span className="flex items-center gap-2 text-body-sm text-foreground"><FileText className="h-4 w-4 text-muted-foreground" aria-hidden />{bi(d)}</span>
             <button
               type="button"
               aria-label={t(`Delete ${d.en}`, `Excluir ${d.pt}`)}
@@ -119,14 +120,14 @@ function UndoDemo() {
         {removed && (
           <div className="flex items-center justify-between gap-3 rounded-md bg-foreground text-background px-3 py-2 text-body-sm">
             <span>{t(`“${removed.name.en}” deleted.`, `“${removed.name.pt}” excluído.`)}</span>
-            <button type="button" onClick={undo} className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background">
+            <button type="button" onClick={undo} className="inline-flex items-center gap-1 font-semibold underline underline-offset-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-background">
               <Undo2 className="h-3.5 w-3.5" aria-hidden /> {t("Undo", "Desfazer")}
             </button>
           </div>
         )}
       </div>
       {docs.length < initialDocs.length && !removed && (
-        <button type="button" onClick={() => setDocs(initialDocs)} className={`mt-1 inline-flex items-center gap-1.5 text-label font-medium text-muted-foreground hover:text-foreground rounded-sm ${ring}`}>
+        <button type="button" onClick={() => setDocs(initialDocs)} className={`mt-1 inline-flex items-center gap-1 text-label font-medium text-muted-foreground hover:text-foreground rounded-sm ${ring}`}>
           <RotateCcw className="h-3 w-3" aria-hidden /> {t("Reset demo", "Reiniciar demo")}
         </button>
       )}
@@ -148,7 +149,7 @@ function StatesDemo() {
   const [view, setView] = useState<ViewState>("loading");
   return (
     <div className="space-y-3">
-      <div role="group" aria-label={t("Preview state", "Estado da prévia")} className="inline-flex flex-wrap p-0.5 rounded-md bg-muted border border-border gap-0.5">
+      <div role="group" aria-label={t("Preview state", "Estado da prévia")} className="inline-flex flex-wrap p-1 rounded-md bg-muted border border-border gap-1">
         {viewStates.map(s => (
           <button
             key={s.id}
@@ -218,22 +219,23 @@ function HierarchyDemo() {
         { title: t("Competing primaries", "Ações primárias concorrentes"), good: false },
       ].map(c => (
         <div key={String(c.good)}>
-          <p className="text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3 flex items-center gap-1.5">
+          <p className="text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3 flex items-center gap-1">
             {c.good ? <Check className="h-3.5 w-3.5 text-primary-text" aria-hidden /> : <span aria-hidden className="text-body-sm leading-none">×</span>}
             {c.title}
           </p>
           <div className="rounded-md border border-border bg-background/40 p-4">
             <p className="text-body-sm font-medium text-foreground mb-3">{t("Discard unsaved draft?", "Descartar rascunho não salvo?")}</p>
-            <div className="flex flex-wrap items-center gap-2">
+            {/* Empilhados com a mesma largura quando não cabem numa linha (celular); lado a lado a partir de 640 px. */}
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
               {c.good ? (
                 <>
-                  <button type="button" className={`h-9 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium ${ring}`}>{t("Save draft", "Salvar rascunho")}</button>
-                  <button type="button" className={`h-9 px-4 rounded-md border border-border bg-card text-foreground text-body-sm font-medium hover:bg-muted ${ring}`}>{t("Keep editing", "Continuar editando")}</button>
-                  <button type="button" className={`h-9 px-3 rounded-md text-body-sm font-medium text-muted-foreground hover:text-foreground ${ring}`}>{t("Discard", "Descartar")}</button>
+                  <Button>{t("Save draft", "Salvar rascunho")}</Button>
+                  <Button variant="outline">{t("Keep editing", "Continuar editando")}</Button>
+                  <Button variant="ghost" className="text-muted-foreground hover:text-foreground">{t("Discard", "Descartar")}</Button>
                 </>
               ) : (
                 [t("Save draft", "Salvar rascunho"), t("Keep editing", "Continuar editando"), t("Discard", "Descartar")].map(l => (
-                  <button key={l} type="button" className={`h-9 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium ${ring}`}>{l}</button>
+                  <Button key={l}>{l}</Button>
                 ))
               )}
             </div>
@@ -301,6 +303,12 @@ export function UsabilityShowcase() {
           <TargetDemo />
           <Callout title={t("Small icon, large target", "Ícone pequeno, alvo grande")}>
             <p>{t("A 16px icon can sit inside a 40px button. Grow the hit area with padding instead of enlarging the icon.", "Um ícone de 16px pode ficar dentro de um botão de 40px. Aumente a área de toque com padding em vez de aumentar o ícone.")}</p>
+          </Callout>
+          <Callout title={t("The DS rule: 44 px on touch, 40 px with a mouse", "A regra do DS: 44 px no toque, 40 px com mouse")}>
+            <p>{t(
+              "On phones (below 640 px) and on any screen used with a finger, every button, tab, field and list of options is at least 44 × 44 px; with a mouse on a computer, buttons and fields keep 40 px. In code, the toque: variant does this (toque:h-11), and a safety rule in theme.css covers anything built by hand. Checkbox, radio and switch keep their 20–24 px drawing: only the area you can tap grows around it, without moving anything on the screen. Links inside a sentence stay as they are.",
+              "No celular (abaixo de 640 px) e em qualquer tela usada com o dedo, todo botão, aba, campo e lista de opções tem pelo menos 44 × 44 px; com mouse no computador, botões e campos ficam com 40 px. No código, a variante toque: faz isso (toque:h-11), e uma regra de segurança no theme.css cobre o que for feito à mão. Caixa de seleção, opção de rádio e interruptor continuam com o desenho de 20 a 24 px: só a área que aceita o toque cresce em volta dele, sem mudar nada de lugar. Links no meio de uma frase ficam como estão.",
+            )}</p>
           </Callout>
         </div>
       </PageSection>

@@ -31,7 +31,7 @@ function CopyBtn({ text }: { text: string }) {
 function CodeBlock({ file, tag, code }: { file: string; tag: string; code: string }) {
   return (
     <div className="bg-muted border border-border rounded-md overflow-hidden min-w-0">
-      <div className="flex items-center justify-between gap-3 px-4 py-2.5 border-b border-border">
+      <div className="flex items-center justify-between gap-3 px-4 py-2 border-b border-border">
         <span className="text-label font-[family-name:var(--font-mono)] text-foreground truncate">{file}</span>
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-caption font-semibold uppercase tracking-[0.08em] text-muted-foreground">{tag}</span>
@@ -107,7 +107,7 @@ const catPt: Record<string, string> = { Color: "Cor", Typography: "Tipografia", 
 
 function Mono({ children }: { children: React.ReactNode }) {
   return (
-    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1.5 py-0.5 rounded-sm bg-muted text-foreground border border-border">
+    <code className="text-body-sm font-[family-name:var(--font-mono)] px-1 py-1 rounded-sm bg-muted text-foreground border border-border">
       {children}
     </code>
   );
@@ -118,7 +118,7 @@ function TextLink({ children, onClick }: { children: React.ReactNode; onClick: (
     <button
       type="button"
       onClick={onClick}
-      className="group inline-flex items-center gap-1.5 text-body-sm font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+      className="group inline-flex items-center gap-1 text-body-sm font-semibold text-primary-text hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
     >
       {children}
       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
@@ -212,7 +212,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
             <Megaphone className="h-4 w-4 text-primary-text" aria-hidden />
             <time className="text-label font-medium text-muted-foreground">{t("October 22, 2026", "22 de outubro de 2026")}</time>
           </div>
-          <h3 className={`${display} text-body-lg font-semibold tracking-[-0.01em] text-foreground mb-1.5`}>
+          <h3 className={`${display} text-body-lg font-semibold tracking-[-0.01em] text-foreground mb-1`}>
             {t("Design tokens now documented end to end", "Design tokens agora documentados de ponta a ponta")}
           </h3>
           <p className="text-body-sm leading-relaxed text-muted-foreground">
@@ -232,7 +232,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div className="flex flex-col bg-card border border-border rounded-md shadow-[var(--shadow-sm)] p-5">
-            <span className="self-start mb-3 rounded-full bg-primary-muted text-primary-text text-caption font-semibold uppercase tracking-[0.06em] px-2.5 py-1">
+            <span className="self-start mb-3 rounded-full bg-primary-muted text-primary-text text-caption font-semibold uppercase tracking-[0.06em] px-2 py-1">
               {t("Recommended", "Recomendado")}
             </span>
             <h3 className={`${display} text-body-lg font-semibold tracking-[-0.01em] text-foreground mb-2`}>
@@ -275,7 +275,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
             <CodeBlock file="src/styles/index.css" tag={t("Tailwind mapping", "Mapeamento Tailwind")} code={indexCode} />
           </div>
           <div className="bg-primary-muted rounded-md px-5 py-4 flex items-start gap-3">
-            <Layers className="h-5 w-5 text-primary-text shrink-0 mt-0.5" aria-hidden />
+            <Layers className="h-5 w-5 text-primary-text shrink-0 mt-1" aria-hidden />
             <p className="text-body-sm leading-relaxed text-foreground">
               <strong className="font-semibold">{t("Golden rule", "Regra de ouro")}</strong> — {t("In components, always use semantic Tailwind classes (", "Nos componentes, use sempre classes semânticas do Tailwind (")}<Mono>bg-primary</Mono>, <Mono>text-foreground</Mono>, <Mono>border-border</Mono>{t(") — never literal colors (", ") — nunca cores literais (")}<Mono>bg-error</Mono>, <Mono>bg-[#D44D4D]</Mono>{t("). This ensures the component works in any theme, now and in the future.", "). Assim o componente funciona em qualquer tema, agora e no futuro.")}
             </p>
@@ -360,7 +360,7 @@ export function DevelopShowcase({ onNavigate }: { onNavigate: Navigate }) {
               <p className={`${display} text-body-sm font-bold uppercase tracking-[0.08em] mb-3 ${col.tone}`}>
                 {col.label}
               </p>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {col.items.map(i => (
                   <li key={i.en} className="text-body-sm leading-relaxed text-foreground">{bi(i)}</li>
                 ))}

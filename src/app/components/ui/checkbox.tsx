@@ -7,8 +7,8 @@ import { CheckIcon, MinusIcon } from "lucide-react";
 import { cn } from "./utils";
 
 /**
- * Caixa de seleção: a caixa tem 20 px. No celular (abaixo de 640 px) a área de toque cresce para 44 px em volta da
- * caixa, sem mudar o lugar dela na tela (margem negativa de 12 px), para o dedo acertar (decisão de 27/11/2026).
+ * Caixa de seleção. O desenho tem 20 px; no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para
+ * 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.
  */
 function Checkbox({
   className,
@@ -18,7 +18,7 @@ function Checkbox({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm outline-none disabled:cursor-not-allowed max-sm:-m-3 max-sm:size-11",
+        "peer group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm outline-none disabled:cursor-not-allowed disabled:opacity-50 toque:-m-3 toque:size-11",
         className,
       )}
       {...props}
@@ -26,14 +26,7 @@ function Checkbox({
       <span
         aria-hidden
         data-slot="checkbox-caixa"
-        className={cn(
-          "flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background shadow-xs transition-shadow dark:bg-input/30",
-          "group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=checked]:text-primary-foreground dark:group-data-[state=checked]:bg-primary",
-          "group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-data-[state=indeterminate]:text-primary-foreground",
-          "group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2",
-          "group-aria-invalid:border-destructive group-aria-invalid:ring-destructive/20 dark:group-aria-invalid:ring-destructive/40",
-          "group-disabled:opacity-50",
-        )}
+        className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background text-primary-foreground shadow-xs transition-shadow dark:bg-input/30 group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-destructive group-aria-invalid:ring-destructive/20"
       >
         <CheckboxPrimitive.Indicator
           data-slot="checkbox-indicator"
