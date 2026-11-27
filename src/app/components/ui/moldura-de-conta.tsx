@@ -66,11 +66,11 @@ function MolduraDeConta({
             {typeof selo === "string" ? <Selo size="sm" tone="primary">{selo}</Selo> : selo}
           </div>
         )}
-        <h1 className="text-[1.5rem] font-bold leading-tight tracking-[-0.02em] text-foreground text-balance">{titulo}</h1>
-        {descricao && <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base">{descricao}</p>}
+        <h1 className="text-h3 font-bold leading-tight tracking-[-0.02em] text-foreground text-balance">{titulo}</h1>
+        {descricao && <p className="mt-2 text-pretty text-body-sm leading-relaxed text-muted-foreground sm:text-body">{descricao}</p>}
         <div className="mt-6">{children}</div>
         {rodape && (
-          <div data-slot="moldura-de-conta-rodape" className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-4 text-sm">
+          <div data-slot="moldura-de-conta-rodape" className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-4 text-body-sm">
             {rodape}
           </div>
         )}

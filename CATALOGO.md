@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 84 arquivos de componentes em `src/app/components/ui/` com 349 componentes exportados · 76 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 158 tokens · 29 páginas e 202 âncoras no site (https://designsystem.danimoscatelli.com.br) · 3 propostas de componente.
+**Resumo:** 117 arquivos de componentes em `src/app/components/ui/` com 401 componentes exportados · 81 templates e padrões ainda só em demonstração · 46 seções com marcação feita à mão · 160 tokens · 33 páginas e 229 âncoras no site (https://designsystem.danimoscatelli.com.br) · 34 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -32,16 +32,24 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `AccordionContent` (props: `className`, `children`)
 - **Onde ver:** Overlays › Accordion (`overlays#accordion`)
 
+### agenda-do-mes
+
+- **Arquivo:** [src/app/components/ui/agenda-do-mes.tsx](src/app/components/ui/agenda-do-mes.tsx)
+- **Quando usar:** AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.
+- **Componentes:**
+  - `AgendaDoMes` (props: `eventos`, `dia`, `diaInicial`, `onDiaChange`, `hoje`, `renderEvento`, `acoesDoDia`, `locale`, `textos`, `className`)
+- **Onde ver:** Peças da área restrita › Agenda do mês (`pecas-admin#admin-agenda`)
+
 ### alert
 
 - **Arquivo:** [src/app/components/ui/alert.tsx](src/app/components/ui/alert.tsx)
 - **Quando usar:** Alerta (padrão de todos os alertas, decisão da dona do produto de 23/11/2026): Mesma aparência do Alerta com ação (ui/alerta-com-acao): cantos de 16 px, respiro de 20 × 22 px, borda na cor do estado a 22%, fundo do card com a cor do estado a 7% (9% no aviso), o svg filho vira o ícone com base (caixa de 44 px, cantos --radius-md, base na cor do estado a 18% ou 30% no aviso, ícone de 20 px na cor de ícone do estado), …
 - **Componentes:**
-  - `Alert` (props: `className`, `variant`)
+  - `Alert` (props: `className`, `variant`, `tom`, `children`)
   - `AlertTitle` (props: `className`)
   - `AlertDescription` (props: `className`)
 - **Variantes:** `variant` = `destructive` · `success` · `info` · `warning` · `error`
-- **Onde ver:** Feedback › Alertas (`feedback#alerts`) · Feedback › Alerta só com descrição (`feedback#alerta-sem-titulo`)
+- **Onde ver:** Feedback › Alertas (`feedback#alerts`) · Feedback › Alerta só com descrição (`feedback#alerta-sem-titulo`) · Molduras e estados › Alerta por tom (`molduras#molduras-alerta-tom`) · e mais 1 seções (ver `catalogo.json`)
 
 ### alert-dialog
 
@@ -89,7 +97,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `Avatar` (props: `className`)
   - `AvatarImage` (props: `className`)
   - `AvatarFallback` (props: `className`)
-- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+- **Onde ver:** Peças da área restrita › Conversa (`pecas-admin#admin-conversa`) · Peças da área restrita › Quadro (`pecas-admin#admin-quadro`)
 
 ### avatar-circles
 
@@ -134,6 +142,22 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `BarraDeComposicao` (props: `titulo`, `partes`, `ocultarZeros`, `formatarQuantidade`)
 - **Onde ver:** Templates › Peças do painel (`templates#template-painel-pecas`)
 
+### barra-de-numeros
+
+- **Arquivo:** [src/app/components/ui/barra-de-numeros.tsx](src/app/components/ui/barra-de-numeros.tsx)
+- **Quando usar:** BarraDeNumeros (números de destaque de uma seção): Três ou quatro números grandes com o que cada um mede ("15+ anos de experiência", "35 recomendações"), numa faixa de uma seção institucional. Era a "barra de números" da landing de demonstração, que sobrepunha os números no celular. Para indicadores de painel com ícone e variação, use o CardIndicador.
+- **Componentes:**
+  - `BarraDeNumeros` (props: `itens`, `centralizar`, `className`)
+- **Onde ver:** Seções do site › Números e cards de navegação (`secoes-site#secoes-numeros`)
+
+### botao-de-envio
+
+- **Arquivo:** [src/app/components/ui/botao-de-envio.tsx](src/app/components/ui/botao-de-envio.tsx)
+- **Quando usar:** BotaoDeEnvio (botão com os estados de envio): O Button do DS com o retorno de cada envio, sem mudar de tamanho: parado → "Enviando…" (girando) → "Enviado" com check → volta sozinho ao estado parado; ou "Tentar de novo" quando falha. Veio do formulário "Notificar lançamento" da página inicial e dos botões "Enviar"/"Salvar" da área restrita, que pintavam os estados à mão (verde solto, #16a34a).
+- **Componentes:**
+  - `BotaoDeEnvio` (props: `estado`, `children`, `textos`, `icone`, `voltarApos`, `onVoltar`, `className`, `disabled`, `variant`)
+- **Onde ver:** Campos › Botões de envio e exclusão (`campos#campos-botoes`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`)
+
 ### botao-subir
 
 - **Arquivo:** [src/app/components/ui/botao-subir.tsx](src/app/components/ui/botao-subir.tsx)
@@ -174,7 +198,38 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `Button` (props: `className`, `variant`, `size`, `asChild`)
 - **Funções e constantes:** `buttonVariants`
 - **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon`
-- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 15 seções (ver `catalogo.json`)
+- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 23 seções (ver `catalogo.json`)
+
+### cabecalho-do-site
+
+- **Arquivo:** [src/app/components/ui/cabecalho-do-site.tsx](src/app/components/ui/cabecalho-do-site.tsx)
+- **Quando usar:** CabecalhoDoSite (cabeçalho do site + menu do celular): O cabeçalho de todas as páginas do site do estúdio (src/compartilhado/partes.ts, menu.ts e menu.css), no modelo documentado em Header e menus: logo, links das páginas, um botão de ação ("Contato") e, no celular, o menu em folha inferior. Use-o no topo de cada página; os links são páginas, e a atual fica marcada.
+- **Componentes:**
+  - `CabecalhoDoSite` (props: `itens`, `atual`, `acao`, `modelo`, `superficie`, `esconderAoRolar`, `inicioHref`, `rotuloInicio`, `logo`, `raiz`, `posicao`, `tela`, `textos`, `className`)
+- **Onde ver:** Molduras e estados › Cabeçalho do site (`molduras#molduras-cabecalho`)
+
+### cadastro-em-etapas
+
+- **Arquivo:** [src/app/components/ui/cadastro-em-etapas.tsx](src/app/components/ui/cadastro-em-etapas.tsx)
+- **Quando usar:** Cadastro em etapas (trazido do FindLook Design System, 27/11/2026: mesmos nomes e mesma API; só as peças gerais, sem o formulário do lojista). Serve ao cadastro de parceiro da Rede de Parceiros e a qualquer formulário longo: - MolduraDoCadastro: card com o Stepper do DS no topo.
+- **Componentes:**
+  - `MolduraDoCadastro` (props: `etapas`, `atual`, `concluidas`, `onIrPara`, `rotulo`, `children`, `className`)
+  - `EtapaDoCadastro` (props: `titulo`, `explicacao`, `tituloRef`, `obrigatorios`, `erro`, `resumoDeErros`, `lateral`, `barra`, `onSubmit`, `children`)
+  - `BarraDaEtapa` (props: `onVoltar`, `rotuloVoltar`, `rotuloContinuar`, `carregando`, `textoCarregando`, `desativado`, `children`, `className`)
+  - `LateralDaEtapa` (props: `icone`, `titulo`, `paragrafos`, `destaque`, `tom`, `iconeDestaque`, `className`)
+  - `ListaDeRevisao` (props: `children`, `valoresAbertos`, `className`): Revisão
+  - `BlocoDeRevisao` (props: `valor`, `titulo`, `nomeEtapa`, `resumo`, `onEditar`, `rotuloEditar`, `depois`, `children`)
+  - `LinhaDeDado` (props: `rotulo`, `valor`, `vazio`, `className`)
+- **Funções e constantes:** `CampoDoCadastro`
+- **Onde ver:** Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`) · Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`)
+
+### caixa-de-entrada
+
+- **Arquivo:** [src/app/components/ui/caixa-de-entrada.tsx](src/app/components/ui/caixa-de-entrada.tsx)
+- **Quando usar:** CaixaDeEntrada (lista de mensagens + painel de leitura): Mensagens, contatos ou notificações numa lista à esquerda e a mensagem aberta à direita, como o Contato da área restrita (Recebidos/Enviados) e o template Caixa de entrada, que era só demonstração e quebrava no celular.
+- **Componentes:**
+  - `CaixaDeEntrada` (props: `itens`, `aberta`, `abertaInicial`, `onAbrir`, `renderLeitura`, `topo`, `vazio`, `semSelecao`, `rotulo`, `textos`, `className`)
+- **Onde ver:** Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`)
 
 ### calendar
 
@@ -183,6 +238,62 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Calendar` (props: `className`, `classNames`, `showOutsideDays`)
 - **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+
+### campo
+
+- **Arquivo:** [src/app/components/ui/campo.tsx](src/app/components/ui/campo.tsx)
+- **Quando usar:** Campo (o campo padrão do formulário): rótulo, controle, ajuda e erro sempre na mesma ordem e com os mesmos vínculos de acessibilidade. É o CampoDoCadastro do FindLook Design System com o nome geral (a mesma API) e serve a todos os formulários: contato, cadastro de parceiro, área restrita, telas de conta.
+- **Componentes:**
+  - `Campo` (props: `rotulo`, `ajuda`, `erro`, `icone`, `obrigatorio`, `inteiro`, `depois`, `classeDoBloco`, `className`, `id`, `children`, `required`)
+  - `MensagemDeErro` (props: `id`, `children`, `className`): Texto de erro de um campo ou grupo: ícone + texto na cor de texto do erro (nunca só a cor).
+  - `GradeDeCampos` (props: `children`, `className`): Grade dos campos: um por linha; dois por linha só a partir de 31rem (cada campo com 240 px ou mais).
+  - `ResumoDeErros` (props: `erros`, `titulo`, `onIrPara`, `className`): Resumo dos erros (use com 2 erros ou mais): Alerta de erro com um link para cada campo.
+  - `CampoDeTelefone` (props: `valor`, `onValorChange`, `placeholder`): Telefone com DDD; teclado numérico no celular.
+  - `CampoDeCnpj` (props: `valor`, `onValorChange`, `placeholder`): CNPJ com a máscara; teclado numérico no celular. A validação (cnpjValido) fica a cargo do formulário.
+- **Funções e constantes:** `mascaraTelefone`, `mascaraCnpj`, `cnpjValido`
+- **Onde ver:** Campos › Campo e máscaras (`campos#campos-campo`) · Molduras e estados › Moldura de conta (`molduras#molduras-conta`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) · e mais 1 seções (ver `catalogo.json`)
+
+### campo-copiavel
+
+- **Arquivo:** [src/app/components/ui/campo-copiavel.tsx](src/app/components/ui/campo-copiavel.tsx)
+- **Quando usar:** CampoCopiavel (link ou código para copiar): Um valor só de leitura com o botão Copiar ao lado: o link de uma pesquisa para enviar, um código de convite, uma chave pública. Veio das Pesquisas da área restrita (`pa-link-copiar`).
+- **Componentes:**
+  - `CampoCopiavel` (props: `valor`, `rotulo`, `mostrarRotulo`, `textos`, `onCopiar`, `className`)
+- **Onde ver:** Campos › Busca e copiar (`campos#campos-busca`)
+
+### campo-de-busca
+
+- **Arquivo:** [src/app/components/ui/campo-de-busca.tsx](src/app/components/ui/campo-de-busca.tsx)
+- **Quando usar:** CampoDeBusca (buscar numa lista): O campo de busca das listas e tabelas (parceiros, pesquisas, contatos): lupa à esquerda, o texto, e o botão Limpar (×) quando há texto. Enter não envia formulário; Esc limpa. Veio da busca da área restrita (`filters`/`search` feitos à mão). Para buscar no sistema inteiro, use o CampoDeBuscaGlobal do painel.
+- **Componentes:**
+  - `CampoDeBusca` (props: `valor`, `onValorChange`, `onBusca`, `atraso`, `rotulo`, `resultados`, `textos`, `placeholder`, `className`)
+- **Onde ver:** Campos › Busca e copiar (`campos#campos-busca`)
+
+### campo-de-email
+
+- **Arquivo:** [src/app/components/ui/campo-de-email.tsx](src/app/components/ui/campo-de-email.tsx)
+- **Quando usar:** CampoDeEmail (e-mail com sugestão de domínio): O Campo de e-mail com as sugestões do site: enquanto a pessoa digita "ana@gm", aparecem botões "ana@gmail.com", "ana@…" com os domínios mais comuns no Brasil; um toque completa o e-mail. Veio da gaveta de contato do site (src/compartilhado/menu.ts, sugerirEmail) e do app EI (campos.tsx, CampoEmail), que tinham duas cópias.
+- **Componentes:**
+  - `CampoDeEmail` (props: `valor`, `onValorChange`, `dominios`, `textos`, `onFocus`, `onBlur`, `placeholder`)
+- **Funções e constantes:** `DOMINIOS_COMUNS`, `sugestoesDeEmail`
+- **Onde ver:** Campos › Campo e máscaras (`campos#campos-campo`) · Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+
+### campo-de-emails
+
+- **Arquivo:** [src/app/components/ui/campo-de-emails.tsx](src/app/components/ui/campo-de-emails.tsx)
+- **Quando usar:** CampoDeEmails (vários e-mails em etiquetas): Para (destinatários), Cc e Cco de um e-mail novo, convites para várias pessoas. Cada e-mail digitado vira uma etiqueta quando a pessoa aperta Enter, vírgula, ponto e vírgula, espaço ou sai do campo; colar uma lista separa os e-mails sozinho. Veio do "Novo e-mail" do Contato da área restrita (etiquetas `ne-tag` feitas à mão).
+- **Componentes:**
+  - `CampoDeEmails` (props: `id`, `valor`, `onValorChange`, `placeholder`, `maximo`, `desabilitado`, `invalido`, `textos`, `className`)
+- **Onde ver:** Campos › Vários e-mails (`campos#campos-emails`)
+
+### campo-estado-cidade
+
+- **Arquivo:** [src/app/components/ui/campo-estado-cidade.tsx](src/app/components/ui/campo-estado-cidade.tsx)
+- **Quando usar:** CampoEstadoCidade (estado e cidade, em par): Dois Selects do DS lado a lado: primeiro o estado (as 27 UFs), depois a cidade daquele estado. Veio da Rede de Parceiros (cadastro) e do app EI (campos.tsx), que usavam <select> nativo.
+- **Componentes:**
+  - `CampoEstadoCidade` (props: `uf`, `cidade`, `onChange`, `carregarCidades`, `erro`, `obrigatorio`, `desabilitado`, `textos`, `className`)
+- **Funções e constantes:** `ESTADOS_DO_BRASIL`
+- **Onde ver:** Campos › Campo e máscaras (`campos#campos-campo`)
 
 ### card
 
@@ -198,6 +309,30 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CardContent` (props: `className`)
   - `CardFooter` (props: `className`, `children`): Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito.
 - **Onde ver:** Cards › Como escolher (`cards#card-escolher`) · Cards › Card sólido (`cards#card-solido`) · Cards › Anatomia do card (`cards#card-anatomy`) · e mais 16 seções (ver `catalogo.json`)
+
+### card-de-artigo
+
+- **Arquivo:** [src/app/components/ui/card-de-artigo.tsx](src/app/components/ui/card-de-artigo.tsx)
+- **Quando usar:** CardDeArtigo (artigo, insight ou notícia): Os cartões de "Insights & artigos" da página inicial (grade "bento": um destaque largo e cartões horizontais) e da seção de artigos das páginas de apresentação. Foto, categoria e data, título (o link), resumo em até 3 linhas e o rodapé com o tempo de leitura e "Ler artigo".
+- **Componentes:**
+  - `CardDeArtigo` (props: `titulo`, `href`, `resumo`, `imagem`, `alt`, `categoria`, `data`, `tempoDeLeitura`, `selo`, `formato`, `novaAba`, `nivel`, `textos`, `className`)
+- **Onde ver:** Seções do site › Card de artigo (`secoes-site#secoes-artigos`)
+
+### card-de-depoimento
+
+- **Arquivo:** [src/app/components/ui/card-de-depoimento.tsx](src/app/components/ui/card-de-depoimento.tsx)
+- **Quando usar:** CardDeDepoimento (depoimento de cliente ou par): O cartão dos depoimentos da página inicial (21 recomendações do LinkedIn, `testimonial-card`) e das páginas de apresentação: foto, nome e cargo em cima, o depoimento embaixo e, opcional, a origem ("Recomendação no LinkedIn"). Use dentro do Carousel (um por vez no celular, dois no tablet, três no computador) ou numa GradeDeCards.
+- **Componentes:**
+  - `CardDeDepoimento` (props: `nome`, `cargo`, `foto`, `origem`, `children`, `className`)
+- **Onde ver:** Seções do site › Card de depoimento (`secoes-site#secoes-depoimentos`)
+
+### card-de-navegacao
+
+- **Arquivo:** [src/app/components/ui/card-de-navegacao.tsx](src/app/components/ui/card-de-navegacao.tsx)
+- **Quando usar:** CardDeNavegacao (card que leva a outra página): Um card inteiro clicável que leva a outra página ou seção: ícone na base, título, uma frase e a seta. Era o NavCard da página Começar do DS (só demonstração) e serve às grades "Explore" e aos atalhos da área restrita. Para um item de ação dentro de uma lista, use a LinhaDeLista.
+- **Componentes:**
+  - `CardDeNavegacao` (props: `titulo`, `descricao`, `icone`, `href`, `onClick`, `selo`, `className`)
+- **Onde ver:** Seções do site › Números e cards de navegação (`secoes-site#secoes-numeros`)
 
 ### card-frente
 
@@ -218,7 +353,24 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CarouselItem` (props: `className`)
   - `CarouselPrevious` (props: `className`, `variant`, `size`)
   - `CarouselNext` (props: `className`, `variant`, `size`)
-- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+- **Onde ver:** Seções do site › Card de depoimento (`secoes-site#secoes-depoimentos`)
+
+### cartao-de-escolha
+
+- **Arquivo:** [src/app/components/ui/cartao-de-escolha.tsx](src/app/components/ui/cartao-de-escolha.tsx)
+- **Quando usar:** Cartão de escolha (CartaoDeEscolha, dentro de um GrupoDeCartoesDeEscolha): escolha única entre poucas opções grandes, com ícone, título e uma linha de explicação. Trazido do FindLook Design System (27/11/2026), com o mesmo nome e a mesma API; no DM, substitui os cartões selecionáveis feitos à mão (opções "não sei" do app EI, "Meu negócio é…" da gaveta de contato do site).
+- **Componentes:**
+  - `GrupoDeCartoesDeEscolha` (props: `value`, `defaultValue`, `onValueChange`, `colunas`, `className`)
+  - `CartaoDeEscolha` (props: `valor`, `titulo`, `descricao`, `icone`, `desabilitado`, `id`, `className`)
+- **Onde ver:** Campos › Cartões de escolha (`campos#campos-escolha`)
+
+### cartao-flutuante
+
+- **Arquivo:** [src/app/components/ui/cartao-flutuante.tsx](src/app/components/ui/cartao-flutuante.tsx)
+- **Quando usar:** CartaoFlutuante (selo de contexto sobre uma foto do hero): Os cartõezinhos que flutuam sobre a foto do hero da Rede de Parceiros ("Design & UX · Protótipo em validação", "Pesquisa · Entrevistas com usuários", `rp-flu`), o mesmo recurso da página do lojista da FindLook. Ícone na base, título e uma linha de estado com o ponto colorido.
+- **Componentes:**
+  - `CartaoFlutuante` (props: `icone`, `titulo`, `estado`, `tom`, `flutuar`, `atraso`, `decorativo`, `className`)
+- **Onde ver:** Seções do site › Cartão flutuante e luzes (`secoes-site#secoes-flutuantes`)
 
 ### chart
 
@@ -246,7 +398,24 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Chip de estado: o estado de um item (mensagem, candidatura, pedido) sempre em texto, com ícone opcional e o fundo do tom. Regra: estado nunca só por cor ou forma; o texto é obrigatório. Vai na coluna do fim de uma LinhaDeLista (tags e ações), que no celular desce para uma linha própria embaixo do texto.
 - **Componentes:**
   - `ChipDeEstado` (props: `tom`, `icone`, `tamanho`, `className`, `children`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`) · Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · e mais 3 seções (ver `catalogo.json`)
+
+### chip-filtravel
+
+- **Arquivo:** [src/app/components/ui/chip-filtravel.tsx](src/app/components/ui/chip-filtravel.tsx)
+- **Quando usar:** ChipFiltravel e GrupoDeChipsFiltraveis (filtros em pílulas): Filtros rápidos acima de uma lista (status, assunto, tipo), uma ou várias opções ao mesmo tempo. Era o padrão "Chips (filtráveis)" de Rótulos e o assunto do contato da landing, só em demonstração.
+- **Componentes:**
+  - `ChipFiltravel` (props: `ativo`, `onAtivoChange`, `contagem`, `className`, `children`, `onClick`)
+  - `GrupoDeChipsFiltraveis` (props: `opcoes`, `valor`, `onValorChange`, `multiplo`, `rotulo`, `className`)
+- **Onde ver:** Campos › Chips de filtro (`campos#campos-chips`)
+
+### citacao
+
+- **Arquivo:** [src/app/components/ui/citacao.tsx](src/app/components/ui/citacao.tsx)
+- **Quando usar:** Citacao (frase em destaque com autoria): Uma fala de cliente, participante ou especialista em destaque, como os depoimentos curtos de "Uma nova perspectiva" do Projeto Piloto e o texto original citado no app EI (`TextoOriginal`). Para uma grade de depoimentos com foto, use o CardDeDepoimento.
+- **Componentes:**
+  - `Citacao` (props: `children`, `autor`, `papel`, `cite`, `tamanho`, `className`)
+- **Onde ver:** Seções do site › Citação (`secoes-site#secoes-citacao`)
 
 ### collapsible
 
@@ -302,6 +471,17 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Utilitários de contraste (WCAG 2.x) para avaliar texto sobre vidro.
 - **Funções e constantes:** `parseColor`, `resolveCssColor`, `over`, `luminance`, `contrastRatio`, `AA`, `formatRatio`
 - **Onde ver:** Cards › Card de vidro (`cards#card-vidro`) · Cards › Vidro: acabamentos (`cards#card-glass`) · Cards › Vidro por fundo (`cards#card-glass-fundos`) · e mais 1 seções (ver `catalogo.json`)
+
+### conversa
+
+- **Arquivo:** [src/app/components/ui/conversa.tsx](src/app/components/ui/conversa.tsx)
+- **Quando usar:** Conversa (histórico de mensagens em balões): A troca de mensagens entre duas partes, como a resposta por e-mail no Contato da área restrita e o convite da simulação da Rede de Parceiros. Balões alinhados por autor: as mensagens de quem usa o sistema ("eu") à direita, no cinza de apoio (--secondary); as da outra pessoa ("outro") à esquerda, no card com borda.
+- **Componentes:**
+  - `Conversa` (props: `className`, `children`, `rotulo`)
+  - `BalaoDaConversa` (props: `autor`, `nome`, `quando`, `avatar`, `estado`, `depois`, `children`, `className`)
+  - `SeparadorDaConversa` (props: `children`, `className`)
+  - `IndicadorDeDigitacao` (props: `autor`, `avatar`, `rotulo`, `className`)
+- **Onde ver:** Peças da área restrita › Conversa (`pecas-admin#admin-conversa`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) · Peças da área restrita › Agenda do mês (`pecas-admin#admin-agenda`) · e mais 1 seções (ver `catalogo.json`)
 
 ### curva-secao
 
@@ -384,6 +564,24 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `DropdownMenuSubContent` (props: `className`)
 - **Onde ver:** Overlays › Dropdown (`overlays#dropdown`) · Templates › Painel (`templates#template-painel`)
 
+### estado-vazio
+
+- **Arquivo:** [src/app/components/ui/estado-vazio.tsx](src/app/components/ui/estado-vazio.tsx)
+- **Quando usar:** EstadoVazio, EstadoFinal e PaginaDeErro: as três telas "sem conteúdo" do DS: EstadoVazio — uma lista, tabela ou área que ainda não tem nada (ou que o filtro esvaziou). Ícone na base, título, uma frase que explica o porquê e, quando houver, a próxima ação. Use dentro de um card ou no lugar da lista. tom "neutro" (padrão: nada a fazer agora, ou "nenhum resultado") ou "marca" (convite a começar: "Crie o primeiro").
+- **Componentes:**
+  - `EstadoVazio` (props: `icone`, `titulo`, `descricao`, `acoes`, `tom`, `tamanho`, `nivel`, `className`)
+  - `EstadoFinal` (props: `tom`, `icone`, `titulo`, `descricao`, `acoes`, `nivel`, `focarAoAparecer`, `children`, `className`)
+  - `PaginaDeErro` (props: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`, `className`)
+- **Onde ver:** Molduras e estados › Vazio, final e erro (`molduras#molduras-estados`) · Campos › Busca e copiar (`campos#campos-busca`) · Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+
+### faixa-de-logos
+
+- **Arquivo:** [src/app/components/ui/faixa-de-logos.tsx](src/app/components/ui/faixa-de-logos.tsx)
+- **Quando usar:** FaixaDeLogos (empresas atendidas, parceiros, imprensa): Uma faixa de logos que corre devagar, como "Empresas atendidas" da página inicial (carrossel `client-marquee` com CSS próprio). O FindLook DS tem a FaixaDeParceiros, com a mesma ideia.
+- **Componentes:**
+  - `FaixaDeLogos` (props: `logos`, `rotulo`, `duracao`, `colorirAoPassar`, `textos`, `className`)
+- **Onde ver:** Seções do site › Faixa de logos (`secoes-site#secoes-logos`)
+
 ### form
 
 - **Arquivo:** [src/app/components/ui/form.tsx](src/app/components/ui/form.tsx)
@@ -417,7 +615,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `GradeDeCards` (props: `colunas`, `larguraMinima`, `limiteDeDiferenca`, `layout`, `onLayoutChange`, `className`, `style`, `children`)
   - `ItemDaGrade` (props: `className`): ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.
 - **Funções e constantes:** `LIMITE_DE_DIFERENCA`, `FATOR_DE_VOLTA`, `passaDoLimite`, `useOrientacaoDoCard`
-- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 55 seções (ver `catalogo.json`)
+- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 82 seções (ver `catalogo.json`)
 
 ### graficos-catalogo
 
@@ -535,7 +733,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Rótulo de campo, ligado ao campo.
 - **Componentes:**
   - `Label` (props: `className`)
-- **Onde ver:** Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
+- **Onde ver:** Campos › Campo e máscaras (`campos#campos-campo`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`) · Campos › Vários e-mails (`campos#campos-emails`)
 
 ### linha-de-lista
 
@@ -545,12 +743,43 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `LinhaDeLista` (props: `as`, `inicio`, `titulo`, `descricao`, `fim`, `quebraAcoes`, `alinharAcoesAbaixo`, `alinhar`, `interativa`, `selecionada`, `className`, `children`)
 - **Onde ver:** Templates › Painel (`templates#template-painel`) · Cards › Borda, sombra e raio (`cards#card-layout`) · Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`)
 
+### link-saiba-mais
+
+- **Arquivo:** [src/app/components/ui/link-saiba-mais.tsx](src/app/components/ui/link-saiba-mais.tsx)
+- **Quando usar:** LinkSaibaMais (alça "Saiba mais" do hero): O link que convida a rolar até a próxima seção, centralizado na base do hero (`ih-alca` da página inicial e `rp-alca` da Rede de Parceiros): texto e a seta num círculo que desce e sobe devagar. Com `direcao="direita"`, vira um link de continuação no fim de um bloco ("Saiba mais →").
+- **Componentes:**
+  - `LinkSaibaMais` (props: `children`, `direcao`, `sobreEscuro`, `className`)
+- **Onde ver:** Seções do site › Saiba mais e texto longo (`secoes-site#secoes-saiba-prosa`)
+
+### lista-de-pilares
+
+- **Arquivo:** [src/app/components/ui/lista-de-pilares.tsx](src/app/components/ui/lista-de-pilares.tsx)
+- **Quando usar:** ListaDePilares (3 a 5 ideias com ícone, em sequência): Os pilares de uma seção institucional: "Contato · Relacionamento · Indicação" da Rede de Parceiros (`rx-pilares`, com o feixe que liga os ícones) e os passos de "Uma nova perspectiva" do Projeto Piloto. Cada pilar: ícone na base rosa (IconeComBase marca), título curto e uma frase.
+- **Componentes:**
+  - `ListaDePilares` (props: `pilares`, `rotulo`, `ordenada`, `linha`, `nivel`, `className`)
+- **Onde ver:** Seções do site › Pilares (`secoes-site#secoes-pilares`)
+
+### logo
+
+- **Arquivo:** [src/app/components/ui/logo.tsx](src/app/components/ui/logo.tsx)
+- **Componentes:**
+  - `Logo` (props: `variante`, `superficie`, `rotulo`, `corDoSimbolo`, `className`)
+- **Onde ver:** Molduras e estados › Componente do logo (`molduras#molduras-logo`) · Seções do site › Faixa de logos (`secoes-site#secoes-logos`) · Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`)
+
 ### lucide-catalogo
 
 - **Arquivo:** [src/app/components/ui/lucide-catalogo.ts](src/app/components/ui/lucide-catalogo.ts)
 - **Quando usar:** Catálogo da biblioteca Lucide (lucide-react 1.70.0): 2029 ícones nas categorias oficiais da Lucide (lucide.dev). Cada ícone aparece na sua primeira categoria. Gerado a partir de lucide.dev/api/categories.
 - **Funções e constantes:** `versaoLucide`, `categoriasLucide`
 - **Onde ver:** Ícones › Biblioteca (`icons#icon-library`)
+
+### luzes-difusas
+
+- **Arquivo:** [src/app/components/ui/luzes-difusas.tsx](src/app/components/ui/luzes-difusas.tsx)
+- **Quando usar:** Luzes difusas (tema escuro). Trazido do FindLook Design System (27/11/2026), mesmo nome e mesma API, com as cores deste DS (primária, violeta e crimson-600). No site do estúdio: os círculos de luz atrás da foto do hero da página inicial e do card "Empresas atendidas" (`ih-luz`).
+- **Componentes:**
+  - `LuzesDifusas` (props: `variante`, `dissolver`, `className`)
+- **Onde ver:** Seções do site › Cartão flutuante e luzes (`secoes-site#secoes-flutuantes`)
 
 ### menubar
 
@@ -574,6 +803,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `MenubarSubTrigger` (props: `className`, `inset`, `children`)
   - `MenubarSubContent` (props: `className`)
 - **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+
+### moldura-de-conta
+
+- **Arquivo:** [src/app/components/ui/moldura-de-conta.tsx](src/app/components/ui/moldura-de-conta.tsx)
+- **Quando usar:** MolduraDeConta (telas de acesso): A moldura das telas de conta: entrar, criar ou definir senha, esqueci a senha, link expirado, sem acesso. Página inteira no fundo da página, com um card estreito centralizado: logo (link para o início), selo opcional ("Área restrita"), título, uma frase de apoio, o formulário (children) e um rodapé opcional (links como "Voltar para entrar").
+- **Componentes:**
+  - `MolduraDeConta` (props: `titulo`, `descricao`, `selo`, `logo`, `inicioHref`, `rotuloInicio`, `rodape`, `telaCheia`, `children`, `className`)
+- **Onde ver:** Molduras e estados › Moldura de conta (`molduras#molduras-conta`)
 
 ### navigation-menu
 
@@ -626,7 +863,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CardComCabecalho` (props: `icone`, `titulo`, `descricao`, `acao`, `tom`, `cabecalho`, `nivel`, `sangria`, `idDoTitulo`, `children`, `className`)
   - `LinkVerTudo` (props: `children`, `href`, `rotulo`, `onClick`, `tom`, `icone`, `as`, `className`)
 - **Funções e constantes:** `formatarNumero`, `formatarVariacao`
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`)
 
 ### painel-shell
 
@@ -667,7 +904,15 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `PasswordInput` (props: `label`, `value`, `onValueChange`, `textos`, `invalido`, `describedBy`, `id`, `className`): Um campo de senha com o botão de exibir/ocultar.
   - `PasswordConfirm` (props: `senha`, `confirmacao`, `onSenhaChange`, `onConfirmacaoChange`, `regras`, `textos`, `semConfirmacao`, `disabled`, `className`): Senha + confirmação, com força da senha, dicas com check e verificação de coincidência.
 - **Funções e constantes:** `regrasPadrao`, `textosPadrao`, `forcaDaSenha`
-- **Onde ver:** Botões › Senha (`buttons#password`)
+- **Onde ver:** Botões › Senha (`buttons#password`) · Molduras e estados › Moldura de conta (`molduras#molduras-conta`)
+
+### pilula-de-acao
+
+- **Arquivo:** [src/app/components/ui/pilula-de-acao.tsx](src/app/components/ui/pilula-de-acao.tsx)
+- **Quando usar:** PilulaDeAcao (pílula de ação flutuante): Botão em pílula, na primária, fixo ao lado do botão do WhatsApp, com a ação principal da página: "Quero ser parceiro" (Seja Parceiro) e "Cadastrar empresa" (Projeto Piloto). Do site: #cta-flutuante e .faixa-flutuante (src/rede-parceiros-inicio.ts e .css, src/projeto-piloto.ts e .css).
+- **Componentes:**
+  - `PilulaDeAcao` (props: `rotulo`, `href`, `onClick`, `icone`, `iconeAntes`, `visivel`, `mostrarApos`, `esconderCom`, `sempreAte`, `raiz`, `layout`, `faixa`, `fixo`, `className`)
+- **Onde ver:** Padrões do site › Elementos flutuantes (`site#site-flutuantes`)
 
 ### popover
 
@@ -687,6 +932,22 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Progress` (props: `className`, `value`)
 - **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
+
+### prosa
+
+- **Arquivo:** [src/app/components/ui/prosa.tsx](src/app/components/ui/prosa.tsx)
+- **Quando usar:** Prosa (texto longo: política de privacidade, termos, artigos): Aplica a tipografia do DS a um texto corrido escrito em HTML simples (h2, h3, p, ul, ol, a, strong, blockquote, table), sem classes em cada elemento: Política de privacidade, termos de uso, descadastro, notas legais. Veio da página /privacidade/ do site (44 linhas de CSS próprio).
+- **Componentes:**
+  - `Prosa` (props: `tamanho`, `className`)
+- **Onde ver:** Seções do site › Saiba mais e texto longo (`secoes-site#secoes-saiba-prosa`)
+
+### quadro
+
+- **Arquivo:** [src/app/components/ui/quadro.tsx](src/app/components/ui/quadro.tsx)
+- **Quando usar:** Quadro (colunas de etapas com cartões, estilo kanban): Itens organizados por etapa: o quadro ilustrativo da Rede de Parceiros (`rx-kanban`: Em análise, Convite, Em colaboração…) e o acompanhamento de candidaturas ou projetos na área restrita. Cada coluna tem título, a quantidade e os cartões (título, uma linha de apoio, etiqueta e pessoa).
+- **Componentes:**
+  - `Quadro` (props: `colunas`, `rotulo`, `textos`, `className`)
+- **Onde ver:** Peças da área restrita › Quadro (`pecas-admin#admin-quadro`)
 
 ### radio-group
 
@@ -713,7 +974,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** RodapeSite (rodapé do site): Rodapé compartilhado do site do estúdio (src/compartilhado/partes.ts): logo + links de navegação em cima, copyright, cidade e crédito do design system embaixo. Três variantes, como no código do site:
 - **Componentes:**
   - `RodapeSite` (props: `variante`, `logo`, `rotuloLogo`, `inicioHref`, `links`, `privacidade`, `rotuloPreferencias`, `onPreferenciasCookies`, `areaRestrita`, `copyright`, `cidade`, `credito`, `rotuloNav`, `novaAba`, `espacoFlutuante`, `className`)
-- **Onde ver:** Padrões do site › Rodapé (`site#site-rodape`)
+- **Onde ver:** Padrões do site › Rodapé (`site#site-rodape`) · Molduras e estados › Rodapé do site (`molduras#molduras-rodape`)
 
 ### scroll-area
 
@@ -730,7 +991,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** SegmentedControl (controle segmentado): Opções acopladas, uma selecionada por vez, que se tocam como botões. Use para escolhas curtas e exclusivas (2 a 5 opções, rótulos de uma ou duas palavras): filtro, condição, período, modo de exibição. Sempre há uma opção selecionada. Teclado: setas movem a seleção; Tab entra e sai do grupo.
 - **Componentes:**
   - `SegmentedControl` (props: `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size`, `fullWidth`, `className`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 2 seções (ver `catalogo.json`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 3 seções (ver `catalogo.json`)
 
 ### select
 
@@ -794,7 +1055,8 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Combinações de cores prontas, só com tokens do design system. O dourado é o token `--warning` (âmbar), que fica mais vivo no tema escuro.
 - **Componentes:**
   - `ShineBorder` (props: `borderWidth`, `duration`, `shineColor`, `preset`, `className`, `style`)
-- **Funções e constantes:** `shinePresets`
+  - `BrilhoDeSelecionado` (props: `className`): Borda do card selecionado (trazido do FindLook Design System, 27/11/2026, mesmo nome e mesma API): o brilho que corre por cima da borda de 2 px na primária dos cards que se escolhem (CartaoDeEscolha).
+- **Funções e constantes:** `shinePresets`, `molduraDoSelecionavel`
 - **Onde ver:** Cards › Shine Border (`cards#card-shine`)
 
 ### side-panel
@@ -844,6 +1106,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Variantes:** `variant` = `default` · `outline`; `size` = `default` · `sm` · `lg`
 - **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
 
+### simulacao
+
+- **Arquivo:** [src/app/components/ui/simulacao.tsx](src/app/components/ui/simulacao.tsx)
+- **Quando usar:** Simulacao (demonstração em etapas: tópicos + tela simulada): Conta um processo em etapas com uma tela de exemplo que muda a cada etapa, como "Da conexão à colaboração" da Rede de Parceiros (`rx-mt-*`: tópicos clicáveis à esquerda e a tela do sistema à direita). Cada tópico tem título, uma frase e a cena (qualquer conteúdo do DS: um formulário de exemplo, um cartão de pessoa, uma conversa).
+- **Componentes:**
+  - `Simulacao` (props: `topicos`, `intro`, `topoDaTela`, `intervalo`, `autoAvancar`, `rotulo`, `textos`, `className`)
+- **Onde ver:** Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`)
+
 ### skeleton
 
 - **Arquivo:** [src/app/components/ui/skeleton.tsx](src/app/components/ui/skeleton.tsx)
@@ -868,6 +1138,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `Toaster`: Notificações temporárias (toast). Monte <Toaster /> uma vez na raiz do app e chame toast(), toast.success(), toast.error(), toast.warning(), toast.info() ou toast.loading() de "sonner". Ícone e texto sempre juntos.
 - **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
 
+### stepper
+
+- **Arquivo:** [src/app/components/ui/stepper.tsx](src/app/components/ui/stepper.tsx)
+- **Quando usar:** Stepper (indicador de etapas) — progresso de um formulário em várias telas: Trazido do FindLook Design System (mesmo nome e mesma API, 27/11/2026), com a escala deste DS: etapas em abas numeradas ("01", "02"…), lado a lado sobre uma linha. Serve ao cadastro de parceiro da Rede de Parceiros e a qualquer formulário em várias telas.
+- **Componentes:**
+  - `Stepper` (props: `etapas`, `atual`, `concluidas`, `onIrPara`, `rotulo`, `textos`, `className`)
+- **Onde ver:** Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+
 ### surgir-ao-rolar
 
 - **Arquivo:** [src/app/components/ui/surgir-ao-rolar.tsx](src/app/components/ui/surgir-ao-rolar.tsx)
@@ -885,6 +1163,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Switch` (props: `className`)
 - **Onde ver:** Botões › Controle segmentado (`buttons#segmented`) · Cards › Mesma altura ou um por linha (`cards#card-mesma-altura`)
+
+### tabela-adaptavel
+
+- **Arquivo:** [src/app/components/ui/tabela-adaptavel.tsx](src/app/components/ui/tabela-adaptavel.tsx)
+- **Quando usar:** TabelaAdaptavel (tabela que nunca rola para o lado): Regra do DS: card nunca tem rolagem horizontal. A tabela mostra as colunas que cabem na largura dela (não da tela): - prioridade 1 (padrão): sempre aparece; - prioridade 2: some abaixo de 36rem (576 px); - prioridade 3: some abaixo de 48rem (768 px); quando alguma coluna sai, um aviso curto embaixo diz quais ("Nesta largura, ficam de fora: Plano, Cidade").
+- **Componentes:**
+  - `TabelaAdaptavel` (props: `colunas`, `linhas`, `chave`, `legenda`, `mostrarLegenda`, `acoes`, `vazio`, `textos`, `className`)
+- **Onde ver:** Campos › Tabela adaptável (`campos#campos-tabela`)
 
 ### table
 
@@ -918,7 +1204,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Campo de texto com várias linhas.
 - **Componentes:**
   - `Textarea` (props: `className`)
-- **Onde ver:** Overlays (`overlays`, fora das seções)
+- **Onde ver:** Campos › Campo e máscaras (`campos#campos-campo`) · Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) · Overlays (`overlays`, fora das seções)
 
 ### timeline
 
@@ -1008,7 +1294,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:1091](src/app/components/showcase/TemplatesShowcase.tsx#L1091) |  | 14 |
 | `LandingTemplate` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesShowcase.tsx:1521](src/app/components/showcase/TemplatesShowcase.tsx#L1521) | `GradeDeCards` | 82 |
 
-### 2.2 Padrões nas páginas de componentes (35)
+### 2.2 Padrões nas páginas de componentes (40)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
@@ -1041,8 +1327,13 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:76](src/app/components/showcase/FeedbackShowcase.tsx#L76) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
 | `SkeletonPulse`<br>Skeleton | Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:106](src/app/components/showcase/FeedbackShowcase.tsx#L106) |  | 1 |
 | `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:128](src/app/components/showcase/OverlaysShowcase.tsx#L128) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
-| `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:414](src/app/components/showcase/SitePatternsShowcase.tsx#L414) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
-| `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:462](src/app/components/showcase/SitePatternsShowcase.tsx#L462) | `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 6 |
+| `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:467](src/app/components/showcase/SitePatternsShowcase.tsx#L467) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
+| `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:515](src/app/components/showcase/SitePatternsShowcase.tsx#L515) | `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 6 |
+| `DemoCabecalho`<br>Molduras e estados (27/11/2026): cabeçalho do site, rodapé, moldura das telas de conta, estados vazio/final/erro, alerta por tom e logo. | Molduras e estados › Cabeçalho do site (`molduras#molduras-cabecalho`) | [src/app/components/showcase/MoldurasShowcase.tsx:22](src/app/components/showcase/MoldurasShowcase.tsx#L22) | `CabecalhoDoSite`, `SegmentedControl` | 5 |
+| `DemoConta` | Molduras e estados › Moldura de conta (`molduras#molduras-conta`) | [src/app/components/showcase/MoldurasShowcase.tsx:77](src/app/components/showcase/MoldurasShowcase.tsx#L77) | `Button`, `Campo`, `MolduraDeConta`, `PasswordInput` | 1 |
+| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:33](src/app/components/showcase/CamposShowcase.tsx#L33) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 2 |
+| `DemoBusca` | Campos › Busca e copiar (`campos#campos-busca`) | [src/app/components/showcase/CamposShowcase.tsx:69](src/app/components/showcase/CamposShowcase.tsx#L69) | `Button`, `CampoDeBusca`, `EstadoVazio` | 1 |
+| `DemoCaixa`<br>Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo. | Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) | [src/app/components/showcase/PecasAdminShowcase.tsx:24](src/app/components/showcase/PecasAdminShowcase.tsx#L24) | `BalaoDaConversa`, `BotaoDeEnvio`, `CaixaDeEntrada`, `Campo`, `ChipDeEstado`, `Conversa`, `IconeComBase`, `Textarea` | 2 |
 | `Segmentado`<br>Controles da demonstração | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:91](src/app/components/showcase/HeaderShowcase.tsx#L91) |  | 1 |
 | `Chave` | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:119](src/app/components/showcase/HeaderShowcase.tsx#L119) |  | 2 |
 | `Capa`<br>Fundos por trás do header | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:149](src/app/components/showcase/HeaderShowcase.tsx#L149) |  | 4 |
@@ -1095,7 +1386,7 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 
 | Seção | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|
-| Início › Novidades (`overview#whats-new`) | [src/app/components/showcase/HomeShowcase.tsx:117](src/app/components/showcase/HomeShowcase.tsx#L117) |  | 3 |
+| Início › Novidades (`overview#whats-new`) | [src/app/components/showcase/HomeShowcase.tsx:121](src/app/components/showcase/HomeShowcase.tsx#L121) |  | 3 |
 | Desenvolvimento › Plataformas (`develop#dev-platforms`) | [src/app/components/showcase/DevelopShowcase.tsx:227](src/app/components/showcase/DevelopShowcase.tsx#L227) |  | 3 |
 | Identidade de marca › Uso do símbolo (`brand#brand-symbol-usage`) | [src/app/components/showcase/BrandShowcase.tsx:320](src/app/components/showcase/BrandShowcase.tsx#L320) |  | 3 |
 | Identidade de marca › Responsividade (`brand#brand-responsive`) | [src/app/components/showcase/BrandShowcase.tsx:442](src/app/components/showcase/BrandShowcase.tsx#L442) |  | 17 |
@@ -1119,7 +1410,7 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Motion Design › Transições de layout (`motion#layout`) | [src/app/components/showcase/MotionShowcase.tsx:1032](src/app/components/showcase/MotionShowcase.tsx#L1032) |  | 6 |
 | Motion Design › Lista animada (`motion#animated-list`) | [src/app/components/showcase/MotionShowcase.tsx:1316](src/app/components/showcase/MotionShowcase.tsx#L1316) |  | 7 |
 | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1703](src/app/components/showcase/MotionShowcase.tsx#L1703) |  | 6 |
-| Catálogo de componentes › Todos os componentes (`catalogo#catalogo-lista`) | [src/app/components/showcase/CatalogoShowcase.tsx:142](src/app/components/showcase/CatalogoShowcase.tsx#L142) | `Input` | 5 |
+| Catálogo de componentes › Todos os componentes (`catalogo#catalogo-lista`) | [src/app/components/showcase/CatalogoShowcase.tsx:143](src/app/components/showcase/CatalogoShowcase.tsx#L143) | `Input` | 5 |
 | Cards › Borda, sombra e raio (`cards#card-layout`) | [src/app/components/showcase/CardShowcase.tsx:610](src/app/components/showcase/CardShowcase.tsx#L610) | `Card`, `GradeDeCards` | 3 |
 | Cards › Estados (`cards#card-states`) | [src/app/components/showcase/CardShowcase.tsx:945](src/app/components/showcase/CardShowcase.tsx#L945) | `Button`, `Card`, `CardDescription`, `CardFooter`, `CardHeader`, `CardTitle`, `GradeDeCards`, `ItemDaGrade` +1 | 3 |
 | Cards › Cards aninhados (`cards#card-nested`) | [src/app/components/showcase/CardShowcase.tsx:1091](src/app/components/showcase/CardShowcase.tsx#L1091) | `Card`, `CardDescription`, `CardTitle`, `GradeDeCards` | 5 |
@@ -1138,8 +1429,8 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:225](src/app/components/showcase/OverlaysShowcase.tsx#L225) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
 | Overlays › Diálogos (`overlays#dialogs`) | [src/app/components/showcase/OverlaysShowcase.tsx:273](src/app/components/showcase/OverlaysShowcase.tsx#L273) | `Dialog` | 3 |
 | Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:348](src/app/components/showcase/OverlaysShowcase.tsx#L348) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
-| Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:196](src/app/components/showcase/SitePatternsShowcase.tsx#L196) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade` | 3 |
-| Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:642](src/app/components/showcase/SitePatternsShowcase.tsx#L642) | `CurvaSecao`, `SeloSecao` | 4 |
+| Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:202](src/app/components/showcase/SitePatternsShowcase.tsx#L202) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade`, `PilulaDeAcao` | 15 |
+| Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:695](src/app/components/showcase/SitePatternsShowcase.tsx#L695) | `CurvaSecao`, `SeloSecao` | 4 |
 | Painel lateral › Anatomia (`sidepanel#sidepanel-anatomy`) | [src/app/components/showcase/SidePanelShowcase.tsx:235](src/app/components/showcase/SidePanelShowcase.tsx#L235) |  | 3 |
 
 ## 3. Tokens
@@ -1223,6 +1514,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--ring` | `rgba(212, 77, 77, 0.35)` | `rgba(212, 77, 77, 0.4)` |  |
 | `--destructive` | `--crimson-400 (#D44D4D)` | igual |  |
 | `--destructive-foreground` | `#FFFFFF` | igual |  |
+| `--sobreposicao` | `color-mix(in srgb, var(--graphite-950) 50%, transparent)` | igual |  |
 
 ### 3.3 Gráficos
 
@@ -1275,6 +1567,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 ### 3.6 Raio
 
 - `--radius`: `0.75rem`
+- `--radius-full`: `9999px`
 - `--radius-sm`: `calc(var(--radius) - 4px)` — classe rounded-sm
 - `--radius-md`: `--radius (0.75rem)` — classe rounded-md
 - `--radius-lg`: `calc(var(--radius) + 4px)` — classe rounded-lg
@@ -1382,9 +1675,40 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 
 | Proposta | Componente | Status |
 |---|---|---|
+| [Agenda do mês](propostas/2026-11-27-agenda-do-mes.md) | `AgendaDoMes em src/app/components/ui/agenda-do-mes.tsx` | proposta |
+| [Alerta por tom](propostas/2026-11-27-alerta-tom.md) | `Alert (prop tom) em src/app/components/ui/alert.tsx` | proposta |
 | [Barra de composição](propostas/2026-11-27-barra-de-composicao.md) | `BarraDeComposicao em src/app/components/ui/barra-de-composicao.tsx` | proposta |
+| [Barra de números](propostas/2026-11-27-barra-de-numeros.md) | `BarraDeNumeros em src/app/components/ui/barra-de-numeros.tsx` | proposta |
+| [Botão de envio e exclusão em contorno](propostas/2026-11-27-botao-de-envio.md) | `BotaoDeEnvio, Button variant="outline-destructive" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx` | proposta |
+| [Cabeçalho do site](propostas/2026-11-27-cabecalho-do-site.md) | `CabecalhoDoSite em src/app/components/ui/cabecalho-do-site.tsx` | proposta |
+| [Caixa de entrada](propostas/2026-11-27-caixa-de-entrada.md) | `CaixaDeEntrada em src/app/components/ui/caixa-de-entrada.tsx` | proposta |
+| [Campo de busca e campo copiável](propostas/2026-11-27-campo-de-busca-e-copiavel.md) | `CampoDeBusca, CampoCopiavel em src/app/components/ui/campo-de-busca.tsx, src/app/components/ui/campo-copiavel.tsx` | proposta |
+| [Campo de vários e-mails](propostas/2026-11-27-campo-de-emails.md) | `CampoDeEmails em src/app/components/ui/campo-de-emails.tsx` | proposta |
+| [Campo, CampoDeEmail, CampoEstadoCidade e máscaras](propostas/2026-11-27-campo.md) | `Campo, GradeDeCampos, MensagemDeErro, ResumoDeErros, CampoDeTelefone, CampoDeCnpj, mascaraTelefone, mascaraCnpj, cnpjValido, CampoDeEmail, CampoEstadoCidade em src/app/components/ui/campo.tsx, src/app/components/ui/campo-de-email.tsx, src/app/components/ui/campo-estado-cidade.tsx` | proposta |
+| [Card de artigo](propostas/2026-11-27-card-de-artigo.md) | `CardDeArtigo em src/app/components/ui/card-de-artigo.tsx` | proposta |
+| [Card de depoimento](propostas/2026-11-27-card-de-depoimento.md) | `CardDeDepoimento em src/app/components/ui/card-de-depoimento.tsx` | proposta |
+| [Card de navegação](propostas/2026-11-27-card-de-navegacao.md) | `CardDeNavegacao em src/app/components/ui/card-de-navegacao.tsx` | proposta |
+| [Cartão de escolha](propostas/2026-11-27-cartao-de-escolha.md) | `GrupoDeCartoesDeEscolha, CartaoDeEscolha, BrilhoDeSelecionado, molduraDoSelecionavel em src/app/components/ui/cartao-de-escolha.tsx, src/app/components/ui/shine-border.tsx` | proposta |
+| [Cartão flutuante](propostas/2026-11-27-cartao-flutuante.md) | `CartaoFlutuante em src/app/components/ui/cartao-flutuante.tsx` | proposta |
 | [Chip de estado](propostas/2026-11-27-chip-de-estado.md) | `ChipDeEstado em src/app/components/ui/chip-de-estado.tsx` | proposta |
+| [Chip filtrável](propostas/2026-11-27-chip-filtravel.md) | `ChipFiltravel, GrupoDeChipsFiltraveis em src/app/components/ui/chip-filtravel.tsx` | proposta |
+| [Citação](propostas/2026-11-27-citacao.md) | `Citacao em src/app/components/ui/citacao.tsx` | proposta |
+| [Conversa](propostas/2026-11-27-conversa.md) | `Conversa, BalaoDaConversa, SeparadorDaConversa, IndicadorDeDigitacao em src/app/components/ui/conversa.tsx` | proposta |
+| [Estado vazio, estado final e página de erro](propostas/2026-11-27-estado-vazio.md) | `EstadoVazio, EstadoFinal, PaginaDeErro em src/app/components/ui/estado-vazio.tsx` | proposta |
+| [Faixa de logos](propostas/2026-11-27-faixa-de-logos.md) | `FaixaDeLogos em src/app/components/ui/faixa-de-logos.tsx` | proposta |
+| [Link Saiba mais](propostas/2026-11-27-link-saiba-mais.md) | `LinkSaibaMais em src/app/components/ui/link-saiba-mais.tsx` | proposta |
+| [Lista de pilares](propostas/2026-11-27-lista-de-pilares.md) | `ListaDePilares em src/app/components/ui/lista-de-pilares.tsx` | proposta |
+| [Logo](propostas/2026-11-27-logo.md) | `Logo em src/app/components/ui/logo.tsx` | proposta |
+| [Luzes difusas](propostas/2026-11-27-luzes-difusas.md) | `LuzesDifusas em src/app/components/ui/luzes-difusas.tsx` | proposta |
+| [Moldura de conta](propostas/2026-11-27-moldura-de-conta.md) | `MolduraDeConta em src/app/components/ui/moldura-de-conta.tsx` | proposta |
 | [Peças do painel: casca, cabeçalho da página, card de indicador e ícone com base](propostas/2026-11-27-pecas-do-painel.md) | `MenuLateralProvider, MenuLateral, TopoDoMenu, BotaoRecolherMenu, NavDoMenu, ItemDoMenu, GrupoDoMenu, BarraSuperiorDoPainel, BotaoDeNotificacoes, GatilhoDaConta, AvatarPainel, ContadorDoPainel, CampoDeBuscaGlobal, CardDeAjuda em src/app/components/ui/painel-shell.tsx; CabecalhoDaPagina em src/app/components/ui/painel-cabecalho.tsx; IconeComBase, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao em src/app/components/ui/painel-dados.tsx` | proposta |
+| [Pílula de ação](propostas/2026-11-27-pilula-de-acao.md) | `PilulaDeAcao em src/app/components/ui/pilula-de-acao.tsx` | proposta |
+| [Prosa](propostas/2026-11-27-prosa.md) | `Prosa em src/app/components/ui/prosa.tsx` | proposta |
+| [Quadro](propostas/2026-11-27-quadro.md) | `Quadro em src/app/components/ui/quadro.tsx` | proposta |
+| [Simulação em etapas](propostas/2026-11-27-simulacao.md) | `Simulacao em src/app/components/ui/simulacao.tsx` | proposta |
+| [Stepper e cadastro em etapas](propostas/2026-11-27-stepper-e-cadastro-em-etapas.md) | `Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao, LinhaDeDado, CampoDoCadastro em src/app/components/ui/stepper.tsx, src/app/components/ui/cadastro-em-etapas.tsx` | proposta |
+| [Tabela adaptável](propostas/2026-11-27-tabela-adaptavel.md) | `TabelaAdaptavel em src/app/components/ui/tabela-adaptavel.tsx` | proposta |
+| [Tokens: sobreposição, raio de pílula, variante de toque e escala de texto](propostas/2026-11-27-tokens-sobreposicao-raio-toque-texto.md) | `tokens em src/styles/theme.css` | proposta |
 
 ## 6. Páginas e âncoras do site
 
@@ -1413,6 +1737,10 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Ícones** (`icons`): `icon-sizes` Tamanhos e cores · `icon-library` Biblioteca · `icons-tokens` Tokens
 - **Overlays** (`overlays`): `breadcrumb` Breadcrumb · `pagination` Paginação · `tooltips` Tooltips · `dropdown` Dropdown · `dialogs` Diálogos · `accordion` Accordion · `overlays-tokens` Tokens
 - **Padrões do site** (`site`): `site-rodape` Rodapé · `site-flutuantes` Elementos flutuantes · `site-cookies` Aviso de cookies · `site-entrada` Entrada ao rolar · `site-frentes` Card de frente de atuação · `site-curvas` Divisores curvos
+- **Molduras e estados** (`molduras`): `molduras-cabecalho` Cabeçalho do site · `molduras-rodape` Rodapé do site · `molduras-conta` Moldura de conta · `molduras-estados` Vazio, final e erro · `molduras-alerta-tom` Alerta por tom · `molduras-logo` Componente do logo
+- **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-tabela` Tabela adaptável
+- **Peças da área restrita** (`pecas-admin`): `admin-caixa` Caixa de entrada · `admin-conversa` Conversa · `admin-agenda` Agenda do mês · `admin-etapas` Etapas e cadastro · `admin-quadro` Quadro
+- **Seções do site** (`secoes-site`): `secoes-depoimentos` Card de depoimento · `secoes-artigos` Card de artigo · `secoes-logos` Faixa de logos · `secoes-citacao` Citação · `secoes-pilares` Pilares · `secoes-flutuantes` Cartão flutuante e luzes · `secoes-simulacao` Simulação em etapas · `secoes-numeros` Números e cards de navegação · `secoes-saiba-prosa` Saiba mais e texto longo
 - **Header e menus** (`header`): `header-demo` Demonstração · `header-models` Modelos · `header-scroll` Comportamentos de rolagem · `header-mobile` Menus no celular · `header-backgrounds` Fundos por trás do header · `header-a11y` Checklist de acessibilidade · `header-usage` Uso · `header-tokens` Tokens
 - **Painel lateral** (`sidepanel`): `sidepanel-anatomy` Anatomia · `sidepanel-behavior` Comportamento · `sidepanel-contact` Formulário de contato · `sidepanel-a11y` Checklist de acessibilidade · `sidepanel-usage` Uso · `sidepanel-tokens` Tokens
 - **Linha do tempo** (`timeline`): `timeline-demo` Demonstração · `timeline-anatomy` Anatomia · `timeline-motion` Movimento: Step Indicator · `timeline-usage` Uso

@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 84,
-    "componentesExportados": 349,
-    "templatesEPadroesSoEmDemonstracao": 76,
+    "arquivosDeComponentes": 117,
+    "componentesExportados": 401,
+    "templatesEPadroesSoEmDemonstracao": 81,
     "secoesComMarcacaoAMao": 46,
-    "tokens": 158,
-    "paginas": 29,
-    "ancoras": 202,
-    "propostas": 3
+    "tokens": 160,
+    "paginas": 33,
+    "ancoras": 229,
+    "propostas": 34
   },
   "componentes": [
     {
@@ -84,6 +84,53 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/agenda-do-mes.tsx",
+      "nome": "agenda-do-mes",
+      "quandoUsar": "AgendaDoMes (calendário do mês com compromissos): O mês inteiro com os compromissos de cada dia e, ao lado (ou embaixo, quando não cabe), a lista do dia escolhido. Veio das Reuniões da área restrita (calendário `cal-*` feito à mão). O Calendar do DS serve para escolher uma data num campo; esta agenda serve para ver o mês e o que acontece em cada dia.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "AgendaDoMes",
+          "tipo": "componente",
+          "linha": 68,
+          "descricao": "",
+          "props": [
+            "eventos",
+            "dia",
+            "diaInicial",
+            "onDiaChange",
+            "hoje",
+            "renderEvento",
+            "acoesDoDia",
+            "locale",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "AgendaDoMesProps",
+        "EventoDaAgenda",
+        "TomDoEvento"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-agenda",
+          "titulo": "Agenda do mês",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 208,
+          "uso": "direto",
+          "exports": [
+            "AgendaDoMes"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/alert.tsx",
       "nome": "alert",
       "quandoUsar": "Alerta (padrão de todos os alertas, decisão da dona do produto de 23/11/2026): Mesma aparência do Alerta com ação (ui/alerta-com-acao): cantos de 16 px, respiro de 20 × 22 px, borda na cor do estado a 22%, fundo do card com a cor do estado a 7% (9% no aviso), o svg filho vira o ícone com base (caixa de 44 px, cantos --radius-md, base na cor do estado a 18% ou 30% no aviso, ícone de 20 px na cor de ícone do estado), …",
@@ -92,18 +139,20 @@
         {
           "nome": "Alert",
           "tipo": "componente",
-          "linha": 50,
+          "linha": 66,
           "descricao": "",
           "props": [
             "className",
-            "variant"
+            "variant",
+            "tom",
+            "children"
           ],
           "reexportaDe": null
         },
         {
           "nome": "AlertTitle",
           "tipo": "componente",
-          "linha": 67,
+          "linha": 92,
           "descricao": "",
           "props": [
             "className"
@@ -113,7 +162,7 @@
         {
           "nome": "AlertDescription",
           "tipo": "componente",
-          "linha": 80,
+          "linha": 105,
           "descricao": "",
           "props": [
             "className"
@@ -121,7 +170,9 @@
           "reexportaDe": null
         }
       ],
-      "tipos": [],
+      "tipos": [
+        "TomDoAlerta"
+      ],
       "variantes": {
         "variant": [
           "destructive",
@@ -158,6 +209,32 @@
             "Alert",
             "AlertTitle",
             "AlertDescription"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-alerta-tom",
+          "titulo": "Alerta por tom",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 246,
+          "uso": "direto",
+          "exports": [
+            "Alert",
+            "AlertTitle",
+            "AlertDescription"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "direto",
+          "exports": [
+            "Alert"
           ]
         }
       ]
@@ -453,7 +530,34 @@
       ],
       "tipos": [],
       "variantes": {},
-      "ondeVer": []
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-conversa",
+          "titulo": "Conversa",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 190,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Avatar",
+            "AvatarFallback"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-quadro",
+          "titulo": "Quadro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 243,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Avatar",
+            "AvatarFallback"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/avatar-circles.tsx",
@@ -571,7 +675,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 276,
+          "linha": 329,
           "uso": "direto",
           "exports": [
             "AvisoCookies"
@@ -618,7 +722,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "AvisoProjeto"
@@ -742,6 +846,101 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/barra-de-numeros.tsx",
+      "nome": "barra-de-numeros",
+      "quandoUsar": "BarraDeNumeros (números de destaque de uma seção): Três ou quatro números grandes com o que cada um mede (\"15+ anos de experiência\", \"35 recomendações\"), numa faixa de uma seção institucional. Era a \"barra de números\" da landing de demonstração, que sobrepunha os números no celular. Para indicadores de painel com ícone e variação, use o CardIndicador.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "BarraDeNumeros",
+          "tipo": "componente",
+          "linha": 18,
+          "descricao": "",
+          "props": [
+            "itens",
+            "centralizar",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "NumeroDaBarra"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-numeros",
+          "titulo": "Números e cards de navegação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 238,
+          "uso": "direto",
+          "exports": [
+            "BarraDeNumeros"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/botao-de-envio.tsx",
+      "nome": "botao-de-envio",
+      "quandoUsar": "BotaoDeEnvio (botão com os estados de envio): O Button do DS com o retorno de cada envio, sem mudar de tamanho: parado → \"Enviando…\" (girando) → \"Enviado\" com check → volta sozinho ao estado parado; ou \"Tentar de novo\" quando falha. Veio do formulário \"Notificar lançamento\" da página inicial e dos botões \"Enviar\"/\"Salvar\" da área restrita, que pintavam os estados à mão (verde solto, #16a34a).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "BotaoDeEnvio",
+          "tipo": "componente",
+          "linha": 37,
+          "descricao": "",
+          "props": [
+            "estado",
+            "children",
+            "textos",
+            "icone",
+            "voltarApos",
+            "onVoltar",
+            "className",
+            "disabled",
+            "variant"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BotaoDeEnvioProps",
+        "EstadoDoEnvio"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-botoes",
+          "titulo": "Botões de envio e exclusão",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 278,
+          "uso": "direto",
+          "exports": [
+            "BotaoDeEnvio"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "BotaoDeEnvio"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/botao-subir.tsx",
       "nome": "botao-subir",
       "quandoUsar": "BotaoSubir (voltar ao topo): Botão redondo de 56 px, de superfície clara com borda, que aparece quando o rodapé entra na tela e leva a pessoa de volta ao topo (Projeto Piloto e Seja Parceiro). Fica ao lado do botão do WhatsApp: 88 px da direita (92 px a partir de 640 px), na mesma linha de base. Entra subindo 16 px e aparecendo; sem animação e com volta instantânea para quem pede menos movimento.",
@@ -776,7 +975,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "BotaoSubir"
@@ -793,7 +992,7 @@
         {
           "nome": "VERDE_WHATSAPP",
           "tipo": "utilitário",
-          "linha": 17,
+          "linha": 18,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -801,7 +1000,7 @@
         {
           "nome": "linkWhatsApp",
           "tipo": "utilitário",
-          "linha": 19,
+          "linha": 20,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -809,7 +1008,7 @@
         {
           "nome": "IconeWhatsApp",
           "tipo": "componente",
-          "linha": 32,
+          "linha": 33,
           "descricao": "",
           "props": [
             "className"
@@ -819,7 +1018,7 @@
         {
           "nome": "BotaoWhatsApp",
           "tipo": "componente",
-          "linha": 40,
+          "linha": 41,
           "descricao": "",
           "props": [
             "numero",
@@ -844,7 +1043,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "BotaoWhatsApp"
@@ -968,7 +1167,7 @@
         {
           "nome": "Button",
           "tipo": "componente",
-          "linha": 40,
+          "linha": 45,
           "descricao": "",
           "props": [
             "className",
@@ -1134,7 +1333,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1146,7 +1345,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 276,
+          "linha": 329,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1158,7 +1357,31 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-estados",
+          "titulo": "Vazio, final e erro",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 179,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-botoes",
+          "titulo": "Botões de envio e exclusão",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 278,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1201,6 +1424,78 @@
           ]
         },
         {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-tabela",
+          "titulo": "Tabela adaptável",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 293,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-agenda",
+          "titulo": "Agenda do mês",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 208,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
           "pagina": "overlays",
           "paginaRotulo": "Overlays",
           "ancora": null,
@@ -1210,6 +1505,270 @@
           "uso": "na página, fora das seções",
           "exports": [
             "Button"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/cabecalho-do-site.tsx",
+      "nome": "cabecalho-do-site",
+      "quandoUsar": "CabecalhoDoSite (cabeçalho do site + menu do celular): O cabeçalho de todas as páginas do site do estúdio (src/compartilhado/partes.ts, menu.ts e menu.css), no modelo documentado em Header e menus: logo, links das páginas, um botão de ação (\"Contato\") e, no celular, o menu em folha inferior. Use-o no topo de cada página; os links são páginas, e a atual fica marcada.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CabecalhoDoSite",
+          "tipo": "componente",
+          "linha": 85,
+          "descricao": "",
+          "props": [
+            "itens",
+            "atual",
+            "acao",
+            "modelo",
+            "superficie",
+            "esconderAoRolar",
+            "inicioHref",
+            "rotuloInicio",
+            "logo",
+            "raiz",
+            "posicao",
+            "tela",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "AcaoDoCabecalho",
+        "CabecalhoDoSiteProps",
+        "ItemDoCabecalho"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-cabecalho",
+          "titulo": "Cabeçalho do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 104,
+          "uso": "direto",
+          "exports": [
+            "CabecalhoDoSite"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/cadastro-em-etapas.tsx",
+      "nome": "cadastro-em-etapas",
+      "quandoUsar": "Cadastro em etapas (trazido do FindLook Design System, 27/11/2026: mesmos nomes e mesma API; só as peças gerais, sem o formulário do lojista). Serve ao cadastro de parceiro da Rede de Parceiros e a qualquer formulário longo: - MolduraDoCadastro: card com o Stepper do DS no topo.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CampoDoCadastro",
+          "tipo": "utilitário",
+          "linha": 33,
+          "descricao": "O Campo do DS com o nome usado no FindLook.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "MolduraDoCadastro",
+          "tipo": "componente",
+          "linha": 46,
+          "descricao": "",
+          "props": [
+            "etapas",
+            "atual",
+            "concluidas",
+            "onIrPara",
+            "rotulo",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "EtapaDoCadastro",
+          "tipo": "componente",
+          "linha": 74,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "explicacao",
+            "tituloRef",
+            "obrigatorios",
+            "erro",
+            "resumoDeErros",
+            "lateral",
+            "barra",
+            "onSubmit",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BarraDaEtapa",
+          "tipo": "componente",
+          "linha": 118,
+          "descricao": "",
+          "props": [
+            "onVoltar",
+            "rotuloVoltar",
+            "rotuloContinuar",
+            "carregando",
+            "textoCarregando",
+            "desativado",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "LateralDaEtapa",
+          "tipo": "componente",
+          "linha": 163,
+          "descricao": "",
+          "props": [
+            "icone",
+            "titulo",
+            "paragrafos",
+            "destaque",
+            "tom",
+            "iconeDestaque",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ListaDeRevisao",
+          "tipo": "componente",
+          "linha": 183,
+          "descricao": "Revisão",
+          "props": [
+            "children",
+            "valoresAbertos",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BlocoDeRevisao",
+          "tipo": "componente",
+          "linha": 206,
+          "descricao": "",
+          "props": [
+            "valor",
+            "titulo",
+            "nomeEtapa",
+            "resumo",
+            "onEditar",
+            "rotuloEditar",
+            "depois",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "LinhaDeDado",
+          "tipo": "componente",
+          "linha": 230,
+          "descricao": "",
+          "props": [
+            "rotulo",
+            "valor",
+            "vazio",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BarraDaEtapaProps",
+        "BlocoDeRevisaoProps",
+        "EtapaDoCadastroProps",
+        "LateralDaEtapaProps",
+        "MolduraDoCadastroProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "direto",
+          "exports": [
+            "MolduraDoCadastro",
+            "EtapaDoCadastro",
+            "BarraDaEtapa",
+            "LateralDaEtapa",
+            "ListaDeRevisao",
+            "BlocoDeRevisao",
+            "LinhaDeDado"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
+          "uso": "direto",
+          "exports": [
+            "LinhaDeDado"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/caixa-de-entrada.tsx",
+      "nome": "caixa-de-entrada",
+      "quandoUsar": "CaixaDeEntrada (lista de mensagens + painel de leitura): Mensagens, contatos ou notificações numa lista à esquerda e a mensagem aberta à direita, como o Contato da área restrita (Recebidos/Enviados) e o template Caixa de entrada, que era só demonstração e quebrava no celular.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CaixaDeEntrada",
+          "tipo": "componente",
+          "linha": 60,
+          "descricao": "",
+          "props": [
+            "itens",
+            "aberta",
+            "abertaInicial",
+            "onAbrir",
+            "renderLeitura",
+            "topo",
+            "vazio",
+            "semSelecao",
+            "rotulo",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CaixaDeEntradaProps",
+        "ItemDaCaixa"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "direto",
+          "exports": [
+            "CaixaDeEntrada"
           ]
         }
       ]
@@ -1236,6 +1795,432 @@
       "tipos": [],
       "variantes": {},
       "ondeVer": []
+    },
+    {
+      "arquivo": "src/app/components/ui/campo.tsx",
+      "nome": "campo",
+      "quandoUsar": "Campo (o campo padrão do formulário): rótulo, controle, ajuda e erro sempre na mesma ordem e com os mesmos vínculos de acessibilidade. É o CampoDoCadastro do FindLook Design System com o nome geral (a mesma API) e serve a todos os formulários: contato, cadastro de parceiro, área restrita, telas de conta.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Campo",
+          "tipo": "componente",
+          "linha": 45,
+          "descricao": "",
+          "props": [
+            "rotulo",
+            "ajuda",
+            "erro",
+            "icone",
+            "obrigatorio",
+            "inteiro",
+            "depois",
+            "classeDoBloco",
+            "className",
+            "id",
+            "children",
+            "required"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "MensagemDeErro",
+          "tipo": "componente",
+          "linha": 73,
+          "descricao": "Texto de erro de um campo ou grupo: ícone + texto na cor de texto do erro (nunca só a cor).",
+          "props": [
+            "id",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GradeDeCampos",
+          "tipo": "componente",
+          "linha": 82,
+          "descricao": "Grade dos campos: um por linha; dois por linha só a partir de 31rem (cada campo com 240 px ou mais).",
+          "props": [
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ResumoDeErros",
+          "tipo": "componente",
+          "linha": 93,
+          "descricao": "Resumo dos erros (use com 2 erros ou mais): Alerta de erro com um link para cada campo.",
+          "props": [
+            "erros",
+            "titulo",
+            "onIrPara",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "mascaraTelefone",
+          "tipo": "utilitário",
+          "linha": 124,
+          "descricao": "(41) 99999-9999 ou (41) 3333-3333, enquanto a pessoa digita.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "mascaraCnpj",
+          "tipo": "utilitário",
+          "linha": 133,
+          "descricao": "12.345.678/0001-90, enquanto a pessoa digita.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "cnpjValido",
+          "tipo": "utilitário",
+          "linha": 143,
+          "descricao": "Confere os dígitos verificadores do CNPJ (só o formato; não consulta a Receita).",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CampoDeTelefone",
+          "tipo": "componente",
+          "linha": 158,
+          "descricao": "Telefone com DDD; teclado numérico no celular.",
+          "props": [
+            "valor",
+            "onValorChange",
+            "placeholder"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CampoDeCnpj",
+          "tipo": "componente",
+          "linha": 163,
+          "descricao": "CNPJ com a máscara; teclado numérico no celular. A validação (cnpjValido) fica a cargo do formulário.",
+          "props": [
+            "valor",
+            "onValorChange",
+            "placeholder"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoProps",
+        "ErroDoResumo",
+        "PropsDoControleDoCampo"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "direto",
+          "exports": [
+            "Campo",
+            "GradeDeCampos",
+            "ResumoDeErros",
+            "cnpjValido",
+            "CampoDeTelefone",
+            "CampoDeCnpj"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Campo"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Campo"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Campo",
+            "GradeDeCampos"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/campo-copiavel.tsx",
+      "nome": "campo-copiavel",
+      "quandoUsar": "CampoCopiavel (link ou código para copiar): Um valor só de leitura com o botão Copiar ao lado: o link de uma pesquisa para enviar, um código de convite, uma chave pública. Veio das Pesquisas da área restrita (`pa-link-copiar`).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CampoCopiavel",
+          "tipo": "componente",
+          "linha": 31,
+          "descricao": "",
+          "props": [
+            "valor",
+            "rotulo",
+            "mostrarRotulo",
+            "textos",
+            "onCopiar",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoCopiavelProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212,
+          "uso": "direto",
+          "exports": [
+            "CampoCopiavel"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/campo-de-busca.tsx",
+      "nome": "campo-de-busca",
+      "quandoUsar": "CampoDeBusca (buscar numa lista): O campo de busca das listas e tabelas (parceiros, pesquisas, contatos): lupa à esquerda, o texto, e o botão Limpar (×) quando há texto. Enter não envia formulário; Esc limpa. Veio da busca da área restrita (`filters`/`search` feitos à mão). Para buscar no sistema inteiro, use o CampoDeBuscaGlobal do painel.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CampoDeBusca",
+          "tipo": "componente",
+          "linha": 31,
+          "descricao": "",
+          "props": [
+            "valor",
+            "onValorChange",
+            "onBusca",
+            "atraso",
+            "rotulo",
+            "resultados",
+            "textos",
+            "placeholder",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoDeBuscaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212,
+          "uso": "direto",
+          "exports": [
+            "CampoDeBusca"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/campo-de-email.tsx",
+      "nome": "campo-de-email",
+      "quandoUsar": "CampoDeEmail (e-mail com sugestão de domínio): O Campo de e-mail com as sugestões do site: enquanto a pessoa digita \"ana@gm\", aparecem botões \"ana@gmail.com\", \"ana@…\" com os domínios mais comuns no Brasil; um toque completa o e-mail. Veio da gaveta de contato do site (src/compartilhado/menu.ts, sugerirEmail) e do app EI (campos.tsx, CampoEmail), que tinham duas cópias.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "DOMINIOS_COMUNS",
+          "tipo": "utilitário",
+          "linha": 22,
+          "descricao": "",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "sugestoesDeEmail",
+          "tipo": "utilitário",
+          "linha": 25,
+          "descricao": "As sugestões para o que já foi digitado (no máximo 4).",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CampoDeEmail",
+          "tipo": "componente",
+          "linha": 41,
+          "descricao": "",
+          "props": [
+            "valor",
+            "onValorChange",
+            "dominios",
+            "textos",
+            "onFocus",
+            "onBlur",
+            "placeholder"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoDeEmailProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "direto",
+          "exports": [
+            "CampoDeEmail"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CampoDeEmail"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/campo-de-emails.tsx",
+      "nome": "campo-de-emails",
+      "quandoUsar": "CampoDeEmails (vários e-mails em etiquetas): Para (destinatários), Cc e Cco de um e-mail novo, convites para várias pessoas. Cada e-mail digitado vira uma etiqueta quando a pessoa aperta Enter, vírgula, ponto e vírgula, espaço ou sai do campo; colar uma lista separa os e-mails sozinho. Veio do \"Novo e-mail\" do Contato da área restrita (etiquetas `ne-tag` feitas à mão).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CampoDeEmails",
+          "tipo": "componente",
+          "linha": 40,
+          "descricao": "",
+          "props": [
+            "id",
+            "valor",
+            "onValorChange",
+            "placeholder",
+            "maximo",
+            "desabilitado",
+            "invalido",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoDeEmailsProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-emails",
+          "titulo": "Vários e-mails",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 230,
+          "uso": "direto",
+          "exports": [
+            "CampoDeEmails"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/campo-estado-cidade.tsx",
+      "nome": "campo-estado-cidade",
+      "quandoUsar": "CampoEstadoCidade (estado e cidade, em par): Dois Selects do DS lado a lado: primeiro o estado (as 27 UFs), depois a cidade daquele estado. Veio da Rede de Parceiros (cadastro) e do app EI (campos.tsx), que usavam <select> nativo.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "ESTADOS_DO_BRASIL",
+          "tipo": "utilitário",
+          "linha": 23,
+          "descricao": "",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CampoEstadoCidade",
+          "tipo": "componente",
+          "linha": 50,
+          "descricao": "",
+          "props": [
+            "uf",
+            "cidade",
+            "onChange",
+            "carregarCidades",
+            "erro",
+            "obrigatorio",
+            "desabilitado",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CampoEstadoCidadeProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "direto",
+          "exports": [
+            "CampoEstadoCidade"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/card.tsx",
@@ -1611,6 +2596,138 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/card-de-artigo.tsx",
+      "nome": "card-de-artigo",
+      "quandoUsar": "CardDeArtigo (artigo, insight ou notícia): Os cartões de \"Insights & artigos\" da página inicial (grade \"bento\": um destaque largo e cartões horizontais) e da seção de artigos das páginas de apresentação. Foto, categoria e data, título (o link), resumo em até 3 linhas e o rodapé com o tempo de leitura e \"Ler artigo\".",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CardDeArtigo",
+          "tipo": "componente",
+          "linha": 40,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "href",
+            "resumo",
+            "imagem",
+            "alt",
+            "categoria",
+            "data",
+            "tempoDeLeitura",
+            "selo",
+            "formato",
+            "novaAba",
+            "nivel",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardDeArtigoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-artigos",
+          "titulo": "Card de artigo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 79,
+          "uso": "direto",
+          "exports": [
+            "CardDeArtigo"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/card-de-depoimento.tsx",
+      "nome": "card-de-depoimento",
+      "quandoUsar": "CardDeDepoimento (depoimento de cliente ou par): O cartão dos depoimentos da página inicial (21 recomendações do LinkedIn, `testimonial-card`) e das páginas de apresentação: foto, nome e cargo em cima, o depoimento embaixo e, opcional, a origem (\"Recomendação no LinkedIn\"). Use dentro do Carousel (um por vez no celular, dois no tablet, três no computador) ou numa GradeDeCards.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CardDeDepoimento",
+          "tipo": "componente",
+          "linha": 30,
+          "descricao": "",
+          "props": [
+            "nome",
+            "cargo",
+            "foto",
+            "origem",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardDeDepoimentoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-depoimentos",
+          "titulo": "Card de depoimento",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 47,
+          "uso": "direto",
+          "exports": [
+            "CardDeDepoimento"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/card-de-navegacao.tsx",
+      "nome": "card-de-navegacao",
+      "quandoUsar": "CardDeNavegacao (card que leva a outra página): Um card inteiro clicável que leva a outra página ou seção: ícone na base, título, uma frase e a seta. Era o NavCard da página Começar do DS (só demonstração) e serve às grades \"Explore\" e aos atalhos da área restrita. Para um item de ação dentro de uma lista, use a LinhaDeLista.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CardDeNavegacao",
+          "tipo": "componente",
+          "linha": 29,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "descricao",
+            "icone",
+            "href",
+            "onClick",
+            "selo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardDeNavegacaoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-numeros",
+          "titulo": "Números e cards de navegação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 238,
+          "uso": "direto",
+          "exports": [
+            "CardDeNavegacao"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/card-frente.tsx",
       "nome": "card-frente",
       "quandoUsar": "CardDeFrente e GradeDeFrentes (frentes de atuação): Cards da seção \"Onde podemos atuar\" do Projeto Piloto (article.card-frente de projeto-piloto/index.html e src/projeto-piloto.css). Ícone num quadro de 56 px, título, subtítulo em vermelho, descrição e os temas em pílulas, separados por uma linha.",
@@ -1664,7 +2781,7 @@
           "ancora": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 568,
+          "linha": 621,
           "uso": "direto",
           "exports": [
             "CardDeFrente",
@@ -1677,7 +2794,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CardDeFrente",
@@ -1756,7 +2873,125 @@
         "CarouselApi"
       ],
       "variantes": {},
-      "ondeVer": []
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-depoimentos",
+          "titulo": "Card de depoimento",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 47,
+          "uso": "direto",
+          "exports": [
+            "Carousel",
+            "CarouselContent",
+            "CarouselItem",
+            "CarouselPrevious",
+            "CarouselNext"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/cartao-de-escolha.tsx",
+      "nome": "cartao-de-escolha",
+      "quandoUsar": "Cartão de escolha (CartaoDeEscolha, dentro de um GrupoDeCartoesDeEscolha): escolha única entre poucas opções grandes, com ícone, título e uma linha de explicação. Trazido do FindLook Design System (27/11/2026), com o mesmo nome e a mesma API; no DM, substitui os cartões selecionáveis feitos à mão (opções \"não sei\" do app EI, \"Meu negócio é…\" da gaveta de contato do site).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "GrupoDeCartoesDeEscolha",
+          "tipo": "componente",
+          "linha": 42,
+          "descricao": "",
+          "props": [
+            "value",
+            "defaultValue",
+            "onValueChange",
+            "colunas",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CartaoDeEscolha",
+          "tipo": "componente",
+          "linha": 78,
+          "descricao": "",
+          "props": [
+            "valor",
+            "titulo",
+            "descricao",
+            "icone",
+            "desabilitado",
+            "id",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CartaoDeEscolhaProps",
+        "GrupoDeCartoesDeEscolhaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-escolha",
+          "titulo": "Cartões de escolha",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 260,
+          "uso": "direto",
+          "exports": [
+            "GrupoDeCartoesDeEscolha",
+            "CartaoDeEscolha"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/cartao-flutuante.tsx",
+      "nome": "cartao-flutuante",
+      "quandoUsar": "CartaoFlutuante (selo de contexto sobre uma foto do hero): Os cartõezinhos que flutuam sobre a foto do hero da Rede de Parceiros (\"Design & UX · Protótipo em validação\", \"Pesquisa · Entrevistas com usuários\", `rp-flu`), o mesmo recurso da página do lojista da FindLook. Ícone na base, título e uma linha de estado com o ponto colorido.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CartaoFlutuante",
+          "tipo": "componente",
+          "linha": 36,
+          "descricao": "",
+          "props": [
+            "icone",
+            "titulo",
+            "estado",
+            "tom",
+            "flutuar",
+            "atraso",
+            "decorativo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CartaoFlutuanteProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-flutuantes",
+          "titulo": "Cartão flutuante e luzes",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 163,
+          "uso": "direto",
+          "exports": [
+            "CartaoFlutuante"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/chart.tsx",
@@ -1933,6 +3168,18 @@
       "variantes": {},
       "ondeVer": [
         {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
+          "uso": "direto",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
           "pagina": "templates",
           "paginaRotulo": "Templates",
           "ancora": "template-painel",
@@ -1954,6 +3201,141 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-tabela",
+          "titulo": "Tabela adaptável",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 293,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-quadro",
+          "titulo": "Quadro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 243,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/chip-filtravel.tsx",
+      "nome": "chip-filtravel",
+      "quandoUsar": "ChipFiltravel e GrupoDeChipsFiltraveis (filtros em pílulas): Filtros rápidos acima de uma lista (status, assunto, tipo), uma ou várias opções ao mesmo tempo. Era o padrão \"Chips (filtráveis)\" de Rótulos e o assunto do contato da landing, só em demonstração.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "ChipFiltravel",
+          "tipo": "componente",
+          "linha": 28,
+          "descricao": "",
+          "props": [
+            "ativo",
+            "onAtivoChange",
+            "contagem",
+            "className",
+            "children",
+            "onClick"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GrupoDeChipsFiltraveis",
+          "tipo": "componente",
+          "linha": 67,
+          "descricao": "",
+          "props": [
+            "opcoes",
+            "valor",
+            "onValorChange",
+            "multiplo",
+            "rotulo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ChipFiltravelProps",
+        "GrupoDeChipsFiltraveisProps",
+        "OpcaoDoChip"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-chips",
+          "titulo": "Chips de filtro",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 245,
+          "uso": "direto",
+          "exports": [
+            "GrupoDeChipsFiltraveis"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/citacao.tsx",
+      "nome": "citacao",
+      "quandoUsar": "Citacao (frase em destaque com autoria): Uma fala de cliente, participante ou especialista em destaque, como os depoimentos curtos de \"Uma nova perspectiva\" do Projeto Piloto e o texto original citado no app EI (`TextoOriginal`). Para uma grade de depoimentos com foto, use o CardDeDepoimento.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Citacao",
+          "tipo": "componente",
+          "linha": 26,
+          "descricao": "",
+          "props": [
+            "children",
+            "autor",
+            "papel",
+            "cite",
+            "tamanho",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CitacaoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-citacao",
+          "titulo": "Citação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 118,
+          "uso": "direto",
+          "exports": [
+            "Citacao"
           ]
         }
       ]
@@ -2373,6 +3755,127 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/conversa.tsx",
+      "nome": "conversa",
+      "quandoUsar": "Conversa (histórico de mensagens em balões): A troca de mensagens entre duas partes, como a resposta por e-mail no Contato da área restrita e o convite da simulação da Rede de Parceiros. Balões alinhados por autor: as mensagens de quem usa o sistema (\"eu\") à direita, no cinza de apoio (--secondary); as da outra pessoa (\"outro\") à esquerda, no card com borda.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Conversa",
+          "tipo": "componente",
+          "linha": 25,
+          "descricao": "",
+          "props": [
+            "className",
+            "children",
+            "rotulo"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BalaoDaConversa",
+          "tipo": "componente",
+          "linha": 51,
+          "descricao": "",
+          "props": [
+            "autor",
+            "nome",
+            "quando",
+            "avatar",
+            "estado",
+            "depois",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "SeparadorDaConversa",
+          "tipo": "componente",
+          "linha": 91,
+          "descricao": "",
+          "props": [
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "IndicadorDeDigitacao",
+          "tipo": "componente",
+          "linha": 101,
+          "descricao": "",
+          "props": [
+            "autor",
+            "avatar",
+            "rotulo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BalaoDaConversaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-conversa",
+          "titulo": "Conversa",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 190,
+          "uso": "direto",
+          "exports": [
+            "Conversa",
+            "BalaoDaConversa",
+            "SeparadorDaConversa",
+            "IndicadorDeDigitacao"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "direto",
+          "exports": [
+            "Conversa",
+            "BalaoDaConversa"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-agenda",
+          "titulo": "Agenda do mês",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 208,
+          "uso": "direto",
+          "exports": [
+            "Conversa"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
+          "uso": "direto",
+          "exports": [
+            "Conversa",
+            "BalaoDaConversa",
+            "IndicadorDeDigitacao"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/curva-secao.tsx",
       "nome": "curva-secao",
       "quandoUsar": "CurvaSecao (divisor curvo entre seções): Borda curva e suave entre uma seção clara e uma escura (Projeto Piloto, seção \"Onde podemos atuar\"). É um SVG decorativo, de ponta a ponta, que se estica na largura (preserveAspectRatio=\"none\") e fica dentro da seção, por cima do fundo dela:",
@@ -2402,7 +3905,7 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 642,
+          "linha": 695,
           "uso": "direto",
           "exports": [
             "CurvaSecao"
@@ -2414,7 +3917,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CurvaSecao"
@@ -2949,6 +4452,153 @@
             "DropdownMenuItem",
             "DropdownMenuLabel",
             "DropdownMenuSeparator"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/estado-vazio.tsx",
+      "nome": "estado-vazio",
+      "quandoUsar": "EstadoVazio, EstadoFinal e PaginaDeErro: as três telas \"sem conteúdo\" do DS: EstadoVazio — uma lista, tabela ou área que ainda não tem nada (ou que o filtro esvaziou). Ícone na base, título, uma frase que explica o porquê e, quando houver, a próxima ação. Use dentro de um card ou no lugar da lista. tom \"neutro\" (padrão: nada a fazer agora, ou \"nenhum resultado\") ou \"marca\" (convite a começar: \"Crie o primeiro\").",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "EstadoVazio",
+          "tipo": "componente",
+          "linha": 52,
+          "descricao": "",
+          "props": [
+            "icone",
+            "titulo",
+            "descricao",
+            "acoes",
+            "tom",
+            "tamanho",
+            "nivel",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "EstadoFinal",
+          "tipo": "componente",
+          "linha": 92,
+          "descricao": "",
+          "props": [
+            "tom",
+            "icone",
+            "titulo",
+            "descricao",
+            "acoes",
+            "nivel",
+            "focarAoAparecer",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "PaginaDeErro",
+          "tipo": "componente",
+          "linha": 139,
+          "descricao": "",
+          "props": [
+            "codigo",
+            "ilustracao",
+            "titulo",
+            "descricao",
+            "acoes",
+            "telaCheia",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "EstadoFinalProps",
+        "EstadoVazioProps",
+        "PaginaDeErroProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-estados",
+          "titulo": "Vazio, final e erro",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 179,
+          "uso": "direto",
+          "exports": [
+            "EstadoVazio",
+            "EstadoFinal",
+            "PaginaDeErro"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "EstadoVazio"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "EstadoFinal"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/faixa-de-logos.tsx",
+      "nome": "faixa-de-logos",
+      "quandoUsar": "FaixaDeLogos (empresas atendidas, parceiros, imprensa): Uma faixa de logos que corre devagar, como \"Empresas atendidas\" da página inicial (carrossel `client-marquee` com CSS próprio). O FindLook DS tem a FaixaDeParceiros, com a mesma ideia.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "FaixaDeLogos",
+          "tipo": "componente",
+          "linha": 34,
+          "descricao": "",
+          "props": [
+            "logos",
+            "rotulo",
+            "duracao",
+            "colorirAoPassar",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "FaixaDeLogosProps",
+        "LogoDaFaixa"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-logos",
+          "titulo": "Faixa de logos",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 102,
+          "uso": "direto",
+          "exports": [
+            "FaixaDeLogos"
           ]
         }
       ]
@@ -3560,7 +5210,7 @@
           "ancora": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -3573,7 +5223,85 @@
           "ancora": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 568,
+          "linha": 621,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-estados",
+          "titulo": "Vazio, final e erro",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 179,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-logo",
+          "titulo": "Componente do logo",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 265,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-artigos",
+          "titulo": "Card de artigo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 79,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-citacao",
+          "titulo": "Citação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 118,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-numeros",
+          "titulo": "Números e cards de navegação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 238,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-saiba-prosa",
+          "titulo": "Saiba mais e texto longo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 258,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -3886,7 +5614,7 @@
           "ancora": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 128,
+          "linha": 129,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3898,7 +5626,7 @@
           "ancora": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 276,
+          "linha": 329,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3910,7 +5638,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3922,7 +5650,259 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 642,
+          "linha": 695,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-cabecalho",
+          "titulo": "Cabeçalho do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 104,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-rodape",
+          "titulo": "Rodapé do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 132,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-alerta-tom",
+          "titulo": "Alerta por tom",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 246,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-emails",
+          "titulo": "Vários e-mails",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 230,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-chips",
+          "titulo": "Chips de filtro",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 245,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-escolha",
+          "titulo": "Cartões de escolha",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 260,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-botoes",
+          "titulo": "Botões de envio e exclusão",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 278,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-tabela",
+          "titulo": "Tabela adaptável",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 293,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-conversa",
+          "titulo": "Conversa",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 190,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-agenda",
+          "titulo": "Agenda do mês",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 208,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-quadro",
+          "titulo": "Quadro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 243,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-depoimentos",
+          "titulo": "Card de depoimento",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 47,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-logos",
+          "titulo": "Faixa de logos",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 102,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-pilares",
+          "titulo": "Pilares",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 140,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-flutuantes",
+          "titulo": "Cartão flutuante e luzes",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 163,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -5382,7 +7362,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 122,
+          "linha": 123,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -5394,7 +7374,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 688,
+          "linha": 741,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -5656,7 +7636,7 @@
           "ancora": "catalogo-lista",
           "titulo": "Todos os componentes",
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 142,
+          "linha": 143,
           "uso": "direto",
           "exports": [
             "Input"
@@ -5748,12 +7728,36 @@
       "variantes": {},
       "ondeVer": [
         {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "direto",
+          "exports": [
+            "Label"
+          ]
+        },
+        {
           "pagina": "cards",
           "paginaRotulo": "Cards",
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
           "linha": 706,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Label"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-emails",
+          "titulo": "Vários e-mails",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 230,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -5833,6 +7837,151 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/link-saiba-mais.tsx",
+      "nome": "link-saiba-mais",
+      "quandoUsar": "LinkSaibaMais (alça \"Saiba mais\" do hero): O link que convida a rolar até a próxima seção, centralizado na base do hero (`ih-alca` da página inicial e `rp-alca` da Rede de Parceiros): texto e a seta num círculo que desce e sobe devagar. Com `direcao=\"direita\"`, vira um link de continuação no fim de um bloco (\"Saiba mais →\").",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "LinkSaibaMais",
+          "tipo": "componente",
+          "linha": 24,
+          "descricao": "",
+          "props": [
+            "children",
+            "direcao",
+            "sobreEscuro",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "LinkSaibaMaisProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-saiba-prosa",
+          "titulo": "Saiba mais e texto longo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 258,
+          "uso": "direto",
+          "exports": [
+            "LinkSaibaMais"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/lista-de-pilares.tsx",
+      "nome": "lista-de-pilares",
+      "quandoUsar": "ListaDePilares (3 a 5 ideias com ícone, em sequência): Os pilares de uma seção institucional: \"Contato · Relacionamento · Indicação\" da Rede de Parceiros (`rx-pilares`, com o feixe que liga os ícones) e os passos de \"Uma nova perspectiva\" do Projeto Piloto. Cada pilar: ícone na base rosa (IconeComBase marca), título curto e uma frase.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "ListaDePilares",
+          "tipo": "componente",
+          "linha": 44,
+          "descricao": "",
+          "props": [
+            "pilares",
+            "rotulo",
+            "ordenada",
+            "linha",
+            "nivel",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ListaDePilaresProps",
+        "Pilar"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-pilares",
+          "titulo": "Pilares",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 140,
+          "uso": "direto",
+          "exports": [
+            "ListaDePilares"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/logo.tsx",
+      "nome": "logo",
+      "quandoUsar": "",
+      "fonteDescricao": null,
+      "exports": [
+        {
+          "nome": "Logo",
+          "tipo": "componente",
+          "linha": 45,
+          "descricao": "",
+          "props": [
+            "variante",
+            "superficie",
+            "rotulo",
+            "corDoSimbolo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "LogoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-logo",
+          "titulo": "Componente do logo",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 265,
+          "uso": "direto",
+          "exports": [
+            "Logo"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-logos",
+          "titulo": "Faixa de logos",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 102,
+          "uso": "direto",
+          "exports": [
+            "Logo"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
+          "uso": "direto",
+          "exports": [
+            "Logo"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/lucide-catalogo.ts",
       "nome": "lucide-catalogo",
       "quandoUsar": "Catálogo da biblioteca Lucide (lucide-react 1.70.0): 2029 ícones nas categorias oficiais da Lucide (lucide.dev). Cada ícone aparece na sua primeira categoria. Gerado a partir de lucide.dev/api/categories.",
@@ -5870,6 +8019,44 @@
           "uso": "direto",
           "exports": [
             "versaoLucide"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/luzes-difusas.tsx",
+      "nome": "luzes-difusas",
+      "quandoUsar": "Luzes difusas (tema escuro). Trazido do FindLook Design System (27/11/2026), mesmo nome e mesma API, com as cores deste DS (primária, violeta e crimson-600). No site do estúdio: os círculos de luz atrás da foto do hero da página inicial e do card \"Empresas atendidas\" (`ih-luz`).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "LuzesDifusas",
+          "tipo": "componente",
+          "linha": 47,
+          "descricao": "",
+          "props": [
+            "variante",
+            "dissolver",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "LuzesDifusasProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-flutuantes",
+          "titulo": "Cartão flutuante e luzes",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 163,
+          "uso": "direto",
+          "exports": [
+            "LuzesDifusas"
           ]
         }
       ]
@@ -6045,6 +8232,51 @@
       "tipos": [],
       "variantes": {},
       "ondeVer": []
+    },
+    {
+      "arquivo": "src/app/components/ui/moldura-de-conta.tsx",
+      "nome": "moldura-de-conta",
+      "quandoUsar": "MolduraDeConta (telas de acesso): A moldura das telas de conta: entrar, criar ou definir senha, esqueci a senha, link expirado, sem acesso. Página inteira no fundo da página, com um card estreito centralizado: logo (link para o início), selo opcional (\"Área restrita\"), título, uma frase de apoio, o formulário (children) e um rodapé opcional (links como \"Voltar para entrar\").",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "MolduraDeConta",
+          "tipo": "componente",
+          "linha": 37,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "descricao",
+            "selo",
+            "logo",
+            "inicioHref",
+            "rotuloInicio",
+            "rodape",
+            "telaCheia",
+            "children",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "MolduraDeContaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "direto",
+          "exports": [
+            "MolduraDeConta"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/navigation-menu.tsx",
@@ -6470,6 +8702,18 @@
             "CardIndicador",
             "CardComCabecalho",
             "LinkVerTudo"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "IconeComBase"
           ]
         }
       ]
@@ -6912,6 +9156,67 @@
             "regrasPadrao",
             "PasswordConfirm"
           ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "PasswordInput"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/pilula-de-acao.tsx",
+      "nome": "pilula-de-acao",
+      "quandoUsar": "PilulaDeAcao (pílula de ação flutuante): Botão em pílula, na primária, fixo ao lado do botão do WhatsApp, com a ação principal da página: \"Quero ser parceiro\" (Seja Parceiro) e \"Cadastrar empresa\" (Projeto Piloto). Do site: #cta-flutuante e .faixa-flutuante (src/rede-parceiros-inicio.ts e .css, src/projeto-piloto.ts e .css).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "PilulaDeAcao",
+          "tipo": "componente",
+          "linha": 90,
+          "descricao": "",
+          "props": [
+            "rotulo",
+            "href",
+            "onClick",
+            "icone",
+            "iconeAntes",
+            "visivel",
+            "mostrarApos",
+            "esconderCom",
+            "sempreAte",
+            "raiz",
+            "layout",
+            "faixa",
+            "fixo",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "PilulaDeAcaoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "site",
+          "paginaRotulo": "Padrões do site",
+          "ancora": "site-flutuantes",
+          "titulo": "Elementos flutuantes",
+          "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
+          "linha": 202,
+          "uso": "direto",
+          "exports": [
+            "PilulaDeAcao"
+          ]
         }
       ]
     },
@@ -6983,6 +9288,84 @@
       "tipos": [],
       "variantes": {},
       "ondeVer": []
+    },
+    {
+      "arquivo": "src/app/components/ui/prosa.tsx",
+      "nome": "prosa",
+      "quandoUsar": "Prosa (texto longo: política de privacidade, termos, artigos): Aplica a tipografia do DS a um texto corrido escrito em HTML simples (h2, h3, p, ul, ol, a, strong, blockquote, table), sem classes em cada elemento: Política de privacidade, termos de uso, descadastro, notas legais. Veio da página /privacidade/ do site (44 linhas de CSS próprio).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Prosa",
+          "tipo": "componente",
+          "linha": 20,
+          "descricao": "",
+          "props": [
+            "tamanho",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ProsaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-saiba-prosa",
+          "titulo": "Saiba mais e texto longo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 258,
+          "uso": "direto",
+          "exports": [
+            "Prosa"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/quadro.tsx",
+      "nome": "quadro",
+      "quandoUsar": "Quadro (colunas de etapas com cartões, estilo kanban): Itens organizados por etapa: o quadro ilustrativo da Rede de Parceiros (`rx-kanban`: Em análise, Convite, Em colaboração…) e o acompanhamento de candidaturas ou projetos na área restrita. Cada coluna tem título, a quantidade e os cartões (título, uma linha de apoio, etiqueta e pessoa).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Quadro",
+          "tipo": "componente",
+          "linha": 60,
+          "descricao": "",
+          "props": [
+            "colunas",
+            "rotulo",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CartaoDoQuadro",
+        "ColunaDoQuadro",
+        "QuadroProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-quadro",
+          "titulo": "Quadro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 243,
+          "uso": "direto",
+          "exports": [
+            "Quadro"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/radio-group.tsx",
@@ -7113,7 +9496,19 @@
           "ancora": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 128,
+          "linha": 129,
+          "uso": "direto",
+          "exports": [
+            "RodapeSite"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-rodape",
+          "titulo": "Rodapé do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 132,
           "uso": "direto",
           "exports": [
             "RodapeSite"
@@ -7214,7 +9609,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -7239,6 +9634,18 @@
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
           "linha": 1268,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-cabecalho",
+          "titulo": "Cabeçalho do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 104,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -7448,7 +9855,7 @@
           "ancora": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 642,
+          "linha": 695,
           "uso": "direto",
           "exports": [
             "SeloSecao"
@@ -7460,7 +9867,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SeloSecao"
@@ -7623,6 +10030,24 @@
             "className",
             "style"
           ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "BrilhoDeSelecionado",
+          "tipo": "componente",
+          "linha": 78,
+          "descricao": "Borda do card selecionado (trazido do FindLook Design System, 27/11/2026, mesmo nome e mesma API): o brilho que corre por cima da borda de 2 px na primária dos cards que se escolhem (CartaoDeEscolha).",
+          "props": [
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "molduraDoSelecionavel",
+          "tipo": "utilitário",
+          "linha": 87,
+          "descricao": "Moldura do card selecionável (regra dos rosas claros, 27/11/2026): selecionado = borda de 2 px na primária e fundo no rosa de selecionado (--primary-suave), que continua com o mouse em cima;",
+          "props": [],
           "reexportaDe": null
         }
       ],
@@ -8086,6 +10511,50 @@
       "ondeVer": []
     },
     {
+      "arquivo": "src/app/components/ui/simulacao.tsx",
+      "nome": "simulacao",
+      "quandoUsar": "Simulacao (demonstração em etapas: tópicos + tela simulada): Conta um processo em etapas com uma tela de exemplo que muda a cada etapa, como \"Da conexão à colaboração\" da Rede de Parceiros (`rx-mt-*`: tópicos clicáveis à esquerda e a tela do sistema à direita). Cada tópico tem título, uma frase e a cena (qualquer conteúdo do DS: um formulário de exemplo, um cartão de pessoa, uma conversa).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Simulacao",
+          "tipo": "componente",
+          "linha": 41,
+          "descricao": "",
+          "props": [
+            "topicos",
+            "intro",
+            "topoDaTela",
+            "intervalo",
+            "autoAvancar",
+            "rotulo",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "SimulacaoProps",
+        "TopicoDaSimulacao"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189,
+          "uso": "direto",
+          "exports": [
+            "Simulacao"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/skeleton.tsx",
       "nome": "skeleton",
       "quandoUsar": "Espaço de carregamento no formato do conteúdo.",
@@ -8177,6 +10646,49 @@
       "ondeVer": []
     },
     {
+      "arquivo": "src/app/components/ui/stepper.tsx",
+      "nome": "stepper",
+      "quandoUsar": "Stepper (indicador de etapas) — progresso de um formulário em várias telas: Trazido do FindLook Design System (mesmo nome e mesma API, 27/11/2026), com a escala deste DS: etapas em abas numeradas (\"01\", \"02\"…), lado a lado sobre uma linha. Serve ao cadastro de parceiro da Rede de Parceiros e a qualquer formulário em várias telas.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Stepper",
+          "tipo": "componente",
+          "linha": 70,
+          "descricao": "",
+          "props": [
+            "etapas",
+            "atual",
+            "concluidas",
+            "onIrPara",
+            "rotulo",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "StepperEtapa",
+        "StepperProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222,
+          "uso": "direto",
+          "exports": [
+            "Stepper"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/surgir-ao-rolar.tsx",
       "nome": "surgir-ao-rolar",
       "quandoUsar": "SurgirAoRolar e TituloQueSurge (entrada ao rolar): Os blocos entram quando chegam na tela, como no site do estúdio. Dois efeitos, os dois do site:",
@@ -8246,7 +10758,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501,
+          "linha": 554,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SurgirAoRolar",
@@ -8297,6 +10809,51 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "Switch"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/tabela-adaptavel.tsx",
+      "nome": "tabela-adaptavel",
+      "quandoUsar": "TabelaAdaptavel (tabela que nunca rola para o lado): Regra do DS: card nunca tem rolagem horizontal. A tabela mostra as colunas que cabem na largura dela (não da tela): - prioridade 1 (padrão): sempre aparece; - prioridade 2: some abaixo de 36rem (576 px); - prioridade 3: some abaixo de 48rem (768 px); quando alguma coluna sai, um aviso curto embaixo diz quais (\"Nesta largura, ficam de fora: Plano, Cidade\").",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "TabelaAdaptavel",
+          "tipo": "componente",
+          "linha": 50,
+          "descricao": "",
+          "props": [
+            "colunas",
+            "linhas",
+            "chave",
+            "legenda",
+            "mostrarLegenda",
+            "acoes",
+            "vazio",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ColunaDaTabela",
+        "TabelaAdaptavelProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-tabela",
+          "titulo": "Tabela adaptável",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 293,
+          "uso": "direto",
+          "exports": [
+            "TabelaAdaptavel"
           ]
         }
       ]
@@ -8493,6 +11050,30 @@
       "tipos": [],
       "variantes": {},
       "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Textarea"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Textarea"
+          ]
+        },
         {
           "pagina": "overlays",
           "paginaRotulo": "Overlays",
@@ -10802,7 +13383,7 @@
       "nome": "SecaoEscopo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 414,
+      "linha": 467,
       "descricao": "A seção \"Onde podemos atuar\" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site.",
       "pagina": "site",
       "paginaRotulo": "Padrões do site",
@@ -10813,7 +13394,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501
+          "linha": 554
         }
       ],
       "usaComponentes": [
@@ -10828,7 +13409,7 @@
       "nome": "SecaoArtigos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 462,
+      "linha": 515,
       "descricao": "Cabeçalho da seção \"Insights & Artigos\" da Home, com o desfoque do site; os cards são blocos neutros.",
       "pagina": "site",
       "paginaRotulo": "Padrões do site",
@@ -10839,7 +13420,7 @@
           "ancora": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501
+          "linha": 554
         }
       ],
       "usaComponentes": [
@@ -10848,6 +13429,142 @@
         "TituloQueSurge"
       ],
       "elementosFeitosAMao": 6
+    },
+    {
+      "nome": "DemoCabecalho",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+      "linha": 22,
+      "descricao": "Molduras e estados (27/11/2026): cabeçalho do site, rodapé, moldura das telas de conta, estados vazio/final/erro, alerta por tom e logo.",
+      "pagina": "molduras",
+      "paginaRotulo": "Molduras e estados",
+      "onde": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-cabecalho",
+          "titulo": "Cabeçalho do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 104
+        }
+      ],
+      "usaComponentes": [
+        "CabecalhoDoSite",
+        "SegmentedControl"
+      ],
+      "elementosFeitosAMao": 5
+    },
+    {
+      "nome": "DemoConta",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+      "linha": 77,
+      "descricao": "",
+      "pagina": "molduras",
+      "paginaRotulo": "Molduras e estados",
+      "onde": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154
+        }
+      ],
+      "usaComponentes": [
+        "Button",
+        "Campo",
+        "MolduraDeConta",
+        "PasswordInput"
+      ],
+      "elementosFeitosAMao": 1
+    },
+    {
+      "nome": "DemoCampos",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+      "linha": 33,
+      "descricao": "",
+      "pagina": "campos",
+      "paginaRotulo": "Campos",
+      "onde": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185
+        }
+      ],
+      "usaComponentes": [
+        "Button",
+        "Campo",
+        "CampoDeCnpj",
+        "CampoDeEmail",
+        "CampoDeTelefone",
+        "CampoEstadoCidade",
+        "GradeDeCampos",
+        "ResumoDeErros",
+        "Textarea"
+      ],
+      "elementosFeitosAMao": 2
+    },
+    {
+      "nome": "DemoBusca",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+      "linha": 69,
+      "descricao": "",
+      "pagina": "campos",
+      "paginaRotulo": "Campos",
+      "onde": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212
+        }
+      ],
+      "usaComponentes": [
+        "Button",
+        "CampoDeBusca",
+        "EstadoVazio"
+      ],
+      "elementosFeitosAMao": 1
+    },
+    {
+      "nome": "DemoCaixa",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+      "linha": 24,
+      "descricao": "Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo.",
+      "pagina": "pecas-admin",
+      "paginaRotulo": "Peças da área restrita",
+      "onde": [
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174
+        }
+      ],
+      "usaComponentes": [
+        "BalaoDaConversa",
+        "BotaoDeEnvio",
+        "CaixaDeEntrada",
+        "Campo",
+        "ChipDeEstado",
+        "Conversa",
+        "IconeComBase",
+        "Textarea"
+      ],
+      "elementosFeitosAMao": 2
     },
     {
       "nome": "Segmentado",
@@ -11023,7 +13740,7 @@
       "ancora": "whats-new",
       "titulo": "Novidades",
       "arquivo": "src/app/components/showcase/HomeShowcase.tsx",
-      "linha": 117,
+      "linha": 121,
       "elementosFeitosAMao": 3,
       "usaComponentes": []
     },
@@ -11272,7 +13989,7 @@
       "ancora": "catalogo-lista",
       "titulo": "Todos os componentes",
       "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-      "linha": 142,
+      "linha": 143,
       "elementosFeitosAMao": 5,
       "usaComponentes": [
         "Input"
@@ -11511,15 +14228,16 @@
       "ancora": "site-flutuantes",
       "titulo": "Elementos flutuantes",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 196,
-      "elementosFeitosAMao": 3,
+      "linha": 202,
+      "elementosFeitosAMao": 15,
       "usaComponentes": [
         "AvisoProjeto",
         "BotaoSubir",
         "BotaoWhatsApp",
         "Button",
         "GradeDeCards",
-        "ItemDaGrade"
+        "ItemDaGrade",
+        "PilulaDeAcao"
       ]
     },
     {
@@ -11528,7 +14246,7 @@
       "ancora": "site-curvas",
       "titulo": "Divisores curvos",
       "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-      "linha": 642,
+      "linha": 695,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "CurvaSecao",
@@ -11987,6 +14705,13 @@
       {
         "nome": "--radius",
         "claro": "0.75rem",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
+      },
+      {
+        "nome": "--radius-full",
+        "claro": "9999px",
         "escuro": null,
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
@@ -12670,6 +15395,13 @@
         "escuro": null,
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
+      },
+      {
+        "nome": "--sobreposicao",
+        "claro": "color-mix(in srgb, var(--graphite-950) 50%, transparent)",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       }
     ],
     "escalaTipografica": [
@@ -12983,10 +15715,94 @@
   },
   "propostas": [
     {
+      "arquivo": "propostas/2026-11-27-agenda-do-mes.md",
+      "titulo": "Agenda do mês",
+      "status": "proposta",
+      "componente": "AgendaDoMes em src/app/components/ui/agenda-do-mes.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-alerta-tom.md",
+      "titulo": "Alerta por tom",
+      "status": "proposta",
+      "componente": "Alert (prop tom) em src/app/components/ui/alert.tsx"
+    },
+    {
       "arquivo": "propostas/2026-11-27-barra-de-composicao.md",
       "titulo": "Barra de composição",
       "status": "proposta",
       "componente": "BarraDeComposicao em src/app/components/ui/barra-de-composicao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-barra-de-numeros.md",
+      "titulo": "Barra de números",
+      "status": "proposta",
+      "componente": "BarraDeNumeros em src/app/components/ui/barra-de-numeros.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-botao-de-envio.md",
+      "titulo": "Botão de envio e exclusão em contorno",
+      "status": "proposta",
+      "componente": "BotaoDeEnvio, Button variant=\"outline-destructive\" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-cabecalho-do-site.md",
+      "titulo": "Cabeçalho do site",
+      "status": "proposta",
+      "componente": "CabecalhoDoSite em src/app/components/ui/cabecalho-do-site.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-caixa-de-entrada.md",
+      "titulo": "Caixa de entrada",
+      "status": "proposta",
+      "componente": "CaixaDeEntrada em src/app/components/ui/caixa-de-entrada.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-campo-de-busca-e-copiavel.md",
+      "titulo": "Campo de busca e campo copiável",
+      "status": "proposta",
+      "componente": "CampoDeBusca, CampoCopiavel em src/app/components/ui/campo-de-busca.tsx, src/app/components/ui/campo-copiavel.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-campo-de-emails.md",
+      "titulo": "Campo de vários e-mails",
+      "status": "proposta",
+      "componente": "CampoDeEmails em src/app/components/ui/campo-de-emails.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-campo.md",
+      "titulo": "Campo, CampoDeEmail, CampoEstadoCidade e máscaras",
+      "status": "proposta",
+      "componente": "Campo, GradeDeCampos, MensagemDeErro, ResumoDeErros, CampoDeTelefone, CampoDeCnpj, mascaraTelefone, mascaraCnpj, cnpjValido, CampoDeEmail, CampoEstadoCidade em src/app/components/ui/campo.tsx, src/app/components/ui/campo-de-email.tsx, src/app/components/ui/campo-estado-cidade.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-card-de-artigo.md",
+      "titulo": "Card de artigo",
+      "status": "proposta",
+      "componente": "CardDeArtigo em src/app/components/ui/card-de-artigo.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-card-de-depoimento.md",
+      "titulo": "Card de depoimento",
+      "status": "proposta",
+      "componente": "CardDeDepoimento em src/app/components/ui/card-de-depoimento.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-card-de-navegacao.md",
+      "titulo": "Card de navegação",
+      "status": "proposta",
+      "componente": "CardDeNavegacao em src/app/components/ui/card-de-navegacao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-cartao-de-escolha.md",
+      "titulo": "Cartão de escolha",
+      "status": "proposta",
+      "componente": "GrupoDeCartoesDeEscolha, CartaoDeEscolha, BrilhoDeSelecionado, molduraDoSelecionavel em src/app/components/ui/cartao-de-escolha.tsx, src/app/components/ui/shine-border.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-cartao-flutuante.md",
+      "titulo": "Cartão flutuante",
+      "status": "proposta",
+      "componente": "CartaoFlutuante em src/app/components/ui/cartao-flutuante.tsx"
     },
     {
       "arquivo": "propostas/2026-11-27-chip-de-estado.md",
@@ -12995,10 +15811,112 @@
       "componente": "ChipDeEstado em src/app/components/ui/chip-de-estado.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-27-chip-filtravel.md",
+      "titulo": "Chip filtrável",
+      "status": "proposta",
+      "componente": "ChipFiltravel, GrupoDeChipsFiltraveis em src/app/components/ui/chip-filtravel.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-citacao.md",
+      "titulo": "Citação",
+      "status": "proposta",
+      "componente": "Citacao em src/app/components/ui/citacao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-conversa.md",
+      "titulo": "Conversa",
+      "status": "proposta",
+      "componente": "Conversa, BalaoDaConversa, SeparadorDaConversa, IndicadorDeDigitacao em src/app/components/ui/conversa.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-estado-vazio.md",
+      "titulo": "Estado vazio, estado final e página de erro",
+      "status": "proposta",
+      "componente": "EstadoVazio, EstadoFinal, PaginaDeErro em src/app/components/ui/estado-vazio.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-faixa-de-logos.md",
+      "titulo": "Faixa de logos",
+      "status": "proposta",
+      "componente": "FaixaDeLogos em src/app/components/ui/faixa-de-logos.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-link-saiba-mais.md",
+      "titulo": "Link Saiba mais",
+      "status": "proposta",
+      "componente": "LinkSaibaMais em src/app/components/ui/link-saiba-mais.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-lista-de-pilares.md",
+      "titulo": "Lista de pilares",
+      "status": "proposta",
+      "componente": "ListaDePilares em src/app/components/ui/lista-de-pilares.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-logo.md",
+      "titulo": "Logo",
+      "status": "proposta",
+      "componente": "Logo em src/app/components/ui/logo.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-luzes-difusas.md",
+      "titulo": "Luzes difusas",
+      "status": "proposta",
+      "componente": "LuzesDifusas em src/app/components/ui/luzes-difusas.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-moldura-de-conta.md",
+      "titulo": "Moldura de conta",
+      "status": "proposta",
+      "componente": "MolduraDeConta em src/app/components/ui/moldura-de-conta.tsx"
+    },
+    {
       "arquivo": "propostas/2026-11-27-pecas-do-painel.md",
       "titulo": "Peças do painel: casca, cabeçalho da página, card de indicador e ícone com base",
       "status": "proposta",
       "componente": "MenuLateralProvider, MenuLateral, TopoDoMenu, BotaoRecolherMenu, NavDoMenu, ItemDoMenu, GrupoDoMenu, BarraSuperiorDoPainel, BotaoDeNotificacoes, GatilhoDaConta, AvatarPainel, ContadorDoPainel, CampoDeBuscaGlobal, CardDeAjuda em src/app/components/ui/painel-shell.tsx; CabecalhoDaPagina em src/app/components/ui/painel-cabecalho.tsx; IconeComBase, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao em src/app/components/ui/painel-dados.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-pilula-de-acao.md",
+      "titulo": "Pílula de ação",
+      "status": "proposta",
+      "componente": "PilulaDeAcao em src/app/components/ui/pilula-de-acao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-prosa.md",
+      "titulo": "Prosa",
+      "status": "proposta",
+      "componente": "Prosa em src/app/components/ui/prosa.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-quadro.md",
+      "titulo": "Quadro",
+      "status": "proposta",
+      "componente": "Quadro em src/app/components/ui/quadro.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-simulacao.md",
+      "titulo": "Simulação em etapas",
+      "status": "proposta",
+      "componente": "Simulacao em src/app/components/ui/simulacao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-stepper-e-cadastro-em-etapas.md",
+      "titulo": "Stepper e cadastro em etapas",
+      "status": "proposta",
+      "componente": "Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao, LinhaDeDado, CampoDoCadastro em src/app/components/ui/stepper.tsx, src/app/components/ui/cadastro-em-etapas.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-tabela-adaptavel.md",
+      "titulo": "Tabela adaptável",
+      "status": "proposta",
+      "componente": "TabelaAdaptavel em src/app/components/ui/tabela-adaptavel.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-tokens-sobreposicao-raio-toque-texto.md",
+      "titulo": "Tokens: sobreposição, raio de pílula, variante de toque e escala de texto",
+      "status": "proposta",
+      "componente": "tokens em src/styles/theme.css"
     }
   ],
   "paginas": [
@@ -13011,13 +15929,13 @@
           "id": "whats-new",
           "titulo": "Novidades",
           "arquivo": "src/app/components/showcase/HomeShowcase.tsx",
-          "linha": 117
+          "linha": 121
         },
         {
           "id": "home-explore",
           "titulo": "Tudo no sistema",
           "arquivo": "src/app/components/showcase/HomeShowcase.tsx",
-          "linha": 156
+          "linha": 160
         }
       ]
     },
@@ -13678,7 +16596,7 @@
           "id": "catalogo-lista",
           "titulo": "Todos os componentes",
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 142
+          "linha": 143
         }
       ]
     },
@@ -14191,37 +17109,227 @@
           "id": "site-rodape",
           "titulo": "Rodapé",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 128
+          "linha": 129
         },
         {
           "id": "site-flutuantes",
           "titulo": "Elementos flutuantes",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 196
+          "linha": 202
         },
         {
           "id": "site-cookies",
           "titulo": "Aviso de cookies",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 276
+          "linha": 329
         },
         {
           "id": "site-entrada",
           "titulo": "Entrada ao rolar",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 501
+          "linha": 554
         },
         {
           "id": "site-frentes",
           "titulo": "Card de frente de atuação",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 568
+          "linha": 621
         },
         {
           "id": "site-curvas",
           "titulo": "Divisores curvos",
           "arquivo": "src/app/components/showcase/SitePatternsShowcase.tsx",
-          "linha": 642
+          "linha": 695
+        }
+      ]
+    },
+    {
+      "id": "molduras",
+      "rotulo": "Molduras e estados",
+      "grupo": "Componentes",
+      "ancoras": [
+        {
+          "id": "molduras-cabecalho",
+          "titulo": "Cabeçalho do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 104
+        },
+        {
+          "id": "molduras-rodape",
+          "titulo": "Rodapé do site",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 132
+        },
+        {
+          "id": "molduras-conta",
+          "titulo": "Moldura de conta",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 154
+        },
+        {
+          "id": "molduras-estados",
+          "titulo": "Vazio, final e erro",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 179
+        },
+        {
+          "id": "molduras-alerta-tom",
+          "titulo": "Alerta por tom",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 246
+        },
+        {
+          "id": "molduras-logo",
+          "titulo": "Componente do logo",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 265
+        }
+      ]
+    },
+    {
+      "id": "campos",
+      "rotulo": "Campos",
+      "grupo": "Componentes",
+      "ancoras": [
+        {
+          "id": "campos-campo",
+          "titulo": "Campo e máscaras",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 185
+        },
+        {
+          "id": "campos-busca",
+          "titulo": "Busca e copiar",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 212
+        },
+        {
+          "id": "campos-emails",
+          "titulo": "Vários e-mails",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 230
+        },
+        {
+          "id": "campos-chips",
+          "titulo": "Chips de filtro",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 245
+        },
+        {
+          "id": "campos-escolha",
+          "titulo": "Cartões de escolha",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 260
+        },
+        {
+          "id": "campos-botoes",
+          "titulo": "Botões de envio e exclusão",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 278
+        },
+        {
+          "id": "campos-tabela",
+          "titulo": "Tabela adaptável",
+          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
+          "linha": 293
+        }
+      ]
+    },
+    {
+      "id": "pecas-admin",
+      "rotulo": "Peças da área restrita",
+      "grupo": "Componentes",
+      "ancoras": [
+        {
+          "id": "admin-caixa",
+          "titulo": "Caixa de entrada",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 174
+        },
+        {
+          "id": "admin-conversa",
+          "titulo": "Conversa",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 190
+        },
+        {
+          "id": "admin-agenda",
+          "titulo": "Agenda do mês",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 208
+        },
+        {
+          "id": "admin-etapas",
+          "titulo": "Etapas e cadastro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 222
+        },
+        {
+          "id": "admin-quadro",
+          "titulo": "Quadro",
+          "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
+          "linha": 243
+        }
+      ]
+    },
+    {
+      "id": "secoes-site",
+      "rotulo": "Seções do site",
+      "grupo": "Componentes",
+      "ancoras": [
+        {
+          "id": "secoes-depoimentos",
+          "titulo": "Card de depoimento",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 47
+        },
+        {
+          "id": "secoes-artigos",
+          "titulo": "Card de artigo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 79
+        },
+        {
+          "id": "secoes-logos",
+          "titulo": "Faixa de logos",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 102
+        },
+        {
+          "id": "secoes-citacao",
+          "titulo": "Citação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 118
+        },
+        {
+          "id": "secoes-pilares",
+          "titulo": "Pilares",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 140
+        },
+        {
+          "id": "secoes-flutuantes",
+          "titulo": "Cartão flutuante e luzes",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 163
+        },
+        {
+          "id": "secoes-simulacao",
+          "titulo": "Simulação em etapas",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 189
+        },
+        {
+          "id": "secoes-numeros",
+          "titulo": "Números e cards de navegação",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 238
+        },
+        {
+          "id": "secoes-saiba-prosa",
+          "titulo": "Saiba mais e texto longo",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 258
         }
       ]
     },

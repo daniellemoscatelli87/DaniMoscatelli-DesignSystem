@@ -48,28 +48,28 @@ function CardDeArtigo({ titulo, href, resumo, imagem, alt = "", categoria, data,
         {imagem && (
           <div className={cn("relative overflow-hidden bg-muted", formato === "destaque" ? "aspect-[16/10] @min-[48rem]/artigo:aspect-auto @min-[48rem]/artigo:min-h-80" : formato === "horizontal" ? "aspect-[16/10] @min-[36rem]/artigo:aspect-auto" : "aspect-[16/10]")}>
             <img src={imagem} alt={alt} loading="lazy" className="absolute inset-0 size-full object-cover transition-transform duration-[var(--duration-xslow)] ease-[var(--ease-out)] group-hover/artigo:scale-105 motion-reduce:transition-none motion-reduce:group-hover/artigo:scale-100" />
-            {selo && <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-primary-text shadow-sm"><span aria-hidden className="size-1.5 rounded-full bg-primary" />{selo}</span>}
+            {selo && <span className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full bg-card px-3 py-1 text-label font-bold uppercase tracking-[0.08em] text-primary-text shadow-sm"><span aria-hidden className="size-1.5 rounded-full bg-primary" />{selo}</span>}
           </div>
         )}
         <div className={cn("flex min-w-0 flex-col p-6", formato === "destaque" && "@min-[48rem]/artigo:p-8")}>
           {(categoria || data) && (
-            <p className="mb-3 flex flex-wrap items-center gap-x-2 text-xs font-medium text-muted-foreground">
+            <p className="mb-3 flex flex-wrap items-center gap-x-2 text-label font-medium text-muted-foreground">
               {categoria && <span className="font-bold uppercase tracking-[0.08em] text-primary-text">{categoria}</span>}
               {categoria && data && <span aria-hidden>•</span>}
               {data && <span>{data}</span>}
             </p>
           )}
-          <H className={cn("font-bold leading-snug text-foreground text-balance transition-colors group-hover/artigo:text-primary-text", formato === "destaque" ? "text-xl @min-[48rem]/artigo:text-[1.5rem]" : "text-base")}>
+          <H className={cn("font-bold leading-snug text-foreground text-balance transition-colors group-hover/artigo:text-primary-text", formato === "destaque" ? "text-h4 @min-[48rem]/artigo:text-h3" : "text-body")}>
             <a href={href} {...alvo} className="outline-none after:absolute after:inset-0 after:content-['']">
               {titulo}
               {novaAba && <span className="sr-only">{tx.novaAba}</span>}
             </a>
           </H>
-          {resumo && <p className={cn("mt-3 line-clamp-3 text-pretty leading-relaxed text-muted-foreground", formato === "destaque" ? "text-sm @min-[48rem]/artigo:text-base" : "text-sm")}>{resumo}</p>}
+          {resumo && <p className={cn("mt-3 line-clamp-3 text-pretty leading-relaxed text-muted-foreground", formato === "destaque" ? "text-body-sm @min-[48rem]/artigo:text-body" : "text-body-sm")}>{resumo}</p>}
           <div aria-hidden className="min-h-6 flex-1" />
           <div className="flex items-center justify-between gap-3 border-t border-border pt-4">
-            <span className="text-xs font-medium text-muted-foreground">{tempoDeLeitura}</span>
-            <span aria-hidden className="inline-flex items-center gap-2 text-sm font-bold text-primary-text transition-[gap] duration-[var(--duration-fast)] group-hover/artigo:gap-3">
+            <span className="text-label font-medium text-muted-foreground">{tempoDeLeitura}</span>
+            <span aria-hidden className="inline-flex items-center gap-2 text-body-sm font-bold text-primary-text transition-[gap] duration-[var(--duration-fast)] group-hover/artigo:gap-3">
               {tx.ler} <ArrowRight className="size-4" />
             </span>
           </div>

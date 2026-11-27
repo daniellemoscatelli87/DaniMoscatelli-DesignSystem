@@ -65,15 +65,15 @@ function BalaoDaConversa({ autor, nome, quando, avatar, estado, depois, children
       {avatar && <span className="shrink-0">{avatar}</span>}
       <div
         className={cn(
-          "min-w-0 max-w-[85%] rounded-lg px-4 py-3 text-sm leading-relaxed sm:max-w-[80%]",
+          "min-w-0 max-w-[85%] rounded-lg px-4 py-3 text-body-sm leading-relaxed sm:max-w-[80%]",
           eu ? "rounded-br-sm bg-secondary text-secondary-foreground" : "rounded-bl-sm border border-border bg-card text-card-foreground",
         )}
       >
-        {nome && <p className="mb-1 text-xs font-semibold text-foreground">{nome}</p>}
+        {nome && <p className="mb-1 text-label font-semibold text-foreground">{nome}</p>}
         <div className="whitespace-pre-line [overflow-wrap:anywhere]">{children}</div>
         {depois && <div className="mt-3">{depois}</div>}
         {(quando || est) && (
-          <p className={cn("mt-2 flex items-center gap-1 text-xs text-muted-foreground", eu && "justify-end")}>
+          <p className={cn("mt-2 flex items-center gap-1 text-label text-muted-foreground", eu && "justify-end")}>
             {quando}
             {est && (
               <span className={cn("inline-flex items-center gap-1", estado === "erro" && "font-semibold text-error-text")}>
@@ -90,7 +90,7 @@ function BalaoDaConversa({ autor, nome, quando, avatar, estado, depois, children
 
 function SeparadorDaConversa({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div data-slot="separador-da-conversa" role="separator" aria-label={typeof children === "string" ? children : undefined} className={cn("my-2 flex items-center gap-3 text-xs font-medium text-muted-foreground", className)}>
+    <div data-slot="separador-da-conversa" role="separator" aria-label={typeof children === "string" ? children : undefined} className={cn("my-2 flex items-center gap-3 text-label font-medium text-muted-foreground", className)}>
       <span aria-hidden className="h-px flex-1 bg-border" />
       <span aria-hidden>{children}</span>
       <span aria-hidden className="h-px flex-1 bg-border" />

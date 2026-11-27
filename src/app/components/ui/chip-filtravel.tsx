@@ -33,7 +33,7 @@ function ChipFiltravel({ ativo, onAtivoChange, contagem, className, children, on
       aria-pressed={ativo}
       onClick={e => { onClick?.(e); onAtivoChange?.(!ativo); }}
       className={cn(
-        "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-sm font-medium transition-colors duration-[var(--duration-fast)] sm:min-h-9 sm:px-3",
+        "inline-flex min-h-9 toque:min-h-11 items-center gap-2 rounded-full border px-4 text-body-sm font-medium transition-colors duration-[var(--duration-fast)] sm:px-3",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
         ativo
           ? "border-primary/40 bg-primary-suave text-primary-text"
@@ -45,7 +45,7 @@ function ChipFiltravel({ ativo, onAtivoChange, contagem, className, children, on
       {ativo && <Check aria-hidden className="size-4 motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-[var(--duration-fast)]" />}
       {children}
       {contagem !== undefined && (
-        <span className={cn("rounded-full px-2 text-xs font-semibold tabular-nums", ativo ? "bg-card text-primary-text" : "bg-muted text-muted-foreground")}>{contagem}</span>
+        <span className={cn("rounded-full px-2 text-label font-semibold tabular-nums", ativo ? "bg-card text-primary-text" : "bg-muted text-muted-foreground")}>{contagem}</span>
       )}
     </button>
   );

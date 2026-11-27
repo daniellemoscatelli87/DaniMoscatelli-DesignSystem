@@ -27,7 +27,7 @@ function LinkSaibaMais({ children = "Saiba mais", direcao = "baixo", sobreEscuro
     <a
       data-slot="link-saiba-mais"
       className={cn(
-        "group/alca inline-flex min-h-11 items-center gap-3 rounded-full text-sm font-semibold transition-colors duration-[var(--duration-fast)]",
+        "group/alca inline-flex min-h-11 items-center gap-3 rounded-full text-body-sm font-semibold transition-colors duration-[var(--duration-fast)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
         direcao === "baixo" && "flex-col gap-2",
         sobreEscuro ? "text-white hover:text-crimson-100" : "text-foreground hover:text-primary-text",

@@ -79,7 +79,7 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
         {/* Tópicos */}
         <div className="order-2 min-w-0 @min-[48rem]/simulacao:order-1">
           <div className="mb-3 flex items-center justify-between gap-3">
-            {intro ? <p className="text-sm font-semibold text-muted-foreground">{intro}</p> : <span />}
+            {intro ? <p className="text-body-sm font-semibold text-muted-foreground">{intro}</p> : <span />}
             {autoAvancar && !reduzir && topicos.length > 1 && (
               <button
                 type="button"
@@ -118,9 +118,9 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
                     ativo ? "border-primary/30 bg-primary-suave before:bg-primary" : "border-transparent hover:bg-accent before:bg-transparent",
                   )}
                 >
-                  <span className={cn("block text-sm font-semibold", ativo ? "text-primary-text" : "text-foreground")}>{t.titulo}</span>
+                  <span className={cn("block text-body-sm font-semibold", ativo ? "text-primary-text" : "text-foreground")}>{t.titulo}</span>
                   {t.descricao && (
-                    <span className={cn("block text-sm text-muted-foreground transition-[grid-template-rows,opacity] duration-[var(--duration-normal)]", ativo ? "mt-1 opacity-100" : "sr-only @min-[48rem]/simulacao:not-sr-only @min-[48rem]/simulacao:mt-1")}>
+                    <span className={cn("block text-body-sm text-muted-foreground transition-[grid-template-rows,opacity] duration-[var(--duration-normal)]", ativo ? "mt-1 opacity-100" : "sr-only @min-[48rem]/simulacao:not-sr-only @min-[48rem]/simulacao:mt-1")}>
                       {t.descricao}
                     </span>
                   )}
@@ -149,7 +149,7 @@ function Simulacao({ topicos, intro, topoDaTela, intervalo = 6000, autoAvancar =
           className="order-1 min-w-0 overflow-hidden rounded-xl border border-border bg-background shadow-lg @min-[48rem]/simulacao:order-2"
         >
           <div className="flex h-11 items-center gap-2 border-b border-border bg-card px-4">
-            {topoDaTela ?? <span className="text-sm font-semibold text-foreground">{tx.telaDeExemplo}</span>}
+            {topoDaTela ?? <span className="text-body-sm font-semibold text-foreground">{tx.telaDeExemplo}</span>}
           </div>
           <div className="relative grid min-h-80 p-4 @min-[32rem]/simulacao:p-6">
             <AnimatePresence mode="wait" initial={false}>

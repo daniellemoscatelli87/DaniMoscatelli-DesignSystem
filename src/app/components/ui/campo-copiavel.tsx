@@ -50,7 +50,7 @@ function CampoCopiavel({ valor, rotulo, mostrarRotulo = false, textos, onCopiar,
   };
   return (
     <div data-slot="campo-copiavel" className={cn("@container/copiar min-w-0", className)}>
-      <label htmlFor={id} className={mostrarRotulo ? "mb-2 block text-sm font-semibold text-foreground" : "sr-only"}>{rotulo}</label>
+      <label htmlFor={id} className={mostrarRotulo ? "mb-2 block text-body-sm font-semibold text-foreground" : "sr-only"}>{rotulo}</label>
       <div className="flex flex-col gap-2 @min-[24rem]/copiar:flex-row">
         <input
           ref={ref}
@@ -58,13 +58,13 @@ function CampoCopiavel({ valor, rotulo, mostrarRotulo = false, textos, onCopiar,
           readOnly
           value={valor}
           onFocus={e => e.currentTarget.select()}
-          className="h-11 min-w-0 flex-1 truncate rounded-md border border-input bg-muted px-3 text-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring sm:h-10"
+          className="h-10 toque:h-11 min-w-0 flex-1 truncate rounded-md border border-input bg-muted px-3 text-body-sm text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring"
         />
         <button
           type="button"
           onClick={copiar}
           className={cn(
-            "inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-md border px-4 text-sm font-semibold transition-colors duration-[var(--duration-fast)] sm:h-10",
+            "inline-flex h-10 toque:h-11 shrink-0 items-center justify-center gap-2 rounded-md border px-4 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)]",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
             estado === "copiado" ? "border-[var(--success-text)] bg-success-muted text-success-text" : "border-[var(--border-strong)] bg-card text-foreground hover:bg-accent",
           )}
@@ -74,7 +74,7 @@ function CampoCopiavel({ valor, rotulo, mostrarRotulo = false, textos, onCopiar,
         </button>
       </div>
       <p className="sr-only" aria-live="polite">{estado === "copiado" ? tx.copiado : estado === "selecionado" ? tx.selecionado : ""}</p>
-      {estado === "selecionado" && <p className="mt-2 text-sm text-muted-foreground">{tx.selecionado}</p>}
+      {estado === "selecionado" && <p className="mt-2 text-body-sm text-muted-foreground">{tx.selecionado}</p>}
     </div>
   );
 }

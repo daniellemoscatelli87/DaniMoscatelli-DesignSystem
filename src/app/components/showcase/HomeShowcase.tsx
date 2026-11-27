@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronRight, Sparkles, Fingerprint, Layers, Coins, Compass, Accessibility, Image, Wind, LayoutTemplate, Component, Plug, Rocket, Lightbulb, Code2 } from "lucide-react";
+import { ChevronRight, Sparkles, Fingerprint, Layers, Coins, Compass, Accessibility, Image, Wind, LayoutTemplate, Component, Plug, Rocket, Lightbulb, Code2, Frame, TextCursorInput, Inbox, Newspaper } from "lucide-react";
 import { useI18n, type Bi } from "../../i18n";
 import logoVermelho from "../../../imports/LogoVermelho.png";
 import { SectionLabel, CardGrid, useGo, type Navigate, type CardItem } from "./GetStartedShowcase";
@@ -45,6 +45,10 @@ const explore: { label: Bi; items: CardItem[] }[] = [
       { icon: Wind, title: { en: "Motion Design", pt: "Motion Design" }, desc: { en: "Presets, easing, spring physics and motion tokens.", pt: "Presets, easing, física de spring e tokens de movimento." }, target: { page: "motion" } },
       { icon: Component, title: { en: "Components", pt: "Componentes" }, desc: { en: "Buttons, cards, data display, feedback, labels, icons and overlays.", pt: "Botões, cards, exibição de dados, feedback, labels, ícones e overlays." }, target: { page: "buttons" } },
       { icon: LayoutTemplate, title: { en: "Templates", pt: "Templates" }, desc: { en: "Dashboard, auth, pricing, landing page and more.", pt: "Dashboard, login, preços, landing page e mais." }, target: { page: "templates" } },
+      { icon: Frame, title: { en: "Frames & states", pt: "Molduras e estados" }, desc: { en: "Site header and footer, account frame, empty, final and error states, logo.", pt: "Cabeçalho e rodapé do site, moldura de conta, estados vazio, final e de erro, logo." }, target: { page: "molduras" } },
+      { icon: TextCursorInput, title: { en: "Fields", pt: "Campos" }, desc: { en: "Standard field, e-mail, state and city, masks, search, chips and the adaptive table.", pt: "Campo padrão, e-mail, estado e cidade, máscaras, busca, chips e a tabela adaptável." }, target: { page: "campos" } },
+      { icon: Inbox, title: { en: "Restricted area pieces", pt: "Peças da área restrita" }, desc: { en: "Inbox, conversation, month agenda, step-by-step sign-up and board.", pt: "Caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro." }, target: { page: "pecas-admin" } },
+      { icon: Newspaper, title: { en: "Site sections", pt: "Seções do site" }, desc: { en: "Testimonials, articles, logos, quotes, pillars, simulation and long text.", pt: "Depoimentos, artigos, logos, citações, pilares, simulação e texto longo." }, target: { page: "secoes-site" } },
     ],
   },
 ];

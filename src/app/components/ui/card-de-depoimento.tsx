@@ -38,18 +38,18 @@ function CardDeDepoimento({ nome, cargo, foto, origem, children, className, ...p
         {foto ? (
           <img src={foto} alt="" loading="lazy" className="size-12 shrink-0 rounded-full object-cover ring-2 ring-primary-muted" />
         ) : (
-          <span aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary-muted text-sm font-bold text-primary-text">{iniciais(nome)}</span>
+          <span aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary-muted text-body-sm font-bold text-primary-text">{iniciais(nome)}</span>
         )}
         <span className="min-w-0">
-          <span className="block text-sm font-bold text-foreground">{nome}</span>
-          {cargo && <span className="block truncate text-xs text-muted-foreground" title={cargo}>{cargo}</span>}
+          <span className="block text-body-sm font-bold text-foreground">{nome}</span>
+          {cargo && <span className="block truncate text-label text-muted-foreground" title={cargo}>{cargo}</span>}
         </span>
       </figcaption>
-      <blockquote className="relative flex-1 text-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
+      <blockquote className="relative flex-1 text-body-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
         <Quote aria-hidden className="mb-2 size-5 text-primary-text" />
         {children}
       </blockquote>
-      {origem && <p className="border-t border-border pt-4 text-xs font-medium text-muted-foreground">{origem}</p>}
+      {origem && <p className="border-t border-border pt-4 text-label font-medium text-muted-foreground">{origem}</p>}
     </figure>
   );
 }

@@ -72,7 +72,7 @@ function CampoEstadoCidade({ uf, cidade, onChange, carregarCidades = carregarPad
     <div data-slot="campo-estado-cidade" className={cn("@container/uf min-w-0 space-y-2", className)}>
       <div className="grid gap-4 @min-[28rem]/uf:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)]">
         <div className="min-w-0 space-y-2">
-          <Label htmlFor={`${id}-uf`} className="text-sm font-semibold">{tx.estado}{asterisco}</Label>
+          <Label htmlFor={`${id}-uf`} className="text-body-sm font-semibold">{tx.estado}{asterisco}</Label>
           <Select value={uf} onValueChange={v => onChange(v, "")} disabled={desabilitado}>
             <SelectTrigger id={`${id}-uf`} aria-invalid={erro && !uf ? true : undefined} aria-describedby={descritor} aria-required={obrigatorio || undefined} className="w-full bg-card">
               <SelectValue placeholder={tx.selecione} />
@@ -83,7 +83,7 @@ function CampoEstadoCidade({ uf, cidade, onChange, carregarCidades = carregarPad
           </Select>
         </div>
         <div className="min-w-0 space-y-2">
-          <Label htmlFor={`${id}-cidade`} className="text-sm font-semibold">{tx.cidade}{asterisco}</Label>
+          <Label htmlFor={`${id}-cidade`} className="text-body-sm font-semibold">{tx.cidade}{asterisco}</Label>
           <Select value={cidade} onValueChange={v => onChange(uf, v)} disabled={desabilitado || estado !== "ok"}>
             <SelectTrigger id={`${id}-cidade`} aria-invalid={erro && !cidade ? true : undefined} aria-describedby={descritor} aria-required={obrigatorio || undefined} aria-busy={estado === "carregando" || undefined} className="w-full bg-card">
               <SelectValue placeholder={vazioDaCidade} />

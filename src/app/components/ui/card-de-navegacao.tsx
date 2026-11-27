@@ -38,10 +38,10 @@ function CardDeNavegacao({ titulo, descricao, icone, href, onClick, selo, classN
       {icone && <IconeComBase tom="marca">{icone}</IconeComBase>}
       <span className="min-w-0 flex-1">
         <span className="flex flex-wrap items-center gap-2">
-          <span className="text-base font-semibold text-foreground">{titulo}</span>
+          <span className="text-body font-semibold text-foreground">{titulo}</span>
           {selo}
         </span>
-        {descricao && <span className="mt-1 block text-sm text-pretty text-muted-foreground">{descricao}</span>}
+        {descricao && <span className="mt-1 block text-body-sm text-pretty text-muted-foreground">{descricao}</span>}
       </span>
       <ArrowRight aria-hidden className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform duration-[var(--duration-fast)] group-hover/nav:translate-x-1 group-hover/nav:text-foreground motion-reduce:transition-none" />
     </>

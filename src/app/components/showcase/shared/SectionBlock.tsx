@@ -8,7 +8,7 @@ import { DoDont, Mono } from "./Guidance";
 
 export function CodeBlock({ children }: { children: string }) {
   return (
-    <pre className="overflow-hidden whitespace-pre-wrap break-words rounded-md border border-border bg-muted p-4 font-[family-name:var(--font-mono)] text-xs leading-relaxed text-foreground">
+    <pre className="overflow-hidden whitespace-pre-wrap break-words rounded-md border border-border bg-muted p-4 font-[family-name:var(--font-mono)] text-label leading-relaxed text-foreground">
       {children}
     </pre>
   );
@@ -32,16 +32,17 @@ export function SectionBlock({
     <section id={id} className="scroll-mt-32 space-y-6">
       <div>
         <SectionHeader title={titulo} description={quando} />
-        <p className="-mt-6 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-          <span>{t("File", "Arquivo")}:</span> <Mono>{arquivo}</Mono>
-          <span aria-hidden>·</span>
-          {nomes.map(n => <Mono key={n}>{n}</Mono>)}
-        </p>
+        <dl className="-mt-6 grid gap-2 text-body-sm text-muted-foreground sm:grid-cols-[auto_minmax(0,1fr)] sm:items-baseline sm:gap-x-3">
+          <dt>{t("File", "Arquivo")}</dt>
+          <dd className="flex flex-wrap gap-2">{arquivo.split(" · ").map(a => <Mono key={a}>{a}</Mono>)}</dd>
+          <dt>{t("Components", "Componentes")}</dt>
+          <dd className="flex flex-wrap gap-2">{nomes.map(n => <Mono key={n}>{n}</Mono>)}</dd>
+        </dl>
       </div>
       {children}
       {api && (
         <div className="space-y-2">
-          <h3 className="text-sm font-semibold text-foreground">{t("How to use", "Como usar")}</h3>
+          <h3 className="text-body-sm font-semibold text-foreground">{t("How to use", "Como usar")}</h3>
           <CodeBlock>{api}</CodeBlock>
         </div>
       )}
@@ -54,7 +55,7 @@ export function SectionBlock({
 export function ShowcaseCard({ children, className = "", rotulo }: { children: React.ReactNode; className?: string; rotulo?: string }) {
   return (
     <div className={`rounded-xl border border-border bg-card p-4 sm:p-6 ${className}`}>
-      {rotulo && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground">{rotulo}</p>}
+      {rotulo && <p className="mb-4 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{rotulo}</p>}
       {children}
     </div>
   );

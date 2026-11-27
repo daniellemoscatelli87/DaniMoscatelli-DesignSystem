@@ -63,8 +63,8 @@ function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "neutro", taman
           {icone}
         </IconeComBase>
       )}
-      <H className={cn("font-semibold text-foreground text-balance", tamanho === "sm" ? "text-base" : "text-lg")}>{t}</H>
-      {descricao && <p className={cn("mt-2 text-pretty text-muted-foreground", tamanho === "sm" ? "text-sm" : "text-sm sm:text-base")}>{descricao}</p>}
+      <H className={cn("font-semibold text-foreground text-balance", tamanho === "sm" ? "text-body" : "text-subtitle")}>{t}</H>
+      {descricao && <p className={cn("mt-2 text-pretty text-muted-foreground", tamanho === "sm" ? "text-body-sm" : "text-body-sm sm:text-body")}>{descricao}</p>}
       <Acoes className={tamanho === "sm" ? "mt-4" : undefined}>{acoes}</Acoes>
     </div>
   );
@@ -114,10 +114,10 @@ function EstadoFinal({ tom = "sucesso", icone, titulo: t, descricao, acoes, nive
       >
         {icone ?? <Icone />}
       </motion.span>
-      <H ref={ref} tabIndex={-1} className="text-[1.5rem] font-bold leading-tight tracking-[-0.02em] text-foreground outline-none text-balance">
+      <H ref={ref} tabIndex={-1} className="text-h3 font-bold leading-tight tracking-[-0.02em] text-foreground outline-none text-balance">
         {t}
       </H>
-      {descricao && <p className="mt-3 text-pretty text-base leading-relaxed text-muted-foreground">{descricao}</p>}
+      {descricao && <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{descricao}</p>}
       {children && <div className="mt-6 w-full text-left">{children}</div>}
       <Acoes>{acoes}</Acoes>
     </div>
@@ -147,12 +147,12 @@ function PaginaDeErro({ codigo, ilustracao, titulo: t, descricao, acoes, telaChe
         {ilustracao ? (
           <div aria-hidden className="mb-8 w-full max-w-xs">{ilustracao}</div>
         ) : codigo ? (
-          <p aria-hidden className="mb-4 text-[2.5rem] font-bold leading-none tracking-[-0.04em] text-primary-text tabular-nums sm:text-[3.25rem]">
+          <p aria-hidden className="mb-4 text-h1 font-bold leading-none tracking-[-0.04em] text-primary-text tabular-nums sm:text-display-lg">
             {codigo}
           </p>
         ) : null}
-        <h1 className="text-[2rem] font-bold leading-tight tracking-[-0.03em] text-foreground text-balance">{t}</h1>
-        {descricao && <p className="mt-3 text-pretty text-base leading-relaxed text-muted-foreground">{descricao}</p>}
+        <h1 className="text-h2 font-bold leading-tight tracking-[-0.03em] text-foreground text-balance">{t}</h1>
+        {descricao && <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{descricao}</p>}
         <Acoes className="mt-8">{acoes}</Acoes>
       </div>
     </main>

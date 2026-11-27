@@ -81,11 +81,11 @@ function EtapaDoCadastro({ titulo, explicacao, tituloRef, obrigatorios, erro, re
         )}
       >
         <div className="min-w-0">
-          <h2 ref={tituloRef} tabIndex={-1} className="text-[1.5rem] font-bold leading-tight tracking-[-0.02em] text-foreground outline-none [text-wrap:balance]">
+          <h2 ref={tituloRef} tabIndex={-1} className="text-h3 font-bold leading-tight tracking-[-0.02em] text-foreground outline-none [text-wrap:balance]">
             {titulo}
           </h2>
           {explicacao && <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{explicacao}</p>}
-          {obrigatorios && <p className="mt-5 text-sm text-muted-foreground">{obrigatorios}</p>}
+          {obrigatorios && <p className="mt-5 text-body-sm text-muted-foreground">{obrigatorios}</p>}
           {erro && (
             <Alert variant="error" className="mt-5">
               <TriangleAlert aria-hidden />
@@ -165,9 +165,9 @@ function LateralDaEtapa({ icone, titulo, paragrafos = [], destaque, tom = "info"
   return (
     <aside data-slot="lateral-da-etapa" aria-labelledby={id} className={cn("@container/lateral min-w-0 self-start rounded-xl border border-border bg-card p-5 @min-[56rem]/etapa:p-6", className)}>
       <IconeComBase tom="marca" tamanho="lg">{icone}</IconeComBase>
-      <h3 id={id} className="mt-4 text-lg font-bold tracking-[-0.01em] text-foreground">{titulo}</h3>
+      <h3 id={id} className="mt-4 text-subtitle font-bold tracking-[-0.01em] text-foreground">{titulo}</h3>
       {paragrafos.map((p) => (
-        <p key={p} className="mt-2 text-sm leading-relaxed text-muted-foreground">{p}</p>
+        <p key={p} className="mt-2 text-body-sm leading-relaxed text-muted-foreground">{p}</p>
       ))}
       {destaque && (
         <Alert variant={TONS_LATERAL[tom]} role="note" className="mt-4">
@@ -209,15 +209,15 @@ function BlocoDeRevisao({ valor, titulo, nomeEtapa, resumo = [], onEditar, rotul
     <AccordionItem value={valor} data-slot="bloco-de-revisao" className="@container/revisao rounded-lg border border-border px-5 last:border-b">
       <AccordionTrigger className="min-w-0 items-center py-4 hover:no-underline [&>svg]:size-5 [&>svg]:text-primary-text">
         <span className="min-w-0">
-          <span className="block text-base font-bold text-foreground">{titulo}</span>
-          {texto && <span className="mt-1 block truncate text-sm font-normal text-muted-foreground">{texto}</span>}
+          <span className="block text-body font-bold text-foreground">{titulo}</span>
+          {texto && <span className="mt-1 block truncate text-body-sm font-normal text-muted-foreground">{texto}</span>}
         </span>
       </AccordionTrigger>
       <AccordionContent>
-        <dl className="grid gap-x-6 gap-y-3 text-sm @min-[30rem]/revisao:grid-cols-2">{children}</dl>
+        <dl className="grid gap-x-6 gap-y-3 text-body-sm @min-[30rem]/revisao:grid-cols-2">{children}</dl>
         {depois}
         {onEditar && (
-          <button type="button" onClick={onEditar} className={cn("mt-4 rounded-sm text-sm font-semibold text-primary-text underline underline-offset-4", foco)}>
+          <button type="button" onClick={onEditar} className={cn("mt-4 rounded-sm text-body-sm font-semibold text-primary-text underline underline-offset-4", foco)}>
             {rotuloEditar}
             {nomeEtapa && <span className="sr-only"> {nomeEtapa.toLowerCase()}</span>}
           </button>
@@ -230,7 +230,7 @@ function BlocoDeRevisao({ valor, titulo, nomeEtapa, resumo = [], onEditar, rotul
 function LinhaDeDado({ rotulo, valor, vazio = "Não informado", className }: { rotulo: string; valor?: React.ReactNode; vazio?: string; className?: string }) {
   return (
     <div data-slot="linha-de-dado" className={cn("min-w-0", className)}>
-      <dt className="text-xs text-muted-foreground">{rotulo}</dt>
+      <dt className="text-label text-muted-foreground">{rotulo}</dt>
       <dd className="break-words font-medium text-foreground">{valor || vazio}</dd>
     </div>
   );

@@ -14,6 +14,38 @@ export type ChangeEntry = {
 // Newest first. Every entry needs both en and pt. Add every new DS inclusion at the TOP of this list.
 export const changelog: ChangeEntry[] = [
   {
+    date: "Nov 2026", kind: "New", title: { en: "Site sections: testimonials, articles, logos, quotes, pillars, floating cards, simulation and long text", pt: "Seções do site: depoimentos, artigos, logos, citações, pilares, cartões flutuantes, simulação e texto longo" },
+    desc: {
+      en: "So the studio site can switch its hand-built sections to the DS without changing content (27/11/2026): CardDeDepoimento, CardDeArtigo (highlight, horizontal, vertical), FaixaDeLogos (pauses, still grid with reduced motion), Citacao, ListaDePilares, CartaoFlutuante, Simulacao (real tabs, auto-advance with Pause), LinkSaibaMais, Prosa, BarraDeNumeros, CardDeNavegacao, and LuzesDifusas brought from the FindLook DS with the same API. New page Components › Site sections.",
+      pt: "Para o site do estúdio trocar as seções feitas à mão pelo DS sem mudar o conteúdo (27/11/2026): CardDeDepoimento, CardDeArtigo (destaque, horizontal, vertical), FaixaDeLogos (pausa, grade parada com menos movimento), Citacao, ListaDePilares, CartaoFlutuante, Simulacao (abas de verdade, avança sozinha com Pausar), LinkSaibaMais, Prosa, BarraDeNumeros, CardDeNavegacao, e LuzesDifusas trazida do DS da FindLook com a mesma API. Nova página Componentes › Seções do site.",
+    },
+    page: "secoes-site", anchor: "secoes-depoimentos",
+  },
+  {
+    date: "Nov 2026", kind: "New", title: { en: "Restricted area pieces: inbox, conversation, month agenda, step-by-step sign-up and board", pt: "Peças da área restrita: caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro" },
+    desc: {
+      en: "CaixaDeEntrada (list and reading pane side by side from 672 px of its own width, one at a time with Back below that), Conversa with BalaoDaConversa, SeparadorDaConversa and IndicadorDeDigitacao, AgendaDoMes (keyboard grid, list of the chosen day), Quadro (kanban that never scrolls sideways) and, brought from the FindLook DS with the same names and API, Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao and LinhaDeDado. New page Components › Restricted area pieces.",
+      pt: "CaixaDeEntrada (lista e leitura lado a lado a partir de 672 px da própria largura; abaixo, uma por vez com Voltar), Conversa com BalaoDaConversa, SeparadorDaConversa e IndicadorDeDigitacao, AgendaDoMes (grade com teclado e lista do dia escolhido), Quadro (kanban que nunca rola para o lado) e, trazidos do DS da FindLook com os mesmos nomes e API, Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao e LinhaDeDado. Nova página Componentes › Peças da área restrita.",
+    },
+    page: "pecas-admin", anchor: "admin-caixa",
+  },
+  {
+    date: "Nov 2026", kind: "New", title: { en: "Fields: standard field, e-mail with domain suggestion, state and city, masks, search, copy, several e-mails, chips, choice cards, send button and adaptive table", pt: "Campos: campo padrão, e-mail com sugestão de domínio, estado e cidade, máscaras, busca, copiar, vários e-mails, chips, cartões de escolha, botão de envio e tabela adaptável" },
+    desc: {
+      en: "Campo (label, control, help and error always linked; same API as FindLook's CampoDoCadastro) with GradeDeCampos, MensagemDeErro and ResumoDeErros; CampoDeEmail, CampoEstadoCidade, CampoDeTelefone and CampoDeCnpj (masks and cnpjValido); CampoDeBusca; CampoCopiavel; CampoDeEmails; ChipFiltravel and GrupoDeChipsFiltraveis; CartaoDeEscolha with BrilhoDeSelecionado (from the FindLook DS, selected on --primary-suave); BotaoDeEnvio (sending, sent, try again) and the Button variant outline-destructive; TabelaAdaptavel (columns leave by priority with a notice, list below 480 px). New page Components › Fields.",
+      pt: "Campo (rótulo, controle, ajuda e erro sempre ligados; a mesma API do CampoDoCadastro da FindLook) com GradeDeCampos, MensagemDeErro e ResumoDeErros; CampoDeEmail, CampoEstadoCidade, CampoDeTelefone e CampoDeCnpj (máscaras e cnpjValido); CampoDeBusca; CampoCopiavel; CampoDeEmails; ChipFiltravel e GrupoDeChipsFiltraveis; CartaoDeEscolha com BrilhoDeSelecionado (do DS da FindLook, selecionado em --primary-suave); BotaoDeEnvio (enviando, enviado, tentar de novo) e a variante outline-destructive do Button; TabelaAdaptavel (colunas saem por prioridade com aviso; lista abaixo de 480 px). Nova página Componentes › Campos.",
+    },
+    page: "campos", anchor: "campos-campo",
+  },
+  {
+    date: "Nov 2026", kind: "New", title: { en: "Frames and states: site header, account frame, empty, final and error states, Alert by tone, Logo", pt: "Molduras e estados: cabeçalho do site, moldura de conta, estados vazio, final e de erro, Alert por tom, Logo" },
+    desc: {
+      en: "CabecalhoDoSite (pill or strip on desktop, bottom-sheet menu on phones, hides on scroll down), MolduraDeConta (sign-in and password screens), EstadoVazio, EstadoFinal and PaginaDeErro, the Alert tom prop (Portuguese tones with the state icon in place) and Logo (official artwork as inline SVG, no image copies in products). The site footer (RodapeSite) was checked against the site: same content and variants. Tokens: --sobreposicao (one overlay for every window) and --radius-full; the toque variant and the text-size scale of the fix branch. PilulaDeAcao (branch claude/pilula-acao) merged with its proposal. New page Components › Frames & states.",
+      pt: "CabecalhoDoSite (pílula ou faixa no computador, menu em folha inferior no celular, some ao rolar para baixo), MolduraDeConta (telas de entrar e de senha), EstadoVazio, EstadoFinal e PaginaDeErro, a prop tom do Alert (tons em português com o ícone do estado já colocado) e Logo (a arte oficial em SVG no código, sem cópia de imagem nos produtos). O rodapé (RodapeSite) foi conferido com o do site: mesmo conteúdo e variantes. Tokens: --sobreposicao (um véu só para todas as janelas) e --radius-full; a variante toque e a escala de texto do branch de correções. PilulaDeAcao (branch claude/pilula-acao) integrada, com proposta. Nova página Componentes › Molduras e estados.",
+    },
+    page: "molduras", anchor: "molduras-cabecalho",
+  },
+  {
     date: "Nov 2026", kind: "Updated", title: { en: "Approved colours and the light-pink rule: selected, hover and highlight", pt: "Cores aprovadas e a regra dos rosas claros: selecionado, hover e destaque" },
     desc: {
       en: "Product owner's decisions (27/11/2026). --primary is #CC4545 (white text 4.66:1) and --primary-hover #B82828 (crimson-500, 6.2:1), in light and dark (dark was 4.2:1 and 3.7:1). --muted-foreground is #5A6A80 (4.83:1 on the #EDF0F5 background). Three solid light pinks with one job each: SELECTED --primary-suave #FCEEEE (new; active menu item, selected chip, segment, row and plan; stays pink under the pointer; --primary-text 5.5:1), HOVER light grey --accent #E8EDF3, never pink, and HIGHLIGHT --primary-muted #FAE4E4 (now solid; icon bases, status chips). Applied to the panel menu and this site's menu, LinhaDeLista, SegmentedControl (soft variant), chips and the Templates demos; pink hovers on upload areas, outline buttons and links became grey. The panel counter (ContadorDoPainel) goes back to --primary, now 4.66:1 with white. Documented in Foundations › Colours › Light pinks, the same rule as in the FindLook DS.",

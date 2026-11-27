@@ -78,13 +78,13 @@ function ListaDePilares({ pilares, rotulo, ordenada = true, linha = true, nivel 
             {linha && i < pilares.length - 1 && (
               <span aria-hidden className="absolute left-6 top-14 h-[calc(100%-1.5rem)] w-px bg-[var(--crimson-200)] @min-[40rem]/pilares:hidden" />
             )}
-            <IconeComBase tom="marca" tamanho="lg" redonda className="relative z-10 ring-4 ring-background">{p.icone}</IconeComBase>
+            <IconeComBase tom="marca" tamanho="lg" redonda className="relative z-10 ring-4 ring-card">{p.icone}</IconeComBase>
             <div className="min-w-0 @min-[40rem]/pilares:mt-4">
-              <H className="text-lg font-bold leading-snug text-foreground">
+              <H className="text-subtitle font-bold leading-snug text-foreground">
                 {ordenada && <span className="sr-only">{i + 1}. </span>}
                 {p.titulo}
               </H>
-              <p className="mt-2 text-pretty text-sm leading-relaxed text-muted-foreground @min-[40rem]/pilares:mx-auto @min-[40rem]/pilares:max-w-xs">{p.texto}</p>
+              <p className="mt-2 text-pretty text-body-sm leading-relaxed text-muted-foreground @min-[40rem]/pilares:mx-auto @min-[40rem]/pilares:max-w-xs">{p.texto}</p>
             </div>
           </motion.li>
         ))}

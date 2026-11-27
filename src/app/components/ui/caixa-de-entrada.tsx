@@ -13,7 +13,7 @@ import { EstadoVazio } from "./estado-vazio";
  * restrita (Recebidos/Enviados) e o template Caixa de entrada, que era só demonstração e quebrava no celular.
  *
  * Responsiva pela própria largura (container query), não pela tela:
- * - a partir de 48rem (768 px): lista (20rem) e leitura lado a lado; sem mensagem aberta, a leitura mostra um
+ * - a partir de 42rem (672 px): lista (20rem) e leitura lado a lado; sem mensagem aberta, a leitura mostra um
  *   estado vazio ("Escolha uma mensagem");
  * - abaixo disso: uma coisa por vez. A lista ocupa tudo; ao abrir uma mensagem, a leitura ocupa o lugar da lista,
  *   com "Voltar" no topo (o foco vai para o título da mensagem e, ao voltar, para a linha que estava aberta).
@@ -97,11 +97,11 @@ function CaixaDeEntrada({
 
   return (
     <div ref={raizRef} data-slot="caixa-de-entrada" data-lendo={item ? "sim" : "nao"} className={cn("@container/caixa h-full min-h-0 w-full overflow-hidden rounded-xl border border-border bg-card", className)}>
-      <div className="grid h-full min-h-0 grid-cols-1 @min-[48rem]/caixa:grid-cols-[20rem_minmax(0,1fr)]">
+      <div className="grid h-full min-h-0 grid-cols-1 @min-[42rem]/caixa:grid-cols-[20rem_minmax(0,1fr)]">
         {/* Lista */}
         <section
           aria-label={rotulo}
-          className={cn("flex min-h-0 min-w-0 flex-col @min-[48rem]/caixa:border-r @min-[48rem]/caixa:border-border", item && "@max-[48rem]/caixa:hidden")}
+          className={cn("flex min-h-0 min-w-0 flex-col @min-[42rem]/caixa:border-r @min-[42rem]/caixa:border-border", item && "@max-[42rem]/caixa:hidden")}
         >
           {topo && <div className="shrink-0 border-b border-border px-4 py-3">{topo}</div>}
           {itens.length === 0 ? (
@@ -129,10 +129,10 @@ function CaixaDeEntrada({
                           {i.lida === false && <span className="sr-only"> ({tx.naoLida})</span>}
                         </span>
                       }
-                      descricao={i.resumo != null ? <span className="block truncate text-sm">{i.resumo}</span> : undefined}
+                      descricao={i.resumo != null ? <span className="block truncate text-body-sm">{i.resumo}</span> : undefined}
                       fim={
                         <span className="flex items-center gap-2">
-                          {i.quando != null && <span className="whitespace-nowrap text-xs text-muted-foreground">{i.quando}</span>}
+                          {i.quando != null && <span className="whitespace-nowrap text-label text-muted-foreground">{i.quando}</span>}
                           <span aria-hidden className={cn("size-2 shrink-0 rounded-full", i.lida === false ? "bg-primary" : "bg-transparent")} />
                         </span>
                       }
@@ -149,7 +149,7 @@ function CaixaDeEntrada({
         {/* Leitura */}
         <section
           aria-label={item ? undefined : rotulo}
-          className={cn("min-h-0 min-w-0 flex-col overflow-y-auto", item ? "flex" : "hidden @min-[48rem]/caixa:flex")}
+          className={cn("min-h-0 min-w-0 flex-col overflow-y-auto", item ? "flex" : "hidden @min-[42rem]/caixa:flex")}
         >
           {item ? (
             <div
@@ -158,11 +158,11 @@ function CaixaDeEntrada({
               tabIndex={-1}
               className="flex min-h-full flex-col outline-none motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-right-2 motion-safe:duration-[var(--duration-normal)]"
             >
-              <div className="shrink-0 border-b border-border px-2 py-2 @min-[48rem]/caixa:hidden">
+              <div className="shrink-0 border-b border-border px-2 py-2 @min-[42rem]/caixa:hidden">
                 <button
                   type="button"
                   onClick={() => abrir(null)}
-                  className="inline-flex h-11 items-center gap-2 rounded-md px-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="inline-flex h-11 items-center gap-2 rounded-md px-2 text-body-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <ArrowLeft aria-hidden className="size-4" /> {tx.voltar}
                 </button>

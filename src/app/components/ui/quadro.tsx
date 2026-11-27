@@ -70,19 +70,19 @@ function Quadro({ colunas, rotulo, textos, className }: QuadroProps) {
           <section key={c.id} aria-label={`${c.titulo}, ${c.cartoes.length} ${c.cartoes.length === 1 ? tx.item : tx.itens}`} className="min-w-0 rounded-lg bg-muted p-3">
             <header className="mb-3 flex items-center gap-2 px-1">
               <span aria-hidden className={cn("size-2 shrink-0 rounded-full", PONTO[c.tom ?? "neutro"])} />
-              <h3 className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground">{c.titulo}</h3>
-              <span aria-hidden className="rounded-full bg-card px-2 text-xs font-semibold tabular-nums text-muted-foreground">{c.cartoes.length}</span>
+              <h3 className="min-w-0 flex-1 truncate text-body-sm font-semibold text-foreground">{c.titulo}</h3>
+              <span aria-hidden className="rounded-full bg-card px-2 text-label font-semibold tabular-nums text-muted-foreground">{c.cartoes.length}</span>
             </header>
             {c.cartoes.length === 0 ? (
-              <p className="rounded-md border border-dashed border-[var(--border-strong)] px-3 py-4 text-center text-sm text-muted-foreground">{c.vazio ?? tx.vazio}</p>
+              <p className="rounded-md border border-dashed border-[var(--border-strong)] px-3 py-4 text-center text-body-sm text-muted-foreground">{c.vazio ?? tx.vazio}</p>
             ) : (
               <ul className="grid gap-2">
                 {c.cartoes.map(k => {
                   const i = ordem++;
                   const conteudo = (
                     <>
-                      <span className="block text-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">{k.titulo}</span>
-                      {k.descricao && <span className="mt-1 block text-sm text-muted-foreground [overflow-wrap:anywhere]">{k.descricao}</span>}
+                      <span className="block text-body-sm font-semibold leading-snug text-foreground [overflow-wrap:anywhere]">{k.titulo}</span>
+                      {k.descricao && <span className="mt-1 block text-body-sm text-muted-foreground [overflow-wrap:anywhere]">{k.descricao}</span>}
                       {(k.etiqueta || k.pessoa) && (
                         <span className="mt-3 flex items-center justify-between gap-2">
                           <span className="min-w-0">{k.etiqueta}</span>

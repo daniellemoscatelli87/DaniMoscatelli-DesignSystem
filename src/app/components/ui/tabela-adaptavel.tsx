@@ -57,20 +57,20 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
 
   return (
     <div data-slot="tabela-adaptavel" className={cn("@container/tabela min-w-0 overflow-hidden rounded-xl border border-border bg-card", className)}>
-      {mostrarLegenda && <p className="border-b border-border px-4 py-3 text-sm font-semibold text-foreground">{legenda}</p>}
+      {mostrarLegenda && <p className="border-b border-border px-4 py-3 text-body-sm font-semibold text-foreground">{legenda}</p>}
       {linhas.length === 0 && vazio ? (
         <div className="px-4">{vazio}</div>
       ) : (
         <>
           {/* Tabela (30rem ou mais) */}
-          <table className="hidden w-full border-collapse text-left text-sm @min-[30rem]/tabela:table">
+          <table className="hidden w-full border-collapse text-left text-body-sm @min-[30rem]/tabela:table">
             <caption className="sr-only">{legenda}</caption>
             <thead>
               <tr className="border-b border-border bg-muted/50">
                 {colunas.map(c => (
-                  <th key={c.id} scope="col" className={cn(celulaBase(c), "py-3 text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground")}>{c.titulo}</th>
+                  <th key={c.id} scope="col" className={cn(celulaBase(c), "py-3 text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground")}>{c.titulo}</th>
                 ))}
-                {acoes && <th scope="col" className="w-px whitespace-nowrap px-4 py-3 text-right text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground"><span className="sr-only">{tx.acoes}</span></th>}
+                {acoes && <th scope="col" className="w-px whitespace-nowrap px-4 py-3 text-right text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground"><span className="sr-only">{tx.acoes}</span></th>}
               </tr>
             </thead>
             <tbody>
@@ -85,7 +85,7 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
             </tbody>
           </table>
           {(p2.length > 0 || p3.length > 0) && (
-            <p className="hidden border-t border-border px-4 py-2 text-xs text-muted-foreground @min-[30rem]/tabela:block @min-[48rem]/tabela:hidden">
+            <p className="hidden border-t border-border px-4 py-2 text-label text-muted-foreground @min-[30rem]/tabela:block @min-[48rem]/tabela:hidden">
               <span className="@min-[36rem]/tabela:hidden">{tx.foraDaTela}: {[...p2, ...p3].join(", ")}.</span>
               <span className="hidden @min-[36rem]/tabela:inline">{p3.length ? `${tx.foraDaTela}: ${p3.join(", ")}.` : ""}</span>
             </p>
@@ -95,8 +95,8 @@ function TabelaAdaptavel<T>({ colunas, linhas, chave, legenda, mostrarLegenda = 
           <ul aria-label={legenda} className="divide-y divide-border @min-[30rem]/tabela:hidden">
             {linhas.map(l => (
               <li key={chave(l)} className="px-4 py-4 transition-colors hover:bg-[var(--row-hover)]">
-                <p className="text-sm font-semibold text-foreground [overflow-wrap:anywhere]">{principal.celula(l)}</p>
-                <dl className="mt-2 grid gap-1 text-sm">
+                <p className="text-body-sm font-semibold text-foreground [overflow-wrap:anywhere]">{principal.celula(l)}</p>
+                <dl className="mt-2 grid gap-1 text-body-sm">
                   {outras.map(c => (
                     <div key={c.id} className="grid grid-cols-[minmax(0,2fr)_minmax(0,3fr)] gap-3">
                       <dt className="text-muted-foreground">{c.titulo}</dt>

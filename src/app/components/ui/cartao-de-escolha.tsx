@@ -104,11 +104,11 @@ function CartaoDeEscolha({ valor, titulo, descricao, icone, desabilitado = false
           </IconeComBase>
         )}
         <span className="min-w-0 flex-1">
-          <span id={idDoTitulo} className={cn("block text-base font-semibold leading-snug text-balance", desabilitado ? "text-disabled-foreground" : "text-foreground")}>
+          <span id={idDoTitulo} className={cn("block text-body font-semibold leading-snug text-balance", desabilitado ? "text-disabled-foreground" : "text-foreground")}>
             {titulo}
           </span>
           {descricao && (
-            <span id={idDaDescricao} className={cn("mt-1 block text-sm text-pretty", desabilitado ? "text-disabled-foreground" : "text-muted-foreground")}>
+            <span id={idDaDescricao} className={cn("mt-1 block text-body-sm text-pretty", desabilitado ? "text-disabled-foreground" : "text-muted-foreground")}>
               {descricao}
             </span>
           )}

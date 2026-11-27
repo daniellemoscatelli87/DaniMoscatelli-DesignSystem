@@ -1,5 +1,39 @@
 @custom-variant dark (&:is(.dark *));
 
+/* Telas de toque (decisão de 27/11/2026): celular (abaixo de 640 px) ou qualquer tela com dedo como ponteiro principal.
+   Uso: toque:h-11 deixa o alvo com 44 px no toque; no computador com mouse vale a altura de sempre (40 px). */
+@custom-variant toque {
+  @media (max-width: 639.98px) {
+    @slot;
+  }
+  @media (pointer: coarse) {
+    @slot;
+  }
+}
+
+/* ── Escala tipográfica (tokens de tamanho de texto, 27/11/2026) ──
+   A mesma escala da página Fundamentos › Tipografia. Viram as classes text-display-xl, text-h1, text-body-sm,
+   text-caption etc. Só o tamanho: a altura de linha continua vindo do elemento (leading-*). Valores fora desta lista
+   não são usados: vão para o passo mais perto. */
+@theme {
+  --text-display-xl: 4rem;     /* 64 px — Display XL */
+  --text-display-lg: 3rem;     /* 48 px — Display G */
+  --text-display-md: 2.25rem;  /* 36 px — Display M */
+  --text-h1: 2.5rem;           /* 40 px — Título 1 */
+  --text-h2: 2rem;             /* 32 px — Título 2 */
+  --text-h3: 1.5rem;           /* 24 px — Título 3 e Declaração */
+  --text-h4: 1.25rem;          /* 20 px — Título 4 */
+  --text-subtitle-lg: 1.25rem; /* 20 px — Subtítulo grande */
+  --text-subtitle: 1.125rem;   /* 18 px — Subtítulo */
+  --text-body-lg: 1.125rem;    /* 18 px — Corpo grande */
+  --text-body: 1rem;           /* 16 px — Corpo */
+  --text-body-sm: 0.875rem;    /* 14 px — Corpo pequeno */
+  --text-button: 0.875rem;     /* 14 px — Botão */
+  --text-label: 0.75rem;       /* 12 px — Rótulo */
+  --text-caption: 0.6875rem;   /* 11 px — Legenda */
+}
+
+
 /* =========================================================
    DESIGN SYSTEM — GRAPHITE + CRIMSON
    Premium SaaS · Cold graphite palette · Burnt crimson accent
@@ -521,6 +555,18 @@
     font-family: var(--font-sans);
     font-weight: var(--font-weight-semibold);
     line-height: 1.5;
+  }
+
+  /* Alvos de toque (decisão de 27/11/2026): no celular e em telas de dedo, todo botão, aba, campo e lista de seleção
+     tem pelo menos 44 × 44 px, mesmo quando o componente desenha algo menor no computador. Caixa de seleção, opção de
+     rádio e interruptor crescem a área de toque dentro do próprio componente (o desenho continua do mesmo tamanho).
+     Exceção: data-alvo-compacto, só para botões dentro de uma linha de texto (como o "i" de explicação de um rótulo),
+     que ganham a área de toque com uma margem invisível. */
+  @media (max-width: 639.98px), (pointer: coarse) {
+    :where(button, [role="button"], [role="tab"], select, summary, input:not([type="checkbox"], [type="radio"], [type="range"], [type="hidden"], [type="color"], [type="file"])):not([data-alvo-compacto], [role="checkbox"], [role="radio"], [role="switch"], [role="slider"], [role="menuitem"], [role="option"]) {
+      min-height: 2.75rem;
+      min-width: 2.75rem;
+    }
   }
 
   input, textarea, select {

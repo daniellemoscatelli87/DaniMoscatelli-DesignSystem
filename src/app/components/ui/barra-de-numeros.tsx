@@ -21,8 +21,8 @@ function BarraDeNumeros({ itens, centralizar = false, className }: { itens: Nume
       <dl className={cn("grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border bg-border", itens.length === 3 ? "@min-[40rem]/numeros:grid-cols-3" : "@min-[40rem]/numeros:grid-cols-4")}>
         {itens.map(n => (
           <div key={n.rotulo} className={cn("flex min-w-0 flex-col-reverse gap-1 bg-card p-4 @min-[40rem]/numeros:p-6", centralizar && "items-center text-center", itens.length === 3 && "last:col-span-2 @min-[40rem]/numeros:last:col-span-1")}>
-            <dt className="text-sm text-muted-foreground text-balance">{n.rotulo}{n.detalhe && <span className="mt-1 block text-xs">{n.detalhe}</span>}</dt>
-            <dd className="text-[2rem] font-bold leading-none tracking-[-0.03em] text-foreground tabular-nums">{n.valor}</dd>
+            <dt className="text-body-sm text-muted-foreground text-balance">{n.rotulo}{n.detalhe && <span className="mt-1 block text-label">{n.detalhe}</span>}</dt>
+            <dd className="text-h2 font-bold leading-none tracking-[-0.03em] text-foreground tabular-nums">{n.valor}</dd>
           </div>
         ))}
       </dl>

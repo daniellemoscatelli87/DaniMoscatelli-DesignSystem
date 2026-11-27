@@ -56,16 +56,16 @@ const porModo = {
   cabecalho: { auto: "@min-[40rem]/stepper:hidden", completo: "hidden", compacto: "" },
   nome: { auto: "hidden @min-[40rem]/stepper:inline", completo: "inline", compacto: "hidden" },
   marcador: {
-    auto: "h-8 w-8 text-xs @min-[40rem]/stepper:h-10 @min-[40rem]/stepper:w-10 @min-[40rem]/stepper:text-sm",
-    completo: "h-10 w-10 text-sm",
-    compacto: "h-8 w-8 text-xs",
+    auto: "h-8 w-8 text-label @min-[40rem]/stepper:h-10 @min-[40rem]/stepper:w-10 @min-[40rem]/stepper:text-body-sm",
+    completo: "h-10 w-10 text-body-sm",
+    compacto: "h-8 w-8 text-label",
   },
   item: { auto: "pb-4 pt-1 @min-[40rem]/stepper:pb-5 @min-[40rem]/stepper:pt-4", completo: "pb-5 pt-4", compacto: "pb-4 pt-1" },
   lista: { auto: "gap-2 @min-[40rem]/stepper:gap-0", completo: "gap-0", compacto: "gap-2" },
 } as const;
 
 /* Tamanho do nome: maior quando o Stepper tem 60rem ou mais (no lugar do antigo lg: da tela). */
-const nomeTexto = "text-base font-bold leading-tight @min-[60rem]/stepper:text-lg";
+const nomeTexto = "text-body font-bold leading-tight @min-[60rem]/stepper:text-subtitle";
 
 export function Stepper({ etapas, atual, concluidas, onIrPara, rotulo = "Etapas", textos, className }: StepperProps) {
   const tx = {
@@ -120,7 +120,7 @@ export function Stepper({ etapas, atual, concluidas, onIrPara, rotulo = "Etapas"
         </ol>
       </div>
       {/* Sem espaço para os nomes: "Etapa X de N" e o nome da etapa atual. */}
-      <p className={cn("mb-3 text-sm text-muted-foreground", porModo.cabecalho[modo])} aria-hidden>
+      <p className={cn("mb-3 text-body-sm text-muted-foreground", porModo.cabecalho[modo])} aria-hidden>
         {corrente ? (
           <>
             {tx.etapa} {atual + 1} {tx.de} {total} · <span className="font-semibold text-foreground">{corrente.titulo}</span>

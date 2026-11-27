@@ -121,7 +121,7 @@ function CabecalhoDoSite({
           key={i.id}
           href={i.href}
           aria-current={i.id === atual ? "page" : undefined}
-          className={cn("whitespace-nowrap rounded-sm text-sm font-semibold decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] aria-[current=page]:underline", corLink, foco)}
+          className={cn("whitespace-nowrap rounded-sm text-body-sm font-semibold decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] aria-[current=page]:underline", corLink, foco)}
         >
           {i.rotulo}
         </a>
@@ -137,7 +137,7 @@ function CabecalhoDoSite({
         onClick: acao.onClick,
         "data-slot": "cabecalho-acao",
         className: cn(
-          "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border px-6 text-sm font-semibold transition-colors duration-[var(--duration-fast)] [&_svg]:size-4",
+          "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border px-6 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)] [&_svg]:size-4",
           escuro
             ? "border-white/85 text-white hover:bg-white hover:text-graphite-900"
             : "border-foreground text-foreground hover:bg-foreground hover:text-background",
@@ -187,7 +187,7 @@ function CabecalhoDoSite({
                   key={i.id}
                   href={i.href}
                   aria-current={i.id === atual ? "page" : undefined}
-                  className={cn("whitespace-nowrap rounded-sm text-sm font-semibold text-foreground decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] hover:text-primary-text aria-[current=page]:text-primary-text aria-[current=page]:underline aria-[current=page]:decoration-primary", foco)}
+                  className={cn("whitespace-nowrap rounded-sm text-body-sm font-semibold text-foreground decoration-2 underline-offset-[6px] transition-colors duration-[var(--duration-fast)] hover:text-primary-text aria-[current=page]:text-primary-text aria-[current=page]:underline aria-[current=page]:decoration-primary", foco)}
                 >
                   {i.rotulo}
                 </a>
@@ -195,7 +195,7 @@ function CabecalhoDoSite({
             </nav>
             {acao && React.cloneElement(botaoAcao as React.ReactElement<{ className?: string }>, {
               className: cn(
-                "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-foreground px-6 text-sm font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-foreground hover:text-background [&_svg]:size-4",
+                "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-foreground px-6 text-body-sm font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-foreground hover:text-background [&_svg]:size-4",
                 foco,
               ),
             })}
@@ -270,7 +270,7 @@ function CabecalhoDoSite({
                       aria-current={i.id === atual ? "page" : undefined}
                       onClick={() => setAberto(false)}
                       className={cn(
-                        "flex min-h-12 items-center justify-between rounded-md px-4 text-base font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-accent",
+                        "flex min-h-12 items-center justify-between rounded-md px-4 text-body font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-accent",
                         "aria-[current=page]:bg-primary-suave aria-[current=page]:text-primary-text",
                         foco,
                       )}
@@ -286,7 +286,7 @@ function CabecalhoDoSite({
                     ...(acao.href ? { href: acao.href } : { type: "button" }),
                     onClick: () => { setAberto(false); acao.onClick?.(); },
                     className: cn(
-                      "mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 text-base font-semibold text-primary-foreground transition-colors duration-[var(--duration-fast)] hover:bg-[var(--primary-hover)] [&_svg]:size-4",
+                      "mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 text-body font-semibold text-primary-foreground transition-colors duration-[var(--duration-fast)] hover:bg-[var(--primary-hover)] [&_svg]:size-4",
                       foco,
                     ),
                   },

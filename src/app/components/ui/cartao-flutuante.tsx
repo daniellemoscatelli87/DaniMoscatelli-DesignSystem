@@ -48,9 +48,9 @@ function CartaoFlutuante({ icone, titulo, estado, tom = "marca", flutuar = true,
     >
       <IconeComBase tom="marca" tamanho="md">{icone}</IconeComBase>
       <span className="min-w-0">
-        <strong className="block truncate text-sm font-bold text-foreground">{titulo}</strong>
+        <strong className="block truncate text-body-sm font-bold text-foreground">{titulo}</strong>
         {estado && (
-          <span className="flex items-center gap-2 text-xs text-muted-foreground">
+          <span className="flex items-center gap-2 text-label text-muted-foreground">
             <span className={cn("size-2 shrink-0 rounded-full", PONTO[tom], !reduzir && "animate-pulse")} />
             <span className="truncate">{estado}</span>
           </span>

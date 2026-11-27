@@ -27,12 +27,12 @@ function Citacao({ children, autor, papel, cite, tamanho = "texto", className, .
   const destaque = tamanho === "destaque";
   return (
     <figure data-slot="citacao" data-tamanho={tamanho} className={cn(destaque ? "relative max-w-3xl" : "border-l-4 border-primary pl-4", className)} {...props}>
-      {destaque && <span aria-hidden className="mb-2 block font-[family-name:var(--font-accent)] text-[3.25rem] leading-none text-primary-text">“</span>}
-      <blockquote cite={cite} className={cn("text-pretty text-foreground", destaque ? "text-xl font-semibold leading-snug tracking-[-0.01em] sm:text-[1.5rem]" : "text-base leading-relaxed")}>
+      {destaque && <span aria-hidden className="mb-2 block font-[family-name:var(--font-accent)] text-display-lg leading-none text-primary-text">“</span>}
+      <blockquote cite={cite} className={cn("text-pretty text-foreground", destaque ? "text-h4 font-semibold leading-snug tracking-[-0.01em] sm:text-h3" : "text-body leading-relaxed")}>
         {children}
       </blockquote>
       {(autor || papel) && (
-        <figcaption className={cn("text-sm", destaque ? "mt-4" : "mt-2")}>
+        <figcaption className={cn("text-body-sm", destaque ? "mt-4" : "mt-2")}>
           {autor && <span className="font-semibold text-foreground">{autor}</span>}
           {autor && papel && <span aria-hidden className="mx-2 text-muted-foreground">·</span>}
           {papel && <span className="text-muted-foreground">{papel}</span>}

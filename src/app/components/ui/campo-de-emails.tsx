@@ -67,7 +67,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
       onClick={() => inputRef.current?.focus()}
       aria-disabled={desabilitado || undefined}
       className={cn(
-        "flex min-h-11 w-full cursor-text flex-wrap items-center gap-2 rounded-md border border-input bg-input-background px-2 py-1 transition-[color,box-shadow] sm:min-h-10",
+        "flex min-h-10 toque:min-h-11 w-full cursor-text flex-wrap items-center gap-2 rounded-md border border-input bg-input-background px-2 py-1 transition-[color,box-shadow]",
         "focus-within:border-ring focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2",
         (invalido || algumInvalido) && "border-destructive",
         desabilitado && "cursor-not-allowed opacity-50",
@@ -81,7 +81,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
             key={email}
             data-valido={ok ? "sim" : "nao"}
             className={cn(
-              "inline-flex min-h-11 max-w-full items-center rounded-full pl-1 text-sm sm:min-h-8",
+              "inline-flex min-h-8 toque:min-h-11 max-w-full items-center rounded-full pl-1 text-body-sm",
               ok ? "bg-secondary text-secondary-foreground" : "border border-[var(--error-text)] bg-card text-error-text",
               "motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in-95 motion-safe:duration-[var(--duration-fast)]",
             )}
@@ -90,7 +90,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
               type="button"
               disabled={desabilitado}
               onClick={e => { e.stopPropagation(); editar(email); }}
-              className="inline-flex min-h-11 min-w-0 items-center gap-1 rounded-full px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:min-h-8"
+              className="inline-flex min-h-8 toque:min-h-11 min-w-0 items-center gap-1 rounded-full px-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               aria-label={`${tx.editar} ${email}${ok ? "" : ` (${tx.invalido})`}`}
             >
               {!ok && <AlertCircle aria-hidden className="size-4 shrink-0" />}
@@ -101,7 +101,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
               disabled={desabilitado}
               onClick={e => { e.stopPropagation(); remover(email); }}
               aria-label={`${tx.remover} ${email}`}
-              className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:size-8"
+              className="flex size-8 toque:size-11 shrink-0 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <X aria-hidden className="size-4" />
             </button>
@@ -133,7 +133,7 @@ function CampoDeEmails({ id, valor, onValorChange, placeholder = "nome@exemplo.c
           if (/[,;\s]/.test(colado.trim())) { e.preventDefault(); adicionar(texto + colado); setTexto(""); }
         }}
         onBlur={() => { if (texto.trim()) { adicionar(texto); setTexto(""); } }}
-        className="h-11 min-w-[10rem] flex-1 bg-transparent px-2 text-base outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed sm:h-8 sm:text-sm"
+        className="h-8 toque:h-11 min-w-[10rem] flex-1 bg-transparent px-2 text-body outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed sm:text-body-sm"
       />
     </div>
   );

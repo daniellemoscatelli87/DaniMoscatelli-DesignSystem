@@ -125,7 +125,7 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
   };
 
   const doDia = porDia.get(dia) ?? [];
-  const botaoMes = "flex size-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:size-10";
+  const botaoMes = "flex size-10 toque:size-11 items-center justify-center rounded-full text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
   return (
     <div data-slot="agenda-do-mes" className={cn("@container/agenda w-full", className)}>
@@ -133,7 +133,7 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
         {/* Mês */}
         <div className="min-w-0 rounded-xl border border-border bg-card p-3 @min-[40rem]/agenda:p-6">
           <div className="mb-4 flex items-center justify-between gap-2 pl-1">
-            <h3 aria-live="polite" className="text-lg font-semibold capitalize text-foreground">{nomeDoMes}</h3>
+            <h3 aria-live="polite" className="text-subtitle font-semibold text-foreground first-letter:uppercase">{nomeDoMes}</h3>
             <div className="flex items-center gap-1">
               <button type="button" onClick={() => trocarMes(-1)} aria-label={tx.anterior} className={botaoMes}><ChevronLeft aria-hidden className="size-5" /></button>
               <button type="button" onClick={() => trocarMes(1)} aria-label={tx.proximo} className={botaoMes}><ChevronRight aria-hidden className="size-5" /></button>
@@ -142,7 +142,7 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
           <div ref={gradeRef} role="grid" aria-label={nomeDoMes} onKeyDown={aoTeclar}>
             <div role="row" className="grid grid-cols-7">
               {semana.map(s => (
-                <span key={s} role="columnheader" className="pb-2 text-center text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground">{s}</span>
+                <span key={s} role="columnheader" className="pb-2 text-center text-label font-semibold uppercase tracking-[0.06em] text-muted-foreground">{s}</span>
               ))}
             </div>
             {Array.from({ length: 6 }, (_, l) => (
@@ -163,7 +163,7 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
                         aria-label={`${nomeCompleto(d)}${ehHoje ? `, ${tx.hoje}` : ""}${lista.length ? `, ${contar(lista.length)}` : ""}`}
                         aria-current={ehHoje ? "date" : undefined}
                         className={cn(
-                          "flex h-12 w-full min-w-0 flex-col items-center justify-start gap-1 rounded-md border border-transparent px-1 pt-1 text-sm transition-colors duration-[var(--duration-fast)]",
+                          "flex h-12 w-full min-w-0 flex-col items-center justify-start gap-1 rounded-md border border-transparent px-1 pt-1 text-body-sm transition-colors duration-[var(--duration-fast)]",
                           "@min-[40rem]/agenda:h-24 @min-[40rem]/agenda:items-stretch @min-[40rem]/agenda:px-2 @min-[40rem]/agenda:pt-2",
                           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                           escolhido ? "border-primary bg-primary-suave" : "hover:bg-accent",
@@ -181,12 +181,12 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
                         {lista.length > 0 && (
                           <span aria-hidden className="hidden min-w-0 flex-col gap-1 @min-[40rem]/agenda:flex">
                             {lista.slice(0, 2).map(e => (
-                              <span key={e.id} className="flex min-w-0 items-center gap-1 text-left text-xs leading-tight text-foreground">
+                              <span key={e.id} className="flex min-w-0 items-center gap-1 text-left text-label leading-tight text-foreground">
                                 <span className={cn("size-1.5 shrink-0 rounded-full", COR_DO_PONTO[e.tom ?? "marca"])} />
                                 <span className="truncate">{e.hora ? `${e.hora} ` : ""}{e.titulo}</span>
                               </span>
                             ))}
-                            {lista.length > 2 && <span className="text-left text-xs font-semibold text-muted-foreground">+{lista.length - 2}</span>}
+                            {lista.length > 2 && <span className="text-left text-label font-semibold text-muted-foreground">+{lista.length - 2}</span>}
                           </span>
                         )}
                       </button>
@@ -202,8 +202,8 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
         <section aria-labelledby={idDoDia} className="min-w-0 rounded-xl border border-border bg-card">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-4 @min-[40rem]/agenda:px-6">
             <div className="min-w-0">
-              <h3 id={idDoDia} className="text-base font-semibold first-letter:uppercase text-foreground">{nomeCompleto(deIso(dia))}</h3>
-              <p className="text-sm text-muted-foreground">{doDia.length ? contar(doDia.length) : tx.semEventos}</p>
+              <h3 id={idDoDia} className="text-body font-semibold first-letter:uppercase text-foreground">{nomeCompleto(deIso(dia))}</h3>
+              <p className="text-body-sm text-muted-foreground">{doDia.length ? contar(doDia.length) : tx.semEventos}</p>
             </div>
             {acoesDoDia}
           </div>
@@ -215,9 +215,9 @@ function AgendaDoMes({ eventos, dia: diaProp, diaInicial, onDiaChange, hoje: hoj
                     <>
                       <span aria-hidden className={cn("mt-2 size-2 rounded-full", COR_DO_PONTO[e.tom ?? "marca"])} />
                       <div className="min-w-0">
-                        {e.hora && <p className="text-xs font-semibold tabular-nums text-muted-foreground">{e.hora}</p>}
-                        <p className="text-sm font-semibold text-foreground [overflow-wrap:anywhere]">{e.titulo}</p>
-                        {e.descricao && <p className="mt-1 text-sm text-muted-foreground">{e.descricao}</p>}
+                        {e.hora && <p className="text-label font-semibold tabular-nums text-muted-foreground">{e.hora}</p>}
+                        <p className="text-body-sm font-semibold text-foreground [overflow-wrap:anywhere]">{e.titulo}</p>
+                        {e.descricao && <p className="mt-1 text-body-sm text-muted-foreground">{e.descricao}</p>}
                       </div>
                     </>
                   )}

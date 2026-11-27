@@ -52,7 +52,7 @@ function DemoCabecalho() {
           />
         )}
       </div>
-      <p className="mb-3 text-sm text-muted-foreground">{t("Scroll inside the box: the header hides when you scroll down and comes back when you scroll up.", "Role dentro da caixa: o cabeçalho some ao descer e volta ao subir.")}</p>
+      <p className="mb-3 text-body-sm text-muted-foreground">{t("Scroll inside the box: the header hides when you scroll down and comes back when you scroll up.", "Role dentro da caixa: o cabeçalho some ao descer e volta ao subir.")}</p>
       <div className={`mx-auto overflow-hidden rounded-lg border border-border ${tela === "celular" ? "max-w-[390px]" : ""}`}>
         <div ref={rolagem} className="relative h-[26rem] overflow-y-auto bg-background">
           <CabecalhoDoSite
@@ -89,7 +89,7 @@ function DemoConta() {
       >
         <form className="grid gap-4" onSubmit={e => e.preventDefault()}>
           <Campo rotulo={t("E-mail", "E-mail")} type="email" autoComplete="username" placeholder="nome@exemplo.com" />
-          <PasswordInput label={t("Password", "Senha")} value={senha} onValueChange={setSenha} />
+          <PasswordInput label={t("Password", "Senha")} value={senha} onValueChange={setSenha} textos={{ mostrar: t("Show password", "Mostrar senha"), ocultar: t("Hide password", "Ocultar senha") }} />
           <Button type="submit" size="lg" className="w-full">{t("Sign in", "Entrar")}</Button>
         </form>
       </MolduraDeConta>

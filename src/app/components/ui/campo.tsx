@@ -50,7 +50,7 @@ function Campo({ rotulo, ajuda, erro, icone, obrigatorio, inteiro, depois, class
   const controle: PropsDoControle = { id, "aria-invalid": erro ? true : undefined, "aria-describedby": descritores, required: required ?? obrigatorio };
   return (
     <div data-slot="campo" className={cn("min-w-0 space-y-2", inteiro && "col-span-full", classeDoBloco)}>
-      <Label htmlFor={id} className="text-sm font-semibold leading-snug">
+      <Label htmlFor={id} className="text-body-sm font-semibold leading-snug">
         {rotulo}
         {obrigatorio && <span aria-hidden className="-ml-1 text-primary-text">*</span>}
       </Label>
@@ -63,7 +63,7 @@ function Campo({ rotulo, ajuda, erro, icone, obrigatorio, inteiro, depois, class
         </div>
       )}
       {depois}
-      {mostrarAjuda && <p id={`${id}-ajuda`} className="text-sm text-muted-foreground">{ajuda}</p>}
+      {mostrarAjuda && <p id={`${id}-ajuda`} className="text-body-sm text-muted-foreground">{ajuda}</p>}
       {erro && <MensagemDeErro id={`${id}-erro`}>{erro}</MensagemDeErro>}
     </div>
   );
@@ -72,7 +72,7 @@ function Campo({ rotulo, ajuda, erro, icone, obrigatorio, inteiro, depois, class
 /** Texto de erro de um campo ou grupo: ícone + texto na cor de texto do erro (nunca só a cor). */
 function MensagemDeErro({ id, children, className }: { id?: string; children: React.ReactNode; className?: string }) {
   return (
-    <p id={id} data-slot="mensagem-de-erro" className={cn("flex items-start gap-2 text-sm font-medium text-error-text motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1", className)}>
+    <p id={id} data-slot="mensagem-de-erro" className={cn("flex items-start gap-2 text-body-sm font-medium text-error-text motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1", className)}>
       <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden /> <span className="min-w-0">{children}</span>
     </p>
   );

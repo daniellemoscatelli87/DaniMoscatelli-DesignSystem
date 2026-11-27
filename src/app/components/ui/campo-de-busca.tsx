@@ -53,7 +53,7 @@ function CampoDeBusca({ valor, onValorChange, onBusca, atraso = 0, rotulo = "Bus
           if (e.key === "Enter") e.preventDefault();
         }}
         className={cn(
-          "flex h-11 w-full min-w-0 rounded-md border border-input bg-input-background pl-10 pr-12 text-base transition-[color,box-shadow] outline-none placeholder:text-muted-foreground sm:h-10 sm:pr-10",
+          "flex h-10 toque:h-11 w-full min-w-0 rounded-md border border-input bg-input-background pl-10 pr-12 text-body transition-[color,box-shadow] outline-none placeholder:text-muted-foreground sm:pr-10",
           "focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           "[&::-webkit-search-cancel-button]:appearance-none",
         )}
@@ -64,7 +64,7 @@ function CampoDeBusca({ valor, onValorChange, onBusca, atraso = 0, rotulo = "Bus
           type="button"
           aria-label={tx.limpar}
           onClick={() => { onValorChange(""); ref.current?.focus(); }}
-          className="absolute right-0 top-1/2 flex size-11 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:right-1 sm:size-8 sm:hover:bg-accent motion-safe:animate-in motion-safe:fade-in"
+          className="absolute right-0 top-1/2 flex size-8 toque:size-11 -translate-y-1/2 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:right-1 sm:hover:bg-accent motion-safe:animate-in motion-safe:fade-in"
         >
           <X aria-hidden className="size-4" />
         </button>
