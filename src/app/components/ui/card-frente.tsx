@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { ShineBorder } from "./shine-border";
 import { cn } from "./utils";

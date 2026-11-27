@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronDown, Info, Lightbulb } from "lucide-react";

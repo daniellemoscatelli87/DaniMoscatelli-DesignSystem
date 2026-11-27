@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "./utils";
@@ -88,7 +90,7 @@ export function PartnerCard({
         <h3 className={cn("font-bold [text-wrap:balance]", titleSize[size], dark ? "text-white" : "text-foreground")} style={{ fontFamily: "var(--font-sans)" }}>
           {withHighlight(title, "text-primary-text")}
         </h3>
-        {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : "text-muted-foreground")}>{description}</p>}
+        {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : surface === "tint" ? "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]" : "text-muted-foreground")}>{description}</p>}
         <div className={cn("mt-auto flex flex-wrap items-center gap-x-5 gap-y-3", size === "p" ? "pt-4" : "pt-6")}>
           <Cta
             {...(cta.href ? { href: cta.href } : { type: "button", onClick: cta.onClick })}

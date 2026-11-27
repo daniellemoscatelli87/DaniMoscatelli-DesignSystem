@@ -1,5 +1,7 @@
+"use client";
+
 import * as React from "react";
-import { Eye, EyeOff, Check, Circle, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Eye, EyeOff, AlertCircle, CheckCircle2 } from "lucide-react";
 import { cn } from "./utils";
 
 /**
@@ -7,8 +9,10 @@ import { cn } from "./utils";
  *
  * - Exibir/ocultar senha em cada campo (botão com aria-pressed e rótulo).
  * - Força da senha em 4 barras + rótulo em texto (Fraca, Razoável, Boa, Forte), calculada pelos requisitos atendidos.
- * - Dica de preenchimento: cada requisito ganha um check na cor primária da marca quando atendido; o ícone muda de forma
- *   (círculo → check) e o leitor de tela ouve "atendido", então a cor nunca é o único sinal.
+ * - Dica de preenchimento: requisito ainda não atendido tem um ponto neutro (como o de uma lista) e texto cinza; atendido
+ *   ganha o check de sucesso do design system (CheckCircle2 em --success-text) e texto no tom principal. A forma muda
+ *   (ponto → check) e o leitor de tela ouve "atendido" ou "não atendido", então a cor nunca é o único sinal. Nada ali
+ *   parece um controle: o círculo vazado de antes lembrava um botão de rádio (27/11/2026).
  * - Confirmação: avisa "As senhas não coincidem" (erro) ou "As senhas coincidem" (sucesso) depois que a pessoa digita.
  */
 
@@ -155,11 +159,13 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
           <p className="mb-2 text-[0.8125rem] font-semibold text-foreground">{textos.dicaTitulo}</p>
           <ul className="flex flex-col gap-1.5">
             {regras.map((r, i) => (
-              <li key={r.id} className={cn("flex items-center gap-2 text-[0.8125rem] transition-colors duration-200", atendidas[i] ? "text-foreground" : "text-muted-foreground")}>
+              <li key={r.id} data-atendido={atendidas[i] ? "sim" : "nao"} className={cn("flex items-center gap-2 text-[0.8125rem] transition-colors duration-200 motion-reduce:transition-none", atendidas[i] ? "text-foreground" : "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]")}>
+                {/* Sinais que não parecem controles (27/11/2026): "ainda não" é um ponto neutro, como o de uma lista; "atendido" é o
+                    check de sucesso do design system (CheckCircle2 em --success-text). O círculo vazado parecia um botão de rádio. */}
                 {atendidas[i] ? (
-                  <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground animate-in zoom-in-50 duration-200"><Check className="h-3 w-3" strokeWidth={3} aria-hidden /></span>
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[var(--success-text)] motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-200" aria-hidden />
                 ) : (
-                  <Circle className="h-4 w-4 shrink-0 text-muted-foreground/60" aria-hidden />
+                  <span aria-hidden className="inline-flex h-4 w-4 shrink-0 items-center justify-center"><span className="h-1.5 w-1.5 rounded-full bg-current" /></span>
                 )}
                 <span>{r.label}</span>
                 <span className="sr-only">, {atendidas[i] ? textos.atendido : textos.naoAtendido}</span>
@@ -183,7 +189,7 @@ export function PasswordConfirm({ senha, confirmacao, onSenhaChange, onConfirmac
           />
           <p id={confId} aria-live="polite" className="min-h-[1.25rem] text-[0.8125rem]">
             {mostrarConf && (coincidem ? (
-              <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--primary-text,var(--primary))]" aria-hidden />{textos.coincidem}</span>
+              <span className="inline-flex items-center gap-1 text-foreground"><CheckCircle2 className="h-4 w-4 text-[var(--success-text)]" aria-hidden />{textos.coincidem}</span>
             ) : (
               <span className="inline-flex items-center gap-1 text-[var(--error-text)]"><AlertCircle className="h-4 w-4" aria-hidden />{textos.naoCoincidem}</span>
             ))}

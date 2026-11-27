@@ -11,7 +11,7 @@
     "secoesComMarcacaoAMao": 46,
     "tokens": 157,
     "paginas": 29,
-    "ancoras": 201,
+    "ancoras": 202,
     "propostas": 3
   },
   "componentes": [
@@ -92,7 +92,7 @@
         {
           "nome": "Alert",
           "tipo": "componente",
-          "linha": 43,
+          "linha": 50,
           "descricao": "",
           "props": [
             "className",
@@ -103,7 +103,7 @@
         {
           "nome": "AlertTitle",
           "tipo": "componente",
-          "linha": 60,
+          "linha": 67,
           "descricao": "",
           "props": [
             "className"
@@ -113,7 +113,7 @@
         {
           "nome": "AlertDescription",
           "tipo": "componente",
-          "linha": 73,
+          "linha": 80,
           "descricao": "",
           "props": [
             "className"
@@ -140,6 +140,20 @@
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
           "linha": 215,
           "uso": "dentro de outro exemplo",
+          "exports": [
+            "Alert",
+            "AlertTitle",
+            "AlertDescription"
+          ]
+        },
+        {
+          "pagina": "feedback",
+          "paginaRotulo": "Feedback",
+          "ancora": "alerta-sem-titulo",
+          "titulo": "Alerta só com descrição",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 238,
+          "uso": "direto",
           "exports": [
             "Alert",
             "AlertTitle",
@@ -290,7 +304,7 @@
         {
           "nome": "variaveisDoAlerta",
           "tipo": "utilitário",
-          "linha": 28,
+          "linha": 38,
           "descricao": "Cada tom define as variáveis que o alerta e os botões usam: --alerta-cor (borda, fundo e contorno do botão), --alerta-texto (texto do botão), --alerta-icone (ícone), --alerta-fundo (tinta do fundo sobre o card) e --alerta-base (tinta da …",
           "props": [],
           "reexportaDe": null
@@ -298,7 +312,7 @@
         {
           "nome": "AlertaComAcao",
           "tipo": "componente",
-          "linha": 66,
+          "linha": 76,
           "descricao": "",
           "props": [
             "tom",
@@ -315,7 +329,7 @@
         {
           "nome": "BotaoDoAlerta",
           "tipo": "componente",
-          "linha": 149,
+          "linha": 160,
           "descricao": "Ação principal do alerta: só contorno, na cor do estado; texto e ícone na cor de texto do estado.",
           "props": [
             "tom",
@@ -327,7 +341,7 @@
         {
           "nome": "LinkDoAlerta",
           "tipo": "componente",
-          "linha": 174,
+          "linha": 185,
           "descricao": "Ação secundária do alerta: botão com cara de link, sublinhado, em --foreground.",
           "props": [
             "asChild",
@@ -357,7 +371,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 237,
+          "linha": 251,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AlertaComAcao",
@@ -474,7 +488,7 @@
           "ancora": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 555,
+          "linha": 569,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -503,7 +517,7 @@
         {
           "nome": "CHAVE_COOKIES",
           "tipo": "utilitário",
-          "linha": 21,
+          "linha": 23,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -511,7 +525,7 @@
         {
           "nome": "abrirAvisoCookies",
           "tipo": "utilitário",
-          "linha": 25,
+          "linha": 27,
           "descricao": "Abre o aviso de novo (botão \"Preferências de cookies\").",
           "props": [],
           "reexportaDe": null
@@ -519,7 +533,7 @@
         {
           "nome": "lerEscolhaCookies",
           "tipo": "utilitário",
-          "linha": 31,
+          "linha": 33,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -527,7 +541,7 @@
         {
           "nome": "AvisoCookies",
           "tipo": "componente",
-          "linha": 52,
+          "linha": 54,
           "descricao": "",
           "props": [
             "texto",
@@ -574,7 +588,7 @@
         {
           "nome": "AvisoProjeto",
           "tipo": "componente",
-          "linha": 74,
+          "linha": 76,
           "descricao": "",
           "props": [
             "titulo",
@@ -736,7 +750,7 @@
         {
           "nome": "BotaoSubir",
           "tipo": "componente",
-          "linha": 34,
+          "linha": 36,
           "descricao": "",
           "props": [
             "alvo",
@@ -1108,7 +1122,7 @@
           "ancora": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 245,
+          "linha": 259,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1232,7 +1246,7 @@
         {
           "nome": "Card",
           "tipo": "componente",
-          "linha": 32,
+          "linha": 34,
           "descricao": "",
           "props": [
             "className",
@@ -1244,7 +1258,7 @@
         {
           "nome": "CardMidia",
           "tipo": "componente",
-          "linha": 56,
+          "linha": 58,
           "descricao": "Mídia do card: foto (tipo=\"imagem\", de ponta a ponta) ou ícone (tipo=\"icone\", com o respiro do card; um ícone svg direto ganha a base rosa clara com o ícone na cor de texto da primária, o padrão dos templates do painel). Vertical: no topo.",
           "props": [
             "className",
@@ -1255,7 +1269,7 @@
         {
           "nome": "CardHeader",
           "tipo": "componente",
-          "linha": 73,
+          "linha": 75,
           "descricao": "",
           "props": [
             "className"
@@ -1265,7 +1279,7 @@
         {
           "nome": "CardTitle",
           "tipo": "componente",
-          "linha": 86,
+          "linha": 88,
           "descricao": "",
           "props": [
             "className"
@@ -1275,7 +1289,7 @@
         {
           "nome": "CardDescription",
           "tipo": "componente",
-          "linha": 96,
+          "linha": 98,
           "descricao": "",
           "props": [
             "className"
@@ -1285,7 +1299,7 @@
         {
           "nome": "CardAction",
           "tipo": "componente",
-          "linha": 106,
+          "linha": 108,
           "descricao": "",
           "props": [
             "className"
@@ -1295,7 +1309,7 @@
         {
           "nome": "CardContent",
           "tipo": "componente",
-          "linha": 119,
+          "linha": 121,
           "descricao": "",
           "props": [
             "className"
@@ -1305,7 +1319,7 @@
         {
           "nome": "CardFooter",
           "tipo": "componente",
-          "linha": 130,
+          "linha": 132,
           "descricao": "Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito.",
           "props": [
             "className",
@@ -1605,7 +1619,7 @@
         {
           "nome": "CardDeFrente",
           "tipo": "componente",
-          "linha": 96,
+          "linha": 98,
           "descricao": "",
           "props": [
             "numero",
@@ -1628,7 +1642,7 @@
         {
           "nome": "GradeDeFrentes",
           "tipo": "componente",
-          "linha": 200,
+          "linha": 202,
           "descricao": "Grade de 3/2 colunas; no celular, carrossel com encaixe. Para a entrada em cascata do site: <SurgirAoRolar as={GradeDeFrentes} escalonar>…cards…</SurgirAoRolar>.",
           "props": [
             "rotulo",
@@ -3155,7 +3169,7 @@
         {
           "nome": "LIMITE_DE_DIFERENCA",
           "tipo": "utilitário",
-          "linha": 46,
+          "linha": 48,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -3163,7 +3177,7 @@
         {
           "nome": "FATOR_DE_VOLTA",
           "tipo": "utilitário",
-          "linha": 48,
+          "linha": 50,
           "descricao": "Para voltar de lista para grade, a diferença precisa cair abaixo de 75% do limite.",
           "props": [],
           "reexportaDe": null
@@ -3171,7 +3185,7 @@
         {
           "nome": "passaDoLimite",
           "tipo": "utilitário",
-          "linha": 51,
+          "linha": 53,
           "descricao": "A diferença entre o card mais alto e o mais baixo de uma linha passa do limite?",
           "props": [],
           "reexportaDe": null
@@ -3179,7 +3193,7 @@
         {
           "nome": "useOrientacaoDoCard",
           "tipo": "utilitário",
-          "linha": 58,
+          "linha": 60,
           "descricao": "Orientação pedida pela GradeDeCards mais próxima: \"horizontal\" quando ela virou lista; null fora de uma grade.",
           "props": [],
           "reexportaDe": null
@@ -3187,7 +3201,7 @@
         {
           "nome": "SemOrientacaoHerdada",
           "tipo": "componente",
-          "linha": 63,
+          "linha": 65,
           "descricao": "Zera a orientação herdada: um card dentro de outro card não herda a orientação da grade de fora.",
           "props": [
             "children"
@@ -3197,7 +3211,7 @@
         {
           "nome": "GradeDeCards",
           "tipo": "componente",
-          "linha": 98,
+          "linha": 100,
           "descricao": "",
           "props": [
             "colunas",
@@ -3214,7 +3228,7 @@
         {
           "nome": "ItemDaGrade",
           "tipo": "componente",
-          "linha": 261,
+          "linha": 263,
           "descricao": "ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.",
           "props": [
             "className"
@@ -3860,7 +3874,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 237,
+          "linha": 251,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -3949,7 +3963,7 @@
         {
           "nome": "CORES_SERIES",
           "tipo": "utilitário",
-          "linha": 32,
+          "linha": 34,
           "descricao": "Tons de 4 séries lado a lado ou empilhadas, por importância (coresPorImportancia(4)). Mantido por compatibilidade: para outro número de séries, use coresPorImportancia ou coresDasSeries.",
           "props": [],
           "reexportaDe": null
@@ -3957,7 +3971,7 @@
         {
           "nome": "quebrarTexto",
           "tipo": "utilitário",
-          "linha": 41,
+          "linha": 43,
           "descricao": "Quebra um texto em linhas que caibam em `maximo` px (estimativa). Palavras maiores que a linha não são cortadas.",
           "props": [],
           "reexportaDe": null
@@ -3965,7 +3979,7 @@
         {
           "nome": "resumoDaDistribuicao",
           "tipo": "utilitário",
-          "linha": 151,
+          "linha": 153,
           "descricao": "Mínimo, quartis, mediana, máximo, bigodes (regra de 1,5 × IQR) e valores fora do padrão.",
           "props": [],
           "reexportaDe": null
@@ -3973,7 +3987,7 @@
         {
           "nome": "BarrasAgrupadas",
           "tipo": "componente",
-          "linha": 200,
+          "linha": 202,
           "descricao": "Barras agrupadas, deitadas: em cada grupo, uma barra por série com o valor escrito no fim. O nome de cada série aparece em cima das barras do primeiro grupo (e na legenda).",
           "props": [
             "grupos",
@@ -3988,7 +4002,7 @@
         {
           "nome": "BarrasEmpilhadas",
           "tipo": "componente",
-          "linha": 251,
+          "linha": 253,
           "descricao": "Barras empilhadas com o total escrito no fim. As partes não levam texto: embaixo de cada barra, uma linha com o valor de cada parte, na mesma ordem e com um ponto na cor dela.",
           "props": [
             "categorias",
@@ -4002,7 +4016,7 @@
         {
           "nome": "Pirulito",
           "tipo": "componente",
-          "linha": 301,
+          "linha": 303,
           "descricao": "Pirulito: haste fina e um ponto no valor, escrito ao lado. Mais leve que barras quando há muitos itens.",
           "props": [
             "itens",
@@ -4019,7 +4033,7 @@
         {
           "nome": "AreaEmpilhada",
           "tipo": "componente",
-          "linha": 418,
+          "linha": 420,
           "descricao": "Área empilhada: o topo é o total; cada camada é a parte de uma série. Nome e último valor no fim de cada camada.",
           "props": [
             "series",
@@ -4035,7 +4049,7 @@
         {
           "nome": "Streamgraph",
           "tipo": "componente",
-          "linha": 462,
+          "linha": 464,
           "descricao": "Streamgraph: camadas empilhadas em torno de um eixo central, em curvas suaves. Mostra o volume e a mistura mudando no tempo; não serve para ler valores exatos (estão no fim de cada camada e na tabela).",
           "props": [
             "series",
@@ -4050,7 +4064,7 @@
         {
           "nome": "LinhaDoTempo",
           "tipo": "componente",
-          "linha": 518,
+          "linha": 520,
           "descricao": "Linha do tempo com espaçamento proporcional: cada evento é um ponto no eixo, com data e nome em faixas abaixo (as faixas se multiplicam quando os nomes não cabem lado a lado). Diferente do componente Timeline (lista de etapas).",
           "props": [
             "eventos",
@@ -4065,7 +4079,7 @@
         {
           "nome": "CalendarioDeCalor",
           "tipo": "componente",
-          "linha": 597,
+          "linha": 599,
           "descricao": "Calendário de calor: uma coluna por semana, uma linha por dia da semana, cor pela escala sequencial. O dia de maior valor fica contornado e escrito abaixo; o valor de cada dia aparece ao passar o cursor e na tabela.",
           "props": [
             "dias",
@@ -4081,7 +4095,7 @@
         {
           "nome": "GraficoDeVelas",
           "tipo": "componente",
-          "linha": 678,
+          "linha": 680,
           "descricao": "Velas: em cada período, o traço vai da mínima à máxima e o corpo da abertura ao fechamento. Corpo cheio quando fechou acima da abertura, vazado quando fechou abaixo (a forma diz a direção, não só a cor).",
           "props": [
             "velas",
@@ -4096,7 +4110,7 @@
         {
           "nome": "Pizza",
           "tipo": "componente",
-          "linha": 740,
+          "linha": 742,
           "descricao": "Pizza: mesmas regras da rosca (partes do maior para o menor, \"Outros\" em grafite no fim, percentual junto de cada fatia).",
           "props": [
             "partes",
@@ -4111,7 +4125,7 @@
         {
           "nome": "Waffle",
           "tipo": "componente",
-          "linha": 781,
+          "linha": 783,
           "descricao": "Waffle: 100 quadrados, cada um é 1% do total; as partes se preenchem em ordem, da maior para a menor.",
           "props": [
             "partes",
@@ -4126,7 +4140,7 @@
         {
           "nome": "Piramide",
           "tipo": "componente",
-          "linha": 819,
+          "linha": 821,
           "descricao": "Pirâmide: dois grupos de costas um para o outro, faixa a faixa, com o valor escrito na ponta de cada barra.",
           "props": [
             "faixas",
@@ -4142,7 +4156,7 @@
         {
           "nome": "Dispersao",
           "tipo": "componente",
-          "linha": 867,
+          "linha": 869,
           "descricao": "Dispersão: um ponto por item em dois eixos. Os destaques ficam na cor primária e com o nome escrito.",
           "props": [
             "pontos",
@@ -4159,7 +4173,7 @@
         {
           "nome": "MatrizDeCorrelacao",
           "tipo": "componente",
-          "linha": 954,
+          "linha": 956,
           "descricao": "Matriz de correlação (metade de baixo, numa tabela de verdade): a cor mostra a força da relação, pela escala sequencial, e as listras mostram a direção (com listras: quando uma sobe, a outra desce).",
           "props": [
             "variaveis",
@@ -4175,7 +4189,7 @@
         {
           "nome": "Radar",
           "tipo": "componente",
-          "linha": 1035,
+          "linha": 1037,
           "descricao": "Radar: cada eixo é uma medida na mesma escala. A série em destaque é preenchida e tem os valores escritos junto do nome de cada eixo, fora da área; as outras são só contorno (tracejado), para não depender só da cor.",
           "props": [
             "eixos",
@@ -4191,7 +4205,7 @@
         {
           "nome": "CoordenadasParalelas",
           "tipo": "componente",
-          "linha": 1112,
+          "linha": 1114,
           "descricao": "Coordenadas paralelas: compara itens em várias medidas de escalas diferentes; cada eixo mostra o próprio mínimo e máximo.",
           "props": [
             "eixos",
@@ -4205,7 +4219,7 @@
         {
           "nome": "Sankey",
           "tipo": "componente",
-          "linha": 1185,
+          "linha": 1187,
           "descricao": "Sankey: fluxos entre etapas; a espessura de cada faixa é a quantidade. O nome e o valor de cada nó ficam escritos ao lado dele; a faixa em destaque fica no tom 1 e as outras no cinza de contexto (tom 6).",
           "props": [
             "nos",
@@ -4220,7 +4234,7 @@
         {
           "nome": "RedeDeConexoes",
           "tipo": "componente",
-          "linha": 1268,
+          "linha": 1270,
           "descricao": "Rede de conexões em círculo: cada nó num ponto do círculo, ligações curvas por dentro, com espessura pela força. As ligações do nó em destaque ficam na cor primária; passar o cursor num nó realça as ligações dele.",
           "props": [
             "nos",
@@ -4234,7 +4248,7 @@
         {
           "nome": "Histograma",
           "tipo": "componente",
-          "linha": 1341,
+          "linha": 1343,
           "descricao": "Histograma: quantos valores caem em cada faixa. A contagem fica escrita em cima de cada barra quando cabe.",
           "props": [
             "valores",
@@ -4252,7 +4266,7 @@
         {
           "nome": "BoxPlot",
           "tipo": "componente",
-          "linha": 1437,
+          "linha": 1439,
           "descricao": "Box plot: a caixa vai do 1º ao 3º quartil (a metade do meio), o traço é a mediana, os bigodes vão até 1,5 × a caixa e os pontos vazados são valores fora do padrão. A mediana fica escrita ao lado de cada grupo.",
           "props": [
             "grupos",
@@ -4267,7 +4281,7 @@
         {
           "nome": "Violino",
           "tipo": "componente",
-          "linha": 1485,
+          "linha": 1487,
           "descricao": "Violino: o contorno mostra onde os valores se concentram em cada grupo (densidade estimada, espelhada). Dentro, a barra escura é a metade do meio e o ponto é a mediana, escrita ao lado do nome.",
           "props": [
             "grupos",
@@ -4282,7 +4296,7 @@
         {
           "nome": "Densidade",
           "tipo": "componente",
-          "linha": 1547,
+          "linha": 1549,
           "descricao": "Curvas de densidade: a forma de cada distribuição, suavizada, para comparar onde cada grupo se concentra. O nome de cada série fica escrito no pico da curva; o eixo vertical não tem unidade (só a forma importa).",
           "props": [
             "series",
@@ -4297,7 +4311,7 @@
         {
           "nome": "MapaDePontos",
           "tipo": "componente",
-          "linha": 1702,
+          "linha": 1704,
           "descricao": "Mapa de pontos esquemático: cada ponto é um lugar (loja, unidade…) na posição aproximada que o produto informar. Os tipos mudam a forma e o tom; os destaques têm o nome escrito. Não é mapa em escala e não usa dados geográficos.",
           "props": [
             "regioes",
@@ -4316,7 +4330,7 @@
         {
           "nome": "MapaDeBolhas",
           "tipo": "componente",
-          "linha": 1760,
+          "linha": 1762,
           "descricao": "Mapa de bolhas esquemático: uma bolha por lugar, com a área proporcional ao valor. Nome e valor ficam escritos embaixo da bolha, fora dela. Não é mapa em escala e não usa dados geográficos.",
           "props": [
             "regioes",
@@ -4508,7 +4522,7 @@
         {
           "nome": "CORES_GRAFICO",
           "tipo": "utilitário",
-          "linha": 38,
+          "linha": 40,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -4516,7 +4530,7 @@
         {
           "nome": "COR_NEUTRA",
           "tipo": "utilitário",
-          "linha": 40,
+          "linha": 42,
           "descricao": "Cinza de contexto (o último tom): \"Outros\" e informação sem destaque, sempre por último.",
           "props": [],
           "reexportaDe": null
@@ -4524,7 +4538,7 @@
         {
           "nome": "corDoTom",
           "tipo": "utilitário",
-          "linha": 43,
+          "linha": 45,
           "descricao": "Tom da paleta (1 ao último) como cor CSS.",
           "props": [],
           "reexportaDe": null
@@ -4532,7 +4546,7 @@
         {
           "nome": "coresPorImportancia",
           "tipo": "utilitário",
-          "linha": 49,
+          "linha": 51,
           "descricao": "Índices dos tons para `n` séries, da mais importante para a mais contextual (tabela em graficos-paleta.ts). Acima do número de tons, as séries a mais ficam no último tom (agrupe-as em \"Outros\").",
           "props": [],
           "reexportaDe": null
@@ -4540,7 +4554,7 @@
         {
           "nome": "coresDasSeries",
           "tipo": "utilitário",
-          "linha": 58,
+          "linha": 60,
           "descricao": "Cores de séries já ordenadas por importância. Quando há partes `neutro` (\"Outros\"), as outras usam os tons de n + 1 séries sem o último, e \"Outros\" fica no cinza seguinte, sem saltos (tomDosOutros em graficos-paleta.ts): no tom 6 quando as …",
           "props": [],
           "reexportaDe": null
@@ -4548,7 +4562,7 @@
         {
           "nome": "coresDeFoco",
           "tipo": "utilitário",
-          "linha": 75,
+          "linha": 77,
           "descricao": "Gráficos de um foco só (barras ordenadas, pirulito, inclinação, halteres, ranking, destaques): o 1º destaque no tom 1, um 2º destaque no tom 2 (nunca mais de 2 tons intensos), destaques além disso na faixa de apoio (3 a 5) e todo o …",
           "props": [],
           "reexportaDe": null
@@ -4556,7 +4570,7 @@
         {
           "nome": "coresDeContexto",
           "tipo": "utilitário",
-          "linha": 81,
+          "linha": 83,
           "descricao": "Tons de contexto para `n` séries sem destaque que precisam ser diferenciadas (tonsDeContexto em graficos-paleta.ts).",
           "props": [],
           "reexportaDe": null
@@ -4564,7 +4578,7 @@
         {
           "nome": "COR_GRADE",
           "tipo": "utilitário",
-          "linha": 86,
+          "linha": 88,
           "descricao": "Linhas de grade.",
           "props": [],
           "reexportaDe": null
@@ -4572,7 +4586,7 @@
         {
           "nome": "TRACO_DA_GRADE",
           "tipo": "utilitário",
-          "linha": 88,
+          "linha": 90,
           "descricao": "Grade horizontal tracejada dos gráficos de área (sem linhas de eixo).",
           "props": [],
           "reexportaDe": null
@@ -4580,7 +4594,7 @@
         {
           "nome": "LINHA_DA_AREA",
           "tipo": "utilitário",
-          "linha": 97,
+          "linha": 99,
           "descricao": "Estilo das áreas (aprovado pela dona do produto, 20/11/2026, o mesmo de \"Visão geral das buscas\"): linha fina (1,5 px) na cor da série no topo de cada área ou camada e preenchimento em degradê vertical transparente da mesma cor.",
           "props": [],
           "reexportaDe": null
@@ -4588,7 +4602,7 @@
         {
           "nome": "DegradeDaArea",
           "tipo": "componente",
-          "linha": 98,
+          "linha": 100,
           "descricao": "",
           "props": [
             "id",
@@ -4602,7 +4616,7 @@
         {
           "nome": "useIdDoSvg",
           "tipo": "utilitário",
-          "linha": 109,
+          "linha": 111,
           "descricao": "Id de SVG único por instância, sem os caracteres que o React põe no useId (quebram o `url(#…)`).",
           "props": [],
           "reexportaDe": null
@@ -4610,7 +4624,7 @@
         {
           "nome": "curvaMonotona",
           "tipo": "utilitário",
-          "linha": 118,
+          "linha": 120,
           "descricao": "Curva suave monotônica em X (como a \"monotone\" do Recharts/d3): passa por todos os pontos e não ultrapassa os dados entre eles (sem picos falsos nem valores abaixo de zero). Os pontos podem vir da esquerda para a direita ou ao contrário.",
           "props": [],
           "reexportaDe": null
@@ -4618,7 +4632,7 @@
         {
           "nome": "ESCALA_SEQUENCIAL",
           "tipo": "utilitário",
-          "linha": 149,
+          "linha": 151,
           "descricao": "Escala contínua (do menor para o maior), pelos tokens --chart-seq-* de cada DS: do cinza (tom 6) ao vermelho (tom 1); os tons de cada passo estão em TONS_DA_ESCALA (graficos-paleta.ts).",
           "props": [],
           "reexportaDe": null
@@ -4626,7 +4640,7 @@
         {
           "nome": "PontoDaCor",
           "tipo": "componente",
-          "linha": 157,
+          "linha": 159,
           "descricao": "Ponto na cor da marca, antes de um valor escrito fora dela (liga o número à parte).",
           "props": [
             "cor",
@@ -4637,7 +4651,7 @@
         {
           "nome": "formatarNumero",
           "tipo": "utilitário",
-          "linha": 166,
+          "linha": 168,
           "descricao": "Número no formato da localidade (padrão pt-BR), sem casas decimais por padrão.",
           "props": [],
           "reexportaDe": null
@@ -4645,7 +4659,7 @@
         {
           "nome": "formatarPercentual",
           "tipo": "utilitário",
-          "linha": 170,
+          "linha": 172,
           "descricao": "Percentual já calculado (0 a 100).",
           "props": [],
           "reexportaDe": null
@@ -4653,7 +4667,7 @@
         {
           "nome": "soma",
           "tipo": "utilitário",
-          "linha": 174,
+          "linha": 176,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -4661,7 +4675,7 @@
         {
           "nome": "useLargura",
           "tipo": "utilitário",
-          "linha": 177,
+          "linha": 179,
           "descricao": "Largura real do elemento, atualizada quando muda (0 até medir).",
           "props": [],
           "reexportaDe": null
@@ -4669,7 +4683,7 @@
         {
           "nome": "marcasDoEixo",
           "tipo": "utilitário",
-          "linha": 193,
+          "linha": 195,
           "descricao": "Marcas de eixo \"redondas\" entre 0 (ou mínimo) e o máximo.",
           "props": [],
           "reexportaDe": null
@@ -4677,7 +4691,7 @@
         {
           "nome": "afastar",
           "tipo": "utilitário",
-          "linha": 206,
+          "linha": 208,
           "descricao": "Afasta rótulos verticais que se sobrepõem (mantém a ordem, distância mínima `gap`).",
           "props": [],
           "reexportaDe": null
@@ -4685,7 +4699,7 @@
         {
           "nome": "larguraTexto",
           "tipo": "utilitário",
-          "linha": 219,
+          "linha": 221,
           "descricao": "Largura aproximada de um texto (Plus Jakarta / Inter em px).",
           "props": [],
           "reexportaDe": null
@@ -4693,7 +4707,7 @@
         {
           "nome": "fmtPadrao",
           "tipo": "utilitário",
-          "linha": 229,
+          "linha": 231,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -4701,7 +4715,7 @@
         {
           "nome": "TabelaDeDados",
           "tipo": "componente",
-          "linha": 236,
+          "linha": 238,
           "descricao": "Tabela de dados (alternativa acessível ao gráfico e detalhamento para quem quer conferir).",
           "props": [
             "dados",
@@ -4713,7 +4727,7 @@
         {
           "nome": "DescobertaVisual",
           "tipo": "componente",
-          "linha": 293,
+          "linha": 295,
           "descricao": "Card de descoberta: conclusão, gráfico, por que importa, próximo passo e dados (recolhidos).",
           "props": [
             "tema",
@@ -4733,7 +4747,7 @@
         {
           "nome": "LegendaDoGrafico",
           "tipo": "componente",
-          "linha": 350,
+          "linha": 352,
           "descricao": "Legenda compacta (sempre junto de rótulos diretos, nunca sozinha)",
           "props": [
             "itens",
@@ -4744,7 +4758,7 @@
         {
           "nome": "arco",
           "tipo": "utilitário",
-          "linha": 382,
+          "linha": 384,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -4752,7 +4766,7 @@
         {
           "nome": "GraficoDeRosca",
           "tipo": "componente",
-          "linha": 394,
+          "linha": 396,
           "descricao": "Rosca de participação, no traço fino do DS: as partes nos tons por importância (da maior para a menor; a maior no tom 1), \"Outros\" em cinza de contexto no fim, percentuais escritos junto de cada parte e lista com nome, quantidade e …",
           "props": [
             "partes",
@@ -4768,7 +4782,7 @@
         {
           "nome": "BarrasOrdenadas",
           "tipo": "componente",
-          "linha": 492,
+          "linha": 494,
           "descricao": "Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra.",
           "props": [
             "itens",
@@ -4785,7 +4799,7 @@
         {
           "nome": "faixa",
           "tipo": "utilitário",
-          "linha": 548,
+          "linha": 550,
           "descricao": "Faixa da escala sequencial (0 a 3) para um valor.",
           "props": [],
           "reexportaDe": null
@@ -4793,7 +4807,7 @@
         {
           "nome": "LegendaSequencial",
           "tipo": "componente",
-          "linha": 553,
+          "linha": 555,
           "descricao": "",
           "props": [
             "menos",
@@ -4804,7 +4818,7 @@
         {
           "nome": "MapaDeCalorPorRegiao",
           "tipo": "componente",
-          "linha": 571,
+          "linha": 573,
           "descricao": "Mapa de calor esquemático: cada região é um bloco numa grade, na posição aproximada (não é mapa em escala). As posições vêm por props; nada de dados geográficos é buscado. O nome fica escrito acima de cada bloco, fora da cor;",
           "props": [
             "regioes",
@@ -4821,7 +4835,7 @@
         {
           "nome": "GraficoDeHalteres",
           "tipo": "componente",
-          "linha": 637,
+          "linha": 639,
           "descricao": "Halteres: para cada item, um ponto para cada medida ligados por uma linha; os valores ficam escritos nos pontos.",
           "props": [
             "itens",
@@ -4837,7 +4851,7 @@
         {
           "nome": "GraficoDeLinhas",
           "tipo": "componente",
-          "linha": 720,
+          "linha": 722,
           "descricao": "Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto. Cores: com uma série em `destaque`, ela fica no tom 1 e as outras no contexto (do tom 6 em diante);",
           "props": [
             "series",
@@ -4854,7 +4868,7 @@
         {
           "nome": "GraficoDeInclinacao",
           "tipo": "componente",
-          "linha": 831,
+          "linha": 833,
           "descricao": "Duas colunas (antes e agora) ligadas por linhas: o destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto.",
           "props": [
             "itens",
@@ -4870,7 +4884,7 @@
         {
           "nome": "Mosaico",
           "tipo": "componente",
-          "linha": 922,
+          "linha": 924,
           "descricao": "Mosaico (treemap): a área de cada bloco é a fatia do total. Tons por importância, do maior bloco (tom 1) ao menor; \"Outros\" em cinza de contexto.",
           "props": [
             "itens",
@@ -4884,7 +4898,7 @@
         {
           "nome": "BarrasEmpilhadas100",
           "tipo": "componente",
-          "linha": 988,
+          "linha": 990,
           "descricao": "Barras 100%: cada linha soma 100%; o percentual de cada parte fica escrito logo acima dela. Categorias em ordem de importância.",
           "props": [
             "categorias",
@@ -4899,7 +4913,7 @@
         {
           "nome": "GraficoDeBolhas",
           "tipo": "componente",
-          "linha": 1035,
+          "linha": 1037,
           "descricao": "Bolhas: posição em dois eixos e tamanho como terceira medida. O destaque no tom 1; o restante no cinza de contexto.",
           "props": [
             "itens",
@@ -4916,7 +4930,7 @@
         {
           "nome": "MapaDeCalorMatricial",
           "tipo": "componente",
-          "linha": 1114,
+          "linha": 1116,
           "descricao": "Matriz com a cor de cada célula pela escala sequencial. É uma tabela de verdade: as células não mostram o número (ele fica para leitores de tela, na dica ao passar o cursor e em Ver dados);",
           "props": [
             "linhas",
@@ -4934,7 +4948,7 @@
         {
           "nome": "GraficoDeRanking",
           "tipo": "componente",
-          "linha": 1176,
+          "linha": 1178,
           "descricao": "Bump chart: como a posição de cada item muda ao longo dos períodos. O destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto.",
           "props": [
             "series",
@@ -4947,7 +4961,7 @@
         {
           "nome": "Funil",
           "tipo": "componente",
-          "linha": 1244,
+          "linha": 1246,
           "descricao": "Funil: etapas da jornada com o valor escrito e, entre elas, quanto seguiu para a próxima. A maior perda fica marcada: a etapa logo depois dela é o ponto de atenção (tom 1) e as outras ficam no cinza de contexto. Sem a marca, todas no tom 1.",
           "props": [
             "etapas",
@@ -5756,7 +5770,7 @@
         {
           "nome": "LinhaDeLista",
           "tipo": "componente",
-          "linha": 57,
+          "linha": 61,
           "descricao": "",
           "props": [
             "as",
@@ -6765,7 +6779,7 @@
         {
           "nome": "PartnerCard",
           "tipo": "componente",
-          "linha": 46,
+          "linha": 48,
           "descricao": "",
           "props": [
             "orientation",
@@ -6816,13 +6830,13 @@
     {
       "arquivo": "src/app/components/ui/password-field.tsx",
       "nome": "password-field",
-      "quandoUsar": "Campo de senha com confirmação (PasswordField / PasswordConfirm): - Exibir/ocultar senha em cada campo (botão com aria-pressed e rótulo). - Força da senha em 4 barras + rótulo em texto (Fraca, Razoável, Boa, Forte), calculada pelos requisitos atendidos. - Dica de preenchimento: cada requisito ganha um check na cor primária da marca quando atendido;",
+      "quandoUsar": "Campo de senha com confirmação (PasswordField / PasswordConfirm): - Exibir/ocultar senha em cada campo (botão com aria-pressed e rótulo). - Força da senha em 4 barras + rótulo em texto (Fraca, Razoável, Boa, Forte), calculada pelos requisitos atendidos. - Dica de preenchimento: requisito ainda não atendido tem um ponto neutro (como o de uma lista) e texto cinza;",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "regrasPadrao",
           "tipo": "utilitário",
-          "linha": 17,
+          "linha": 21,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -6830,7 +6844,7 @@
         {
           "nome": "textosPadrao",
           "tipo": "utilitário",
-          "linha": 38,
+          "linha": 42,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -6838,7 +6852,7 @@
         {
           "nome": "PasswordInput",
           "tipo": "componente",
-          "linha": 65,
+          "linha": 69,
           "descricao": "Um campo de senha com o botão de exibir/ocultar.",
           "props": [
             "label",
@@ -6855,7 +6869,7 @@
         {
           "nome": "forcaDaSenha",
           "tipo": "utilitário",
-          "linha": 102,
+          "linha": 106,
           "descricao": "Força (0 a 4) = quantidade de requisitos atendidos, limitada a 4.",
           "props": [],
           "reexportaDe": null
@@ -6863,7 +6877,7 @@
         {
           "nome": "PasswordConfirm",
           "tipo": "componente",
-          "linha": 121,
+          "linha": 125,
           "descricao": "Senha + confirmação, com força da senha, dicas com check e verificação de coincidência.",
           "props": [
             "senha",
@@ -7373,7 +7387,7 @@
           "ancora": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 434,
+          "linha": 448,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -7385,7 +7399,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 469,
+          "linha": 483,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -7422,7 +7436,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 469,
+          "linha": 483,
           "uso": "direto",
           "exports": [
             "SeloSecao"
@@ -8171,7 +8185,7 @@
         {
           "nome": "useSurgirAoRolar",
           "tipo": "utilitário",
-          "linha": 78,
+          "linha": 80,
           "descricao": "\"inicial\" (sem estilo, antes do script), \"oculto\" (esperando a tela), \"visto\" (entrando) ou \"fim\" (entrada terminada: nenhum estilo da entrada fica no elemento, para não atrasar transições de hover dos filhos).",
           "props": [],
           "reexportaDe": null
@@ -8179,7 +8193,7 @@
         {
           "nome": "SurgirAoRolar",
           "tipo": "componente",
-          "linha": 143,
+          "linha": 145,
           "descricao": "",
           "props": [
             "as",
@@ -8201,7 +8215,7 @@
         {
           "nome": "TituloQueSurge",
           "tipo": "componente",
-          "linha": 194,
+          "linha": 196,
           "descricao": "",
           "props": [
             "as",
@@ -8502,7 +8516,7 @@
         {
           "nome": "Timeline",
           "tipo": "componente",
-          "linha": 47,
+          "linha": 49,
           "descricao": "",
           "props": [
             "etapas",
@@ -8936,7 +8950,7 @@
         {
           "nome": "useIsMobile",
           "tipo": "utilitário",
-          "linha": 5,
+          "linha": 7,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -10682,7 +10696,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 237
+          "linha": 251
         }
       ],
       "usaComponentes": [
@@ -10707,7 +10721,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 237
+          "linha": 251
         }
       ],
       "usaComponentes": [
@@ -10758,7 +10772,7 @@
           "ancora": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 331
+          "linha": 345
         }
       ],
       "usaComponentes": [],
@@ -11380,7 +11394,7 @@
       "ancora": "progress",
       "titulo": "Progresso",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 288,
+      "linha": 302,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -11390,7 +11404,7 @@
       "ancora": "badges",
       "titulo": "Badges e tags",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 379,
+      "linha": 393,
       "elementosFeitosAMao": 5,
       "usaComponentes": []
     },
@@ -11400,7 +11414,7 @@
       "ancora": "selo",
       "titulo": "Selo (tag do hero)",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 434,
+      "linha": 448,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Selo"
@@ -11412,7 +11426,7 @@
       "ancora": "avatar",
       "titulo": "Avatar",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 508,
+      "linha": 522,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -11422,7 +11436,7 @@
       "ancora": "empty-states",
       "titulo": "Estados vazios",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 599,
+      "linha": 613,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -12778,7 +12792,7 @@
         "titulo": "Alerta com ação",
         "resumo": "Alerta com ação: ações sempre embaixo do texto",
         "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-        "linha": 237
+        "linha": 251
       },
       {
         "ancora": "grid-colunas",
@@ -13995,34 +14009,40 @@
           "linha": 215
         },
         {
+          "id": "alerta-sem-titulo",
+          "titulo": "Alerta só com descrição",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 238
+        },
+        {
           "id": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 237
+          "linha": 251
         },
         {
           "id": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 245
+          "linha": 259
         },
         {
           "id": "progress",
           "titulo": "Progresso",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 288
+          "linha": 302
         },
         {
           "id": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 331
+          "linha": 345
         },
         {
           "id": "feedback-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 643
+          "linha": 657
         }
       ]
     },
@@ -14035,49 +14055,49 @@
           "id": "badges",
           "titulo": "Badges e tags",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 379
+          "linha": 393
         },
         {
           "id": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 434
+          "linha": 448
         },
         {
           "id": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 469
+          "linha": 483
         },
         {
           "id": "rotulos-timeline",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 501
+          "linha": 515
         },
         {
           "id": "avatar",
           "titulo": "Avatar",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 508
+          "linha": 522
         },
         {
           "id": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 555
+          "linha": 569
         },
         {
           "id": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 599
+          "linha": 613
         },
         {
           "id": "badges-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 654
+          "linha": 668
         }
       ]
     },

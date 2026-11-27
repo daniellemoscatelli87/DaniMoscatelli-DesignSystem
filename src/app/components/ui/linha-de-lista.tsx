@@ -38,7 +38,11 @@ export type LinhaDeListaProps = Omit<React.HTMLAttributes<HTMLElement>, "title">
    * própria embaixo do texto, que usa a largura toda. true: embaixo sempre. false: ao lado do texto em qualquer largura.
    */
   quebraAcoes?: boolean | "estreito";
-  /** Lado das tags e ações quando descem para baixo do texto. */
+  /**
+   * Lado das tags e ações quando descem para baixo do texto. "inicio" (padrão, dona do produto, 27/11/2026): a linha de
+   * baixo começa na borda esquerda da coluna do texto (mesmo x do título), perto do texto a que pertence (proximidade
+   * e alinhamento). "fim": encostada na borda direita.
+   */
   alinharAcoesAbaixo?: "fim" | "inicio";
   /** "centro" centraliza início e fim na altura da linha (do tablet em diante); "inicio" alinha tudo no topo. */
   alinhar?: "inicio" | "centro";
@@ -61,7 +65,7 @@ export function LinhaDeLista({
   descricao,
   fim,
   quebraAcoes = "estreito",
-  alinharAcoesAbaixo = "fim",
+  alinharAcoesAbaixo = "inicio",
   alinhar = "inicio",
   interativa,
   selecionada = false,
