@@ -7,12 +7,12 @@
   "resumo": {
     "arquivosDeComponentes": 118,
     "componentesExportados": 402,
-    "templatesEPadroesSoEmDemonstracao": 77,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 44,
     "tokens": 160,
     "paginas": 33,
     "ancoras": 230,
-    "propostas": 34
+    "propostas": 35
   },
   "componentes": [
     {
@@ -955,7 +955,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 309,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "BotaoDeEnvio"
@@ -1488,7 +1488,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 309,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1776,7 +1776,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1788,7 +1788,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1800,7 +1800,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 324,
+          "linha": 321,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2117,20 +2117,7 @@
       ],
       "tipos": [],
       "variantes": {},
-      "ondeVer": [
-        {
-          "pagina": "campos",
-          "paginaRotulo": "Campos",
-          "ancora": "campos-horario",
-          "titulo": "Campo de horário",
-          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259,
-          "uso": "direto",
-          "exports": [
-            "Calendar"
-          ]
-        }
-      ]
+      "ondeVer": []
     },
     {
       "arquivo": "src/app/components/ui/campo.tsx",
@@ -2257,7 +2244,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "direto",
           "exports": [
             "Campo",
@@ -2274,7 +2261,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259,
+          "linha": 256,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -2352,7 +2339,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "CampoCopiavel"
@@ -2396,7 +2383,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "CampoDeBusca"
@@ -2454,7 +2441,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "direto",
           "exports": [
             "CampoDeEmail"
@@ -2510,7 +2497,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 244,
+          "linha": 241,
           "uso": "direto",
           "exports": [
             "CampoDeEmails"
@@ -2559,7 +2546,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259,
+          "linha": 256,
           "uso": "direto",
           "exports": [
             "CampoDeHorario"
@@ -2611,7 +2598,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "direto",
           "exports": [
             "CampoEstadoCidade"
@@ -3442,7 +3429,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 291,
+          "linha": 288,
           "uso": "direto",
           "exports": [
             "GrupoDeCartoesDeEscolha",
@@ -3782,7 +3769,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 324,
+          "linha": 321,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -3876,7 +3863,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 276,
+          "linha": 273,
           "uso": "direto",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -5186,7 +5173,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -6367,7 +6354,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6379,7 +6366,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6391,7 +6378,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 244,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6403,7 +6390,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259,
+          "linha": 256,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6415,7 +6402,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 276,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6427,7 +6414,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 291,
+          "linha": 288,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6439,7 +6426,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 309,
+          "linha": 306,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6451,7 +6438,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 324,
+          "linha": 321,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -8450,7 +8437,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "direto",
           "exports": [
             "Label"
@@ -8522,7 +8509,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 244,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -8689,7 +8676,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226,
+          "linha": 223,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -12030,7 +12017,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 324,
+          "linha": 321,
           "uso": "direto",
           "exports": [
             "TabelaAdaptavel"
@@ -12317,7 +12304,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199,
+          "linha": 196,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -14823,7 +14810,7 @@
       "nome": "DemoCampos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 36,
+      "linha": 35,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -14834,7 +14821,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199
+          "linha": 196
         }
       ],
       "usaComponentes": [
@@ -14847,30 +14834,6 @@
         "GradeDeCampos",
         "ResumoDeErros",
         "Textarea"
-      ],
-      "elementosFeitosAMao": 1
-    },
-    {
-      "nome": "DemoHorario",
-      "tipo": "padrão de componente",
-      "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 89,
-      "descricao": "",
-      "pagina": "campos",
-      "paginaRotulo": "Campos",
-      "onde": [
-        {
-          "pagina": "campos",
-          "paginaRotulo": "Campos",
-          "ancora": "campos-horario",
-          "titulo": "Campo de horário",
-          "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259
-        }
-      ],
-      "usaComponentes": [
-        "Calendar",
-        "CampoDeHorario"
       ],
       "elementosFeitosAMao": 1
     },
@@ -17055,7 +17018,7 @@
       "arquivo": "propostas/2026-11-27-botao-de-envio.md",
       "titulo": "Botão de envio e exclusão em contorno",
       "status": "proposta",
-      "componente": "BotaoDeEnvio, Button variant=\"outline-destructive\" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx"
+      "componente": "BotaoDeEnvio, Button variant=\"exclusao-contorno\" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx"
     },
     {
       "arquivo": "propostas/2026-11-27-cabecalho-do-site.md",
@@ -17080,6 +17043,12 @@
       "titulo": "Campo de vários e-mails",
       "status": "proposta",
       "componente": "CampoDeEmails em src/app/components/ui/campo-de-emails.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-27-campo-de-horario.md",
+      "titulo": "Campo de horário",
+      "status": "proposta",
+      "componente": "CampoDeHorario em src/app/components/ui/campo-de-horario.tsx"
     },
     {
       "arquivo": "propostas/2026-11-27-campo.md",
@@ -18508,49 +18477,49 @@
           "id": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 199
+          "linha": 196
         },
         {
           "id": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 226
+          "linha": 223
         },
         {
           "id": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 244
+          "linha": 241
         },
         {
           "id": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 259
+          "linha": 256
         },
         {
           "id": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 276
+          "linha": 273
         },
         {
           "id": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 291
+          "linha": 288
         },
         {
           "id": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 309
+          "linha": 306
         },
         {
           "id": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 324
+          "linha": 321
         }
       ]
     },

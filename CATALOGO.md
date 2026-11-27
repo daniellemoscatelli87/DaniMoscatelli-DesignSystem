@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 118 arquivos de componentes em `src/app/components/ui/` com 402 componentes exportados · 77 templates e padrões ainda só em demonstração · 44 seções com marcação feita à mão · 160 tokens · 33 páginas e 230 âncoras no site (https://designsystem.danimoscatelli.com.br) · 34 propostas de componente.
+**Resumo:** 118 arquivos de componentes em `src/app/components/ui/` com 402 componentes exportados · 76 templates e padrões ainda só em demonstração · 44 seções com marcação feita à mão · 160 tokens · 33 páginas e 230 âncoras no site (https://designsystem.danimoscatelli.com.br) · 35 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -237,7 +237,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** Calendário mensal para escolher uma data ou um intervalo.
 - **Componentes:**
   - `Calendar` (props: `className`, `classNames`, `showOutsideDays`)
-- **Onde ver:** Campos › Campo de horário (`campos#campos-horario`)
+- **Onde ver:** nenhuma página do site importa este componente (sem demonstração).
 
 ### campo
 
@@ -1303,7 +1303,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:418](src/app/components/showcase/TemplatesShowcase.tsx#L418) | `GradeDeCards`, `Select`, `Switch` | 8 |
 | `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:593](src/app/components/showcase/TemplatesShowcase.tsx#L593) | `Button`, `Checkbox`, `Input`, `Label`, `Select`, `SelectContent`, `SelectItem`, `SelectTrigger` +2 | 9 |
 
-### 2.2 Padrões nas páginas de componentes (36)
+### 2.2 Padrões nas páginas de componentes (35)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
@@ -1337,8 +1337,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:132](src/app/components/showcase/OverlaysShowcase.tsx#L132) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
 | `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:466](src/app/components/showcase/SitePatternsShowcase.tsx#L466) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
 | `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:514](src/app/components/showcase/SitePatternsShowcase.tsx#L514) | `CardDeArtigo`, `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 1 |
-| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:36](src/app/components/showcase/CamposShowcase.tsx#L36) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
-| `DemoHorario` | Campos › Campo de horário (`campos#campos-horario`) | [src/app/components/showcase/CamposShowcase.tsx:89](src/app/components/showcase/CamposShowcase.tsx#L89) | `Calendar`, `CampoDeHorario` | 1 |
+| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:35](src/app/components/showcase/CamposShowcase.tsx#L35) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
 | `DemoCaixa`<br>Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo. | Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) | [src/app/components/showcase/PecasAdminShowcase.tsx:23](src/app/components/showcase/PecasAdminShowcase.tsx#L23) | `Avatar`, `AvatarFallback`, `BalaoDaConversa`, `BotaoDeEnvio`, `CaixaDeEntrada`, `Campo`, `ChipDeEstado`, `Conversa` +1 | 1 |
 | `Segmentado`<br>Controles da demonstração | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:93](src/app/components/showcase/HeaderShowcase.tsx#L93) |  | 1 |
 | `Capa`<br>Fundos por trás do header | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:141](src/app/components/showcase/HeaderShowcase.tsx#L141) |  | 4 |
@@ -1681,11 +1680,12 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Alerta por tom](propostas/2026-11-27-alerta-tom.md) | `Alert (prop tom) em src/app/components/ui/alert.tsx` | proposta |
 | [Barra de composição](propostas/2026-11-27-barra-de-composicao.md) | `BarraDeComposicao em src/app/components/ui/barra-de-composicao.tsx` | proposta |
 | [Barra de números](propostas/2026-11-27-barra-de-numeros.md) | `BarraDeNumeros em src/app/components/ui/barra-de-numeros.tsx` | proposta |
-| [Botão de envio e exclusão em contorno](propostas/2026-11-27-botao-de-envio.md) | `BotaoDeEnvio, Button variant="outline-destructive" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx` | proposta |
+| [Botão de envio e exclusão em contorno](propostas/2026-11-27-botao-de-envio.md) | `BotaoDeEnvio, Button variant="exclusao-contorno" em src/app/components/ui/botao-de-envio.tsx, src/app/components/ui/button.tsx` | proposta |
 | [Cabeçalho do site](propostas/2026-11-27-cabecalho-do-site.md) | `CabecalhoDoSite em src/app/components/ui/cabecalho-do-site.tsx` | proposta |
 | [Caixa de entrada](propostas/2026-11-27-caixa-de-entrada.md) | `CaixaDeEntrada em src/app/components/ui/caixa-de-entrada.tsx` | proposta |
 | [Campo de busca e campo copiável](propostas/2026-11-27-campo-de-busca-e-copiavel.md) | `CampoDeBusca, CampoCopiavel em src/app/components/ui/campo-de-busca.tsx, src/app/components/ui/campo-copiavel.tsx` | proposta |
 | [Campo de vários e-mails](propostas/2026-11-27-campo-de-emails.md) | `CampoDeEmails em src/app/components/ui/campo-de-emails.tsx` | proposta |
+| [Campo de horário](propostas/2026-11-27-campo-de-horario.md) | `CampoDeHorario em src/app/components/ui/campo-de-horario.tsx` | proposta |
 | [Campo, CampoDeEmail, CampoEstadoCidade e máscaras](propostas/2026-11-27-campo.md) | `Campo, GradeDeCampos, MensagemDeErro, ResumoDeErros, CampoDeTelefone, CampoDeCnpj, mascaraTelefone, mascaraCnpj, cnpjValido, CampoDeEmail, CampoEstadoCidade em src/app/components/ui/campo.tsx, src/app/components/ui/campo-de-email.tsx, src/app/components/ui/campo-estado-cidade.tsx` | proposta |
 | [Card de artigo](propostas/2026-11-27-card-de-artigo.md) | `CardDeArtigo em src/app/components/ui/card-de-artigo.tsx` | proposta |
 | [Card de depoimento](propostas/2026-11-27-card-de-depoimento.md) | `CardDeDepoimento em src/app/components/ui/card-de-depoimento.tsx` | proposta |

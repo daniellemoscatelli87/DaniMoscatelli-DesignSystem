@@ -13,7 +13,7 @@ Regra do DS: card nunca rola para o lado. O padrão TabelaQueQuebra era só demo
 Área restrita › Parceiros e Pesquisas; tabelas das páginas do DS.
 
 ## API
-`colunas` ({id, titulo, celula, prioridade 1|2|3, alinhar, principal}[]), `linhas`, `chave`, `legenda`, `mostrarLegenda`, `acoes`, `vazio`, `textos`.
+`colunas` ({id, titulo, celula, prioridade 1|2|3, alinhar, principal, ordenavel, valorParaOrdenar}[]), `linhas`, `chave`, `legenda`, `mostrarLegenda`, `acoes`, `vazio`, `ordemInicial` ({coluna, direcao}), `textos`. Ordenação por coluna, aviso de quantas colunas ficaram de fora e lista de LinhaDeLista no celular (ADMIN_REACT.md §7.1).
 
 ## Variações e estados
 Prioridade 2 sai abaixo de 36rem, 3 abaixo de 48rem, com aviso; abaixo de 30rem vira lista de blocos rótulo:valor.

@@ -9,7 +9,6 @@ import { CampoEstadoCidade } from "../ui/campo-estado-cidade";
 import { CampoDeBusca } from "../ui/campo-de-busca";
 import { CampoCopiavel } from "../ui/campo-copiavel";
 import { CampoDeHorario } from "../ui/campo-de-horario";
-import { Calendar } from "../ui/calendar";
 import { CampoDeEmails } from "../ui/campo-de-emails";
 import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
 import { GrupoDeCartoesDeEscolha, CartaoDeEscolha } from "../ui/cartao-de-escolha";
@@ -89,10 +88,8 @@ function DemoBusca() {
 function DemoHorario() {
   const { t } = useI18n();
   const [hora, setHora] = useState("");
-  const [data, setData] = useState<Date | undefined>(new Date());
   return (
-    <ShowcaseCard className="grid gap-6 md:grid-cols-[auto_minmax(0,1fr)] md:items-start">
-      <Calendar mode="single" selected={data} onSelect={setData} className="justify-self-start rounded-lg border border-border" />
+    <ShowcaseCard className="max-w-md">
       <CampoDeHorario rotulo={t("Meeting time", "Horário da reunião")} valor={hora} onValorChange={setHora} indisponiveis={["09:00", "09:15", "14:30"]} obrigatorio />
     </ShowcaseCard>
   );

@@ -13,7 +13,7 @@ O DM DS não tinha cartões selecionáveis; o app EI e o site montavam à mão. 
 App EI (`NextQuestion.tsx:58-70`), gaveta de contato do site ("Meu negócio é…").
 
 ## API
-GrupoDeCartoesDeEscolha: `value`, `defaultValue`, `onValueChange`, `colunas` (1|2) + props do RadioGroup. CartaoDeEscolha: `valor`, `titulo`, `descricao`, `icone`, `desabilitado`, `id`.
+GrupoDeCartoesDeEscolha: `value`, `defaultValue`, `onValueChange`, `colunas` (1|2), `name`, `disabled`, `required` + props de div (aria-labelledby). No DM o rádio é nativo dentro do <label> do cartão (o cartão inteiro é o alvo de toque e as setas são as do navegador); a API é a do FindLook DS. CartaoDeEscolha: `valor`, `titulo`, `descricao`, `icone`, `desabilitado`, `id`.
 
 ## Variações e estados
 Selecionado: borda de 2 px na primária com brilho, fundo --primary-suave (regra dos rosas claros de 27/11/2026), ícone na base rosa, rádio marcado. Não selecionado: borda neutra, hover cinza.

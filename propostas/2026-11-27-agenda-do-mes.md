@@ -13,10 +13,10 @@ O Calendar serve para escolher data num campo; as Reuniões da área restrita de
 Área restrita › Reuniões.
 
 ## API
-`eventos` ({id, data AAAA-MM-DD, titulo, hora, descricao, tom}[]), `dia` | `diaInicial`, `onDiaChange`, `hoje`, `renderEvento`, `acoesDoDia`, `locale`, `textos`.
+Segue a especificação da área restrita (claude, `docs/engineering/ADMIN_REACT.md` §7.1): `mes`, `aoMudarMes`, `eventos` ({data: Date | "AAAA-MM-DD", passado?, titulo?, hora?, descricao?, tom?, id?}[]), `selecionado`, `aoSelecionar`, `rotuloDoDia(dia, eventos)`, `diasSemEventos` ("focaveis" padrão | "inativos": dias sem compromisso não recebem foco). Também: `dia`/`diaInicial`/`onDiaChange` (texto AAAA-MM-DD), `hoje`, `mostrarLista` (lista do dia ao lado; padrão sim), `renderEvento`, `acoesDoDia`, `locale`, `textos`.
 
 ## Variações e estados
-Mês e lista lado a lado a partir de 56rem; abaixo, um embaixo do outro; dias com pontos (estreito) ou nomes (largo); hoje sublinhado na cor de texto da primária, dia escolhido no rosa de selecionado com borda na primária.
+Mês e lista lado a lado a partir de 56rem; abaixo, um embaixo do outro; dias com pontos (estreito) ou nomes (largo); hoje com contorno e número em negrito, dia escolhido no rosa de selecionado (texto --primary-text) com borda na primária, nunca vermelho cheio; dia só com compromissos passados em pontos cinza; mês e lista do dia num card só, com divisor (sem área vazia ao lado).
 
 ## Acessibilidade
 role=grid com setas, Home/End e PageUp/PageDown; cada dia com nome completo e contagem; botões de mês com 44 px no toque. Textos visíveis e lidos em português. Tamanhos de texto pelos tokens da escala (`text-body-sm`, `text-label`…), alvos de toque pela variante `toque` (44 px no celular e em telas de dedo).

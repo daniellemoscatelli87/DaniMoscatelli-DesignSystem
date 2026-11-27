@@ -13,7 +13,7 @@ O Novo e-mail do Contato tinha etiquetas de e-mail feitas à mão (`ne-tag`).
 Área restrita › Contato › Novo e-mail (Para, Cc, Cco).
 
 ## API
-`id`, `valor` (string[]), `onValorChange`, `placeholder`, `maximo`, `desabilitado`, `invalido`, `aria-describedby`, `textos`.
+`id`, `valor` (string[]), `onValorChange`, `placeholder`, `maximo`, `desabilitado`, `invalido`, `aria-describedby`, `textos`. Sugestões de domínio do CampoDeEmail embaixo do campo enquanto a pessoa digita (especificação da área restrita).
 
 ## Variações e estados
 Etiqueta válida em cinza de apoio; inválida com borda e texto de erro e ícone; Enter, vírgula, ponto e vírgula, espaço, colar e sair do campo criam etiquetas; Backspace devolve a última para editar.

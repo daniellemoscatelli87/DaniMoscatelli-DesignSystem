@@ -13,7 +13,7 @@ Estados vazios eram só demonstração (StatesDemo, Empty States); o site e a á
 Cadastro de parceiro (telas finais), 404, descadastro, Comunicados (vazio), área restrita (`Inicio.tsx:122`).
 
 ## API
-EstadoVazio: `icone`, `titulo`, `descricao`, `acoes`, `tom` ("neutro" | "marca"), `tamanho` ("sm" | "md"), `nivel`. EstadoFinal: `tom` ("sucesso" | "info" | "aviso" | "erro"), `icone`, `titulo`, `descricao`, `acoes`, `nivel`, `focarAoAparecer`, children (resumo). PaginaDeErro: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`.
+EstadoVazio: `icone`, `titulo`, `descricao`, `acoes`, `tom` ("neutro" | "marca"), `tamanho` ("sm" | "md"), `variante` ("pagina" padrão, centralizado | "lista": dentro de um card, ícone à esquerda e ação na coluna do texto, como pede ADMIN_REACT.md §7.1), `nivel`. EstadoFinal: `tom` ("sucesso" | "info" | "aviso" | "erro"), `icone`, `titulo`, `descricao`, `acoes`, `nivel`, `focarAoAparecer`, children (resumo). PaginaDeErro: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`.
 
 ## Variações e estados
 Ações lado a lado e centralizadas; quando não cabem, coluna de botões da mesma largura. Ícone do estado final entra com mola (parado com menos movimento).
