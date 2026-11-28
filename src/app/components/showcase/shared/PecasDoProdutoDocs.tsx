@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarCheck, Eye, LogIn, Search, GraduationCap, Rocket, RotateCcw, Store, UserRound } from "lucide-react";
+import { CalendarCheck, Eye, LogIn, GraduationCap, Rocket, RotateCcw, Store, UserRound } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { DoDont, Mono } from "./Guidance";
 import { Button } from "../../ui/button";
@@ -540,7 +540,8 @@ export function SecaoJanelasECabecalho() {
       />
       <Card>
         <CardContent className="grid gap-6 p-6">
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="grid gap-3">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center">
             <Dialog>
               <DialogTrigger asChild><Button type="button" variant="outline">Abrir uma janela</Button></DialogTrigger>
               <DialogContent>
@@ -550,8 +551,9 @@ export function SecaoJanelasECabecalho() {
                 </DialogHeader>
               </DialogContent>
             </Dialog>
-            <Button type="button" variant="outline" onClick={() => setAberta(true)}><Search aria-hidden /> Buscar cidade</Button>
-            <p aria-live="polite" className="m-0 text-body-sm text-muted-foreground">{escolhida ? `Cidade escolhida: ${escolhida}.` : ""}</p>
+            <Button type="button" variant="outline" onClick={() => setAberta(true)}>Buscar cidade</Button>
+          </div>
+            <p aria-live="polite" className="m-0 min-h-5 text-body-sm text-muted-foreground">{escolhida ? `Cidade escolhida: ${escolhida}.` : ""}</p>
           </div>
           <CommandDialog open={aberta} onOpenChange={setAberta} title="Buscar cidade" description="Digite o começo do nome da cidade." shouldFilter={false}>
             <CommandInput placeholder="Digite o nome da cidade" value={busca} onValueChange={setBusca} />
@@ -571,11 +573,11 @@ export function SecaoJanelasECabecalho() {
         </CardContent>
       </Card>
       <ComoUsar>{`<CommandDialog open={aberta} onOpenChange={setAberta} title="Buscar cidade"
-  shouldFilter={false}              // a lista já vem filtrada (do servidor)
-  filter={(valor, busca) => …}      // ou um filtro próprio
+  shouldFilter={false} // a lista já vem filtrada (do servidor)
+  filter={(valor, busca) => …} // ou um filtro próprio
 >…</CommandDialog>
 
-<CabecalhoDoSite itens={[]} acao={{ rotulo: "Entrar", href: "/entrar" }} />   // sem botão Menu`}</ComoUsar>
+<CabecalhoDoSite itens={[]} acao={{ rotulo: "Entrar", href: "/entrar" }} /> // sem botão Menu`}</ComoUsar>
       <Regras itens={[
         "Fechar das janelas: desenho de 24 px; no toque, um ::after invisível de 44 × 44 px centralizado (data-alvo-compacto evita que a regra global aumente o desenho).",
         "CommandDialog: título e descrição dentro da janela, escondidos na tela e lidos por leitores de tela (o Radix pede o DialogTitle dentro do conteúdo).",
