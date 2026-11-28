@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 126,
-    "componentesExportados": 415,
+    "arquivosDeComponentes": 130,
+    "componentesExportados": 422,
     "templatesEPadroesSoEmDemonstracao": 76,
-    "secoesComMarcacaoAMao": 45,
-    "tokens": 163,
+    "secoesComMarcacaoAMao": 46,
+    "tokens": 171,
     "paginas": 33,
-    "ancoras": 237,
-    "propostas": 46
+    "ancoras": 241,
+    "propostas": 51
   },
   "componentes": [
     {
@@ -545,6 +545,33 @@
       "ondeVer": []
     },
     {
+      "arquivo": "src/app/components/ui/avaliacao.tsx",
+      "nome": "avaliacao",
+      "quandoUsar": "Avaliação: a nota de uma loja com a estrela e, ao lado, o número de avaliações entre parênteses (\"★ 4,6 (128)\"). Nota com uma casa decimal e vírgula; número de avaliações no formato pt-BR. Sem nota, mostra \"Sem nota\" em cinza (nunca um zero). A estrela é decorativa; os leitores de tela ouvem \"Nota 4,6 de 5, 128 avaliações\" e, com `fonte`, de onde veio a nota (\"informada na ficha\").",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "Avaliacao",
+          "tipo": "componente",
+          "linha": 24,
+          "descricao": "",
+          "props": [
+            "nota",
+            "total",
+            "fonte",
+            "tamanho",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "AvaliacaoProps"
+      ],
+      "variantes": {},
+      "ondeVer": []
+    },
+    {
       "arquivo": "src/app/components/ui/avatar.tsx",
       "nome": "avatar",
       "quandoUsar": "Foto ou iniciais de uma pessoa ou loja.",
@@ -954,7 +981,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 336,
           "uso": "direto",
           "exports": [
             "BarraDeNumeros"
@@ -1077,21 +1104,21 @@
     {
       "arquivo": "src/app/components/ui/botao-whatsapp.tsx",
       "nome": "botao-whatsapp",
-      "quandoUsar": "BotaoWhatsApp (botão flutuante do WhatsApp): Botão redondo de 56 px no canto inferior direito (20 px da borda; 24 px a partir de 640 px), que abre a conversa no WhatsApp em nova aba, com uma mensagem pronta. É o mesmo botão de todas as páginas do site (index.html e public/whatsapp.js).",
+      "quandoUsar": "BotaoWhatsApp (botão flutuante do WhatsApp): Botão redondo de 56 px no canto inferior direito que abre a conversa no WhatsApp em nova aba, com uma mensagem pronta. Mesmo componente e mesma API nos dois design systems (pedido da dona do produto, 28/11/2026), documentado junto das peças de redes sociais (LinkDeRedeSocial). Só os valores padrão mudam: o número e a mensagem de cada marca.",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "VERDE_WHATSAPP",
           "tipo": "utilitário",
-          "linha": 18,
-          "descricao": "",
+          "linha": 33,
+          "descricao": "@deprecated use var(--marca-whatsapp); mantido para quem já importava.",
           "props": [],
           "reexportaDe": null
         },
         {
           "nome": "linkWhatsApp",
           "tipo": "utilitário",
-          "linha": 20,
+          "linha": 35,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -1099,8 +1126,8 @@
         {
           "nome": "IconeWhatsApp",
           "tipo": "componente",
-          "linha": 33,
-          "descricao": "",
+          "linha": 50,
+          "descricao": "O ícone do WhatsApp (o mesmo do LinkDeRedeSocial).",
           "props": [
             "className"
           ],
@@ -1109,7 +1136,7 @@
         {
           "nome": "BotaoWhatsApp",
           "tipo": "componente",
-          "linha": 41,
+          "linha": 54,
           "descricao": "",
           "props": [
             "numero",
@@ -1117,9 +1144,16 @@
             "rotulo",
             "titulo",
             "fixo",
-            "className",
-            "style"
+            "className"
           ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDoBotaoWhatsApp",
+          "tipo": "utilitário",
+          "linha": 82,
+          "descricao": "O mesmo botão em HTML puro (páginas sem React): mesmas classes e mesmo ícone.",
+          "props": [],
           "reexportaDe": null
         }
       ],
@@ -1128,6 +1162,19 @@
       ],
       "variantes": {},
       "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-botao-whatsapp",
+          "titulo": "Botão do WhatsApp",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 229,
+          "uso": "direto",
+          "exports": [
+            "BotaoWhatsApp",
+            "htmlDoBotaoWhatsApp"
+          ]
+        },
         {
           "pagina": "site",
           "paginaRotulo": "Padrões do site",
@@ -2638,7 +2685,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "GradeDeCampos"
@@ -3635,7 +3682,7 @@
           "ancora": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86,
+          "linha": 107,
           "uso": "direto",
           "exports": [
             "CardDeArtigo"
@@ -3658,19 +3705,22 @@
     {
       "arquivo": "src/app/components/ui/card-de-depoimento.tsx",
       "nome": "card-de-depoimento",
-      "quandoUsar": "CardDeDepoimento (depoimento de cliente ou par): O cartão dos depoimentos da página inicial (21 recomendações do LinkedIn, `testimonial-card`) e das páginas de apresentação: o depoimento em cima e, depois de um divisor, a pessoa (foto, nome e cargo) e, opcional, a origem (\"Recomendação no LinkedIn\"). A frase vem primeiro e começa na borda do card; a pessoa assina embaixo.",
+      "quandoUsar": "CardDeDepoimento (depoimento de cliente, par ou de quem usou a plataforma): O cartão padrão de depoimento nos dois design systems (decisão da dona do produto, 28/11/2026): o ícone de aspas, o depoimento em cima e, depois de um divisor, a pessoa (foto ou iniciais, nome, cargo e, opcional, a origem, como \"Recomendação no LinkedIn\").",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "CardDeDepoimento",
           "tipo": "componente",
-          "linha": 31,
+          "linha": 49,
           "descricao": "",
           "props": [
             "nome",
             "cargo",
             "foto",
             "origem",
+            "perfil",
+            "loja",
+            "nota",
             "children",
             "className"
           ],
@@ -3678,7 +3728,8 @@
         }
       ],
       "tipos": [
-        "CardDeDepoimentoProps"
+        "CardDeDepoimentoProps",
+        "PerfilDoDepoimento"
       ],
       "variantes": {},
       "ondeVer": [
@@ -3688,7 +3739,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "direto",
           "exports": [
             "CardDeDepoimento"
@@ -3742,7 +3793,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 336,
           "uso": "direto",
           "exports": [
             "CardDeNavegacao"
@@ -3806,6 +3857,57 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "CardDeNavegacao"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/card-de-rede-social.tsx",
+      "nome": "card-de-rede-social",
+      "quandoUsar": "CardDeRedeSocial (convite para ver tudo numa rede social): O card \"Veja todas as 35 recomendações na íntegra\" da seção de depoimentos da página inicial: o selo de verificado, o título, o texto e o botão em pílula que abre a rede (\"Acessar Recomendações no LinkedIn\"). Só no DS Dani Moscatelli (pedido da dona do produto, 28/11/2026), na área das redes sociais, junto do LinkDeRedeSocial.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CardDeRedeSocial",
+          "tipo": "componente",
+          "linha": 44,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "descricao",
+            "href",
+            "rotuloDoBotao",
+            "rede",
+            "nivel",
+            "novaAba",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDoCardDeRedeSocial",
+          "tipo": "utilitário",
+          "linha": 75,
+          "descricao": "O mesmo card em HTML puro (páginas sem React): mesmas classes, o selo BadgeCheck da Lucide (ISC) e o ícone da rede igual ao do LinkDeRedeSocial.",
+          "props": [],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardDeRedeSocialProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-card-rede-social",
+          "titulo": "Card de rede social",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 174,
+          "uso": "direto",
+          "exports": [
+            "CardDeRedeSocial"
           ]
         }
       ]
@@ -3963,7 +4065,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "direto",
           "exports": [
             "Carousel",
@@ -4072,7 +4174,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 197,
           "uso": "direto",
           "exports": [
             "CartaoFlutuante"
@@ -4308,7 +4410,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4528,7 +4630,7 @@
           "ancora": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "Citacao"
@@ -5140,7 +5242,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -5249,7 +5351,7 @@
           "ancora": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264,
+          "linha": 285,
           "uso": "direto",
           "exports": [
             "DiagramaDeEcossistema"
@@ -6158,7 +6260,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 130,
           "uso": "direto",
           "exports": [
             "FaixaDeLogos"
@@ -6850,7 +6952,7 @@
           "ancora": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86,
+          "linha": 107,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6863,7 +6965,7 @@
           "ancora": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6876,7 +6978,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 336,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6889,7 +6991,20 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 356,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-redes-sociais",
+          "titulo": "Links de redes sociais",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 22,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -7562,7 +7677,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7574,7 +7689,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 130,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7586,7 +7701,7 @@
           "ancora": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153,
+          "linha": 174,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7598,7 +7713,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 197,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7610,7 +7725,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7622,7 +7737,43 @@
           "ancora": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264,
+          "linha": 285,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-pilulas-destaque",
+          "titulo": "Pílulas de destaque",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 120,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-card-rede-social",
+          "titulo": "Card de rede social",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 174,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-botao-whatsapp",
+          "titulo": "Botão do WhatsApp",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 229,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9120,7 +9271,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 123,
+          "linha": 128,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -9398,7 +9549,7 @@
           "ancora": "catalogo-lista",
           "titulo": "Todos os componentes",
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 143,
+          "linha": 148,
           "uso": "direto",
           "exports": [
             "Input"
@@ -9793,6 +9944,122 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/link-de-rede-social.tsx",
+      "nome": "link-de-rede-social",
+      "quandoUsar": "LinkDeRedeSocial e GrupoDeRedesSociais (links de redes sociais): A pílula branca de \"Me siga nas redes sociais\" da página inicial do site (`ih-redes`): o ícone da rede na cor oficial da marca, o texto em --foreground e a sombra suave (--shadow-suave). É um link: abre o perfil da rede. Aprovados pela dona do produto em 28/11/2026.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "redesSociais",
+          "tipo": "utilitário",
+          "linha": 75,
+          "descricao": "As redes que o DS conhece, na ordem da documentação.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "nomeDaRede",
+          "tipo": "utilitário",
+          "linha": 78,
+          "descricao": "Nome da rede como a marca escreve (\"LinkedIn\", \"YouTube\").",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "IconeDeRedeSocial",
+          "tipo": "componente",
+          "linha": 96,
+          "descricao": "O ícone da marca (aria-hidden), na cor oficial quando dentro de .ds-link-rede-social--<rede>.",
+          "props": [
+            "rede",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "LinkDeRedeSocial",
+          "tipo": "componente",
+          "linha": 117,
+          "descricao": "",
+          "props": [
+            "rede",
+            "href",
+            "children",
+            "tamanho",
+            "novaAba",
+            "className",
+            "target",
+            "rel"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GrupoDeRedesSociais",
+          "tipo": "componente",
+          "linha": 142,
+          "descricao": "Lista dos links: cada LinkDeRedeSocial vira um item; centralizados e quebrando em linhas, 12 px entre eles.",
+          "props": [
+            "alinhamento",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "svgDaRedeSocial",
+          "tipo": "utilitário",
+          "linha": 157,
+          "descricao": "O svg da marca em HTML puro (aria-hidden), com a classe dada: o mesmo desenho do IconeDeRedeSocial.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDoLinkDeRedeSocial",
+          "tipo": "utilitário",
+          "linha": 167,
+          "descricao": "O mesmo link em HTML puro, para as páginas que não usam React (as páginas originais do site): mesmas classes, mesmo ícone, mesmo aviso de nova aba. Precisa do bloco \"@ds-css-puro\" do theme.css na página.",
+          "props": [],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "GrupoDeRedesSociaisProps",
+        "LinkDeRedeSocialProps",
+        "RedeSocial"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-redes-sociais",
+          "titulo": "Links de redes sociais",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 22,
+          "uso": "direto",
+          "exports": [
+            "redesSociais",
+            "nomeDaRede",
+            "LinkDeRedeSocial",
+            "GrupoDeRedesSociais",
+            "htmlDoLinkDeRedeSocial"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-card-rede-social",
+          "titulo": "Card de rede social",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 174,
+          "uso": "direto",
+          "exports": [
+            "LinkDeRedeSocial"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/link-saiba-mais.tsx",
       "nome": "link-saiba-mais",
       "quandoUsar": "LinkSaibaMais (alça \"Saiba mais\" do hero): O link que convida a rolar até a próxima seção, centralizado na base do hero (`ih-alca` da página inicial e `rp-alca` da Rede de Parceiros): texto e a seta num círculo que desce e sobe devagar. Com `direcao=\"direita\"`, vira um link de continuação no fim de um bloco (\"Saiba mais →\").",
@@ -9824,7 +10091,7 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 356,
           "uso": "direto",
           "exports": [
             "LinkSaibaMais"
@@ -9932,7 +10199,7 @@
           "ancora": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153,
+          "linha": 174,
           "uso": "direto",
           "exports": [
             "ListaDePilares"
@@ -9986,7 +10253,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 130,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -9998,7 +10265,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -10078,7 +10345,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 197,
           "uso": "direto",
           "exports": [
             "LuzesDifusas"
@@ -11413,6 +11680,65 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/pilula-de-destaque.tsx",
+      "nome": "pilula-de-destaque",
+      "quandoUsar": "PilulaDeDestaque e GrupoDePilulasDeDestaque (destaques que não são clicáveis): Os destaques curtos da seção de depoimentos da página inicial do site (`ih-tags`: \"35 recomendações\", \"Excelência e compromisso\", \"Líderes, clientes & pares\"): pílula de fundo cinza bem claro, borda fina, texto em --foreground e um ícone Lucide de 18 px no vermelho do texto da marca (--primary-text), o mesmo tamanho em todas.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "PilulaDeDestaque",
+          "tipo": "componente",
+          "linha": 29,
+          "descricao": "",
+          "props": [
+            "icone",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "GrupoDePilulasDeDestaque",
+          "tipo": "componente",
+          "linha": 44,
+          "descricao": "A lista das pílulas (<ul>); os filhos são PilulaDeDestaque. Dê um aria-label quando não houver título perto.",
+          "props": [
+            "alinhamento",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDaPilulaDeDestaque",
+          "tipo": "utilitário",
+          "linha": 60,
+          "descricao": "A mesma pílula em HTML puro (páginas sem React). `svgDoIcone` é o <svg> do ícone Lucide, copiado da biblioteca de ícones do DS (Ícones › Biblioteca), sem width/height: a classe dá os 18 px e a cor.",
+          "props": [],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "GrupoDePilulasDeDestaqueProps",
+        "PilulaDeDestaqueProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-pilulas-destaque",
+          "titulo": "Pílulas de destaque",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 120,
+          "uso": "direto",
+          "exports": [
+            "PilulaDeDestaque",
+            "GrupoDePilulasDeDestaque"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/popover.tsx",
       "nome": "popover",
       "quandoUsar": "Painel flutuante preso a um botão.",
@@ -11528,7 +11854,7 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 356,
           "uso": "direto",
           "exports": [
             "Prosa"
@@ -13117,7 +13443,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 223,
           "uso": "direto",
           "exports": [
             "Simulacao",
@@ -16808,7 +17134,7 @@
       "ancora": "catalogo-lista",
       "titulo": "Todos os componentes",
       "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-      "linha": 143,
+      "linha": 148,
       "elementosFeitosAMao": 5,
       "usaComponentes": [
         "Input"
@@ -17070,6 +17396,18 @@
       "usaComponentes": [
         "CurvaSecao",
         "SeloSecao"
+      ]
+    },
+    {
+      "pagina": "secoes-site",
+      "paginaRotulo": "Seções do site",
+      "ancora": "secoes-botao-whatsapp",
+      "titulo": "Botão do WhatsApp",
+      "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+      "linha": 229,
+      "elementosFeitosAMao": 4,
+      "usaComponentes": [
+        "BotaoWhatsApp"
       ]
     },
     {
@@ -17613,6 +17951,13 @@
         "escuro": "0 16px 64px rgba(0, 0, 0, 0.55), 0 48px 100px rgba(0, 0, 0, 0.40)",
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
+      },
+      {
+        "nome": "--shadow-suave",
+        "claro": "0 10px 30px -5px color-mix(in srgb, var(--graphite-950) 4%, transparent), 0 4px 12px -2px color-mix(in srgb, var(--graphite-950) 2%, transparent)",
+        "escuro": "0 10px 30px -5px rgba(0, 0, 0, 0.45), 0 4px 12px -2px rgba(0, 0, 0, 0.3)",
+        "papel": "",
+        "grupoCss": ""
       }
     ],
     "espaco": [
@@ -18242,6 +18587,55 @@
         "escuro": null,
         "papel": "",
         "grupoCss": ""
+      },
+      {
+        "nome": "--marca-linkedin",
+        "claro": "#0A66C2",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-instagram",
+        "claro": "#E1306C",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-whatsapp",
+        "claro": "#25D366",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-facebook",
+        "claro": "#1877F2",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-youtube",
+        "claro": "#FF0000",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-tiktok",
+        "claro": "#000000",
+        "escuro": "#FFFFFF",
+        "papel": "",
+        "grupoCss": ""
+      },
+      {
+        "nome": "--marca-behance",
+        "claro": "#1769FF",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
       }
     ],
     "escalaTipografica": [
@@ -18775,10 +19169,28 @@
       "componente": "tokens em src/styles/theme.css"
     },
     {
+      "arquivo": "propostas/2026-11-28-botao-whatsapp.md",
+      "titulo": "Botão do WhatsApp nos dois DS",
+      "status": "pedido da dona do produto (28/11/2026): \"O botão do WhatsApp também já está nos botões das redes sociais no design system; precisa estar em ambos os DS.\"",
+      "componente": "BotaoWhatsApp, IconeWhatsApp, linkWhatsApp, htmlDoBotaoWhatsApp em src/app/components/ui/botao-whatsapp.tsx. Mesma API nos dois DS; os arquivos só diferem no bloco dos valores padrão (número e mensagem do estúdio no DM; sem número no FindLook)."
+    },
+    {
       "arquivo": "propostas/2026-11-28-caixa-de-consentimento.md",
       "titulo": "Caixa de consentimento",
       "status": "aprovada (dona do produto, 28/11/2026; publicação com o \"sim\" dela)",
       "componente": "CaixaDeConsentimento em src/app/components/ui/caixa-de-consentimento.tsx (mesmo arquivo e API no DS FindLook)"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-card-de-depoimento.md",
+      "titulo": "Card de depoimento (padrão dos dois DS)",
+      "status": "decisão da dona do produto (28/11/2026): \"Use o componente de depoimento do Design System … leve o componente de depoimento para o FindLook, adaptado para feedbacks de clientes que usaram a plataforma.\"",
+      "componente": "CardDeDepoimento em src/app/components/ui/card-de-depoimento.tsx (arquivo idêntico nos dois DS); Avaliacao (ui/avaliacao.tsx) agora também no DS Dani Moscatelli, idêntica"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-card-de-rede-social.md",
+      "titulo": "Card de rede social (só no DS Dani Moscatelli)",
+      "status": "pedido da dona do produto (28/11/2026): \"Esse componente entra apenas no Dani Moscatelli, na área de componentes de redes sociais. Porém esse componente está precisando ser enquadrado nos espaçamentos internos do padrão dos cards.\"",
+      "componente": "CardDeRedeSocial, htmlDoCardDeRedeSocial em src/app/components/ui/card-de-rede-social.tsx"
     },
     {
       "arquivo": "propostas/2026-11-28-confete.md",
@@ -18805,6 +19217,12 @@
       "componente": "EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-28-link-de-rede-social.md",
+      "titulo": "Link de rede social",
+      "status": "aprovado (dona do produto, 28/11/2026; publicação com o \"sim\" dela)",
+      "componente": null
+    },
+    {
       "arquivo": "propostas/2026-11-28-mock-de-campo.md",
       "titulo": "Campo de exemplo na simulação",
       "status": "proposta",
@@ -18815,6 +19233,12 @@
       "titulo": "Página 404 padrão e espaço abaixo do cabeçalho",
       "status": "aprovada (decisões da dona do produto de 28/11/2026; publicação com o \"sim\" dela)",
       "componente": "PaginaDeErro (nova variante moldura=\"card\") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-pilula-de-destaque.md",
+      "titulo": "Pílula de destaque",
+      "status": "aprovada (dona do produto, 28/11/2026; prévia `mock-pilulas/pilulas.png`, linha \"Proposta\")",
+      "componente": null
     },
     {
       "arquivo": "propostas/2026-11-28-recorte-de-foto.md",
@@ -19506,7 +19930,7 @@
           "id": "catalogo-lista",
           "titulo": "Todos os componentes",
           "arquivo": "src/app/components/showcase/CatalogoShowcase.tsx",
-          "linha": 143
+          "linha": 148
         }
       ]
     },
@@ -20269,61 +20693,85 @@
           "id": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54
+          "linha": 55
         },
         {
           "id": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86
+          "linha": 107
         },
         {
           "id": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109
+          "linha": 130
         },
         {
           "id": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131
+          "linha": 152
         },
         {
           "id": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153
+          "linha": 174
         },
         {
           "id": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176
+          "linha": 197
         },
         {
           "id": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202
+          "linha": 223
         },
         {
           "id": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264
+          "linha": 285
         },
         {
           "id": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315
+          "linha": 336
         },
         {
           "id": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335
+          "linha": 356
+        },
+        {
+          "id": "secoes-redes-sociais",
+          "titulo": "Links de redes sociais",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 22
+        },
+        {
+          "id": "secoes-pilulas-destaque",
+          "titulo": "Pílulas de destaque",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 120
+        },
+        {
+          "id": "secoes-card-rede-social",
+          "titulo": "Card de rede social",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 174
+        },
+        {
+          "id": "secoes-botao-whatsapp",
+          "titulo": "Botão do WhatsApp",
+          "arquivo": "src/app/components/showcase/shared/SecoesRedesEDestaques.tsx",
+          "linha": 229
         }
       ]
     },

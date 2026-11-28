@@ -718,3 +718,427 @@
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+
+/* ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+   @ds-css-puro:inicio
+   Componentes em CSS puro (28/11/2026, aprovados pela dona do produto). Estas classes são a única fonte do desenho do
+   LinkDeRedeSocial (ui/link-de-rede-social.tsx), da PilulaDeDestaque (ui/pilula-de-destaque.tsx), do
+   CardDeDepoimento (ui/card-de-depoimento.tsx) e do BotaoWhatsApp (ui/botao-whatsapp.tsx): o componente em React só
+   monta o HTML e aplica estas mesmas classes.
+   Páginas em HTML puro (as páginas originais do site) usam as classes direto, com os tokens deste arquivo.
+   Bloco igual nos dois design systems (Dani Moscatelli e FindLook), menos o trecho marcado "Só no DS Dani Moscatelli"
+   (CardDeRedeSocial); só tokens com o mesmo nome nos dois. Os tamanhos de texto (--text-*) ficam no @theme do
+   Tailwind, que uma página sem Tailwind não lê: por isso levam o valor do próprio token como reserva. Fica em
+   @layer components, para que uma classe utilitária passada pelo produto (largura, margem) possa ajustar a peça.
+   ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* Sombra suave (28/11/2026): difusa e clara, a das pílulas "Me siga nas redes sociais" do site original
+     (shadow-subtle-card). Nenhum token de sombra tinha esse desenho: o --shadow-sm é curto e escuro demais e o
+     --shadow-md, forte demais para uma pílula. Uso: peças pequenas que flutuam sobre fundo claro (LinkDeRedeSocial). */
+  --shadow-suave: 0 10px 30px -5px color-mix(in srgb, var(--graphite-950) 4%, transparent), 0 4px 12px -2px color-mix(in srgb, var(--graphite-950) 2%, transparent);
+
+  /* Cores oficiais das marcas (exceção da dona do produto, 19/11 e 28/11/2026): só nos ícones das redes sociais e
+     de compartilhar, nunca em texto, fundo ou borda de outra peça. O TikTok é preto no claro e branco no escuro. */
+  --marca-linkedin: #0A66C2;
+  --marca-instagram: #E1306C;
+  --marca-whatsapp: #25D366;
+  --marca-facebook: #1877F2;
+  --marca-youtube: #FF0000;
+  --marca-tiktok: #000000;
+  --marca-behance: #1769FF;
+}
+.dark {
+  --shadow-suave: 0 10px 30px -5px rgba(0, 0, 0, 0.45), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+  --marca-tiktok: #FFFFFF;
+}
+
+@layer components {
+  /* ── LinkDeRedeSocial: pílula branca com o ícone da rede na cor oficial e o texto em --foreground ──
+     <a class="ds-link-rede-social ds-link-rede-social--linkedin" href="…" target="_blank" rel="noopener noreferrer">
+       <svg class="ds-link-rede-social__icone" aria-hidden="true" …>…</svg>
+       <span>Perfil profissional</span><span class="ds-so-leitor"> (abre em nova aba)</span>
+     </a>
+     Tamanhos: sm (padrão, a referência: 32 px, texto de 12 px, ícone de 14 px) e md (ds-link-rede-social--md: 40 px,
+     texto de 14 px, ícone de 16 px). No toque (celular ou tela de dedo), a área de toque tem 44 px de altura sem mudar
+     o desenho. Hover: fundo cinza claro (--accent), a pílula sobe 2 px e o ícone cresce um pouco; sem movimento com
+     "menos movimento". Foco: anel --ring. */
+  .ds-link-rede-social {
+    --ds-rede-cor: var(--foreground);
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--space-8);
+    padding: 0 var(--space-3);
+    border-radius: 9999px;
+    background-color: var(--card);
+    color: var(--foreground);
+    box-shadow: var(--shadow-suave);
+    font-family: var(--font-sans);
+    font-size: var(--text-label, 0.75rem);
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--duration-fast) var(--ease-out), translate var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out);
+  }
+  .ds-link-rede-social--md {
+    min-height: var(--space-10);
+    padding: 0 var(--space-4);
+    font-size: var(--text-body-sm, 0.875rem);
+    line-height: 1.25rem;
+  }
+  .ds-link-rede-social__icone {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    color: var(--ds-rede-cor);
+    transition: scale var(--duration-normal) var(--ease-out);
+  }
+  .ds-link-rede-social--md .ds-link-rede-social__icone { width: 16px; height: 16px; }
+  .ds-link-rede-social:hover { background-color: var(--accent); translate: 0 -2px; }
+  .ds-link-rede-social:hover .ds-link-rede-social__icone { scale: 1.1; }
+  .ds-link-rede-social:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .ds-link-rede-social:active { translate: 0 0; }
+  /* Área de toque de 44 px no celular e em tela de dedo; o desenho continua com 32 px (ou 40 px no md). */
+  @media (max-width: 639.98px), (pointer: coarse) {
+    .ds-link-rede-social::after {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      top: 50%;
+      min-height: 44px;
+      height: 100%;
+      transform: translateY(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-link-rede-social, .ds-link-rede-social__icone { transition: background-color var(--duration-fast) var(--ease-out); }
+    .ds-link-rede-social:hover { translate: none; }
+    .ds-link-rede-social:hover .ds-link-rede-social__icone { scale: none; }
+  }
+  .ds-link-rede-social--linkedin { --ds-rede-cor: var(--marca-linkedin); }
+  .ds-link-rede-social--instagram { --ds-rede-cor: var(--marca-instagram); }
+  .ds-link-rede-social--whatsapp { --ds-rede-cor: var(--marca-whatsapp); }
+  .ds-link-rede-social--facebook { --ds-rede-cor: var(--marca-facebook); }
+  .ds-link-rede-social--youtube { --ds-rede-cor: var(--marca-youtube); }
+  .ds-link-rede-social--tiktok { --ds-rede-cor: var(--marca-tiktok); }
+  .ds-link-rede-social--behance { --ds-rede-cor: var(--marca-behance); }
+
+  /* GrupoDeRedesSociais: os links centralizados, quebrando em linhas, 12 px entre eles (as áreas de toque de 44 px não se sobrepõem).
+     <ul class="ds-grupo-redes-sociais" aria-label="Redes sociais"><li><a class="ds-link-rede-social …">…</a></li>…</ul>
+     ds-grupo-redes-sociais--inicio: alinhados à esquerda (no fim de um texto alinhado à esquerda). */
+  .ds-grupo-redes-sociais {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ds-grupo-redes-sociais--inicio { justify-content: flex-start; }
+  .ds-grupo-redes-sociais > li { display: flex; margin: 0; padding: 0; }
+
+  /* ── PilulaDeDestaque: um destaque curto que não é clicável (números, qualidades, públicos) ──
+     <ul class="ds-grupo-pilulas-destaque" aria-label="Destaques">
+       <li class="ds-pilula-destaque"><svg class="ds-pilula-destaque__icone" aria-hidden="true" …>…</svg>35 recomendações</li>
+     </ul>
+     Fundo cinza bem claro (metade do --muted sobre o card), borda --border-strong, texto --foreground em 12 px
+     (14 px a partir de 768 px), ícone Lucide de 18 px em --primary-text. Sem hover, sem foco, sem cursor de clique. */
+  .ds-pilula-destaque {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: 9999px;
+    background-color: color-mix(in srgb, var(--muted) 50%, var(--card));
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--text-label, 0.75rem);
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+    text-align: left;
+  }
+  @media (min-width: 768px) {
+    .ds-pilula-destaque { font-size: var(--text-body-sm, 0.875rem); line-height: 1.25rem; }
+  }
+  .ds-pilula-destaque__icone { flex: none; width: 18px; height: 18px; color: var(--primary-text); }
+  .ds-grupo-pilulas-destaque {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ds-grupo-pilulas-destaque--inicio { justify-content: flex-start; }
+
+  /* ── CardDeDepoimento: aspas, o depoimento, divisor e a pessoa embaixo (padrão dos dois DS, 28/11/2026) ──
+     <figure class="ds-card-depoimento">
+       <blockquote class="ds-card-depoimento__texto">
+         <span class="ds-card-depoimento__topo"><svg class="ds-card-depoimento__aspas" aria-hidden="true" …>…</svg></span>
+         “Texto do depoimento com <strong>o trecho principal</strong>.”
+       </blockquote>
+       <figcaption class="ds-card-depoimento__pessoa">
+         <img class="ds-card-depoimento__foto" src="…" alt="">   (ou <span class="ds-card-depoimento__iniciais" aria-hidden="true">DM</span>)
+         <span class="ds-card-depoimento__quem">
+           <span class="ds-card-depoimento__nome">Nome</span>
+           <span class="ds-card-depoimento__cargo">Cargo</span>
+           <span class="ds-card-depoimento__origem">Recomendação no LinkedIn</span>   (opcional)
+         </span>
+       </figcaption>
+     </figure>
+     Card só de borda (sem sombra parada), cantos de 24 px, 24 px de respiro, altura total da célula. Texto de 14 px em
+     --muted-foreground (o <strong> em --foreground); aspas de 20 px em --primary-text; foto de 48 px com anel
+     --primary-muted. Hover: só a borda fica mais forte (--border-strong). O selo do perfil e a nota (FindLook) são o
+     ChipDeEstado e a Avaliacao do DS, no componente em React. */
+  .ds-card-depoimento {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    height: 100%;
+    margin: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 12px);
+    background-color: var(--card);
+    color: var(--card-foreground);
+    font-family: var(--font-sans);
+    text-align: left;
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+  .ds-card-depoimento:hover { border-color: var(--border-strong); }
+  .ds-card-depoimento__texto {
+    position: relative;
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0;
+    color: var(--muted-foreground);
+    font-size: var(--text-body-sm, 0.875rem);
+    line-height: 1.625;
+  }
+  .ds-card-depoimento__texto strong { font-weight: var(--font-weight-semibold); color: var(--foreground); }
+  .ds-card-depoimento__topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+  }
+  .ds-card-depoimento__aspas { display: block; flex: none; width: 20px; height: 20px; color: var(--primary-text); }
+  .ds-card-depoimento__pessoa {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+  .ds-card-depoimento__foto,
+  .ds-card-depoimento__iniciais {
+    box-sizing: border-box;
+    flex: none;
+    width: var(--space-12);
+    height: var(--space-12);
+    border-radius: 9999px;
+  }
+  .ds-card-depoimento__foto { display: block; object-fit: cover; box-shadow: 0 0 0 2px var(--primary-muted); }
+  .ds-card-depoimento__iniciais {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-muted);
+    color: var(--primary-text);
+    font-size: var(--text-body-sm, 0.875rem);
+    font-weight: var(--font-weight-bold);
+  }
+  .ds-card-depoimento__quem { display: block; flex: 1 1 auto; min-width: 0; }
+  .ds-card-depoimento__nome { display: block; color: var(--foreground); font-size: var(--text-body-sm, 0.875rem); font-weight: var(--font-weight-bold); line-height: 1.43; }
+  .ds-card-depoimento__cargo {
+    display: block;
+    overflow: hidden;
+    color: var(--muted-foreground);
+    font-size: var(--text-label, 0.75rem);
+    line-height: 1.33;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ds-card-depoimento__origem { display: block; margin-top: var(--space-1); color: var(--primary-text); font-size: var(--text-label, 0.75rem); font-weight: var(--font-weight-medium); line-height: 1.33; }
+  .ds-card-depoimento__perfil { display: flex; margin-top: var(--space-2); }
+
+  /* ── BotaoWhatsApp: botão flutuante do WhatsApp (igual nos dois DS, 28/11/2026) ──
+     <a class="ds-botao-whatsapp" href="https://wa.me/…" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp (abre em nova aba)">
+       <svg class="ds-botao-whatsapp__icone" aria-hidden="true" …>…</svg>
+     </a>
+     56 px, verde oficial (--marca-whatsapp) com ícone branco de 28 px (exceção da dona do produto), sombra --shadow-md,
+     20 px da borda (24 px a partir de 640 px) mais a área segura do aparelho, camada 45 (acima das faixas fixas, 43, e
+     dos outros flutuantes, 44). --na-caixa: dentro de uma caixa (demonstrações). .ds-espaco-botao-whatsapp: no último
+     bloco da página (o rodapé), para o botão nunca cobrir o fim do conteúdo. */
+  .ds-botao-whatsapp {
+    position: fixed;
+    right: calc(var(--space-5) + env(safe-area-inset-right, 0px));
+    bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+    z-index: 45;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 9999px;
+    background-color: var(--marca-whatsapp);
+    color: var(--primary-foreground);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: scale var(--duration-normal) var(--ease-out);
+  }
+  .ds-botao-whatsapp--na-caixa { position: absolute; right: var(--space-5); bottom: var(--space-5); }
+  .ds-botao-whatsapp__icone { display: block; width: 28px; height: 28px; }
+  .ds-botao-whatsapp:hover { scale: 1.05; }
+  .ds-botao-whatsapp:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  @media (min-width: 640px) {
+    .ds-botao-whatsapp { right: calc(var(--space-6) + env(safe-area-inset-right, 0px)); bottom: calc(var(--space-6) + env(safe-area-inset-bottom, 0px)); }
+    .ds-botao-whatsapp--na-caixa { right: var(--space-6); bottom: var(--space-6); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-botao-whatsapp { transition: none; }
+    .ds-botao-whatsapp:hover { scale: none; }
+  }
+  .ds-espaco-botao-whatsapp { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Texto só para leitores de tela (o aviso "(abre em nova aba)" dos links externos). */
+  .ds-so-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* ── Só no DS Dani Moscatelli: CardDeRedeSocial ("Veja todas as 35 recomendações na íntegra", 28/11/2026) ──
+     <section class="ds-card-rede-social ds-card-rede-social--linkedin" aria-label="…">
+       <span class="ds-card-rede-social__icone"><svg aria-hidden="true" …>(BadgeCheck)</svg></span>
+       <div class="ds-card-rede-social__texto"><h3 class="ds-card-rede-social__titulo">…</h3><p class="ds-card-rede-social__descricao">…</p></div>
+       <div class="ds-card-rede-social__rodape"><a class="ds-card-rede-social__botao" href="…"><span class="ds-card-rede-social__rotulo">(svg da rede)Acessar…</span></a></div>
+     </section>
+     Padrão dos cards do DS: só borda, cantos de 24 px, 24 px de respiro, ícone numa base de 44 px (cantos de 16 px),
+     16 px do ícone ao título, 4 px do título ao texto, 24 px até o rodapé. Card com ação: divisor (1 px, --border) e,
+     16 px abaixo, o botão em pílula: largura inteira no celular, canto direito do tablet em diante (40 px; 44 px no
+     toque). Abaixo de 640 px, vertical; a
+     partir de 640 px, horizontal (ícone à esquerda, 24 px até o texto; rodapé na largura inteira). Selo na cor da rede
+     sobre a base com 10% dela; botão na cor da rede só no LinkedIn (texto branco 5,7:1), nas outras na primária. */
+  .ds-card-rede-social {
+    --ds-rede-cor: var(--primary-text);
+    --ds-rede-botao: var(--primary);
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--space-4);
+    margin: 0;
+    padding: var(--space-6);
+    border: 1px solid var(--border);
+    border-radius: calc(var(--radius) + 12px);
+    background-color: var(--card);
+    color: var(--card-foreground);
+    font-family: var(--font-sans);
+    text-align: left;
+  }
+  .ds-card-rede-social--linkedin { --ds-rede-cor: var(--marca-linkedin); --ds-rede-botao: var(--marca-linkedin); }
+  .ds-card-rede-social--instagram { --ds-rede-cor: var(--marca-instagram); }
+  .ds-card-rede-social--whatsapp { --ds-rede-cor: var(--marca-whatsapp); }
+  .ds-card-rede-social--facebook { --ds-rede-cor: var(--marca-facebook); }
+  .ds-card-rede-social--youtube { --ds-rede-cor: var(--marca-youtube); }
+  .ds-card-rede-social--tiktok { --ds-rede-cor: var(--marca-tiktok); }
+  .ds-card-rede-social--behance { --ds-rede-cor: var(--marca-behance); }
+  .ds-card-rede-social__icone {
+    box-sizing: border-box;
+    display: flex;
+    align-self: start;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: calc(var(--radius) + 4px);
+    background-color: color-mix(in srgb, var(--ds-rede-cor) 10%, var(--card));
+    color: var(--ds-rede-cor);
+  }
+  .ds-card-rede-social__icone svg { display: block; width: 20px; height: 20px; }
+  .ds-card-rede-social__texto { min-width: 0; }
+  .ds-card-rede-social__titulo {
+    margin: 0;
+    color: var(--foreground);
+    font-size: var(--text-h4, 1.25rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  .ds-card-rede-social__descricao {
+    margin: var(--space-1) 0 0;
+    color: var(--muted-foreground);
+    font-size: var(--text-body-sm, 0.875rem);
+    line-height: 1.625;
+  }
+  .ds-card-rede-social__rodape {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: var(--space-2);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+  .ds-card-rede-social__botao {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    max-width: 100%;
+    min-height: var(--space-10);
+    padding: 0 var(--space-4);
+    border-radius: 9999px;
+    background-color: var(--ds-rede-botao);
+    color: var(--primary-foreground);
+    font-size: var(--text-button, 0.875rem);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.25;
+    text-align: center;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  .ds-card-rede-social__botao:hover { background-color: color-mix(in srgb, var(--ds-rede-botao) 82%, var(--graphite-950)); }
+  .ds-card-rede-social__botao:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  /* O ícone vai dentro do rótulo, na linha do texto: se o texto quebrar, o ícone fica junto da primeira linha. */
+  .ds-card-rede-social__rotulo { text-wrap: balance; }
+  .ds-card-rede-social__marca { display: inline-block; width: 16px; height: 16px; margin-right: var(--space-2); vertical-align: -3px; }
+  @media (max-width: 639.98px), (pointer: coarse) {
+    .ds-card-rede-social__botao { min-height: 44px; padding-block: var(--space-2); }
+  }
+  /* Ação do card (regra da dona do produto, 28/11/2026): no card estreito (celular), o botão ocupa a largura inteira;
+     do tablet em diante, fica no canto direito da linha da ação. */
+  @media (max-width: 639.98px) {
+    .ds-card-rede-social__botao { flex: 1 1 100%; }
+  }
+  @media (min-width: 640px) {
+    .ds-card-rede-social { grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-6); }
+    .ds-card-rede-social__rodape { grid-column: 1 / -1; }
+  }
+  /* fim do trecho só do DS Dani Moscatelli */
+}
+/* @ds-css-puro:fim */
