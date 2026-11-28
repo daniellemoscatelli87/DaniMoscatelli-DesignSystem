@@ -42,6 +42,46 @@ const sizes = {
   lg: { root: "rounded-full", item: "first:pl-6 last:pr-6 h-11 px-5 text-body gap-2 [&_svg]:size-4" },
 } as const;
 
+/**
+ * Lógica de seleção em comum entre o SegmentedControl e o AlternadorCompacto (28/11/2026): valor controlado ou não,
+ * sempre uma opção selecionada, e as setas selecionando a próxima opção habilitada (como em um grupo de rádio), com
+ * volta ao início e o foco acompanhando a seleção.
+ */
+export function useEscolhaSegmentada<T extends string>({
+  options,
+  value,
+  defaultValue,
+  onValueChange,
+  seletorDoItem = "[data-slot=segmented-item]",
+}: {
+  options: SegmentedOption<T>[];
+  value?: T;
+  defaultValue?: T;
+  onValueChange?: (value: T) => void;
+  seletorDoItem?: string;
+}) {
+  const [inner, setInner] = React.useState<T>(defaultValue ?? options[0]?.value);
+  const current = value ?? inner;
+  const rootRef = React.useRef<HTMLDivElement>(null);
+  const select = (v: T) => {
+    if (value === undefined) setInner(v);
+    onValueChange?.(v);
+  };
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const dir = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    const enabled = options.filter((o) => !o.disabled);
+    if (enabled.length < 2) return;
+    const i = enabled.findIndex((o) => o.value === current);
+    const next = enabled[(i + dir + enabled.length) % enabled.length];
+    select(next.value);
+    const idx = options.findIndex((o) => o.value === next.value);
+    rootRef.current?.querySelectorAll<HTMLButtonElement>(seletorDoItem)[idx]?.focus();
+  };
+  return { current, select, rootRef, onKeyDown };
+}
+
 export function SegmentedControl<T extends string = string>({
   options,
   value,
@@ -53,27 +93,8 @@ export function SegmentedControl<T extends string = string>({
   className,
   ...props
 }: SegmentedControlProps<T>) {
-  const [inner, setInner] = React.useState<T>(defaultValue ?? options[0]?.value);
-  const current = value ?? inner;
+  const { current, select, rootRef, onKeyDown } = useEscolhaSegmentada({ options, value, defaultValue, onValueChange });
   const s = sizes[size];
-  const rootRef = React.useRef<HTMLDivElement>(null);
-  const select = (v: T) => {
-    if (value === undefined) setInner(v);
-    onValueChange?.(v);
-  };
-  // Setas selecionam a próxima opção habilitada (como em um grupo de rádio), com volta ao início.
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    const dir = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1 : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
-    if (!dir) return;
-    e.preventDefault();
-    const enabled = options.filter((o) => !o.disabled);
-    if (enabled.length < 2) return;
-    const i = enabled.findIndex((o) => o.value === current);
-    const next = enabled[(i + dir + enabled.length) % enabled.length];
-    select(next.value);
-    const idx = options.findIndex((o) => o.value === next.value);
-    rootRef.current?.querySelectorAll<HTMLButtonElement>("[data-slot=segmented-item]")[idx]?.focus();
-  };
   return (
     <ToggleGroupPrimitive.Root
       ref={rootRef}

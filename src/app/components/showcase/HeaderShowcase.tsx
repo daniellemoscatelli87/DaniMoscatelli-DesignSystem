@@ -14,6 +14,7 @@ import logoSobreClaro from "../../../imports/Logo-Horizontal-DarkMode.png";
 import logoSobreEscuro from "../../../imports/Logo-Horizontal-LightMode.png";
 import logoIcone from "../../../imports/IconeLogo-red.png";
 import { SectionHeader } from "./shared/SectionHeader";
+import { LogoNoCelularDocs } from "./shared/LogoNoCelularDocs";
 
 /* ─────────────────────────────────────────────────────────────
    Header e menus
@@ -250,8 +251,9 @@ function DemoHeader({ tela, modelo, fundo, menuCel, opcoes }: { tela: Tela; mode
       : fundo === "foto" ? "imagem" : escuro ? "escura" : "clara";
   const sobreEscuro = superficie !== "clara";
 
-  // Logo: a pílula usa sempre o ícone; no celular, o modelo do site também; ao rolar, vira ícone se a opção estiver ligada
-  const soIcone = pilula || (modelo === "pilula" && !desktop) || (opcoes.iconeAoRolar && rolado);
+  // Logo: a pílula usa sempre o ícone; no celular, qualquer modelo também; ao rolar, vira ícone se a opção estiver ligada
+  // Logo no celular (28/11/2026, pedido da dona do produto, regra igual nos dois DS): abaixo de 640 px, só o símbolo
+  const soIcone = pilula || !desktop || (opcoes.iconeAoRolar && rolado);
   const corLink = sobreEscuro ? "text-white/90 hover:text-white" : "text-foreground hover:text-[var(--primary-text,var(--primary))]";
   const sombraTexto = superficie === "imagem" ? { textShadow: "0 1px 2px rgb(0 0 0 / .35)" } : undefined;
   const mostraLinks = desktop && !comBarra;
@@ -686,7 +688,7 @@ export function HeaderShowcase() {
       group: t("Header — sizes and motion", "Header — tamanhos e movimento"),
       tokens: [
         { name: t("Height", "Altura"), description: t("Pill (with top space) / bar desktop / phone", "Pílula (com o respiro) / faixa desktop / celular"), light: "97px / 72px / 64px" },
-        { name: t("Logo", "Logo"), description: t("Full desktop / full phone / icon", "Completo desktop / completo celular / ícone"), light: "44px / 36px / 40px" },
+        { name: t("Logo", "Logo"), description: t("Full (bar, desktop) / symbol (below 640 px, pill and on scroll)", "Completo (faixa, computador) / símbolo (abaixo de 640 px, pílula e ao rolar)"), light: "44px / 40px" },
         { name: t("Touch target", "Área de toque"), description: t("Menu button", "Botão de menu"), light: "44 × 44px" },
         { name: t("Thresholds", "Limites"), description: t("Scrolled / hide sensitivity", "Rolado / sensibilidade do sumir"), light: `${ROLADO_APOS}px / ${SENSIBILIDADE}px` },
         { name: t("Transition", "Transição"), description: t("Hide and return; off with reduced motion", "Sumir e voltar; desligada com movimento reduzido"), light: "300ms cubic-bezier(0.16, 1, 0.3, 1)" },
@@ -749,6 +751,7 @@ export function HeaderShowcase() {
             <CardOpcao key={o.id} Icone={o.Icone} titulo={o.rotulo} selo={o.selo} desc={o.desc} quando={o.quando} ativo={tela === "celular" && menuCel === o.id} rotuloAcao={ver} onAcao={() => verNaDemo(() => { setTela("celular"); setMenuCel(o.id); })} />
           ))}
         </div>
+        <LogoNoCelularDocs simbolo={MARCA.logoIcone} completo={MARCA.logoSobreClaro} completoEscuro={MARCA.logoSobreEscuro} nome={"Dani Moscatelli"} />
       </section>
 
       <section id="header-backgrounds">
