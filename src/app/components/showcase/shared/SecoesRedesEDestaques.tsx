@@ -215,8 +215,8 @@ export function SecaoCardDeRedeSocial() {
       />
       <Callout title={t("Why one card for any network", "Por que um card para qualquer rede")}>
         {t(
-          "CardDeRedeSocial with rede=\"linkedin\" by default, instead of a LinkedIn-only \"recommendations\" card: the same drawing serves \"see all the reviews\" on another network, without a new card. Badge: the DS BadgeCheck icon in the network colour, on a base with 10% of it (brand exception, like the other social pieces).",
-          "CardDeRedeSocial com rede=\"linkedin\" por padrão, em vez de um card de \"recomendações\" só do LinkedIn: o mesmo desenho serve para \"veja todas as avaliações\" em outra rede, sem um card novo. Selo: o ícone BadgeCheck do DS na cor da rede, sobre uma base com 10% dela (exceção das marcas, como as outras peças de redes sociais).",
+          "CardDeRedeSocial with rede=\"linkedin\" by default, instead of a LinkedIn-only \"recommendations\" card: the same drawing serves \"see all the reviews\" on another network, without a new card. Badge: the DS BadgeCheck icon in the network colour, on the light grey base (--muted): an informative icon, per the 3-state icon rule.",
+          "CardDeRedeSocial com rede=\"linkedin\" por padrão, em vez de um card de \"recomendações\" só do LinkedIn: o mesmo desenho serve para \"veja todas as avaliações\" em outra rede, sem um card novo. Selo: o ícone BadgeCheck do DS na cor da rede, sobre a base cinza clara (--muted): ícone informativo, pela regra dos 3 estados do ícone com base.",
         )}
       </Callout>
     </SectionBlock>

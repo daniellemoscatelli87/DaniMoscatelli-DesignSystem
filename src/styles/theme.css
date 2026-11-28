@@ -1041,7 +1041,7 @@
      16 px abaixo, o botão em pílula: largura inteira no celular, canto direito do tablet em diante (40 px; 44 px no
      toque). Abaixo de 640 px, vertical; a
      partir de 640 px, horizontal (ícone à esquerda, 24 px até o texto; rodapé na largura inteira). Selo na cor da rede
-     sobre a base com 10% dela; botão na cor da rede só no LinkedIn (texto branco 5,7:1), nas outras na primária. */
+     sobre a base cinza clara (--muted): ícone informativo, regra dos 3 estados; botão na cor da rede só no LinkedIn (texto branco 5,7:1), nas outras na primária. */
   .ds-card-rede-social {
     --ds-rede-cor: var(--primary-text);
     --ds-rede-botao: var(--primary);
@@ -1074,7 +1074,7 @@
     width: 44px;
     height: 44px;
     border-radius: calc(var(--radius) + 4px);
-    background-color: color-mix(in srgb, var(--ds-rede-cor) 10%, var(--card));
+    background-color: var(--muted);
     color: var(--ds-rede-cor);
   }
   .ds-card-rede-social__icone svg { display: block; width: 20px; height: 20px; }
