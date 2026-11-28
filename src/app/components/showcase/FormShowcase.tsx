@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { useI18n } from "../../i18n";
 import {
-  Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload, Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
+  Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload, Trash2, Edit3, Copy, Share, MoreHorizontal,
   ArrowRight, Check, X, Zap, Star, XCircle,
 } from "lucide-react";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
@@ -49,17 +49,18 @@ const variantesUi: Record<string, "default" | "outline" | "ghost" | "link" | "se
 const tamanhosUi: Record<string, "sm" | "default" | "lg" | "icon"> = { sm: "sm", md: "default", lg: "lg", xl: "lg", "icon-sm": "icon", icon: "icon", "icon-lg": "icon" };
 const tamanhoExtra: Record<string, string> = { xl: "h-13 px-7", "icon-sm": "size-8", "icon-lg": "size-11" };
 
-function Btn({ variant = "primary", size = "md", children, loading = false, disabled = false, icon, iconOnly = false, className = "" }:
-  { variant?: "primary"|"outline"|"ghost"|"link"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; loading?: boolean; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; className?: string }) {
+function Btn({ variant = "primary", size = "md", children, disabled = false, icon, iconOnly = false, rotulo, className = "" }:
+  { variant?: "primary"|"outline"|"ghost"|"link"|"secondary"|"destructive"|"crimson-outline"; size?: "sm"|"md"|"lg"|"xl"|"icon-sm"|"icon"|"icon-lg"; children?: React.ReactNode; disabled?: boolean; icon?: React.ReactNode; iconOnly?: boolean; rotulo?: string; className?: string }) {
   const contorno = variant === "crimson-outline" ? "border-primary text-[var(--primary-text,var(--primary))] hover:bg-accent hover:text-[var(--primary-text,var(--primary))]" : "";
   return (
     <Button
       variant={variantesUi[variant]}
       size={tamanhosUi[size] ?? "default"}
       className={`${contorno} ${tamanhoExtra[size] ?? ""} ${variant === "link" ? "!px-0" : ""} ${className}`}
-      disabled={loading || disabled}
+      disabled={disabled}
+      aria-label={iconOnly ? rotulo : undefined}
     >
-      {loading ? <Loader2 className="h-4 w-4 animate-spin shrink-0" /> : icon && <span className="shrink-0">{icon}</span>}
+      {icon && <span className="shrink-0" aria-hidden>{icon}</span>}
       {!iconOnly && children}
     </Button>
   );
@@ -98,8 +99,54 @@ function FormShowcaseBase() {
               <Btn variant="link">{t("Link button", "Botão link")}</Btn>
               <Btn variant="crimson-outline">{t("Crimson Outline", "Contorno Crimson")}</Btn>
               <Btn variant="primary" disabled>{t("Disabled", "Desabilitado")}</Btn>
-              <Btn variant="primary" loading onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}>{t("Loading", "Carregando")}</Btn>
+              <Button carregando textoCarregando={t("Loading", "Carregando")}>{t("Save", "Salvar")}</Button>
             </div>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Disabled and loading", "Desabilitado e carregando")}>
+          <ShowcaseCard>
+            <p className="mb-5 max-w-2xl text-body-sm leading-relaxed text-muted-foreground">
+              {t(
+                "Two different states that never share a look (owner's decision, 28/11/2026). Disabled means the action is not available right now (something is missing, or there is no permission): grey background, no colour, no click. Loading means the action was accepted and is working: the button keeps its own colour, slightly faded (80%), with the spinner before the text; it is marked aria-busy, takes no clicks and keeps its width. With reduced motion the spinner stops and the text still says it is loading.",
+                "Dois estados diferentes, que nunca têm a mesma cara (decisão da dona do produto, 28/11/2026). Desabilitado quer dizer que a ação não está disponível agora (falta preencher algo ou não há permissão): fundo cinza, sem cor, sem clique. Carregando quer dizer que a ação foi aceita e está trabalhando: o botão mantém a própria cor, um pouco esmaecido (80%), com o giro antes do texto; fica marcado como ocupado (aria-busy), não recebe clique e não muda de largura. Com \"menos movimento\", o giro fica parado e o texto continua dizendo que está carregando.",
+              )}
+            </p>
+            <div className="grid gap-6 sm:grid-cols-3">
+              <div>
+                <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Disabled: unavailable", "Desabilitado: indisponível")}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button disabled>{t("Continue", "Continuar")}</Button>
+                  <Button variant="outline" disabled>{t("Back", "Voltar")}</Button>
+                </div>
+              </div>
+              <div>
+                <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Loading: working", "Carregando: trabalhando")}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button carregando textoCarregando={t("Saving…", "Salvando…")}>{t("Save", "Salvar")}</Button>
+                  <Button variant="outline" carregando textoCarregando={t("Updating…", "Atualizando…")}>{t("Update", "Atualizar")}</Button>
+                </div>
+              </div>
+              <div>
+                <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Try it", "Experimente")}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Button
+                    carregando={loading}
+                    textoCarregando={t("Saving…", "Salvando…")}
+                    onClick={() => { setLoading(true); window.setTimeout(() => setLoading(false), 2000); }}
+                  >
+                    {t("Save changes", "Salvar alterações")}
+                  </Button>
+                </div>
+              </div>
+            </div>
+            <pre className="mt-6 whitespace-pre-wrap break-words rounded-md bg-muted/60 p-3 text-label text-muted-foreground"><code>{`import { Button } from "@/app/components/ui/button";
+
+// Desabilitado: a ação não está disponível
+<Button disabled>Continuar</Button>
+
+// Carregando: a ação está trabalhando (passe sempre true ou false: a largura não pula)
+<Button carregando={salvando} textoCarregando="Salvando…">Salvar</Button>`}</code></pre>
           </ShowcaseCard>
         </SubSection>
 
@@ -113,7 +160,7 @@ function FormShowcaseBase() {
               <div className="flex flex-wrap items-center gap-2">
                 <Btn variant="ghost">{t("Dismiss", "Dispensar")}</Btn>
                 <Btn variant="ghost" icon={<Star className="h-4 w-4" />}>{t("Favorite", "Favoritar")}</Btn>
-                <Btn variant="ghost" size="icon" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly />
+                <Btn variant="ghost" size="icon" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly rotulo={t("More options", "Mais opções")} />
               </div>
             </ShowcaseCard>
             <ShowcaseCard>
@@ -143,13 +190,13 @@ function FormShowcaseBase() {
         <SubSection title={t("Icon Buttons", "Botões de ícone")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
-              <Btn size="icon-sm" variant="outline" icon={<Plus className="h-4 w-4" />} iconOnly />
-              <Btn size="icon" variant="outline" icon={<Edit3 className="h-4 w-4" />} iconOnly />
-              <Btn size="icon-lg" variant="outline" icon={<Share className="h-5 w-5" />} iconOnly />
-              <Btn size="icon-sm" variant="ghost" icon={<Trash2 className="h-4 w-4" />} iconOnly />
-              <Btn size="icon" variant="ghost" icon={<Copy className="h-4 w-4" />} iconOnly />
-              <Btn size="icon" variant="primary" icon={<ArrowRight className="h-4 w-4" />} iconOnly />
-              <Btn size="icon" variant="ghost" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly />
+              <Btn size="icon-sm" variant="outline" icon={<Plus className="h-4 w-4" />} iconOnly rotulo={t("Add", "Adicionar")} />
+              <Btn size="icon" variant="outline" icon={<Edit3 className="h-4 w-4" />} iconOnly rotulo={t("Edit", "Editar")} />
+              <Btn size="icon-lg" variant="outline" icon={<Share className="h-5 w-5" />} iconOnly rotulo={t("Share", "Compartilhar")} />
+              <Btn size="icon-sm" variant="ghost" icon={<Trash2 className="h-4 w-4" />} iconOnly rotulo={t("Delete", "Excluir")} />
+              <Btn size="icon" variant="ghost" icon={<Copy className="h-4 w-4" />} iconOnly rotulo={t("Copy", "Copiar")} />
+              <Btn size="icon" variant="primary" icon={<ArrowRight className="h-4 w-4" />} iconOnly rotulo={t("Next", "Avançar")} />
+              <Btn size="icon" variant="ghost" icon={<MoreHorizontal className="h-4 w-4" />} iconOnly rotulo={t("More options", "Mais opções")} />
             </div>
           </ShowcaseCard>
         </SubSection>

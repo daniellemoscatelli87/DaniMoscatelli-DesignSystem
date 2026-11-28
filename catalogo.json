@@ -7,7 +7,7 @@
   "resumo": {
     "arquivosDeComponentes": 126,
     "componentesExportados": 415,
-    "templatesEPadroesSoEmDemonstracao": 76,
+    "templatesEPadroesSoEmDemonstracao": 75,
     "secoesComMarcacaoAMao": 45,
     "tokens": 163,
     "paginas": 33,
@@ -457,7 +457,7 @@
         {
           "nome": "LinkDoAlerta",
           "tipo": "componente",
-          "linha": 185,
+          "linha": 187,
           "descricao": "Ação secundária do alerta: botão com cara de link, sublinhado, em --foreground.",
           "props": [
             "asChild",
@@ -983,7 +983,7 @@
         {
           "nome": "BotaoDeEnvio",
           "tipo": "componente",
-          "linha": 37,
+          "linha": 39,
           "descricao": "",
           "props": [
             "estado",
@@ -993,8 +993,8 @@
             "voltarApos",
             "onVoltar",
             "className",
-            "disabled",
-            "variant"
+            "variant",
+            "onClick"
           ],
           "reexportaDe": null
         }
@@ -1013,6 +1013,18 @@
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
           "linha": 360,
           "uso": "direto",
+          "exports": [
+            "BotaoDeEnvio"
+          ]
+        },
+        {
+          "pagina": "usability",
+          "paginaRotulo": "Usabilidade",
+          "ancora": "ux-feedback",
+          "titulo": "Status do sistema",
+          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
+          "linha": 326,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "BotaoDeEnvio"
           ]
@@ -1250,15 +1262,23 @@
         {
           "nome": "buttonVariants",
           "tipo": "utilitário",
-          "linha": 11,
+          "linha": 12,
           "descricao": "",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "classeDoCarregando",
+          "tipo": "utilitário",
+          "linha": 109,
+          "descricao": "Carregando (decisão da dona do produto, 28/11/2026: \"o botão loading é colorido, porém levemente esmaecido\"). O botão que está trabalhando fica na cor da própria variante (o vermelho do principal, o contorno do secundário), a 80% de …",
           "props": [],
           "reexportaDe": null
         },
         {
           "nome": "Button",
           "tipo": "componente",
-          "linha": 97,
+          "linha": 127,
           "descricao": "forwardRef (27/11/2026): com React 18, sem ele a ref do Radix (asChild em PopoverTrigger, TooltipTrigger, DropdownMenuTrigger…) se perdia no Button e o Popover ficava fora da tela (translate(0, -200%)), por exemplo o seletor de data dentro …",
           "props": [
             "className",
@@ -1266,7 +1286,11 @@
             "size",
             "forma",
             "quebra",
-            "asChild"
+            "asChild",
+            "carregando",
+            "textoCarregando",
+            "children",
+            "onClick"
           ],
           "reexportaDe": null
         }
@@ -1295,6 +1319,10 @@
           "celular",
           "nunca",
           "sempre"
+        ],
+        "camadas": [
+          "sim",
+          "nao"
         ]
       },
       "ondeVer": [
@@ -1304,7 +1332,7 @@
           "ancora": "buttons",
           "titulo": "Variantes de botão",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 88,
+          "linha": 89,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1664,7 +1692,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 289,
+          "linha": 287,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1676,7 +1704,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 348,
+          "linha": 346,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2195,7 +2223,7 @@
         {
           "nome": "LateralDaEtapa",
           "tipo": "componente",
-          "linha": 168,
+          "linha": 163,
           "descricao": "",
           "props": [
             "icone",
@@ -2211,7 +2239,7 @@
         {
           "nome": "ListaDeRevisao",
           "tipo": "componente",
-          "linha": 188,
+          "linha": 183,
           "descricao": "Revisão",
           "props": [
             "children",
@@ -2223,7 +2251,7 @@
         {
           "nome": "BlocoDeRevisao",
           "tipo": "componente",
-          "linha": 211,
+          "linha": 206,
           "descricao": "",
           "props": [
             "valor",
@@ -2240,7 +2268,7 @@
         {
           "nome": "LinhaDeDado",
           "tipo": "componente",
-          "linha": 235,
+          "linha": 230,
           "descricao": "",
           "props": [
             "rotulo",
@@ -2626,7 +2654,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 190,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -4195,7 +4223,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207,
+          "linha": 254,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4207,7 +4235,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 317,
+          "linha": 364,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -6067,7 +6095,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 348,
+          "linha": 346,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -6489,7 +6517,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 328,
+          "linha": 326,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6950,7 +6978,7 @@
           "ancora": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 280,
+          "linha": 278,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6962,7 +6990,7 @@
           "ancora": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 357,
+          "linha": 355,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9084,7 +9112,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 270,
+          "linha": 268,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -9386,7 +9414,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 190,
+          "linha": 237,
           "uso": "direto",
           "exports": [
             "Input"
@@ -11342,7 +11370,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207,
+          "linha": 254,
           "uso": "direto",
           "exports": [
             "regrasPadrao",
@@ -11615,7 +11643,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207,
+          "linha": 254,
           "uso": "direto",
           "exports": [
             "RadioGroup",
@@ -11880,7 +11908,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 317,
+          "linha": 364,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12171,7 +12199,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207,
+          "linha": 254,
           "uso": "direto",
           "exports": [
             "Select",
@@ -12187,7 +12215,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 317,
+          "linha": 364,
           "uso": "direto",
           "exports": [
             "Select"
@@ -13413,7 +13441,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 317,
+          "linha": 364,
           "uso": "direto",
           "exports": [
             "Switch"
@@ -13811,7 +13839,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207,
+          "linha": 254,
           "uso": "direto",
           "exports": [
             "Textarea"
@@ -14622,28 +14650,7 @@
           "ancora": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 308
-        }
-      ],
-      "usaComponentes": [],
-      "elementosFeitosAMao": 1
-    },
-    {
-      "nome": "FeedbackDemo",
-      "tipo": "demonstração de conceito",
-      "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 48,
-      "descricao": "System status",
-      "pagina": "usability",
-      "paginaRotulo": "Usabilidade",
-      "onde": [
-        {
-          "pagina": "usability",
-          "paginaRotulo": "Usabilidade",
-          "ancora": "ux-feedback",
-          "titulo": "Status do sistema",
-          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 328
+          "linha": 306
         }
       ],
       "usaComponentes": [],
@@ -14653,7 +14660,7 @@
       "nome": "UndoDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 85,
+      "linha": 83,
       "descricao": "",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -14664,7 +14671,7 @@
           "ancora": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 381
+          "linha": 379
         }
       ],
       "usaComponentes": [],
@@ -14674,7 +14681,7 @@
       "nome": "StatesDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 149,
+      "linha": 147,
       "descricao": "",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -14685,7 +14692,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 348
+          "linha": 346
         }
       ],
       "usaComponentes": [
@@ -14698,7 +14705,7 @@
       "nome": "HierarchyDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 223,
+      "linha": 221,
       "descricao": "Button hierarchy",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -14709,7 +14716,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 289
+          "linha": 287
         }
       ],
       "usaComponentes": [
@@ -17937,7 +17944,7 @@
       },
       {
         "nome": "--disabled",
-        "claro": "var(--graphite-100)",
+        "claro": "color-mix(in srgb, var(--graphite-100) 50%, var(--graphite-50))",
         "escuro": "color-mix(in srgb, var(--graphite-700) 60%, var(--graphite-800))",
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
@@ -18326,7 +18333,7 @@
         "titulo": "Hierarquia de ações",
         "resumo": "Hierarquia de ações: principal, secundária e terciária",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 289
+        "linha": 287
       },
       {
         "ancora": "card-escolher",
@@ -18434,7 +18441,7 @@
         "titulo": "Ações destrutivas",
         "resumo": "Ações destrutivas: confirmação e desfazer",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 381
+        "linha": 379
       },
       {
         "ancora": "graficos-escolher",
@@ -18504,7 +18511,7 @@
         "ancora": "ux-checklist",
         "titulo": "Revisão rápida",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 390
+        "linha": 388
       },
       {
         "pagina": "accessibility",
@@ -19164,49 +19171,49 @@
           "id": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 280
+          "linha": 278
         },
         {
           "id": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 289
+          "linha": 287
         },
         {
           "id": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 308
+          "linha": 306
         },
         {
           "id": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 328
+          "linha": 326
         },
         {
           "id": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 348
+          "linha": 346
         },
         {
           "id": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 357
+          "linha": 355
         },
         {
           "id": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 381
+          "linha": 379
         },
         {
           "id": "ux-checklist",
           "titulo": "Revisão rápida",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 390
+          "linha": 388
         }
       ]
     },
@@ -19519,31 +19526,31 @@
           "id": "buttons",
           "titulo": "Variantes de botão",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 88
+          "linha": 89
         },
         {
           "id": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 190
+          "linha": 237
         },
         {
           "id": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 207
+          "linha": 254
         },
         {
           "id": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 317
+          "linha": 364
         },
         {
           "id": "buttons-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 414
+          "linha": 461
         },
         {
           "id": "botao-quebra",

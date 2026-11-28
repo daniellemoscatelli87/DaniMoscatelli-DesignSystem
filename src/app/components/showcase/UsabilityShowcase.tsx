@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  Eye, Compass, Undo2, MessageSquare, Gauge, Layers, Check, Loader2, Trash2, Inbox, RotateCcw, FileText, XCircle,
+  Eye, Compass, Undo2, MessageSquare, Gauge, Layers, Check, Trash2, Inbox, RotateCcw, FileText, XCircle,
 } from "lucide-react";
 import { PageHeader, PageSection } from "./GetStartedShowcase";
 import { EstadoVazio } from "../ui/estado-vazio";
 import { Button } from "../ui/button";
 import { useI18n } from "../../i18n";
-import { Button } from "../ui/button";
+import { BotaoDeEnvio } from "../ui/botao-de-envio";
 import { Callout, DataTable, DoDont, Mono, Panel, PrincipleGrid, display } from "./shared/Guidance";
 import { GradeDeCards } from "../ui/grade-de-cards";
 
@@ -58,16 +58,14 @@ function FeedbackDemo() {
   };
   return (
     <Panel className="p-5 flex flex-col items-start gap-3">
-      <button
-        type="button"
+      {/* O BotaoDeEnvio do DS (28/11/2026): publicando = cor do botão um pouco esmaecida, com o giro; publicado = check. */}
+      <BotaoDeEnvio
+        estado={state === "loading" ? "enviando" : state === "done" ? "feito" : "parado"}
+        textos={{ enviando: t("Publishing…", "Publicando…"), feito: t("Published", "Publicado") }}
         onClick={run}
-        aria-disabled={state === "loading"}
-        className={`h-10 min-w-[148px] px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium inline-flex items-center justify-center gap-2 transition-opacity aria-disabled:opacity-70 aria-disabled:cursor-progress ${ring}`}
       >
-        {state === "loading" && <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden />}
-        {state === "done" && <Check className="h-4 w-4" aria-hidden />}
-        {state === "idle" ? t("Publish changes", "Publicar alterações") : state === "loading" ? t("Publishing…", "Publicando…") : t("Published", "Publicado")}
-      </button>
+        {t("Publish changes", "Publicar alterações")}
+      </BotaoDeEnvio>
       <p role="status" className="text-body-sm text-muted-foreground min-h-[1.25rem]">
         {state === "loading" ? t("Publishing 3 files. This usually takes a few seconds.", "Publicando 3 arquivos. Isso costuma levar alguns segundos.") : state === "done" ? t("Live at 14:32. Visitors see the update now.", "No ar às 14:32. Os visitantes já veem a atualização.") : t("Click to see the three feedback states.", "Clique para ver os três estados de feedback.")}
       </p>

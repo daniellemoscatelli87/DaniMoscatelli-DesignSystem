@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowLeft, ArrowRight, Loader2, XCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, XCircle } from "lucide-react";
 import { cn } from "./utils";
 import { Button } from "./button";
 import { Stepper, type StepperEtapa } from "./stepper";
@@ -106,7 +106,7 @@ type BarraDaEtapaProps = {
   onVoltar?: () => void;
   rotuloVoltar?: string;
   rotuloContinuar?: React.ReactNode;
-  /** Mostra o carregamento no botão principal e o desativa. */
+  /** Mostra o carregamento no botão principal (Button carregando: cor do botão esmaecida, giro, sem clique). */
   carregando?: boolean;
   textoCarregando?: string;
   desativado?: boolean;
@@ -131,17 +131,12 @@ function BarraDaEtapa({ onVoltar, rotuloVoltar = "Voltar", rotuloContinuar, carr
               <ArrowLeft aria-hidden className="@min-[40rem]/etapa:hidden" /> {rotuloVoltar}
             </Button>
           )}
-          <Button type="submit" size="lg" className={botao} disabled={desativado || carregando} aria-busy={carregando || undefined} aria-describedby={descricaoDoContinuar}>
-            {carregando ? (
+          {/* Carregando = o Button carregando (28/11/2026): na cor do botão, um pouco esmaecido, com o giro; nunca o cinza de desativado. */}
+          <Button type="submit" size="lg" className={botao} disabled={desativado} carregando={carregando} textoCarregando={textoCarregando} aria-describedby={descricaoDoContinuar}>
+            {rotuloContinuar ?? (
               <>
-                <Loader2 className="motion-safe:animate-spin" aria-hidden /> {textoCarregando}
+                Continuar <ArrowRight aria-hidden />
               </>
-            ) : (
-              rotuloContinuar ?? (
-                <>
-                  Continuar <ArrowRight aria-hidden />
-                </>
-              )
             )}
           </Button>
         </>
