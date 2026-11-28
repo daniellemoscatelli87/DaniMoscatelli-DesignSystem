@@ -153,6 +153,7 @@ export function SecaoAcaoNoCard({ marca }: { marca: Marca }) {
           </ol>
         </Callout>
 
+        <h3 className={`${display} text-body font-semibold text-foreground`}>{t("Live examples", "Exemplos ao vivo")}</h3>
         <GradeDeCards colunas={{ base: 1, md: 2 }} className="gap-5">
           <ItemDaGrade>
             <Rotulo>{t("One action, with information on the left", "Uma ação, com informação à esquerda")}</Rotulo>
@@ -273,7 +274,7 @@ export function SecaoAcaoNoCard({ marca }: { marca: Marca }) {
               <SeloCerto certo={false} />
               <CardExemplo titulo={x.mais.titulo} texto={t("A row of buttons with the same weight: nobody knows which one to press.", "Uma fileira de botões com o mesmo peso: ninguém sabe qual apertar.")}>
                 <div className="flex flex-wrap justify-end gap-2 border-t border-border pt-4">
-                  {x.mais.opcoes.slice(0, 3).map(o => <Button key={o.rotulo} variant="outline" size="sm">{o.rotulo}</Button>)}
+                  {x.mais.opcoes.slice(0, 2).map(o => <Button key={o.rotulo} variant="outline" size="sm">{o.rotulo}</Button>)}
                   <Button size="sm">{x.mais.principal}</Button>
                 </div>
               </CardExemplo>

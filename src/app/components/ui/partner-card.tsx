@@ -12,7 +12,8 @@ import { AcoesDoCard } from "./acoes-do-card";
 /**
  * PartnerCard (card de convite ao parceiro)
  *
- * Card que convida ao cadastro: selo, título com destaque, texto curto, ação principal
+ * Card que convida ao cadastro: selo, título com destaque, texto curto, ação principal (no horizontal, o visual fica à
+ * esquerda, como a mídia do Card, e as ações na ponta direita; 28/11/2026)
  * e link secundário opcional. Vertical ou horizontal; tamanhos p, m e g. Sem orientation, segue a GradeDeCards:
  * horizontal quando a grade virou lista (regra da dona do produto, 27/11/2026).
  * Fundo de card com um brilho suave na cor primária no canto, como o hero do site.
@@ -75,7 +76,7 @@ export function PartnerCard({
       <span aria-hidden className="pointer-events-none absolute -bottom-20 -left-10 -z-10 h-40 w-40 rounded-full bg-primary/5 blur-3xl" />
 
       {visual && (
-        <div className={cn("flex shrink-0 items-center justify-center rounded-lg", dark ? "bg-white/10" : "bg-[var(--primary-muted)]", visualBox[size], horizontal ? "sm:order-last" : "")}>
+        <div className={cn("flex shrink-0 items-center justify-center rounded-lg", dark ? "bg-white/10" : "bg-[var(--primary-muted)]", visualBox[size])}>
           <span className={cn("flex items-center justify-center text-primary-text", size === "p" ? "[&>svg]:h-6 [&>svg]:w-6 [&>img]:h-7" : size === "m" ? "[&>svg]:h-8 [&>svg]:w-8 [&>img]:h-10" : "[&>svg]:h-12 [&>svg]:w-12 [&>img]:h-14")}>{visual}</span>
         </div>
       )}
