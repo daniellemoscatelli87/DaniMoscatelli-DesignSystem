@@ -7,7 +7,8 @@ import { CheckIcon, MinusIcon } from "lucide-react";
 import { cn } from "./utils";
 
 /**
- * Caixa de seleção. O desenho tem 20 px; no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para
+ * Caixa de seleção. O desenho tem 20 px, QUADRADO, com cantos de 6 px (--radius-xs, 28/11/2026: com 8 px parecia
+ * redonda e se confundia com o rádio); no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para
  * 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.
  */
 function Checkbox({
@@ -18,7 +19,7 @@ function Checkbox({
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        "peer group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-sm outline-none disabled:cursor-not-allowed disabled:opacity-50 toque:-m-3 toque:size-11",
+        "peer group relative inline-flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-xs outline-none disabled:cursor-not-allowed disabled:opacity-50 toque:-m-3 toque:size-11",
         className,
       )}
       {...props}
@@ -26,7 +27,7 @@ function Checkbox({
       <span
         aria-hidden
         data-slot="checkbox-caixa"
-        className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background group-disabled:group-data-[state=unchecked]:border-[var(--border-strong)] text-primary-foreground shadow-xs transition-shadow dark:bg-input-fundo/30 group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-error group-aria-invalid:ring-error/20"
+        className="flex size-5 shrink-0 items-center justify-center rounded-xs border border-input bg-input-background group-disabled:group-data-[state=unchecked]:border-[var(--border-strong)] text-primary-foreground shadow-xs transition-shadow dark:bg-input-fundo/30 group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-error group-aria-invalid:ring-error/20"
       >
         <CheckboxPrimitive.Indicator
           data-slot="checkbox-indicator"

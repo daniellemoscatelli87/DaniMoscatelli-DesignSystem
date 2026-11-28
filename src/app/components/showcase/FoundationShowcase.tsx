@@ -47,11 +47,11 @@ const semanticColors = [
   { name: "Border", pt: "Borda",           token: "--border",            swatch: "bg-border",           text: "text-foreground", light: "rgba(19,26,39,.09)", dark: "rgba(255,255,255,.07)" },
   { name: "Success", pt: "Sucesso",          token: "--success",           swatch: "bg-success",          text: "text-white", light: "#388459", dark: "#22C55E" },
   { name: "Warning", pt: "Aviso",          token: "--warning",           swatch: "bg-warning",          text: "text-warning-foreground", light: "#F0A020", dark: "#F5B040" },
-  { name: "Error", pt: "Erro",            token: "--error",             swatch: "bg-error",            text: "text-error-foreground", light: "#D9416E", dark: "#E5688F" },
+  { name: "Error", pt: "Erro",            token: "--error",             swatch: "bg-error",            text: "text-error-foreground", light: "#B82828", dark: "#E88080" },
   { name: "Info", pt: "Informação",             token: "--info",              swatch: "bg-info",             text: "text-white", light: "#3D7CAA", dark: "#3B82F6" },
   { name: "Success text", pt: "Texto de sucesso", token: "--success-text",    swatch: "bg-success-text",     text: "text-white", light: "#327650", dark: "#22C55E" },
   { name: "Warning text", pt: "Texto de aviso",   token: "--warning-text",    swatch: "bg-warning-text",     text: "text-white", light: "#935E0A", dark: "#F5B040" },
-  { name: "Error text", pt: "Texto de erro",      token: "--error-text",      swatch: "bg-error-text",       text: "text-white", light: "#C52756", dark: "#E5688F" },
+  { name: "Error text", pt: "Texto de erro",      token: "--error-text",      swatch: "bg-error-text",       text: "text-white", light: "#B82828", dark: "#E88080" },
   { name: "Info text", pt: "Texto de info",       token: "--info-text",       swatch: "bg-info-text",        text: "text-white", light: "#366E97", dark: "#3B82F6" },
 ];
 
@@ -87,6 +87,7 @@ const displayScaleItems = [
 ];
 
 const radiusScale = [
+  { name: "XS — 6px",   value: "6px",   cls: "rounded-xs" },
   { name: "SM — 8px",   value: "8px",   cls: "rounded-sm" },
   { name: "MD — 12px",  value: "12px",  cls: "rounded-md" },
   { name: "LG — 16px",  value: "16px",  cls: "rounded-lg" },
@@ -604,12 +605,12 @@ function getFoundationTokenGroups(t: (en: string, pt: string) => string): TokenG
     tokens: [
       { name: "--success",         description: t("Positive / confirmed", "Positivo / confirmado"),     light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--warning",         description: t("Caution / pending (yellowish orange, 23/11/2026)", "Atenção / pendente (laranja amarelado, 23/11/2026)"),        light: "#F0A020", dark: "#F5B040", isColor: true },
-      { name: "--error",           description: t("Error / danger (pinker than the brand red, 23/11/2026)", "Erro / perigo (mais rosa que o vermelho da marca, 23/11/2026)"),           light: "#D9416E", dark: "#E5688F", isColor: true },
+      { name: "--error",           description: t("Error / danger: the brand red, darker (crimson 500; owner's decision of 28/11/2026, replaces the pink of 23/11)", "Erro / perigo: o vermelho da marca, mais escuro (carmim 500; decisão da dona do produto de 28/11/2026, substitui o rosa de 23/11)"),           light: "#B82828", dark: "#E88080", isColor: true },
       { name: "--info",            description: t("Informational", "Informativo"),            light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--success-text",    description: t("Success as text or icon on light backgrounds (alerts): 5.0:1", "Sucesso como texto ou ícone sobre fundo claro (alertas): 5,0:1"), light: "#327650", dark: "#22C55E", isColor: true },
       { name: "--info-text",       description: t("Info as text or icon on light backgrounds (alerts): 5.0:1", "Info como texto ou ícone sobre fundo claro (alertas): 5,0:1"),       light: "#366E97", dark: "#3B82F6", isColor: true },
       { name: "--warning-text",    description: t("Warning as text or icon on light backgrounds (alerts): 5.1:1", "Aviso como texto ou ícone sobre fundo claro (alertas): 5,1:1"),   light: "#935E0A", dark: "#F5B040", isColor: true },
-      { name: "--error-text",      description: t("Error as text or icon on light backgrounds (alerts): 5.0:1", "Erro como texto ou ícone sobre fundo claro (alertas): 5,0:1"),     light: "#C52756", dark: "#E5688F", isColor: true },
+      { name: "--error-text",      description: t("Error as text or icon on light backgrounds: 6.2:1 on white, 5.6:1 on the alert (28/11/2026)", "Erro como texto ou ícone sobre fundo claro: 6,2:1 no branco, 5,6:1 no alerta (28/11/2026)"),     light: "#B82828", dark: "#E88080", isColor: true },
       { name: "--destructive",     description: t("Destructive action", "Ação destrutiva"),       light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--violet",          description: t("Accent purple", "Roxo de destaque"),            light: "#ba69dc", dark: "#eb6cff", isColor: true },
       { name: "--orange",          description: t("Accent orange", "Laranja de destaque"),            light: "#fa9852", dark: "#ff8833", isColor: true },
@@ -641,6 +642,7 @@ function getFoundationTokenGroups(t: (en: string, pt: string) => string): TokenG
     group: t("Shape", "Forma"),
     tokens: [
       { name: "--radius",    description: t("Base border radius", "Raio de borda base"),    light: "0.75rem",                   dark: undefined },
+      { name: "--radius-xs", description: t("Checkbox only (6 px, 28/11/2026)", "Só a caixa de marcar (6 px, 28/11/2026)"),   light: "calc(0.75rem - 6px)",        dark: undefined },
       { name: "--radius-sm", description: t("Small radius (card)", "Raio pequeno (card)"),   light: "calc(0.75rem - 4px)",        dark: undefined },
       { name: "--radius-md", description: t("Medium radius", "Raio médio"),         light: "0.75rem",                   dark: undefined },
       { name: "--radius-lg", description: t("Large radius (dialog)", "Raio grande (diálogo)"), light: "calc(0.75rem + 4px)",        dark: undefined },

@@ -169,7 +169,7 @@ function CaixaDeEntrada({
                 <button
                   type="button"
                   onClick={() => abrir(null)}
-                  className="inline-flex h-11 items-center gap-2 rounded-md px-2 text-body-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="inline-flex h-11 items-center gap-2 rounded-full px-3 text-body-sm font-semibold text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <ArrowLeft aria-hidden className="size-4" /> {tx.voltar}
                 </button>

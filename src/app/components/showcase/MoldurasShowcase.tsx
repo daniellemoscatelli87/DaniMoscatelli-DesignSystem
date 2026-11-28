@@ -15,6 +15,7 @@ import { PasswordInput } from "../ui/password-field";
 import { SegmentedControl } from "../ui/segmented-control";
 import { RodapeSite } from "../ui/rodape-site";
 import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
+import { PaginaAbaixoDoCabecalho } from "./shared/PaginaAbaixoDoCabecalho";
 import logoSobreClaro from "../../../imports/Logo-Horizontal-DarkMode.png";
 
 /* Molduras e estados (27/11/2026): cabeçalho do site, rodapé, moldura das telas de conta, estados vazio/final/erro,
@@ -239,15 +240,54 @@ export function MoldurasShowcase() {
             acoes={<><Button>{t("Back to home", "Voltar ao início")}</Button><Button variant="outline">{t("See the partner network", "Ver a Rede de Parceiros")}</Button></>}
           />
         </ShowcaseCard>
-        <div className="overflow-hidden rounded-xl border border-border bg-background">
+        <ShowcaseCard rotulo={t("Error page without frame (moldura=\"nenhuma\")", "Página de erro sem moldura (moldura=\"nenhuma\")")}>
           <PaginaDeErro
+            elemento="div"
             telaCheia={false}
-            codigo="404"
-            titulo={t("Page not found", "Página não encontrada")}
-            descricao={t("The address may have changed. Go back home or use the menu.", "O endereço pode ter mudado. Volte ao início ou use o menu.")}
+            codigo="403"
+            titulo={t("You don't have access to this page", "Você não tem acesso a esta página")}
+            descricao={t("Sign in with the account that received the invitation.", "Entre com a conta que recebeu o convite.")}
             acoes={<Button>{t("Back to home", "Voltar ao início")}</Button>}
+            className="py-8"
           />
-        </div>
+        </ShowcaseCard>
+      </SectionBlock>
+
+      <SectionBlock
+        id="molduras-erro"
+        titulo={t("Error page (404)", "Página de erro (404)")}
+        quando={t(
+          "The standard page for any broken address, including a link that arrives incomplete (an e-mail link missing its code, for example). On the studio site: a white border-only card, centred, at the standard distance below the site header (--espaco-abaixo-do-cabecalho: 32 px on phones, 64 px from 1024 px). The logo stays only in the header.",
+          "A página padrão para qualquer endereço quebrado, inclusive um link que chega incompleto (um link de e-mail sem o código, por exemplo). No site do estúdio: um card branco só de borda, centralizado, à distância padrão abaixo do cabeçalho do site (--espaco-abaixo-do-cabecalho: 32 px no celular, 64 px a partir de 1024 px). O logo fica só no cabeçalho.",
+        )}
+        arquivo="ui/estado-vazio.tsx"
+        nomes={["PaginaDeErro moldura=\"card\"", "SeloSecao", "Button forma=\"pilula\""]}
+        api={`<CabecalhoDoSite itens={itens} atual="inicio" />
+<PaginaDeErro
+  moldura="card"            // card branco só de borda; já começa abaixo do cabeçalho
+  codigo="404"              // vira o selo "Erro 404" (ou selo="…")
+  titulo="Página não encontrada"
+  descricao="O endereço pode ter mudado ou não existe mais."
+  acoes={<Button asChild size="lg" forma="pilula"><a href="/">Ir para a página inicial</a></Button>}
+/>`}
+        faca={[
+          t("Send every broken or incomplete link to this page, with the same text.", "Mande todo link quebrado ou incompleto para esta página, com o mesmo texto."),
+          t("One action: back to the home page, in a filled pill button.", "Uma ação só: voltar à página inicial, em botão pílula cheio."),
+          t("Keep the site header above it; the logo stays only there.", "Mantenha o cabeçalho do site em cima; o logo fica só nele."),
+        ]}
+        naoFaca={[
+          t("Don't show a form with a disabled button and a notice when the link is incomplete.", "Não mostre formulário com botão desativado e aviso quando o link estiver incompleto."),
+          t("Don't create a separate \"incomplete link\" page or variant.", "Não crie uma página ou variante \"link incompleto\" separada."),
+          t("Don't repeat the logo inside the card.", "Não repita o logo dentro do card."),
+        ]}
+      >
+        <Callout title={t("Rule (owner's decision, 28/11/2026)", "Regra (decisão da dona do produto, 28/11/2026)")}>
+          {t(
+            "Broken or incomplete link = the standard 404 page. Never show a form with a disabled button and a notice.",
+            "Link quebrado ou incompleto = página 404 padrão; nunca mostrar formulário com botão desativado e aviso.",
+          )}
+        </Callout>
+        <PaginaAbaixoDoCabecalho />
       </SectionBlock>
 
       <SectionBlock

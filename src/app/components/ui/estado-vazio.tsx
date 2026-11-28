@@ -5,6 +5,8 @@ import { CheckCircle2, Info, XCircle, AlertCircle } from "lucide-react";
 import { cn } from "./utils";
 import { Confete } from "./confete";
 import { IconeComBase } from "./painel-dados";
+import { Card } from "./card";
+import { SeloSecao } from "./selo-secao";
 
 /**
  * EstadoVazio, EstadoFinal e PaginaDeErro: as três telas "sem conteúdo" do DS. Mesma API nos dois DS (FindLook e
@@ -20,7 +22,11 @@ import { IconeComBase } from "./painel-dados";
  *   movimento, título, texto, um resumo opcional (children) e as ações. tom "sucesso" (padrão), "info", "aviso" ou
  *   "erro"; o ícone e o texto dizem o estado, nunca só a cor.
  * PaginaDeErro — página inteira de erro (404, sem acesso, fora do ar): código grande ou ilustração, título, texto e
- *   as ações ("Voltar ao início" em botão cheio). Centralizada na altura da tela.
+ *   as ações ("Voltar ao início" em botão cheio). Centralizada na altura da tela; com abaixoDoCabecalho, começa a
+ *   --espaco-abaixo-do-cabecalho do cabeçalho do site. moldura="card" (28/11/2026): card branco só de borda com o selo
+ *   "Erro 404" (o padrão do site Dani Moscatelli; o logo fica só no cabeçalho).
+ *   Regra (dona do produto, 28/11/2026): link quebrado ou incompleto (um link de e-mail sem o código, por exemplo) =
+ *   esta página 404 padrão. Nunca mostrar formulário com botão desativado e aviso, nem uma página "link incompleto".
  *
  * Alinhamento (regra do celular): tudo centralizado numa coluna estreita; as ações ficam juntas numa linha
  * centralizada e, quando não cabem, viram uma coluna de botões da mesma largura.
@@ -149,31 +155,75 @@ function EstadoFinal({ tom = "sucesso", icone, titulo: t, descricao, acoes, nive
 }
 
 export type PaginaDeErroProps = Omit<React.ComponentProps<"main">, "title"> & {
-  /** "404", "403"… (decorativo; o título diz o que aconteceu). */
+  /** "404", "403"… Sem moldura, é o número grande (decorativo; o título diz o que aconteceu); no card, vai no selo. */
   codigo?: string;
   /** Ilustração no lugar do código (imagem decorativa; no FindLook, a ilustração 404 do mascote). */
   ilustracao?: React.ReactNode;
   titulo: React.ReactNode;
   descricao?: React.ReactNode;
   acoes?: React.ReactNode;
-  /** Ocupa a altura da tela (padrão) ou só o conteúdo (demonstrações). */
+  /** Ocupa a altura da tela (padrão) ou só o conteúdo (demonstrações). Sem efeito com abaixoDoCabecalho. */
   telaCheia?: boolean;
+  /**
+   * "nenhuma" (padrão): o conteúdo solto na página. "card" (28/11/2026, o padrão do site Dani Moscatelli): um card
+   * branco só de borda, centralizado, com o selo "Erro 404", o título, o texto e o botão. O logo fica só no cabeçalho.
+   */
+  moldura?: "nenhuma" | "card";
+  /** Texto do selo do card (padrão: "Erro " + codigo). */
+  selo?: React.ReactNode;
+  /**
+   * O conteúdo começa a --espaco-abaixo-do-cabecalho do cabeçalho do site (32 px no celular, 64 px do desktop em diante),
+   * em vez de ficar no meio da altura da tela. Padrão: sim com moldura="card"; não sem moldura.
+   */
+  abaixoDoCabecalho?: boolean;
+  /** "main" (padrão, a página) ou "div" (demonstração dentro de outra página, que já tem o seu <main>). */
+  elemento?: "main" | "div";
 };
 
-function PaginaDeErro({ codigo, ilustracao, titulo: t, descricao, acoes, telaCheia = true, className, ...props }: PaginaDeErroProps) {
+function PaginaDeErro({ codigo, ilustracao, titulo: t, descricao, acoes, telaCheia = true, moldura = "nenhuma", selo, abaixoDoCabecalho, elemento = "main", className, ...props }: PaginaDeErroProps) {
+  const Raiz = elemento as React.ElementType;
+  const abaixo = abaixoDoCabecalho ?? moldura === "card";
+  const comCard = moldura === "card";
+  const textoDoSelo = selo ?? (codigo ? `Erro ${codigo}` : null);
   return (
-    <main data-slot="pagina-de-erro" className={cn("flex w-full flex-col items-center justify-center px-4 py-16 text-center", telaCheia && "min-h-svh", className)} {...props}>
-      <div className="flex w-full max-w-lg flex-col items-center">
-        {ilustracao ? (
-          <div aria-hidden className="mb-8 w-full max-w-xs">{ilustracao}</div>
-        ) : codigo ? (
-          <p aria-hidden className="m-0 mb-4 text-h1 font-bold leading-none tracking-[-0.04em] text-primary-text tabular-nums sm:text-display-lg">{codigo}</p>
-        ) : null}
-        <h1 className="m-0 text-h2 font-bold leading-tight tracking-[-0.03em] text-foreground text-balance">{t}</h1>
-        {descricao && <p className="m-0 mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{descricao}</p>}
-        <Acoes className="mt-8">{acoes}</Acoes>
-      </div>
-    </main>
+    <Raiz
+      data-slot="pagina-de-erro"
+      data-moldura={moldura}
+      className={cn(
+        "@container/erro flex w-full flex-col items-center text-center",
+        abaixo ? "ds-abaixo-do-cabecalho justify-start pb-16" : "justify-center py-16",
+        comCard ? "px-[var(--grid-margin)]" : "px-4",
+        telaCheia && !abaixo && "min-h-svh",
+        className,
+      )}
+      {...props}
+    >
+      {comCard ? (
+        <Card className="w-full max-w-xl items-center gap-0 px-6 py-8 shadow-none motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-2 motion-safe:duration-[var(--duration-slow)] motion-safe:ease-[var(--ease-snappy)] @min-[40rem]/erro:px-10 @min-[40rem]/erro:py-12">
+          {ilustracao ? (
+            <div aria-hidden className="mb-6 w-full max-w-60">{ilustracao}</div>
+          ) : textoDoSelo ? (
+            <SeloSecao size="sm" className="mb-4">{textoDoSelo}</SeloSecao>
+          ) : null}
+          {/* Título numa linha só no celular, como na prévia aprovada (28/11/2026): 24 px até 480 px de largura, 32 px até 640 px e 36 px depois. */}
+          <h1 className="m-0 text-h3 font-bold leading-tight tracking-[-0.03em] text-foreground text-balance @min-[30rem]/erro:text-h2 @min-[40rem]/erro:text-display-md">{t}</h1>
+          {descricao && <p className="m-0 mt-3 max-w-xs text-balance text-body leading-relaxed text-muted-foreground">{descricao}</p>}
+          {/* Uma ação só fica centralizada na largura do texto; duas ou mais seguem a regra das Acoes. */}
+          <Acoes className="[&:has(>:only-child)]:items-center">{acoes}</Acoes>
+        </Card>
+      ) : (
+        <div className="flex w-full max-w-lg flex-col items-center">
+          {ilustracao ? (
+            <div aria-hidden className="mb-8 w-full max-w-xs">{ilustracao}</div>
+          ) : codigo ? (
+            <p aria-hidden className="m-0 mb-4 text-h1 font-bold leading-none tracking-[-0.04em] text-primary-text tabular-nums sm:text-display-lg">{codigo}</p>
+          ) : null}
+          <h1 className="m-0 text-h2 font-bold leading-tight tracking-[-0.03em] text-foreground text-balance">{t}</h1>
+          {descricao && <p className="m-0 mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{descricao}</p>}
+          <Acoes className="mt-8">{acoes}</Acoes>
+        </div>
+      )}
+    </Raiz>
   );
 }
 

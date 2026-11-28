@@ -6,12 +6,14 @@ import { DataTable, DoDont, Mono, Panel } from "./shared/Guidance";
 import { cn } from "../ui/utils";
 import { SectionHeader } from "./shared/SectionHeader";
 import { GradeDeCards } from "../ui/grade-de-cards";
+import { PaginaAbaixoDoCabecalho } from "./shared/PaginaAbaixoDoCabecalho";
 
 /* ─────────────────────────────────────────────────────────────
    Grid e espaçamento
    Tokens em styles/theme.css: --space-*, --grid-columns/-margin/-gutter,
    --content-reading/-default/-wide e --section-space(-hero), com as
-   classes .ds-container(-reading/-wide), .ds-grid e .ds-section(-hero).
+   classes .ds-container(-reading/-wide), .ds-grid e .ds-section(-hero); --espaco-abaixo-do-cabecalho e
+   .ds-abaixo-do-cabecalho (28/11/2026).
    ───────────────────────────────────────────────────────────── */
 
 
@@ -96,6 +98,7 @@ export function GridShowcase() {
         { name: "--content-wide", description: t("Maximum width for panels and tables", "Largura máxima para painéis e tabelas"), light: "1280px" },
         { name: "--section-space", description: t("Vertical space between sections: phone / desktop", "Espaço vertical entre seções: celular / desktop"), light: "64 / 80 px" },
         { name: "--section-space-hero", description: t("Before and after the hero", "Antes e depois do hero"), light: "96px" },
+        { name: "--espaco-abaixo-do-cabecalho", description: t("From the end of the site header to the start of the content: phone and tablet / desktop (≥ 1024 px)", "Do fim do cabeçalho do site ao começo do conteúdo: celular e tablet / desktop (≥ 1024 px)"), light: "32 / 64 px" },
       ],
     },
   ];
@@ -215,6 +218,29 @@ export function GridShowcase() {
         </GradeDeCards>
       </section>
 
+      <section id="grid-cabecalho" className="scroll-mt-32">
+        <SectionHeader
+          title={t("Space below the header", "Espaço abaixo do cabeçalho")}
+          description={t(
+            "Every page whose content starts right under the site header keeps the same distance from it: 32 px on phones and tablets and 64 px from 1024 px (the 12-column desktop breakpoint). Error page, account screens and inner pages start at this distance; a hero that sits under the transparent header does not use it.",
+            "Toda página cujo conteúdo começa logo abaixo do cabeçalho do site fica à mesma distância dele: 32 px no celular e no tablet e 64 px a partir de 1024 px (o ponto do desktop de 12 colunas). Página de erro, telas de conta e páginas internas começam a esta distância; um hero que fica por baixo do cabeçalho transparente não usa.",
+          )}
+        />
+        <DataTable
+          head={[t("Screen", "Tela"), t("From", "A partir de"), t("Space", "Espaço"), "Token"]}
+          rows={[
+            [t("Phone and tablet", "Celular e tablet"), "0", "32 px", "--space-8"],
+            [t("Desktop", "Desktop"), "1024 px", "64 px", "--space-16"],
+          ]}
+        />
+        <div className="mt-6">
+          <PaginaAbaixoDoCabecalho />
+        </div>
+        <p className="mt-3 text-body-sm text-muted-foreground">
+          {t("Live example: the 404 page under the site header. The ruler on the left shows the space.", "Exemplo ao vivo: a página 404 abaixo do cabeçalho do site. A régua à esquerda mostra o espaço.")}
+        </p>
+      </section>
+
       <section id="grid-uso" className="scroll-mt-32">
         <SectionHeader
           title={t("How to use", "Como usar")}
@@ -250,6 +276,7 @@ export function GridShowcase() {
                 [<Mono key="b">.ds-grid</Mono>, t("Create the 4/8/12 column grid with the gutter of the screen.", "Criar o grid de 4/8/12 colunas com a calha da tela.")],
                 [<Mono key="c">col-span-4 sm:col-span-8 lg:col-span-6</Mono>, t("Say how many columns a block takes on each screen (at most 4 on phone, 8 on tablet, 12 on desktop).", "Dizer quantas colunas o bloco ocupa em cada tela (no máximo 4 no celular, 8 no tablet, 12 no desktop).")],
                 [<Mono key="d">.ds-section</Mono>, t("Vertical space between page sections (-hero for the hero).", "Espaço vertical entre seções da página (-hero para o hero).")],
+                [<Mono key="f">.ds-abaixo-do-cabecalho</Mono>, t("Space between the site header and the content that starts under it (padding-top: --espaco-abaixo-do-cabecalho). In Tailwind: pt-[var(--espaco-abaixo-do-cabecalho)]. In PaginaDeErro: abaixoDoCabecalho.", "Espaço entre o cabeçalho do site e o conteúdo que começa abaixo dele (padding-top: --espaco-abaixo-do-cabecalho). No Tailwind: pt-[var(--espaco-abaixo-do-cabecalho)]. Na PaginaDeErro: abaixoDoCabecalho.")],
                 [<Mono key="e">p-[var(--space-6)]</Mono>, t("Any padding, gap or margin with a step of the scale.", "Qualquer padding, espaço ou margem com um passo da escala.")],
               ]}
             />
@@ -264,6 +291,7 @@ export function GridShowcase() {
             t("Take every padding, gap and margin from the 4 px scale.", "Tire todo padding, espaço e margem da escala de 4 px."),
             t("Align blocks to whole columns and let the span change with the screen.", "Alinhe os blocos a colunas inteiras e deixe o span mudar com a tela."),
             t("Use the same space between all sections of a page.", "Use o mesmo espaço entre todas as seções de uma página."),
+            t("Start the content under the site header at --espaco-abaixo-do-cabecalho (32 / 64 px).", "Comece o conteúdo abaixo do cabeçalho do site em --espaco-abaixo-do-cabecalho (32 / 64 px)."),
           ]}
           donts={[
             t("Use values outside the scale (13 px, 18 px, 30 px).", "Não use valores fora da escala (13 px, 18 px, 30 px)."),

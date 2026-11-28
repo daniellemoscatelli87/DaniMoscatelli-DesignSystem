@@ -215,8 +215,8 @@ function TeamTemplate() {
       <div className="@container/equipe flex h-[520px] flex-col overflow-hidden bg-background">
         {/* Cabeçalho: título e ações; no celular, as ações descem para baixo do título, na mesma borda */}
         <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-3 border-b border-border px-4 py-4 @2xl/equipe:px-6">
-          <div className="min-w-0 flex-1">
-            <h3 className="text-body font-bold text-foreground">{t("Team Members", "Membros da equipe")}</h3>
+          <div className="min-w-48 flex-1">
+            <h3 className="text-body font-bold text-foreground text-balance">{t("Team Members", "Membros da equipe")}</h3>
             <p className="text-label text-muted-foreground">{teamMembers.length} {t("members in your workspace", "membros no seu espaço de trabalho")}</p>
           </div>
           <div className="flex flex-wrap items-center gap-2">

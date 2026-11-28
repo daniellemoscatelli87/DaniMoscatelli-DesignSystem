@@ -98,7 +98,7 @@ function useRolagem(raiz: React.RefObject<HTMLElement | null> | undefined, escon
 }
 
 /** Uma ação do cabeçalho (link ou botão) desenhada pelo Button do DS. Fora do componente para não remontar a cada rolagem. */
-function BotaoDaAcao({ a, A, variant, forma = "pilula", className, slot, aoClicar }: { a: AcaoDoCabecalho; A: React.ElementType; variant: "default" | "outline" | "ghost"; forma?: "pilula" | "padrao"; className?: string; slot: string; aoClicar?: () => void }) {
+function BotaoDaAcao({ a, A, variant, forma = "pilula", className, slot, aoClicar }: { a: AcaoDoCabecalho; A: React.ElementType; variant: "default" | "outline" | "ghost"; forma?: "pilula" | "quadrado"; className?: string; slot: string; aoClicar?: () => void }) {
   const onClick = () => { aoClicar?.(); a.onClick?.(); };
   return a.href ? (
     <Button asChild variant={variant} forma={forma} quebra="nunca" className={className}>
@@ -303,8 +303,8 @@ function CabecalhoDoSite({
                     </A>
                   ))}
                 </nav>
-                {acao && <BotaoDaAcao A={A} a={acao} variant="default" forma="padrao" slot="cabecalho-acao" aoClicar={() => setAberto(false)} className="mt-4 h-12 w-full text-body" />}
-                {acaoSecundaria && <BotaoDaAcao A={A} a={acaoSecundaria} variant="outline" forma="padrao" slot="cabecalho-acao-secundaria" aoClicar={() => setAberto(false)} className={cn("mt-2 h-12 w-full text-body", !acao && "mt-4")} />}
+                {acao && <BotaoDaAcao A={A} a={acao} variant="default" slot="cabecalho-acao" aoClicar={() => setAberto(false)} className="mt-4 h-12 w-full text-body" />}
+                {acaoSecundaria && <BotaoDaAcao A={A} a={acaoSecundaria} variant="outline" slot="cabecalho-acao-secundaria" aoClicar={() => setAberto(false)} className={cn("mt-2 h-12 w-full text-body", !acao && "mt-4")} />}
               </DialogPrimitive.Content>
             </DialogPrimitive.Portal>
           </DialogPrimitive.Root>

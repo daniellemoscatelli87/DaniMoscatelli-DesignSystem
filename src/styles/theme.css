@@ -126,10 +126,14 @@
   --warning-foreground: var(--graphite-900);
   --warning-muted:      rgba(240, 160, 32, 0.14);
   --warning-text:       #935E0A;   /* âmbar escuro só para texto e ícone sobre fundo claro: 5,1:1 no fundo do Alerta com ação, 5,5:1 no branco (decisão de 23/11/2026) */
-  --error:              #D9416E;   /* erro mais rosa, separado do vermelho da marca (decisão de 23/11/2026) */
+  /* Erro no vermelho da marca, mais escuro (decisão da dona do produto de 28/11/2026, "Opção A"; substitui o rosa de
+     23/11/2026): carmim 500. Texto branco sobre ele 6,2:1; como texto e ícone, 6,2:1 no branco, 5,5:1 no fundo da página
+     (#EDF0F5), 5,6:1 no fundo do alerta e 4,6:1 na base do ícone do alerta. --error-muted (≈ #F8EAEA no branco): 5,3:1
+     com o --error-text. A borda do campo com erro usa o --error (6,2:1). */
+  --error:              var(--crimson-500);
   --error-foreground:   #FFFFFF;
-  --error-muted:        rgba(217, 65, 110, 0.1);
-  --error-text:         #C52756;   /* rosa escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,5:1 no branco (decisão de 23/11/2026) */
+  --error-muted:        rgba(184, 40, 40, 0.1);
+  --error-text:         var(--crimson-500);
   --info:               #3D7CAA;   /* texto branco atinge 4,5:1 (decisão de 16/11/2026) */
   --info-foreground:    #FFFFFF;
   --info-muted:         rgba(61, 124, 170, 0.1);
@@ -145,11 +149,13 @@
   --card-foreground:  var(--graphite-900);
   --popover:          #FFFFFF;
   --popover-foreground: var(--graphite-900);
-  /* Contorno das peças em que se clica ou digita (27/11/2026, WCAG 1.4.11: pelo menos 3:1): campos, seleção, caixa de
-     marcar, opção, botão de contorno, chip e o interruptor desligado. Grafite 400: 4,9:1 no branco e 4,29:1 no fundo da
-     página (#EDF0F5); o grafite 300 (2,93:1) não chega a 3:1. Antes era o --border-strong (1,4:1), que continua só nos
-     cards e divisores, que não são campos. */
-  --input:            var(--graphite-400);
+  /* Contorno das peças em que se clica ou digita: campos, seleção, caixa de marcar, opção, botão de contorno, chip e o
+     interruptor desligado. Decisão da dona do produto de 28/11/2026: "um pouco pesada; deixe 50% menos forte". Passou do
+     grafite 400 (#627288, 4,9:1 no branco) para #B0B8C4 (metade do #627288 misturado ao branco): 2,0:1 no branco e
+     1,75:1 no fundo da página (#EDF0F5), abaixo dos 3:1 adotados em 27/11/2026 (WCAG 1.4.11); escolha consciente da
+     dona do produto. O campo desativado continua mais claro: --border-strong (1,4:1) com 50% de opacidade. O --border-strong
+     continua nos cards e divisores. O tema escuro não mudou. */
+  --input:            #B0B8C4;
   --input-background: #FFFFFF;
   /* Preenchimento dos campos no tema escuro (28/11/2026): o --input passou a ser só o contorno. No claro, igual ao
      --input-background. Campo, seleção, caixa de marcar e botão de contorno usam dark:bg-input-fundo/30. */
@@ -256,9 +262,9 @@
   --warning-foreground: var(--graphite-900);
   --warning-muted:      rgba(245, 176, 64, 0.14);
   --warning-text:       var(--warning);
-  --error:              #E5688F;   /* rosa do tema escuro: 5,7:1 no card escuro, 5,2:1 no fundo do alerta; texto sobre ele em grafite (5,6:1) */
+  --error:              var(--crimson-300);   /* carmim 300 no tema escuro (28/11/2026): 6,6:1 no card escuro, 6,0:1 no fundo do alerta, 5,0:1 na base do ícone; texto sobre ele em grafite (6,5:1) */
   --error-foreground:   var(--graphite-900);
-  --error-muted:        rgba(229, 104, 143, 0.15);
+  --error-muted:        rgba(232, 128, 128, 0.15);
   --error-text:         var(--error);
   --info:               #3B82F6;
   --info-foreground:    #FFFFFF;
@@ -458,6 +464,9 @@
   --color-crimson-900: var(--crimson-900);
   --color-crimson-950: var(--crimson-950);
 
+  /* 6 px (28/11/2026): só a caixa de marcar (Checkbox e CaixaDeConsentimento). Com o --radius-sm (8 px), a caixa de
+     20 px parecia redonda e se confundia com o rádio; nenhum passo da escala dava um quadrado claro. */
+  --radius-xs: calc(var(--radius) - 6px);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
@@ -641,6 +650,12 @@
 
   --section-space: 64px;
   --section-space-hero: 96px;
+
+  /* Espaço abaixo do cabeçalho (28/11/2026): a distância entre o fim do cabeçalho do site e o começo do conteúdo, em
+     toda página cujo conteúdo começa logo abaixo dele (página de erro, telas de conta, páginas internas). 32 px no
+     celular e no tablet; 64 px do desktop (1024 px, o mesmo ponto do grid de 12 colunas) em diante. Uso: a classe
+     .ds-abaixo-do-cabecalho, pt-[var(--espaco-abaixo-do-cabecalho)] ou a prop abaixoDoCabecalho da PaginaDeErro. */
+  --espaco-abaixo-do-cabecalho: var(--space-8);
 }
 /* tablet: 8 colunas */
 @media (min-width: 640px) {
@@ -656,6 +671,7 @@
     --grid-columns: 12;
     --grid-margin: 32px;
     --section-space: 80px;
+    --espaco-abaixo-do-cabecalho: var(--space-16);
   }
 }
 
@@ -682,6 +698,9 @@
 /* Ritmo vertical entre seções de página */
 .ds-section { padding-block: var(--section-space); }
 .ds-section-hero { padding-block: var(--section-space-hero); }
+
+/* Conteúdo que começa logo abaixo do cabeçalho do site (32 px no celular, 64 px do desktop em diante) */
+.ds-abaixo-do-cabecalho { padding-top: var(--espaco-abaixo-do-cabecalho); }
 
 /* ── Movimento ──
    Durações e curvas oficiais (documentadas em Movimento > Tokens). As curvas --ease-out, --ease-in e --ease-in-out

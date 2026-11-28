@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "./utils";
 
-// Padrão único (decisão de 16/11/2026): botão de 40 px, cantos 12 px; mesma altura do campo de texto.
+// Padrão único (decisão de 16/11/2026): botão de 40 px, mesma altura do campo de texto. Forma: pílula (28/11/2026).
 // Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo),
 // todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).
 
@@ -42,11 +42,15 @@ const buttonVariants = cva(
         icon: "size-10 rounded-md toque:size-11 max-sm:size-11 pointer-coarse:size-11",
         "icon-lg": "size-11 rounded-md",
       },
-      // Forma (27/11/2026): "pilula" deixa o botão todo arredondado (pílula). Usada no cabeçalho do site por decisão
-      // de marca (FindLook: "Sou Lojista" em contorno e "Entrar" em vermelho; Dani Moscatelli: o modelo pílula).
+      // Forma. Decisão da dona do produto (28/11/2026), nos dois DS: "Pílula como padrão em ambos os projetos". Todo
+      // botão é pílula (rounded-full) em qualquer variante e tamanho; o botão só de ícone vira círculo. "quadrado" (cantos
+      // de 12 px; 8 px no sm) é exceção rara: botão colado a um campo ou dentro de uma barra de ferramentas de cantos
+      // retos, onde a pílula destoa do que está em volta. "padrao" é o nome antigo de "quadrado" (até 27/11/2026, quando
+      // o padrão eram os cantos de 12 px) e continua aceito.
       forma: {
-        padrao: "",
         pilula: "rounded-full",
+        quadrado: "",
+        padrao: "",
       },
       // Quebra do texto (28/11/2026): no celular (abaixo de 640 px), um texto que não cabe na largura quebra em mais de
       // uma linha, centralizado, e o botão cresce para baixo (mínimo de 44 px, 8 px de respiro em cima e embaixo), em vez
@@ -66,11 +70,15 @@ const buttonVariants = cva(
       { quebra: "sempre", size: "default", class: "h-auto min-h-10 py-2 toque:h-auto toque:min-h-11 max-sm:h-auto max-sm:min-h-11 pointer-coarse:h-auto pointer-coarse:min-h-11" },
       { quebra: "sempre", size: "sm", class: "h-auto min-h-8 py-1.5 toque:h-auto toque:min-h-11 max-sm:h-auto max-sm:min-h-11 pointer-coarse:h-auto pointer-coarse:min-h-11" },
       { quebra: "sempre", size: "lg", class: "h-auto min-h-11 py-2" },
+      // Na pílula, 4 px a mais de cada lado: o texto não encosta na curva (28/11/2026).
+      { forma: "pilula", size: "default", class: "px-5 has-[>svg]:px-4" },
+      { forma: "pilula", size: "sm", class: "px-4 has-[>svg]:px-3" },
+      { forma: "pilula", size: "lg", class: "px-6 has-[>svg]:px-5" },
     ],
     defaultVariants: {
       variant: "default",
       size: "default",
-      forma: "padrao",
+      forma: "pilula",
       // Padrão "nunca" para quem usa buttonVariants() direto (dia do calendário, paginação, ações do AlertDialog): o
       // desenho deles não muda. O componente Button liga a quebra do celular sozinho (veja quebraEfetiva).
       quebra: "nunca",

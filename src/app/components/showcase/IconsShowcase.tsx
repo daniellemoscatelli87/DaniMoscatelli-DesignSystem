@@ -188,13 +188,13 @@ export function IconsShowcase() {
         <SubSection title={t("In context", "Em contexto")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3">
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md bg-primary text-primary-foreground text-body font-semibold hover:opacity-90 transition-opacity">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-full bg-primary text-primary-foreground text-body font-semibold hover:opacity-90 transition-opacity">
                 <Plus className="w-4 h-4" strokeWidth={2} /> {t("New", "Novo")}
               </button>
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md border border-border bg-card text-foreground text-body font-semibold hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border bg-card text-foreground text-body font-semibold hover:bg-accent transition-colors">
                 <Download className="w-4 h-4" strokeWidth={1.75} /> {t("Export", "Exportar")}
               </button>
-              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-md border border-border bg-card text-foreground text-body font-semibold hover:bg-accent transition-colors">
+              <button className="inline-flex items-center gap-2 h-10 px-4 rounded-full border border-border bg-card text-foreground text-body font-semibold hover:bg-accent transition-colors">
                 <Filter className="w-4 h-4" strokeWidth={1.75} /> {t("Filter", "Filtrar")}
               </button>
               {([Search, Settings, Bell, MoreHorizontal] as React.ElementType[]).map((Icon, i) => (
@@ -313,7 +313,7 @@ const iconsTokenGroups: TokenGroup[] = [
       { name: "--primary",          description: "Accent / active icon",       light: "#D44D4D", dark: "#D44D4D", isColor: true },
       { name: "--success",          description: "Confirmation / done icon",   light: "#388459", dark: "#22C55E", isColor: true },
       { name: "--warning",          description: "Caution / alert icon",       light: "#F0A020", dark: "#F5B040", isColor: true },
-      { name: "--error",            description: "Error / danger icon",        light: "#D9416E", dark: "#E5688F", isColor: true },
+      { name: "--error",            description: "Error / danger icon",        light: "#B82828", dark: "#E88080", isColor: true },
       { name: "--info",             description: "Informational icon",         light: "#3D7CAA", dark: "#3B82F6", isColor: true },
       { name: "--violet",           description: "Purple accent icon",         light: "#ba69dc", dark: "#eb6cff", isColor: true },
       { name: "--orange",           description: "Orange accent icon",         light: "#fa9852", dark: "#ff8833", isColor: true },

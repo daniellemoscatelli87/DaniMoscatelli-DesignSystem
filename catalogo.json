@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 125,
-    "componentesExportados": 414,
-    "templatesEPadroesSoEmDemonstracao": 75,
+    "arquivosDeComponentes": 126,
+    "componentesExportados": 415,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 45,
-    "tokens": 161,
+    "tokens": 163,
     "paginas": 33,
-    "ancoras": 234,
-    "propostas": 44
+    "ancoras": 237,
+    "propostas": 46
   },
   "componentes": [
     {
@@ -242,7 +242,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 253,
+          "linha": 293,
           "uso": "direto",
           "exports": [
             "Alert",
@@ -256,7 +256,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "Alert"
@@ -1011,7 +1011,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "BotaoDeEnvio"
@@ -1244,7 +1244,7 @@
     {
       "arquivo": "src/app/components/ui/button.tsx",
       "nome": "button",
-      "quandoUsar": "Padrão único (decisão de 16/11/2026): botão de 40 px, cantos 12 px; mesma altura do campo de texto. Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo), todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).",
+      "quandoUsar": "Padrão único (decisão de 16/11/2026): botão de 40 px, mesma altura do campo de texto. Forma: pílula (28/11/2026). Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo), todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
@@ -1258,7 +1258,7 @@
         {
           "nome": "Button",
           "tipo": "componente",
-          "linha": 89,
+          "linha": 97,
           "descricao": "forwardRef (27/11/2026): com React 18, sem ele a ref do Radix (asChild em PopoverTrigger, TooltipTrigger, DropdownMenuTrigger…) se perdia no Button e o Popover ficava fora da tela (translate(0, -200%)), por exemplo o seletor de data dentro …",
           "props": [
             "className",
@@ -1287,8 +1287,9 @@
           "icon-lg"
         ],
         "forma": [
-          "padrao",
-          "pilula"
+          "pilula",
+          "quadrado",
+          "padrao"
         ],
         "quebra": [
           "celular",
@@ -1567,7 +1568,19 @@
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 176,
+          "linha": 177,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1579,7 +1592,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1627,7 +1640,19 @@
           "ancora": "spacing",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 524,
+          "linha": 525,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "grid",
+          "paginaRotulo": "Grid e espaçamento",
+          "ancora": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1927,7 +1952,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1939,7 +1964,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1951,7 +1976,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1963,7 +1988,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1975,7 +2000,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 405,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2068,8 +2093,32 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 101,
+          "linha": 102,
           "uso": "direto",
+          "exports": [
+            "CabecalhoDoSite"
+          ]
+        },
+        {
+          "pagina": "grid",
+          "paginaRotulo": "Grid e espaçamento",
+          "ancora": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "CabecalhoDoSite"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "CabecalhoDoSite"
           ]
@@ -2232,6 +2281,50 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/caixa-de-consentimento.tsx",
+      "nome": "caixa-de-consentimento",
+      "quandoUsar": "CaixaDeConsentimento (28/11/2026, aprovada pela dona do produto; mesma API nos dois DS)",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CaixaDeConsentimento",
+          "tipo": "componente",
+          "linha": 44,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "children",
+            "paragrafos",
+            "erro",
+            "onCheckedChange",
+            "onChange",
+            "className",
+            "id",
+            "disabled"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CaixaDeConsentimentoProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-consentimento",
+          "titulo": "Caixa de consentimento",
+          "arquivo": "src/app/components/showcase/shared/SecaoCaixaDeConsentimento.tsx",
+          "linha": 18,
+          "uso": "direto",
+          "exports": [
+            "CaixaDeConsentimento"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/caixa-de-entrada.tsx",
       "nome": "caixa-de-entrada",
       "quandoUsar": "CaixaDeEntrada (lista de mensagens + painel de leitura): Mensagens, contatos ou notificações numa lista à esquerda e a mensagem aberta à direita, como o Contato da área restrita (Recebidos/Enviados) e o template Caixa de entrada, que era só demonstração e quebrava no celular.",
@@ -2318,7 +2411,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374,
+          "linha": 375,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -2342,7 +2435,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -2480,7 +2573,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "Campo",
@@ -2497,7 +2590,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -2509,7 +2602,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "MensagemDeErro"
@@ -2533,7 +2626,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 187,
+          "linha": 190,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -2569,7 +2662,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo"
@@ -2635,7 +2728,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "direto",
           "exports": [
             "CampoCopiavel"
@@ -2681,7 +2774,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "direto",
           "exports": [
             "CampoDeBusca"
@@ -2743,7 +2836,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "CampoDeEmail"
@@ -2799,7 +2892,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "direto",
           "exports": [
             "CampoDeEmails"
@@ -2874,7 +2967,7 @@
           "ancora": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388,
+          "linha": 389,
           "uso": "direto",
           "exports": [
             "CampoDeEndereco"
@@ -2923,7 +3016,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "CampoDeHorario"
@@ -2975,7 +3068,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "CampoEstadoCidade"
@@ -3935,7 +4028,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "direto",
           "exports": [
             "GrupoDeCartoesDeEscolha",
@@ -4079,13 +4172,13 @@
     {
       "arquivo": "src/app/components/ui/checkbox.tsx",
       "nome": "checkbox",
-      "quandoUsar": "Caixa de seleção. O desenho tem 20 px; no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.",
+      "quandoUsar": "Caixa de seleção. O desenho tem 20 px, QUADRADO, com cantos de 6 px (--radius-xs, 28/11/2026: com 8 px parecia redonda e se confundia com o rádio); no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "Checkbox",
           "tipo": "componente",
-          "linha": 13,
+          "linha": 14,
           "descricao": "",
           "props": [
             "className"
@@ -4102,7 +4195,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4114,7 +4207,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 314,
+          "linha": 317,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4287,7 +4380,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 405,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -4382,7 +4475,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322,
+          "linha": 323,
           "uso": "direto",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -5842,7 +5935,7 @@
         {
           "nome": "EstadoVazio",
           "tipo": "componente",
-          "linha": 68,
+          "linha": 74,
           "descricao": "",
           "props": [
             "icone",
@@ -5862,7 +5955,7 @@
         {
           "nome": "EstadoFinal",
           "tipo": "componente",
-          "linha": 130,
+          "linha": 136,
           "descricao": "",
           "props": [
             "tom",
@@ -5881,7 +5974,7 @@
         {
           "nome": "PaginaDeErro",
           "tipo": "componente",
-          "linha": 163,
+          "linha": 183,
           "descricao": "",
           "props": [
             "codigo",
@@ -5890,6 +5983,10 @@
             "descricao",
             "acoes",
             "telaCheia",
+            "moldura",
+            "selo",
+            "abaixoDoCabecalho",
+            "elemento",
             "className"
           ],
           "reexportaDe": null
@@ -5902,6 +5999,18 @@
       ],
       "variantes": {},
       "ondeVer": [
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256,
+          "uso": "direto",
+          "exports": [
+            "PaginaDeErro"
+          ]
+        },
         {
           "pagina": "feedback",
           "paginaRotulo": "Feedback",
@@ -5932,11 +6041,23 @@
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 176,
+          "linha": 177,
           "uso": "direto",
           "exports": [
             "EstadoVazio",
             "EstadoFinal",
+            "PaginaDeErro"
+          ]
+        },
+        {
+          "pagina": "grid",
+          "paginaRotulo": "Grid e espaçamento",
+          "ancora": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221,
+          "uso": "dentro de outro exemplo",
+          "exports": [
             "PaginaDeErro"
           ]
         },
@@ -5982,7 +6103,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -6343,7 +6464,7 @@
           "ancora": "grid-ritmo",
           "titulo": "Ritmo vertical",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 184,
+          "linha": 187,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6690,7 +6811,7 @@
           "ancora": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 176,
+          "linha": 177,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6703,7 +6824,20 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 272,
+          "linha": 312,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "campos-consentimento",
+          "titulo": "Caixa de consentimento",
+          "arquivo": "src/app/components/showcase/shared/SecaoCaixaDeConsentimento.tsx",
+          "linha": 18,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6804,7 +6938,7 @@
           "ancora": "grid-evitar",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 260,
+          "linha": 287,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7140,7 +7274,7 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 101,
+          "linha": 102,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7152,7 +7286,7 @@
           "ancora": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 129,
+          "linha": 130,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7164,7 +7298,19 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7176,7 +7322,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 253,
+          "linha": 293,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7188,7 +7334,7 @@
           "ancora": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 302,
+          "linha": 342,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7200,7 +7346,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7212,7 +7358,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7224,7 +7370,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7236,7 +7382,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7248,7 +7394,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322,
+          "linha": 323,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7260,7 +7406,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7272,7 +7418,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7284,7 +7430,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374,
+          "linha": 375,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7296,7 +7442,7 @@
           "ancora": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388,
+          "linha": 389,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7308,7 +7454,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 405,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -8890,7 +9036,7 @@
           "ancora": "typography",
           "titulo": "Tipografia",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 204,
+          "linha": 205,
           "uso": "direto",
           "exports": [
             "Heading"
@@ -9240,7 +9386,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 187,
+          "linha": 190,
           "uso": "direto",
           "exports": [
             "Input"
@@ -9399,7 +9545,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "Label"
@@ -9483,7 +9629,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -9638,7 +9784,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -9742,7 +9888,7 @@
           "ancora": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 302,
+          "linha": 342,
           "uso": "direto",
           "exports": [
             "LinkDeTexto",
@@ -9828,7 +9974,7 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 272,
+          "linha": 312,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -10151,7 +10297,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "MolduraDeConta"
@@ -11196,7 +11342,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "regrasPadrao",
@@ -11209,7 +11355,7 @@
           "ancora": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151,
+          "linha": 152,
           "uso": "dentro de outro exemplo",
           "exports": [
             "PasswordInput"
@@ -11469,7 +11615,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "RadioGroup",
@@ -11633,7 +11779,7 @@
           "ancora": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 129,
+          "linha": 130,
           "uso": "direto",
           "exports": [
             "RodapeSite"
@@ -11695,7 +11841,7 @@
         {
           "nome": "SegmentedControl",
           "tipo": "componente",
-          "linha": 44,
+          "linha": 45,
           "descricao": "",
           "props": [
             "options",
@@ -11734,7 +11880,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 314,
+          "linha": 317,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -11772,6 +11918,18 @@
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 59,
           "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "grid",
+          "paginaRotulo": "Grid e espaçamento",
+          "ancora": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221,
+          "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
           ]
@@ -11866,7 +12024,19 @@
           "ancora": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 101,
+          "linha": 102,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -12001,7 +12171,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "Select",
@@ -12017,7 +12187,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 314,
+          "linha": 317,
           "uso": "direto",
           "exports": [
             "Select"
@@ -13243,7 +13413,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 314,
+          "linha": 317,
           "uso": "direto",
           "exports": [
             "Switch"
@@ -13360,7 +13530,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 405,
           "uso": "direto",
           "exports": [
             "TabelaAdaptavel"
@@ -13641,7 +13811,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "Textarea"
@@ -13689,7 +13859,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -14152,7 +14322,7 @@
           "ancora": "grid-colunas",
           "titulo": "Grid de colunas",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 140,
+          "linha": 143,
           "uso": "direto",
           "exports": [
             "cn"
@@ -14164,7 +14334,7 @@
           "ancora": "grid-ritmo",
           "titulo": "Ritmo vertical",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 184,
+          "linha": 187,
           "uso": "direto",
           "exports": [
             "cn"
@@ -14188,7 +14358,7 @@
           "ancora": "grid-uso",
           "titulo": "Como usar",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 218,
+          "linha": 244,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14365,7 +14535,7 @@
       "nome": "DemoDoGrid",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-      "linha": 31,
+      "linha": 33,
       "descricao": "Demonstração do grid: as colunas, a margem e a calha da tela escolhida, em escala dentro da página.",
       "pagina": "grid",
       "paginaRotulo": "Grid e espaçamento",
@@ -14376,7 +14546,7 @@
           "ancora": "grid-colunas",
           "titulo": "Grid de colunas",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 140
+          "linha": 143
         }
       ],
       "usaComponentes": [],
@@ -14386,7 +14556,7 @@
       "nome": "Bloco",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-      "linha": 56,
+      "linha": 58,
       "descricao": "Exemplo de composição sobre o grid: blocos com span por tela.",
       "pagina": "grid",
       "paginaRotulo": "Grid e espaçamento",
@@ -14397,11 +14567,45 @@
           "ancora": "grid-uso",
           "titulo": "Como usar",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 218
+          "linha": 244
         }
       ],
       "usaComponentes": [],
       "elementosFeitosAMao": 1
+    },
+    {
+      "nome": "PaginaAbaixoDoCabecalho",
+      "tipo": "demonstração de conceito",
+      "arquivo": "src/app/components/showcase/shared/PaginaAbaixoDoCabecalho.tsx",
+      "linha": 19,
+      "descricao": "",
+      "pagina": "grid",
+      "paginaRotulo": "Grid e espaçamento",
+      "onde": [
+        {
+          "pagina": "grid",
+          "paginaRotulo": "Grid e espaçamento",
+          "ancora": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221
+        },
+        {
+          "pagina": "molduras",
+          "paginaRotulo": "Molduras e estados",
+          "ancora": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256
+        }
+      ],
+      "usaComponentes": [
+        "Button",
+        "CabecalhoDoSite",
+        "PaginaDeErro",
+        "SegmentedControl"
+      ],
+      "elementosFeitosAMao": 2
     },
     {
       "nome": "TargetDemo",
@@ -16114,7 +16318,7 @@
       "nome": "DemoCampos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 39,
+      "linha": 40,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -16125,7 +16329,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245
+          "linha": 246
         }
       ],
       "usaComponentes": [
@@ -16145,7 +16349,7 @@
       "nome": "DemoCalendario",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 196,
+      "linha": 197,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -16156,7 +16360,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374
+          "linha": 375
         }
       ],
       "usaComponentes": [
@@ -16398,7 +16602,7 @@
       "ancora": "colors",
       "titulo": "Paleta de cores",
       "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-      "linha": 125,
+      "linha": 126,
       "elementosFeitosAMao": 5,
       "usaComponentes": []
     },
@@ -16408,7 +16612,7 @@
       "ancora": "typography",
       "titulo": "Tipografia",
       "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-      "linha": 204,
+      "linha": 205,
       "elementosFeitosAMao": 35,
       "usaComponentes": [
         "Heading"
@@ -16420,7 +16624,7 @@
       "ancora": "grid-ritmo",
       "titulo": "Ritmo vertical",
       "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-      "linha": 184,
+      "linha": 187,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "GradeDeCards"
@@ -16432,7 +16636,7 @@
       "ancora": "grid-uso",
       "titulo": "Como usar",
       "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-      "linha": 218,
+      "linha": 244,
       "elementosFeitosAMao": 3,
       "usaComponentes": []
     },
@@ -17332,6 +17536,13 @@
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
+        "nome": "--radius-xs",
+        "claro": "calc(var(--radius) - 6px)",
+        "escuro": null,
+        "papel": "classe rounded-xs",
+        "grupoCss": "@theme inline"
+      },
+      {
         "nome": "--radius-sm",
         "claro": "calc(var(--radius) - 4px)",
         "escuro": null,
@@ -17845,9 +18056,9 @@
       },
       {
         "nome": "--error",
-        "claro": "#D9416E",
-        "escuro": "#E5688F",
-        "papel": "erro mais rosa, separado do vermelho da marca (decisão de 23/11/2026)",
+        "claro": "var(--crimson-500)",
+        "escuro": "var(--crimson-300)",
+        "papel": "carmim 300 no tema escuro (28/11/2026): 6,6:1 no card escuro, 6,0:1 no fundo do alerta, 5,0:1 na base do ícone; texto sobre ele em grafite (6,5:1)",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
@@ -17859,16 +18070,16 @@
       },
       {
         "nome": "--error-muted",
-        "claro": "rgba(217, 65, 110, 0.1)",
-        "escuro": "rgba(229, 104, 143, 0.15)",
+        "claro": "rgba(184, 40, 40, 0.1)",
+        "escuro": "rgba(232, 128, 128, 0.15)",
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
         "nome": "--error-text",
-        "claro": "#C52756",
+        "claro": "var(--crimson-500)",
         "escuro": "var(--error)",
-        "papel": "rosa escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,5:1 no branco (decisão de 23/11/2026)",
+        "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
       {
@@ -17971,8 +18182,8 @@
       },
       {
         "nome": "--input",
-        "claro": "var(--graphite-400)",
-        "escuro": null,
+        "claro": "#B0B8C4",
+        "escuro": "var(--graphite-400)",
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
       },
@@ -18024,6 +18235,13 @@
         "escuro": null,
         "papel": "",
         "grupoCss": "LIGHT MODE SEMANTIC TOKENS"
+      },
+      {
+        "nome": "--espaco-abaixo-do-cabecalho",
+        "claro": "var(--space-8)",
+        "escuro": null,
+        "papel": "",
+        "grupoCss": ""
       }
     ],
     "escalaTipografica": [
@@ -18162,7 +18380,7 @@
         "titulo": "Grid de colunas",
         "resumo": "Grid de colunas: 4, 8 e 12 colunas por tela",
         "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-        "linha": 140
+        "linha": 143
       },
       {
         "ancora": "grid-uso",
@@ -18171,7 +18389,7 @@
         "titulo": "Como usar",
         "resumo": "Grid e espaçamento: como usar",
         "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-        "linha": 218
+        "linha": 244
       },
       {
         "ancora": "grid-evitar",
@@ -18180,7 +18398,7 @@
         "titulo": "O que evitar",
         "resumo": "Grid e espaçamento: o que evitar",
         "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-        "linha": 260
+        "linha": 287
       },
       {
         "ancora": "a11y-contrast",
@@ -18557,6 +18775,12 @@
       "componente": "tokens em src/styles/theme.css"
     },
     {
+      "arquivo": "propostas/2026-11-28-caixa-de-consentimento.md",
+      "titulo": "Caixa de consentimento",
+      "status": "aprovada (dona do produto, 28/11/2026; publicação com o \"sim\" dela)",
+      "componente": "CaixaDeConsentimento em src/app/components/ui/caixa-de-consentimento.tsx (mesmo arquivo e API no DS FindLook)"
+    },
+    {
       "arquivo": "propostas/2026-11-28-confete.md",
       "titulo": "Confete",
       "status": "proposta",
@@ -18585,6 +18809,12 @@
       "titulo": "Campo de exemplo na simulação",
       "status": "proposta",
       "componente": "MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-pagina-404-padrao.md",
+      "titulo": "Página 404 padrão e espaço abaixo do cabeçalho",
+      "status": "aprovada (decisões da dona do produto de 28/11/2026; publicação com o \"sim\" dela)",
+      "componente": "PaginaDeErro (nova variante moldura=\"card\") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css"
     },
     {
       "arquivo": "propostas/2026-11-28-recorte-de-foto.md",
@@ -18781,37 +19011,37 @@
           "id": "colors",
           "titulo": "Paleta de cores",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 125
+          "linha": 126
         },
         {
           "id": "typography",
           "titulo": "Tipografia",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 204
+          "linha": 205
         },
         {
           "id": "spacing",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 524
+          "linha": 525
         },
         {
           "id": "radius",
           "titulo": "Raio",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 529
+          "linha": 530
         },
         {
           "id": "shadows",
           "titulo": "Sombras",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 548
+          "linha": 549
         },
         {
           "id": "colors-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FoundationShowcase.tsx",
-          "linha": 568
+          "linha": 569
         }
       ]
     },
@@ -18824,49 +19054,55 @@
           "id": "grid-visao",
           "titulo": "Visão geral",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 105
+          "linha": 108
         },
         {
           "id": "grid-escala",
           "titulo": "Escala de espaçamento",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 123
+          "linha": 126
         },
         {
           "id": "grid-colunas",
           "titulo": "Grid de colunas",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 140
+          "linha": 143
         },
         {
           "id": "grid-larguras",
           "titulo": "Larguras máximas",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 162
+          "linha": 165
         },
         {
           "id": "grid-ritmo",
           "titulo": "Ritmo vertical",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 184
+          "linha": 187
+        },
+        {
+          "id": "grid-cabecalho",
+          "titulo": "Espaço abaixo do cabeçalho",
+          "arquivo": "src/app/components/showcase/GridShowcase.tsx",
+          "linha": 221
         },
         {
           "id": "grid-uso",
           "titulo": "Como usar",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 218
+          "linha": 244
         },
         {
           "id": "grid-evitar",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 260
+          "linha": 287
         },
         {
           "id": "grid-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
-          "linha": 277
+          "linha": 305
         }
       ]
     },
@@ -19289,25 +19525,25 @@
           "id": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 187
+          "linha": 190
         },
         {
           "id": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 204
+          "linha": 207
         },
         {
           "id": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 314
+          "linha": 317
         },
         {
           "id": "buttons-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 411
+          "linha": 414
         },
         {
           "id": "botao-quebra",
@@ -19850,43 +20086,49 @@
           "id": "molduras-cabecalho",
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 101
+          "linha": 102
         },
         {
           "id": "molduras-rodape",
           "titulo": "Rodapé do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 129
+          "linha": 130
         },
         {
           "id": "molduras-conta",
           "titulo": "Moldura de conta",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 151
+          "linha": 152
         },
         {
           "id": "molduras-estados",
           "titulo": "Vazio, final e erro",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 176
+          "linha": 177
+        },
+        {
+          "id": "molduras-erro",
+          "titulo": "Página de erro (404)",
+          "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
+          "linha": 256
         },
         {
           "id": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 253
+          "linha": 293
         },
         {
           "id": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 272
+          "linha": 312
         },
         {
           "id": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 302
+          "linha": 342
         }
       ]
     },
@@ -19899,61 +20141,61 @@
           "id": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245
+          "linha": 246
         },
         {
           "id": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272
+          "linha": 273
         },
         {
           "id": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290
+          "linha": 291
         },
         {
           "id": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305
+          "linha": 306
         },
         {
           "id": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322
+          "linha": 323
         },
         {
           "id": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337
+          "linha": 338
         },
         {
           "id": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359
+          "linha": 360
         },
         {
           "id": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374
+          "linha": 375
         },
         {
           "id": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388
+          "linha": 389
         },
         {
           "id": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402
+          "linha": 405
         },
         {
           "id": "campo-com-prefixo",
@@ -19972,6 +20214,12 @@
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 334
+        },
+        {
+          "id": "campos-consentimento",
+          "titulo": "Caixa de consentimento",
+          "arquivo": "src/app/components/showcase/shared/SecaoCaixaDeConsentimento.tsx",
+          "linha": 18
         }
       ]
     },

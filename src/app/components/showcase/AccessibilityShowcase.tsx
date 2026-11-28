@@ -53,7 +53,7 @@ const lightPairs: Pair[] = [
   { name: "success-text / alerta", usage: { en: "Success button text on the alert", pt: "Texto do botão no alerta de sucesso" }, fg: "#327650", bg: "#F1F6F3" },
   { name: "info-text / alerta", usage: { en: "Info button text on the alert", pt: "Texto do botão no alerta de info" }, fg: "#366E97", bg: "#F1F6F9" },
   { name: "warning-text / alerta", usage: { en: "Warning icon and button text on the alert", pt: "Ícone e texto do botão no alerta de aviso" }, fg: "#935E0A", bg: "#FEF6EB" },
-  { name: "error-text / alerta", usage: { en: "Error icon and button text on the alert", pt: "Ícone e texto do botão no alerta de erro" }, fg: "#C52756", bg: "#FCF2F5" },
+  { name: "error-text / alerta", usage: { en: "Error icon and button text on the alert", pt: "Ícone e texto do botão no alerta de erro" }, fg: "#B82828", bg: "#FAF0F0" },
   { name: "warning-foreground / warning", usage: { en: "Text on the warning amber (never white)", pt: "Texto sobre o âmbar de aviso (nunca branco)" }, fg: "#131A27", bg: "#F0A020" },
 ];
 const darkPairs: Pair[] = [
@@ -190,10 +190,10 @@ function FocusDemo() {
         {t("Press", "Pressione")} <kbd className="px-1 py-1 rounded-sm border border-border bg-muted text-caption font-medium text-foreground">Tab</kbd> {t("to move through these controls and watch the ring.", "para percorrer estes controles e observar o anel de foco.")}
       </p>
       <div className="flex flex-wrap items-center gap-3">
-        <button className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-full bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Primary", "Primário")}
         </button>
-        <button className="h-10 px-4 rounded-md border border-border bg-card text-foreground text-body-sm font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button className="h-10 px-4 rounded-full border border-border bg-card text-foreground text-body-sm font-medium hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Secondary", "Secundário")}
         </button>
         <a href="#a11y-focus" onClick={e => e.preventDefault()} className="text-body-sm font-medium text-primary-text underline underline-offset-4 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -304,7 +304,7 @@ function FormDemo() {
             {show && (<><XCircle className="h-3.5 w-3.5 text-[var(--error-text)] shrink-0" aria-hidden />{error}</>)}
           </p>
         </div>
-        <button type="submit" className="h-10 px-4 rounded-md bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+        <button type="submit" className="h-10 px-4 rounded-full bg-primary text-primary-foreground text-body-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
           {t("Send invite", "Enviar convite")}
         </button>
         <p role="status" className="text-body-sm text-foreground min-h-[1.25rem]">{sent ? t("Invite sent to ", "Convite enviado para ") + email : ""}</p>

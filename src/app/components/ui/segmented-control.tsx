@@ -36,9 +36,10 @@ export type SegmentedControlProps<T extends string = string> = Omit<
 };
 
 const sizes = {
-  sm: { root: "rounded-sm", item: "h-8 px-3 text-button gap-1 [&_svg]:size-3.5 toque:h-11 toque:min-w-11" },
-  md: { root: "rounded-md", item: "h-10 px-4 text-button gap-2 [&_svg]:size-4 toque:h-11 toque:min-w-11" },
-  lg: { root: "rounded-md", item: "h-11 px-5 text-body gap-2 [&_svg]:size-4" },
+  // Trilho em pílula (28/11/2026, "pílula como padrão"): a primeira e a última opção ganham 4 px a mais por fora.
+  sm: { root: "rounded-full", item: "first:pl-4 last:pr-4 h-8 px-3 text-button gap-1 [&_svg]:size-3.5 toque:h-11 toque:min-w-11" },
+  md: { root: "rounded-full", item: "first:pl-5 last:pr-5 h-10 px-4 text-button gap-2 [&_svg]:size-4 toque:h-11 toque:min-w-11" },
+  lg: { root: "rounded-full", item: "first:pl-6 last:pr-6 h-11 px-5 text-body gap-2 [&_svg]:size-4" },
 } as const;
 
 export function SegmentedControl<T extends string = string>({

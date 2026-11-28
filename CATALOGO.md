@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 125 arquivos de componentes em `src/app/components/ui/` com 414 componentes exportados · 75 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 161 tokens · 33 páginas e 234 âncoras no site (https://designsystem.danimoscatelli.com.br) · 44 propostas de componente.
+**Resumo:** 126 arquivos de componentes em `src/app/components/ui/` com 415 componentes exportados · 76 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 163 tokens · 33 páginas e 237 âncoras no site (https://designsystem.danimoscatelli.com.br) · 46 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -193,12 +193,12 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 ### button
 
 - **Arquivo:** [src/app/components/ui/button.tsx](src/app/components/ui/button.tsx)
-- **Quando usar:** Padrão único (decisão de 16/11/2026): botão de 40 px, cantos 12 px; mesma altura do campo de texto. Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo), todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).
+- **Quando usar:** Padrão único (decisão de 16/11/2026): botão de 40 px, mesma altura do campo de texto. Forma: pílula (28/11/2026). Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo), todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).
 - **Componentes:**
   - `Button` (props: `className`, `variant`, `size`, `forma`, `quebra`, `asChild`): forwardRef (27/11/2026): com React 18, sem ele a ref do Radix (asChild em PopoverTrigger, TooltipTrigger, DropdownMenuTrigger…) se perdia no Button e o Popover ficava fora da tela (translate(0, -200%)), por exemplo o seletor de data dentro …
 - **Funções e constantes:** `buttonVariants`
-- **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon-lg`; `forma` = `padrao` · `pilula`; `quebra` = `celular` · `nunca` · `sempre`
-- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Motion Design › Presets de entrada e saída (`motion#enter-presets`) · e mais 57 seções (ver `catalogo.json`)
+- **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon-lg`; `forma` = `pilula` · `quadrado` · `padrao`; `quebra` = `celular` · `nunca` · `sempre`
+- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Motion Design › Presets de entrada e saída (`motion#enter-presets`) · e mais 59 seções (ver `catalogo.json`)
 
 ### cabecalho-do-site
 
@@ -206,7 +206,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** CabecalhoDoSite (cabeçalho do site + menu do celular): O cabeçalho de todas as páginas do site do estúdio (src/compartilhado/partes.ts, menu.ts e menu.css), no modelo documentado em Header e menus: logo, links das páginas, um botão de ação ("Contato") e, no celular, o menu em folha inferior. Use-o no topo de cada página; os links são páginas, e a atual fica marcada.
 - **Componentes:**
   - `CabecalhoDoSite` (props: `itens`, `atual`, `acao`, `modelo`, `superficie`, `esconderAoRolar`, `inicioHref`, `rotuloInicio`, `logo`, `raiz`, `posicao`, `tela`, `textos`, `className`, `acaoSecundaria`, `transparenteNoTopo`, `iconeAoRolar`, `telaLarga`, `comoLink`, `containerDoMenu`)
-- **Onde ver:** Molduras e estados › Cabeçalho do site (`molduras#molduras-cabecalho`)
+- **Onde ver:** Molduras e estados › Cabeçalho do site (`molduras#molduras-cabecalho`) · Grid e espaçamento › Espaço abaixo do cabeçalho (`grid#grid-cabecalho`) · Molduras e estados › Página de erro (404) (`molduras#molduras-erro`)
 
 ### cadastro-em-etapas
 
@@ -222,6 +222,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `LinhaDeDado` (props: `rotulo`, `valor`, `vazio`, `className`)
 - **Funções e constantes:** `CampoDoCadastro`
 - **Onde ver:** Peças da área restrita › Etapas e cadastro (`pecas-admin#admin-etapas`)
+
+### caixa-de-consentimento
+
+- **Arquivo:** [src/app/components/ui/caixa-de-consentimento.tsx](src/app/components/ui/caixa-de-consentimento.tsx)
+- **Quando usar:** CaixaDeConsentimento (28/11/2026, aprovada pela dona do produto; mesma API nos dois DS)
+- **Componentes:**
+  - `CaixaDeConsentimento` (props: `titulo`, `children`, `paragrafos`, `erro`, `onCheckedChange`, `onChange`, `className`, `id`, `disabled`)
+- **Onde ver:** Campos › Caixa de consentimento (`campos#campos-consentimento`)
 
 ### caixa-de-entrada
 
@@ -404,7 +412,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 ### checkbox
 
 - **Arquivo:** [src/app/components/ui/checkbox.tsx](src/app/components/ui/checkbox.tsx)
-- **Quando usar:** Caixa de seleção. O desenho tem 20 px; no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.
+- **Quando usar:** Caixa de seleção. O desenho tem 20 px, QUADRADO, com cantos de 6 px (--radius-xs, 28/11/2026: com 8 px parecia redonda e se confundia com o rádio); no toque (celular ou tela de dedo, 27/11/2026) a área clicável cresce para 44 × 44 px em volta dele, com margem negativa, sem mudar o tamanho do desenho nem o espaço que ele ocupa.
 - **Componentes:**
   - `Checkbox` (props: `className`)
 - **Onde ver:** Botões › Senha (`buttons#password`) · Botões › Controle segmentado (`buttons#segmented`) · Campos › Prefixo, sufixo e desabilitado (`campos#campo-com-prefixo`) · e mais 3 seções (ver `catalogo.json`)
@@ -623,8 +631,8 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `EstadoVazio` (props: `icone`, `titulo`, `descricao`, `acoes`, `tom`, `tamanho`, `variante`, `nivel`, `ilustracao`, `moldura`, `className`)
   - `EstadoFinal` (props: `tom`, `icone`, `titulo`, `descricao`, `acoes`, `nivel`, `focarAoAparecer`, `comemorar`, `children`, `className`)
-  - `PaginaDeErro` (props: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`, `className`)
-- **Onde ver:** Feedback › Confete na conquista (`feedback#confete`) · Rótulos › Estados vazios (`badges#empty-states`) · Molduras e estados › Vazio, final e erro (`molduras#molduras-estados`) · e mais 5 seções (ver `catalogo.json`)
+  - `PaginaDeErro` (props: `codigo`, `ilustracao`, `titulo`, `descricao`, `acoes`, `telaCheia`, `moldura`, `selo`, `abaixoDoCabecalho`, `elemento`, `className`)
+- **Onde ver:** Molduras e estados › Página de erro (404) (`molduras#molduras-erro`) · Feedback › Confete na conquista (`feedback#confete`) · Rótulos › Estados vazios (`badges#empty-states`) · e mais 7 seções (ver `catalogo.json`)
 
 ### faixa-de-logos
 
@@ -667,7 +675,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `GradeDeCards` (props: `colunas`, `larguraMinima`, `limiteDeDiferenca`, `layout`, `onLayoutChange`, `className`, `style`, `children`)
   - `ItemDaGrade` (props: `className`): ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.
 - **Funções e constantes:** `LIMITE_DE_DIFERENCA`, `FATOR_DE_VOLTA`, `passaDoLimite`, `useOrientacaoDoCard`
-- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 95 seções (ver `catalogo.json`)
+- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 97 seções (ver `catalogo.json`)
 
 ### graficos-catalogo
 
@@ -1061,7 +1069,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** SegmentedControl (controle segmentado): Opções acopladas, uma selecionada por vez, que se tocam como botões. Use para escolhas curtas e exclusivas (2 a 5 opções, rótulos de uma ou duas palavras): filtro, condição, período, modo de exibição. Sempre há uma opção selecionada. Teclado: setas movem a seleção; Tab entra e sai do grupo.
 - **Componentes:**
   - `SegmentedControl` (props: `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size`, `fullWidth`, `className`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 11 seções (ver `catalogo.json`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 13 seções (ver `catalogo.json`)
 
 ### select
 
@@ -1400,8 +1408,8 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:135](src/app/components/showcase/OverlaysShowcase.tsx#L135) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
 | `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:466](src/app/components/showcase/SitePatternsShowcase.tsx#L466) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
 | `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:514](src/app/components/showcase/SitePatternsShowcase.tsx#L514) | `CardDeArtigo`, `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 1 |
-| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:39](src/app/components/showcase/CamposShowcase.tsx#L39) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
-| `DemoCalendario` | Campos › Seletor de data (Calendar) (`campos#campos-calendario`) | [src/app/components/showcase/CamposShowcase.tsx:196](src/app/components/showcase/CamposShowcase.tsx#L196) | `Calendar` | 1 |
+| `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:40](src/app/components/showcase/CamposShowcase.tsx#L40) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
+| `DemoCalendario` | Campos › Seletor de data (Calendar) (`campos#campos-calendario`) | [src/app/components/showcase/CamposShowcase.tsx:197](src/app/components/showcase/CamposShowcase.tsx#L197) | `Calendar` | 1 |
 | `DemoCaixa`<br>Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo. | Peças da área restrita › Caixa de entrada (`pecas-admin#admin-caixa`) | [src/app/components/showcase/PecasAdminShowcase.tsx:23](src/app/components/showcase/PecasAdminShowcase.tsx#L23) | `Avatar`, `AvatarFallback`, `BalaoDaConversa`, `BotaoDeEnvio`, `CaixaDeEntrada`, `Campo`, `ChipDeEstado`, `Conversa` +1 | 1 |
 | `Segmentado`<br>Controles da demonstração | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:93](src/app/components/showcase/HeaderShowcase.tsx#L93) |  | 1 |
 | `Capa`<br>Fundos por trás do header | Header e menus › Demonstração (`header#header-demo`) | [src/app/components/showcase/HeaderShowcase.tsx:141](src/app/components/showcase/HeaderShowcase.tsx#L141) |  | 4 |
@@ -1409,7 +1417,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `CardOpcao`<br>Cards de explicação, com atalho para a demonstração | Header e menus › Modelos (`header#header-models`) (+3) | [src/app/components/showcase/HeaderShowcase.tsx:551](src/app/components/showcase/HeaderShowcase.tsx#L551) |  | 3 |
 | `ContactPanelDemo`<br>Variante: formulário de contato do site | Painel lateral › Comportamento (`sidepanel#sidepanel-behavior`) (+1) | [src/app/components/showcase/SidePanelShowcase.tsx:39](src/app/components/showcase/SidePanelShowcase.tsx#L39) | `SidePanel`, `SidePanelActions`, `SidePanelBody`, `SidePanelContent`, `SidePanelFooter`, `SidePanelHeader`, `SidePanelTrigger` | 10 |
 
-### 2.3 Demonstrações nas páginas de fundamentos e diretrizes (31)
+### 2.3 Demonstrações nas páginas de fundamentos e diretrizes (32)
 
 Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, tokens). Normalmente não vão para o produto como estão; servem de referência de comportamento.
 
@@ -1419,8 +1427,9 @@ Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, 
 | `LogoCard`<br>Logo card | Identidade de marca › Logo vertical (`brand#brand-logo-vertical`) (+2) | [src/app/components/showcase/BrandShowcase.tsx:86](src/app/components/showcase/BrandShowcase.tsx#L86) |  | 3 |
 | `ColorChip`<br>Color chip | Identidade de marca › Paleta da marca (`brand#brand-colors`) | [src/app/components/showcase/BrandShowcase.tsx:125](src/app/components/showcase/BrandShowcase.tsx#L125) |  | 2 |
 | `RuleCard`<br>Do / Don't card | Identidade de marca › Regras de uso (`brand#brand-rules`) | [src/app/components/showcase/BrandShowcase.tsx:157](src/app/components/showcase/BrandShowcase.tsx#L157) |  | 2 |
-| `DemoDoGrid`<br>Demonstração do grid: as colunas, a margem e a calha da tela escolhida, em escala dentro da página. | Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) | [src/app/components/showcase/GridShowcase.tsx:31](src/app/components/showcase/GridShowcase.tsx#L31) |  | 3 |
-| `Bloco`<br>Exemplo de composição sobre o grid: blocos com span por tela. | Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:56](src/app/components/showcase/GridShowcase.tsx#L56) |  | 1 |
+| `DemoDoGrid`<br>Demonstração do grid: as colunas, a margem e a calha da tela escolhida, em escala dentro da página. | Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) | [src/app/components/showcase/GridShowcase.tsx:33](src/app/components/showcase/GridShowcase.tsx#L33) |  | 3 |
+| `Bloco`<br>Exemplo de composição sobre o grid: blocos com span por tela. | Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:58](src/app/components/showcase/GridShowcase.tsx#L58) |  | 1 |
+| `PaginaAbaixoDoCabecalho` | Grid e espaçamento › Espaço abaixo do cabeçalho (`grid#grid-cabecalho`) (+1) | [src/app/components/showcase/shared/PaginaAbaixoDoCabecalho.tsx:19](src/app/components/showcase/shared/PaginaAbaixoDoCabecalho.tsx#L19) | `Button`, `CabecalhoDoSite`, `PaginaDeErro`, `SegmentedControl` | 2 |
 | `TargetDemo`<br>Touch targets | Usabilidade › Tamanho de alvo (`usability#ux-targets`) | [src/app/components/showcase/UsabilityShowcase.tsx:18](src/app/components/showcase/UsabilityShowcase.tsx#L18) |  | 1 |
 | `FeedbackDemo`<br>System status | Usabilidade › Status do sistema (`usability#ux-feedback`) | [src/app/components/showcase/UsabilityShowcase.tsx:48](src/app/components/showcase/UsabilityShowcase.tsx#L48) |  | 1 |
 | `UndoDemo` | Usabilidade › Ações destrutivas (`usability#ux-destructive`) | [src/app/components/showcase/UsabilityShowcase.tsx:85](src/app/components/showcase/UsabilityShowcase.tsx#L85) |  | 6 |
@@ -1458,10 +1467,10 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Identidade de marca › Uso do símbolo (`brand#brand-symbol-usage`) | [src/app/components/showcase/BrandShowcase.tsx:320](src/app/components/showcase/BrandShowcase.tsx#L320) |  | 3 |
 | Identidade de marca › Responsividade (`brand#brand-responsive`) | [src/app/components/showcase/BrandShowcase.tsx:442](src/app/components/showcase/BrandShowcase.tsx#L442) |  | 17 |
 | Identidade de marca › Área de respiro (`brand#brand-clearspace`) | [src/app/components/showcase/BrandShowcase.tsx:705](src/app/components/showcase/BrandShowcase.tsx#L705) |  | 10 |
-| Fundamentos › Paleta de cores (`colors#colors`) | [src/app/components/showcase/FoundationShowcase.tsx:125](src/app/components/showcase/FoundationShowcase.tsx#L125) |  | 5 |
-| Fundamentos › Tipografia (`colors#typography`) | [src/app/components/showcase/FoundationShowcase.tsx:204](src/app/components/showcase/FoundationShowcase.tsx#L204) | `Heading` | 35 |
-| Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) | [src/app/components/showcase/GridShowcase.tsx:184](src/app/components/showcase/GridShowcase.tsx#L184) | `GradeDeCards` | 3 |
-| Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:218](src/app/components/showcase/GridShowcase.tsx#L218) |  | 3 |
+| Fundamentos › Paleta de cores (`colors#colors`) | [src/app/components/showcase/FoundationShowcase.tsx:126](src/app/components/showcase/FoundationShowcase.tsx#L126) |  | 5 |
+| Fundamentos › Tipografia (`colors#typography`) | [src/app/components/showcase/FoundationShowcase.tsx:205](src/app/components/showcase/FoundationShowcase.tsx#L205) | `Heading` | 35 |
+| Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) | [src/app/components/showcase/GridShowcase.tsx:187](src/app/components/showcase/GridShowcase.tsx#L187) | `GradeDeCards` | 3 |
+| Grid e espaçamento › Como usar (`grid#grid-uso`) | [src/app/components/showcase/GridShowcase.tsx:244](src/app/components/showcase/GridShowcase.tsx#L244) |  | 3 |
 | Design Tokens › O que são tokens (`tokens#tokens-intro`) | [src/app/components/showcase/TokensShowcase.tsx:115](src/app/components/showcase/TokensShowcase.tsx#L115) | `GradeDeCards`, `ItemDaGrade` | 8 |
 | Design Tokens › As três camadas (`tokens#tokens-hierarchy`) | [src/app/components/showcase/TokensShowcase.tsx:205](src/app/components/showcase/TokensShowcase.tsx#L205) |  | 21 |
 | Design Tokens › Guia para designers (`tokens#tokens-design`) | [src/app/components/showcase/TokensShowcase.tsx:336](src/app/components/showcase/TokensShowcase.tsx#L336) |  | 3 |
@@ -1556,10 +1565,10 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--warning-foreground` | `--graphite-900 (#131A27)` | igual |  |
 | `--warning-muted` | `rgba(240, 160, 32, 0.14)` | `rgba(245, 176, 64, 0.14)` |  |
 | `--warning-text` | `#935E0A` | `--warning (#F5B040)` | âmbar escuro só para texto e ícone sobre fundo claro: 5,1:1 no fundo do Alerta com ação, 5,5:1 no branco (decisão de 23/11/2026) |
-| `--error` | `#D9416E` | `#E5688F` | erro mais rosa, separado do vermelho da marca (decisão de 23/11/2026) |
+| `--error` | `--crimson-500 (#B82828)` | `--crimson-300 (#E88080)` | carmim 300 no tema escuro (28/11/2026): 6,6:1 no card escuro, 6,0:1 no fundo do alerta, 5,0:1 na base do ícone; texto sobre ele em grafite (6,5:1) |
 | `--error-foreground` | `#FFFFFF` | `--graphite-900 (#131A27)` |  |
-| `--error-muted` | `rgba(217, 65, 110, 0.1)` | `rgba(229, 104, 143, 0.15)` |  |
-| `--error-text` | `#C52756` | `--error (#E5688F)` | rosa escuro só para texto e ícone sobre fundo claro: 5,0:1 no fundo do Alerta com ação, 5,5:1 no branco (decisão de 23/11/2026) |
+| `--error-muted` | `rgba(184, 40, 40, 0.1)` | `rgba(232, 128, 128, 0.15)` |  |
+| `--error-text` | `--crimson-500 (#B82828)` | `--error (#E88080)` |  |
 | `--info` | `#3D7CAA` | `#3B82F6` | texto branco atinge 4,5:1 (decisão de 16/11/2026) |
 | `--info-foreground` | `#FFFFFF` | igual |  |
 | `--info-muted` | `rgba(61, 124, 170, 0.1)` | `rgba(59, 130, 246, 0.12)` |  |
@@ -1574,7 +1583,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--card-foreground` | `--graphite-900 (#131A27)` | `#E4E9F0` |  |
 | `--popover` | `#FFFFFF` | `rgba(19, 26, 39, 0.95)` |  |
 | `--popover-foreground` | `--graphite-900 (#131A27)` | `#E4E9F0` |  |
-| `--input` | `--graphite-400 (#627288)` | igual |  |
+| `--input` | `#B0B8C4` | `--graphite-400 (#627288)` |  |
 | `--input-background` | `#FFFFFF` | `rgba(19, 26, 39, 0.6)` |  |
 | `--input-fundo` | `#FFFFFF` | `rgba(19, 26, 39, 0.6)` |  |
 | `--switch-background` | `--graphite-400 (#627288)` | igual | interruptor desligado: trilho 4,9:1 no branco; bolinha branca 4,9:1 no trilho |
@@ -1582,6 +1591,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 | `--destructive` | `--crimson-400 (#D44D4D)` | igual |  |
 | `--destructive-foreground` | `#FFFFFF` | igual |  |
 | `--sobreposicao` | `color-mix(in srgb, var(--graphite-950) 50%, transparent)` | igual |  |
+| `--espaco-abaixo-do-cabecalho` | `--space-8 (32px)` | igual |  |
 
 ### 3.3 Gráficos
 
@@ -1635,6 +1645,7 @@ Primitivas: servem de base para os tokens semânticos. Em componentes, prefira o
 
 - `--radius`: `0.75rem`
 - `--radius-full`: `9999px`
+- `--radius-xs`: `calc(var(--radius) - 6px)` — classe rounded-xs
 - `--radius-sm`: `calc(var(--radius) - 4px)` — classe rounded-sm
 - `--radius-md`: `--radius (0.75rem)` — classe rounded-md
 - `--radius-lg`: `calc(var(--radius) + 4px)` — classe rounded-lg
@@ -1710,9 +1721,9 @@ Regras documentadas no site. Antes de montar uma tela, leia as que valem para el
 - **Card: o que evitar** — Cards › O que evitar (`cards#card-guidelines`) · [src/app/components/showcase/CardShowcase.tsx:1273](src/app/components/showcase/CardShowcase.tsx#L1273)
 - **Alertas: tipos e quando usar cada um** — Feedback › Alertas (`feedback#alerts`) · [src/app/components/showcase/FeedbackShowcase.tsx:217](src/app/components/showcase/FeedbackShowcase.tsx#L217)
 - **Alerta com ação: ações sempre embaixo do texto** — Feedback › Alerta com ação (`feedback#alerta-com-acao`) · [src/app/components/showcase/FeedbackShowcase.tsx:253](src/app/components/showcase/FeedbackShowcase.tsx#L253)
-- **Grid de colunas: 4, 8 e 12 colunas por tela** — Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) · [src/app/components/showcase/GridShowcase.tsx:140](src/app/components/showcase/GridShowcase.tsx#L140)
-- **Grid e espaçamento: como usar** — Grid e espaçamento › Como usar (`grid#grid-uso`) · [src/app/components/showcase/GridShowcase.tsx:218](src/app/components/showcase/GridShowcase.tsx#L218)
-- **Grid e espaçamento: o que evitar** — Grid e espaçamento › O que evitar (`grid#grid-evitar`) · [src/app/components/showcase/GridShowcase.tsx:260](src/app/components/showcase/GridShowcase.tsx#L260)
+- **Grid de colunas: 4, 8 e 12 colunas por tela** — Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) · [src/app/components/showcase/GridShowcase.tsx:143](src/app/components/showcase/GridShowcase.tsx#L143)
+- **Grid e espaçamento: como usar** — Grid e espaçamento › Como usar (`grid#grid-uso`) · [src/app/components/showcase/GridShowcase.tsx:244](src/app/components/showcase/GridShowcase.tsx#L244)
+- **Grid e espaçamento: o que evitar** — Grid e espaçamento › O que evitar (`grid#grid-evitar`) · [src/app/components/showcase/GridShowcase.tsx:287](src/app/components/showcase/GridShowcase.tsx#L287)
 - **Contraste mínimo (WCAG 2.2 AA)** — Acessibilidade › Contraste (`accessibility#a11y-contrast`) · [src/app/components/showcase/AccessibilityShowcase.tsx:445](src/app/components/showcase/AccessibilityShowcase.tsx#L445)
 - **Respeitar a preferência por menos movimento** — Acessibilidade › Motion (`accessibility#a11y-motion`) · [src/app/components/showcase/AccessibilityShowcase.tsx:547](src/app/components/showcase/AccessibilityShowcase.tsx#L547)
 - **Durações e curvas oficiais de movimento** — Motion Design › Tokens de movimento (`motion#motion-tokens`) · [src/app/components/showcase/MotionShowcase.tsx:1033](src/app/components/showcase/MotionShowcase.tsx#L1033)
@@ -1779,11 +1790,13 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Stepper e cadastro em etapas](propostas/2026-11-27-stepper-e-cadastro-em-etapas.md) | `Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao, LinhaDeDado, CampoDoCadastro em src/app/components/ui/stepper.tsx, src/app/components/ui/cadastro-em-etapas.tsx` | proposta |
 | [Tabela adaptável](propostas/2026-11-27-tabela-adaptavel.md) | `TabelaAdaptavel em src/app/components/ui/tabela-adaptavel.tsx` | proposta |
 | [Tokens: sobreposição, raio de pílula, variante de toque e escala de texto](propostas/2026-11-27-tokens-sobreposicao-raio-toque-texto.md) | `tokens em src/styles/theme.css` | proposta |
+| [Caixa de consentimento](propostas/2026-11-28-caixa-de-consentimento.md) | `CaixaDeConsentimento em src/app/components/ui/caixa-de-consentimento.tsx (mesmo arquivo e API no DS FindLook)` | aprovada (dona do produto, 28/11/2026; publicação com o "sim" dela) |
 | [Confete](propostas/2026-11-28-confete.md) | `Confete, dispararConfete e EstadoFinal comemorar em src/app/components/ui/confete.tsx` | proposta |
 | [Diagrama do ecossistema](propostas/2026-11-28-diagrama-de-ecossistema.md) | `DiagramaDeEcossistema em src/app/components/ui/diagrama-de-ecossistema.tsx` | proposta |
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
+| [Página 404 padrão e espaço abaixo do cabeçalho](propostas/2026-11-28-pagina-404-padrao.md) | `PaginaDeErro (nova variante moldura="card") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css` | aprovada (decisões da dona do produto de 28/11/2026; publicação com o "sim" dela) |
 | [Recorte de foto](propostas/2026-11-28-recorte-de-foto.md) | `RecorteDeFoto em src/app/components/ui/recorte-de-foto.tsx` | proposta |
 
 ## 6. Páginas e âncoras do site
@@ -1794,7 +1807,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Desenvolvimento** (`develop`): `dev-catalogo` Consulte o catálogo antes de montar qualquer peça · `dev-announcements` As últimas do desenvolvimento · `dev-platforms` Plataformas · `dev-setup` Como os tokens são definidos no código · `dev-reference` Referência de tokens · `dev-workflow` Mantendo design e código em sincronia · `dev-ai` Construindo com IA
 - **Identidade de marca** (`brand`): `brand` · `brand-logo-vertical` Logo vertical · `brand-logo-horizontal` Logo horizontal · `brand-symbol` Símbolo / Ícone · `brand-symbol-usage` Uso do símbolo · `brand-responsive` Responsividade · `brand-backgrounds` Aplicação em fundos · `brand-colors` Paleta da marca · `brand-typography` Tipografia · `brand-rules` Regras de uso · `brand-clearspace` Área de respiro
 - **Fundamentos** (`colors`): `colors` Paleta de cores · `typography` Tipografia · `spacing` · `radius` Raio · `shadows` Sombras · `colors-tokens` Tokens
-- **Grid e espaçamento** (`grid`): `grid-visao` Visão geral · `grid-escala` Escala de espaçamento · `grid-colunas` Grid de colunas · `grid-larguras` Larguras máximas · `grid-ritmo` Ritmo vertical · `grid-uso` Como usar · `grid-evitar` O que evitar · `grid-tokens` Tokens
+- **Grid e espaçamento** (`grid`): `grid-visao` Visão geral · `grid-escala` Escala de espaçamento · `grid-colunas` Grid de colunas · `grid-larguras` Larguras máximas · `grid-ritmo` Ritmo vertical · `grid-cabecalho` Espaço abaixo do cabeçalho · `grid-uso` Como usar · `grid-evitar` O que evitar · `grid-tokens` Tokens
 - **Design Tokens** (`tokens`): `tokens-intro` O que são tokens · `tokens-hierarchy` As três camadas · `tokens-design` Guia para designers · `tokens-ia` IA e tokens · `tokens-bridge` Mapeamento Design ↔ Dev · `tokens-definition` Implementação em código
 - **Integração** (`integration`)
 - **Usabilidade** (`usability`): `ux-principles` Princípios · `ux-hierarchy` Hierarquia de ações · `ux-targets` Tamanho de alvo · `ux-feedback` Status do sistema · `ux-states` Estados de conteúdo · `ux-errors` Erros e microcopy · `ux-destructive` Ações destrutivas · `ux-checklist` Revisão rápida
@@ -1813,8 +1826,8 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Ícones** (`icons`): `icon-sizes` Tamanhos e cores · `icon-library` Biblioteca · `icons-tokens` Tokens
 - **Overlays** (`overlays`): `breadcrumb` Breadcrumb · `pagination` Paginação · `tooltips` Tooltips · `dropdown` Dropdown · `dialogs` Diálogos · `accordion` Accordion · `overlays-tokens` Tokens
 - **Padrões do site** (`site`): `site-rodape` Rodapé · `site-flutuantes` Elementos flutuantes · `site-cookies` Aviso de cookies · `site-entrada` Entrada ao rolar · `site-frentes` Card de frente de atuação · `site-curvas` Divisores curvos
-- **Molduras e estados** (`molduras`): `molduras-cabecalho` Cabeçalho do site · `molduras-rodape` Rodapé do site · `molduras-conta` Moldura de conta · `molduras-estados` Vazio, final e erro · `molduras-alerta-tom` Alerta por tom · `molduras-logo` Componente do logo · `molduras-links` Links de texto e pular para o conteúdo
-- **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-horario` Campo de horário · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-calendario` Seletor de data (Calendar) · `campos-endereco` Endereço com sugestões (CampoDeEndereco) · `campos-tabela` Tabela adaptável · `campo-com-prefixo` Prefixo, sufixo e desabilitado · `escolha-ordenada` Escolha ordenada · `escala-de-notas` Escala de notas
+- **Molduras e estados** (`molduras`): `molduras-cabecalho` Cabeçalho do site · `molduras-rodape` Rodapé do site · `molduras-conta` Moldura de conta · `molduras-estados` Vazio, final e erro · `molduras-erro` Página de erro (404) · `molduras-alerta-tom` Alerta por tom · `molduras-logo` Componente do logo · `molduras-links` Links de texto e pular para o conteúdo
+- **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-horario` Campo de horário · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-calendario` Seletor de data (Calendar) · `campos-endereco` Endereço com sugestões (CampoDeEndereco) · `campos-tabela` Tabela adaptável · `campo-com-prefixo` Prefixo, sufixo e desabilitado · `escolha-ordenada` Escolha ordenada · `escala-de-notas` Escala de notas · `campos-consentimento` Caixa de consentimento
 - **Peças da área restrita** (`pecas-admin`): `admin-caixa` Caixa de entrada · `admin-conversa` Conversa · `admin-agenda` Agenda do mês · `admin-etapas` Etapas e cadastro · `admin-quadro` Quadro
 - **Seções do site** (`secoes-site`): `secoes-depoimentos` Card de depoimento · `secoes-artigos` Card de artigo · `secoes-logos` Faixa de logos · `secoes-citacao` Citação · `secoes-pilares` Pilares · `secoes-flutuantes` Cartão flutuante e luzes · `secoes-simulacao` Simulação em etapas · `secoes-ecossistema` Diagrama do ecossistema · `secoes-numeros` Números e cards de navegação · `secoes-saiba-prosa` Saiba mais e texto longo
 - **Header e menus** (`header`): `header-demo` Demonstração · `header-models` Modelos · `header-scroll` Comportamentos de rolagem · `header-mobile` Menus no celular · `header-backgrounds` Fundos por trás do header · `header-a11y` Checklist de acessibilidade · `header-usage` Uso · `header-tokens` Tokens

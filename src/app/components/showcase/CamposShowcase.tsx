@@ -23,6 +23,7 @@ import { EstadoVazio } from "../ui/estado-vazio";
 import { Calendar } from "../ui/calendar";
 import { CampoDeEndereco, type SugestaoDeEndereco } from "../ui/campo-de-endereco";
 import { SecaoCamposComAfixo, SecaoEscolhaOrdenada, SecaoEscalaDeNotas } from "./shared/LacunasDocs";
+import { SecaoCaixaDeConsentimento } from "./shared/SecaoCaixaDeConsentimento";
 
 /* Campos (27/11/2026): o campo padrão, e-mail com sugestão, estado e cidade, máscaras, busca, copiar, vários e-mails,
    chips de filtro, cartões de escolha, botão com estados de envio e a tabela que se adapta. */
@@ -398,6 +399,8 @@ function CamposShowcaseBase() {
       >
         <DemoEndereco />
       </SectionBlock>
+
+      <SecaoCaixaDeConsentimento />
 
       <SectionBlock
         id="campos-tabela"

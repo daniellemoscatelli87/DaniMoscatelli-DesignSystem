@@ -167,7 +167,7 @@ function BotaoDoAlerta({ tom, asChild = false, className, ...props }: BotaoDoAle
       data-tom={tomFinal}
       className={cn(
         variaveisDoTom({ tom: tomFinal }),
-        "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-md toque:min-h-11 border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-3 py-1 text-left text-body-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
+        "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-full toque:min-h-11 border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-4 py-1 text-left text-body-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
         "hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_8%,transparent)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground aria-disabled:pointer-events-none aria-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground",
         transicao,
@@ -188,7 +188,7 @@ function LinkDoAlerta({ asChild = false, className, ...props }: LinkDoAlertaProp
     <Comp
       data-slot="link-do-alerta"
       className={cn(
-        "inline-flex min-h-10 max-w-full items-center gap-2 rounded-sm bg-transparent toque:min-h-11 px-1 text-left text-body-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+        "inline-flex min-h-10 max-w-full items-center gap-2 rounded-full bg-transparent toque:min-h-11 px-2 text-left text-body-sm font-semibold leading-snug text-foreground underline decoration-[color:color-mix(in_oklab,var(--foreground)_35%,transparent)] underline-offset-4 hover:decoration-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:text-disabled-foreground disabled:no-underline aria-disabled:pointer-events-none aria-disabled:text-disabled-foreground aria-disabled:no-underline",
         transicao,
         foco,
