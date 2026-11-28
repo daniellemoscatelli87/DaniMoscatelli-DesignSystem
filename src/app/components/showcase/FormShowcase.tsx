@@ -5,6 +5,7 @@ import {
   Search, Eye, EyeOff, ChevronDown, Plus, Send, Upload, Loader2, Trash2, Edit3, Copy, Share, MoreHorizontal,
   ArrowRight, Check, X, Zap, Star, XCircle,
 } from "lucide-react";
+import { AlternadorCompactoDocs } from "./shared/AlternadorCompactoDocs";
 import { SegmentedControl } from "@/app/components/ui/segmented-control";
 import { Button } from "@/app/components/ui/button";
 import { Campo } from "@/app/components/ui/campo";
@@ -368,6 +369,13 @@ const [confirmacao, setConfirmacao] = useState("");
               <li>• {t("The selection is never removed by tapping again: there is always one active option.", "A seleção nunca é removida ao tocar de novo: sempre há uma opção ativa.")}</li>
               <li>• {t("Always give the group a visible label or an aria-label.", "Dê sempre ao grupo um rótulo visível ou um aria-label.")}</li>
             </ul>
+          </ShowcaseCard>
+        </SubSection>
+
+        <SubSection title={t("Compact switch", "Alternador compacto")}>
+          <div id="alternador-compacto" className="scroll-mt-32" />
+          <ShowcaseCard>
+            <AlternadorCompactoDocs />
           </ShowcaseCard>
         </SubSection>
 

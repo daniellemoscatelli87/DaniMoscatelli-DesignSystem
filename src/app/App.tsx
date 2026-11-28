@@ -37,6 +37,7 @@ import { GridShowcase } from "./components/showcase/GridShowcase";
 import { TimelineShowcase } from "./components/showcase/TimelineShowcase";
 import { UploadShowcase } from "./components/showcase/UploadShowcase";
 import { Toaster } from "./components/ui/sonner";
+import { AlternadorCompacto } from "./components/ui/alternador-compacto";
 import { CatalogoShowcase } from "./components/showcase/CatalogoShowcase";
 import { SitePatternsShowcase } from "./components/showcase/SitePatternsShowcase";
 import { GraficosShowcase } from "./components/showcase/GraficosShowcase";
@@ -140,6 +141,8 @@ const ptLabels: Record<string, string> = {
   "Buttons": "Botões",
   "Button Variants": "Variantes de botão",
   "Segmented Control": "Controle segmentado",
+  "Compact switch": "Alternador compacto",
+  "Logo on phones": "Logo no celular",
   "Password": "Senha",
   "Form Controls": "Controles de formulário",
   "Cards": "Cards",
@@ -475,6 +478,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "inputs",         label: "Form Controls",   sectionId: "buttons" },
           { id: "password",       label: "Password",        sectionId: "buttons" },
           { id: "segmented",      label: "Segmented Control", sectionId: "buttons" },
+          { id: "alternador-compacto", label: "Compact switch", sectionId: "buttons" },
           { id: "botao-quebra", label: "Texto longo no botão", sectionId: "buttons" },
           { id: "buttons-tokens", label: "Tokens",          sectionId: "buttons" },
         ],
@@ -634,6 +638,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "header-models",      label: "Models",                        sectionId: "header" },
           { id: "header-scroll",      label: "Scroll behaviours",             sectionId: "header" },
           { id: "header-mobile",      label: "Phone menus",                   sectionId: "header" },
+          { id: "header-logo-celular", label: "Logo on phones",            sectionId: "header" },
           { id: "header-backgrounds", label: "Backgrounds behind the header", sectionId: "header" },
           { id: "header-a11y",        label: "Accessibility checklist",       sectionId: "header" },
           { id: "header-usage",       label: "Usage",                         sectionId: "header" },
@@ -1023,52 +1028,26 @@ function AppShell() {
         </button>
 
 
-        {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-9 p-1 rounded-full bg-muted border border-border gap-1">
-          {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
-            <button
-              key={code}
-              type="button"
-              onClick={() => setLang(code)}
-              aria-pressed={lang === code}
-              title={full}
-              aria-label={full}
-              data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
-                lang === code
-                  ? "bg-card text-foreground shadow-sm border border-border"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {short}
-            </button>
-          ))}
-        </div>
-
-        {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-9 p-1 rounded-full bg-muted border border-border gap-1">
-          <button
-            onClick={() => setDark(false)}
-            data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
-              !dark
-                ? "bg-card text-foreground shadow-sm border border-border"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Sun style={{ height: "13px", width: "13px" }} />
-            <span className="hidden sm:inline">{t("Light", "Claro")}</span>
-          </button>
-          <button
-            onClick={() => setDark(true)}
-            data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
-              dark
-                ? "bg-card text-foreground shadow-sm border border-border"
-                : "text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <Moon style={{ height: "13px", width: "13px" }} />
-            <span className="hidden sm:inline">{t("Dark", "Escuro")}</span>
-          </button>
-        </div>
+        {/* Idioma e tema: o AlternadorCompacto do DS (28/11/2026), o mesmo desenho dos seletores feitos à mão antes */}
+        <AlternadorCompacto
+          aria-label={t("Language", "Idioma")}
+          value={lang}
+          onValueChange={setLang}
+          options={[
+            { value: "en", label: "EN", nome: "EN, English" },
+            { value: "pt", label: "PT", nome: "PT, Português (BR)" },
+          ]}
+        />
+        <AlternadorCompacto
+          aria-label={t("Theme", "Tema")}
+          value={dark ? "escuro" : "claro"}
+          onValueChange={(v) => setDark(v === "escuro")}
+          rotuloVisivel="sm"
+          options={[
+            { value: "claro", label: t("Light", "Claro"), icon: <Sun /> },
+            { value: "escuro", label: t("Dark", "Escuro"), icon: <Moon /> },
+          ]}
+        />
       </header>
 
       <div className="flex flex-1 pt-16">
