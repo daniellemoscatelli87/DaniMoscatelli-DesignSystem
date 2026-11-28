@@ -6,6 +6,8 @@ import { cn } from "./utils";
 import { Selo } from "./selo";
 import { withHighlight } from "./heading";
 import { useOrientacaoDoCard } from "./grade-de-cards";
+import { Button } from "./button";
+import { AcoesDoCard } from "./acoes-do-card";
 
 /**
  * PartnerCard (card de convite ao parceiro)
@@ -15,9 +17,8 @@ import { useOrientacaoDoCard } from "./grade-de-cards";
  * horizontal quando a grade virou lista (regra da dona do produto, 27/11/2026).
  * Fundo de card com um brilho suave na cor primária no canto, como o hero do site.
  *
- * Ações (regra do DS, 27/11/2026): ação principal e link secundário ficam lado a lado quando cabem. Quando não cabem
- * (card com menos de 22rem de conteúdo, como no celular), viram um grupo empilhado: os dois na largura toda, um
- * embaixo do outro, o secundário como botão de contorno. O link nunca fica sozinho embaixo do botão. Alvos de 44 px.
+ * Ações (regra da ação nos cards, 28/11/2026): divisor e, à direita, o link secundário (Button link) e a ação principal
+ * (pílula). No celular, os dois na largura toda, um embaixo do outro, o principal em cima. Alvos de 44 px no toque.
  */
 type Size = "p" | "m" | "g";
 
@@ -47,7 +48,7 @@ const titleSize: Record<Size, string> = {
 };
 const descSize: Record<Size, string> = { p: "text-body-sm", m: "text-body", g: "text-body-lg" };
 const visualBox: Record<Size, string> = { p: "h-12 w-12", m: "h-16 w-16", g: "h-24 w-24" };
-const ctaSize: Record<Size, string> = { p: "min-h-11 px-4 text-body-sm", m: "min-h-11 px-5 text-body-sm", g: "min-h-12 px-6 text-body" };
+const tamanhoDoBotao: Record<Size, "default" | "lg"> = { p: "default", m: "default", g: "lg" };
 
 export function PartnerCard({
   orientation: orientacaoFixa, size = "m", eyebrow, title, description, cta, secondary, visual, surface = "card", className, ...props
@@ -55,8 +56,6 @@ export function PartnerCard({
   const daGrade = useOrientacaoDoCard();
   const horizontal = (orientacaoFixa ?? daGrade ?? "vertical") === "horizontal";
   const dark = surface === "dark";
-  const Cta = cta.href ? "a" : "button";
-  const Sec = secondary?.href ? "a" : "button";
   return (
     <div
       data-slot="partner-card"
@@ -95,28 +94,24 @@ export function PartnerCard({
           {withHighlight(title, "text-primary-text")}
         </h3>
         {description && <p className={cn("mt-2 max-w-prose leading-relaxed", descSize[size], dark ? "text-white/70" : surface === "tint" ? "text-[color:color-mix(in_oklab,var(--muted-foreground)_85%,var(--foreground))]" : "text-muted-foreground")}>{description}</p>}
-        <div className={cn("@container/acoes mt-auto", size === "p" ? "pt-4" : "pt-6")}>
-        <div className="flex flex-col items-stretch gap-3 @[22rem]/acoes:flex-row @[22rem]/acoes:flex-wrap @[22rem]/acoes:items-center @[22rem]/acoes:gap-x-5">
-          <Cta
-            {...(cta.href ? { href: cta.href } : { type: "button", onClick: cta.onClick })}
-            className={cn("group inline-flex items-center justify-center gap-2 rounded-full bg-primary font-semibold text-primary-foreground shadow-[var(--shadow-sm)] transition-all hover:-translate-y-0.5 hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-md)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2", dark && "focus-visible:ring-offset-[var(--graphite-950)]", ctaSize[size])}
-          >
-            {cta.label}
-            <ArrowRight className={cn("transition-transform group-hover:translate-x-0.5", size === "g" ? "h-5 w-5" : "h-4 w-4")} aria-hidden />
-          </Cta>
-          {secondary && (
-            <Sec
-              {...(secondary.href ? { href: secondary.href } : { type: "button", onClick: secondary.onClick })}
-              className={cn(
-                "inline-flex min-h-11 items-center justify-center rounded-full border px-4 text-body-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                "@[22rem]/acoes:justify-start @[22rem]/acoes:rounded-sm @[22rem]/acoes:border-transparent @[22rem]/acoes:px-1 @[22rem]/acoes:underline-offset-4 @[22rem]/acoes:hover:underline",
-                dark ? "border-white/25 text-white/85 hover:bg-white/10 @[22rem]/acoes:hover:bg-transparent" : "border-input text-[var(--primary-text,var(--primary))] hover:bg-accent @[22rem]/acoes:hover:bg-transparent",
+        {/* Ações (regra da ação nos cards, dona do produto, 28/11/2026): divisor e a linha da ação (AcoesDoCard), com a
+            ação principal (pílula) na ponta direita e o secundário como botão link. No celular, os dois ocupam a largura
+            toda, um embaixo do outro, o principal em cima; do tablet em diante, lado a lado, à direita. */}
+        <div className={cn("mt-auto", size === "p" ? "pt-4" : "pt-6")}>
+          <AcoesDoCard className={dark ? "border-white/10" : undefined}>
+            {secondary && (
+              <Button asChild={!!secondary.href} variant="link" size={tamanhoDoBotao[size]} onClick={secondary.href ? undefined : secondary.onClick} type={secondary.href ? undefined : "button"} className={dark ? "text-white/85 hover:text-white" : undefined}>
+                {secondary.href ? <a href={secondary.href}>{secondary.label}</a> : secondary.label}
+              </Button>
+            )}
+            <Button asChild={!!cta.href} size={tamanhoDoBotao[size]} onClick={cta.href ? undefined : cta.onClick} type={cta.href ? undefined : "button"} className={cn("group", dark && "focus-visible:ring-offset-[var(--graphite-950)]")}>
+              {cta.href ? (
+                <a href={cta.href}>{cta.label}<ArrowRight className="transition-transform duration-[var(--duration-fast)] group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden /></a>
+              ) : (
+                <>{cta.label}<ArrowRight className="transition-transform duration-[var(--duration-fast)] group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden /></>
               )}
-            >
-              {secondary.label}
-            </Sec>
-          )}
-        </div>
+            </Button>
+          </AcoesDoCard>
         </div>
       </div>
     </div>

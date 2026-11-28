@@ -37,11 +37,11 @@ function Token({ name, value }: { name: string; value: string }) {
 }
 
 /* ── Replay button ── */
-/** Repetir uma animação: botão fantasma do DS, sempre no pé do card (mt-auto), na mesma altura em todos os cards. */
+/** Repetir uma animação: botão fantasma do DS, no pé do card (mt-auto), na largura toda do card (regra da ação nos cards, 28/11/2026). */
 function ReplayBtn({ onClick }: { onClick: () => void }) {
   const { t } = useI18n();
   return (
-    <Button variant="ghost" size="sm" onClick={onClick} className="mt-auto text-muted-foreground hover:text-foreground">
+    <Button variant="ghost" size="sm" onClick={onClick} className="mt-auto w-full text-muted-foreground hover:text-foreground">
       <RefreshCw aria-hidden /> {t("Replay", "Repetir")}
     </Button>
   );

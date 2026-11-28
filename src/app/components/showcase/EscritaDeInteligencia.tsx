@@ -55,7 +55,7 @@ function Descoberta({ card }: { card: CardDeDescoberta }) {
         aria-expanded={aberto}
         aria-controls={idDetalhes}
         onClick={() => setAberto(v => !v)}
-        className="mt-4 inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+        className="ml-auto mt-4 flex w-fit items-center gap-1 rounded-sm text-body-sm font-semibold toque:min-h-11 text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         {aberto ? t("Hide details", "Ocultar detalhes") : t("See details", "Ver detalhes")}
         <ChevronDown className={`h-4 w-4 transition-transform ${aberto ? "rotate-180" : ""}`} aria-hidden />

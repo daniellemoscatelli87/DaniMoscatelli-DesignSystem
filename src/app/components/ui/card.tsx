@@ -130,12 +130,17 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-/** Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito. */
+/**
+ * Rodapé do card: a linha da ação (regra da dona do produto, 28/11/2026). As ações ficam no lado DIREITO; no celular
+ * (abaixo de 640 px), os botões ocupam a largura toda, um embaixo do outro, o principal em cima (escreva a secundária
+ * antes da principal). Do tablet em diante, lado a lado, à direita. As mesmas regras do AcoesDoCard (theme.css, bloco
+ * "@ds-css-puro:cards-acao"). No Card horizontal, ganha o divisor do card em cima.
+ */
 function CardFooter({ className, children, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("mt-auto flex items-center px-6 pb-6 [.border-t]:pt-6", className)}
+      className={cn("mt-auto flex flex-wrap items-center justify-end gap-2 px-6 pb-6 [.border-t]:pt-6", className)}
       {...props}
     >
       <DivisorDoCard className="hidden" />

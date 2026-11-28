@@ -139,7 +139,7 @@ function CartaoDoCatalogo({ nome, componente, quando, cuidado, dados, children }
       )}
       <div className="mt-4">
         <button type="button" aria-expanded={aberto} aria-controls={id} onClick={() => setAberto(v => !v)}
-          className="inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          className="ml-auto flex w-fit items-center gap-1 rounded-sm toque:min-h-11 text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
           {aberto ? t("Hide data", "Ocultar dados") : t("See data", "Ver dados")}
           <ChevronDown aria-hidden className={`h-4 w-4 transition-transform motion-reduce:transition-none ${aberto ? "rotate-180" : ""}`} />
         </button>

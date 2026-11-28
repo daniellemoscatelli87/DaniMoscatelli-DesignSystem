@@ -38,6 +38,7 @@ import { CardsDeKpi } from "./DataShowcase";
 import { WobbleCardConteudo, ShineBorderConteudo, evitarWobble } from "./MotionShowcase";
 import { CanvasRevealCard, evitarCanvasReveal } from "./BackgroundsShowcase";
 import { SectionHeader } from "./shared/SectionHeader";
+import { SecaoAcaoNoCard, SecaoCardDePublicacao } from "./shared/AcaoNoCardDocs";
 
 
 function SpecCard({
@@ -560,10 +561,10 @@ export function CardShowcase() {
             description={t("A concise description establishes context before the main content.", "Uma descrição concisa estabelece o contexto antes do conteúdo principal.")}
             action={<Button variant="ghost" size="icon" aria-label={t("Open options", "Abrir opções")}><Sparkles /></Button>}
             footer={
-              <div className="flex w-full items-center justify-between gap-3">
-                <span className="text-label text-muted-foreground">{t("Updated 5 minutes ago", "Atualizado há 5 minutos")}</span>
+              <>
+                <span className="ds-acoes-do-card__info">{t("Updated 5 minutes ago", "Atualizado há 5 minutos")}</span>
                 <Button size="sm">{t("View report", "Ver relatório")}<ChevronRight /></Button>
-              </div>
+              </>
             }
           >
             <div className="grid grid-cols-3 gap-3">
@@ -696,8 +697,8 @@ export function CardShowcase() {
         </GradeDeCards>
         <p className="mt-3 text-body-sm leading-relaxed text-muted-foreground">{t("Same Card, same parts: orientacao=\"horizontal\" puts the CardMidia on the left and the header and content in the rest of the width; the footer goes below, across the whole card. Inside a GradeDeCards that became a list, the Card turns horizontal on its own.", "O mesmo Card, as mesmas partes: orientacao=\"horizontal\" põe a CardMidia à esquerda e o cabeçalho e o conteúdo no resto da largura; o rodapé vai para baixo, na largura inteira do card. Dentro de uma GradeDeCards que virou lista, o Card fica horizontal sozinho.")}</p>
         <div className="mt-4">
-          <Callout title={t("Card with an action: divider and button in the bottom-right corner", "Card com ação: divisor e botão no canto inferior direito")}>
-            <p>{t("Rule of the product owner (27/11/2026). In the horizontal card, the actions never form a column on the right, centred beside the content: the CardFooter becomes a full-width row below, with the card divider on top and the buttons aligned to the bottom-right corner. The vertical card keeps its footer at the bottom, as before.", "Regra da dona do produto (27/11/2026). No card horizontal, as ações nunca formam uma coluna à direita, centrada ao lado do conteúdo: o CardFooter vira uma linha de largura inteira embaixo, com o divisor do card em cima e os botões alinhados no canto inferior direito. O card vertical mantém o rodapé na base, como antes.")}</p>
+          <Callout title={t("Card with an action: divider and the action on the right", "Card com ação: divisor e a ação à direita")}>
+            <p>{t("Rules of the product owner (27/11 and 28/11/2026). In the horizontal card, the actions never form a column on the right, centred beside the content: the CardFooter becomes a full-width row below, with the card divider on top and the buttons on the right. In any card, the action sits on the right or takes the whole width; on phones, two buttons go one below the other. See The action in the card, below.", "Regras da dona do produto (27/11 e 28/11/2026). No card horizontal, as ações nunca formam uma coluna à direita, centrada ao lado do conteúdo: o CardFooter vira uma linha de largura inteira embaixo, com o divisor do card em cima e os botões à direita. Em qualquer card, a ação fica à direita ou ocupa a largura toda; no celular, dois botões ficam um embaixo do outro. Veja A ação no card, mais abaixo.")}</p>
           </Callout>
         </div>
       </section>
@@ -746,7 +747,7 @@ export function CardShowcase() {
                 [t("Difference up to the limit", "Diferença até o limite"), t("Side by side; the grid stretches the cards to the same height and the footer goes to the bottom.", "Lado a lado; a grade estica os cards até a mesma altura e o rodapé desce para a base.")],
                 [t(`Difference above ${LIMITE_DE_DIFERENCA.px} px`, `Diferença acima de ${LIMITE_DE_DIFERENCA.px} px`), t("One per row, horizontal cards.", "Um por linha, cards horizontais.")],
                 [t("Difference above 1/3 of the tallest card (and at least 64 px)", "Diferença acima de 1/3 do card mais alto (e de pelo menos 64 px)"), t("One per row, horizontal cards.", "Um por linha, cards horizontais.")],
-                [t("Card with an action (one per row)", "Card com ação (um por linha)"), t("Card with an action: divider and button in the bottom-right corner.", "Card com ação: divisor e botão no canto inferior direito.")],
+                [t("Card with an action (one per row)", "Card com ação (um por linha)"), t("Divider and the action on the right (see The action in the card).", "Divisor e a ação à direita (veja A ação no card).")],
                 [t("Back to side by side", "Volta para lado a lado"), t("Only when the difference falls below 75% of the limit (90 px, or 1/4 and 48 px), so it does not flicker.", "Só quando a diferença cai abaixo de 75% do limite (90 px, ou 1/4 e 48 px), para não piscar.")],
                 [t("One column (phone)", "Uma coluna (celular)"), t("Nothing changes: the cards are already one per row, vertical.", "Nada muda: os cards já ficam um por linha, na vertical.")],
               ]}
@@ -845,12 +846,12 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
         <GradeDeCards className="md:grid-cols-2 gap-4">
           <SpecCard
             title={t("Primary and secondary actions", "Ações primária e secundária")}
-            description={t("Place task-level actions together in the footer, with the primary action last.", "Coloque ações da tarefa juntas no rodapé, com a ação principal por último.")}
+            description={t("Both actions matter: outline and filled pill, on the right, the main one last.", "As duas ações importam: contorno e pílula preenchida, à direita, a principal por último.")}
             footer={
-              <div className="flex w-full justify-end gap-2">
+              <>
                 <Button variant="outline" size="sm">{t("Cancel", "Cancelar")}</Button>
                 <Button size="sm">{t("Save changes", "Salvar alterações")}</Button>
-              </div>
+              </>
             }
           >
             <p className="text-body-sm leading-relaxed text-muted-foreground">
@@ -875,12 +876,12 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
           </SpecCard>
           <SpecCard
             title={t("Destructive action", "Ação destrutiva")}
-            description={t("Separate destructive actions from the primary flow and name the consequence.", "Separe ações destrutivas do fluxo principal e nomeie a consequência.")}
+            description={t("Name the consequence; the destructive button stays at the far right and opens a confirmation.", "Nomeie a consequência; o botão destrutivo fica na ponta direita e abre uma confirmação.")}
             footer={
-              <div className="flex w-full items-center justify-between gap-2">
-                <Button variant="ghost" size="sm">{t("Keep project", "Manter projeto")}</Button>
+              <>
+                <Button variant="outline" size="sm">{t("Keep project", "Manter projeto")}</Button>
                 <Button variant="destructive" size="sm">{t("Delete project", "Excluir projeto")}</Button>
-              </div>
+              </>
             }
           >
             <Callout title={t("Confirmation required", "Confirmação necessária")}>
@@ -894,12 +895,16 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
             rows={[
               [t("Header", "Cabeçalho"), t("Contextual actions and overflow menus", "Ações contextuais e menus de opções"), "Ghost / icon"],
               [t("Content", "Conteúdo"), t("Inline navigation related to the content", "Navegação inline relacionada ao conteúdo"), "Link"],
-              [t("Footer", "Rodapé"), t("Task completion and supporting actions", "Conclusão da tarefa e ações de apoio"), "Primary + Outline"],
-              [t("Separated footer edge", "Extremidade separada do rodapé"), t("Destructive action with explicit consequence", "Ação destrutiva com consequência explícita"), "Destructive"],
+              [t("Footer, on the right", "Rodapé, à direita"), t("Main action and a minor second action", "Ação principal e uma segunda ação menor"), "Primary + Link"],
+              [t("Footer, on the right", "Rodapé, à direita"), t("Two actions that both really matter", "Duas ações que importam de verdade"), "Primary + Outline"],
+              [t("Footer, on the right", "Rodapé, à direita"), t("More than two actions", "Mais de duas ações"), "Primary + BotaoDeAcoes"],
+              [t("Footer, on the right", "Rodapé, à direita"), t("Destructive action with explicit consequence", "Ação destrutiva com consequência explícita"), "Outline + Destructive"],
             ]}
           />
         </div>
       </section>
+
+      <SecaoAcaoNoCard marca="dm" />
 
       <section id="card-ia" className="scroll-mt-32">
         <SectionHeader
@@ -1155,6 +1160,8 @@ import { Card, CardMidia, CardHeader, CardTitle, CardFooter } from "@/app/compon
       </section>
 
       {/* ═══ PARTE 2: CARD DE VIDRO ═══ */}
+      <SecaoCardDePublicacao marca="dm" foto={FOTO.src} alt={bi(FOTO.alt)} />
+
       <Parte id="card-vidro" numero={t("Part 2", "Parte 2")} titulo={t("Glass card", "Card de vidro")} texto={t("Translucent surface that blurs what is behind it, for photos, colour or gradients. Only combinations that pass the contrast check (WCAG AA) appear here; to test others, use Test the glass.", "Superfície translúcida que desfoca o que está atrás, para foto, cor ou gradiente. Aqui só aparecem combinações que passam na conferência de contraste (WCAG AA); para testar outras, use Testar o vidro.")} />
 
       <section id="card-glass" className="scroll-mt-32">

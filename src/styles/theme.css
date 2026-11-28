@@ -702,6 +702,282 @@
 /* Conteúdo que começa logo abaixo do cabeçalho do site (32 px no celular, 64 px do desktop em diante) */
 .ds-abaixo-do-cabecalho { padding-top: var(--espaco-abaixo-do-cabecalho); }
 
+/* ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+   @ds-css-puro:cards-acao:inicio
+   Ação nos cards e Card de publicação em CSS puro (decisão da dona do produto, 28/11/2026). Estas classes são a única
+   fonte do desenho da linha da ação dos cards (AcoesDoCard e CardFooter, ui/acoes-do-card.tsx e ui/card.tsx) e do
+   CardDePublicacao (ui/card-de-publicacao.tsx; o CardDeArtigo é o mesmo card): o componente em React só monta o HTML e
+   aplica estas classes. Páginas em HTML puro (as páginas originais do site) usam as classes direto, com os tokens deste
+   arquivo. Bloco igual nos dois design systems; só tokens com o mesmo nome nos dois. Fica em @layer components, para
+   que uma classe utilitária passada pelo produto (largura, margem) possa ajustar a peça.
+   ═════════════════════════════════════════════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  /* ── Linha da ação do card (regra da dona do produto, 28/11/2026) ──
+     <div class="ds-acoes-do-card">
+       <span class="ds-acoes-do-card__info">10–12 min de leitura</span>      (opcional: informação à esquerda)
+       <a class="ds-acoes-do-card__botao …" href="…">Saiba mais</a>          (secundária, antes no HTML)
+       <a class="ds-acoes-do-card__botao …" href="…">Quero participar</a>    (principal, a última: fica na ponta direita)
+     </div>
+     1. Divisor em cima (--border) e a ação no lado DIREITO; a informação (tempo de leitura, data, preço) à esquerda.
+        ds-acoes-do-card--sem-divisor tira o divisor (quando o card já tem um logo acima).
+     2. Celular (tela abaixo de 640 px): os botões ocupam a largura toda do card; com 2 botões, um embaixo do outro, o
+        principal em cima. A informação fica numa linha só dela, em cima, à esquerda. Um link de texto ("Ler artigo")
+        continua à direita.
+     3. Do tablet em diante: os botões lado a lado, à direita. Se não couberem, quebram para a linha de baixo, ainda à
+        direita.
+     4. Com o BotaoDeAcoes (mais de 2 ações): a principal e o botão de ações ficam na mesma linha também no celular; a
+        principal ocupa o resto da largura.
+     O mesmo vale para o CardFooter do Card (data-slot="card-footer"). Em React, um Button do DS (data-slot="button")
+     já conta como botão; no HTML puro, marque o botão com ds-acoes-do-card__botao. */
+  .ds-acoes-do-card {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-2) var(--space-3);
+    margin: 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border);
+  }
+  .ds-acoes-do-card--sem-divisor { padding-top: 0; border-top: 0; }
+  /* Sem informação à esquerda: quando os botões não cabem lado a lado (card estreito no computador), quebram de baixo
+     para cima, e o principal (o último) fica em cima, como no celular. */
+  .ds-acoes-do-card:not(:has(> .ds-acoes-do-card__info)) { flex-wrap: wrap-reverse; }
+  .ds-acoes-do-card__info {
+    min-width: 0;
+    margin-inline-end: auto;
+    color: var(--muted-foreground);
+    font-size: var(--text-label, 0.75rem);
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+  }
+  @media (max-width: 639.98px) {
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) {
+      flex-direction: column-reverse;
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):not(:has(> [data-slot=botao-de-acoes])) > :is([data-slot=button], .ds-acoes-do-card__botao) {
+      width: 100%;
+    }
+    /* informação e link de texto: numa linha só deles, em cima (column-reverse: a ordem maior fica em cima) */
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) > :not([data-slot=button], .ds-acoes-do-card__botao, [data-slot=card-divisor]) {
+      order: 1;
+      align-self: flex-start;
+    }
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) > a:not([data-slot=button], .ds-acoes-do-card__botao) {
+      align-self: flex-end;
+    }
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) { flex-wrap: wrap; }
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) > :is([data-slot=button], .ds-acoes-do-card__botao) { flex: 1 1 0; min-width: 0; }
+    :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) > .ds-acoes-do-card__info { flex: 1 1 100%; }
+  }
+  /* Prévia "como fica no celular" na documentação: as mesmas regras dentro de [data-tela=celular]. */
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) {
+    flex-direction: column-reverse;
+    flex-wrap: nowrap;
+    align-items: stretch;
+  }
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):not(:has(> [data-slot=botao-de-acoes])) > :is([data-slot=button], .ds-acoes-do-card__botao) {
+    width: 100%;
+  }
+  /* informação e link de texto: numa linha só deles, em cima (column-reverse: a ordem maior fica em cima) */
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) > :not([data-slot=button], .ds-acoes-do-card__botao, [data-slot=card-divisor]) {
+    order: 1;
+    align-self: flex-start;
+  }
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> :is([data-slot=button], .ds-acoes-do-card__botao)):not(:has(> [data-slot=botao-de-acoes])) > a:not([data-slot=button], .ds-acoes-do-card__botao) {
+    align-self: flex-end;
+  }
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) { flex-wrap: wrap; }
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) > :is([data-slot=button], .ds-acoes-do-card__botao) { flex: 1 1 0; min-width: 0; }
+  [data-tela=celular] :is(.ds-acoes-do-card, [data-slot=card-footer]):has(> [data-slot=botao-de-acoes]) > .ds-acoes-do-card__info { flex: 1 1 100%; }
+
+  /* ── Card de publicação (CardDePublicacao; o CardDeArtigo é o mesmo card) ──
+     <div class="ds-card-publicacao ds-card-publicacao--destaque">                    (--destaque | --horizontal | --vertical)
+       <article class="ds-card-publicacao__cartao">
+         <div class="ds-card-publicacao__midia">
+           <img class="ds-card-publicacao__foto" src="…" alt="…" loading="lazy">
+           <span class="ds-card-publicacao__selo"><span class="ds-card-publicacao__ponto" aria-hidden="true"></span>Mais recente</span>
+         </div>
+         <div class="ds-card-publicacao__corpo">
+           <p class="ds-card-publicacao__meta"><span class="ds-card-publicacao__categoria">Business design</span><span aria-hidden="true">•</span><span>01/09/2026</span></p>
+           <h3 class="ds-card-publicacao__titulo"><a class="ds-card-publicacao__link" href="…">Título da publicação</a></h3>
+           <p class="ds-card-publicacao__resumo">Resumo em até 3 linhas.</p>
+           <div class="ds-acoes-do-card ds-card-publicacao__rodape">
+             <span class="ds-acoes-do-card__info">10–12 min de leitura</span>
+             <span class="ds-card-publicacao__acao" aria-hidden="true">Ler artigo <svg …>→</svg></span>
+           </div>
+         </div>
+       </article>
+     </div>
+     O card inteiro é clicável pelo link do título (que se estende sobre o card); "Ler artigo" repete o convite só para
+     quem vê e fica à DIREITA da linha da ação, depois do divisor; o tempo de leitura fica à esquerda.
+     Formatos: destaque (foto e texto lado a lado, metade cada, a partir de 48rem do próprio card; título maior), horizontal
+     (foto à esquerda, 2/5, a partir de 26rem) e vertical (foto em cima). Resumo: até 3 linhas (2 no horizontal).
+     Hover: borda mais forte, título na cor de texto da primária, a foto aproxima um pouco e a seta se afasta; parado com
+     "menos movimento". Foco: anel --ring em volta do card. */
+  .ds-card-publicacao {
+    container: card-publicacao / inline-size;
+    box-sizing: border-box;
+    height: 100%;
+    font-family: var(--font-sans);
+  }
+  .ds-card-publicacao__cartao {
+    position: relative;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl, calc(var(--radius) + 12px));
+    background-color: var(--card);
+    color: var(--card-foreground);
+    transition: border-color var(--duration-normal) var(--ease-out);
+  }
+  .ds-card-publicacao__cartao:hover { border-color: var(--border-strong); }
+  .ds-card-publicacao__cartao:has(.ds-card-publicacao__link:focus-visible) { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .ds-card-publicacao__midia {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background-color: var(--muted);
+  }
+  .ds-card-publicacao__foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale var(--duration-xslow) var(--ease-out);
+  }
+  .ds-card-publicacao__cartao:hover .ds-card-publicacao__foto { scale: 1.05; }
+  .ds-card-publicacao__selo {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+    background-color: var(--card);
+    color: var(--primary-text);
+    box-shadow: var(--shadow-sm);
+    font-size: var(--text-label, 0.75rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ds-card-publicacao__ponto { width: 6px; height: 6px; border-radius: 9999px; background-color: var(--primary); }
+  .ds-card-publicacao__corpo {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    padding: var(--space-6);
+  }
+  .ds-card-publicacao__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 var(--space-2);
+    margin: 0 0 var(--space-3);
+    color: var(--muted-foreground);
+    font-size: var(--text-label, 0.75rem);
+    font-weight: var(--font-weight-medium);
+    line-height: 1rem;
+  }
+  .ds-card-publicacao__categoria {
+    color: var(--primary-text);
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .ds-card-publicacao__titulo {
+    margin: 0;
+    color: var(--foreground);
+    font-size: var(--text-body, 1rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.375;
+    text-wrap: balance;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+  .ds-card-publicacao__cartao:hover .ds-card-publicacao__titulo { color: var(--primary-text); }
+  .ds-card-publicacao__link { color: inherit; text-decoration: none; outline: none; }
+  /* o link do título cobre o card todo: o card inteiro abre a publicação */
+  .ds-card-publicacao__link::after { content: ""; position: absolute; inset: 0; }
+  .ds-card-publicacao__resumo {
+    display: -webkit-box;
+    margin: var(--space-3) 0 0;
+    overflow: hidden;
+    color: var(--muted-foreground);
+    font-size: var(--text-body-sm, 0.875rem);
+    line-height: 1.625;
+    text-wrap: pretty;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+  .ds-card-publicacao--horizontal .ds-card-publicacao__resumo { -webkit-line-clamp: 2; line-clamp: 2; }
+  .ds-card-publicacao__rodape { margin-top: auto; }
+  /* respiro mínimo entre o texto e o rodapé, mesmo quando o card estica na grade */
+  .ds-card-publicacao__corpo > :has(+ .ds-card-publicacao__rodape) { margin-bottom: var(--space-6); }
+  .ds-card-publicacao__acao {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--primary-text);
+    font-size: var(--text-body-sm, 0.875rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.25rem;
+    white-space: nowrap;
+    transition: gap var(--duration-fast) var(--ease-out);
+  }
+  .ds-card-publicacao__acao > svg { flex: none; width: 16px; height: 16px; }
+  .ds-card-publicacao__cartao:hover .ds-card-publicacao__acao { gap: var(--space-3); }
+  .ds-card-publicacao__so-leitor {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  /* toque: o título tem pelo menos 44 px de área de toque (o card todo também abre a publicação) */
+  @media (max-width: 639.98px), (pointer: coarse) {
+    .ds-card-publicacao__link { display: inline-flex; min-height: 44px; align-items: center; }
+  }
+  /* destaque: título maior; foto e texto lado a lado a partir de 48rem do próprio card */
+  .ds-card-publicacao--destaque .ds-card-publicacao__titulo { font-size: var(--text-h4, 1.25rem); }
+  @container card-publicacao (min-width: 48rem) {
+    .ds-card-publicacao--destaque .ds-card-publicacao__cartao { grid-template-columns: 1fr 1fr; grid-template-rows: none; }
+    .ds-card-publicacao--destaque .ds-card-publicacao__midia { aspect-ratio: auto; min-height: 20rem; }
+    .ds-card-publicacao--destaque .ds-card-publicacao__corpo { padding: var(--space-8); }
+    .ds-card-publicacao--destaque .ds-card-publicacao__titulo { font-size: var(--text-h3, 1.5rem); }
+    .ds-card-publicacao--destaque .ds-card-publicacao__resumo { font-size: var(--text-body, 1rem); }
+  }
+  /* horizontal: foto à esquerda (2/5) a partir de 26rem do próprio card (cabe em 2 colunas, como na página inicial) */
+  @container card-publicacao (min-width: 26rem) {
+    .ds-card-publicacao--horizontal .ds-card-publicacao__cartao { grid-template-columns: 2fr 3fr; grid-template-rows: none; }
+    .ds-card-publicacao--horizontal .ds-card-publicacao__midia { aspect-ratio: auto; min-height: 12rem; }
+  }
+  /* sem foto: o corpo ocupa o card todo */
+  .ds-card-publicacao__cartao:not(:has(.ds-card-publicacao__midia)) { grid-template-columns: none; grid-template-rows: 1fr; }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-card-publicacao__foto, .ds-card-publicacao__acao { transition: none; }
+    .ds-card-publicacao__cartao:hover .ds-card-publicacao__foto { scale: none; }
+    .ds-card-publicacao__cartao:hover .ds-card-publicacao__acao { gap: var(--space-2); }
+  }
+}
+/* @ds-css-puro:cards-acao:fim */
+
 /* ── Movimento ──
    Durações e curvas oficiais (documentadas em Movimento > Tokens). As curvas --ease-out, --ease-in e --ease-in-out
    também passam a valer para as classes ease-out, ease-in e ease-in-out do Tailwind. */

@@ -107,11 +107,12 @@ function AvisoCookies({
           </a>
         )}
       </p>
-      <div className="ml-auto flex flex-none gap-2 max-[479px]:w-full">
-        <Button type="button" variant="outline" size="lg" onClick={() => escolher("recusado")} className="h-11 rounded-full bg-card px-5 text-sm max-[479px]:flex-1">
+      {/* Ações (regra da ação nos cards, 28/11/2026): à direita; no celular, as duas na largura toda, uma embaixo da outra, Aceitar em cima. */}
+      <div className="ml-auto flex flex-none gap-2 max-sm:w-full max-sm:flex-col-reverse">
+        <Button type="button" variant="outline" size="lg" onClick={() => escolher("recusado")} className="h-11 rounded-full bg-card px-5 text-sm max-sm:w-full">
           {rotuloRecusar}
         </Button>
-        <Button type="button" size="lg" onClick={() => escolher("aceito")} className="h-11 rounded-full px-5 text-sm max-[479px]:flex-1">
+        <Button type="button" size="lg" onClick={() => escolher("aceito")} className="h-11 rounded-full px-5 text-sm max-sm:w-full">
           {rotuloAceitar}
         </Button>
       </div>

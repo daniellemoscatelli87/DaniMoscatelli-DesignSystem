@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 126,
-    "componentesExportados": 415,
-    "templatesEPadroesSoEmDemonstracao": 76,
-    "secoesComMarcacaoAMao": 45,
+    "arquivosDeComponentes": 129,
+    "componentesExportados": 418,
+    "templatesEPadroesSoEmDemonstracao": 77,
+    "secoesComMarcacaoAMao": 46,
     "tokens": 163,
     "paginas": 33,
-    "ancoras": 237,
-    "propostas": 46
+    "ancoras": 239,
+    "propostas": 48
   },
   "componentes": [
     {
@@ -74,7 +74,7 @@
           "ancora": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385,
+          "linha": 388,
           "uso": "direto",
           "exports": [
             "Accordion",
@@ -96,6 +96,93 @@
             "AccordionItem",
             "AccordionTrigger",
             "AccordionContent"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/acoes-do-card.tsx",
+      "nome": "acoes-do-card",
+      "quandoUsar": "AcoesDoCard (a linha da ação do card) — regra da dona do produto, 28/11/2026: \"Em todo tipo de card, a ação (botão) fica do lado direito e/ou ocupando 100% da largura do card. Com 2 botões num card pequeno, os dois ocupam a largura toda, um embaixo do outro (apenas no mobile). No desktop, se houver espaço, um ao lado do outro.\"",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "AcoesDoCard",
+          "tipo": "componente",
+          "linha": 30,
+          "descricao": "",
+          "props": [
+            "info",
+            "divisor",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "AcoesDoCardProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
+          "uso": "direto",
+          "exports": [
+            "AcoesDoCard"
+          ]
+        },
+        {
+          "pagina": "header",
+          "paginaRotulo": "Header e menus",
+          "ancora": "header-models",
+          "titulo": "Modelos",
+          "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
+          "linha": 730,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "AcoesDoCard"
+          ]
+        },
+        {
+          "pagina": "header",
+          "paginaRotulo": "Header e menus",
+          "ancora": "header-scroll",
+          "titulo": "Comportamentos de rolagem",
+          "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
+          "linha": 739,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "AcoesDoCard"
+          ]
+        },
+        {
+          "pagina": "header",
+          "paginaRotulo": "Header e menus",
+          "ancora": "header-mobile",
+          "titulo": "Menus no celular",
+          "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
+          "linha": 748,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "AcoesDoCard"
+          ]
+        },
+        {
+          "pagina": "header",
+          "paginaRotulo": "Header e menus",
+          "ancora": "header-backgrounds",
+          "titulo": "Fundos por trás do header",
+          "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
+          "linha": 757,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "AcoesDoCard"
           ]
         }
       ]
@@ -398,7 +485,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "AlertDialog",
@@ -671,7 +758,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -864,7 +951,19 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "Badge"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Badge"
@@ -970,6 +1069,62 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "BarraDeNumeros"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/botao-de-acoes.tsx",
+      "nome": "botao-de-acoes",
+      "quandoUsar": "BotaoDeAcoes (menu \"Ações\") — pedido da dona do produto, 28/11/2026: \"Se houver mais ações no card, vamos criar um botão de ações padronizado, inspirado no que já existe no painel administrativo. É um botão escrito 'Ações', com uma seta apontando para baixo. Quando a pessoa toca, abre o menu de opções. No mobile a palavra 'Ações' não aparece, e esse botão vira um botão com 3 pontinhos verticais dentro.\"",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "BotaoDeAcoes",
+          "tipo": "componente",
+          "linha": 56,
+          "descricao": "",
+          "props": [
+            "opcoes",
+            "rotulo",
+            "soIcone",
+            "desabilitado",
+            "alinhar",
+            "children",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BotaoDeAcoesProps",
+        "OpcaoDeAcao"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
+          "uso": "direto",
+          "exports": [
+            "BotaoDeAcoes"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-publicacao",
+          "titulo": "Card de publicação",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 386,
+          "uso": "direto",
+          "exports": [
+            "BotaoDeAcoes"
           ]
         }
       ]
@@ -1228,7 +1383,7 @@
           "ancora": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226,
+          "linha": 227,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Breadcrumb",
@@ -1376,7 +1531,7 @@
           "ancora": "card-anatomy",
           "titulo": "Anatomia do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 549,
+          "linha": 550,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1388,7 +1543,7 @@
           "ancora": "card-orientacao",
           "titulo": "Vertical e horizontal",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 668,
+          "linha": 669,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1400,7 +1555,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1412,7 +1567,7 @@
           "ancora": "card-actions",
           "titulo": "Botões em cards",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 837,
+          "linha": 838,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1424,7 +1579,7 @@
           "ancora": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904,
+          "linha": 909,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1436,7 +1591,7 @@
           "ancora": "card-states",
           "titulo": "Estados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 944,
+          "linha": 949,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1448,7 +1603,7 @@
           "ancora": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046,
+          "linha": 1051,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1460,7 +1615,19 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1520,7 +1687,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 320,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1880,7 +2047,7 @@
           "ancora": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594,
+          "linha": 595,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1892,7 +2059,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2423,7 +2590,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 320,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -3158,8 +3325,8 @@
         {
           "nome": "CardFooter",
           "tipo": "componente",
-          "linha": 134,
-          "descricao": "Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito.",
+          "linha": 139,
+          "descricao": "Rodapé do card: a linha da ação (regra da dona do produto, 28/11/2026). As ações ficam no lado DIREITO; no celular (abaixo de 640 px), os botões ocupam a largura toda, um embaixo do outro, o principal em cima (escreva a secundária antes da …",
           "props": [
             "className",
             "children"
@@ -3176,7 +3343,7 @@
           "ancora": "card-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 526,
+          "linha": 527,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3188,7 +3355,7 @@
           "ancora": "card-solido",
           "titulo": "Card sólido",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 547,
+          "linha": 548,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3200,7 +3367,7 @@
           "ancora": "card-anatomy",
           "titulo": "Anatomia do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 549,
+          "linha": 550,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Card",
@@ -3218,7 +3385,7 @@
           "ancora": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594,
+          "linha": 595,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Card"
@@ -3230,7 +3397,7 @@
           "ancora": "card-layout",
           "titulo": "Borda, sombra e raio",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 609,
+          "linha": 610,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3242,7 +3409,7 @@
           "ancora": "card-orientacao",
           "titulo": "Vertical e horizontal",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 668,
+          "linha": 669,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3259,7 +3426,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3277,7 +3444,7 @@
           "ancora": "card-actions",
           "titulo": "Botões em cards",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 837,
+          "linha": 838,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Card",
@@ -3295,7 +3462,7 @@
           "ancora": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904,
+          "linha": 909,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Card",
@@ -3313,7 +3480,7 @@
           "ancora": "card-states",
           "titulo": "Estados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 944,
+          "linha": 949,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3329,7 +3496,7 @@
           "ancora": "card-animacao",
           "titulo": "Animação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1007,
+          "linha": 1012,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3341,7 +3508,7 @@
           "ancora": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046,
+          "linha": 1051,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3358,7 +3525,7 @@
           "ancora": "card-nested",
           "titulo": "Cards aninhados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1090,
+          "linha": 1095,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3372,7 +3539,7 @@
           "ancora": "card-vidro",
           "titulo": "Card de vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1158,
+          "linha": 1165,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3384,7 +3551,7 @@
           "ancora": "card-guidelines",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1273,
+          "linha": 1280,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3396,7 +3563,7 @@
           "ancora": "card-accessibility",
           "titulo": "Acessibilidade do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1333,
+          "linha": 1340,
           "uso": "direto",
           "exports": [
             "Card"
@@ -3408,10 +3575,27 @@
           "ancora": "card-tokens",
           "titulo": "Tokens de card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1347,
+          "linha": 1354,
           "uso": "direto",
           "exports": [
             "Card"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardHeader",
+            "CardTitle",
+            "CardDescription",
+            "CardContent",
+            "CardFooter"
           ]
         },
         {
@@ -3597,30 +3781,25 @@
     {
       "arquivo": "src/app/components/ui/card-de-artigo.tsx",
       "nome": "card-de-artigo",
-      "quandoUsar": "CardDeArtigo (artigo, insight ou notícia): Os cartões de \"Insights & artigos\" da página inicial (grade \"bento\": um destaque largo e cartões horizontais) e da seção de artigos das páginas de apresentação. Foto, categoria e data, título (o link), resumo em até 3 linhas e o rodapé com o tempo de leitura e \"Ler artigo\".",
+      "quandoUsar": "CardDeArtigo (artigo, insight ou notícia): Desde 28/11/2026, é o CardDePublicacao (ui/card-de-publicacao.tsx), o card de publicação do DS, com \"Ler artigo\" como convite. Mesmas props de antes (titulo, href, resumo, imagem, alt, categoria, data, tempoDeLeitura, selo, formato, novaAba, nivel, textos, className).",
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
           "nome": "CardDeArtigo",
           "tipo": "componente",
-          "linha": 40,
+          "linha": 14,
           "descricao": "",
           "props": [
-            "titulo",
-            "href",
-            "resumo",
-            "imagem",
-            "alt",
-            "categoria",
-            "data",
-            "tempoDeLeitura",
-            "selo",
-            "formato",
-            "novaAba",
-            "nivel",
-            "textos",
-            "className"
+            "textos"
           ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDoCardDeArtigo",
+          "tipo": "utilitário",
+          "linha": 19,
+          "descricao": "HTML puro do CardDeArtigo (o CardDePublicacao com \"Ler artigo\").",
+          "props": [],
           "reexportaDe": null
         }
       ],
@@ -3806,6 +3985,65 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "CardDeNavegacao"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/card-de-publicacao.tsx",
+      "nome": "card-de-publicacao",
+      "quandoUsar": "CardDePublicacao (artigo, novidade, notícia, promoção) — o card de publicação do DS (28/11/2026)",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "CardDePublicacao",
+          "tipo": "componente",
+          "linha": 56,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "href",
+            "resumo",
+            "imagem",
+            "alt",
+            "categoria",
+            "data",
+            "info",
+            "tempoDeLeitura",
+            "selo",
+            "formato",
+            "novaAba",
+            "nivel",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "htmlDoCardDePublicacao",
+          "tipo": "utilitário",
+          "linha": 108,
+          "descricao": "O mesmo card em HTML puro, para as páginas que não usam React (as páginas originais do site). Precisa do bloco \"@ds-css-puro:cards-acao\" do theme.css na página. Os textos são escapados.",
+          "props": [],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CardDePublicacaoProps",
+        "FormatoDoCardDePublicacao"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-publicacao",
+          "titulo": "Card de publicação",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 386,
+          "uso": "direto",
+          "exports": [
+            "CardDePublicacao"
           ]
         }
       ]
@@ -4971,7 +5209,7 @@
           "ancora": "card-vidro",
           "titulo": "Card de vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1158,
+          "linha": 1165,
           "uso": "direto",
           "exports": [
             "AA"
@@ -4983,7 +5221,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160,
+          "linha": 1167,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AA",
@@ -4996,7 +5234,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198,
+          "linha": 1205,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AA",
@@ -5009,7 +5247,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AA",
@@ -5366,7 +5604,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 320,
           "uso": "direto",
           "exports": [
             "Dialog",
@@ -5452,7 +5690,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160,
+          "linha": 1167,
           "uso": "dentro de outro exemplo",
           "exports": [
             "DoodleTexture"
@@ -5464,7 +5702,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198,
+          "linha": 1205,
           "uso": "dentro de outro exemplo",
           "exports": [
             "DoodleTexture"
@@ -5476,7 +5714,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
           "uso": "dentro de outro exemplo",
           "exports": [
             "DoodleTexture"
@@ -5488,7 +5726,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "DoodleTexture"
@@ -5782,7 +6020,7 @@
           "ancora": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "DropdownMenu",
@@ -6325,7 +6563,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
           "uso": "direto",
           "exports": [
             "GlassCard",
@@ -6338,7 +6576,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160,
+          "linha": 1167,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GlassCard",
@@ -6351,7 +6589,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198,
+          "linha": 1205,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GlassCard",
@@ -6364,7 +6602,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GlassCard",
@@ -6525,7 +6763,7 @@
           "ancora": "card-anatomy",
           "titulo": "Anatomia do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 549,
+          "linha": 550,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6537,7 +6775,7 @@
           "ancora": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594,
+          "linha": 595,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6550,7 +6788,7 @@
           "ancora": "card-layout",
           "titulo": "Borda, sombra e raio",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 609,
+          "linha": 610,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6562,7 +6800,7 @@
           "ancora": "card-orientacao",
           "titulo": "Vertical e horizontal",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 668,
+          "linha": 669,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6575,7 +6813,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "direto",
           "exports": [
             "LIMITE_DE_DIFERENCA",
@@ -6589,7 +6827,7 @@
           "ancora": "card-actions",
           "titulo": "Botões em cards",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 837,
+          "linha": 838,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6601,7 +6839,7 @@
           "ancora": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904,
+          "linha": 909,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6614,7 +6852,7 @@
           "ancora": "card-states",
           "titulo": "Estados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 944,
+          "linha": 949,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6627,7 +6865,7 @@
           "ancora": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046,
+          "linha": 1051,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6639,7 +6877,7 @@
           "ancora": "card-nested",
           "titulo": "Cards aninhados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1090,
+          "linha": 1095,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6651,7 +6889,7 @@
           "ancora": "card-partner",
           "titulo": "Card de convite ao parceiro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1124,
+          "linha": 1129,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6663,7 +6901,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160,
+          "linha": 1167,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6676,7 +6914,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198,
+          "linha": 1205,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6689,7 +6927,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6701,7 +6939,32 @@
           "ancora": "card-guidelines",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1273,
+          "linha": 1280,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
+          "uso": "direto",
+          "exports": [
+            "GradeDeCards",
+            "ItemDaGrade"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-publicacao",
+          "titulo": "Card de publicação",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 386,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -7070,7 +7333,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7082,7 +7345,7 @@
           "ancora": "card-accessibility",
           "titulo": "Acessibilidade do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1333,
+          "linha": 1340,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7634,7 +7897,7 @@
           "ancora": "header-usage",
           "titulo": "Uso",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 795,
+          "linha": 798,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9458,7 +9721,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "Input"
@@ -9617,7 +9880,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -9641,7 +9904,7 @@
           "ancora": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700,
+          "linha": 703,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -9760,7 +10023,7 @@
           "ancora": "card-layout",
           "titulo": "Borda, sombra e raio",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 609,
+          "linha": 610,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -10505,7 +10768,7 @@
           "ancora": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Pagination",
@@ -11211,7 +11474,7 @@
         {
           "nome": "PartnerCard",
           "tipo": "componente",
-          "linha": 52,
+          "linha": 53,
           "descricao": "",
           "props": [
             "orientation",
@@ -11239,7 +11502,7 @@
           "ancora": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904,
+          "linha": 909,
           "uso": "direto",
           "exports": [
             "PartnerCard"
@@ -11251,7 +11514,7 @@
           "ancora": "card-partner",
           "titulo": "Card de convite ao parceiro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1124,
+          "linha": 1129,
           "uso": "direto",
           "exports": [
             "PartnerCard"
@@ -11465,7 +11728,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 320,
           "uso": "direto",
           "exports": [
             "Popover",
@@ -12000,7 +12263,7 @@
           "ancora": "card-animacao",
           "titulo": "Animação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1007,
+          "linha": 1012,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -12012,7 +12275,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -12502,7 +12765,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Sheet",
@@ -12575,7 +12838,7 @@
           "ancora": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046,
+          "linha": 1051,
           "uso": "direto",
           "exports": [
             "shinePresets",
@@ -13164,7 +13427,7 @@
           "ancora": "card-states",
           "titulo": "Estados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 944,
+          "linha": 949,
           "uso": "direto",
           "exports": [
             "Skeleton"
@@ -13214,7 +13477,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Slider"
@@ -13449,7 +13712,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Switch"
@@ -13461,7 +13724,7 @@
           "ancora": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700,
+          "linha": 703,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Switch"
@@ -13883,7 +14146,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "Textarea"
@@ -14089,7 +14352,7 @@
           "ancora": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Tooltip",
@@ -14346,7 +14609,7 @@
           "ancora": "card-layout",
           "titulo": "Borda, sombra e raio",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 609,
+          "linha": 610,
           "uso": "direto",
           "exports": [
             "cn"
@@ -14370,7 +14633,7 @@
           "ancora": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594,
+          "linha": 595,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14382,7 +14645,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705,
+          "linha": 706,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14394,7 +14657,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160,
+          "linha": 1167,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14406,7 +14669,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198,
+          "linha": 1205,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14418,7 +14681,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223,
+          "linha": 1230,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -14430,7 +14693,19 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267,
+          "linha": 1274,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "cn"
+          ]
+        },
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136,
           "uso": "dentro de outro exemplo",
           "exports": [
             "cn"
@@ -15605,7 +15880,7 @@
           "ancora": "card-animacao",
           "titulo": "Animação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1007
+          "linha": 1012
         }
       ],
       "usaComponentes": [
@@ -15617,7 +15892,7 @@
       "nome": "CenaDoVidro",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 113,
+      "linha": 114,
       "descricao": "Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene).",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15628,7 +15903,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160
+          "linha": 1167
         },
         {
           "pagina": "cards",
@@ -15636,7 +15911,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198
+          "linha": 1205
         },
         {
           "pagina": "cards",
@@ -15644,7 +15919,7 @@
           "ancora": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223
+          "linha": 1230
         },
         {
           "pagina": "cards",
@@ -15652,7 +15927,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267
+          "linha": 1274
         }
       ],
       "usaComponentes": [
@@ -15665,7 +15940,7 @@
       "nome": "GlassTestCard",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 175,
+      "linha": 176,
       "descricao": "Card de teste: título e subtítulo reais sobre o vidro, com avaliação de contraste (WCAG AA) e alerta dentro do card quando a configuração compromete a acessibilidade.",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15676,7 +15951,7 @@
           "ancora": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160
+          "linha": 1167
         },
         {
           "pagina": "cards",
@@ -15684,7 +15959,7 @@
           "ancora": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198
+          "linha": 1205
         },
         {
           "pagina": "cards",
@@ -15692,7 +15967,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267
+          "linha": 1274
         }
       ],
       "usaComponentes": [
@@ -15704,7 +15979,7 @@
       "nome": "GlassFinishPicker",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 213,
+      "linha": 214,
       "descricao": "",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15715,7 +15990,7 @@
           "ancora": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267
+          "linha": 1274
         }
       ],
       "usaComponentes": [
@@ -15733,7 +16008,7 @@
       "nome": "CardPorFundo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 332,
+      "linha": 333,
       "descricao": "",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15744,7 +16019,7 @@
           "ancora": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594
+          "linha": 595
         }
       ],
       "usaComponentes": [
@@ -15757,7 +16032,7 @@
       "nome": "DemoMesmaAltura",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 357,
+      "linha": 358,
       "descricao": "Dois cards lado a lado; o interruptor põe muito conteúdo no segundo e a GradeDeCards troca para um por linha.",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15768,7 +16043,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705
+          "linha": 706
         }
       ],
       "usaComponentes": [
@@ -15791,7 +16066,7 @@
       "nome": "CardDeExemplo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 429,
+      "linha": 430,
       "descricao": "Card pequeno dos exemplos certo e errado.",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15802,7 +16077,7 @@
           "ancora": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705
+          "linha": 706
         }
       ],
       "usaComponentes": [
@@ -15830,7 +16105,7 @@
           "ancora": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904
+          "linha": 909
         }
       ],
       "usaComponentes": [
@@ -15853,7 +16128,7 @@
           "ancora": "card-animacao",
           "titulo": "Animação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1007
+          "linha": 1012
         }
       ],
       "usaComponentes": [],
@@ -15874,13 +16149,40 @@
           "ancora": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046
+          "linha": 1051
         }
       ],
       "usaComponentes": [
         "ShineBorder"
       ],
       "elementosFeitosAMao": 5
+    },
+    {
+      "nome": "CardExemplo",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+      "linha": 48,
+      "descricao": "Card de exemplo da regra: título, texto e a linha da ação.",
+      "pagina": "cards",
+      "paginaRotulo": "Cards",
+      "onde": [
+        {
+          "pagina": "cards",
+          "paginaRotulo": "Cards",
+          "ancora": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136
+        }
+      ],
+      "usaComponentes": [
+        "Card",
+        "CardContent",
+        "CardDescription",
+        "CardHeader",
+        "CardTitle"
+      ],
+      "elementosFeitosAMao": 1
     },
     {
       "nome": "RoscaAntiga",
@@ -16246,7 +16548,7 @@
       "nome": "DrawerDemo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 135,
+      "linha": 136,
       "descricao": "Drawer",
       "pagina": "overlays",
       "paginaRotulo": "Overlays",
@@ -16403,7 +16705,7 @@
       "nome": "Segmentado",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-      "linha": 93,
+      "linha": 94,
       "descricao": "Controles da demonstração",
       "pagina": "header",
       "paginaRotulo": "Header e menus",
@@ -16414,7 +16716,7 @@
           "ancora": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700
+          "linha": 703
         }
       ],
       "usaComponentes": [],
@@ -16424,7 +16726,7 @@
       "nome": "Capa",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-      "linha": 141,
+      "linha": 142,
       "descricao": "Fundos por trás do header",
       "pagina": "header",
       "paginaRotulo": "Header e menus",
@@ -16435,7 +16737,7 @@
           "ancora": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700
+          "linha": 703
         }
       ],
       "usaComponentes": [],
@@ -16445,7 +16747,7 @@
       "nome": "DemoHeader",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-      "linha": 165,
+      "linha": 166,
       "descricao": "Demonstração: janela com rolagem própria",
       "pagina": "header",
       "paginaRotulo": "Header e menus",
@@ -16456,7 +16758,7 @@
           "ancora": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700
+          "linha": 703
         }
       ],
       "usaComponentes": [],
@@ -16466,7 +16768,7 @@
       "nome": "CardOpcao",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-      "linha": 551,
+      "linha": 552,
       "descricao": "Cards de explicação, com atalho para a demonstração",
       "pagina": "header",
       "paginaRotulo": "Header e menus",
@@ -16477,7 +16779,7 @@
           "ancora": "header-models",
           "titulo": "Modelos",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 727
+          "linha": 730
         },
         {
           "pagina": "header",
@@ -16485,7 +16787,7 @@
           "ancora": "header-scroll",
           "titulo": "Comportamentos de rolagem",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 736
+          "linha": 739
         },
         {
           "pagina": "header",
@@ -16493,7 +16795,7 @@
           "ancora": "header-mobile",
           "titulo": "Menus no celular",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 745
+          "linha": 748
         },
         {
           "pagina": "header",
@@ -16501,10 +16803,12 @@
           "ancora": "header-backgrounds",
           "titulo": "Fundos por trás do header",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 754
+          "linha": 757
         }
       ],
-      "usaComponentes": [],
+      "usaComponentes": [
+        "AcoesDoCard"
+      ],
       "elementosFeitosAMao": 3
     },
     {
@@ -16820,7 +17124,7 @@
       "ancora": "card-layout",
       "titulo": "Borda, sombra e raio",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 609,
+      "linha": 610,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Card",
@@ -16833,7 +17137,7 @@
       "ancora": "card-states",
       "titulo": "Estados",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 944,
+      "linha": 949,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Button",
@@ -16853,13 +17157,34 @@
       "ancora": "card-nested",
       "titulo": "Cards aninhados",
       "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-      "linha": 1090,
+      "linha": 1095,
       "elementosFeitosAMao": 5,
       "usaComponentes": [
         "Card",
         "CardDescription",
         "CardTitle",
         "GradeDeCards"
+      ]
+    },
+    {
+      "pagina": "cards",
+      "paginaRotulo": "Cards",
+      "ancora": "card-acao",
+      "titulo": "A ação no card",
+      "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+      "linha": 136,
+      "elementosFeitosAMao": 4,
+      "usaComponentes": [
+        "AcoesDoCard",
+        "BotaoDeAcoes",
+        "Button",
+        "Card",
+        "CardDescription",
+        "CardFooter",
+        "CardHeader",
+        "CardTitle",
+        "GradeDeCards",
+        "ItemDaGrade"
       ]
     },
     {
@@ -17004,7 +17329,7 @@
       "ancora": "tooltips",
       "titulo": "Tooltips",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 254,
+      "linha": 255,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Tooltip"
@@ -17016,7 +17341,7 @@
       "ancora": "dropdown",
       "titulo": "Dropdown",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 269,
+      "linha": 270,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "DropdownMenu",
@@ -17032,7 +17357,7 @@
       "ancora": "accordion",
       "titulo": "Accordion",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 385,
+      "linha": 388,
       "elementosFeitosAMao": 8,
       "usaComponentes": [
         "Accordion",
@@ -18335,7 +18660,7 @@
         "titulo": "Como escolher",
         "resumo": "Como escolher o card: pelo fundo, com borda ou com sombra",
         "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-        "linha": 526
+        "linha": 527
       },
       {
         "ancora": "card-layout",
@@ -18344,7 +18669,7 @@
         "titulo": "Borda, sombra e raio",
         "resumo": "Card: borda, sombra e raio",
         "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-        "linha": 609
+        "linha": 610
       },
       {
         "ancora": "card-guidelines",
@@ -18353,7 +18678,7 @@
         "titulo": "O que evitar",
         "resumo": "Card: o que evitar",
         "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-        "linha": 1273
+        "linha": 1280
       },
       {
         "ancora": "alerts",
@@ -18461,7 +18786,7 @@
         "titulo": "Uso",
         "resumo": "Cabeçalho: uso",
         "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-        "linha": 795
+        "linha": 798
       },
       {
         "ancora": "escrita-principios",
@@ -18520,7 +18845,7 @@
         "ancora": "card-evitar",
         "titulo": "O que evitar",
         "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-        "linha": 1272
+        "linha": 1279
       },
       {
         "pagina": "sidepanel",
@@ -18775,10 +19100,22 @@
       "componente": "tokens em src/styles/theme.css"
     },
     {
+      "arquivo": "propostas/2026-11-28-acao-no-card-e-botao-de-acoes.md",
+      "titulo": "A ação no card (AcoesDoCard) e o botão de ações (BotaoDeAcoes)",
+      "status": "proposta",
+      "componente": null
+    },
+    {
       "arquivo": "propostas/2026-11-28-caixa-de-consentimento.md",
       "titulo": "Caixa de consentimento",
       "status": "aprovada (dona do produto, 28/11/2026; publicação com o \"sim\" dela)",
       "componente": "CaixaDeConsentimento em src/app/components/ui/caixa-de-consentimento.tsx (mesmo arquivo e API no DS FindLook)"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-card-de-publicacao.md",
+      "titulo": "Card de publicação",
+      "status": "proposta",
+      "componente": "CardDePublicacao e htmlDoCardDePublicacao em src/app/components/ui/card-de-publicacao.tsx; CardDeArtigo (ui/card-de-artigo.tsx) passa a ser o mesmo card com \"Ler artigo\""
     },
     {
       "arquivo": "propostas/2026-11-28-confete.md",
@@ -19562,145 +19899,157 @@
           "id": "card-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 526
+          "linha": 527
         },
         {
           "id": "card-solido",
           "titulo": "Card sólido",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 547
+          "linha": 548
         },
         {
           "id": "card-anatomy",
           "titulo": "Anatomia do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 549
+          "linha": 550
         },
         {
           "id": "card-fundos",
           "titulo": "Por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 594
+          "linha": 595
         },
         {
           "id": "card-layout",
           "titulo": "Borda, sombra e raio",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 609
+          "linha": 610
         },
         {
           "id": "card-orientacao",
           "titulo": "Vertical e horizontal",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 668
+          "linha": 669
         },
         {
           "id": "card-mesma-altura",
           "titulo": "Mesma altura ou um por linha",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 705
+          "linha": 706
         },
         {
           "id": "card-actions",
           "titulo": "Botões em cards",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 837
+          "linha": 838
         },
         {
           "id": "card-ia",
           "titulo": "Arquitetura de informação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 904
+          "linha": 909
         },
         {
           "id": "card-states",
           "titulo": "Estados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 944
+          "linha": 949
         },
         {
           "id": "card-animacao",
           "titulo": "Animação",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1007
+          "linha": 1012
         },
         {
           "id": "card-shine",
           "titulo": "Shine Border",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1046
+          "linha": 1051
         },
         {
           "id": "card-nested",
           "titulo": "Cards aninhados",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1090
+          "linha": 1095
         },
         {
           "id": "card-partner",
           "titulo": "Card de convite ao parceiro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1124
+          "linha": 1129
         },
         {
           "id": "card-vidro",
           "titulo": "Card de vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1158
+          "linha": 1165
         },
         {
           "id": "card-glass",
           "titulo": "Vidro: acabamentos",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1160
+          "linha": 1167
         },
         {
           "id": "card-glass-fundos",
           "titulo": "Vidro por fundo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1198
+          "linha": 1205
         },
         {
           "id": "card-glass-conteudo",
           "titulo": "Vidro com conteúdo",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1223
+          "linha": 1230
         },
         {
           "id": "card-testar",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1266
+          "linha": 1273
         },
         {
           "id": "card-glass-teste",
           "titulo": "Testar o vidro",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1267
+          "linha": 1274
         },
         {
           "id": "card-evitar",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1272
+          "linha": 1279
         },
         {
           "id": "card-guidelines",
           "titulo": "O que evitar",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1273
+          "linha": 1280
         },
         {
           "id": "card-accessibility",
           "titulo": "Acessibilidade do card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1333
+          "linha": 1340
         },
         {
           "id": "card-tokens",
           "titulo": "Tokens de card",
           "arquivo": "src/app/components/showcase/CardShowcase.tsx",
-          "linha": 1347
+          "linha": 1354
+        },
+        {
+          "id": "card-acao",
+          "titulo": "A ação no card",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 136
+        },
+        {
+          "id": "card-publicacao",
+          "titulo": "Card de publicação",
+          "arquivo": "src/app/components/showcase/shared/AcaoNoCardDocs.tsx",
+          "linha": 386
         }
       ]
     },
@@ -19994,43 +20343,43 @@
           "id": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226
+          "linha": 227
         },
         {
           "id": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240
+          "linha": 241
         },
         {
           "id": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254
+          "linha": 255
         },
         {
           "id": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269
+          "linha": 270
         },
         {
           "id": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317
+          "linha": 320
         },
         {
           "id": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385
+          "linha": 388
         },
         {
           "id": "overlays-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 463
+          "linha": 466
         }
       ]
     },
@@ -20336,49 +20685,49 @@
           "id": "header-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 700
+          "linha": 703
         },
         {
           "id": "header-models",
           "titulo": "Modelos",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 727
+          "linha": 730
         },
         {
           "id": "header-scroll",
           "titulo": "Comportamentos de rolagem",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 736
+          "linha": 739
         },
         {
           "id": "header-mobile",
           "titulo": "Menus no celular",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 745
+          "linha": 748
         },
         {
           "id": "header-backgrounds",
           "titulo": "Fundos por trás do header",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 754
+          "linha": 757
         },
         {
           "id": "header-a11y",
           "titulo": "Checklist de acessibilidade",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 771
+          "linha": 774
         },
         {
           "id": "header-usage",
           "titulo": "Uso",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 795
+          "linha": 798
         },
         {
           "id": "header-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/HeaderShowcase.tsx",
-          "linha": 811
+          "linha": 814
         }
       ]
     },

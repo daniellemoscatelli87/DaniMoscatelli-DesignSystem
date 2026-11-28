@@ -46,9 +46,9 @@ function downloadSvg(markup: string, filename: string) {
 function DownloadButtons({ asset }: { asset: DownloadAsset }) {
   const { t } = useI18n();
   const btn =
-    "inline-flex items-center gap-1 rounded-full border border-border bg-background px-3 py-1 text-label font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+    "inline-flex items-center justify-center gap-1 rounded-full max-sm:min-h-11 border border-border bg-background px-3 py-1 text-label font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
   return (
-    <div className="flex shrink-0 items-center gap-2">
+    <div className="ml-auto flex shrink-0 items-center gap-2 max-sm:w-full max-sm:flex-col max-sm:items-stretch">
       <button
         type="button"
         onClick={() => downloadPng(asset.png, `${asset.filename}.png`)}

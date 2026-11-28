@@ -13,7 +13,7 @@ export function navegarPara(secao: string, ancora?: string) {
  * (por exemplo, tudo sobre cards fica em Cards). Mostra o motivo e um botão para ir até lá.
  *
  * Celular (abaixo de 640 px), como o Alerta com ação: uma borda esquerda só. O ícone fica na linha do título,
- * centralizado com ele; o texto e o botão começam na mesma borda do ícone. Do 640 px em diante: ícone numa coluna,
+ * centralizado com ele; o texto começa na mesma borda do ícone e o botão ocupa a largura toda (regra da ação nos cards, 28/11/2026). Do 640 px em diante: ícone numa coluna,
  * título e texto na coluna do meio e o botão à direita, centralizado na altura.
  */
 export function VejaEm({ secao, ancora, titulo, texto, rotuloBotao }: { secao: string; ancora?: string; titulo: string; texto: string; rotuloBotao?: string }) {
@@ -30,7 +30,7 @@ export function VejaEm({ secao, ancora, titulo, texto, rotuloBotao }: { secao: s
         variant="outline"
         size="sm"
         onClick={() => navegarPara(secao, ancora)}
-        className="col-span-2 col-start-1 row-start-3 justify-self-start sm:col-span-1 sm:col-start-3 sm:row-span-2 sm:row-start-1 sm:self-center"
+        className="col-span-2 col-start-1 row-start-3 w-full justify-self-stretch sm:w-auto sm:justify-self-end sm:col-span-1 sm:col-start-3 sm:row-span-2 sm:row-start-1 sm:self-center"
       >
         {rotuloBotao ?? t("See in Cards", "Ver em Cards")} <ArrowRight aria-hidden />
       </Button>

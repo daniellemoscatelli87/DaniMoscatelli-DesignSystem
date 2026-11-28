@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { AcoesDoCard } from "../ui/acoes-do-card";
 import {
   ArrowRight, BarChart2, Check, ChevronRight, Eye, EyeOff, FileText, Image as ImageIcon, LayoutDashboard, Mail,
   Maximize2, Menu, Minimize2, Monitor, Moon, PanelBottom, PanelRight, PanelTop, Palette, Pill, Settings,
@@ -565,16 +566,18 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
       <p className="mt-3 flex-1 text-body-sm leading-relaxed text-foreground">
         <strong className="font-semibold">{t("When to use:", "Quando usar:")}</strong> {quando}
       </p>
-      <button
-        type="button"
-        aria-pressed={ativo}
-        onClick={onAcao}
-        className={`mt-4 inline-flex h-9 items-center justify-center gap-1 self-start rounded-md border border-primary px-3 text-body-sm font-semibold transition-colors ${foco}
-          ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-accent`}`}
-      >
-        {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}
-        {ativo ? rotuloAcao[1] : rotuloAcao[0]}
-      </button>
+      <AcoesDoCard className="mt-4">
+        <button
+          type="button"
+          aria-pressed={ativo}
+          onClick={onAcao}
+          className={`ds-acoes-do-card__botao inline-flex h-9 items-center justify-center gap-1 rounded-md border border-primary px-3 text-body-sm font-semibold transition-colors ${foco}
+            ${ativo ? "bg-primary text-primary-foreground" : `bg-card ${textoMarca} hover:bg-accent`}`}
+        >
+          {ativo ? <Check aria-hidden className="h-4 w-4" /> : <Eye aria-hidden className="h-4 w-4" />}
+          {ativo ? rotuloAcao[1] : rotuloAcao[0]}
+        </button>
+      </AcoesDoCard>
     </div>
   );
 }

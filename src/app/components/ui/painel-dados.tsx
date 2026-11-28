@@ -99,7 +99,7 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
   explicacao?: React.ReactNode;
   /** Selo de estado embaixo do número (Badge do DS: "3 não respondidas"). */
   selo?: React.ReactNode;
-  /** Ação no rodapé do card (LinkVerTudo), separada por um DivisorSuave. */
+  /** Ação no rodapé do card (LinkVerTudo), separada por um DivisorSuave, à direita (regra da ação nos cards, 28/11/2026). */
   acao?: React.ReactNode;
   /** Base do ícone: "neutro" (padrão em grades de cards iguais) ou "marca". */
   tom?: TomDoIcone;
@@ -177,7 +177,7 @@ function CardIndicador({ icone, valor, total, rotulo, formato = "numero", format
       {acao && (
         <div className="mt-auto pt-4">
           <DivisorSuave />
-          <div className="pt-3">{acao}</div>
+          <div className="flex flex-wrap justify-end gap-2 pt-3">{acao}</div>
         </div>
       )}
     </Card>

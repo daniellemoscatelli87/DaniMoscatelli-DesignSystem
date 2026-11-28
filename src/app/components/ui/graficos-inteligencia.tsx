@@ -336,7 +336,7 @@ export function DescobertaVisual({ tema, conclusao, contexto, children, porQueIm
             aria-expanded={aberto}
             aria-controls={id}
             onClick={() => setAberto(v => !v)}
-            className="inline-flex items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="ml-auto flex w-fit items-center gap-1 rounded-sm text-body-sm font-semibold text-[var(--primary-text,var(--primary))] toque:min-h-11 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           >
             {aberto ? r.ocultarDados : r.verDados}
             <ChevronDown aria-hidden className={cn("h-4 w-4 transition-transform motion-reduce:transition-none", aberto && "rotate-180")} />
