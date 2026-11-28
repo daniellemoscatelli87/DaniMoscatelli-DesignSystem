@@ -17,15 +17,15 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
+          "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
         // O botão secundário do DS é o de contorno (decisão da dona do produto, 20/11/2026)
         secondary:
-          "border border-input bg-background text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
+          "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
         // Exclusão em contorno (27/11/2026, especificação da área restrita, ADMIN_REACT.md §7.1): ação destrutiva que não
         // é a principal da área ("Excluir", "Apagar tudo"); o vermelho cheio (destructive) fica só na confirmação.
         // Contorno e texto --error-text (5,5:1 no branco), hover --error-muted, foco com anel de erro.
         "exclusao-contorno":
-          "border border-[var(--error-text)] bg-background text-error-text hover:bg-error-muted focus-visible:ring-[var(--error)] dark:bg-input-fundo/30",
+          "border border-[var(--error-text)] bg-transparent text-error-text hover:bg-error-muted focus-visible:ring-[var(--error)] dark:bg-input-fundo/30",
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 disabled:bg-transparent disabled:hover:bg-transparent dark:disabled:bg-transparent",
         link: "text-primary-text underline-offset-4 hover:underline disabled:bg-transparent disabled:hover:bg-transparent disabled:no-underline",
