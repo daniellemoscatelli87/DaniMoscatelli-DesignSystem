@@ -683,7 +683,7 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 218,
+          "linha": 216,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -1363,7 +1363,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 185,
+          "linha": 183,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1495,7 +1495,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104,
+          "linha": 102,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1591,7 +1591,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 288,
+          "linha": 286,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1603,7 +1603,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 336,
+          "linha": 334,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1615,7 +1615,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 58,
+          "linha": 59,
           "uso": "direto",
           "exports": [
             "Button"
@@ -2521,7 +2521,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -3344,7 +3344,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 185,
+          "linha": 183,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3357,7 +3357,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 249,
+          "linha": 247,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3370,7 +3370,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104,
+          "linha": 102,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3383,7 +3383,7 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 218,
+          "linha": 216,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3396,7 +3396,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3409,7 +3409,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 288,
+          "linha": 286,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3422,7 +3422,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 58,
+          "linha": 59,
           "uso": "direto",
           "exports": [
             "Card",
@@ -4126,7 +4126,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4627,7 +4627,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104,
+          "linha": 102,
           "uso": "direto",
           "exports": [
             "dispararConfete"
@@ -5769,7 +5769,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 336,
+          "linha": 334,
           "uso": "direto",
           "exports": [
             "EscalaDeNotas",
@@ -5825,7 +5825,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 288,
+          "linha": 286,
           "uso": "direto",
           "exports": [
             "EscolhaOrdenada"
@@ -5908,7 +5908,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104,
+          "linha": 102,
           "uso": "direto",
           "exports": [
             "EstadoFinal"
@@ -6924,7 +6924,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 185,
+          "linha": 183,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7032,7 +7032,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 249,
+          "linha": 247,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7068,7 +7068,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104,
+          "linha": 102,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7080,7 +7080,7 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 218,
+          "linha": 216,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7320,7 +7320,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7332,7 +7332,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 288,
+          "linha": 286,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7344,7 +7344,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 336,
+          "linha": 334,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7512,7 +7512,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 58,
+          "linha": 59,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -8621,7 +8621,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 249,
+          "linha": 247,
           "uso": "direto",
           "exports": [
             "BarrasOrdenadas",
@@ -9411,7 +9411,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "direto",
           "exports": [
             "Label"
@@ -11517,7 +11517,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 58,
+          "linha": 59,
           "uso": "direto",
           "exports": [
             "RecorteDeFoto"
@@ -11765,6 +11765,18 @@
           ]
         },
         {
+          "pagina": "upload",
+          "paginaRotulo": "Upload",
+          "ancora": "recorte-de-foto",
+          "titulo": "Recorte de foto",
+          "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
+          "linha": 59,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
           "pagina": "backgrounds",
           "paginaRotulo": "Fundos",
           "ancora": "gradient-anim-bg",
@@ -11855,6 +11867,18 @@
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
           "linha": 101,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "upload",
+          "paginaRotulo": "Upload",
+          "ancora": "upload-dropzone",
+          "titulo": "Área de soltar",
+          "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
+          "linha": 131,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -13629,7 +13653,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146,
+          "linha": 144,
           "uso": "direto",
           "exports": [
             "Textarea"
@@ -19289,7 +19313,7 @@
           "id": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 185
+          "linha": 183
         }
       ]
     },
@@ -19537,7 +19561,7 @@
           "id": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 249
+          "linha": 247
         }
       ]
     },
@@ -19635,13 +19659,13 @@
           "id": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 104
+          "linha": 102
         },
         {
           "id": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 218
+          "linha": 216
         }
       ]
     },
@@ -19935,19 +19959,19 @@
           "id": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 146
+          "linha": 144
         },
         {
           "id": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 288
+          "linha": 286
         },
         {
           "id": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 336
+          "linha": 334
         }
       ]
     },
@@ -20199,7 +20223,7 @@
           "id": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 58
+          "linha": 59
         }
       ]
     }

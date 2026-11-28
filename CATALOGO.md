@@ -1061,7 +1061,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** SegmentedControl (controle segmentado): Opções acopladas, uma selecionada por vez, que se tocam como botões. Use para escolhas curtas e exclusivas (2 a 5 opções, rótulos de uma ou duas palavras): filtro, condição, período, modo de exibição. Sempre há uma opção selecionada. Teclado: setas movem a seleção; Tab entra e sai do grupo.
 - **Componentes:**
   - `SegmentedControl` (props: `options`, `value`, `defaultValue`, `onValueChange`, `variant`, `size`, `fullWidth`, `className`)
-- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 9 seções (ver `catalogo.json`)
+- **Onde ver:** Templates › Painel (`templates#template-painel`) · Botões › Controle segmentado (`buttons#segmented`) · Padrões do site › Entrada ao rolar (`site#site-entrada`) · e mais 11 seções (ver `catalogo.json`)
 
 ### select
 

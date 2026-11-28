@@ -13,6 +13,7 @@ import { dispararConfete } from "../../ui/confete";
 import { EstadoFinal } from "../../ui/estado-vazio";
 import { BarrasOrdenadas, Funil } from "../../ui/graficos-inteligencia";
 import { Card, CardContent } from "../../ui/card";
+import { SegmentedControl } from "../../ui/segmented-control";
 import { EscolhaOrdenada } from "../../ui/escolha-ordenada";
 import { EscalaDeNotas, GrupoDeEscalas } from "../../ui/escala-de-notas";
 
@@ -64,10 +65,7 @@ export function SecaoRecorteDeFoto() {
       />
       <Card>
         <CardContent className="grid gap-6 p-6">
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Forma do recorte">
-            <Button type="button" size="sm" variant={forma === "circulo" ? "default" : "outline"} aria-pressed={forma === "circulo"} onClick={() => setForma("circulo")}>Redondo</Button>
-            <Button type="button" size="sm" variant={forma === "quadrado" ? "default" : "outline"} aria-pressed={forma === "quadrado"} onClick={() => setForma("quadrado")}>Quadrado</Button>
-          </div>
+          <SegmentedControl size="sm" aria-label="Forma do recorte" className="self-start" value={forma} onValueChange={v => setForma(v as typeof forma)} options={[{ value: "circulo", label: "Redondo" }, { value: "quadrado", label: "Quadrado" }]} />
           {foto ? (
             <div className="flex flex-wrap items-center gap-4">
               <img src={foto} alt="Foto recortada" className={forma === "circulo" ? "size-24 rounded-full border border-border" : "size-24 rounded-md border border-border"} />
