@@ -11,8 +11,8 @@
     "secoesComMarcacaoAMao": 45,
     "tokens": 161,
     "paginas": 33,
-    "ancoras": 242,
-    "propostas": 53
+    "ancoras": 243,
+    "propostas": 54
   },
   "componentes": [
     {
@@ -74,7 +74,7 @@
           "ancora": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385,
+          "linha": 386,
           "uso": "direto",
           "exports": [
             "Accordion",
@@ -398,8 +398,8 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
-          "uso": "na página, fora das seções",
+          "linha": 619,
+          "uso": "na página, dentro de outro exemplo",
           "exports": [
             "AlertDialog",
             "AlertDialogContent",
@@ -683,7 +683,7 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 216,
+          "linha": 219,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -1228,7 +1228,7 @@
           "ancora": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226,
+          "linha": 227,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Breadcrumb",
@@ -1363,7 +1363,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 183,
+          "linha": 186,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1495,7 +1495,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102,
+          "linha": 105,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1519,7 +1519,19 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 318,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1591,7 +1603,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 286,
+          "linha": 289,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1603,7 +1615,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 334,
+          "linha": 337,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1615,7 +1627,7 @@
           "ancora": "quadro-link-esticado",
           "titulo": "Quadro com link esticado",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 466,
+          "linha": 469,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1627,7 +1639,7 @@
           "ancora": "lista-de-passos",
           "titulo": "Lista de passos",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 67,
+          "linha": 70,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1639,7 +1651,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59,
+          "linha": 60,
           "uso": "direto",
           "exports": [
             "Button"
@@ -2052,7 +2064,7 @@
         {
           "nome": "CabecalhoDoSite",
           "tipo": "componente",
-          "linha": 112,
+          "linha": 113,
           "descricao": "",
           "props": [
             "itens",
@@ -2093,6 +2105,18 @@
           "titulo": "Cabeçalho do site",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
           "linha": 101,
+          "uso": "direto",
+          "exports": [
+            "CabecalhoDoSite"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
           "uso": "direto",
           "exports": [
             "CabecalhoDoSite"
@@ -2355,7 +2379,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -2546,7 +2570,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -3369,7 +3393,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 183,
+          "linha": 186,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3382,7 +3406,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 247,
+          "linha": 250,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3395,7 +3419,7 @@
           "ancora": "barras-com-link",
           "titulo": "Barras ordenadas com link",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 315,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3408,7 +3432,7 @@
           "ancora": "grade-de-miniaturas",
           "titulo": "Grade de miniaturas",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 262,
+          "linha": 265,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3421,7 +3445,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102,
+          "linha": 105,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3434,7 +3458,20 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 216,
+          "linha": 219,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3447,7 +3484,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3460,7 +3497,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 286,
+          "linha": 289,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3473,7 +3510,7 @@
           "ancora": "item-marcavel",
           "titulo": "Item marcável",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 199,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3486,7 +3523,7 @@
           "ancora": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3499,7 +3536,7 @@
           "ancora": "quadro-link-esticado",
           "titulo": "Quadro com link esticado",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 466,
+          "linha": 469,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3512,7 +3549,7 @@
           "ancora": "lista-de-passos",
           "titulo": "Lista de passos",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 67,
+          "linha": 70,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3525,7 +3562,7 @@
           "ancora": "seletor-de-etapa",
           "titulo": "Seletor de etapa",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 149,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3538,7 +3575,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59,
+          "linha": 60,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3551,7 +3588,7 @@
           "ancora": "imagem-enviando",
           "titulo": "Imagem enviando e iniciais",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 417,
+          "linha": 420,
           "uso": "direto",
           "exports": [
             "Card",
@@ -4255,7 +4292,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4344,7 +4381,7 @@
           "ancora": "item-marcavel",
           "titulo": "Item marcável",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 199,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4356,7 +4393,7 @@
           "ancora": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4650,19 +4687,24 @@
         {
           "nome": "CommandDialog",
           "tipo": "componente",
-          "linha": 32,
-          "descricao": "",
+          "linha": 37,
+          "descricao": "CommandDialog (28/11/2026, igual nos dois DS): o título e a descrição ficam dentro da janela (escondidos na tela, lidos por leitores de tela), como o Radix pede.",
           "props": [
             "title",
             "description",
-            "children"
+            "children",
+            "filter",
+            "shouldFilter",
+            "loop",
+            "value",
+            "onValueChange"
           ],
           "reexportaDe": null
         },
         {
           "nome": "CommandInput",
           "tipo": "componente",
-          "linha": 56,
+          "linha": 66,
           "descricao": "",
           "props": [
             "className"
@@ -4672,7 +4714,7 @@
         {
           "nome": "CommandList",
           "tipo": "componente",
-          "linha": 78,
+          "linha": 88,
           "descricao": "",
           "props": [
             "className"
@@ -4682,7 +4724,7 @@
         {
           "nome": "CommandEmpty",
           "tipo": "componente",
-          "linha": 94,
+          "linha": 104,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -4690,7 +4732,7 @@
         {
           "nome": "CommandGroup",
           "tipo": "componente",
-          "linha": 106,
+          "linha": 116,
           "descricao": "",
           "props": [
             "className"
@@ -4700,7 +4742,7 @@
         {
           "nome": "CommandSeparator",
           "tipo": "componente",
-          "linha": 122,
+          "linha": 132,
           "descricao": "",
           "props": [
             "className"
@@ -4710,7 +4752,7 @@
         {
           "nome": "CommandItem",
           "tipo": "componente",
-          "linha": 135,
+          "linha": 145,
           "descricao": "",
           "props": [
             "className"
@@ -4720,7 +4762,7 @@
         {
           "nome": "CommandShortcut",
           "tipo": "componente",
-          "linha": 151,
+          "linha": 161,
           "descricao": "",
           "props": [
             "className"
@@ -4730,7 +4772,25 @@
       ],
       "tipos": [],
       "variantes": {},
-      "ondeVer": []
+      "ondeVer": [
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
+          "uso": "direto",
+          "exports": [
+            "CommandDialog",
+            "CommandInput",
+            "CommandList",
+            "CommandEmpty",
+            "CommandGroup",
+            "CommandItem"
+          ]
+        }
+      ]
     },
     {
       "arquivo": "src/app/components/ui/confete.tsx",
@@ -4780,7 +4840,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102,
+          "linha": 105,
           "uso": "direto",
           "exports": [
             "dispararConfete"
@@ -5379,7 +5439,7 @@
         {
           "nome": "DialogHeader",
           "tipo": "componente",
-          "linha": 78,
+          "linha": 80,
           "descricao": "",
           "props": [
             "className"
@@ -5389,7 +5449,7 @@
         {
           "nome": "DialogFooter",
           "tipo": "componente",
-          "linha": 88,
+          "linha": 90,
           "descricao": "",
           "props": [
             "className"
@@ -5399,7 +5459,7 @@
         {
           "nome": "DialogTitle",
           "tipo": "componente",
-          "linha": 101,
+          "linha": 103,
           "descricao": "",
           "props": [
             "className"
@@ -5409,7 +5469,7 @@
         {
           "nome": "DialogDescription",
           "tipo": "componente",
-          "linha": 114,
+          "linha": 116,
           "descricao": "",
           "props": [
             "className"
@@ -5426,12 +5486,29 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "Dialog",
             "DialogClose",
             "DialogContent",
+            "DialogTitle",
+            "DialogDescription"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
+          "uso": "direto",
+          "exports": [
+            "Dialog",
+            "DialogTrigger",
+            "DialogContent",
+            "DialogHeader",
             "DialogTitle",
             "DialogDescription"
           ]
@@ -5842,7 +5919,7 @@
           "ancora": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "DropdownMenu",
@@ -5922,7 +5999,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 334,
+          "linha": 337,
           "uso": "direto",
           "exports": [
             "EscalaDeNotas",
@@ -5978,7 +6055,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 286,
+          "linha": 289,
           "uso": "direto",
           "exports": [
             "EscolhaOrdenada"
@@ -6061,7 +6138,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102,
+          "linha": 105,
           "uso": "direto",
           "exports": [
             "EstadoFinal"
@@ -7077,7 +7154,7 @@
           "ancora": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 183,
+          "linha": 186,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7185,7 +7262,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 247,
+          "linha": 250,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7197,7 +7274,7 @@
           "ancora": "barras-com-link",
           "titulo": "Barras ordenadas com link",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 315,
+          "linha": 318,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7221,7 +7298,7 @@
           "ancora": "grade-de-miniaturas",
           "titulo": "Grade de miniaturas",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 262,
+          "linha": 265,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7245,7 +7322,7 @@
           "ancora": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102,
+          "linha": 105,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7257,7 +7334,19 @@
           "ancora": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 216,
+          "linha": 219,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7497,7 +7586,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7509,7 +7598,7 @@
           "ancora": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 286,
+          "linha": 289,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7521,7 +7610,7 @@
           "ancora": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 334,
+          "linha": 337,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7533,7 +7622,7 @@
           "ancora": "item-marcavel",
           "titulo": "Item marcável",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 199,
+          "linha": 202,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7545,7 +7634,7 @@
           "ancora": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360,
+          "linha": 363,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7617,7 +7706,7 @@
           "ancora": "quadro-link-esticado",
           "titulo": "Quadro com link esticado",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 466,
+          "linha": 469,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7713,7 +7802,7 @@
           "ancora": "seletor-de-etapa",
           "titulo": "Seletor de etapa",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 149,
+          "linha": 152,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7737,7 +7826,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59,
+          "linha": 60,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7749,7 +7838,7 @@
           "ancora": "imagem-enviando",
           "titulo": "Imagem enviando e iniciais",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 417,
+          "linha": 420,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7804,7 +7893,7 @@
           "ancora": "grade-de-miniaturas",
           "titulo": "Grade de miniaturas",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 262,
+          "linha": 265,
           "uso": "direto",
           "exports": [
             "GradeDeMiniaturas"
@@ -8903,7 +8992,7 @@
           "ancora": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 247,
+          "linha": 250,
           "uso": "direto",
           "exports": [
             "BarrasOrdenadas",
@@ -8916,7 +9005,7 @@
           "ancora": "barras-com-link",
           "titulo": "Barras ordenadas com link",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 315,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "BarrasOrdenadas"
@@ -9606,8 +9695,8 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
-          "uso": "na página, fora das seções",
+          "linha": 619,
+          "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Input"
           ]
@@ -9712,7 +9801,7 @@
           "ancora": "item-marcavel",
           "titulo": "Item marcável",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 199,
+          "linha": 202,
           "uso": "direto",
           "exports": [
             "ListaMarcavel",
@@ -9761,7 +9850,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "direto",
           "exports": [
             "Label"
@@ -10164,7 +10253,7 @@
           "ancora": "lista-de-passos",
           "titulo": "Lista de passos",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 67,
+          "linha": 70,
           "uso": "direto",
           "exports": [
             "NumeroDoPasso",
@@ -10781,7 +10870,7 @@
           "ancora": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Pagination",
@@ -11741,7 +11830,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 318,
           "uso": "direto",
           "exports": [
             "Popover",
@@ -11859,7 +11948,7 @@
           "ancora": "quadro-link-esticado",
           "titulo": "Quadro com link esticado",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 466,
+          "linha": 469,
           "uso": "direto",
           "exports": [
             "Quadro"
@@ -11921,7 +12010,7 @@
         {
           "nome": "RecorteDeFoto",
           "tipo": "componente",
-          "linha": 72,
+          "linha": 79,
           "descricao": "",
           "props": [
             "onRecortar",
@@ -11941,6 +12030,7 @@
         }
       ],
       "tipos": [
+        "ArquivoDoRecorte",
         "RecorteDeFotoProps"
       ],
       "variantes": {},
@@ -11951,7 +12041,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59,
+          "linha": 60,
           "uso": "direto",
           "exports": [
             "RecorteDeFoto"
@@ -12180,7 +12270,7 @@
           "ancora": "grade-de-miniaturas",
           "titulo": "Grade de miniaturas",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 262,
+          "linha": 265,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12204,7 +12294,7 @@
           "ancora": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12228,7 +12318,7 @@
           "ancora": "lista-de-passos",
           "titulo": "Lista de passos",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 67,
+          "linha": 70,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12240,7 +12330,7 @@
           "ancora": "seletor-de-etapa",
           "titulo": "Seletor de etapa",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 149,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12252,7 +12342,7 @@
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59,
+          "linha": 60,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12599,7 +12689,7 @@
           "ancora": "seletor-de-etapa",
           "titulo": "Seletor de etapa",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 149,
+          "linha": 152,
           "uso": "direto",
           "exports": [
             "SeletorDeEtapa"
@@ -12858,7 +12948,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 619,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Sheet",
@@ -13899,7 +13989,7 @@
           "ancora": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "TabelaAdaptavel"
@@ -14192,7 +14282,7 @@
           "ancora": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144,
+          "linha": 147,
           "uso": "direto",
           "exports": [
             "Textarea"
@@ -14252,8 +14342,8 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
-          "uso": "na página, fora das seções",
+          "linha": 619,
+          "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Textarea"
           ]
@@ -14458,7 +14548,7 @@
           "ancora": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Tooltip",
@@ -14656,7 +14746,7 @@
           "ancora": "imagem-enviando",
           "titulo": "Imagem enviando e iniciais",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 417,
+          "linha": 420,
           "uso": "direto",
           "exports": [
             "ImageUpload"
@@ -16597,7 +16687,7 @@
       "nome": "DrawerDemo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 135,
+      "linha": 136,
       "descricao": "Drawer",
       "pagina": "overlays",
       "paginaRotulo": "Overlays",
@@ -17355,7 +17445,7 @@
       "ancora": "tooltips",
       "titulo": "Tooltips",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 254,
+      "linha": 255,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Tooltip"
@@ -17367,7 +17457,7 @@
       "ancora": "dropdown",
       "titulo": "Dropdown",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 269,
+      "linha": 270,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "DropdownMenu",
@@ -17383,7 +17473,7 @@
       "ancora": "accordion",
       "titulo": "Accordion",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 385,
+      "linha": 386,
       "elementosFeitosAMao": 8,
       "usaComponentes": [
         "Accordion",
@@ -19166,6 +19256,12 @@
       "componente": "ItemMarcavel e ListaMarcavel em src/app/components/ui/item-marcavel.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-28-janela-busca-cabecalho-recorte.md",
+      "titulo": "Fechar das janelas, busca de comandos, cabeçalho sem itens e nome do arquivo no recorte",
+      "status": "proposta",
+      "componente": "DialogContent (ui/dialog.tsx), CommandDialog (ui/command.tsx), CabecalhoDoSite (ui/cabecalho-do-site.tsx), RecorteDeFoto (ui/recorte-de-foto.tsx)"
+    },
+    {
       "arquivo": "propostas/2026-11-28-lista-de-passos.md",
       "titulo": "Lista de passos",
       "status": "proposta",
@@ -19922,7 +20018,7 @@
           "id": "botao-quebra",
           "titulo": "Texto longo no botão",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 183
+          "linha": 186
         }
       ]
     },
@@ -20170,13 +20266,13 @@
           "id": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 247
+          "linha": 250
         },
         {
           "id": "barras-com-link",
           "titulo": "Barras ordenadas com link",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 315
+          "linha": 318
         }
       ]
     },
@@ -20219,7 +20315,7 @@
           "id": "grade-de-miniaturas",
           "titulo": "Grade de miniaturas",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 262
+          "linha": 265
         }
       ]
     },
@@ -20280,13 +20376,13 @@
           "id": "confete",
           "titulo": "Confete na conquista",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 102
+          "linha": 105
         },
         {
           "id": "avatar-decorativo",
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 216
+          "linha": 219
         }
       ]
     },
@@ -20379,43 +20475,49 @@
           "id": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226
+          "linha": 227
         },
         {
           "id": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240
+          "linha": 241
         },
         {
           "id": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254
+          "linha": 255
         },
         {
           "id": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269
+          "linha": 270
         },
         {
           "id": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317
+          "linha": 318
         },
         {
           "id": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385
+          "linha": 386
         },
         {
           "id": "overlays-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 463
+          "linha": 464
+        },
+        {
+          "id": "janelas-e-cabecalho",
+          "titulo": "Janela, busca e cabeçalho sem itens",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 534
         }
       ]
     },
@@ -20580,31 +20682,31 @@
           "id": "campo-com-prefixo",
           "titulo": "Prefixo, sufixo e desabilitado",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 144
+          "linha": 147
         },
         {
           "id": "escolha-ordenada",
           "titulo": "Escolha ordenada",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 286
+          "linha": 289
         },
         {
           "id": "escala-de-notas",
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 334
+          "linha": 337
         },
         {
           "id": "item-marcavel",
           "titulo": "Item marcável",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 199
+          "linha": 202
         },
         {
           "id": "tabela-linha-atual",
           "titulo": "Tabela com linha atual",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 360
+          "linha": 363
         }
       ]
     },
@@ -20647,7 +20749,7 @@
           "id": "quadro-link-esticado",
           "titulo": "Quadro com link esticado",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 466
+          "linha": 469
         }
       ]
     },
@@ -20849,13 +20951,13 @@
           "id": "lista-de-passos",
           "titulo": "Lista de passos",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 67
+          "linha": 70
         },
         {
           "id": "seletor-de-etapa",
           "titulo": "Seletor de etapa",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 149
+          "linha": 152
         }
       ]
     },
@@ -20874,13 +20976,13 @@
           "id": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
-          "linha": 59
+          "linha": 60
         },
         {
           "id": "imagem-enviando",
           "titulo": "Imagem enviando e iniciais",
           "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
-          "linha": 417
+          "linha": 420
         }
       ]
     }

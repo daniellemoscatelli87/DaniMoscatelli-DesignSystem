@@ -17,7 +17,8 @@ import { Button } from "./button";
  * Comportamento:
  * - Computador (a partir de 768 px): pílula clara que flutua no topo (modelo "pilula", padrão) com o símbolo, os links
  *   e a ação; ou faixa de ponta a ponta (modelo "faixa") com o logo completo, que vira símbolo ao rolar.
- * - Celular: faixa com o símbolo, a ação escondida e o botão Menu (44 px). Transparente no topo; ao rolar, fundo do
+ * - Celular: faixa com o símbolo, a ação escondida e o botão Menu (44 px); sem `itens` (28/11/2026), sem o botão Menu e
+ *   com as ações na faixa. Transparente no topo; ao rolar, fundo do
  *   card a 85% com desfoque e borda. O menu abre uma folha inferior com os links (a página atual no rosa de
  *   selecionado, --primary-suave) e a ação em botão cheio.
  * - Some ao rolar para baixo e volta ao rolar para cima (esconderAoRolar); recebe o foco de volta pelo teclado.
@@ -254,6 +255,13 @@ function CabecalhoDoSite({
       >
         <header className="flex h-16 w-full items-center justify-between gap-4 px-4">
           {linkInicio(simbolo)}
+          {/* Sem itens (28/11/2026): não há o que pôr no menu; o botão Menu some e as ações ficam na faixa. */}
+          {itens.length === 0 ? (
+            <div className="flex items-center gap-2">
+              {acaoSecundaria && <BotaoDaAcao A={A} a={acaoSecundaria} variant="ghost" slot="cabecalho-acao-secundaria" className={cn("px-4", escuro ? "text-white hover:bg-white/15 hover:text-white" : "text-foreground")} />}
+              {acao && <BotaoDaAcao A={A} a={acao} variant="outline" slot="cabecalho-acao" className={contornoDaAcao(escuro)} />}
+            </div>
+          ) : (
           <DialogPrimitive.Root open={aberto} onOpenChange={setAberto}>
             <DialogPrimitive.Trigger
               aria-label={tx.abrirMenu}
@@ -308,6 +316,7 @@ function CabecalhoDoSite({
               </DialogPrimitive.Content>
             </DialogPrimitive.Portal>
           </DialogPrimitive.Root>
+          )}
         </header>
       </div>
     </div>

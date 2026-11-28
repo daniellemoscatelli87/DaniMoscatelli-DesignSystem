@@ -29,23 +29,33 @@ function Command({
   );
 }
 
+/**
+ * CommandDialog (28/11/2026, igual nos dois DS): o título e a descrição ficam dentro da janela (escondidos na tela, lidos
+ * por leitores de tela), como o Radix pede. Repassa para o Command as props de busca: `filter`, `shouldFilter`, `loop`,
+ * `value` e `onValueChange` (por exemplo, shouldFilter={false} quando a lista já vem filtrada do servidor).
+ */
 function CommandDialog({
   title = "Paleta de comandos",
   description = "Busque um comando para executar…",
   children,
+  filter,
+  shouldFilter,
+  loop,
+  value,
+  onValueChange,
   ...props
 }: React.ComponentProps<typeof Dialog> & {
   title?: string;
   description?: string;
-}) {
+} & Pick<React.ComponentProps<typeof CommandPrimitive>, "filter" | "shouldFilter" | "loop" | "value" | "onValueChange">) {
   return (
     <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title}</DialogTitle>
-        <DialogDescription>{description}</DialogDescription>
-      </DialogHeader>
       <DialogContent className="overflow-hidden p-0">
-        <Command className="[&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <Command filter={filter} shouldFilter={shouldFilter} loop={loop} value={value} onValueChange={onValueChange} className="[&_[cmdk-group-heading]]:text-muted-foreground **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
           {children}
         </Command>
       </DialogContent>

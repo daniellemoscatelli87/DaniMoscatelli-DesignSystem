@@ -23,6 +23,7 @@ import { Textarea } from "../ui/textarea";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Calendar } from "../ui/calendar";
 import { CalendarDays } from "lucide-react";
+import { SecaoJanelasECabecalho } from "./shared/PecasDoProdutoDocs";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -211,7 +212,7 @@ function DataNaJanela() {
   );
 }
 
-export function OverlaysShowcase() {
+function OverlaysShowcaseBase() {
   const { t, bi } = useI18n();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
@@ -613,3 +614,15 @@ const overlaysTokenGroups = (t: TFn): TokenGroup[] => [
     ],
   },
 ];
+
+/* Peças de 28/11/2026 (shared/PecasDoProdutoDocs): a mesma documentação nos dois design systems. */
+export function OverlaysShowcase() {
+  return (
+    <>
+      <OverlaysShowcaseBase  />
+      <div className="mt-20 space-y-20">
+        <SecaoJanelasECabecalho />
+      </div>
+    </>
+  );
+}

@@ -52,6 +52,7 @@ function ComoUsar({ children }: { children: string }) {
 /* ── Recorte de foto ── */
 
 export function SecaoRecorteDeFoto() {
+  const [nome, setNome] = React.useState("");
   const [foto, setFoto] = React.useState<string | null>(null);
   const [forma, setForma] = React.useState<"circulo" | "quadrado">("circulo");
   React.useEffect(() => () => { if (foto) URL.revokeObjectURL(foto); }, [foto]);
@@ -71,18 +72,20 @@ export function SecaoRecorteDeFoto() {
               <img src={foto} alt="Foto recortada" className={forma === "circulo" ? "size-24 rounded-full border border-border" : "size-24 rounded-md border border-border"} />
               <div className="grid gap-2">
                 <p className="m-0 inline-flex items-center gap-1 text-body-sm font-semibold text-foreground"><Check aria-hidden className="size-4 text-primary-text" /> Foto pronta (600 × 600 px)</p>
+                {nome && <p className="m-0 text-body-sm text-muted-foreground">{nome}</p>}
                 <Button type="button" variant="outline" size="sm" onClick={() => setFoto(null)}>Trocar foto</Button>
               </div>
             </div>
           ) : (
-            <RecorteDeFoto key={forma} forma={forma} onRecortar={(_, url) => setFoto(url)} />
+            <RecorteDeFoto key={forma} forma={forma} onRecortar={(_, url, arquivo) => { setFoto(url); setNome(arquivo.nomeDoRecorte); }} />
           )}
         </CardContent>
       </Card>
       <ComoUsar>{`<RecorteDeFoto
   forma="circulo"                 // ou "quadrado"; o arquivo sai sempre quadrado
   tamanhoDeSaida={600}            // lado do arquivo, em px
-  onRecortar={(foto, url) => { /* foto é um Blob: envie; url serve para a prévia */ }}
+  onRecortar={(foto, url, arquivo) => { /* foto é um Blob: envie; url serve para a prévia;
+    arquivo = { nome, tipo } do arquivo escolhido e nomeDoRecorte ("praia.jpg") para mostrar numa lista */ }}
   onCancelar={() => fecharJanela()}
 />`}</ComoUsar>
       <p className="m-0 text-body-sm text-muted-foreground">Teclado: Tab chega à área da foto; as setas movem (Shift: passo maior), + e − mudam o zoom e 0 recomeça. O zoom também tem o controle deslizante e os botões − e +. Foto menor que 300 × 300 px, de outro formato ou maior que 15 MB mostra o erro logo abaixo da área de envio.</p>

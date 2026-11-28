@@ -28,9 +28,16 @@ import { UploadDropzone } from "./upload";
  *   troca de etapa não animam.
  */
 
+/** Dados do arquivo que a pessoa escolheu (28/11/2026). */
+export type ArquivoDoRecorte = { nome: string; tipo: string; nomeDoRecorte: string };
+
 export type RecorteDeFotoProps = {
   /** Recebe a foto recortada (Blob) e um endereço local (URL.createObjectURL) para a prévia; revogue-o quando não precisar. */
-  onRecortar: (foto: Blob, url: string) => void;
+  /**
+   * Recebe o recorte (Blob), um endereço local para a prévia e, desde 28/11/2026, os dados do arquivo escolhido: `nome` e
+   * `tipo` originais (para listas mostrarem o nome do arquivo) e `nomeDoRecorte` (o mesmo nome com a extensão do recorte).
+   */
+  onRecortar: (foto: Blob, url: string, arquivo: ArquivoDoRecorte) => void;
   onCancelar?: () => void;
   forma?: "circulo" | "quadrado";
   /** Lado do arquivo final, em pixels (padrão 600). */
@@ -74,7 +81,7 @@ function RecorteDeFoto({
   minimoPx = 300, formatos = ["image/jpeg", "image/png", "image/webp"], zoomMaximo = 3, textos, className,
 }: RecorteDeFotoProps) {
   const tx = { ...TEXTOS, ...textos };
-  const [foto, setFoto] = React.useState<{ img: HTMLImageElement; url: string; nome: string } | null>(null);
+  const [foto, setFoto] = React.useState<{ img: HTMLImageElement; url: string; nome: string; tipo: string } | null>(null);
   const [erro, setErro] = React.useState<string | null>(null);
   const [enq, setEnq] = React.useState<Enquadre>({ zoom: 1, x: 0, y: 0 });
   const [lado, setLado] = React.useState(280);
@@ -143,7 +150,7 @@ function RecorteDeFoto({
         URL.revokeObjectURL(url);
         return setErro(tx.erroPequena(f.name, img.naturalWidth, img.naturalHeight, minimoPx));
       }
-      setFoto({ img, url, nome: f.name });
+      setFoto({ img, url, nome: f.name, tipo: f.type });
       requestAnimationFrame(() => area.current?.focus());
     };
     img.onerror = () => { URL.revokeObjectURL(url); setErro(tx.erroLeitura(f.name)); };
@@ -156,7 +163,11 @@ function RecorteDeFoto({
     setUsando(true);
     c.toBlob(b => {
       setUsando(false);
-      if (b) onRecortar(b, URL.createObjectURL(b));
+      if (b) {
+        const extensao = tipo === "image/png" ? "png" : tipo === "image/webp" ? "webp" : "jpg";
+        const base = (foto?.nome ?? "").replace(/\.[^.]+$/, "") || "foto";
+        onRecortar(b, URL.createObjectURL(b), { nome: foto?.nome ?? `${base}.${extensao}`, tipo: foto?.tipo ?? tipo, nomeDoRecorte: `${base}.${extensao}` });
+      }
     }, tipo, qualidade);
   };
 

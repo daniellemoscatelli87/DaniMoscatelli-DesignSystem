@@ -564,6 +564,7 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "dialogs",          label: "Dialogs",    sectionId: "overlays" },
           { id: "accordion",        label: "Accordion",  sectionId: "overlays" },
           { id: "overlays-tokens",  label: "Tokens",     sectionId: "overlays" },
+          { id: "janelas-e-cabecalho", label: "Janela, busca e cabeçalho sem itens", sectionId: "overlays" },
         ],
       },
       { id: "site", label: "Site patterns", icon: Globe,

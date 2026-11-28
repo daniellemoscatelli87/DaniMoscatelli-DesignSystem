@@ -66,7 +66,9 @@ function DialogContent({
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="ring-offset-background focus-visible:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+        {/* Fechar (28/11/2026): o desenho continua pequeno, mas no toque a área é de 44 × 44 px (um ::after invisível
+            centralizado); data-alvo-compacto evita que a regra global de 44 px aumente o desenho. */}
+        <DialogPrimitive.Close data-alvo-compacto className="ring-offset-background focus-visible:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 inline-flex size-6 items-center justify-center rounded-sm opacity-70 toque:after:absolute toque:after:left-1/2 toque:after:top-1/2 toque:after:size-11 toque:after:-translate-x-1/2 toque:after:-translate-y-1/2 toque:after:content-[''] transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
           <XIcon />
           <span className="sr-only">Fechar</span>
         </DialogPrimitive.Close>

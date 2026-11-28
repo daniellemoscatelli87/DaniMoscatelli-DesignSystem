@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarCheck, Eye, GraduationCap, Rocket, RotateCcw, Store, UserRound } from "lucide-react";
+import { CalendarCheck, Eye, LogIn, Search, GraduationCap, Rocket, RotateCcw, Store, UserRound } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { DoDont, Mono } from "./Guidance";
 import { Button } from "../../ui/button";
@@ -14,6 +14,9 @@ import { BarrasOrdenadas } from "../../ui/graficos-inteligencia";
 import { TabelaAdaptavel } from "../../ui/tabela-adaptavel";
 import { ImageUpload } from "../../ui/upload";
 import { Quadro } from "../../ui/quadro";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "../../ui/dialog";
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "../../ui/command";
+import { CabecalhoDoSite } from "../../ui/cabecalho-do-site";
 
 /*
  * Documentação das peças que o produto FindLook ainda fazia à mão (28/11/2026), igual nos dois design systems:
@@ -167,8 +170,8 @@ export function SecaoSeletorDeEtapa() {
   rotulo="Etapa da ativação"
   etapas={[{ id: "cadastro", titulo: "Cadastro", descricao: "…", icone: <Store /> }, …]}
   atual={loja.etapa}
-  salvando={salvando}          // id da etapa sendo salva: trava as outras
-  feita={feita}                // id da que acabou de salvar: check por um momento
+  salvando={salvando} // id da etapa sendo salva: trava as outras
+  feita={feita} // id da que acabou de salvar: check por um momento
   onEscolher={(id) => mudar(id)}
 />`}</ComoUsar>
       <Regras itens={[
@@ -281,14 +284,14 @@ export function SecaoGradeDeMiniaturas() {
       </Card>
       <ComoUsar>{`<GradeDeMiniaturas
   rotulo="Peças da ideia de post"
-  colunas={2}            // máximo; em bloco estreito fica em 2
+  colunas={2} // máximo; em bloco estreito fica em 2
   maximo={4}
   itens={pecas.map(p => ({ id: p.id, titulo: p.nome, detalhe: \`\${preco} · \${p.loja}\`, foto: p.foto }))}
   vazio={<EstadoVazio tamanho="sm" moldura="tracejado" titulo="Aparece quando houver peças." />}
 />`}</ComoUsar>
       <Regras itens={[
         "Foto quadrada no cinza de apoio (--muted), cantos de 8 px; sem foto, o ícone de imagem no mesmo quadrado (a grade não pula).",
-        "Nome em text-label (12 px), cortado em 1 linha com o nome inteiro no title; detalhe em text-caption (11 px) cinza. A foto é decorativa: o nome escrito diz o que ela é.",
+        "Nome em text-label (12 px) e detalhe em text-caption (11 px) cinza, cada um com até 2 linhas (o nome inteiro fica no title). A foto é decorativa: o nome escrito diz o que ela é.",
         "Nunca rola para o lado: as colunas seguem a largura do próprio bloco. Com href, cada miniatura vira link com hover cinza e foco visível.",
       ]} />
       <DoDont
@@ -328,7 +331,7 @@ export function SecaoBarrasComLink() {
       <ComoUsar>{`<BarrasOrdenadas
   rotulo="Bairros com mais lojas"
   itens={bairros.map(b => ({ rotulo: b.nome, valor: b.lojas, href: \`/admin/lojas/?bairro=\${b.nome}\` }))}
-  comoLink={Link}         // o Link do Next, no produto
+  comoLink={Link} // o Link do Next, no produto
   formatar={(n) => \`\${n} lojas\`}
 />`}</ComoUsar>
       <Regras itens={[
@@ -385,7 +388,7 @@ export function SecaoTabelaLinhaAtual() {
       <ComoUsar>{`<TabelaAdaptavel
   linhas={bairros}
   chave={(b) => b.nome}
-  linhaAtual={bairroDoPlano}     // a chave da linha
+  linhaAtual={bairroDoPlano} // a chave da linha
   colunas={[{ id: "bairro", principal: true, celula: (b) => <>{b.nome}{b.nome === bairroDoPlano && <ChipDeEstado tom="marca">no plano</ChipDeEstado>}</> }, …]}
 />`}</ComoUsar>
       <Regras itens={[
@@ -435,7 +438,7 @@ export function SecaoImagemOcupada() {
       </Card>
       <ComoUsar>{`<ImageUpload
   shape="circle" size={88} label="Foto de perfil"
-  value={foto} iniciais="AL"          // sem foto, as iniciais
+  value={foto} iniciais="AL" // sem foto, as iniciais
   ocupado={enviando} textoOcupado="Enviando…"
   onChange={(arquivo) => enviar(arquivo)}
 />`}</ComoUsar>
@@ -501,8 +504,8 @@ export function SecaoQuadroComLinkEsticado() {
       <ComoUsar>{`cartao={(loja) => (
   <>
     <a href={ficha(loja)} className="after:absolute after:inset-0 after:content-['']">{loja.nome}</a>
-    <Button size="sm" variant="outline">Lembrar</Button>   // fica acima do link sozinho
-    <a href={site(loja)} data-acima-do-link>Site</a>        // outro link: marque para ficar acima
+    <Button size="sm" variant="outline">Lembrar</Button> // fica acima do link sozinho
+    <a href={site(loja)} data-acima-do-link>Site</a> // outro link: marque para ficar acima
   </>
 )}`}</ComoUsar>
       <Regras itens={[
@@ -512,6 +515,75 @@ export function SecaoQuadroComLinkEsticado() {
       <DoDont
         dos={["Estique só o link principal (o nome).", "Mantenha o botão Mover para, além de arrastar."]}
         donts={["Não estique dois links no mesmo cartão.", "Não envolva o cartão inteiro num <a> com botões dentro (controle dentro de controle)."]}
+      />
+    </section>
+  );
+}
+
+/* ── Janela, busca de comandos e cabeçalho sem itens ── */
+
+const CIDADES = ["Curitiba", "Campinas", "Florianópolis", "Porto Alegre", "São Paulo"];
+
+export function SecaoJanelasECabecalho() {
+  const [busca, setBusca] = React.useState("");
+  const [aberta, setAberta] = React.useState(false);
+  const [escolhida, setEscolhida] = React.useState("");
+  // Lista já filtrada fora do Command (como uma busca no servidor): shouldFilter={false}.
+  const filtradas = CIDADES.filter(c => c.toLowerCase().startsWith(busca.trim().toLowerCase()));
+  return (
+    <section id="janelas-e-cabecalho" className="scroll-mt-32 space-y-6">
+      <Cabecalho
+        titulo="Janela, busca de comandos e cabeçalho sem itens"
+        quando="Ajustes de 28/11/2026: o X de fechar das janelas com 44 px de área no toque; a busca de comandos com o título dentro da janela e as props de busca do Command; o cabeçalho do site sem itens, sem o botão Menu no celular."
+        arquivo="ui/dialog.tsx · ui/command.tsx · ui/cabecalho-do-site.tsx"
+        nomes={["DialogContent (fechar)", "CommandDialog (filter, shouldFilter, loop, value, onValueChange)", "CabecalhoDoSite (itens vazios)"]}
+      />
+      <Card>
+        <CardContent className="grid gap-6 p-6">
+          <div className="flex flex-wrap items-center gap-3">
+            <Dialog>
+              <DialogTrigger asChild><Button type="button" variant="outline">Abrir uma janela</Button></DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Janela de exemplo</DialogTitle>
+                  <DialogDescription>No celular, o X tem 44 × 44 px de área de toque; o desenho continua pequeno.</DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+            <Button type="button" variant="outline" onClick={() => setAberta(true)}><Search aria-hidden /> Buscar cidade</Button>
+            <p aria-live="polite" className="m-0 text-body-sm text-muted-foreground">{escolhida ? `Cidade escolhida: ${escolhida}.` : ""}</p>
+          </div>
+          <CommandDialog open={aberta} onOpenChange={setAberta} title="Buscar cidade" description="Digite o começo do nome da cidade." shouldFilter={false}>
+            <CommandInput placeholder="Digite o nome da cidade" value={busca} onValueChange={setBusca} />
+            <CommandList>
+              <CommandEmpty>Nenhuma cidade com esse começo.</CommandEmpty>
+              <CommandGroup heading="Cidades (exemplo)">
+                {filtradas.map(c => <CommandItem key={c} value={c} onSelect={() => { setEscolhida(c); setAberta(false); }}>{c}</CommandItem>)}
+              </CommandGroup>
+            </CommandList>
+          </CommandDialog>
+          <div className="border-t border-border pt-5">
+            <h3 className="mb-3 text-body-sm font-semibold text-foreground">Cabeçalho sem itens, no celular</h3>
+            <div className="max-w-sm overflow-hidden rounded-lg border border-border" data-cards-ignorar>
+              <CabecalhoDoSite itens={[]} tela="celular" posicao="sticky" esconderAoRolar={false} inicioHref="#janelas-e-cabecalho" acao={{ rotulo: "Entrar", href: "#janelas-e-cabecalho", icone: <LogIn aria-hidden /> }} />
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <ComoUsar>{`<CommandDialog open={aberta} onOpenChange={setAberta} title="Buscar cidade"
+  shouldFilter={false}              // a lista já vem filtrada (do servidor)
+  filter={(valor, busca) => …}      // ou um filtro próprio
+>…</CommandDialog>
+
+<CabecalhoDoSite itens={[]} acao={{ rotulo: "Entrar", href: "/entrar" }} />   // sem botão Menu`}</ComoUsar>
+      <Regras itens={[
+        "Fechar das janelas: desenho de 24 px; no toque, um ::after invisível de 44 × 44 px centralizado (data-alvo-compacto evita que a regra global aumente o desenho).",
+        "CommandDialog: título e descrição dentro da janela, escondidos na tela e lidos por leitores de tela (o Radix pede o DialogTitle dentro do conteúdo).",
+        "CabecalhoDoSite sem itens: no celular, nada de botão Menu (abriria uma folha vazia); as ações ficam na faixa, ao lado do logo.",
+      ]} />
+      <DoDont
+        dos={["Use shouldFilter={false} quando a busca for feita fora (no servidor).", "Deixe o cabeçalho sem itens nas telas de entrar e de cadastro."]}
+        donts={["Não crie um botão de fechar próprio: o da janela já tem a área de toque certa.", "Não mostre o botão Menu sem nada para mostrar."]}
       />
     </section>
   );

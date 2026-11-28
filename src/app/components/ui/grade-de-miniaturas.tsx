@@ -13,8 +13,8 @@ import { cn } from "./utils";
  * - `maximo` corta a lista (padrão: todas); `vazio` aparece quando não há itens.
  * - Sem foto: o ícone de imagem em cinza, no mesmo quadrado (a grade não pula).
  * - Com `href` (ou `onClick`), cada miniatura vira link (ou botão) com hover cinza e foco visível; sem, só mostra.
- * Texto: nome em text-label (12 px, médio, cortado em 1 linha com o nome inteiro no title) e detalhe em text-caption
- * (11 px) cinza. A foto é decorativa (alt vazio): o nome escrito diz o que ela é.
+ * Texto: nome em text-label (12 px, médio, até 2 linhas, com o nome inteiro no title) e detalhe em text-caption
+ * (11 px) cinza, até 2 linhas. A foto é decorativa (alt vazio): o nome escrito diz o que ela é.
  * Movimento: as fotos aparecem com um esmaecer curto; com "menos movimento", aparecem prontas.
  */
 
@@ -62,8 +62,8 @@ export function GradeDeMiniaturas({ itens, colunas = 2, maximo, vazio, rotulo, c
                   <ImageOff aria-hidden className="size-5 text-muted-foreground" />
                 )}
               </span>
-              <span title={m.titulo} className="mt-1 block truncate text-label font-medium text-foreground">{m.titulo}</span>
-              {m.detalhe && <span className="block truncate text-caption text-muted-foreground">{m.detalhe}</span>}
+              <span title={m.titulo} className="mt-1 line-clamp-2 text-label font-medium leading-snug text-foreground">{m.titulo}</span>
+              {m.detalhe && <span className="line-clamp-2 text-caption leading-snug text-muted-foreground">{m.detalhe}</span>}
             </>
           );
           const interativo = "-m-1 block rounded-md p-1 text-left transition-colors duration-[var(--duration-fast)] hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
