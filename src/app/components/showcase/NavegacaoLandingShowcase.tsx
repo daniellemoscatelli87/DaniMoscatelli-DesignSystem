@@ -176,25 +176,25 @@ export function NavegacaoLandingShowcase() {
               <ConteudoDoHero titulo={t("Example hero title", "Título do hero de exemplo")} />
             </HeroComAba>
             <MenuDeAncoras raiz={caixaExemplo} fixo noCelular="seletor" itens={itensExemplo} rotulo={t("On this page", "Nesta página")} className="px-6 sm:px-10" />
-            <section id="ex-sobre" className="px-6 py-12 sm:px-10">
+            <div id="ex-sobre" className="px-6 py-12 sm:px-10">
               <SurgirAoRolar raiz={caixaExemplo} escalonar className="max-w-2xl space-y-3">
-                <h4 className="text-h4 font-bold text-foreground">{t("About", "Sobre")}</h4>
+                <h3 className="text-h4 font-bold text-foreground">{t("About", "Sobre")}</h3>
                 <p className="text-body leading-relaxed text-muted-foreground">{t("Example text. The blocks appear as they reach the screen.", "Texto de exemplo. Os blocos surgem quando chegam na tela.")}</p>
                 <p className="text-body leading-relaxed text-muted-foreground">{t("Second example paragraph, entering right after the first.", "Segundo parágrafo de exemplo, entrando logo depois do primeiro.")}</p>
               </SurgirAoRolar>
-            </section>
+            </div>
             <FundoDeExemplo raiz={caixaExemplo} className="px-6 py-20 sm:px-10 sm:py-24">
-              <section id="ex-como" className="max-w-md rounded-lg border border-border bg-card p-6">
-                <h4 className="text-h4 font-bold text-foreground">{t("How it works", "Como funciona")}</h4>
+              <div id="ex-como" className="max-w-md rounded-lg border border-border bg-card p-6">
+                <h3 className="text-h4 font-bold text-foreground">{t("How it works", "Como funciona")}</h3>
                 <p className="mt-2 text-body leading-relaxed text-muted-foreground">{t("The photo behind this card moves slower than the page.", "A foto atrás deste card anda mais devagar que a página.")}</p>
-              </section>
+              </div>
             </FundoDeExemplo>
-            <section id="ex-etapas" className="px-6 py-12 sm:px-10">
+            <div id="ex-etapas" className="px-6 py-12 sm:px-10">
               <SecaoFixa
                 topo={72}
                 fixo={
                   <div className="space-y-2">
-                    <h4 className="text-h4 font-bold text-foreground">{t("Steps", "Etapas")}</h4>
+                    <h3 className="text-h4 font-bold text-foreground">{t("Steps", "Etapas")}</h3>
                     <p className="text-body leading-relaxed text-muted-foreground">{t("This title stays beside the steps on the computer.", "Este título fica parado ao lado das etapas no computador.")}</p>
                   </div>
                 }
@@ -208,12 +208,12 @@ export function NavegacaoLandingShowcase() {
                   ))}
                 </ol>
               </SecaoFixa>
-            </section>
-            <section id="ex-contato" className="relative overflow-hidden bg-graphite-900 px-6 pb-12 pt-20 sm:px-10 sm:pt-28 lg:pt-32">
+            </div>
+            <div id="ex-contato" className="relative overflow-hidden bg-graphite-900 px-6 pb-12 pt-20 sm:px-10 sm:pt-28 lg:pt-32">
               <CurvaSecao posicao="topo" cor="var(--card)" />
-              <h4 className="text-h4 font-bold text-white">{t("Contact", "Contato")}</h4>
+              <h3 className="text-h4 font-bold text-white">{t("Contact", "Contato")}</h3>
               <p className="mt-2 max-w-xl text-body leading-relaxed text-graphite-100">{t("Example dark section, opened by the curve.", "Seção escura de exemplo, aberta pela curva.")}</p>
-            </section>
+            </div>
             <footer ref={rodapeExemplo} className="border-t border-border px-6 py-6 text-body-sm text-muted-foreground sm:px-10">
               {t("Example footer: the back-to-top button appears here.", "Rodapé de exemplo: o botão de voltar ao topo aparece aqui.")}
             </footer>
@@ -268,10 +268,10 @@ export function NavegacaoLandingShowcase() {
               <HeroComAba raiz={caixaHeroPc} tela="computador" telaCheia={false} rotulo={t("Learn more", "Saiba mais")} alvo="#hero-pc-proxima" classNamePainel="px-10 pt-12">
                 <ConteudoDoHero titulo={t("Example hero title", "Título do hero de exemplo")} />
               </HeroComAba>
-              <section id="hero-pc-proxima" className="px-10 py-10">
-                <h4 className="text-h4 font-bold text-foreground">{t("Next section", "Seção seguinte")}</h4>
+              <div id="hero-pc-proxima" className="px-10 py-10">
+                <h3 className="text-h4 font-bold text-foreground">{t("Next section", "Seção seguinte")}</h3>
                 <p className="mt-2 text-body text-muted-foreground">{t("White, like the tab: the two become one piece.", "Branca, como a aba: as duas viram uma peça só.")}</p>
-              </section>
+              </div>
               <Recheio linhas={4} />
             </CaixaDeRolagem>
           </div>
@@ -282,10 +282,10 @@ export function NavegacaoLandingShowcase() {
                 <HeroComAba raiz={caixaHeroCel} tela="celular" telaCheia={false} rotulo={t("Learn more", "Saiba mais")} alvo="#hero-cel-proxima" classNamePainel="px-6 pt-8">
                   <ConteudoDoHero celular titulo={t("Example hero title", "Título do hero de exemplo")} />
                 </HeroComAba>
-                <section id="hero-cel-proxima" className="px-6 py-8">
-                  <h4 className="text-h4 font-bold text-foreground">{t("Next section", "Seção seguinte")}</h4>
+                <div id="hero-cel-proxima" className="px-6 py-8">
+                  <h3 className="text-h4 font-bold text-foreground">{t("Next section", "Seção seguinte")}</h3>
                   <p className="mt-2 text-body text-muted-foreground">{t("It starts with rounded corners, with the tab in the centre.", "Começa com os cantos arredondados, com a aba no centro.")}</p>
-                </section>
+                </div>
                 <Recheio linhas={4} />
               </CaixaDeRolagem>
             </div>
@@ -449,14 +449,14 @@ export function NavegacaoLandingShowcase() {
                 { id: "ma-como", rotulo: t("How it works", "Como funciona") },
                 { id: "ma-etapas", rotulo: t("Steps", "Etapas") },
                 { id: "ma-contato", rotulo: t("Contact", "Contato") },
-              ]} rotulo={t("On this page", "Nesta página")} className="px-6 sm:px-10" />
+              ]} rotulo={t("On this page (chips example)", "Nesta página (exemplo com chips)")} className="px-6 sm:px-10" />
               {[["ma-sobre", t("About", "Sobre")], ["ma-como", t("How it works", "Como funciona")], ["ma-etapas", t("Steps", "Etapas")], ["ma-contato", t("Contact", "Contato")]].map(([id, nome]) => (
-                <section key={id} id={id} className="border-b border-border px-6 py-8 sm:px-10">
-                  <h4 className="text-h4 font-bold text-foreground">{nome}</h4>
+                <div key={id} id={id} className="border-b border-border px-6 py-8 sm:px-10">
+                  <h3 className="text-h4 font-bold text-foreground">{nome}</h3>
                   <div aria-hidden className="mt-4 space-y-3">
                     {[0, 1, 2].map(i => <div key={i} className="h-12 rounded-lg border border-border bg-card" />)}
                   </div>
-                </section>
+                </div>
               ))}
             </CaixaDeRolagem>
           </div>
@@ -470,16 +470,16 @@ export function NavegacaoLandingShowcase() {
                     { id: "mv-metodo", rotulo: t("Method", "Método") },
                     { id: "mv-resultados", rotulo: t("Results", "Resultados") },
                     { id: "mv-duvidas", rotulo: t("Questions", "Dúvidas") },
-                  ]} rotulo={t("On this page", "Nesta página")} />
+                  ]} rotulo={t("On this page (vertical example)", "Nesta página (exemplo vertical)")} />
                 </div>
                 <div>
                   {[["mv-visao", t("Overview", "Visão geral")], ["mv-metodo", t("Method", "Método")], ["mv-resultados", t("Results", "Resultados")], ["mv-duvidas", t("Questions", "Dúvidas")]].map(([id, nome]) => (
-                    <section key={id} id={id} className="border-b border-border py-6">
-                      <h4 className="text-h4 font-bold text-foreground">{nome}</h4>
+                    <div key={id} id={id} className="border-b border-border py-6">
+                      <h3 className="text-h4 font-bold text-foreground">{nome}</h3>
                       <div aria-hidden className="mt-4 space-y-3">
                         {[0, 1, 2].map(i => <div key={i} className="h-12 rounded-lg border border-border bg-card" />)}
                       </div>
-                    </section>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -514,7 +514,7 @@ export function NavegacaoLandingShowcase() {
         <CaixaDeRolagem refCaixa={caixaProgresso} rotulo={t("Reading progress (scrolls inside)", "Progresso de leitura (rola por dentro)")} altura="h-120">
           <ProgressoDeLeitura raiz={caixaProgresso} alvo={artigo} posicao="grudado" className="-mb-1" />
           <article ref={artigo} className="mx-auto max-w-2xl space-y-4 px-6 py-10 sm:px-10">
-            <h4 className="text-h4 font-bold text-foreground">{t("Example article", "Artigo de exemplo")}</h4>
+            <h3 className="text-h4 font-bold text-foreground">{t("Example article", "Artigo de exemplo")}</h3>
             {[1, 2, 3, 4, 5, 6, 7].map(n => (
               <p key={n} className="text-body leading-relaxed text-muted-foreground">
                 {t(`Example paragraph ${n}. The bar at the top fills as this text scrolls, from its beginning to its end.`, `Parágrafo de exemplo ${n}. A barra no topo enche conforme este texto rola, do começo dele até o fim dele.`)}
@@ -556,7 +556,7 @@ export function NavegacaoLandingShowcase() {
               topo={24}
               fixo={
                 <div className="space-y-2">
-                  <h4 className="text-h4 font-bold text-foreground">{t("How it works", "Como funciona")}</h4>
+                  <h3 className="text-h4 font-bold text-foreground">{t("How it works", "Como funciona")}</h3>
                   <p className="text-body leading-relaxed text-muted-foreground">{t("Example introduction that stays still while the steps scroll.", "Introdução de exemplo que fica parada enquanto as etapas rolam.")}</p>
                 </div>
               }

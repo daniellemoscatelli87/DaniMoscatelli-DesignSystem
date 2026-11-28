@@ -665,7 +665,7 @@
     overflow: hidden;
     border-radius: var(--hero-raio);
     background: var(--hero-fundo);
-    padding-bottom: calc(var(--hero-tampa) + var(--aba-altura));
+    padding-bottom: calc(var(--hero-tampa) + var(--aba-altura) + var(--space-6));
   }
   /* a tampa: o começo arredondado da seção seguinte (só no celular e no tablet) */
   .ds-hero-com-aba-painel::after {

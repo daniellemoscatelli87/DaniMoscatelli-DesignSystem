@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 421 componentes exportados · 78 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 163 tokens · 34 páginas e 252 âncoras no site (https://designsystem.danimoscatelli.com.br) · 46 propostas de componente.
+**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 421 componentes exportados · 78 templates e padrões ainda só em demonstração · 48 seções com marcação feita à mão · 163 tokens · 34 páginas e 246 âncoras no site (https://designsystem.danimoscatelli.com.br) · 47 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -523,7 +523,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** CurvaSecao (divisor curvo entre seções): Borda curva e suave entre uma seção clara e uma escura (Projeto Piloto, seção "Onde podemos atuar"). É um SVG decorativo, de ponta a ponta, que se estica na largura (preserveAspectRatio="none") e fica dentro da seção, por cima do fundo dela:
 - **Componentes:**
   - `CurvaSecao` (props: `posicao`, `cor`, `className`)
-- **Onde ver:** Padrões do site › Divisores curvos (`site#site-curvas`) · Navegação de landing page › Contato (`navegacao-landing#ex-contato`) · Navegação de landing page › Curva entre seções (`navegacao-landing#nav-curva`) · e mais 2 seções (ver `catalogo.json`)
+- **Onde ver:** Padrões do site › Divisores curvos (`site#site-curvas`) · Navegação de landing page › Página de exemplo (`navegacao-landing#nav-exemplo`) · Navegação de landing page › Curva entre seções (`navegacao-landing#nav-curva`) · e mais 2 seções (ver `catalogo.json`)
 
 ### diagrama-de-ecossistema
 
@@ -1103,7 +1103,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Quando usar:** SecaoFixa (título ou imagem parado enquanto o texto rola): Uma seção em duas colunas para conteúdo longo (etapas de um método, perguntas, uma história em partes): no computador (a partir de 1024 px), a coluna `fixo` (o título com a introdução, ou uma imagem) fica parada ao lado enquanto a coluna de texto rola; quando a seção acaba, as duas saem juntas.
 - **Componentes:**
   - `SecaoFixa` (props: `fixo`, `children`, `lado`, `topo`, `className`, `style`)
-- **Onde ver:** Navegação de landing page › Seção fixa (`navegacao-landing#nav-secao-fixa`) · Navegação de landing page › Etapas (`navegacao-landing#ex-etapas`) · Navegação de landing page › Classes de CSS puro (`navegacao-landing#nav-classes`)
+- **Onde ver:** Navegação de landing page › Seção fixa (`navegacao-landing#nav-secao-fixa`) · Navegação de landing page › Página de exemplo (`navegacao-landing#nav-exemplo`) · Navegação de landing page › Classes de CSS puro (`navegacao-landing#nav-classes`)
 
 ### segmented-control
 
@@ -1276,7 +1276,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `SurgirAoRolar` (props: `as`, `efeito`, `escalonar`, `passo`, `atraso`, `raiz`, `limiar`, `margem`, `repetir`, `duracao`, `className`, `style`, `children`)
   - `TituloQueSurge` (props: `as`, `children`, `passo`, `atraso`, `destaque`, `raiz`, `limiar`, `margem`, `repetir`, `duracao`, `className`, `style`)
 - **Funções e constantes:** `useSurgirAoRolar`
-- **Onde ver:** Navegação de landing page › Surgir ao rolar e voltar ao topo (`navegacao-landing#nav-surgir`) · Navegação de landing page › Sobre (`navegacao-landing#ex-sobre`) · Padrões do site › Entrada ao rolar (`site#site-entrada`)
+- **Onde ver:** Navegação de landing page › Surgir ao rolar e voltar ao topo (`navegacao-landing#nav-surgir`) · Navegação de landing page › Página de exemplo (`navegacao-landing#nav-exemplo`) · Padrões do site › Entrada ao rolar (`site#site-entrada`)
 
 ### switch
 
@@ -1500,7 +1500,7 @@ Exemplos que ilustram uma regra (usabilidade, acessibilidade, movimento, marca, 
 | `OrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1410](src/app/components/showcase/MotionShowcase.tsx#L1410) |  | 1 |
 | `AvatarOrbitCanvas` | Motion Design › Círculos orbitais (`motion#orbiting-circles`) | [src/app/components/showcase/MotionShowcase.tsx:1558](src/app/components/showcase/MotionShowcase.tsx#L1558) |  | 3 |
 
-### 2.4 Seções com marcação feita à mão no próprio corpo (47)
+### 2.4 Seções com marcação feita à mão no próprio corpo (48)
 
 Seções que montam peças direto na página, sem componente local, com 3 ou mais elementos de estilo próprio. Antes de copiar uma delas, confira se a peça já existe na seção 1.
 
@@ -1550,6 +1550,7 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:385](src/app/components/showcase/OverlaysShowcase.tsx#L385) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
 | Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:203](src/app/components/showcase/SitePatternsShowcase.tsx#L203) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade`, `PilulaDeAcao` | 15 |
 | Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:694](src/app/components/showcase/SitePatternsShowcase.tsx#L694) | `CurvaSecao`, `SeloSecao` | 4 |
+| Navegação de landing page › Página de exemplo (`navegacao-landing#nav-exemplo`) | [src/app/components/showcase/NavegacaoLandingShowcase.tsx:159](src/app/components/showcase/NavegacaoLandingShowcase.tsx#L159) | `CurvaSecao`, `HeroComAba`, `MenuDeAncoras`, `ProgressoDeLeitura`, `SecaoFixa`, `SurgirAoRolar` | 5 |
 | Navegação de landing page › Curva entre seções (`navegacao-landing#nav-curva`) | [src/app/components/showcase/NavegacaoLandingShowcase.tsx:307](src/app/components/showcase/NavegacaoLandingShowcase.tsx#L307) | `CurvaSecao` | 4 |
 | Navegação de landing page › Menu de âncoras (`navegacao-landing#nav-menu-ancoras`) | [src/app/components/showcase/NavegacaoLandingShowcase.tsx:399](src/app/components/showcase/NavegacaoLandingShowcase.tsx#L399) | `MenuDeAncoras` | 4 |
 | Painel lateral › Anatomia (`sidepanel#sidepanel-anatomy`) | [src/app/components/showcase/SidePanelShowcase.tsx:235](src/app/components/showcase/SidePanelShowcase.tsx#L235) |  | 3 |
@@ -1842,6 +1843,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
+| [Navegação de landing page](propostas/2026-11-28-navegacao-landing.md) | `HeroComAba e AbaSaibaMais (ui/hero-com-aba.tsx), Parallax (ui/parallax.tsx), MenuDeAncoras e useSecaoAtiva (ui/menu-de-ancoras.tsx), ProgressoDeLeitura (ui/progresso-de-leitura.tsx), SecaoFixa (ui/secao-fixa.tsx); CurvaSecao passa a usar a classe .ds-curva-secao; classes de CSS puro no bloco @ds-css-puro:navegacao-landing do src/styles/theme.css` | em revisão |
 | [Página 404 padrão e espaço abaixo do cabeçalho](propostas/2026-11-28-pagina-404-padrao.md) | `PaginaDeErro (nova variante moldura="card") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css` | aprovada (decisões da dona do produto de 28/11/2026; publicação com o "sim" dela) |
 | [Recorte de foto](propostas/2026-11-28-recorte-de-foto.md) | `RecorteDeFoto em src/app/components/ui/recorte-de-foto.tsx` | proposta |
 
@@ -1876,7 +1878,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-horario` Campo de horário · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-calendario` Seletor de data (Calendar) · `campos-endereco` Endereço com sugestões (CampoDeEndereco) · `campos-tabela` Tabela adaptável · `campo-com-prefixo` Prefixo, sufixo e desabilitado · `escolha-ordenada` Escolha ordenada · `escala-de-notas` Escala de notas · `campos-consentimento` Caixa de consentimento
 - **Peças da área restrita** (`pecas-admin`): `admin-caixa` Caixa de entrada · `admin-conversa` Conversa · `admin-agenda` Agenda do mês · `admin-etapas` Etapas e cadastro · `admin-quadro` Quadro
 - **Seções do site** (`secoes-site`): `secoes-depoimentos` Card de depoimento · `secoes-artigos` Card de artigo · `secoes-logos` Faixa de logos · `secoes-citacao` Citação · `secoes-pilares` Pilares · `secoes-flutuantes` Cartão flutuante e luzes · `secoes-simulacao` Simulação em etapas · `secoes-ecossistema` Diagrama do ecossistema · `secoes-numeros` Números e cards de navegação · `secoes-saiba-prosa` Saiba mais e texto longo
-- **Navegação de landing page** (`navegacao-landing`): `nav-exemplo` Página de exemplo · `ex-sobre` Sobre · `ex-como` Como funciona · `ex-etapas` Etapas · `ex-contato` Contato · `nav-hero-aba` Hero com a aba Saiba mais · `hero-pc-proxima` Seção seguinte · `hero-cel-proxima` Seção seguinte · `nav-curva` Curva entre seções · `nav-parallax` Parallax · `nav-menu-ancoras` Menu de âncoras · `nav-progresso` Progresso de leitura · `nav-secao-fixa` Seção fixa · `nav-surgir` Surgir ao rolar e voltar ao topo · `nav-classes` Classes de CSS puro
+- **Navegação de landing page** (`navegacao-landing`): `nav-exemplo` Página de exemplo · `nav-hero-aba` Hero com a aba Saiba mais · `nav-curva` Curva entre seções · `nav-parallax` Parallax · `nav-menu-ancoras` Menu de âncoras · `nav-progresso` Progresso de leitura · `nav-secao-fixa` Seção fixa · `nav-surgir` Surgir ao rolar e voltar ao topo · `nav-classes` Classes de CSS puro
 - **Header e menus** (`header`): `header-demo` Demonstração · `header-models` Modelos · `header-scroll` Comportamentos de rolagem · `header-mobile` Menus no celular · `header-backgrounds` Fundos por trás do header · `header-a11y` Checklist de acessibilidade · `header-usage` Uso · `header-tokens` Tokens
 - **Painel lateral** (`sidepanel`): `sidepanel-anatomy` Anatomia · `sidepanel-behavior` Comportamento · `sidepanel-contact` Formulário de contato · `sidepanel-a11y` Checklist de acessibilidade · `sidepanel-usage` Uso · `sidepanel-tokens` Tokens
 - **Linha do tempo** (`timeline`): `timeline-demo` Demonstração · `timeline-anatomy` Anatomia · `timeline-motion` Movimento: Step Indicator · `timeline-usage` Uso

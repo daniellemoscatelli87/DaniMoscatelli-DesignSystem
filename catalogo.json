@@ -8,11 +8,11 @@
     "arquivosDeComponentes": 131,
     "componentesExportados": 421,
     "templatesEPadroesSoEmDemonstracao": 78,
-    "secoesComMarcacaoAMao": 47,
+    "secoesComMarcacaoAMao": 48,
     "tokens": 163,
     "paginas": 34,
-    "ancoras": 252,
-    "propostas": 46
+    "ancoras": 246,
+    "propostas": 47
   },
   "componentes": [
     {
@@ -5249,10 +5249,10 @@
         {
           "pagina": "navegacao-landing",
           "paginaRotulo": "Navegação de landing page",
-          "ancora": "ex-contato",
-          "titulo": "Contato",
+          "ancora": "nav-exemplo",
+          "titulo": "Página de exemplo",
           "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 212,
+          "linha": 159,
           "uso": "direto",
           "exports": [
             "CurvaSecao"
@@ -12373,10 +12373,10 @@
         {
           "pagina": "navegacao-landing",
           "paginaRotulo": "Navegação de landing page",
-          "ancora": "ex-etapas",
-          "titulo": "Etapas",
+          "ancora": "nav-exemplo",
+          "titulo": "Página de exemplo",
           "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 192,
+          "linha": 159,
           "uso": "direto",
           "exports": [
             "SecaoFixa"
@@ -13963,10 +13963,10 @@
         {
           "pagina": "navegacao-landing",
           "paginaRotulo": "Navegação de landing page",
-          "ancora": "ex-sobre",
-          "titulo": "Sobre",
+          "ancora": "nav-exemplo",
+          "titulo": "Página de exemplo",
           "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 179,
+          "linha": 159,
           "uso": "direto",
           "exports": [
             "SurgirAoRolar"
@@ -17793,6 +17793,23 @@
     {
       "pagina": "navegacao-landing",
       "paginaRotulo": "Navegação de landing page",
+      "ancora": "nav-exemplo",
+      "titulo": "Página de exemplo",
+      "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
+      "linha": 159,
+      "elementosFeitosAMao": 5,
+      "usaComponentes": [
+        "CurvaSecao",
+        "HeroComAba",
+        "MenuDeAncoras",
+        "ProgressoDeLeitura",
+        "SecaoFixa",
+        "SurgirAoRolar"
+      ]
+    },
+    {
+      "pagina": "navegacao-landing",
+      "paginaRotulo": "Navegação de landing page",
       "ancora": "nav-curva",
       "titulo": "Curva entre seções",
       "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
@@ -19553,6 +19570,12 @@
       "componente": "MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-28-navegacao-landing.md",
+      "titulo": "Navegação de landing page",
+      "status": "em revisão",
+      "componente": "HeroComAba e AbaSaibaMais (ui/hero-com-aba.tsx), Parallax (ui/parallax.tsx), MenuDeAncoras e useSecaoAtiva (ui/menu-de-ancoras.tsx), ProgressoDeLeitura (ui/progresso-de-leitura.tsx), SecaoFixa (ui/secao-fixa.tsx); CurvaSecao passa a usar a classe .ds-curva-secao; classes de CSS puro no bloco @ds-css-puro:navegacao-landing do src/styles/theme.css"
+    },
+    {
       "arquivo": "propostas/2026-11-28-pagina-404-padrao.md",
       "titulo": "Página 404 padrão e espaço abaixo do cabeçalho",
       "status": "aprovada (decisões da dona do produto de 28/11/2026; publicação com o \"sim\" dela)",
@@ -21081,46 +21104,10 @@
           "linha": 159
         },
         {
-          "id": "ex-sobre",
-          "titulo": "Sobre",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 179
-        },
-        {
-          "id": "ex-como",
-          "titulo": "Como funciona",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 187
-        },
-        {
-          "id": "ex-etapas",
-          "titulo": "Etapas",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 192
-        },
-        {
-          "id": "ex-contato",
-          "titulo": "Contato",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 212
-        },
-        {
           "id": "nav-hero-aba",
           "titulo": "Hero com a aba Saiba mais",
           "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
           "linha": 225
-        },
-        {
-          "id": "hero-pc-proxima",
-          "titulo": "Seção seguinte",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 271
-        },
-        {
-          "id": "hero-cel-proxima",
-          "titulo": "Seção seguinte",
-          "arquivo": "src/app/components/showcase/NavegacaoLandingShowcase.tsx",
-          "linha": 285
         },
         {
           "id": "nav-curva",
