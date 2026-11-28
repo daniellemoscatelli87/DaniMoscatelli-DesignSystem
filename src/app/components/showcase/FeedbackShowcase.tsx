@@ -16,6 +16,7 @@ import { AlertaComAcaoDoc } from "./AlertaComAcaoShowcase";
 import { VejaEm } from "./shared/VejaEm";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { ChipDeEstado } from "../ui/chip-de-estado";
 import { EstadoVazio } from "../ui/estado-vazio";
 import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
 import { GradeDeCards } from "../ui/grade-de-cards";
@@ -397,16 +398,13 @@ function FeedbackShowcaseBase({ parte = "feedback" }: { parte?: "feedback" | "ro
 
         <SubSection title={t("Badges", "Badges")}>
           <ShowcaseCard>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               {badgeVariants.map(b => (
                 <span key={b.label.en} className={`inline-flex items-center px-2 py-1 rounded-sm text-label font-semibold border ${b.cls}`}>
                   {bi(b.label)}
                 </span>
               ))}
-              <span className="inline-flex items-center gap-1 px-2 py-1 rounded-sm text-label font-semibold border bg-primary/10 text-primary-text border-primary/20">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                {t("Live", "Ao vivo")}
-              </span>
+              <ChipDeEstado tom="sucesso" aoVivo>{t("Live", "Ao vivo")}</ChipDeEstado>
               <span className="inline-flex items-center px-2 py-1 rounded-full text-caption font-bold bg-primary text-primary-foreground">
                 42
               </span>

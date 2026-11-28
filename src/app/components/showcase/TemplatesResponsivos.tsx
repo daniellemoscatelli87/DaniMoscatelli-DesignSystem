@@ -765,7 +765,7 @@ export function LandingTemplate() {
                   inicio={<IconeComBase tom="marca" tamanho="sm">{c.icone}</IconeComBase>}
                   titulo={c.rotulo}
                   descricao={<span className="break-words">{c.valor}</span>}
-                  fim={<ChipDeEstado tom={c.tom} className="whitespace-nowrap">{c.selo}</ChipDeEstado>}
+                  fim={<ChipDeEstado tom={c.tom} aoVivo={c.selo === "Online"} className="whitespace-nowrap">{c.selo}</ChipDeEstado>}
                   quebraAcoes
                   className="h-full rounded-lg border border-border bg-card px-4"
                 />

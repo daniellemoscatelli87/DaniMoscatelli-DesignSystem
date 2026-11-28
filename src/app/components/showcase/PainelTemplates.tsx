@@ -380,6 +380,33 @@ export function PecasDoPainel() {
           <ChipDeEstado tom="erro">{t("Failed", "Falhou")}</ChipDeEstado>
           <ChipDeEstado tom="marca" tamanho="md">{t("Size md", "Tamanho md")}</ChipDeEstado>
         </div>
+        <div id="template-painel-no-ar" className="scroll-mt-32 space-y-3 pt-2">
+          <h4 className="text-body font-semibold text-foreground">{t("Live state: \"On air\" (aoVivo)", "Estado ao vivo: \"No ar\" (aoVivo)")}</h4>
+          <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
+            {t(
+              "Wherever \"On air\" appears: a tag with the pulsing dot (owner's decision, 28/11/2026). aoVivo puts a dot in the chip's tone before the text, with a halo that pulses; with reduced motion the dot stays still. The dot is decorative: the text says the state. \"Off air\" is the neutral chip, with no dot.",
+              "Onde \"No ar\" aparecer: etiqueta com a bolinha piscando (decisão da dona do produto, 28/11/2026). aoVivo põe uma bolinha na cor do tom antes do texto, com um halo que pulsa; com \"menos movimento\", a bolinha fica parada. A bolinha é decorativa: quem diz o estado é o texto. \"Fora do ar\" é o chip neutro, sem bolinha.",
+            )}
+          </p>
+          <div className="flex flex-wrap items-center gap-2 rounded-xl border border-border bg-card p-5">
+            <ChipDeEstado tom="sucesso" aoVivo>{t("On air", "No ar")}</ChipDeEstado>
+            <ChipDeEstado tom="neutro">{t("Off air", "Fora do ar")}</ChipDeEstado>
+            <ChipDeEstado tom="sucesso" aoVivo tamanho="md">{t("On air", "No ar")}</ChipDeEstado>
+          </div>
+          <p className="text-body-sm text-muted-foreground"><Mono>{'<ChipDeEstado tom="sucesso" aoVivo>No ar</ChipDeEstado>'}</Mono></p>
+          <DoDont
+            dos={[
+              t("\"On air\" always as a ChipDeEstado tom=\"sucesso\" aoVivo, in the end column of the row.", "\"No ar\" sempre como ChipDeEstado tom=\"sucesso\" aoVivo, na coluna do fim da linha."),
+              t("\"Off air\" as the neutral chip, with no dot, in the same place.", "\"Fora do ar\" como chip neutro, sem bolinha, no mesmo lugar."),
+              t("Use the dot only for what is live right now (on air, live, online).", "Use a bolinha só para o que está ativo agora (no ar, ao vivo, online)."),
+            ]}
+            donts={[
+              t("\"On air\" as plain text in the description, or as a chip without the dot.", "\"No ar\" como texto solto na descrição, ou como chip sem a bolinha."),
+              t("The dot alone, without the words.", "A bolinha sozinha, sem o texto."),
+              t("A pulsing dot on states that are not live (new, pending, done).", "Bolinha piscando em estados que não são ao vivo (novo, pendente, concluído)."),
+            ]}
+          />
+        </div>
       </div>
 
       <div className="space-y-4">

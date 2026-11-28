@@ -12,7 +12,7 @@
     "tokens": 171,
     "paginas": 33,
     "ancoras": 243,
-    "propostas": 52
+    "propostas": 53
   },
   "componentes": [
     {
@@ -215,7 +215,7 @@
           "ancora": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 217,
+          "linha": 218,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Alert",
@@ -229,7 +229,7 @@
           "ancora": "alerta-sem-titulo",
           "titulo": "Alerta só com descrição",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 240,
+          "linha": 241,
           "uso": "direto",
           "exports": [
             "Alert",
@@ -269,7 +269,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Alert",
@@ -488,7 +488,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 253,
+          "linha": 254,
           "uso": "dentro de outro exemplo",
           "exports": [
             "AlertaComAcao",
@@ -516,7 +516,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "AlertaComAcao",
@@ -753,7 +753,7 @@
           "ancora": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 561,
+          "linha": 559,
           "uso": "direto",
           "exports": [
             "AvatarCircles"
@@ -1641,7 +1641,7 @@
           "ancora": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 261,
+          "linha": 262,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1665,7 +1665,7 @@
           "ancora": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 605,
+          "linha": 603,
           "uso": "direto",
           "exports": [
             "Button"
@@ -2085,7 +2085,7 @@
           "ancora": "rotulos-timeline",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 507,
+          "linha": 505,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -3730,7 +3730,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Card",
@@ -4472,12 +4472,13 @@
         {
           "nome": "ChipDeEstado",
           "tipo": "componente",
-          "linha": 34,
+          "linha": 50,
           "descricao": "",
           "props": [
             "tom",
             "icone",
             "tamanho",
+            "aoVivo",
             "className",
             "children"
           ],
@@ -4497,6 +4498,18 @@
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
           "linha": 269,
+          "uso": "direto",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "badges",
+          "paginaRotulo": "Rótulos",
+          "ancora": "badges",
+          "titulo": "Badges e tags",
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 396,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4609,6 +4622,18 @@
           "exports": [
             "ChipDeEstado"
           ]
+        },
+        {
+          "pagina": "feedback",
+          "paginaRotulo": "Feedback",
+          "ancora": null,
+          "titulo": null,
+          "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
+          "linha": 725,
+          "uso": "na página, dentro de outro exemplo",
+          "exports": [
+            "ChipDeEstado"
+          ]
         }
       ]
     },
@@ -4663,7 +4688,7 @@
           "ancora": "badges",
           "titulo": "Badges e tags",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 395,
+          "linha": 396,
           "uso": "direto",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -4687,7 +4712,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -4932,7 +4957,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "dispararConfete"
@@ -6229,7 +6254,7 @@
           "ancora": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 605,
+          "linha": 603,
           "uso": "direto",
           "exports": [
             "EstadoVazio"
@@ -6973,7 +6998,7 @@
           "ancora": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 605,
+          "linha": 603,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -7415,7 +7440,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 253,
+          "linha": 254,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -12750,7 +12775,7 @@
           "ancora": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 440,
+          "linha": 438,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -12762,7 +12787,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 475,
+          "linha": 473,
           "uso": "direto",
           "exports": [
             "Selo"
@@ -12774,7 +12799,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Selo"
@@ -12811,7 +12836,7 @@
           "ancora": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 475,
+          "linha": 473,
           "uso": "direto",
           "exports": [
             "SeloSecao"
@@ -12847,7 +12872,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "SeloSecao"
@@ -13620,7 +13645,7 @@
           "ancora": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 347,
+          "linha": 348,
           "uso": "direto",
           "exports": [
             "Skeleton"
@@ -13644,7 +13669,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Skeleton"
@@ -14207,7 +14232,7 @@
           "ancora": "tabs",
           "titulo": "Abas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 174,
+          "linha": 175,
           "uso": "direto",
           "exports": [
             "Tabs",
@@ -14251,7 +14276,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 725,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Tabs",
@@ -15685,7 +15710,7 @@
         "TabsTrigger",
         "TopoDoMenu"
       ],
-      "elementosFeitosAMao": 5
+      "elementosFeitosAMao": 6
     },
     {
       "nome": "CascaDoTemplate",
@@ -16640,7 +16665,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 253
+          "linha": 254
         }
       ],
       "usaComponentes": [
@@ -16665,7 +16690,7 @@
           "ancora": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 253
+          "linha": 254
         }
       ],
       "usaComponentes": [
@@ -16680,7 +16705,7 @@
       "nome": "Alert",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 81,
+      "linha": 82,
       "descricao": "",
       "pagina": "feedback",
       "paginaRotulo": "Feedback",
@@ -16691,7 +16716,7 @@
           "ancora": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 217
+          "linha": 218
         }
       ],
       "usaComponentes": [
@@ -17397,7 +17422,7 @@
       "ancora": "progress",
       "titulo": "Progresso",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 304,
+      "linha": 305,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -17407,7 +17432,7 @@
       "ancora": "skeleton",
       "titulo": "Skeleton",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 347,
+      "linha": 348,
       "elementosFeitosAMao": 7,
       "usaComponentes": [
         "Skeleton"
@@ -17419,9 +17444,10 @@
       "ancora": "badges",
       "titulo": "Badges e tags",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 395,
-      "elementosFeitosAMao": 5,
+      "linha": 396,
+      "elementosFeitosAMao": 3,
       "usaComponentes": [
+        "ChipDeEstado",
         "GrupoDeChipsFiltraveis"
       ]
     },
@@ -17431,7 +17457,7 @@
       "ancora": "selo",
       "titulo": "Selo (tag do hero)",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 440,
+      "linha": 438,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Selo"
@@ -17443,7 +17469,7 @@
       "ancora": "avatar",
       "titulo": "Avatar",
       "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-      "linha": 514,
+      "linha": 512,
       "elementosFeitosAMao": 4,
       "usaComponentes": []
     },
@@ -18901,7 +18927,7 @@
         "titulo": "Alertas",
         "resumo": "Alertas: tipos e quando usar cada um",
         "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-        "linha": 217
+        "linha": 218
       },
       {
         "ancora": "alerta-com-acao",
@@ -18910,7 +18936,7 @@
         "titulo": "Alerta com ação",
         "resumo": "Alerta com ação: ações sempre embaixo do texto",
         "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-        "linha": 253
+        "linha": 254
       },
       {
         "ancora": "grid-colunas",
@@ -19366,6 +19392,12 @@
       "titulo": "Escolha ordenada",
       "status": "proposta",
       "componente": "EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-etiqueta-no-ar.md",
+      "titulo": "Etiqueta \"No ar\" com a bolinha piscando",
+      "status": "aprovada (decisão da dona do produto, 28/11/2026)",
+      "componente": "ChipDeEstado, nova prop aoVivo em src/app/components/ui/chip-de-estado.tsx (mesma API no DS FindLook)"
     },
     {
       "arquivo": "propostas/2026-11-28-link-de-rede-social.md",
@@ -20428,49 +20460,49 @@
           "id": "tabs",
           "titulo": "Abas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 174
+          "linha": 175
         },
         {
           "id": "alerts",
           "titulo": "Alertas",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 217
+          "linha": 218
         },
         {
           "id": "alerta-sem-titulo",
           "titulo": "Alerta só com descrição",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 240
+          "linha": 241
         },
         {
           "id": "alerta-com-acao",
           "titulo": "Alerta com ação",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 253
+          "linha": 254
         },
         {
           "id": "toasts",
           "titulo": "Toasts",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 261
+          "linha": 262
         },
         {
           "id": "progress",
           "titulo": "Progresso",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 304
+          "linha": 305
         },
         {
           "id": "skeleton",
           "titulo": "Skeleton",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 347
+          "linha": 348
         },
         {
           "id": "feedback-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 636
+          "linha": 634
         },
         {
           "id": "confete",
@@ -20495,49 +20527,49 @@
           "id": "badges",
           "titulo": "Badges e tags",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 395
+          "linha": 396
         },
         {
           "id": "selo",
           "titulo": "Selo (tag do hero)",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 440
+          "linha": 438
         },
         {
           "id": "selo-secao",
           "titulo": "Selo de seção",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 475
+          "linha": 473
         },
         {
           "id": "rotulos-timeline",
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 507
+          "linha": 505
         },
         {
           "id": "avatar",
           "titulo": "Avatar",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 514
+          "linha": 512
         },
         {
           "id": "avatar-circles",
           "titulo": "Avatar Circles",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 561
+          "linha": 559
         },
         {
           "id": "empty-states",
           "titulo": "Estados vazios",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 605
+          "linha": 603
         },
         {
           "id": "badges-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 647
+          "linha": 645
         }
       ]
     },

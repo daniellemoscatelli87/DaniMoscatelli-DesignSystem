@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 423 componentes exportados · 75 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 243 âncoras no site (https://designsystem.danimoscatelli.com.br) · 52 propostas de componente.
+**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 423 componentes exportados · 75 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 243 âncoras no site (https://designsystem.danimoscatelli.com.br) · 53 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -447,8 +447,8 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Arquivo:** [src/app/components/ui/chip-de-estado.tsx](src/app/components/ui/chip-de-estado.tsx)
 - **Quando usar:** Chip de estado: o estado de um item (mensagem, candidatura, pedido) sempre em texto, com ícone opcional e o fundo do tom. Regra: estado nunca só por cor ou forma; o texto é obrigatório. Vai na coluna do fim de uma LinhaDeLista (tags e ações), que no celular desce para uma linha própria embaixo do texto.
 - **Componentes:**
-  - `ChipDeEstado` (props: `tom`, `icone`, `tamanho`, `className`, `children`)
-- **Onde ver:** Exibição de dados › Tabela (`data#table`) · Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`) · Templates › Painel (`templates#template-painel`) · e mais 7 seções (ver `catalogo.json`)
+  - `ChipDeEstado` (props: `tom`, `icone`, `tamanho`, `aoVivo`, `className`, `children`)
+- **Onde ver:** Exibição de dados › Tabela (`data#table`) · Rótulos › Badges e tags (`badges#badges`) · Seções do site › Simulação em etapas (`secoes-site#secoes-simulacao`) · e mais 9 seções (ver `catalogo.json`)
 
 ### chip-filtravel
 
@@ -1429,7 +1429,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
-| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 5 |
+| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 6 |
 | `Secao` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:485](src/app/components/showcase/TemplatesResponsivos.tsx#L485) |  | 1 |
 | `CanvasRevealCard`<br>Cards com revelação em canvas (usado na página Cards › Animação). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/BackgroundsShowcase.tsx:495](src/app/components/showcase/BackgroundsShowcase.tsx#L495) | `SegmentedControl` | 4 |
 | `CenaDoVidro`<br>Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene). | Cards › Vidro: acabamentos (`cards#card-glass`) (+3) | [src/app/components/showcase/CardShowcase.tsx:113](src/app/components/showcase/CardShowcase.tsx#L113) | `DoodleTexture`, `GlassScene` | 2 |
@@ -1451,7 +1451,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `ListaErrada`<br>Exemplo errado (o erro que originou a regra): áreas de grid "l1 sit" / "res res" no celular. A segunda linha do texto passa por baixo da tag e da lixeira, e o hover é uma caixa cinza arredondada só no bloco do texto. | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:130](src/app/components/showcase/shared/RegraDasLinhas.tsx#L130) | `Badge` | 2 |
 | `DemoInfoFechavel` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:71](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L71) | `AlertaComAcao`, `BotaoDoAlerta`, `LinkDoAlerta` | 1 |
 | `AlertaComAcaoDoc` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:133](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L133) | `AlertaComAcao`, `BotaoDoAlerta`, `GradeDeCards`, `LinkDoAlerta` | 1 |
-| `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:81](src/app/components/showcase/FeedbackShowcase.tsx#L81) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
+| `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:82](src/app/components/showcase/FeedbackShowcase.tsx#L82) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
 | `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:135](src/app/components/showcase/OverlaysShowcase.tsx#L135) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
 | `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:466](src/app/components/showcase/SitePatternsShowcase.tsx#L466) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
 | `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:514](src/app/components/showcase/SitePatternsShowcase.tsx#L514) | `CardDeArtigo`, `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 1 |
@@ -1541,11 +1541,11 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Gráficos › Design de inteligência (`graficos#graficos-inteligencia`) | [src/app/components/showcase/GraficosShowcase.tsx:1128](src/app/components/showcase/GraficosShowcase.tsx#L1128) | `BarrasOrdenadas`, `DescobertaVisual` | 3 |
 | Exibição de dados › Gráficos (`data#charts`) | [src/app/components/showcase/DataShowcase.tsx:176](src/app/components/showcase/DataShowcase.tsx#L176) |  | 3 |
 | Exibição de dados › Tabela (`data#table`) | [src/app/components/showcase/DataShowcase.tsx:269](src/app/components/showcase/DataShowcase.tsx#L269) | `Button`, `ChipDeEstado`, `LinhaDeLista`, `Pagination`, `PaginationContent`, `PaginationItem`, `PaginationLink` | 8 |
-| Feedback › Progresso (`feedback#progress`) | [src/app/components/showcase/FeedbackShowcase.tsx:304](src/app/components/showcase/FeedbackShowcase.tsx#L304) |  | 4 |
-| Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:347](src/app/components/showcase/FeedbackShowcase.tsx#L347) | `Skeleton` | 7 |
-| Rótulos › Badges e tags (`badges#badges`) | [src/app/components/showcase/FeedbackShowcase.tsx:395](src/app/components/showcase/FeedbackShowcase.tsx#L395) | `GrupoDeChipsFiltraveis` | 5 |
-| Rótulos › Selo (tag do hero) (`badges#selo`) | [src/app/components/showcase/FeedbackShowcase.tsx:440](src/app/components/showcase/FeedbackShowcase.tsx#L440) | `Selo` | 3 |
-| Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:514](src/app/components/showcase/FeedbackShowcase.tsx#L514) |  | 4 |
+| Feedback › Progresso (`feedback#progress`) | [src/app/components/showcase/FeedbackShowcase.tsx:305](src/app/components/showcase/FeedbackShowcase.tsx#L305) |  | 4 |
+| Feedback › Skeleton (`feedback#skeleton`) | [src/app/components/showcase/FeedbackShowcase.tsx:348](src/app/components/showcase/FeedbackShowcase.tsx#L348) | `Skeleton` | 7 |
+| Rótulos › Badges e tags (`badges#badges`) | [src/app/components/showcase/FeedbackShowcase.tsx:396](src/app/components/showcase/FeedbackShowcase.tsx#L396) | `ChipDeEstado`, `GrupoDeChipsFiltraveis` | 3 |
+| Rótulos › Selo (tag do hero) (`badges#selo`) | [src/app/components/showcase/FeedbackShowcase.tsx:438](src/app/components/showcase/FeedbackShowcase.tsx#L438) | `Selo` | 3 |
+| Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:512](src/app/components/showcase/FeedbackShowcase.tsx#L512) |  | 4 |
 | Ícones › Tamanhos e cores (`icons#icon-sizes`) | [src/app/components/showcase/IconsShowcase.tsx:123](src/app/components/showcase/IconsShowcase.tsx#L123) |  | 7 |
 | Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:254](src/app/components/showcase/OverlaysShowcase.tsx#L254) | `Tooltip` | 3 |
 | Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:269](src/app/components/showcase/OverlaysShowcase.tsx#L269) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
@@ -1775,8 +1775,8 @@ Regras documentadas no site. Antes de montar uma tela, leia as que valem para el
 - **Como escolher o card: pelo fundo, com borda ou com sombra** — Cards › Como escolher (`cards#card-escolher`) · [src/app/components/showcase/CardShowcase.tsx:526](src/app/components/showcase/CardShowcase.tsx#L526)
 - **Card: borda, sombra e raio** — Cards › Borda, sombra e raio (`cards#card-layout`) · [src/app/components/showcase/CardShowcase.tsx:609](src/app/components/showcase/CardShowcase.tsx#L609)
 - **Card: o que evitar** — Cards › O que evitar (`cards#card-guidelines`) · [src/app/components/showcase/CardShowcase.tsx:1273](src/app/components/showcase/CardShowcase.tsx#L1273)
-- **Alertas: tipos e quando usar cada um** — Feedback › Alertas (`feedback#alerts`) · [src/app/components/showcase/FeedbackShowcase.tsx:217](src/app/components/showcase/FeedbackShowcase.tsx#L217)
-- **Alerta com ação: ações sempre embaixo do texto** — Feedback › Alerta com ação (`feedback#alerta-com-acao`) · [src/app/components/showcase/FeedbackShowcase.tsx:253](src/app/components/showcase/FeedbackShowcase.tsx#L253)
+- **Alertas: tipos e quando usar cada um** — Feedback › Alertas (`feedback#alerts`) · [src/app/components/showcase/FeedbackShowcase.tsx:218](src/app/components/showcase/FeedbackShowcase.tsx#L218)
+- **Alerta com ação: ações sempre embaixo do texto** — Feedback › Alerta com ação (`feedback#alerta-com-acao`) · [src/app/components/showcase/FeedbackShowcase.tsx:254](src/app/components/showcase/FeedbackShowcase.tsx#L254)
 - **Grid de colunas: 4, 8 e 12 colunas por tela** — Grid e espaçamento › Grid de colunas (`grid#grid-colunas`) · [src/app/components/showcase/GridShowcase.tsx:143](src/app/components/showcase/GridShowcase.tsx#L143)
 - **Grid e espaçamento: como usar** — Grid e espaçamento › Como usar (`grid#grid-uso`) · [src/app/components/showcase/GridShowcase.tsx:244](src/app/components/showcase/GridShowcase.tsx#L244)
 - **Grid e espaçamento: o que evitar** — Grid e espaçamento › O que evitar (`grid#grid-evitar`) · [src/app/components/showcase/GridShowcase.tsx:287](src/app/components/showcase/GridShowcase.tsx#L287)
@@ -1855,6 +1855,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Diagrama do ecossistema](propostas/2026-11-28-diagrama-de-ecossistema.md) | `DiagramaDeEcossistema em src/app/components/ui/diagrama-de-ecossistema.tsx` | proposta |
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
+| [Etiqueta "No ar" com a bolinha piscando](propostas/2026-11-28-etiqueta-no-ar.md) | `ChipDeEstado, nova prop aoVivo em src/app/components/ui/chip-de-estado.tsx (mesma API no DS FindLook)` | aprovada (decisão da dona do produto, 28/11/2026) |
 | [Link de rede social](propostas/2026-11-28-link-de-rede-social.md) | — | aprovado (dona do produto, 28/11/2026; publicação com o "sim" dela) |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
 | [Página 404 padrão e espaço abaixo do cabeçalho](propostas/2026-11-28-pagina-404-padrao.md) | `PaginaDeErro (nova variante moldura="card") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css` | aprovada (decisões da dona do produto de 28/11/2026; publicação com o "sim" dela) |
