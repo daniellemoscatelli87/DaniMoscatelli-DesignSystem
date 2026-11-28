@@ -937,7 +937,7 @@ function AppShell() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* ── TOP NAV ── */}
-      <header className="fixed top-0 inset-x-0 z-40 h-16 bg-card/80 backdrop-blur-xl border-b border-border flex items-center px-4 gap-3" style={{ boxShadow: "var(--shadow-sm)" }}>
+      <header className="fixed top-0 inset-x-0 z-40 h-16 bg-card/80 backdrop-blur-xl border-b border-border flex items-center px-3 min-[360px]:px-4 gap-2 min-[360px]:gap-3" style={{ boxShadow: "var(--shadow-sm)" }}>
         {/* Menu toggle: collapses the sidebar on desktop, opens the drawer on mobile */}
         <button
           type="button"
@@ -982,10 +982,10 @@ function AppShell() {
           }
           @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
-        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2 min-w-0 text-left">
-          <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
-          {/* Celular (26/11/2026): só o símbolo abaixo de 420 px; "| Design System" só a partir de 640 px, para nunca encostar nos seletores */}
-          <div className="hidden min-[420px]:flex items-center gap-0 min-w-0">
+        <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2 min-w-0 shrink-0 text-left">
+          <img src={logoIconRed} alt="" className="hidden min-[340px]:block h-[34px] w-[34px] object-contain shrink-0" />
+          {/* Celular (26/11/2026): só o símbolo abaixo de 640 px (28/11: os seletores de idioma e tema cresceram para 44 px no toque); "| Design System" a partir de 1280 px (antes disso encostava na busca), para nunca encostar nos seletores */}
+          <div className="hidden sm:flex items-center gap-0 min-w-0">
             <span
               className="ds-wordmark text-body-lg font-semibold tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
@@ -994,13 +994,13 @@ function AppShell() {
             </span>
             <span
               aria-hidden
-              className="hidden sm:inline mx-2 text-body-lg font-light"
+              className="hidden xl:inline mx-2 text-body-lg font-light"
               style={{ color: "#627288", opacity: 0.4 }}
             >
               |
             </span>
             <span
-              className="hidden sm:inline text-body-lg font-normal tracking-tight whitespace-nowrap"
+              className="hidden xl:inline text-body-lg font-normal tracking-tight whitespace-nowrap"
               style={{ fontFamily: "var(--font-sans)" }}
             >
               <span className="ds-shimmer">Design System</span>
@@ -1024,7 +1024,7 @@ function AppShell() {
 
 
         {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 toque:h-auto p-1 rounded-full bg-muted border border-border gap-1">
           {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
             <button
               key={code}
@@ -1033,7 +1033,7 @@ function AppShell() {
               aria-pressed={lang === code}
               title={full}
               aria-label={full}
-              className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
+              className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
                 lang === code
                   ? "bg-card text-foreground shadow-sm border border-border"
                   : "text-muted-foreground hover:text-foreground"
@@ -1045,10 +1045,10 @@ function AppShell() {
         </div>
 
         {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-8 p-1 rounded-md bg-muted border border-border gap-1">
+        <div className="flex items-center h-8 toque:h-auto p-1 rounded-full bg-muted border border-border gap-1">
           <button
             onClick={() => setDark(false)}
-            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
               !dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -1059,7 +1059,7 @@ function AppShell() {
           </button>
           <button
             onClick={() => setDark(true)}
-            className={`flex items-center gap-1 h-7 px-2 rounded-sm text-label font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
               dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
