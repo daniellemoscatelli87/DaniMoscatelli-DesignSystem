@@ -46,7 +46,7 @@ function CartaoFlutuante({ icone, titulo, estado, tom = "marca", flutuar = true,
         : { opacity: { duration: 0.4, delay: atraso }, y: { duration: 5, delay: atraso, repeat: Infinity, ease: "easeInOut" } }}
       className={cn("flex w-max max-w-64 items-center gap-3 rounded-lg border border-border bg-card/90 py-2 pl-2 pr-4 shadow-md backdrop-blur-md", className)}
     >
-      <IconeComBase tom="marca" tamanho="md">{icone}</IconeComBase>
+      <IconeComBase tom="informativo" tamanho="md">{icone}</IconeComBase>
       <span className="min-w-0">
         <strong className="block truncate text-body-sm font-bold text-foreground">{titulo}</strong>
         {estado && (

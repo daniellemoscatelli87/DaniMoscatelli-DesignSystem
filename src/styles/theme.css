@@ -92,7 +92,7 @@
   /* Três rosas claros, cada um com um papel (dona do produto, 27/11/2026; cores sólidas):
      --primary-suave  #FCEEEE  SELECIONADO: item ativo do menu, chip, segmento e linha selecionados (o "rosa do meio").
                                Selecionado com o mouse em cima continua neste rosa. Texto --primary-text: 5,5:1.
-     --primary-muted  #FAE4E4  DESTAQUE: base de ícones (IconeComBase marca), chips de estado e faixas de apoio.
+     --primary-muted  #FAE4E4  DESTAQUE: base de ícones clicáveis (IconeComBase clicavel), chips de estado e faixas de apoio.
      HOVER é cinza claro (--accent/--muted #E8EDF3), nunca rosa. */
   --primary-suave:             #FCEEEE;
   --primary-muted:             #FAE4E4;

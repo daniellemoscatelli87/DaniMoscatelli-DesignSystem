@@ -182,7 +182,6 @@ function StatesDemo() {
           <EstadoVazio
             tamanho="sm"
             nivel={3}
-            tom="marca"
             icone={<Inbox />}
             titulo={t("No projects yet", "Nenhum projeto ainda")}
             descricao={t("Projects you create appear here. Start with a template to see how it works.", "Os projetos que você criar aparecem aqui. Comece com um template para ver como funciona.")}

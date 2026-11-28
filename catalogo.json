@@ -7,7 +7,7 @@
   "resumo": {
     "arquivosDeComponentes": 126,
     "componentesExportados": 415,
-    "templatesEPadroesSoEmDemonstracao": 75,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 45,
     "tokens": 163,
     "paginas": 33,
@@ -243,7 +243,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "direto",
           "exports": [
             "Alert",
@@ -269,7 +269,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Alert",
@@ -516,7 +516,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "AlertaComAcao",
@@ -1024,7 +1024,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 326,
+          "linha": 325,
           "uso": "dentro de outro exemplo",
           "exports": [
             "BotaoDeEnvio"
@@ -1360,7 +1360,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 287,
+          "linha": 286,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1624,7 +1624,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1708,7 +1708,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 346,
+          "linha": 345,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2149,7 +2149,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256,
+          "linha": 255,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CabecalhoDoSite"
@@ -3129,18 +3129,19 @@
         {
           "nome": "CardMidia",
           "tipo": "componente",
-          "linha": 60,
-          "descricao": "Mídia do card: foto (tipo=\"imagem\", de ponta a ponta) ou ícone (tipo=\"icone\", com o respiro do card; um ícone svg direto ganha a base rosa clara com o ícone na cor de texto da primária, o padrão dos templates do painel). Vertical: no topo.",
+          "linha": 69,
+          "descricao": "",
           "props": [
             "className",
-            "tipo"
+            "tipo",
+            "tom"
           ],
           "reexportaDe": null
         },
         {
           "nome": "CardHeader",
           "tipo": "componente",
-          "linha": 77,
+          "linha": 87,
           "descricao": "",
           "props": [
             "className"
@@ -3150,7 +3151,7 @@
         {
           "nome": "CardTitle",
           "tipo": "componente",
-          "linha": 90,
+          "linha": 100,
           "descricao": "",
           "props": [
             "className"
@@ -3160,7 +3161,7 @@
         {
           "nome": "CardDescription",
           "tipo": "componente",
-          "linha": 100,
+          "linha": 110,
           "descricao": "",
           "props": [
             "className"
@@ -3170,7 +3171,7 @@
         {
           "nome": "CardAction",
           "tipo": "componente",
-          "linha": 110,
+          "linha": 120,
           "descricao": "",
           "props": [
             "className"
@@ -3180,7 +3181,7 @@
         {
           "nome": "CardContent",
           "tipo": "componente",
-          "linha": 123,
+          "linha": 133,
           "descricao": "",
           "props": [
             "className"
@@ -3190,7 +3191,7 @@
         {
           "nome": "CardFooter",
           "tipo": "componente",
-          "linha": 134,
+          "linha": 144,
           "descricao": "Rodapé do card. No Card horizontal, ganha o divisor do card em cima e as ações vão para o canto inferior direito.",
           "props": [
             "className",
@@ -3617,7 +3618,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Card",
@@ -4016,7 +4017,7 @@
         {
           "nome": "GrupoDeCartoesDeEscolha",
           "tipo": "componente",
-          "linha": 45,
+          "linha": 46,
           "descricao": "",
           "props": [
             "value",
@@ -4034,7 +4035,7 @@
         {
           "nome": "CartaoDeEscolha",
           "tipo": "componente",
-          "linha": 88,
+          "linha": 89,
           "descricao": "",
           "props": [
             "valor",
@@ -4519,7 +4520,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -4764,7 +4765,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "dispararConfete"
@@ -5967,7 +5968,7 @@
         {
           "nome": "EstadoVazio",
           "tipo": "componente",
-          "linha": 74,
+          "linha": 76,
           "descricao": "",
           "props": [
             "icone",
@@ -5987,7 +5988,7 @@
         {
           "nome": "EstadoFinal",
           "tipo": "componente",
-          "linha": 136,
+          "linha": 138,
           "descricao": "",
           "props": [
             "tom",
@@ -6006,7 +6007,7 @@
         {
           "nome": "PaginaDeErro",
           "tipo": "componente",
-          "linha": 183,
+          "linha": 185,
           "descricao": "",
           "props": [
             "codigo",
@@ -6037,7 +6038,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "PaginaDeErro"
@@ -6099,7 +6100,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 346,
+          "linha": 345,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -6521,7 +6522,7 @@
           "ancora": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 326,
+          "linha": 325,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6856,7 +6857,7 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 312,
+          "linha": 311,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6982,7 +6983,7 @@
           "ancora": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 278,
+          "linha": 277,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6994,7 +6995,7 @@
           "ancora": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 355,
+          "linha": 354,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7342,7 +7343,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256,
+          "linha": 255,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7354,7 +7355,7 @@
           "ancora": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 293,
+          "linha": 292,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7366,7 +7367,7 @@
           "ancora": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 342,
+          "linha": 341,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9116,7 +9117,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 268,
+          "linha": 267,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "withHighlight"
@@ -9920,7 +9921,7 @@
           "ancora": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 342,
+          "linha": 341,
           "uso": "direto",
           "exports": [
             "LinkDeTexto",
@@ -10006,7 +10007,7 @@
           "ancora": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 312,
+          "linha": 311,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -10665,9 +10666,25 @@
       "fonteDescricao": "comentário do arquivo",
       "exports": [
         {
+          "nome": "resolverTomDoIcone",
+          "tipo": "utilitário",
+          "linha": 44,
+          "descricao": "Troca os nomes antigos pelos novos: marca vira clicavel; neutro vira informativo.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
+          "nome": "tomSemClique",
+          "tipo": "utilitário",
+          "linha": 49,
+          "descricao": "Tom de um ícone dentro de uma peça que não se toca (cabeçalho de card, estado vazio, item de registro): fica informativo, a não ser que a peça esteja desabilitada. Aceita os nomes antigos sem mudar o desenho para clicável.",
+          "props": [],
+          "reexportaDe": null
+        },
+        {
           "nome": "IconeComBase",
           "tipo": "componente",
-          "linha": 26,
+          "linha": 55,
           "descricao": "",
           "props": [
             "tom",
@@ -10681,7 +10698,7 @@
         {
           "nome": "formatarNumero",
           "tipo": "utilitário",
-          "linha": 47,
+          "linha": 77,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -10689,7 +10706,7 @@
         {
           "nome": "formatarVariacao",
           "tipo": "utilitário",
-          "linha": 49,
+          "linha": 79,
           "descricao": "+18,6% / −4% (sinal sempre visível; vírgula decimal).",
           "props": [],
           "reexportaDe": null
@@ -10697,7 +10714,7 @@
         {
           "nome": "Variacao",
           "tipo": "componente",
-          "linha": 55,
+          "linha": 85,
           "descricao": "Variação (seta + texto; nunca só cor)",
           "props": [
             "valor",
@@ -10709,7 +10726,7 @@
         {
           "nome": "Explicacao",
           "tipo": "componente",
-          "linha": 70,
+          "linha": 100,
           "descricao": "Explicação acessível (toque, teclado e mouse)",
           "props": [
             "termo",
@@ -10720,7 +10737,7 @@
         {
           "nome": "CardIndicador",
           "tipo": "componente",
-          "linha": 131,
+          "linha": 163,
           "descricao": "Card de indicador: rótulo em cima à esquerda, ícone com base no canto superior direito e, logo abaixo, o número grande. A linha do rótulo tem a altura de duas linhas de texto (a do ícone), então numa linha de cards os números ficam …",
           "props": [
             "icone",
@@ -10747,7 +10764,7 @@
         {
           "nome": "DivisorSuave",
           "tipo": "componente",
-          "linha": 192,
+          "linha": 230,
           "descricao": "Linha de 1 px que some nas laterais: degradê transparente → --border-strong → transparente, com o esmaecimento nos últimos ~18% de cada lado. Separa partes de um card sem fechar uma caixa.",
           "props": [
             "className"
@@ -10757,7 +10774,7 @@
         {
           "nome": "CardComCabecalho",
           "tipo": "componente",
-          "linha": 224,
+          "linha": 263,
           "descricao": "",
           "props": [
             "icone",
@@ -10777,7 +10794,7 @@
         {
           "nome": "LinkVerTudo",
           "tipo": "componente",
-          "linha": 264,
+          "linha": 303,
           "descricao": "",
           "props": [
             "children",
@@ -10797,6 +10814,7 @@
         "CardIndicadorProps",
         "EstiloDoCabecalhoDoCard",
         "LinkVerTudoProps",
+        "TomDaBase",
         "TomDoIcone"
       ],
       "variantes": {},
@@ -12068,7 +12086,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256,
+          "linha": 255,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -12338,7 +12356,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Selo"
@@ -12411,7 +12429,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "SeloSecao"
@@ -13208,7 +13226,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Skeleton"
@@ -13803,7 +13821,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 727,
+          "linha": 726,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Tabs",
@@ -14628,7 +14646,7 @@
           "ancora": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256
+          "linha": 255
         }
       ],
       "usaComponentes": [
@@ -14654,7 +14672,7 @@
           "ancora": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 306
+          "linha": 305
         }
       ],
       "usaComponentes": [],
@@ -14675,7 +14693,7 @@
           "ancora": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 379
+          "linha": 378
         }
       ],
       "usaComponentes": [],
@@ -14696,7 +14714,7 @@
           "ancora": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 346
+          "linha": 345
         }
       ],
       "usaComponentes": [
@@ -14709,7 +14727,7 @@
       "nome": "HierarchyDemo",
       "tipo": "demonstração de conceito",
       "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-      "linha": 221,
+      "linha": 220,
       "descricao": "Button hierarchy",
       "pagina": "usability",
       "paginaRotulo": "Usabilidade",
@@ -14720,7 +14738,7 @@
           "ancora": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 287
+          "linha": 286
         }
       ],
       "usaComponentes": [
@@ -15140,7 +15158,7 @@
       "nome": "PainelTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 161,
+      "linha": 162,
       "descricao": "Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início.",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -15193,7 +15211,7 @@
       "nome": "PecasDoPainel",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 226,
+      "linha": 227,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -15237,7 +15255,7 @@
         "TabsTrigger",
         "TopoDoMenu"
       ],
-      "elementosFeitosAMao": 5
+      "elementosFeitosAMao": 4
     },
     {
       "nome": "CascaDoTemplate",
@@ -15600,6 +15618,31 @@
         "Textarea"
       ],
       "elementosFeitosAMao": 9
+    },
+    {
+      "nome": "RegraDoIconeComBase",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/shared/RegraDoIconeComBase.tsx",
+      "linha": 14,
+      "descricao": "Regra do ícone com base (decisão da dona do produto, 28/11/2026): três estados, pelo que o componente faz. Arquivo igual nos dois DS (Dani Moscatelli e FindLook).",
+      "pagina": "templates",
+      "paginaRotulo": "Templates",
+      "onde": [
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel-pecas",
+          "titulo": "Peças do painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 734
+        }
+      ],
+      "usaComponentes": [
+        "Card",
+        "GradeDeCards",
+        "IconeComBase"
+      ],
+      "elementosFeitosAMao": 1
     },
     {
       "nome": "CanvasRevealCard",
@@ -18337,7 +18380,7 @@
         "titulo": "Hierarquia de ações",
         "resumo": "Hierarquia de ações: principal, secundária e terciária",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 287
+        "linha": 286
       },
       {
         "ancora": "card-escolher",
@@ -18445,7 +18488,7 @@
         "titulo": "Ações destrutivas",
         "resumo": "Ações destrutivas: confirmação e desfazer",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 379
+        "linha": 378
       },
       {
         "ancora": "graficos-escolher",
@@ -18515,7 +18558,7 @@
         "ancora": "ux-checklist",
         "titulo": "Revisão rápida",
         "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-        "linha": 388
+        "linha": 387
       },
       {
         "pagina": "accessibility",
@@ -19175,49 +19218,49 @@
           "id": "ux-principles",
           "titulo": "Princípios",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 278
+          "linha": 277
         },
         {
           "id": "ux-hierarchy",
           "titulo": "Hierarquia de ações",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 287
+          "linha": 286
         },
         {
           "id": "ux-targets",
           "titulo": "Tamanho de alvo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 306
+          "linha": 305
         },
         {
           "id": "ux-feedback",
           "titulo": "Status do sistema",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 326
+          "linha": 325
         },
         {
           "id": "ux-states",
           "titulo": "Estados de conteúdo",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 346
+          "linha": 345
         },
         {
           "id": "ux-errors",
           "titulo": "Erros e microcopy",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 355
+          "linha": 354
         },
         {
           "id": "ux-destructive",
           "titulo": "Ações destrutivas",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 379
+          "linha": 378
         },
         {
           "id": "ux-checklist",
           "titulo": "Revisão rápida",
           "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 388
+          "linha": 387
         }
       ]
     },
@@ -19900,7 +19943,7 @@
           "id": "feedback-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 636
+          "linha": 635
         },
         {
           "id": "confete",
@@ -19967,7 +20010,7 @@
           "id": "badges-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FeedbackShowcase.tsx",
-          "linha": 647
+          "linha": 646
         }
       ]
     },
@@ -20121,25 +20164,25 @@
           "id": "molduras-erro",
           "titulo": "Página de erro (404)",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 256
+          "linha": 255
         },
         {
           "id": "molduras-alerta-tom",
           "titulo": "Alerta por tom",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 293
+          "linha": 292
         },
         {
           "id": "molduras-logo",
           "titulo": "Componente do logo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 312
+          "linha": 311
         },
         {
           "id": "molduras-links",
           "titulo": "Links de texto e pular para o conteúdo",
           "arquivo": "src/app/components/showcase/MoldurasShowcase.tsx",
-          "linha": 342
+          "linha": 341
         }
       ]
     },

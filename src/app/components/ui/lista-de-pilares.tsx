@@ -73,7 +73,7 @@ function ListaDePilares({ pilares, rotulo, ordenada = true, linha = true, nivel 
             animate={visivel || reduzir ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             transition={{ duration: 0.4, delay: reduzir ? 0 : 0.15 + i * 0.12, ease: [0, 0, 0.58, 1] }}
           >
-            <IconeComBase tom="marca" tamanho="lg" redonda className="relative z-10 ring-4 ring-card">{p.icone}</IconeComBase>
+            <IconeComBase tom="informativo" tamanho="lg" redonda className="relative z-10 ring-4 ring-card">{p.icone}</IconeComBase>
             <div className="min-w-0">
               <H className="text-subtitle font-bold leading-snug text-foreground">
                 {ordenada && <span className="sr-only">{i + 1}. </span>}

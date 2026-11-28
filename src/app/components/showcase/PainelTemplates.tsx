@@ -22,6 +22,7 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { SidePanel, SidePanelBody, SidePanelContent, SidePanelHeader } from "../ui/side-panel";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { SubTitle, Mono, DoDont } from "./shared/Guidance";
+import { RegraDoIconeComBase } from "./shared/RegraDoIconeComBase";
 
 /* ─────────────────────────────────────────────
    Template do painel (casca + Início), com as peças do painel do DS:
@@ -130,7 +131,7 @@ function PaginaInicio({ t, bi, emDia }: { t: Tr; bi: (v: { en: string; pt: strin
               <LinhaDeLista
                 as="a"
                 href="#contato"
-                inicio={<IconeComBase tom={m.tom} redonda>{m.icone}</IconeComBase>}
+                inicio={<IconeComBase tom="clicavel" redonda>{m.icone}</IconeComBase>}
                 titulo={m.nome}
                 descricao={m.detalhe}
                 fim={
@@ -304,7 +305,7 @@ export function PecasDoPainel() {
           <GradeDeCards className="gap-4 @min-[28rem]/conteudo:grid-cols-2 @min-[66rem]/conteudo:grid-cols-4">
             <CardIndicador icone={<Users />} valor={48} total={75} rotulo={t("Partners active", "Parceiros ativos")} />
             <CardIndicador icone={<Mail />} valor={1284} rotulo={t("Messages", "Mensagens")} variacao={18.6} comparacao={t("vs. last month", "vs. mês passado")} />
-            <CardIndicador href="#" onClick={e => e.preventDefault()} icone={<Mail />} valor={3} rotulo={t("Unanswered (clickable)", "Sem resposta (clicável)")} tom="marca" selo={<Badge variant="outline">{t("oldest: 3 days", "mais antiga: 3 dias")}</Badge>} />
+            <CardIndicador href="#" onClick={e => e.preventDefault()} icone={<Mail />} valor={3} rotulo={t("Unanswered (clickable)", "Sem resposta (clicável)")} selo={<Badge variant="outline">{t("oldest: 3 days", "mais antiga: 3 dias")}</Badge>} />
             <CardIndicador icone={<Rocket />} valor={null} rotulo={t("Waiting for launch", "Aguardando o lançamento")} explicacao={t("People who asked to be told when the product launches.", "Pessoas que pediram aviso quando o produto for lançado.")} apoio={t("The count did not load", "A contagem não carregou")} />
           </GradeDeCards>
         </div>
@@ -314,41 +315,19 @@ export function PecasDoPainel() {
         <SubTitle>{t("4. Icon with base (ui/painel-dados › IconeComBase)", "4. Ícone com base (ui/painel-dados › IconeComBase)")}</SubTitle>
         <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
-            "Only three ways to show an icon, never mixed: pink base + red icon (tom=\"marca\": focus, something to act on, active), grey base + grey icon (tom=\"neutro\": it only identifies; the default in grids of equal cards; paused or record-only items), or no base (inline, beside text, without this component). Sizes sm 32 px, md 40 px (default), lg 48 px; redonda for list rows.",
-            "Só três jeitos de mostrar um ícone, nunca misturados: base rosa + ícone vermelho (tom=\"marca\": foco, algo para agir, ativo), base cinza + ícone cinza (tom=\"neutro\": só identifica; padrão em grades de cards iguais; itens pausados ou só de registro), ou sem base (inline, ao lado do texto, sem este componente). Tamanhos sm 32 px, md 40 px (padrão), lg 48 px; redonda para linhas de lista.",
+            "An icon on a base has three states, chosen by what the component does, never by taste (owner's decision, 28/11/2026): disabled (grey icon on a grey base), informative (coloured icon on a light grey base) and clickable (coloured icon on a light coloured base).",
+            "O ícone com base tem três estados, escolhidos pelo que o componente faz, nunca por gosto (decisão da dona do produto, 28/11/2026): desabilitado (ícone cinza na base cinza), informativo (ícone colorido na base cinza clara) e clicável (ícone colorido na base colorida clara).",
           )}
         </p>
-        {/* Um grupo por linha (marca, neutro, redonda): sem divisor solto no fim de uma linha quebrada. */}
-        <dl className="divide-y divide-border rounded-xl border border-border bg-card">
-          {[
-            { rotulo: t("Brand", "Marca"), icones: (["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`m${tm}`} tom="marca" tamanho={tm}><Mail /></IconeComBase>) },
-            { rotulo: t("Neutral", "Neutro"), icones: (["sm", "md", "lg"] as const).map(tm => <IconeComBase key={`n${tm}`} tom="neutro" tamanho={tm}><MailCheck /></IconeComBase>) },
-            { rotulo: t("Round (list rows)", "Redonda (linhas de lista)"), icones: [<IconeComBase key="rm" tom="marca" redonda><Mail /></IconeComBase>, <IconeComBase key="rn" tom="neutro" redonda><CalendarCheck /></IconeComBase>] },
-          ].map(g => (
-            <div key={g.rotulo} className="flex flex-wrap items-center gap-x-6 gap-y-3 px-5 py-4">
-              <dt className="w-40 text-body-sm font-semibold text-foreground">{g.rotulo}</dt>
-              <dd className="flex items-center gap-4">{g.icones}</dd>
-            </div>
-          ))}
-        </dl>
-        <DoDont
-          dos={[
-            t("Pink base with red icon for what needs action; grey base with grey icon for what only identifies.", "Base rosa com ícone vermelho para o que pede ação; base cinza com ícone cinza para o que só identifica."),
-            t("The same tone for every card of a grid of equal cards.", "O mesmo tom em todos os cards de uma grade de cards iguais."),
-          ]}
-          donts={[
-            t("Grey base with a red icon, or pink base with a grey icon.", "Base cinza com ícone vermelho, ou base rosa com ícone cinza."),
-            t("Colour as the only signal: the state also goes in text (visible or for screen readers).", "Cor como único sinal: o estado vai também em texto (visível ou para leitores de tela)."),
-          ]}
-        />
+        <RegraDoIconeComBase />
       </div>
 
       <div className="space-y-4">
         <SubTitle>{t("5. Card with icon header, soft divider and \"see all\" link", "5. Card com cabeçalho de ícone, divisor suave e link \"ver tudo\"")}</SubTitle>
         <p className="max-w-3xl text-body leading-relaxed text-muted-foreground">
           {t(
-            "CardComCabecalho: the Card of the DS with IconeComBase (marca by default), title, one-line description and an action on the right (LinkVerTudo). The header is separated by a DivisorSuave (fades at the sides); sangria lets lists run edge to edge, so row hover covers the whole row.",
-            "CardComCabecalho: o Card do DS com IconeComBase (marca por padrão), título, descrição de uma linha e ação à direita (LinkVerTudo). O cabeçalho é separado por um DivisorSuave (some nas laterais); sangria deixa listas de ponta a ponta, para o hover cobrir a linha inteira.",
+            "CardComCabecalho: the Card of the DS with IconeComBase (informative: coloured icon on a grey base, since the card is not clickable), title, one-line description and an action on the right (LinkVerTudo). The header is separated by a DivisorSuave (fades at the sides); sangria lets lists run edge to edge, so row hover covers the whole row.",
+            "CardComCabecalho: o Card do DS com IconeComBase (informativo: ícone colorido na base cinza, porque o card não se toca), título, descrição de uma linha e ação à direita (LinkVerTudo). O cabeçalho é separado por um DivisorSuave (some nas laterais); sangria deixa listas de ponta a ponta, para o hover cobrir a linha inteira.",
           )}
         </p>
         <GradeDeCards className="gap-4 md:grid-cols-2">

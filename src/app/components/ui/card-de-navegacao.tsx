@@ -35,7 +35,7 @@ function CardDeNavegacao({ titulo, descricao, icone, href, onClick, selo, classN
   );
   const conteudo = (
     <>
-      {icone && <IconeComBase tom="marca">{icone}</IconeComBase>}
+      {icone && <IconeComBase tom="clicavel">{icone}</IconeComBase>}
       <span className="min-w-0 flex-1">
         <span className="flex flex-wrap items-center gap-2">
           <span className="text-body font-semibold text-foreground">{titulo}</span>

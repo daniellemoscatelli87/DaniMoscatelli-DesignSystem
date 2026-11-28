@@ -188,7 +188,7 @@ export function MoldurasShowcase() {
 <PaginaDeErro codigo="404" titulo="Página não encontrada" acoes={<Button asChild><a href="/">Voltar ao início</a></Button>} />`}
         faca={[
           t("Say why it is empty and what to do next, in one sentence.", "Diga por que está vazio e o que fazer, numa frase."),
-          t("Use tom=\"marca\" only when the empty state invites to start.", "Use tom=\"marca\" só quando o vazio convida a começar."),
+          t("Keep the icon informative (coloured on a grey base): the empty state is not clickable, the button is.", "Deixe o ícone informativo (colorido na base cinza): o estado vazio não se toca, o botão sim."),
         ]}
         naoFaca={[
           t("Don't show an empty table with only the header.", "Não mostre uma tabela vazia só com o cabeçalho."),
@@ -197,7 +197,7 @@ export function MoldurasShowcase() {
       >
         <GradeDeCards className="md:grid-cols-2 gap-4">
           <ItemDaGrade>
-            <ShowcaseCard className="h-full" rotulo={t("Empty · neutral", "Vazio · neutro")}>
+            <ShowcaseCard className="h-full" rotulo={t("Empty · no results", "Vazio · nenhum resultado")}>
               <EstadoVazio
                 tamanho="sm"
                 nivel={3}
@@ -209,11 +209,10 @@ export function MoldurasShowcase() {
             </ShowcaseCard>
           </ItemDaGrade>
           <ItemDaGrade>
-            <ShowcaseCard className="h-full" rotulo={t("Empty · brand", "Vazio · marca")}>
+            <ShowcaseCard className="h-full" rotulo={t("Empty · invitation to start", "Vazio · convite a começar")}>
               <EstadoVazio
                 tamanho="sm"
                 nivel={3}
-                tom="marca"
                 icone={<FolderOpen />}
                 titulo={t("No announcements yet", "Nenhum comunicado ainda")}
                 descricao={t("Announcements you write appear here, with who received them.", "Os comunicados que você escrever aparecem aqui, com quem recebeu.")}

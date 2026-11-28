@@ -50,7 +50,7 @@ function TemplateLabel({ icon: Icon, label }: { icon: React.ElementType; label: 
   return (
     <div className="flex items-center gap-2 mb-4">
       <div className="h-7 w-7 rounded-sm bg-muted flex items-center justify-center">
-        <Icon className="h-3.5 w-3.5 text-muted-foreground" />
+        <Icon className="h-3.5 w-3.5 text-[var(--primary-text,var(--primary))]" />
       </div>
       <span className="text-body-sm font-semibold uppercase tracking-[0.07em] text-muted-foreground">{label}</span>
     </div>
@@ -429,8 +429,8 @@ function PricingTemplate({ mostrarParaQuem = true }: { mostrarParaQuem?: boolean
               >
                 {/* Topo: ícone do plano e, no destacado, o selo no estilo do card com wobble */}
                 <div className="mb-4 flex items-center justify-between gap-2">
-                  <div className="h-8 w-8 rounded-full flex items-center justify-center bg-[var(--primary-muted)] dark:bg-muted shrink-0">
-                    <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))] dark:text-muted-foreground" />
+                  <div className="h-8 w-8 rounded-full flex items-center justify-center bg-muted shrink-0">
+                    <Icon aria-hidden className="h-4 w-4 text-[var(--primary-text,var(--primary))]" />
                   </div>
                   {plan.highlight && (
                     <span className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2 py-1 text-caption font-bold uppercase tracking-[0.06em] text-[var(--primary-text,var(--primary))] whitespace-nowrap">

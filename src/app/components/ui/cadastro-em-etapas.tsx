@@ -164,7 +164,7 @@ function LateralDaEtapa({ icone, titulo, paragrafos = [], destaque, tom = "info"
   const id = React.useId();
   return (
     <aside data-slot="lateral-da-etapa" aria-labelledby={id} className={cn("@container/lateral min-w-0 self-start rounded-xl border border-border bg-card p-5 @min-[56rem]/etapa:p-6", className)}>
-      <IconeComBase tom="marca" tamanho="lg">{icone}</IconeComBase>
+      <IconeComBase tom="informativo" tamanho="lg">{icone}</IconeComBase>
       <h3 id={id} className="mt-4 text-subtitle font-bold tracking-[-0.01em] text-foreground">{titulo}</h3>
       {paragrafos.map((p) => (
         <p key={p} className="mt-2 text-body-sm leading-relaxed text-muted-foreground">{p}</p>

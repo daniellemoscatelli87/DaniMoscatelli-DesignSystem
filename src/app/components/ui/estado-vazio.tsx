@@ -4,7 +4,7 @@ import * as React from "react";
 import { CheckCircle2, Info, XCircle, AlertCircle } from "lucide-react";
 import { cn } from "./utils";
 import { Confete } from "./confete";
-import { IconeComBase } from "./painel-dados";
+import { IconeComBase, tomSemClique } from "./painel-dados";
 import { Card } from "./card";
 import { SeloSecao } from "./selo-secao";
 
@@ -13,8 +13,9 @@ import { SeloSecao } from "./selo-secao";
  * Dani Moscatelli, 27/11/2026).
  *
  * EstadoVazio — uma lista, tabela ou área que ainda não tem nada (ou que o filtro esvaziou). Ícone na base, título,
- *   uma frase que explica o porquê e, quando houver, a próxima ação. tom "neutro" (padrão: nada a fazer agora, ou
- *   "nenhum resultado") ou "marca" (convite a começar: "Crie o primeiro"). variante "pagina" (padrão,
+ *   uma frase que explica o porquê e, quando houver, a próxima ação. O estado vazio não se toca, então o ícone fica
+ *   informativo (colorido na base cinza, regra de 28/11/2026); tom "desabilitado" quando a área está indisponível. Os
+ *   nomes antigos ("neutro", "marca") continuam aceitos e ficam informativos. variante "pagina" (padrão,
  *   centralizado no lugar da lista) ou "lista" (dentro de um card, alinhado à esquerda como uma linha da lista).
  *   `ilustracao`: imagem decorativa no lugar do ícone (no FindLook, o mascote de Mascote & Ilustrações › Estados
  *   vazios). `moldura`: "nenhuma" (padrão), "tracejado" (no lugar de uma lista) ou "card" (sozinho na página).
@@ -60,7 +61,8 @@ export type EstadoVazioProps = Omit<React.ComponentProps<"div">, "title"> & {
   descricao?: React.ReactNode;
   /** Botões ou links (um primário no máximo). */
   acoes?: React.ReactNode;
-  tom?: "neutro" | "marca";
+  /** "informativo" (padrão) ou "desabilitado". "neutro" e "marca" ainda valem e ficam informativos. */
+  tom?: "informativo" | "desabilitado" | "neutro" | "marca";
   /** "sm" dentro de cards e painéis estreitos; "md" (padrão) no lugar de uma lista ou página. */
   tamanho?: "sm" | "md";
   variante?: "pagina" | "lista";
@@ -71,12 +73,12 @@ export type EstadoVazioProps = Omit<React.ComponentProps<"div">, "title"> & {
   moldura?: keyof typeof MOLDURA;
 };
 
-function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "neutro", tamanho = "md", variante = "pagina", nivel = 2, ilustracao, moldura = "nenhuma", className, ...props }: EstadoVazioProps) {
+function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "informativo", tamanho = "md", variante = "pagina", nivel = 2, ilustracao, moldura = "nenhuma", className, ...props }: EstadoVazioProps) {
   const H = titulo(nivel);
   if (variante === "lista") {
     return (
       <div data-slot="estado-vazio" data-tom={tom} data-variante="lista" className={cn("grid grid-cols-[auto_minmax(0,1fr)] items-start gap-x-3 px-4 py-4", className)} {...props}>
-        {icone ? <IconeComBase tom={tom} tamanho="md">{icone}</IconeComBase> : <span />}
+        {icone ? <IconeComBase tom={tomSemClique(tom)} tamanho="md">{icone}</IconeComBase> : <span />}
         <div className="min-w-0 self-center">
           <H className="m-0 text-body-sm font-semibold text-foreground text-pretty">{t}</H>
           {descricao && <p className="m-0 mt-1 text-body-sm text-pretty text-muted-foreground">{descricao}</p>}
@@ -101,7 +103,7 @@ function EstadoVazio({ icone, titulo: t, descricao, acoes, tom = "neutro", taman
       {ilustracao ? (
         <img src={ilustracao} alt="" className={cn("h-auto object-contain", tamanho === "sm" ? "mb-3 w-24" : "mb-4 w-40")} />
       ) : icone ? (
-        <IconeComBase tom={tom} tamanho={tamanho === "sm" ? "md" : "lg"} className={tamanho === "sm" ? "mb-3" : "mb-4"}>
+        <IconeComBase tom={tomSemClique(tom)} tamanho={tamanho === "sm" ? "md" : "lg"} className={tamanho === "sm" ? "mb-3" : "mb-4"}>
           {icone}
         </IconeComBase>
       ) : null}

@@ -53,20 +53,30 @@ const Card = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { or
 });
 
 /**
- * Mídia do card: foto (tipo="imagem", de ponta a ponta) ou ícone (tipo="icone", com o respiro do card; um ícone svg
- * direto ganha a base rosa clara com o ícone na cor de texto da primária, o padrão dos templates do painel).
+ * Mídia do card: foto (tipo="imagem", de ponta a ponta) ou ícone (tipo="icone", com o respiro do card). Um ícone svg
+ * direto ganha a base pela regra dos três estados (28/11/2026), no prop `tom`:
+ * - sem `tom`: informativo (ícone colorido na base cinza) no card parado; clicável (ícone colorido na base colorida)
+ *   sozinho quando o card está dentro de um link ou botão, ou tem data-clicavel;
+ * - "informativo", "clicavel" ou "desabilitado" (ícone cinza na base cinza) fixam o tom.
  * Vertical: no topo. Horizontal: à esquerda, na altura inteira.
  */
-function CardMidia({ className, tipo = "imagem", ...props }: React.ComponentProps<"div"> & { tipo?: "imagem" | "icone" }) {
+const TOM_DA_MIDIA = {
+  auto: "[&>svg]:bg-muted [:is(a,button,[data-clicavel])_&>svg]:bg-[var(--primary-muted)] [&>svg]:text-[var(--primary-text,var(--primary))]",
+  informativo: "[&>svg]:bg-muted [&>svg]:text-[var(--primary-text,var(--primary))]",
+  clicavel: "[&>svg]:bg-[var(--primary-muted)] [&>svg]:text-[var(--primary-text,var(--primary))]",
+  desabilitado: "[&>svg]:bg-disabled [&>svg]:text-disabled-foreground",
+} as const;
+function CardMidia({ className, tipo = "imagem", tom, ...props }: React.ComponentProps<"div"> & { tipo?: "imagem" | "icone"; tom?: "informativo" | "clicavel" | "desabilitado" }) {
   return (
     <div
       data-slot="card-midia"
       data-tipo={tipo}
+      data-tom={tipo === "icone" ? tom ?? "auto" : undefined}
       className={cn(
         "min-w-0",
         tipo === "imagem"
           ? "-mb-6 h-40 overflow-hidden rounded-t-[inherit] [&>img]:h-full [&>img]:w-full [&>img]:object-cover"
-          : "-mb-8 px-6 pt-6 [&>svg]:box-content [&>svg]:size-5 [&>svg]:rounded-lg [&>svg]:bg-[var(--primary-muted)] [&>svg]:p-3 [&>svg]:text-[var(--primary-text,var(--primary))]",
+          : cn("-mb-8 px-6 pt-6 [&>svg]:box-content [&>svg]:size-5 [&>svg]:rounded-lg [&>svg]:p-3", TOM_DA_MIDIA[tom ?? "auto"]),
         className,
       )}
       {...props}

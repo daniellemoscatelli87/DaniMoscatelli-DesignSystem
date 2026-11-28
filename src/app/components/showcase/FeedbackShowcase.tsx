@@ -619,7 +619,6 @@ function FeedbackShowcaseBase({ parte = "feedback" }: { parte?: "feedback" | "ro
             <EstadoVazio
               tamanho="sm"
               nivel={4}
-              tom="marca"
               icone={<Plus />}
               titulo={t("Create your first project", "Crie seu primeiro projeto")}
               descricao={t("Projects help you organize your work and collaborate with your team.", "Projetos ajudam você a organizar seu trabalho e colaborar com sua equipe.")}

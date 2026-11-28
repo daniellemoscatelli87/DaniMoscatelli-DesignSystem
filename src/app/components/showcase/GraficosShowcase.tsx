@@ -155,7 +155,7 @@ function Familia({ id, icone: Icone, nome, descricao, children }: { id: string; 
   return (
     <div id={id} className="scroll-mt-32">
       <div className="mb-4 flex items-start gap-3">
-        <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[var(--primary-muted)] text-[var(--primary-text)]"><Icone className="h-[18px] w-[18px]" /></span>
+        <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-muted text-[var(--primary-text)]"><Icone className="h-[18px] w-[18px]" /></span>
         <div>
           <h3 className="text-body-lg font-bold text-foreground">{nome}</h3>
           <p className="text-body-sm leading-relaxed text-muted-foreground">{descricao}</p>
@@ -880,7 +880,7 @@ function GraficosShowcaseBase() {
           {FAMILIAS.map(f => (
             <Cartao key={f.nome}>
               <div className="mb-3 flex items-center gap-3">
-                <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-md bg-[var(--primary-muted)] text-[var(--primary-text)]"><f.icone className="h-[18px] w-[18px]" /></span>
+                <span aria-hidden className="flex h-9 w-9 items-center justify-center rounded-md bg-muted text-[var(--primary-text)]"><f.icone className="h-[18px] w-[18px]" /></span>
                 <h3 className="text-body font-bold text-foreground">{f.nome}</h3>
               </div>
               <p className="text-body-sm leading-relaxed text-foreground">{f.quando}</p>

@@ -13,7 +13,7 @@
 - Três níveis, cores sólidas, iguais em regra nos dois design systems:
   - **Selecionado** `--primary-suave` #FCEEEE (o rosa do meio): item ativo do menu, chip, segmento e linha selecionados, plano escolhido. Selecionado com o mouse em cima continua neste rosa. Texto `--primary-text`: 5,5:1.
   - **Hover** cinza claro `--accent` #E8EDF3, nunca rosa (linhas de lista de ponta a ponta: `--row-hover`, cinza mais claro). Texto `--foreground` 14,8:1 ou `--muted-foreground` 4,7:1.
-  - **Destaque** `--primary-muted` #FAE4E4: bases de ícone (IconeComBase marca), chips de estado, faixas de apoio. Nunca marca seleção. Texto `--primary-text`: 5,1:1.
+  - **Destaque** `--primary-muted` #FAE4E4: bases de ícones clicáveis (IconeComBase clicavel; o informativo usa a base cinza), chips de estado, faixas de apoio. Nunca marca seleção. Texto `--primary-text`: 5,1:1.
 
 ## Correções da auditoria de celular (27/11/2026)
 

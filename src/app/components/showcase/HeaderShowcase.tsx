@@ -555,7 +555,7 @@ function CardOpcao({ Icone, titulo, selo, desc, quando, ativo, rotuloAcao, onAca
   return (
     <div className={`flex flex-col rounded-lg border bg-card p-5 ${ativo ? "border-primary" : "border-border"}`} style={{ boxShadow: "var(--shadow-xs)" }}>
       <div className="mb-3 flex items-center justify-between gap-2">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-muted)]">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-muted">
           <Icone aria-hidden className={`h-4 w-4 ${textoMarca}`} />
         </div>
         {selo && <span className={`rounded-full border border-primary/20 bg-[var(--primary-muted)] px-2 py-1 text-caption font-bold uppercase tracking-[0.06em] ${textoMarca}`}>{selo}</span>}

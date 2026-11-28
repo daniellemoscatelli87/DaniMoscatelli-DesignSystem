@@ -12,27 +12,57 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 const foco = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background";
 
-/* ── Ícone com base ──────────────────────────────────────────── */
+/* ── Ícone com base (regra da dona do produto, 28/11/2026: três estados) ──
+   Bloco igual nos dois DS (Dani Moscatelli e FindLook); só os tamanhos da base mudam de um para o outro. */
 /**
- * Regra: só três jeitos de mostrar um ícone, e nunca misturados.
- * marca: base rosa (--primary-muted) + ícone vermelho (--primary-text). O ícone do que é foco ou convida a agir
- *        (cabeçalho de card de seção, destaque, próxima ação, algo ativo).
- * neutro: base cinza (--muted) + ícone cinza (--muted-foreground). O ícone só identifica o tipo de informação
- *        (cards de indicador, itens pausados, encerrados ou só de registro). É o padrão em grades de cards iguais.
- * Ícone sem base (inline, ao lado do texto) não usa este componente. Nunca base cinza com ícone vermelho, nem o contrário.
+ * O tom diz o que o componente faz, nunca a importância do ícone:
+ * clicavel: ícone colorido (--primary-text) na base colorida clara (--primary-muted). Para o que se pode tocar: card
+ *           clicável, linha de lista clicável, link.
+ * informativo: ícone colorido (--primary-text) na base cinza clara (--muted). Para o que só informa e não se toca:
+ *           bloco de benefícios, card parado, cabeçalho de card que não é clicável.
+ * desabilitado: ícone cinza na base cinza (--disabled e --disabled-foreground). Para card ou item desabilitado ou
+ *           indisponível.
+ * Nomes antigos, que continuam valendo: marca = clicavel; neutro = informativo.
+ * Tons de estado (sucesso, aviso, erro, info): o ícone de um estado (pagamento confirmado, cadastro pendente, falha
+ * na importação, novidade), na tinta clara do tom com o ícone na cor de texto do tom (3:1 ou mais). Use só quando o
+ * ícone diz o estado.
+ * Ícone sem base (inline, ao lado do texto) não usa este componente.
  */
-type TomDoIcone = "marca" | "neutro";
+type TomDoIcone = "clicavel" | "informativo" | "desabilitado" | "marca" | "neutro";
+type TomDaBase = TomDoIcone | "sucesso" | "aviso" | "erro" | "info";
+type TomResolvido = Exclude<TomDaBase, "marca" | "neutro">;
+const CORES_DA_BASE: Record<TomResolvido, string> = {
+  clicavel: "bg-[var(--primary-muted)] text-[var(--primary-text,var(--primary))]",
+  informativo: "bg-muted text-[var(--primary-text,var(--primary))]",
+  desabilitado: "bg-disabled text-disabled-foreground",
+  sucesso: "bg-success-muted text-success-text",
+  aviso: "bg-warning-muted text-warning-text",
+  erro: "bg-error-muted text-error-text",
+  info: "bg-info-muted text-info-text",
+};
+/** Troca os nomes antigos pelos novos: marca vira clicavel; neutro vira informativo. */
+function resolverTomDoIcone(tom: TomDaBase): TomResolvido {
+  return tom === "marca" ? "clicavel" : tom === "neutro" ? "informativo" : tom;
+}
+/** Tom de um ícone dentro de uma peça que não se toca (cabeçalho de card, estado vazio, item de registro): fica
+ *  informativo, a não ser que a peça esteja desabilitada. Aceita os nomes antigos sem mudar o desenho para clicável. */
+function tomSemClique(tom: TomDaBase | undefined): TomResolvido {
+  if (!tom) return "informativo";
+  const r = resolverTomDoIcone(tom);
+  return r === "clicavel" ? "informativo" : r;
+}
 const TAMANHO_DA_BASE = { sm: "h-8 w-8 [&>svg]:h-4 [&>svg]:w-4", md: "h-10 w-10 [&>svg]:h-5 [&>svg]:w-5", lg: "h-12 w-12 [&>svg]:h-6 [&>svg]:w-6" };
-function IconeComBase({ tom, tamanho = "md", redonda = false, children, className }: { tom: TomDoIcone; tamanho?: keyof typeof TAMANHO_DA_BASE; redonda?: boolean; children: React.ReactNode; className?: string }) {
+function IconeComBase({ tom, tamanho = "md", redonda = false, children, className }: { tom: TomDaBase; tamanho?: keyof typeof TAMANHO_DA_BASE; redonda?: boolean; children: React.ReactNode; className?: string }) {
+  const resolvido = resolverTomDoIcone(tom);
   return (
     <span
       aria-hidden
       data-slot="icone-com-base"
-      data-tom={tom}
+      data-tom={resolvido}
       className={cn(
         "flex shrink-0 items-center justify-center",
         redonda ? "rounded-full" : "rounded-md",
-        tom === "marca" ? "bg-[var(--primary-muted)] text-primary-text" : "bg-muted text-muted-foreground",
+        CORES_DA_BASE[resolvido],
         TAMANHO_DA_BASE[tamanho],
         className,
       )}
@@ -101,7 +131,9 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
   selo?: React.ReactNode;
   /** Ação no rodapé do card (LinkVerTudo), separada por um DivisorSuave. */
   acao?: React.ReactNode;
-  /** Base do ícone: "neutro" (padrão em grades de cards iguais) ou "marca". */
+  /** Base do ícone pela regra dos três estados (28/11/2026): o card parado fica "informativo" (ícone colorido na base
+   *  cinza) e o card com href, "clicavel" (ícone colorido na base colorida), sozinho. Passe "desabilitado" para um
+   *  indicador indisponível. Os nomes antigos ("marca", "neutro") continuam aceitos e seguem a mesma regra. */
   tom?: TomDoIcone;
   /**
    * Card clicável: o card inteiro leva ao detalhe (o rótulo é o link, esticado sobre o card). Use no lugar de um link
@@ -128,7 +160,7 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
  * Use numa GradeDeCards com colunas pelo contêiner (não aperte: 4 lado a lado só com um contêiner de 66rem, cada card com
  * ~15,75rem e o rótulo numa linha; senão 2 × 2, e 1 no celular).
  */
-function CardIndicador({ icone, valor, total, rotulo, formato = "numero", formatar, apoio, variacao, comparacao, explicacao, selo, acao, tom = "neutro", href, as, compacto = false, soNumeroNoCelular = false, className, ...props }: CardIndicadorProps) {
+function CardIndicador({ icone, valor, total, rotulo, formato = "numero", formatar, apoio, variacao, comparacao, explicacao, selo, acao, tom = "informativo", href, as, compacto = false, soNumeroNoCelular = false, className, ...props }: CardIndicadorProps) {
   const mostrar = (n: number) => (formatar ? formatar(n) : formato === "percentual" ? `${formatarNumero(n)}%` : formatarNumero(n));
   const extra = soNumeroNoCelular ? "max-sm:hidden" : undefined;
   const palavras = rotulo.split(" ");
@@ -163,7 +195,7 @@ function CardIndicador({ icone, valor, total, rotulo, formato = "numero", format
             <Link href={href} className="text-foreground outline-none after:absolute after:inset-0 after:rounded-xl after:content-['']">{textoDoRotulo}</Link>
           ) : textoDoRotulo}
         </p>
-        <IconeComBase tom={tom} tamanho={compacto ? "sm" : "md"} className={extra}>{icone}</IconeComBase>
+        <IconeComBase tom={tomDoIndicador(tom, Boolean(href))} tamanho={compacto ? "sm" : "md"} className={extra}>{icone}</IconeComBase>
       </div>
       <div className="pt-2">
         <p className={cn("font-bold leading-none tracking-[-0.025em] tabular-nums text-foreground", "text-h2")}>
@@ -184,6 +216,12 @@ function CardIndicador({ icone, valor, total, rotulo, formato = "numero", format
   );
 }
 
+/** Tom do ícone de um card que pode ou não ser clicável: com link, clicavel; sem link, informativo; desabilitado vale nos dois. */
+function tomDoIndicador(tom: TomDaBase, clicavel: boolean): TomDaBase {
+  const r = tomSemClique(tom);
+  return clicavel && r === "informativo" ? "clicavel" : r;
+}
+
 /* ── Divisor suave ───────────────────────────────────────────── */
 /**
  * Linha de 1 px que some nas laterais: degradê transparente → --border-strong → transparente, com o esmaecimento nos
@@ -201,9 +239,10 @@ function DivisorSuave({ className }: { className?: string }) {
 
 /* ── Card com cabeçalho de ícone ─────────────────────────────── */
 /**
- * Card das páginas do painel (Card do DS, só borda): ícone com base (marca, padrão), título e uma linha opcional de
- * descrição; ação opcional à direita, no alto; depois, o conteúdo. Fica embaixo do CabecalhoDaPagina. Um card por
- * assunto. tom="neutro" para o que está pausado ou é só registro.
+ * Card das páginas do painel (Card do DS, só borda): ícone com base, título e uma linha opcional de descrição; ação
+ * opcional à direita, no alto; depois, o conteúdo. Fica embaixo do CabecalhoDaPagina. Um card por assunto.
+ * O card não é clicável, então o ícone fica informativo (colorido na base cinza, regra de 28/11/2026); tom="desabilitado"
+ * para um card indisponível. Os nomes antigos ("marca", "neutro") continuam aceitos e ficam informativos.
  * cabecalho: "divisor" (padrão): o cabeçalho é separado do conteúdo por um DivisorSuave. "simples": sem divisor.
  * sangria: o conteúdo vai de ponta a ponta do card (listas com hover de linha inteira, como a LinhaDeLista).
  */
@@ -221,7 +260,7 @@ type CardComCabecalhoProps = Omit<React.ComponentProps<"section">, "title"> & {
   idDoTitulo?: string;
 };
 
-function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabecalho = "divisor", nivel = 2, sangria = false, idDoTitulo, children, className, ...props }: CardComCabecalhoProps) {
+function CardComCabecalho({ icone, titulo, descricao, acao, tom = "informativo", cabecalho = "divisor", nivel = 2, sangria = false, idDoTitulo, children, className, ...props }: CardComCabecalhoProps) {
   const gerado = React.useId();
   const tid = idDoTitulo ?? gerado;
   const Titulo = `h${nivel}` as "h2" | "h3" | "h4";
@@ -233,7 +272,7 @@ function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabec
             coluna dele. Em card estreito (menos de 20rem), a ação desce para baixo do texto, na mesma borda esquerda dele;
             nunca volta para a borda do ícone (regra do DS, 27/11/2026). */}
         <div data-slot="cabecalho-do-card" className={cn("grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 px-5 sm:px-6", acao && "@xs:grid-cols-[auto_minmax(0,1fr)_auto]", temConteudo && cabecalho === "simples" && "mb-5")}>
-          <IconeComBase tom={tom} className="self-start">{icone}</IconeComBase>
+          <IconeComBase tom={tomSemClique(tom)} className="self-start">{icone}</IconeComBase>
           <div className="min-w-0 self-center">
             <Titulo id={tid} className="text-body-lg font-bold leading-snug tracking-[-0.01em] text-foreground [text-wrap:pretty]">{titulo}</Titulo>
             {descricao && <p className="mt-1 text-body-sm leading-snug text-muted-foreground [text-wrap:pretty]">{descricao}</p>}
@@ -249,8 +288,8 @@ function CardComCabecalho({ icone, titulo, descricao, acao, tom = "marca", cabec
 
 /* ── Link "ver tudo" ─────────────────────────────────────────── */
 /**
- * Link "ver tudo" com seta. tom="marca" (padrão, --primary-text) para o principal; tom="neutro" (cinza) para o
- * secundário. Sem href e com onClick, vira botão. as: o Link do roteador do produto. Alvo de pelo menos 24 px de altura (44 px no
+ * Link "ver tudo" com seta. tom="marca" ou "clicavel" (padrão, --primary-text) para o principal; tom="neutro" ou
+ * "informativo" (cinza) para o secundário. Sem href e com onClick, vira botão. as: o Link do roteador do produto. Alvo de pelo menos 24 px de altura (44 px no
  * celular, abaixo de 640 px).
  */
 type LinkVerTudoProps = Omit<React.ComponentProps<"a">, "children"> & {
@@ -264,7 +303,7 @@ type LinkVerTudoProps = Omit<React.ComponentProps<"a">, "children"> & {
 function LinkVerTudo({ children = "Ver tudo", href, rotulo, onClick, tom = "marca", icone, as, className, ...props }: LinkVerTudoProps) {
   const classe = cn(
     "group inline-flex min-h-6 shrink-0 items-center gap-1 rounded-sm text-body-sm font-semibold toque:min-h-11 underline-offset-2 hover:underline [&>svg]:h-4 [&>svg]:w-4",
-    tom === "marca" ? "text-primary-text" : "text-muted-foreground hover:text-foreground",
+    tom === "marca" || tom === "clicavel" ? "text-primary-text" : "text-muted-foreground hover:text-foreground",
     foco,
     className,
   );
@@ -281,5 +320,5 @@ function LinkVerTudo({ children = "Ver tudo", href, rotulo, onClick, tom = "marc
   return <Elemento data-slot="link-ver-tudo" href={href ?? "#"} aria-label={rotulo} onClick={onClick} className={classe} {...props}>{conteudo}</Elemento>;
 }
 
-export { IconeComBase, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao, formatarNumero, formatarVariacao };
-export type { TomDoIcone, EstiloDoCabecalhoDoCard, CardIndicadorProps, CardComCabecalhoProps, LinkVerTudoProps };
+export { IconeComBase, resolverTomDoIcone, tomSemClique, CardIndicador, CardComCabecalho, DivisorSuave, LinkVerTudo, Variacao, Explicacao, formatarNumero, formatarVariacao };
+export type { TomDoIcone, TomDaBase, EstiloDoCabecalhoDoCard, CardIndicadorProps, CardComCabecalhoProps, LinkVerTudoProps };

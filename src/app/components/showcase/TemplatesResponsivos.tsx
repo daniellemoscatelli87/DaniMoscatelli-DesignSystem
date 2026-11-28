@@ -75,7 +75,7 @@ function CascaDoTemplate({ itens, ativo, chave, children }: { itens: ItemDaCasca
             <Menu aria-hidden className="size-5" />
           </Button>
           <span className="flex min-w-0 items-center gap-2">
-            <IconeComBase tom="marca" tamanho="sm"><Zap /></IconeComBase>
+            <IconeComBase tom="informativo" tamanho="sm"><Zap /></IconeComBase>
             <span className="whitespace-nowrap text-body font-semibold tracking-tight text-foreground">DaniMS</span>
           </span>
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
@@ -265,7 +265,7 @@ export function SettingsTemplate() {
           <Card orientacao="vertical" className="max-w-2xl">
             <CardContent className="space-y-6 pb-6 pt-6">
               <div className="flex items-center gap-4">
-                <IconeComBase tom="marca" tamanho="lg" redonda>{<Users />}</IconeComBase>
+                <IconeComBase tom="informativo" tamanho="lg" redonda>{<Users />}</IconeComBase>
                 <div className="min-w-0">
                   <p className="text-body font-semibold text-foreground">Dani Moscatelli</p>
                   <p className="truncate text-body-sm text-muted-foreground">dani@moscatelli.co</p>
@@ -385,7 +385,7 @@ export function InboxTemplate() {
       resumo: bi(n.corpo),
       quando: <span className="tabular-nums">{bi(n.quando)}</span>,
       lida,
-      inicio: <IconeComBase tom={lida ? "neutro" : "marca"} tamanho="sm"><Icone /></IconeComBase>,
+      inicio: <IconeComBase tom="clicavel" tamanho="sm"><Icone /></IconeComBase>,
     };
   });
   const abrir = (id: string | null) => {
@@ -414,7 +414,7 @@ export function InboxTemplate() {
           return (
             // Ícone numa coluna própria; título, texto e ações na coluna do texto (mesma borda esquerda).
             <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3">
-              <IconeComBase tom="marca">{React.createElement(n.icone)}</IconeComBase>
+              <IconeComBase tom="informativo">{React.createElement(n.icone)}</IconeComBase>
               <div className="min-w-0">
                 <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(n.titulo)}</h3>
                 <p className="text-body-sm text-muted-foreground">{bi(n.quando)}</p>
@@ -519,7 +519,7 @@ export function LandingTemplate() {
       {/* ══ Barra de navegação: no celular, só logo, Entrar e o botão de menu (folha inferior) ══ */}
       <header className="sticky top-0 z-20 flex items-center gap-4 border-b border-border bg-background/90 px-4 py-2 backdrop-blur-xl @2xl/landing:px-6">
         <span className="flex shrink-0 items-center gap-2">
-          <IconeComBase tom="marca" tamanho="sm"><Zap /></IconeComBase>
+          <IconeComBase tom="informativo" tamanho="sm"><Zap /></IconeComBase>
           <span className="text-body font-extrabold tracking-tight text-foreground">DaniMS</span>
         </span>
         <nav aria-label={t("Main", "Principal")} className="hidden flex-1 items-center justify-center gap-1 @3xl/landing:flex">
@@ -632,7 +632,7 @@ export function LandingTemplate() {
             { icone: <Layers />, titulo: t("200+ native integrations", "Mais de 200 integrações nativas"), texto: t("Connect with Slack, Notion, HubSpot, Stripe and more in one click.", "Conecte com Slack, Notion, HubSpot, Stripe e mais em um clique."), chips: ["Slack", "Notion", "Stripe", "HubSpot", "Zapier"], largo: true },
           ].map(c => (
             <Card key={c.titulo} className={`gap-3 p-5 ${c.largo ? "@2xl/landing:col-span-2" : ""}`}>
-              <IconeComBase tom="marca" tamanho="sm">{c.icone}</IconeComBase>
+              <IconeComBase tom="informativo" tamanho="sm">{c.icone}</IconeComBase>
               <h3 className="text-body font-bold text-foreground [text-wrap:pretty]">{c.titulo}</h3>
               <p className="text-body-sm leading-snug text-muted-foreground">{c.texto}</p>
               {c.chips.length > 0 && <div className="flex flex-wrap gap-2">{c.chips.map(ch => <ChipDeEstado key={ch} tom="neutro">{ch}</ChipDeEstado>)}</div>}
@@ -762,7 +762,7 @@ export function LandingTemplate() {
                   as="a"
                   href="#template-landing"
                   onClick={e => e.preventDefault()}
-                  inicio={<IconeComBase tom="marca" tamanho="sm">{c.icone}</IconeComBase>}
+                  inicio={<IconeComBase tom="clicavel" tamanho="sm">{c.icone}</IconeComBase>}
                   titulo={c.rotulo}
                   descricao={<span className="break-words">{c.valor}</span>}
                   fim={<ChipDeEstado tom={c.tom} className="whitespace-nowrap">{c.selo}</ChipDeEstado>}
@@ -792,7 +792,7 @@ export function LandingTemplate() {
             <Card>
               {enviado ? (
                 <CardContent className="flex flex-col items-center gap-3 py-8 text-center motion-safe:animate-in motion-safe:fade-in">
-                  <IconeComBase tom="marca" tamanho="lg" redonda><CheckCircle /></IconeComBase>
+                  <IconeComBase tom="informativo" tamanho="lg" redonda><CheckCircle /></IconeComBase>
                   <p className="text-body font-bold text-foreground">{t("Message sent!", "Mensagem enviada!")}</p>
                   <p className="max-w-xs text-body-sm leading-relaxed text-muted-foreground">{t("Our team will reply within 2 hours. Check your inbox.", "Nossa equipe responderá em até 2 horas. Confira sua caixa de entrada.")}</p>
                   <Button variant="outline" onClick={() => setEnviado(false)}>{t("Send another message", "Enviar outra mensagem")}</Button>

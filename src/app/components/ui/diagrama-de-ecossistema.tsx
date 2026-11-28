@@ -135,7 +135,7 @@ function DiagramaDeEcossistema({
           data-parte="centro"
         >
           {centro.icone && (
-            <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[var(--primary-muted)] text-[var(--primary-text)] [&>svg]:size-5">
+            <span aria-hidden className="flex size-10 shrink-0 items-center justify-center rounded-full bg-muted text-[var(--primary-text)] [&>svg]:size-5">
               {centro.icone}
             </span>
           )}

@@ -339,8 +339,8 @@ function CamposShowcaseBase() {
         id="campos-escolha"
         titulo={t("Choice cards", "Cartões de escolha")}
         quando={t(
-          "One choice among 2 to 4 big options that change the path and need a sentence of explanation. Selected: primary border with the shine, selected pink background, icon on the pink base and the radio checked.",
-          "Uma escolha entre 2 a 4 opções grandes que mudam o caminho e precisam de uma frase de explicação. Selecionado: borda na primária com o brilho, fundo no rosa de selecionado, ícone na base rosa e o rádio marcado.",
+          "One choice among 2 to 4 big options that change the path and need a sentence of explanation. Selected: primary border with the shine, selected pink background, and the radio checked. The icon always sits on the coloured base, since the card can be tapped (grey only when disabled).",
+          "Uma escolha entre 2 a 4 opções grandes que mudam o caminho e precisam de uma frase de explicação. Selecionado: borda na primária com o brilho, fundo no rosa de selecionado, e o rádio marcado. O ícone fica sempre na base colorida, porque o cartão se toca (cinza só quando desabilitado).",
         )}
         arquivo="ui/cartao-de-escolha.tsx · ui/shine-border.tsx"
         nomes={["GrupoDeCartoesDeEscolha", "CartaoDeEscolha", "BrilhoDeSelecionado", "molduraDoSelecionavel"]}

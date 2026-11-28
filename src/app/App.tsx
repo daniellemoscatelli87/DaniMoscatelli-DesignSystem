@@ -1294,7 +1294,7 @@ function AppShell() {
                       onClick={() => selectSearchResult(result.sectionId, result.anchor)}
                       className="flex w-full items-center gap-3 rounded-sm px-3 py-2 text-left transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none"
                     >
-                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-muted text-muted-foreground">
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm bg-[var(--primary-muted)] text-[var(--primary-text,var(--primary))]">
                         <ResultIcon className="h-4 w-4" aria-hidden />
                       </span>
                       <span className="min-w-0 flex-1">

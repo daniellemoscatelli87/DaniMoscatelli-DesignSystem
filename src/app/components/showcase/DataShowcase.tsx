@@ -448,7 +448,7 @@ export function CardsDeKpi() {
                 <p className="text-h3 font-bold text-foreground tracking-[-0.025em] leading-none">{kpi.value}</p>
               </div>
               <div className="h-9 w-9 rounded-md bg-muted flex items-center justify-center">
-                <Icon className="h-4.5 w-4.5 text-muted-foreground" style={{ height: "18px", width: "18px" }} />
+                <Icon className="h-4.5 w-4.5 text-[var(--primary-text,var(--primary))]" style={{ height: "18px", width: "18px" }} />
               </div>
             </div>
             <div className="h-12">
