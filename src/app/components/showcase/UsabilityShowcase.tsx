@@ -239,7 +239,7 @@ function HierarchyDemo() {
               {c.good ? (
                 <>
                   <Button>{t("Save draft", "Salvar rascunho")}</Button>
-                  <Button variant="outline">{t("Keep editing", "Continuar editando")}</Button>
+                  <Button variant="secondary">{t("Keep editing", "Continuar editando")}</Button>
                   <Button variant="ghost" className="text-muted-foreground hover:text-foreground">{t("Discard", "Descartar")}</Button>
                 </>
               ) : (
@@ -295,9 +295,9 @@ export function UsabilityShowcase() {
           <DataTable
             head={[t("Level", "Nível"), t("Style", "Estilo"), t("Use for", "Usar para")]}
             rows={[
-              [t("Primary", "Primário"), <Mono>bg-primary</Mono>, t("The one thing most people came to do", "A única coisa que a maioria das pessoas veio fazer")],
-              [t("Secondary", "Secundário"), <Mono>border-border bg-card</Mono>, t("Alternatives of equal importance", "Alternativas de igual importância")],
-              [t("Tertiary", "Terciário"), <Mono>text-muted-foreground</Mono>, t("Low-emphasis or reversible actions", "Ações de baixa ênfase ou reversíveis")],
+              [t("Primary", "Primário"), <Mono>{'<Button>'}</Mono>, t("The one thing most people came to do", "A única coisa que a maioria das pessoas veio fazer")],
+              [t("Secondary (outline)", "Secundário (contorno)"), <Mono>{'variant="secondary"'}</Mono>, t("Alternatives of equal importance", "Alternativas de igual importância")],
+              [t("Tertiary", "Terciário"), <Mono>{'variant="ghost" · "link"'}</Mono>, t("Low-emphasis or reversible actions", "Ações de baixa ênfase ou reversíveis")],
             ]}
           />
         </div>

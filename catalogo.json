@@ -200,6 +200,7 @@
       ],
       "variantes": {
         "variant": [
+          "default",
           "destructive",
           "success",
           "info",
@@ -1262,7 +1263,7 @@
         {
           "nome": "buttonVariants",
           "tipo": "utilitário",
-          "linha": 12,
+          "linha": 16,
           "descricao": "",
           "props": [],
           "reexportaDe": null
@@ -1270,7 +1271,7 @@
         {
           "nome": "classeDoCarregando",
           "tipo": "utilitário",
-          "linha": 109,
+          "linha": 113,
           "descricao": "Carregando (decisão da dona do produto, 28/11/2026: \"o botão loading é colorido, porém levemente esmaecido\"). O botão que está trabalhando fica na cor da própria variante (o vermelho do principal, o contorno do secundário), a 80% de …",
           "props": [],
           "reexportaDe": null
@@ -1278,7 +1279,7 @@
         {
           "nome": "Button",
           "tipo": "componente",
-          "linha": 127,
+          "linha": 131,
           "descricao": "forwardRef (27/11/2026): com React 18, sem ele a ref do Radix (asChild em PopoverTrigger, TooltipTrigger, DropdownMenuTrigger…) se perdia no Button e o Popover ficava fora da tela (translate(0, -200%)), por exemplo o seletor de data dentro …",
           "props": [
             "className",
@@ -1300,7 +1301,9 @@
         "variant": [
           "default",
           "destructive",
+          "secondary",
           "outline",
+          "exclusao-contorno",
           "ghost",
           "link"
         ],
@@ -1308,6 +1311,7 @@
           "default",
           "sm",
           "lg",
+          "icon",
           "icon-lg"
         ],
         "forma": [
@@ -1345,6 +1349,18 @@
           "titulo": "Consulte o catálogo antes de montar qualquer peça",
           "arquivo": "src/app/components/showcase/DevelopShowcase.tsx",
           "linha": 144,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "usability",
+          "paginaRotulo": "Usabilidade",
+          "ancora": "ux-hierarchy",
+          "titulo": "Hierarquia de ações",
+          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
+          "linha": 287,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1681,18 +1697,6 @@
           "titulo": "Espaço abaixo do cabeçalho",
           "arquivo": "src/app/components/showcase/GridShowcase.tsx",
           "linha": 221,
-          "uso": "dentro de outro exemplo",
-          "exports": [
-            "Button"
-          ]
-        },
-        {
-          "pagina": "usability",
-          "paginaRotulo": "Usabilidade",
-          "ancora": "ux-hierarchy",
-          "titulo": "Hierarquia de ações",
-          "arquivo": "src/app/components/showcase/UsabilityShowcase.tsx",
-          "linha": 287,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2654,7 +2658,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 237,
+          "linha": 236,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -4223,7 +4227,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254,
+          "linha": 253,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -4235,7 +4239,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 364,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "Checkbox"
@@ -9414,7 +9418,7 @@
           "ancora": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 237,
+          "linha": 236,
           "uso": "direto",
           "exports": [
             "Input"
@@ -11370,7 +11374,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254,
+          "linha": 253,
           "uso": "direto",
           "exports": [
             "regrasPadrao",
@@ -11643,7 +11647,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254,
+          "linha": 253,
           "uso": "direto",
           "exports": [
             "RadioGroup",
@@ -11908,7 +11912,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 364,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -12199,7 +12203,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254,
+          "linha": 253,
           "uso": "direto",
           "exports": [
             "Select",
@@ -12215,7 +12219,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 364,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "Select"
@@ -13441,7 +13445,7 @@
           "ancora": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 364,
+          "linha": 363,
           "uso": "direto",
           "exports": [
             "Switch"
@@ -13839,7 +13843,7 @@
           "ancora": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254,
+          "linha": 253,
           "uso": "direto",
           "exports": [
             "Textarea"
@@ -19532,25 +19536,25 @@
           "id": "inputs",
           "titulo": "Controles de formulário",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 237
+          "linha": 236
         },
         {
           "id": "password",
           "titulo": "Senha",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 254
+          "linha": 253
         },
         {
           "id": "segmented",
           "titulo": "Controle segmentado",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 364
+          "linha": 363
         },
         {
           "id": "buttons-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/FormShowcase.tsx",
-          "linha": 461
+          "linha": 460
         },
         {
           "id": "botao-quebra",

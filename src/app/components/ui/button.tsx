@@ -9,6 +9,10 @@ import { cn } from "./utils";
 // Texto no token do botão (14 px, seminegrito; escala tipográfica de 27/11/2026). No toque (celular ou tela de dedo),
 // todo botão tem 44 px de altura (decisão de 27/11/2026); no computador com mouse, 40 px (sm: 32 px).
 
+// Secundário (contorno), o mesmo desenho para variant="secondary" e o apelido variant="outline" (28/11/2026).
+const varianteSecundaria =
+  "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50";
+
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 rounded-md text-button font-semibold transition-all disabled:cursor-not-allowed disabled:shadow-none disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground disabled:hover:bg-disabled disabled:hover:text-disabled-foreground dark:disabled:bg-disabled dark:disabled:hover:bg-disabled dark:disabled:border-transparent [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 aria-invalid:ring-error/20 dark:aria-invalid:ring-error/40 aria-invalid:border-error",
   {
@@ -17,11 +21,11 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)]",
         destructive:
           "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
-        // O botão secundário do DS é o de contorno (decisão da dona do produto, 20/11/2026)
-        secondary:
-          "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground dark:bg-input-fundo/30 dark:border-input dark:hover:bg-input-fundo/50",
+        // Secundário (contorno): o botão secundário do DS é um só (decisão da dona do produto, 28/11/2026: "o botão
+        // contorno e o secundário podem virar um único botão"; o secundário já era o de contorno desde 20/11/2026).
+        // Use variant="secondary". variant="outline" é apelido do mesmo botão, mantido para nada quebrar nos produtos.
+        secondary: varianteSecundaria,
+        outline: varianteSecundaria,
         // Exclusão em contorno (27/11/2026, especificação da área restrita, ADMIN_REACT.md §7.1): ação destrutiva que não
         // é a principal da área ("Excluir", "Apagar tudo"); o vermelho cheio (destructive) fica só na confirmação.
         // Contorno e texto --error-text (5,5:1 no branco), hover --error-muted, foco com anel de erro.

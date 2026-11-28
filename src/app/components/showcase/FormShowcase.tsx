@@ -87,14 +87,13 @@ function FormShowcaseBase() {
 
       {/* ── BUTTONS ── */}
       <section id="buttons">
-        <SectionHeader title={t("Buttons", "Botões")} description={t("Consistent button hierarchy. Crimson for primary CTAs, outline for secondary, ghost for tertiary.", "Hierarquia de botões consistente. Crimson para CTAs primários, outline para secundários, ghost para terciários.")} />
+        <SectionHeader title={t("Buttons", "Botões")} description={t("Button hierarchy: primary filled in crimson for the one main action; secondary with an outline for the other actions (a single variant, owner's decision of 28/11/2026: use variant=\"secondary\"; variant=\"outline\" is the same button, kept as an alias); ghost for tertiary actions; link for low-emphasis navigation. The Crimson outline is for a secondary action that needs brand emphasis.", "Hierarquia de botões: principal preenchido em crimson para a única ação principal; secundário de contorno para as outras ações (uma variante só, decisão da dona do produto de 28/11/2026: use variant=\"secondary\"; variant=\"outline\" é o mesmo botão, mantido como apelido); ghost para ações terciárias; link para navegação de baixa ênfase. O contorno crimson fica para uma ação secundária que pede destaque da marca.")} />
 
         <SubSection title={t("Variants", "Variantes")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
               <Btn variant="primary" icon={<Zap className="h-4 w-4" />}>{t("Primary CTA", "CTA primário")}</Btn>
-              <Btn variant="outline">{t("Outline", "Contorno")}</Btn>
-              <Btn variant="secondary">{t("Secondary", "Secundário")}</Btn>
+              <Btn variant="secondary">{t("Secondary (outline)", "Secundário (contorno)")}</Btn>
               <Btn variant="ghost">Ghost</Btn>
               <Btn variant="link">{t("Link button", "Botão link")}</Btn>
               <Btn variant="crimson-outline">{t("Crimson Outline", "Contorno Crimson")}</Btn>
@@ -117,14 +116,14 @@ function FormShowcaseBase() {
                 <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Disabled: unavailable", "Desabilitado: indisponível")}</p>
                 <div className="flex flex-wrap items-center gap-3">
                   <Button disabled>{t("Continue", "Continuar")}</Button>
-                  <Button variant="outline" disabled>{t("Back", "Voltar")}</Button>
+                  <Button variant="secondary" disabled>{t("Back", "Voltar")}</Button>
                 </div>
               </div>
               <div>
                 <p className="mb-3 text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Loading: working", "Carregando: trabalhando")}</p>
                 <div className="flex flex-wrap items-center gap-3">
                   <Button carregando textoCarregando={t("Saving…", "Salvando…")}>{t("Save", "Salvar")}</Button>
-                  <Button variant="outline" carregando textoCarregando={t("Updating…", "Atualizando…")}>{t("Update", "Atualizar")}</Button>
+                  <Button variant="secondary" carregando textoCarregando={t("Updating…", "Atualizando…")}>{t("Update", "Atualizar")}</Button>
                 </div>
               </div>
               <div>
@@ -190,9 +189,9 @@ function FormShowcaseBase() {
         <SubSection title={t("Icon Buttons", "Botões de ícone")}>
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
-              <Btn size="icon-sm" variant="outline" icon={<Plus className="h-4 w-4" />} iconOnly rotulo={t("Add", "Adicionar")} />
-              <Btn size="icon" variant="outline" icon={<Edit3 className="h-4 w-4" />} iconOnly rotulo={t("Edit", "Editar")} />
-              <Btn size="icon-lg" variant="outline" icon={<Share className="h-5 w-5" />} iconOnly rotulo={t("Share", "Compartilhar")} />
+              <Btn size="icon-sm" variant="secondary" icon={<Plus className="h-4 w-4" />} iconOnly rotulo={t("Add", "Adicionar")} />
+              <Btn size="icon" variant="secondary" icon={<Edit3 className="h-4 w-4" />} iconOnly rotulo={t("Edit", "Editar")} />
+              <Btn size="icon-lg" variant="secondary" icon={<Share className="h-5 w-5" />} iconOnly rotulo={t("Share", "Compartilhar")} />
               <Btn size="icon-sm" variant="ghost" icon={<Trash2 className="h-4 w-4" />} iconOnly rotulo={t("Delete", "Excluir")} />
               <Btn size="icon" variant="ghost" icon={<Copy className="h-4 w-4" />} iconOnly rotulo={t("Copy", "Copiar")} />
               <Btn size="icon" variant="primary" icon={<ArrowRight className="h-4 w-4" />} iconOnly rotulo={t("Next", "Avançar")} />
@@ -206,14 +205,14 @@ function FormShowcaseBase() {
             <p className="mb-4 max-w-2xl text-body-sm text-muted-foreground">{t("Owner's decision (28/11/2026), the same in both design systems: \"Pill as the default in both projects\". Every button is a pill in every variant and size, and an icon-only button is a circle; components that draw buttons (dialogs, calendar, pagination, alert buttons, segmented control) follow the same rule. forma=\"quadrado\" (12 px corners) is a rare exception: a button glued to a field or inside a toolbar with straight corners. size=\"icon\" is 40 px with a mouse and 44 px on touch; size=\"icon-lg\" is always 44 px. Every button is 44 px tall on phones (below 640 px) and on touch screens.", "Decisão da dona do produto (28/11/2026), igual nos dois design systems: \"Pílula como padrão em ambos os projetos\". Todo botão é pílula, em qualquer variante e tamanho, e o botão só de ícone é um círculo; os componentes que desenham botões (janelas, calendário, paginação, botões do alerta, controle segmentado) seguem a mesma regra. forma=\"quadrado\" (cantos de 12 px) é exceção rara: um botão colado a um campo ou dentro de uma barra de ferramentas de cantos retos. size=\"icon\" tem 40 px com mouse e 44 px no toque; size=\"icon-lg\" tem 44 px sempre. Todo botão tem 44 px de altura no celular (abaixo de 640 px) e em telas de toque.")}</p>
             <div className="space-y-3">
               <div className="flex flex-wrap items-center gap-3">
-              <Button variant="outline">{t("Outline", "Contorno")}</Button>
+              <Button variant="secondary">{t("Secondary", "Secundário")}</Button>
               <Button>{t("Filled", "Preenchida")}</Button>
-              <Button size="icon" variant="outline" aria-label={t("Edit", "Editar")}><Edit3 aria-hidden /></Button>
+              <Button size="icon" variant="secondary" aria-label={t("Edit", "Editar")}><Edit3 aria-hidden /></Button>
               <Button size="icon-lg" variant="ghost" aria-label={t("More options", "Mais opções")}><MoreHorizontal aria-hidden /></Button>
               </div>
               <p className="text-label font-semibold uppercase tracking-[0.08em] text-muted-foreground">{t("Exception: forma=\"quadrado\"", "Exceção: forma=\"quadrado\"")}</p>
               <div className="flex flex-wrap items-center gap-3">
-              <Button forma="quadrado" variant="outline">{t("Outline", "Contorno")}</Button>
+              <Button forma="quadrado" variant="secondary">{t("Secondary", "Secundário")}</Button>
               <Button forma="quadrado">{t("Filled", "Preenchida")}</Button>
               </div>
             </div>
@@ -224,9 +223,9 @@ function FormShowcaseBase() {
           <ShowcaseCard>
             <div className="flex flex-wrap gap-3 items-center">
               <Btn variant="primary" icon={<Send className="h-4 w-4" />}>{t("Send Report", "Enviar relatório")}</Btn>
-              <Btn variant="outline" icon={<Upload className="h-4 w-4" />}>{t("Upload File", "Enviar arquivo")}</Btn>
+              <Btn variant="secondary" icon={<Upload className="h-4 w-4" />}>{t("Upload File", "Enviar arquivo")}</Btn>
               <Btn variant="ghost" icon={<Star className="h-4 w-4" />}>{t("Favorite", "Favoritar")}</Btn>
-              <Btn variant="outline" size="lg" icon={<Plus className="h-4 w-4" />}>{t("New Project", "Novo projeto")}</Btn>
+              <Btn variant="secondary" size="lg" icon={<Plus className="h-4 w-4" />}>{t("New Project", "Novo projeto")}</Btn>
               <Btn variant="primary" size="lg" icon={<Check className="h-4 w-4" />}>{t("Confirm", "Confirmar")}</Btn>
             </div>
           </ShowcaseCard>

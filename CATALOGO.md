@@ -48,7 +48,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `Alert` (props: `className`, `variant`, `icone`, `tom`, `children`)
   - `AlertTitle` (props: `className`)
   - `AlertDescription` (props: `className`)
-- **Variantes:** `variant` = `destructive` · `success` · `info` · `warning` · `error`
+- **Variantes:** `variant` = `default` · `destructive` · `success` · `info` · `warning` · `error`
 - **Onde ver:** Feedback › Alertas (`feedback#alerts`) · Feedback › Alerta só com descrição (`feedback#alerta-sem-titulo`) · Molduras e estados › Alerta por tom (`molduras#molduras-alerta-tom`) · e mais 2 seções (ver `catalogo.json`)
 
 ### alert-dialog
@@ -197,8 +197,8 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `Button` (props: `className`, `variant`, `size`, `forma`, `quebra`, `asChild`, `carregando`, `textoCarregando`, `children`, `onClick`): forwardRef (27/11/2026): com React 18, sem ele a ref do Radix (asChild em PopoverTrigger, TooltipTrigger, DropdownMenuTrigger…) se perdia no Button e o Popover ficava fora da tela (translate(0, -200%)), por exemplo o seletor de data dentro …
 - **Funções e constantes:** `buttonVariants`, `classeDoCarregando`
-- **Variantes:** `variant` = `default` · `destructive` · `outline` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon-lg`; `forma` = `pilula` · `quadrado` · `padrao`; `quebra` = `celular` · `nunca` · `sempre`; `camadas` = `sim` · `nao`
-- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Motion Design › Presets de entrada e saída (`motion#enter-presets`) · e mais 59 seções (ver `catalogo.json`)
+- **Variantes:** `variant` = `default` · `destructive` · `secondary` · `outline` · `exclusao-contorno` · `ghost` · `link`; `size` = `default` · `sm` · `lg` · `icon` · `icon-lg`; `forma` = `pilula` · `quadrado` · `padrao`; `quebra` = `celular` · `nunca` · `sempre`; `camadas` = `sim` · `nao`
+- **Onde ver:** Botões › Variantes de botão (`buttons#buttons`) · Desenvolvimento › Consulte o catálogo antes de montar qualquer peça (`develop#dev-catalogo`) · Usabilidade › Hierarquia de ações (`usability#ux-hierarchy`) · e mais 59 seções (ver `catalogo.json`)
 
 ### cabecalho-do-site
 
