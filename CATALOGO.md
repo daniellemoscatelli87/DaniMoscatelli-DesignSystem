@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 423 componentes exportados · 75 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 243 âncoras no site (https://designsystem.danimoscatelli.com.br) · 52 propostas de componente.
+**Resumo:** 132 arquivos de componentes em `src/app/components/ui/` com 427 componentes exportados · 76 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 244 âncoras no site (https://designsystem.danimoscatelli.com.br) · 53 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -629,7 +629,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `DropdownMenuSub`
   - `DropdownMenuSubTrigger` (props: `className`, `inset`, `children`)
   - `DropdownMenuSubContent` (props: `className`)
-- **Onde ver:** Overlays › Dropdown (`overlays#dropdown`) · Templates › Painel (`templates#template-painel`)
+- **Onde ver:** Overlays › Dropdown (`overlays#dropdown`)
 
 ### escala-de-notas
 
@@ -700,7 +700,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `GradeDeCards` (props: `colunas`, `larguraMinima`, `limiteDeDiferenca`, `layout`, `onLayoutChange`, `className`, `style`, `children`)
   - `ItemDaGrade` (props: `className`): ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.
 - **Funções e constantes:** `LIMITE_DE_DIFERENCA`, `FATOR_DE_VOLTA`, `passaDoLimite`, `useOrientacaoDoCard`
-- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 104 seções (ver `catalogo.json`)
+- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 105 seções (ver `catalogo.json`)
 
 ### graficos-catalogo
 
@@ -887,6 +887,17 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `LuzesDifusas` (props: `variante`, `dissolver`, `className`)
 - **Onde ver:** Seções do site › Cartão flutuante e luzes (`secoes-site#secoes-flutuantes`)
 
+### menu-da-conta
+
+- **Arquivo:** [src/app/components/ui/menu-da-conta.tsx](src/app/components/ui/menu-da-conta.tsx)
+- **Quando usar:** MenuDaConta, CabecalhoDaConta, ItemDaConta e SeparadorDaConta (menu do perfil no cabeçalho)
+- **Componentes:**
+  - `MenuDaConta` (props: `nome`, `email`, `detalhe`, `foto`, `papel`, `rotuloDoGatilho`, `classeDoGatilho`, `gatilho`, `aberto`, `onAbertoChange`, `align`, `className`, `children`, `onCloseAutoFocus`, `onPointerDown`, `onPointerDownOutside`, `onKeyDown`)
+  - `CabecalhoDaConta` (props: `nome`, `email`, `detalhe`, `className`): Nome e e-mail no topo do menu: texto simples, nunca link (anula também os links que o Safari do iPhone cria).
+  - `ItemDaConta` (props: `icone`, `asChild`, `children`): Uma ação da conta. Com asChild, o ícone entra dentro do link filho (ex.: o link do roteador do produto).
+  - `SeparadorDaConta`: Divisor entre grupos de ações (o mesmo do DropdownMenu).
+- **Onde ver:** Overlays › Menu da conta (`overlays#menu-da-conta`) · Templates › Painel (`templates#template-painel`)
+
 ### menubar
 
 - **Arquivo:** [src/app/components/ui/menubar.tsx](src/app/components/ui/menubar.tsx)
@@ -990,7 +1001,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `CardDeAjuda` (props: `titulo`, `texto`, `href`, `className`): Card de ajuda (rodapé do menu)
   - `CampoDeBuscaGlobal` (props: `placeholder`, `atalho`, `onAbrir`, `className`): Barra superior: busca, sino e conta
   - `BotaoDeNotificacoes` (props: `naoLidas`, `indicador`, `className`): Sino de notificações (botão redondo de 44 px, o alvo de toque mínimo). Com não lidas, o ContadorDoPainel fica sobre o canto superior direito do sino (centro do contador no canto do ícone), com anel de 2 px na cor do cabeçalho.
-  - `GatilhoDaConta` (props: `nome`, `papel`, `foto`, `className`)
+  - `GatilhoDaConta` (props: `nome`, `papel`, `foto`, `rotulo`, `className`)
 - **Funções e constantes:** `LARGURA_EXPANDIDO`, `LARGURA_RECOLHIDO`, `useMenuLateral`, `useMenuRecolhido`, `textoDoContador`, `iniciais`
 - **Onde ver:** Templates › Painel (`templates#template-painel`) · Templates › Peças do painel (`templates#template-painel-pecas`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 2 seções (ver `catalogo.json`)
 
@@ -1412,7 +1423,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
-| `PainelTemplate`<br>Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início. | Templates › Painel (`templates#template-painel`) | [src/app/components/showcase/PainelTemplates.tsx:161](src/app/components/showcase/PainelTemplates.tsx#L161) | `AlertaComAcao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `BotaoDoAlerta`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador` +23 | 1 |
+| `PainelTemplate`<br>Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início. | Templates › Painel (`templates#template-painel`) | [src/app/components/showcase/PainelTemplates.tsx:151](src/app/components/showcase/PainelTemplates.tsx#L151) | `AlertaComAcao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `BotaoDoAlerta`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador` +18 | 1 |
 | `CascaDoTemplate`<br>Casca dos templates: a mesma do template do Painel, com o menu montado a partir de uma lista de itens. | Templates › Dashboard (`templates#template-dashboard`) (+1) | [src/app/components/showcase/TemplatesResponsivos.tsx:53](src/app/components/showcase/TemplatesResponsivos.tsx#L53) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `GatilhoDaConta`, `GrupoDoMenu`, `IconeComBase`, `ItemDoMenu`, `MenuLateral` +7 | 1 |
 | `DashboardTemplate` | Templates › Dashboard (`templates#template-dashboard`) | [src/app/components/showcase/TemplatesResponsivos.tsx:134](src/app/components/showcase/TemplatesResponsivos.tsx#L134) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CardComCabecalho`, `CardIndicador`, `ChipDeEstado`, `GatilhoDaConta` +13 | 0 |
 | `SettingsTemplate` | Templates › Configurações (`templates#template-settings`) | [src/app/components/showcase/TemplatesResponsivos.tsx:223](src/app/components/showcase/TemplatesResponsivos.tsx#L223) | `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `Card`, `CardComCabecalho`, `CardContent`, `CardFooter` +21 | 1 |
@@ -1423,13 +1434,13 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:389](src/app/components/showcase/TemplatesShowcase.tsx#L389) | `GradeDeCards`, `Select`, `Switch` | 8 |
 | `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:564](src/app/components/showcase/TemplatesShowcase.tsx#L564) | `Button`, `Checkbox`, `Input`, `Label`, `Select`, `SelectContent`, `SelectItem`, `SelectTrigger` +2 | 9 |
 
-### 2.2 Padrões nas páginas de componentes (34)
+### 2.2 Padrões nas páginas de componentes (35)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
 | Padrão | Onde ver | Arquivo | Usa do DS | Marcação à mão |
 |---|---|---|---|---|
-| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:226](src/app/components/showcase/PainelTemplates.tsx#L226) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 5 |
+| `PecasDoPainel` | Templates › Peças do painel (`templates#template-painel-pecas`) | [src/app/components/showcase/PainelTemplates.tsx:216](src/app/components/showcase/PainelTemplates.tsx#L216) | `Badge`, `BarraDeComposicao`, `BarraSuperiorDoPainel`, `BotaoDeNotificacoes`, `Button`, `CabecalhoDaPagina`, `CampoDeBuscaGlobal`, `Card` +20 | 5 |
 | `Secao` | Templates › Landing page (`templates#template-landing`) | [src/app/components/showcase/TemplatesResponsivos.tsx:485](src/app/components/showcase/TemplatesResponsivos.tsx#L485) |  | 1 |
 | `CanvasRevealCard`<br>Cards com revelação em canvas (usado na página Cards › Animação). | Cards › Animação (`cards#card-animacao`) | [src/app/components/showcase/BackgroundsShowcase.tsx:495](src/app/components/showcase/BackgroundsShowcase.tsx#L495) | `SegmentedControl` | 4 |
 | `CenaDoVidro`<br>Cena do seletor: usa o fundo escolhido; fora do seletor, é a cena padrão (GlassScene). | Cards › Vidro: acabamentos (`cards#card-glass`) (+3) | [src/app/components/showcase/CardShowcase.tsx:113](src/app/components/showcase/CardShowcase.tsx#L113) | `DoodleTexture`, `GlassScene` | 2 |
@@ -1452,7 +1463,8 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `DemoInfoFechavel` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:71](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L71) | `AlertaComAcao`, `BotaoDoAlerta`, `LinkDoAlerta` | 1 |
 | `AlertaComAcaoDoc` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:133](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L133) | `AlertaComAcao`, `BotaoDoAlerta`, `GradeDeCards`, `LinkDoAlerta` | 1 |
 | `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:81](src/app/components/showcase/FeedbackShowcase.tsx#L81) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |
-| `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:135](src/app/components/showcase/OverlaysShowcase.tsx#L135) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
+| `DrawerDemo`<br>Drawer | Overlays | [src/app/components/showcase/OverlaysShowcase.tsx:136](src/app/components/showcase/OverlaysShowcase.tsx#L136) | `Button`, `Sheet`, `SheetContent`, `SheetDescription`, `SheetFooter`, `SheetHeader`, `SheetTitle` | 3 |
+| `MenuDaContaDocs`<br>Documentação do MenuDaConta (28/11/2026): o menu do perfil que abre do avatar no cabeçalho do painel. O mesmo arquivo nos dois DS (Dani Moscatelli e FindLook). | Overlays › Menu da conta (`overlays#menu-da-conta`) | [src/app/components/showcase/shared/MenuDaContaDocs.tsx:11](src/app/components/showcase/shared/MenuDaContaDocs.tsx#L11) | `GradeDeCards`, `ItemDaConta`, `MenuDaConta` | 1 |
 | `SecaoEscopo`<br>A seção "Onde podemos atuar" do Projeto Piloto, como no site, com a entrada ao rolar (subir) do site. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:466](src/app/components/showcase/SitePatternsShowcase.tsx#L466) | `CardDeFrente`, `CurvaSecao`, `GradeDeFrentes`, `SurgirAoRolar` | 3 |
 | `SecaoArtigos`<br>Cabeçalho da seção "Insights & Artigos" da Home, com o desfoque do site; os cards são blocos neutros. | Padrões do site › Entrada ao rolar (`site#site-entrada`) | [src/app/components/showcase/SitePatternsShowcase.tsx:514](src/app/components/showcase/SitePatternsShowcase.tsx#L514) | `CardDeArtigo`, `SeloSecao`, `SurgirAoRolar`, `TituloQueSurge` | 1 |
 | `DemoCampos` | Campos › Campo e máscaras (`campos#campos-campo`) | [src/app/components/showcase/CamposShowcase.tsx:40](src/app/components/showcase/CamposShowcase.tsx#L40) | `Button`, `Campo`, `CampoDeCnpj`, `CampoDeEmail`, `CampoDeTelefone`, `CampoEstadoCidade`, `GradeDeCampos`, `ResumoDeErros` +1 | 1 |
@@ -1547,9 +1559,9 @@ Seções que montam peças direto na página, sem componente local, com 3 ou mai
 | Rótulos › Selo (tag do hero) (`badges#selo`) | [src/app/components/showcase/FeedbackShowcase.tsx:440](src/app/components/showcase/FeedbackShowcase.tsx#L440) | `Selo` | 3 |
 | Rótulos › Avatar (`badges#avatar`) | [src/app/components/showcase/FeedbackShowcase.tsx:514](src/app/components/showcase/FeedbackShowcase.tsx#L514) |  | 4 |
 | Ícones › Tamanhos e cores (`icons#icon-sizes`) | [src/app/components/showcase/IconsShowcase.tsx:123](src/app/components/showcase/IconsShowcase.tsx#L123) |  | 7 |
-| Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:254](src/app/components/showcase/OverlaysShowcase.tsx#L254) | `Tooltip` | 3 |
-| Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:269](src/app/components/showcase/OverlaysShowcase.tsx#L269) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
-| Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:385](src/app/components/showcase/OverlaysShowcase.tsx#L385) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
+| Overlays › Tooltips (`overlays#tooltips`) | [src/app/components/showcase/OverlaysShowcase.tsx:255](src/app/components/showcase/OverlaysShowcase.tsx#L255) | `Tooltip` | 3 |
+| Overlays › Dropdown (`overlays#dropdown`) | [src/app/components/showcase/OverlaysShowcase.tsx:270](src/app/components/showcase/OverlaysShowcase.tsx#L270) | `DropdownMenu`, `DropdownMenuContent`, `DropdownMenuItem`, `DropdownMenuSeparator`, `DropdownMenuTrigger` | 4 |
+| Overlays › Accordion (`overlays#accordion`) | [src/app/components/showcase/OverlaysShowcase.tsx:396](src/app/components/showcase/OverlaysShowcase.tsx#L396) | `Accordion`, `AccordionContent`, `AccordionItem`, `AccordionTrigger` | 8 |
 | Padrões do site › Elementos flutuantes (`site#site-flutuantes`) | [src/app/components/showcase/SitePatternsShowcase.tsx:203](src/app/components/showcase/SitePatternsShowcase.tsx#L203) | `AvisoProjeto`, `BotaoSubir`, `BotaoWhatsApp`, `Button`, `GradeDeCards`, `ItemDaGrade`, `PilulaDeAcao` | 15 |
 | Padrões do site › Divisores curvos (`site#site-curvas`) | [src/app/components/showcase/SitePatternsShowcase.tsx:694](src/app/components/showcase/SitePatternsShowcase.tsx#L694) | `CurvaSecao`, `SeloSecao` | 4 |
 | Seções do site › Botão do WhatsApp (`secoes-site#secoes-botao-whatsapp`) | [src/app/components/showcase/shared/SecoesRedesEDestaques.tsx:229](src/app/components/showcase/shared/SecoesRedesEDestaques.tsx#L229) | `BotaoWhatsApp` | 4 |
@@ -1856,6 +1868,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
 | [Link de rede social](propostas/2026-11-28-link-de-rede-social.md) | — | aprovado (dona do produto, 28/11/2026; publicação com o "sim" dela) |
+| [Menu da conta](propostas/2026-11-28-menu-da-conta.md) | — | aprovada (pedido da dona do produto, 28/11/2026) |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
 | [Página 404 padrão e espaço abaixo do cabeçalho](propostas/2026-11-28-pagina-404-padrao.md) | `PaginaDeErro (nova variante moldura="card") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css` | aprovada (decisões da dona do produto de 28/11/2026; publicação com o "sim" dela) |
 | [Pílula de destaque](propostas/2026-11-28-pilula-de-destaque.md) | — | aprovada (dona do produto, 28/11/2026; prévia `mock-pilulas/pilulas.png`, linha "Proposta") |
@@ -1886,7 +1899,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Feedback** (`feedback`): `tabs` Abas · `alerts` Alertas · `alerta-sem-titulo` Alerta só com descrição · `alerta-com-acao` Alerta com ação · `toasts` Toasts · `progress` Progresso · `skeleton` Skeleton · `feedback-tokens` Tokens · `confete` Confete na conquista · `avatar-decorativo` Avatares de enfeite
 - **Rótulos** (`badges`): `badges` Badges e tags · `selo` Selo (tag do hero) · `selo-secao` Selo de seção · `rotulos-timeline` · `avatar` Avatar · `avatar-circles` Avatar Circles · `empty-states` Estados vazios · `badges-tokens` Tokens
 - **Ícones** (`icons`): `icon-sizes` Tamanhos e cores · `icon-library` Biblioteca · `icons-tokens` Tokens
-- **Overlays** (`overlays`): `breadcrumb` Breadcrumb · `pagination` Paginação · `tooltips` Tooltips · `dropdown` Dropdown · `dialogs` Diálogos · `accordion` Accordion · `overlays-tokens` Tokens
+- **Overlays** (`overlays`): `breadcrumb` Breadcrumb · `pagination` Paginação · `tooltips` Tooltips · `dropdown` Dropdown · `menu-da-conta` Menu da conta · `dialogs` Diálogos · `accordion` Accordion · `overlays-tokens` Tokens
 - **Padrões do site** (`site`): `site-rodape` Rodapé · `site-flutuantes` Elementos flutuantes · `site-cookies` Aviso de cookies · `site-entrada` Entrada ao rolar · `site-frentes` Card de frente de atuação · `site-curvas` Divisores curvos
 - **Molduras e estados** (`molduras`): `molduras-cabecalho` Cabeçalho do site · `molduras-rodape` Rodapé do site · `molduras-conta` Moldura de conta · `molduras-estados` Vazio, final e erro · `molduras-erro` Página de erro (404) · `molduras-alerta-tom` Alerta por tom · `molduras-logo` Componente do logo · `molduras-links` Links de texto e pular para o conteúdo
 - **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-horario` Campo de horário · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-calendario` Seletor de data (Calendar) · `campos-endereco` Endereço com sugestões (CampoDeEndereco) · `campos-tabela` Tabela adaptável · `campo-com-prefixo` Prefixo, sufixo e desabilitado · `escolha-ordenada` Escolha ordenada · `escala-de-notas` Escala de notas · `campos-consentimento` Caixa de consentimento

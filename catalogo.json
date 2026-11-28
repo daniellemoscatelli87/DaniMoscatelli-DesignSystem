@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 131,
-    "componentesExportados": 423,
-    "templatesEPadroesSoEmDemonstracao": 75,
+    "arquivosDeComponentes": 132,
+    "componentesExportados": 427,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 47,
     "tokens": 171,
     "paginas": 33,
-    "ancoras": 243,
-    "propostas": 52
+    "ancoras": 244,
+    "propostas": 53
   },
   "componentes": [
     {
@@ -74,7 +74,7 @@
           "ancora": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385,
+          "linha": 396,
           "uso": "direto",
           "exports": [
             "Accordion",
@@ -399,7 +399,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "AlertDialog",
@@ -1354,7 +1354,7 @@
           "ancora": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226,
+          "linha": 227,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Breadcrumb",
@@ -1677,7 +1677,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 328,
           "uso": "direto",
           "exports": [
             "Button"
@@ -2568,7 +2568,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 328,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -5566,7 +5566,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 328,
           "uso": "direto",
           "exports": [
             "Dialog",
@@ -5982,30 +5982,13 @@
           "ancora": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "DropdownMenu",
             "DropdownMenuTrigger",
             "DropdownMenuContent",
             "DropdownMenuItem",
-            "DropdownMenuSeparator"
-          ]
-        },
-        {
-          "pagina": "templates",
-          "paginaRotulo": "Templates",
-          "ancora": "template-painel",
-          "titulo": "Painel",
-          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
-          "linha": 715,
-          "uso": "dentro de outro exemplo",
-          "exports": [
-            "DropdownMenu",
-            "DropdownMenuTrigger",
-            "DropdownMenuContent",
-            "DropdownMenuItem",
-            "DropdownMenuLabel",
             "DropdownMenuSeparator"
           ]
         }
@@ -7440,6 +7423,18 @@
           "titulo": "Avatares de enfeite",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 216,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "menu-da-conta",
+          "titulo": "Menu da conta",
+          "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
+          "linha": 318,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9743,7 +9738,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "Input"
@@ -10488,6 +10483,107 @@
       ]
     },
     {
+      "arquivo": "src/app/components/ui/menu-da-conta.tsx",
+      "nome": "menu-da-conta",
+      "quandoUsar": "MenuDaConta, CabecalhoDaConta, ItemDaConta e SeparadorDaConta (menu do perfil no cabeçalho)",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "MenuDaConta",
+          "tipo": "componente",
+          "linha": 60,
+          "descricao": "",
+          "props": [
+            "nome",
+            "email",
+            "detalhe",
+            "foto",
+            "papel",
+            "rotuloDoGatilho",
+            "classeDoGatilho",
+            "gatilho",
+            "aberto",
+            "onAbertoChange",
+            "align",
+            "className",
+            "children",
+            "onCloseAutoFocus",
+            "onPointerDown",
+            "onPointerDownOutside",
+            "onKeyDown"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "CabecalhoDaConta",
+          "tipo": "componente",
+          "linha": 102,
+          "descricao": "Nome e e-mail no topo do menu: texto simples, nunca link (anula também os links que o Safari do iPhone cria).",
+          "props": [
+            "nome",
+            "email",
+            "detalhe",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ItemDaConta",
+          "tipo": "componente",
+          "linha": 127,
+          "descricao": "Uma ação da conta. Com asChild, o ícone entra dentro do link filho (ex.: o link do roteador do produto).",
+          "props": [
+            "icone",
+            "asChild",
+            "children"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "SeparadorDaConta",
+          "tipo": "componente",
+          "linha": 145,
+          "descricao": "Divisor entre grupos de ações (o mesmo do DropdownMenu).",
+          "props": [],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "CabecalhoDaContaProps",
+        "ItemDaContaProps",
+        "MenuDaContaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "menu-da-conta",
+          "titulo": "Menu da conta",
+          "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
+          "linha": 318,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "MenuDaConta",
+            "ItemDaConta"
+          ]
+        },
+        {
+          "pagina": "templates",
+          "paginaRotulo": "Templates",
+          "ancora": "template-painel",
+          "titulo": "Painel",
+          "arquivo": "src/app/components/showcase/TemplatesShowcase.tsx",
+          "linha": 715,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "MenuDaConta",
+            "ItemDaConta"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/menubar.tsx",
       "nome": "menubar",
       "quandoUsar": "Barra de menus horizontal, como em programas de computador.",
@@ -10906,7 +11002,7 @@
           "ancora": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240,
+          "linha": 241,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Pagination",
@@ -11495,12 +11591,13 @@
         {
           "nome": "GatilhoDaConta",
           "tipo": "componente",
-          "linha": 588,
+          "linha": 593,
           "descricao": "",
           "props": [
             "nome",
             "papel",
             "foto",
+            "rotulo",
             "className"
           ],
           "reexportaDe": null
@@ -11525,8 +11622,7 @@
             "BarraSuperiorDoPainel",
             "ItemDoMenu",
             "GrupoDoMenu",
-            "BotaoDeNotificacoes",
-            "GatilhoDaConta"
+            "BotaoDeNotificacoes"
           ]
         },
         {
@@ -11925,7 +12021,7 @@
           "ancora": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317,
+          "linha": 328,
           "uso": "direto",
           "exports": [
             "Popover",
@@ -12970,7 +13066,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "Sheet",
@@ -14363,7 +14459,7 @@
           "ancora": null,
           "titulo": null,
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 214,
+          "linha": 215,
           "uso": "na página, fora das seções",
           "exports": [
             "Textarea"
@@ -14569,7 +14665,7 @@
           "ancora": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Tooltip",
@@ -15588,7 +15684,7 @@
       "nome": "PainelTemplate",
       "tipo": "template",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 161,
+      "linha": 151,
       "descricao": "Template do painel: casca (barra superior, menu lateral recolhível, gaveta no celular) e a página Início.",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -15612,20 +15708,15 @@
         "CardComCabecalho",
         "CardIndicador",
         "ChipDeEstado",
-        "DropdownMenu",
-        "DropdownMenuContent",
-        "DropdownMenuItem",
-        "DropdownMenuLabel",
-        "DropdownMenuSeparator",
-        "DropdownMenuTrigger",
-        "GatilhoDaConta",
         "GradeDeCards",
         "GrupoDoMenu",
         "IconeComBase",
+        "ItemDaConta",
         "ItemDoMenu",
         "LinhaDeLista",
         "LinkDoAlerta",
         "LinkVerTudo",
+        "MenuDaConta",
         "MenuLateral",
         "MenuLateralProvider",
         "NavDoMenu",
@@ -15641,7 +15732,7 @@
       "nome": "PecasDoPainel",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/PainelTemplates.tsx",
-      "linha": 226,
+      "linha": 216,
       "descricao": "",
       "pagina": "templates",
       "paginaRotulo": "Templates",
@@ -16705,7 +16796,7 @@
       "nome": "DrawerDemo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 135,
+      "linha": 136,
       "descricao": "Drawer",
       "pagina": "overlays",
       "paginaRotulo": "Overlays",
@@ -16720,6 +16811,31 @@
         "SheetTitle"
       ],
       "elementosFeitosAMao": 3
+    },
+    {
+      "nome": "MenuDaContaDocs",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/shared/MenuDaContaDocs.tsx",
+      "linha": 11,
+      "descricao": "Documentação do MenuDaConta (28/11/2026): o menu do perfil que abre do avatar no cabeçalho do painel. O mesmo arquivo nos dois DS (Dani Moscatelli e FindLook).",
+      "pagina": "overlays",
+      "paginaRotulo": "Overlays",
+      "onde": [
+        {
+          "pagina": "overlays",
+          "paginaRotulo": "Overlays",
+          "ancora": "menu-da-conta",
+          "titulo": "Menu da conta",
+          "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
+          "linha": 318
+        }
+      ],
+      "usaComponentes": [
+        "GradeDeCards",
+        "ItemDaConta",
+        "MenuDaConta"
+      ],
+      "elementosFeitosAMao": 1
     },
     {
       "nome": "SecaoEscopo",
@@ -17463,7 +17579,7 @@
       "ancora": "tooltips",
       "titulo": "Tooltips",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 254,
+      "linha": 255,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "Tooltip"
@@ -17475,7 +17591,7 @@
       "ancora": "dropdown",
       "titulo": "Dropdown",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 269,
+      "linha": 270,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "DropdownMenu",
@@ -17491,7 +17607,7 @@
       "ancora": "accordion",
       "titulo": "Accordion",
       "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-      "linha": 385,
+      "linha": 396,
       "elementosFeitosAMao": 8,
       "usaComponentes": [
         "Accordion",
@@ -19374,6 +19490,12 @@
       "componente": null
     },
     {
+      "arquivo": "propostas/2026-11-28-menu-da-conta.md",
+      "titulo": "Menu da conta",
+      "status": "aprovada (pedido da dona do produto, 28/11/2026)",
+      "componente": null
+    },
+    {
       "arquivo": "propostas/2026-11-28-mock-de-campo.md",
       "titulo": "Campo de exemplo na simulação",
       "status": "proposta",
@@ -20575,43 +20697,49 @@
           "id": "breadcrumb",
           "titulo": "Breadcrumb",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 226
+          "linha": 227
         },
         {
           "id": "pagination",
           "titulo": "Paginação",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 240
+          "linha": 241
         },
         {
           "id": "tooltips",
           "titulo": "Tooltips",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 254
+          "linha": 255
         },
         {
           "id": "dropdown",
           "titulo": "Dropdown",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 269
+          "linha": 270
+        },
+        {
+          "id": "menu-da-conta",
+          "titulo": "Menu da conta",
+          "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
+          "linha": 318
         },
         {
           "id": "dialogs",
           "titulo": "Diálogos",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 317
+          "linha": 328
         },
         {
           "id": "accordion",
           "titulo": "Accordion",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 385
+          "linha": 396
         },
         {
           "id": "overlays-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/OverlaysShowcase.tsx",
-          "linha": 463
+          "linha": 474
         }
       ]
     },

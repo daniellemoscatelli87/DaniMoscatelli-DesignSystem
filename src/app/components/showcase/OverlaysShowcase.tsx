@@ -14,6 +14,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { SectionHeader } from "./shared/SectionHeader";
+import { MenuDaContaDocs } from "./shared/MenuDaContaDocs";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../ui/accordion";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "../ui/dropdown-menu";
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from "../ui/dialog";
@@ -309,6 +310,16 @@ export function OverlaysShowcase() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
+          </ShowcaseCard>
+        </SubSection>
+      </section>
+
+      {/* ── MENU DA CONTA ── */}
+      <section id="menu-da-conta">
+        <SectionHeader title={t("Account menu", "Menu da conta")} description={t("The profile menu that opens from the avatar in the panel header: name and e-mail as text, never links, and the account actions.", "O menu do perfil que abre do avatar no cabeçalho do painel: nome e e-mail como texto, nunca link, e as ações da conta.")} />
+        <SubSection title={t("Account menu", "Menu da conta")}>
+          <ShowcaseCard>
+            <MenuDaContaDocs />
           </ShowcaseCard>
         </SubSection>
       </section>

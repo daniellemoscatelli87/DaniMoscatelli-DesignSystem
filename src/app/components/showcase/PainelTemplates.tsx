@@ -6,7 +6,7 @@ import logoIconRed from "../../../imports/IconeLogo-red.png";
 import { useI18n } from "../../i18n";
 import {
   MenuLateralProvider, MenuLateral, NavDoMenu, TopoDoMenu, ItemDoMenu, GrupoDoMenu, BarraSuperiorDoPainel,
-  BotaoDeNotificacoes, GatilhoDaConta, ContadorDoPainel, CampoDeBuscaGlobal,
+  BotaoDeNotificacoes, ContadorDoPainel, CampoDeBuscaGlobal,
 } from "../ui/painel-shell";
 import { CabecalhoDaPagina } from "../ui/painel-cabecalho";
 import { CardIndicador, CardComCabecalho, IconeComBase, LinkVerTudo } from "../ui/painel-dados";
@@ -20,7 +20,7 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { SidePanel, SidePanelBody, SidePanelContent, SidePanelHeader } from "../ui/side-panel";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { MenuDaConta, ItemDaConta } from "../ui/menu-da-conta";
 import { SubTitle, Mono, DoDont } from "./shared/Guidance";
 
 /* ─────────────────────────────────────────────
@@ -60,22 +60,12 @@ function ConteudoDoMenu({ ativo, ir, t }: { ativo: Pagina; ir: (p: Pagina) => vo
   );
 }
 
-function MenuDaConta({ t }: { t: Tr }) {
+function MenuDaContaDoPainel({ t }: { t: Tr }) {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <GatilhoDaConta nome="Ana Oliveira" aria-label={t("Account of Ana Oliveira. Open account menu", "Conta de Ana Oliveira. Abrir menu da conta")} />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel className="font-normal">
-          <span className="block text-body-sm font-semibold text-foreground">Ana Oliveira</span>
-          <span className="block text-body-sm text-muted-foreground">ana@exemplo.com</span>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem><Settings aria-hidden />{t("Settings", "Configurações")}</DropdownMenuItem>
-        <DropdownMenuItem><LogOut aria-hidden />{t("Sign out", "Sair")}</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <MenuDaConta nome="Ana Oliveira" email="ana@exemplo.com" rotuloDoGatilho={t("Account of Ana Oliveira. Open account menu", "Conta de Ana Oliveira. Abrir menu da conta")}>
+      <ItemDaConta icone={<Settings />}>{t("Settings", "Configurações")}</ItemDaConta>
+      <ItemDaConta icone={<LogOut />}>{t("Sign out", "Sair")}</ItemDaConta>
+    </MenuDaConta>
   );
 }
 
@@ -179,7 +169,7 @@ export function PainelTemplate({ emDia = false }: { emDia?: boolean }) {
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
             {/* O sino soma os contadores do menu (3 + 2): o mesmo número tem o mesmo sentido em toda a tela. */}
             <BotaoDeNotificacoes naoLidas={5} aria-label={t("Notifications, 5 unread", "Notificações, 5 não lidas")} />
-            <MenuDaConta t={t} />
+            <MenuDaContaDoPainel t={t} />
           </div>
         </BarraSuperiorDoPainel>
 

@@ -583,14 +583,18 @@ const BotaoDeNotificacoes = React.forwardRef<HTMLButtonElement, BotaoDeNotificac
   );
 });
 
-type GatilhoDaContaProps = React.ComponentProps<"button"> & { nome: string; papel?: string; foto?: string };
+type GatilhoDaContaProps = React.ComponentProps<"button"> & {
+  nome: string; papel?: string; foto?: string;
+  /** Nome do botão para o leitor de tela (padrão: "Conta de <nome>. Abrir menu da conta"). Vai como texto escondido, e não como
+   *  aria-label, para o nome visível continuar dentro do nome lido (WCAG 2.5.3). */
+  rotulo?: string;
+};
 
-const GatilhoDaConta = React.forwardRef<HTMLButtonElement, GatilhoDaContaProps>(function GatilhoDaConta({ nome, papel, foto, className, ...props }, ref) {
+const GatilhoDaConta = React.forwardRef<HTMLButtonElement, GatilhoDaContaProps>(function GatilhoDaConta({ nome, papel, foto, rotulo, className, ...props }, ref) {
   return (
     <button
       ref={ref}
       type="button"
-      aria-label={`Conta de ${nome}${papel ? `, ${papel}` : ""}. Abrir menu da conta`}
       className={cn(
         "flex min-w-0 items-center gap-2 rounded-md px-2 py-1 text-left transition-colors hover:bg-accent",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -600,7 +604,8 @@ const GatilhoDaConta = React.forwardRef<HTMLButtonElement, GatilhoDaContaProps>(
       data-slot="gatilho-da-conta"
     >
       <AvatarPainel nome={nome} foto={foto} />
-      <span className="hidden min-w-0 sm:block">
+      <span className="sr-only">{rotulo ?? `Conta de ${nome}${papel ? `, ${papel}` : ""}. Abrir menu da conta`}</span>
+      <span aria-hidden className="hidden min-w-0 sm:block">
         <span className="block truncate text-body-sm font-semibold text-foreground">{nome}</span>
         {papel && <span className="block truncate text-label text-muted-foreground">{papel}</span>}
       </span>
