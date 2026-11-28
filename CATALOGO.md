@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 423 componentes exportados · 75 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 243 âncoras no site (https://designsystem.danimoscatelli.com.br) · 52 propostas de componente.
+**Resumo:** 131 arquivos de componentes em `src/app/components/ui/` com 423 componentes exportados · 76 templates e padrões ainda só em demonstração · 47 seções com marcação feita à mão · 171 tokens · 33 páginas e 243 âncoras no site (https://designsystem.danimoscatelli.com.br) · 52 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -825,7 +825,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Arquivo:** [src/app/components/ui/linha-de-lista.tsx](src/app/components/ui/linha-de-lista.tsx)
 - **Quando usar:** Linha de lista: início (caixa de seleção, avatar, ícone), conteúdo (título e descrição) e fim (tags, status, ações).
 - **Componentes:**
-  - `LinhaDeLista` (props: `as`, `inicio`, `titulo`, `descricao`, `fim`, `quebraAcoes`, `alinharAcoesAbaixo`, `alinhar`, `interativa`, `selecionada`, `className`, `children`)
+  - `LinhaDeLista` (props: `as`, `inicio`, `titulo`, `descricao`, `linhasDaDescricao`, `fim`, `quebraAcoes`, `alinharAcoesAbaixo`, `alinhar`, `interativa`, `selecionada`, `className`, `children`)
 - **Onde ver:** Exibição de dados › Tabela (`data#table`) · Templates › Painel (`templates#template-painel`) · Templates › Dashboard (`templates#template-dashboard`) · e mais 6 seções (ver `catalogo.json`)
 
 ### link-de-rede-social
@@ -1423,7 +1423,7 @@ Telas inteiras montadas nas páginas de demonstração. Para uma tela parecida n
 | `PricingTemplate` | Templates › Preços (`templates#template-pricing`) | [src/app/components/showcase/TemplatesShowcase.tsx:389](src/app/components/showcase/TemplatesShowcase.tsx#L389) | `GradeDeCards`, `Select`, `Switch` | 8 |
 | `ContactTemplate` | Templates › Contato (`templates#template-contact`) | [src/app/components/showcase/TemplatesShowcase.tsx:564](src/app/components/showcase/TemplatesShowcase.tsx#L564) | `Button`, `Checkbox`, `Input`, `Label`, `Select`, `SelectContent`, `SelectItem`, `SelectTrigger` +2 | 9 |
 
-### 2.2 Padrões nas páginas de componentes (34)
+### 2.2 Padrões nas páginas de componentes (35)
 
 Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentro das páginas de componentes. São as primeiras candidatas a virar componente.
 
@@ -1449,6 +1449,7 @@ Peças de interface (cards, painéis, menus, controles) desenhadas à mão dentr
 | `Celular`<br>Moldura com a largura de um celular (360 px), para mostrar a linha como ela fica no telefone. É moldura de aparelho, não card de conteúdo: o par certo/errado fica fora da regra de mesma altura (data-cards-ignorar na grade do par). | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:57](src/app/components/showcase/shared/RegraDasLinhas.tsx#L57) |  | 3 |
 | `ListaCerta`<br>Exemplo certo, com LinhaDeLista: tags e ações numa linha própria embaixo do texto, hover e seleção na linha inteira, sem cantos. | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:85](src/app/components/showcase/shared/RegraDasLinhas.tsx#L85) | `Badge`, `Checkbox`, `LinhaDeLista` | 2 |
 | `ListaErrada`<br>Exemplo errado (o erro que originou a regra): áreas de grid "l1 sit" / "res res" no celular. A segunda linha do texto passa por baixo da tag e da lixeira, e o hover é uma caixa cinza arredondada só no bloco do texto. | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:130](src/app/components/showcase/shared/RegraDasLinhas.tsx#L130) | `Badge` | 2 |
+| `ListaDescricaoLonga` | Exibição de dados › Linhas com tags e ações (`data#linhas-colunas`) | [src/app/components/showcase/shared/RegraDasLinhas.tsx:196](src/app/components/showcase/shared/RegraDasLinhas.tsx#L196) | `Badge`, `LinhaDeLista` | 2 |
 | `DemoInfoFechavel` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:71](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L71) | `AlertaComAcao`, `BotaoDoAlerta`, `LinkDoAlerta` | 1 |
 | `AlertaComAcaoDoc` | Feedback › Alerta com ação (`feedback#alerta-com-acao`) | [src/app/components/showcase/AlertaComAcaoShowcase.tsx:133](src/app/components/showcase/AlertaComAcaoShowcase.tsx#L133) | `AlertaComAcao`, `BotaoDoAlerta`, `GradeDeCards`, `LinkDoAlerta` | 1 |
 | `Alert` | Feedback › Alertas (`feedback#alerts`) | [src/app/components/showcase/FeedbackShowcase.tsx:81](src/app/components/showcase/FeedbackShowcase.tsx#L81) | `Alert`, `AlertDescription`, `AlertTitle` | 1 |

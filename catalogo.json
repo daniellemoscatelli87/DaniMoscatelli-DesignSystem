@@ -7,7 +7,7 @@
   "resumo": {
     "arquivosDeComponentes": 131,
     "componentesExportados": 423,
-    "templatesEPadroesSoEmDemonstracao": 75,
+    "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 47,
     "tokens": 171,
     "paginas": 33,
@@ -9943,13 +9943,14 @@
         {
           "nome": "LinhaDeLista",
           "tipo": "componente",
-          "linha": 61,
+          "linha": 78,
           "descricao": "",
           "props": [
             "as",
             "inicio",
             "titulo",
             "descricao",
+            "linhasDaDescricao",
             "fim",
             "quebraAcoes",
             "alinharAcoesAbaixo",
@@ -16622,6 +16623,30 @@
       ],
       "usaComponentes": [
         "Badge"
+      ],
+      "elementosFeitosAMao": 2
+    },
+    {
+      "nome": "ListaDescricaoLonga",
+      "tipo": "padrão de componente",
+      "arquivo": "src/app/components/showcase/shared/RegraDasLinhas.tsx",
+      "linha": 196,
+      "descricao": "",
+      "pagina": "data",
+      "paginaRotulo": "Exibição de dados",
+      "onde": [
+        {
+          "pagina": "data",
+          "paginaRotulo": "Exibição de dados",
+          "ancora": "linhas-colunas",
+          "titulo": "Linhas com tags e ações",
+          "arquivo": "src/app/components/showcase/DataShowcase.tsx",
+          "linha": 365
+        }
+      ],
+      "usaComponentes": [
+        "Badge",
+        "LinhaDeLista"
       ],
       "elementosFeitosAMao": 2
     },

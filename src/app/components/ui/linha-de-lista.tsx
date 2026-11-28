@@ -16,6 +16,10 @@ import { cn } from "./utils";
  * 2. O hover da linha cobre a linha inteira, de ponta a ponta, sem cantos arredondados (--row-hover). A linha
  *    selecionada tem a mesma forma, e o foco do teclado é um contorno por dentro, também sem cantos.
  *
+ * 3. A descrição mostra no máximo 2 linhas; o que passar disso termina em reticências ("…"). O texto inteiro
+ *    continua no código da página, e os leitores de tela leem tudo. Para mostrar o texto todo, abra o detalhe do item.
+ *    linhasDaDescricao muda o limite (1, 2, 3 ou "todas").
+ *
  * Documentação: Dados > Tabelas e Cards > Comportamento responsivo.
  */
 
@@ -31,6 +35,11 @@ export type LinhaDeListaProps = Omit<React.HTMLAttributes<HTMLElement>, "title">
   inicio?: React.ReactNode;
   titulo?: React.ReactNode;
   descricao?: React.ReactNode;
+  /**
+   * Quantas linhas a descrição mostra antes das reticências. Padrão 2 (decisão da dona do produto, 28/11/2026).
+   * "todas" mostra o texto inteiro.
+   */
+  linhasDaDescricao?: 1 | 2 | 3 | "todas";
   /** Coluna do fim: tags, status e ações. Mantém a largura; o texto nunca passa por baixo dela. */
   fim?: React.ReactNode;
   /**
@@ -58,11 +67,20 @@ const COLUNAS = {
   conteudo: "grid-cols-[minmax(0,1fr)]",
 };
 
+// line-clamp já troca o display; por isso a descrição limitada não leva "block".
+const LIMITE_DA_DESCRICAO = {
+  1: "line-clamp-1",
+  2: "line-clamp-2",
+  3: "line-clamp-3",
+  todas: "block",
+} as const;
+
 export function LinhaDeLista({
   as = "div",
   inicio,
   titulo,
   descricao,
+  linhasDaDescricao = 2,
   fim,
   quebraAcoes = "estreito",
   alinharAcoesAbaixo = "inicio",
@@ -106,7 +124,7 @@ export function LinhaDeLista({
       {temInicio && <Bloco data-slot="linha-de-lista-inicio" className="flex shrink-0 items-center">{inicio}</Bloco>}
       <Bloco data-slot="linha-de-lista-conteudo" className="block min-w-0">
         {titulo != null && <span className="block text-body-sm font-semibold text-foreground [overflow-wrap:anywhere]">{titulo}</span>}
-        {descricao != null && <span className="mt-1 block text-body-sm text-muted-foreground [overflow-wrap:anywhere]">{descricao}</span>}
+        {descricao != null && <span data-slot="linha-de-lista-descricao" className={cn("mt-1 text-body-sm text-muted-foreground [overflow-wrap:anywhere]", LIMITE_DA_DESCRICAO[linhasDaDescricao])}>{descricao}</span>}
         {children}
       </Bloco>
       {temFim && (

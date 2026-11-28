@@ -54,7 +54,7 @@ const lixeira = "flex h-8 w-8 items-center justify-center rounded-full text-mute
  * Moldura com a largura de um celular (360 px), para mostrar a linha como ela fica no telefone. É moldura de aparelho,
  * não card de conteúdo: o par certo/errado fica fora da regra de mesma altura (data-cards-ignorar na grade do par).
  */
-function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legenda: string; children: React.ReactNode }) {
+function Celular({ tipo, legenda, titulo, children }: { tipo: "certo" | "errado"; legenda: string; titulo?: string; children: React.ReactNode }) {
   const { t } = useI18n();
   const certo = tipo === "certo";
   return (
@@ -68,7 +68,7 @@ function Celular({ tipo, legenda, children }: { tipo: "certo" | "errado"; legend
       </figcaption>
       <div className="w-full max-w-[22.5rem] overflow-hidden rounded-xl border border-border bg-card">
         <div className="flex items-center justify-between border-b border-border px-4 py-2">
-          <span className="text-label font-semibold text-foreground">{t("Tasks", "Tarefas")}</span>
+          <span className="text-label font-semibold text-foreground">{titulo ?? t("Tasks", "Tarefas")}</span>
           <span className="text-caption text-muted-foreground">360 px</span>
         </div>
         {children}
@@ -174,12 +174,50 @@ function ListaAoLado() {
   );
 }
 
+/** Regra 4 (28/11/2026): descrição longa limitada a 2 linhas, com reticências. Nomes e textos fictícios. */
+const LONGAS: { id: number; titulo: Bi; texto: Bi; data: Bi }[] = [
+  {
+    id: 1,
+    titulo: { en: "Ana Souza (fictitious)", pt: "Ana Souza (fictício)" },
+    texto: {
+      en: "Studio Exemplo · My main area is business development and growth, connecting sales strategy, marketing and data analysis to find opportunities, create demand and drive results.",
+      pt: "Estúdio Exemplo · Minha principal área é desenvolvimento de negócios e crescimento, conectando estratégia comercial, marketing e análise de dados para identificar oportunidades, gerar demanda e impulsionar resultados.",
+    },
+    data: { en: "Nov 14", pt: "14 de nov." },
+  },
+  {
+    id: 2,
+    titulo: { en: "Bruno Lima (fictitious)", pt: "Bruno Lima (fictício)" },
+    texto: { en: "Product Design", pt: "Product Design" },
+    data: { en: "Oct 28", pt: "28 de out." },
+  },
+];
+
+function ListaDescricaoLonga() {
+  const { t, bi } = useI18n();
+  return (
+    <ul className="divide-y divide-border" aria-label={t("Applications (example)", "Candidaturas (exemplo)")}>
+      {LONGAS.map(i => (
+        <LinhaDeLista
+          key={i.id}
+          as="li"
+          interativa
+          titulo={bi(i.titulo)}
+          descricao={bi(i.texto)}
+          fim={<><Badge variant="outline" className="h-6 rounded-full bg-card px-2">{t("Seen", "Vista")}</Badge><span className="text-body-sm text-muted-foreground">{bi(i.data)}</span></>}
+        />
+      ))}
+    </ul>
+  );
+}
+
 const codigo = `<ul className="divide-y divide-border">
   <LinhaDeLista
     as="li"
     inicio={<Checkbox aria-label="Selecionar" />}
     titulo="Revisar os textos da página inicial"
     descricao="Conferir os títulos e o botão principal."
+    /* padrão: a descrição mostra até 2 linhas e termina em reticências; linhasDaDescricao="todas" mostra tudo */
     fim={<><Badge variant="outline">Em andamento</Badge><BotaoExcluir /></>}
     /* padrão: no celular, tags e ações descem para baixo do texto (quebraAcoes="estreito");
        quebraAcoes={false} as mantém ao lado em qualquer largura */
@@ -207,6 +245,11 @@ export function RegraDasLinhas() {
           "This is the default for list rows: below 640 px, the tags, status and actions go to a row of their own below the whole text block, so the text uses the full width. In LinhaDeLista it is quebraAcoes=\"estreito\", the default; quebraAcoes={false} keeps them beside the text at every width (the text still stays in its own column), and quebraAcoes={true} puts them below at every width.",
           "É o padrão das linhas de lista: abaixo de 640 px, as tags, o status e as ações vão para uma linha própria embaixo de todo o bloco de texto, e o texto usa a largura toda. Na LinhaDeLista é quebraAcoes=\"estreito\", o padrão; quebraAcoes={false} as mantém ao lado do texto em qualquer largura (o texto continua na coluna dele), e quebraAcoes={true} as põe embaixo em qualquer largura.",
         )}</p>
+        <p className="mt-3 font-semibold text-foreground">{t("4. The description shows at most 2 lines and ends with an ellipsis (product owner's decision, 28/11/2026).", "4. A descrição mostra no máximo 2 linhas e termina em reticências (decisão da dona do produto, 28/11/2026).")}</p>
+        <p className="mt-1">{t(
+          "In list rows, a longer description is cut at the end of the second line with \"…\", so every row keeps a similar height and the list stays easy to scan. The full text stays in the page and screen readers read all of it; to read everything, open the item. In LinhaDeLista this is the default (linhasDaDescricao={2}); use 1 or 3 when the content asks for it, or \"todas\" to show the whole text.",
+          "Nas linhas de lista, a descrição mais longa é cortada no fim da segunda linha com \"…\", para as linhas terem alturas parecidas e a lista ser fácil de percorrer. O texto inteiro continua na página e os leitores de tela leem tudo; para ler tudo, abra o item. Na LinhaDeLista é o padrão (linhasDaDescricao={2}); use 1 ou 3 quando o conteúdo pedir, ou \"todas\" para mostrar o texto inteiro.",
+        )}</p>
       </Callout>
 
       <div data-cards-ignorar="" className="grid gap-6 md:grid-cols-2">
@@ -221,6 +264,20 @@ export function RegraDasLinhas() {
         "Hover or tap a row in the correct example: the whole row lights up, square, from the checkbox to the trash. Checked rows use the same shape.",
         "Passe o mouse ou toque numa linha do exemplo certo: a linha inteira acende, sem cantos, da caixa de seleção à lixeira. A linha marcada usa a mesma forma.",
       )}</p>
+
+      <div data-cards-ignorar="" className="grid gap-6 md:grid-cols-2 md:items-start">
+        <div className="min-w-0">
+          <p className="mb-2 text-body-sm font-semibold text-foreground">{t("Long descriptions: 2 lines and an ellipsis", "Descrição longa: 2 linhas e reticências")}</p>
+          <ul className="list-disc space-y-1 pl-5 text-body-sm leading-relaxed text-muted-foreground">
+            <li>{t("The first row has a long description: it stops at the second line with \"…\".", "A primeira linha tem uma descrição longa: ela para na segunda linha com \"…\".")}</li>
+            <li>{t("A short description is shown as it is, with no ellipsis.", "A descrição curta aparece como é, sem reticências.")}</li>
+            <li>{t("The title, the tags and the date are never cut.", "O título, as tags e a data nunca são cortados.")}</li>
+          </ul>
+        </div>
+        <Celular tipo="certo" legenda={t("description limited to 2 lines (linhasDaDescricao={2}, the default)", "descrição limitada a 2 linhas (linhasDaDescricao={2}, o padrão)")} titulo={t("Applications", "Candidaturas")}>
+          <ListaDescricaoLonga />
+        </Celular>
+      </div>
 
       <div className="grid gap-6 md:grid-cols-2 md:items-start">
         <div className="min-w-0">
@@ -243,6 +300,7 @@ export function RegraDasLinhas() {
           t("On phones, put the tags and actions in their own row below the text (the default).", "No celular, ponha as tags e ações numa linha própria embaixo do texto (o padrão)."),
           t("Keep the trailing column at its width and top-aligned when the text wraps.", "Mantenha a coluna final na largura dela e no topo quando o texto quebra."),
           t("Wrap, clamp or truncate the text inside its own column.", "Quebre, limite as linhas ou encurte o texto dentro da coluna dele."),
+          t("Limit the description to 2 lines with an ellipsis (the LinhaDeLista default).", "Limite a descrição a 2 linhas, com reticências (o padrão da LinhaDeLista)."),
           t("Paint the hover and the selection on the whole row, square.", "Pinte o hover e a seleção na linha inteira, sem cantos."),
         ]}
         donts={[
