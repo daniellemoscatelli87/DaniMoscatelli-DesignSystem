@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 126 arquivos de componentes em `src/app/components/ui/` com 415 componentes exportados · 76 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 163 tokens · 33 páginas e 237 âncoras no site (https://designsystem.danimoscatelli.com.br) · 46 propostas de componente.
+**Resumo:** 127 arquivos de componentes em `src/app/components/ui/` com 416 componentes exportados · 76 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 163 tokens · 33 páginas e 238 âncoras no site (https://designsystem.danimoscatelli.com.br) · 48 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -149,6 +149,14 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
 - **Componentes:**
   - `BarraDeNumeros` (props: `itens`, `centralizar`, `className`)
 - **Onde ver:** Seções do site › Números e cards de navegação (`secoes-site#secoes-numeros`) · Templates › Landing page (`templates#template-landing`)
+
+### beneficios-dos-dois-lados
+
+- **Arquivo:** [src/app/components/ui/beneficios-dos-dois-lados.tsx](src/app/components/ui/beneficios-dos-dois-lados.tsx)
+- **Quando usar:** BeneficiosDosDoisLados (o que cada lado ganha, num card só): Mostra os benefícios de uma parceria para os dois lados (por exemplo, "Para sua empresa" e "Para o Studio"), num card só. Prévia aprovada pela dona do produto em 28/11/2026. Mesmo arquivo nos dois DS (Dani Moscatelli e FindLook).
+- **Componentes:**
+  - `BeneficiosDosDoisLados` (props: `lados`, `ladoInicial`, `rotulo`, `nivel`, `className`)
+- **Onde ver:** Seções do site › Benefícios dos dois lados (`secoes-site#secoes-beneficios`)
 
 ### botao-de-envio
 
@@ -675,7 +683,7 @@ Tudo o que está em `src/app/components/ui/`. Dentro do design system, importe d
   - `GradeDeCards` (props: `colunas`, `larguraMinima`, `limiteDeDiferenca`, `layout`, `onLayoutChange`, `className`, `style`, `children`)
   - `ItemDaGrade` (props: `className`): ItemDaGrade: item com um rótulo em cima do card. Estica o último filho (o card) até a base da linha, para os cards da linha terem a mesma altura.
 - **Funções e constantes:** `LIMITE_DE_DIFERENCA`, `FATOR_DE_VOLTA`, `passaDoLimite`, `useOrientacaoDoCard`
-- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 97 seções (ver `catalogo.json`)
+- **Onde ver:** Grid e espaçamento › Ritmo vertical (`grid#grid-ritmo`) · Design Tokens › O que são tokens (`tokens#tokens-intro`) · Usabilidade › Status do sistema (`usability#ux-feedback`) · e mais 98 seções (ver `catalogo.json`)
 
 ### graficos-catalogo
 
@@ -1790,11 +1798,13 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Stepper e cadastro em etapas](propostas/2026-11-27-stepper-e-cadastro-em-etapas.md) | `Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao, LinhaDeDado, CampoDoCadastro em src/app/components/ui/stepper.tsx, src/app/components/ui/cadastro-em-etapas.tsx` | proposta |
 | [Tabela adaptável](propostas/2026-11-27-tabela-adaptavel.md) | `TabelaAdaptavel em src/app/components/ui/tabela-adaptavel.tsx` | proposta |
 | [Tokens: sobreposição, raio de pílula, variante de toque e escala de texto](propostas/2026-11-27-tokens-sobreposicao-raio-toque-texto.md) | `tokens em src/styles/theme.css` | proposta |
+| [Benefícios dos dois lados](propostas/2026-11-28-beneficios-dos-dois-lados.md) | `BeneficiosDosDoisLados em src/app/components/ui/beneficios-dos-dois-lados.tsx (o mesmo arquivo nos dois DS); classes .ds-beneficios-lados em src/styles/theme.css (bloco @ds-css-puro:beneficios-dos-dois-lados, igual nos dois DS)` | proposta (prévia aprovada pela dona do produto em 28/11/2026; publicação com o "sim" dela) |
 | [Caixa de consentimento](propostas/2026-11-28-caixa-de-consentimento.md) | `CaixaDeConsentimento em src/app/components/ui/caixa-de-consentimento.tsx (mesmo arquivo e API no DS FindLook)` | aprovada (dona do produto, 28/11/2026; publicação com o "sim" dela) |
 | [Confete](propostas/2026-11-28-confete.md) | `Confete, dispararConfete e EstadoFinal comemorar em src/app/components/ui/confete.tsx` | proposta |
 | [Diagrama do ecossistema](propostas/2026-11-28-diagrama-de-ecossistema.md) | `DiagramaDeEcossistema em src/app/components/ui/diagrama-de-ecossistema.tsx` | proposta |
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
+| [Ícone com base: três estados (desabilitado, informativo, clicável)](propostas/2026-11-28-icone-com-base-tres-estados.md) | `IconeComBase em src/app/components/ui/painel-dados.tsx (bloco igual nos dois DS; só os tamanhos mudam de um DS para o outro)` | decisão da dona do produto (28/11/2026) |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
 | [Página 404 padrão e espaço abaixo do cabeçalho](propostas/2026-11-28-pagina-404-padrao.md) | `PaginaDeErro (nova variante moldura="card") em src/app/components/ui/estado-vazio.tsx; token --espaco-abaixo-do-cabecalho e classe .ds-abaixo-do-cabecalho em src/styles/theme.css` | aprovada (decisões da dona do produto de 28/11/2026; publicação com o "sim" dela) |
 | [Recorte de foto](propostas/2026-11-28-recorte-de-foto.md) | `RecorteDeFoto em src/app/components/ui/recorte-de-foto.tsx` | proposta |
@@ -1829,7 +1839,7 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 - **Molduras e estados** (`molduras`): `molduras-cabecalho` Cabeçalho do site · `molduras-rodape` Rodapé do site · `molduras-conta` Moldura de conta · `molduras-estados` Vazio, final e erro · `molduras-erro` Página de erro (404) · `molduras-alerta-tom` Alerta por tom · `molduras-logo` Componente do logo · `molduras-links` Links de texto e pular para o conteúdo
 - **Campos** (`campos`): `campos-campo` Campo e máscaras · `campos-busca` Busca e copiar · `campos-emails` Vários e-mails · `campos-horario` Campo de horário · `campos-chips` Chips de filtro · `campos-escolha` Cartões de escolha · `campos-botoes` Botões de envio e exclusão · `campos-calendario` Seletor de data (Calendar) · `campos-endereco` Endereço com sugestões (CampoDeEndereco) · `campos-tabela` Tabela adaptável · `campo-com-prefixo` Prefixo, sufixo e desabilitado · `escolha-ordenada` Escolha ordenada · `escala-de-notas` Escala de notas · `campos-consentimento` Caixa de consentimento
 - **Peças da área restrita** (`pecas-admin`): `admin-caixa` Caixa de entrada · `admin-conversa` Conversa · `admin-agenda` Agenda do mês · `admin-etapas` Etapas e cadastro · `admin-quadro` Quadro
-- **Seções do site** (`secoes-site`): `secoes-depoimentos` Card de depoimento · `secoes-artigos` Card de artigo · `secoes-logos` Faixa de logos · `secoes-citacao` Citação · `secoes-pilares` Pilares · `secoes-flutuantes` Cartão flutuante e luzes · `secoes-simulacao` Simulação em etapas · `secoes-ecossistema` Diagrama do ecossistema · `secoes-numeros` Números e cards de navegação · `secoes-saiba-prosa` Saiba mais e texto longo
+- **Seções do site** (`secoes-site`): `secoes-depoimentos` Card de depoimento · `secoes-artigos` Card de artigo · `secoes-logos` Faixa de logos · `secoes-citacao` Citação · `secoes-pilares` Pilares · `secoes-beneficios` Benefícios dos dois lados · `secoes-flutuantes` Cartão flutuante e luzes · `secoes-simulacao` Simulação em etapas · `secoes-ecossistema` Diagrama do ecossistema · `secoes-numeros` Números e cards de navegação · `secoes-saiba-prosa` Saiba mais e texto longo
 - **Header e menus** (`header`): `header-demo` Demonstração · `header-models` Modelos · `header-scroll` Comportamentos de rolagem · `header-mobile` Menus no celular · `header-backgrounds` Fundos por trás do header · `header-a11y` Checklist de acessibilidade · `header-usage` Uso · `header-tokens` Tokens
 - **Painel lateral** (`sidepanel`): `sidepanel-anatomy` Anatomia · `sidepanel-behavior` Comportamento · `sidepanel-contact` Formulário de contato · `sidepanel-a11y` Checklist de acessibilidade · `sidepanel-usage` Uso · `sidepanel-tokens` Tokens
 - **Linha do tempo** (`timeline`): `timeline-demo` Demonstração · `timeline-anatomy` Anatomia · `timeline-motion` Movimento: Step Indicator · `timeline-usage` Uso

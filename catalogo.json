@@ -5,14 +5,14 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 126,
-    "componentesExportados": 415,
+    "arquivosDeComponentes": 127,
+    "componentesExportados": 416,
     "templatesEPadroesSoEmDemonstracao": 76,
     "secoesComMarcacaoAMao": 45,
     "tokens": 163,
     "paginas": 33,
-    "ancoras": 237,
-    "propostas": 46
+    "ancoras": 238,
+    "propostas": 48
   },
   "componentes": [
     {
@@ -955,7 +955,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 368,
           "uso": "direto",
           "exports": [
             "BarraDeNumeros"
@@ -971,6 +971,47 @@
           "uso": "dentro de outro exemplo",
           "exports": [
             "BarraDeNumeros"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/beneficios-dos-dois-lados.tsx",
+      "nome": "beneficios-dos-dois-lados",
+      "quandoUsar": "BeneficiosDosDoisLados (o que cada lado ganha, num card só): Mostra os benefícios de uma parceria para os dois lados (por exemplo, \"Para sua empresa\" e \"Para o Studio\"), num card só. Prévia aprovada pela dona do produto em 28/11/2026. Mesmo arquivo nos dois DS (Dani Moscatelli e FindLook).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "BeneficiosDosDoisLados",
+          "tipo": "componente",
+          "linha": 54,
+          "descricao": "",
+          "props": [
+            "lados",
+            "ladoInicial",
+            "rotulo",
+            "nivel",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "BeneficiosDosDoisLadosProps",
+        "LadoDosBeneficios"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-beneficios",
+          "titulo": "Benefícios dos dois lados",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 178,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "BeneficiosDosDoisLados"
           ]
         }
       ]
@@ -2670,7 +2711,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "GradeDeCampos"
@@ -3668,7 +3709,7 @@
           "ancora": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86,
+          "linha": 87,
           "uso": "direto",
           "exports": [
             "CardDeArtigo"
@@ -3721,7 +3762,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "direto",
           "exports": [
             "CardDeDepoimento"
@@ -3775,7 +3816,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 368,
           "uso": "direto",
           "exports": [
             "CardDeNavegacao"
@@ -3996,7 +4037,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "direto",
           "exports": [
             "Carousel",
@@ -4105,7 +4146,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 229,
           "uso": "direto",
           "exports": [
             "CartaoFlutuante"
@@ -4341,7 +4382,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4561,7 +4602,7 @@
           "ancora": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "direto",
           "exports": [
             "Citacao"
@@ -5173,7 +5214,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -5282,7 +5323,7 @@
           "ancora": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264,
+          "linha": 317,
           "uso": "direto",
           "exports": [
             "DiagramaDeEcossistema"
@@ -6191,7 +6232,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 110,
           "uso": "direto",
           "exports": [
             "FaixaDeLogos"
@@ -6883,7 +6924,7 @@
           "ancora": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86,
+          "linha": 87,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6896,7 +6937,7 @@
           "ancora": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6909,7 +6950,7 @@
           "ancora": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315,
+          "linha": 368,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -6922,7 +6963,7 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 388,
           "uso": "direto",
           "exports": [
             "GradeDeCards",
@@ -7595,7 +7636,7 @@
           "ancora": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54,
+          "linha": 55,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7607,7 +7648,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 110,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7619,7 +7660,19 @@
           "ancora": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153,
+          "linha": 154,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "secoes-site",
+          "paginaRotulo": "Seções do site",
+          "ancora": "secoes-beneficios",
+          "titulo": "Benefícios dos dois lados",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 178,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7631,7 +7684,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 229,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7643,7 +7696,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7655,7 +7708,7 @@
           "ancora": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264,
+          "linha": 317,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -9857,7 +9910,7 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 388,
           "uso": "direto",
           "exports": [
             "LinkSaibaMais"
@@ -9965,7 +10018,7 @@
           "ancora": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153,
+          "linha": 154,
           "uso": "direto",
           "exports": [
             "ListaDePilares"
@@ -10019,7 +10072,7 @@
           "ancora": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109,
+          "linha": 110,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -10031,7 +10084,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Logo"
@@ -10111,7 +10164,7 @@
           "ancora": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176,
+          "linha": 229,
           "uso": "direto",
           "exports": [
             "LuzesDifusas"
@@ -11578,7 +11631,7 @@
           "ancora": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335,
+          "linha": 388,
           "uso": "direto",
           "exports": [
             "Prosa"
@@ -13167,7 +13220,7 @@
           "ancora": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202,
+          "linha": 255,
           "uso": "direto",
           "exports": [
             "Simulacao",
@@ -18829,6 +18882,12 @@
       "componente": "tokens em src/styles/theme.css"
     },
     {
+      "arquivo": "propostas/2026-11-28-beneficios-dos-dois-lados.md",
+      "titulo": "Benefícios dos dois lados",
+      "status": "proposta (prévia aprovada pela dona do produto em 28/11/2026; publicação com o \"sim\" dela)",
+      "componente": "BeneficiosDosDoisLados em src/app/components/ui/beneficios-dos-dois-lados.tsx (o mesmo arquivo nos dois DS); classes .ds-beneficios-lados em src/styles/theme.css (bloco @ds-css-puro:beneficios-dos-dois-lados, igual nos dois DS)"
+    },
+    {
       "arquivo": "propostas/2026-11-28-caixa-de-consentimento.md",
       "titulo": "Caixa de consentimento",
       "status": "aprovada (dona do produto, 28/11/2026; publicação com o \"sim\" dela)",
@@ -18857,6 +18916,12 @@
       "titulo": "Escolha ordenada",
       "status": "proposta",
       "componente": "EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-icone-com-base-tres-estados.md",
+      "titulo": "Ícone com base: três estados (desabilitado, informativo, clicável)",
+      "status": "decisão da dona do produto (28/11/2026)",
+      "componente": "IconeComBase em src/app/components/ui/painel-dados.tsx (bloco igual nos dois DS; só os tamanhos mudam de um DS para o outro)"
     },
     {
       "arquivo": "propostas/2026-11-28-mock-de-campo.md",
@@ -20323,61 +20388,67 @@
           "id": "secoes-depoimentos",
           "titulo": "Card de depoimento",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 54
+          "linha": 55
         },
         {
           "id": "secoes-artigos",
           "titulo": "Card de artigo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 86
+          "linha": 87
         },
         {
           "id": "secoes-logos",
           "titulo": "Faixa de logos",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 109
+          "linha": 110
         },
         {
           "id": "secoes-citacao",
           "titulo": "Citação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 131
+          "linha": 132
         },
         {
           "id": "secoes-pilares",
           "titulo": "Pilares",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 153
+          "linha": 154
+        },
+        {
+          "id": "secoes-beneficios",
+          "titulo": "Benefícios dos dois lados",
+          "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
+          "linha": 178
         },
         {
           "id": "secoes-flutuantes",
           "titulo": "Cartão flutuante e luzes",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 176
+          "linha": 229
         },
         {
           "id": "secoes-simulacao",
           "titulo": "Simulação em etapas",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 202
+          "linha": 255
         },
         {
           "id": "secoes-ecossistema",
           "titulo": "Diagrama do ecossistema",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 264
+          "linha": 317
         },
         {
           "id": "secoes-numeros",
           "titulo": "Números e cards de navegação",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 315
+          "linha": 368
         },
         {
           "id": "secoes-saiba-prosa",
           "titulo": "Saiba mais e texto longo",
           "arquivo": "src/app/components/showcase/SecoesDoSiteShowcase.tsx",
-          "linha": 335
+          "linha": 388
         }
       ]
     },

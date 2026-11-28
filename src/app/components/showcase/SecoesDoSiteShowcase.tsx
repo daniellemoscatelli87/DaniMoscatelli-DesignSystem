@@ -1,5 +1,5 @@
 import React from "react";
-import { BarChart3, BookOpen, Briefcase, Code2, Database, Factory, GraduationCap, Handshake, HeartPulse, Landmark, LayoutGrid, LayoutTemplate, Leaf, Lightbulb, Megaphone, MessageCircle, Monitor, Network, Package, PenTool, Search, ShoppingBag, Sparkles, TrendingUp, Truck, Users } from "lucide-react";
+import { BarChart3, BookOpen, Briefcase, Building, Code2, Database, Factory, GraduationCap, Handshake, HeartPulse, Landmark, LayoutGrid, LayoutTemplate, Leaf, Lightbulb, Megaphone, MessageCircle, Monitor, Network, Package, PenTool, Search, ShoppingBag, Sparkles, TrendingUp, Truck, Users } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
 import { CardDeDepoimento } from "../ui/card-de-depoimento";
@@ -21,6 +21,7 @@ import { ChipDeEstado } from "../ui/chip-de-estado";
 import { Logo } from "../ui/logo";
 import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
+import { SecaoBeneficiosDosDoisLados } from "./shared/SecaoBeneficiosDosDoisLados";
 
 /* Seções do site (27/11/2026): peças das páginas do site do estúdio. Todo o conteúdo é de exemplo. */
 
@@ -172,6 +173,58 @@ logos={[{ nome: "Empresa", src: "/logos/branco.svg", silhueta: true }]}   // só
           />
         </ShowcaseCard>
       </SectionBlock>
+
+      {/* Conteúdo real do Projeto Piloto (página projeto-piloto do site), com o título novo da dona do produto (28/11/2026). */}
+      <SecaoBeneficiosDosDoisLados
+        id="secoes-beneficios"
+        lados={[
+          { id: "empresa", rotulo: t("For your company", "Para sua empresa"), icone: <Building />,
+            titulo: t("More clarity to make decisions that drive your business.", "Mais clareza para tomar decisões que impulsionam seu negócio."),
+            itens: [t("Specialised diagnosis", "Diagnóstico especializado"), t("Identification of frictions and opportunities", "Identificação de fricções e oportunidades"), t("Prioritised recommendations for decisions and concrete improvements", "Recomendações priorizadas para decisões e melhorias concretas")] },
+          { id: "studio", rotulo: t("For the Studio", "Para o Studio"), icone: <Sparkles />,
+            titulo: t("Experience that broadens our practice.", "Experiência que amplia nossa prática."),
+            itens: [t("Work across different sectors and contexts", "Atuação em diferentes setores e contextos"), t("Continuous evolution of methods and tools", "Evolução contínua de métodos e ferramentas"), t("The chance to document case studies, with authorisation", "Possibilidade de documentar estudos de caso, mediante autorização")] },
+        ]}
+        api={`<BeneficiosDosDoisLados
+  lados={[
+    { id: "empresa", rotulo: "Para sua empresa", icone: <Building />,
+      titulo: "Mais clareza para tomar decisões que impulsionam seu negócio.",
+      itens: ["Diagnóstico especializado", "Identificação de fricções e oportunidades", "Recomendações priorizadas para decisões e melhorias concretas"] },
+    { id: "studio", rotulo: "Para o Studio", icone: <Sparkles />,
+      titulo: "Experiência que amplia nossa prática.",
+      itens: ["Atuação em diferentes setores e contextos", "Evolução contínua de métodos e ferramentas", "Possibilidade de documentar estudos de caso, mediante autorização"] },
+  ]}
+/>`}
+        html={`<div class="ds-beneficios-lados">
+  <div class="ds-beneficios-lados__card">
+    <div class="ds-beneficios-lados__alternador" role="radiogroup" aria-label="Benefícios">
+      <label class="ds-beneficios-lados__opcao">
+        <input type="radio" name="beneficios-piloto" value="empresa" checked>
+        <svg aria-hidden="true"><!-- ícone Building --></svg><span>Para sua empresa</span>
+      </label>
+      <label class="ds-beneficios-lados__opcao">
+        <input type="radio" name="beneficios-piloto" value="studio">
+        <svg aria-hidden="true"><!-- ícone Sparkles --></svg><span>Para o Studio</span>
+      </label>
+    </div>
+    <div class="ds-beneficios-lados__lados">
+      <div class="ds-beneficios-lados__lado">
+        <div class="ds-beneficios-lados__cabecalho">
+          <span class="ds-beneficios-lados__base" aria-hidden="true"><svg><!-- Building --></svg></span>
+          <p class="ds-beneficios-lados__rotulo">Para sua empresa</p>
+        </div>
+        <h3 class="ds-beneficios-lados__titulo">Mais clareza para tomar decisões que impulsionam seu negócio.</h3>
+        <ul class="ds-beneficios-lados__lista">
+          <li><svg class="ds-beneficios-lados__check" aria-hidden="true"><!-- CircleCheckBig --></svg><span>Diagnóstico especializado</span></li>
+          …
+        </ul>
+      </div>
+      <div class="ds-beneficios-lados__divisor" aria-hidden="true"></div>
+      <div class="ds-beneficios-lados__lado">…Para o Studio…</div>
+    </div>
+  </div>
+</div>`}
+      />
 
       <SectionBlock
         id="secoes-flutuantes"
