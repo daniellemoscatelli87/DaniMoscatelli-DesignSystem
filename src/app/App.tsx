@@ -983,7 +983,7 @@ function AppShell() {
           @media (prefers-reduced-motion: reduce) { .ds-shimmer { animation: none; } }
         `}</style>
         <button type="button" onClick={() => navigateTo("overview")} aria-label={tl("Home")} className="flex items-center gap-2 min-w-0 shrink-0 text-left">
-          <img src={logoIconRed} alt="" className="hidden min-[340px]:block h-[34px] w-[34px] object-contain shrink-0" />
+          <img src={logoIconRed} alt="" className="h-[34px] w-[34px] object-contain shrink-0" />
           {/* Celular (26/11/2026): só o símbolo abaixo de 640 px (28/11: os seletores de idioma e tema cresceram para 44 px no toque); "| Design System" a partir de 1280 px (antes disso encostava na busca), para nunca encostar nos seletores */}
           <div className="hidden sm:flex items-center gap-0 min-w-0">
             <span
@@ -1024,7 +1024,7 @@ function AppShell() {
 
 
         {/* Language segmented pill */}
-        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-8 toque:h-auto p-1 rounded-full bg-muted border border-border gap-1">
+        <div role="group" aria-label={t("Language", "Idioma")} className="flex items-center h-9 p-1 rounded-full bg-muted border border-border gap-1">
           {([["en", "EN", "English"], ["pt", "PT", "Português (BR)"]] as const).map(([code, short, full]) => (
             <button
               key={code}
@@ -1033,7 +1033,7 @@ function AppShell() {
               aria-pressed={lang === code}
               title={full}
               aria-label={full}
-              className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
+              data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
                 lang === code
                   ? "bg-card text-foreground shadow-sm border border-border"
                   : "text-muted-foreground hover:text-foreground"
@@ -1045,10 +1045,10 @@ function AppShell() {
         </div>
 
         {/* Dark/Light segmented pill */}
-        <div className="flex items-center h-8 toque:h-auto p-1 rounded-full bg-muted border border-border gap-1">
+        <div className="flex items-center h-9 p-1 rounded-full bg-muted border border-border gap-1">
           <button
             onClick={() => setDark(false)}
-            className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
+            data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
               !dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
@@ -1059,7 +1059,7 @@ function AppShell() {
           </button>
           <button
             onClick={() => setDark(true)}
-            className={`flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 ${
+            data-alvo-compacto className={`relative flex items-center gap-1 h-7 px-3 rounded-full text-label font-medium transition-all duration-150 after:absolute after:inset-x-0 after:-inset-y-2 after:content-[''] ${
               dark
                 ? "bg-card text-foreground shadow-sm border border-border"
                 : "text-muted-foreground hover:text-foreground"
