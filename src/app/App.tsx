@@ -44,6 +44,8 @@ import { MoldurasShowcase } from "./components/showcase/MoldurasShowcase";
 import { CamposShowcase } from "./components/showcase/CamposShowcase";
 import { PecasAdminShowcase } from "./components/showcase/PecasAdminShowcase";
 import { SecoesDoSiteShowcase } from "./components/showcase/SecoesDoSiteShowcase";
+import { NavegacaoLandingShowcase } from "./components/showcase/NavegacaoLandingShowcase";
+import { Mouse as IconeNavegacaoLanding } from "lucide-react";
 
 /* ── pt-BR labels for nav (keys are the English labels) ── */
 const ptLabels: Record<string, string> = {
@@ -226,6 +228,15 @@ const ptLabels: Record<string, string> = {
   "Steps and sign-up": "Etapas e cadastro",
   "Board": "Quadro",
   "Site sections": "Seções do site",
+  "Landing page navigation": "Navegação de landing page",
+  "Example page": "Página de exemplo",
+  "Hero with the Learn more tab": "Hero com a aba Saiba mais",
+  "Curve between sections": "Curva entre seções",
+  "Anchor menu": "Menu de âncoras",
+  "Reading progress": "Progresso de leitura",
+  "Sticky section": "Seção fixa",
+  "Reveal and back to top": "Surgir ao rolar e voltar ao topo",
+  "Plain CSS classes": "Classes de CSS puro",
   "Testimonial card": "Card de depoimento",
   "Article card": "Card de artigo",
   "Logo strip": "Faixa de logos",
@@ -628,6 +639,19 @@ const navGroups: { group: string; items: NavItem[] }[] = [
           { id: "secoes-ecossistema", label: "Diagrama do ecossistema", sectionId: "secoes-site" },
         ],
       },
+      { id: "navegacao-landing", label: "Landing page navigation", icon: IconeNavegacaoLanding,
+        items: [
+          { id: "nav-exemplo",       label: "Example page",                 sectionId: "navegacao-landing" },
+          { id: "nav-hero-aba",      label: "Hero with the Learn more tab", sectionId: "navegacao-landing" },
+          { id: "nav-curva",         label: "Curve between sections",       sectionId: "navegacao-landing" },
+          { id: "nav-parallax",      label: "Parallax",                     sectionId: "navegacao-landing" },
+          { id: "nav-menu-ancoras",  label: "Anchor menu",                  sectionId: "navegacao-landing" },
+          { id: "nav-progresso",     label: "Reading progress",             sectionId: "navegacao-landing" },
+          { id: "nav-secao-fixa",    label: "Sticky section",               sectionId: "navegacao-landing" },
+          { id: "nav-surgir",        label: "Reveal and back to top",       sectionId: "navegacao-landing" },
+          { id: "nav-classes",       label: "Plain CSS classes",            sectionId: "navegacao-landing" },
+        ],
+      },
       { id: "header", label: "Header & Menus", icon: PanelTop,
         items: [
           { id: "header-demo",        label: "Demo",                          sectionId: "header" },
@@ -706,6 +730,7 @@ const sectionComponents: Record<string, React.ReactNode> = {
   campos:    <CamposShowcase />,
   "pecas-admin": <PecasAdminShowcase />,
   "secoes-site": <SecoesDoSiteShowcase />,
+  "navegacao-landing": <NavegacaoLandingShowcase />,
   grid:      <GridShowcase />,
   sidepanel: <SidePanelShowcase />,
   timeline:  <TimelineShowcase />,
@@ -740,6 +765,7 @@ const sectionLabels: Record<string, string> = {
   campos:    "Fields",
   "pecas-admin": "Restricted area pieces",
   "secoes-site": "Site sections",
+  "navegacao-landing": "Landing page navigation",
   grid:      "Grid & Spacing",
   sidepanel: "Side Panel",
   timeline:  "Timeline",

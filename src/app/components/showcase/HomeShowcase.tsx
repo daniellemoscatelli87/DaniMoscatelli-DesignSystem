@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronRight, Sparkles, Fingerprint, Layers, Coins, Compass, Accessibility, Image, Wind, LayoutTemplate, Component, Plug, Rocket, Lightbulb, Code2, Frame, TextCursorInput, Inbox, Newspaper } from "lucide-react";
+import { Mouse } from "lucide-react";
 import { useI18n, type Bi } from "../../i18n";
 import logoVermelho from "../../../imports/LogoVermelho.png";
 import { SectionLabel, CardGrid, useGo, type Navigate, type CardItem } from "./GetStartedShowcase";
@@ -49,6 +50,7 @@ const explore: { label: Bi; items: CardItem[] }[] = [
       { icon: TextCursorInput, title: { en: "Fields", pt: "Campos" }, desc: { en: "Standard field, e-mail, state and city, masks, search, chips and the adaptive table.", pt: "Campo padrão, e-mail, estado e cidade, máscaras, busca, chips e a tabela adaptável." }, target: { page: "campos" } },
       { icon: Inbox, title: { en: "Restricted area pieces", pt: "Peças da área restrita" }, desc: { en: "Inbox, conversation, month agenda, step-by-step sign-up and board.", pt: "Caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro." }, target: { page: "pecas-admin" } },
       { icon: Newspaper, title: { en: "Site sections", pt: "Seções do site" }, desc: { en: "Testimonials, articles, logos, quotes, pillars, simulation and long text.", pt: "Depoimentos, artigos, logos, citações, pilares, simulação e texto longo." }, target: { page: "secoes-site" } },
+      { icon: Mouse, title: { en: "Landing page navigation", pt: "Navegação de landing page" }, desc: { en: "Hero with the Learn more tab, curves, parallax, anchor menu, reading bar and sticky section.", pt: "Hero com a aba Saiba mais, curvas, parallax, menu de âncoras, barra de leitura e seção fixa." }, target: { page: "navegacao-landing" } },
     ],
   },
 ];
