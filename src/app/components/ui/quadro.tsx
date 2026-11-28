@@ -20,6 +20,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
  *    uma embaixo da outra, e o título de cada coluna abre e fecha a lista (as que têm itens começam abertas). Mover:
  *    arrastar com o mouse (a coluna que aceita fica tracejada e, embaixo do item, no rosa de destaque) ou o botão
  *    "Mover para" de cada cartão (teclado, toque e leitores de tela), que lista só as colunas permitidas (`podeMover`).
+ *    Link esticado (28/11/2026): o cartão pode ter um link que cobre o cartão inteiro (after:absolute after:inset-0); o
+ *    "Mover para" e os botões e campos de dentro do cartão ficam acima dele (relative z-10) e continuam clicáveis.
  *    `limitarAltura`: cada coluna mostra até 24rem e rola por dentro (só na vertical).
  *
  * Nos dois: card nunca rola para o lado; a largura que vale é a do quadro, não a da tela. Ponto colorido (`tom`) antes
@@ -249,12 +251,14 @@ function QuadroDeItens<K extends string, T>({
                           arrastando === chave(t) && "opacity-50",
                         )}
                       >
-                        <div className="min-w-0 flex-1">{cartao(t)}</div>
+                        {/* Controles dentro do cartão (28/11/2026): ficam acima de um link esticado (after:absolute after:inset-0),
+                            para continuarem clicáveis; um link que não é o esticado leva data-acima-do-link. */}
+                        <div className="min-w-0 flex-1 [&_:is(button,input,select,textarea,[role=button],[data-acima-do-link])]:relative [&_:is(button,input,select,textarea,[role=button],[data-acima-do-link])]:z-10">{cartao(t)}</div>
                         {destinos.length > 0 && (
                           <DropdownMenu>
                             <DropdownMenuTrigger
                               aria-label={`${tx.mover} ${rotuloItem(t)}`}
-                              className={cn("-mr-1 -mt-1 flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground toque:size-11", foco)}
+                              className={cn("relative z-10 -mr-1 -mt-1 flex size-8 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground toque:size-11", foco)}
                             >
                               <MoveRight aria-hidden className="size-4" />
                             </DropdownMenuTrigger>

@@ -323,6 +323,7 @@ export function UploadList({ items, onRemove, onRetry, className }: { items: Upl
 /* ── Imagem única com prévia ── */
 export function ImageUpload({
   value, onChange, shape = "square", size = 120, label: labelProp, accept = ["image/*"], maxSize, onError, className, capture,
+  ocupado = false, textoOcupado = "Enviando…", iniciais,
 }: {
   value?: string | null;
   onChange: (file: File | null, url: string | null) => void;
@@ -334,13 +335,23 @@ export function ImageUpload({
   onError?: (m: string) => void;
   className?: string;
   capture?: "environment" | "user";
+  /**
+   * Enviando (28/11/2026): a imagem fica esmaecida com o carregando por cima, o texto `textoOcupado` aparece embaixo
+   * (lido por leitores de tela) e um novo arquivo, solto ou escolhido, é ignorado até o envio acabar.
+   */
+  ocupado?: boolean;
+  textoOcupado?: string;
+  /** Sem imagem, mostra estas iniciais (até 2 letras) no lugar do convite, num círculo de destaque (foto de perfil). */
+  iniciais?: string;
 }) {
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [dragging, setDragging] = React.useState(false);
+  const abrir = () => { if (!ocupado) inputRef.current?.click(); };
+  const letras = iniciais?.trim().slice(0, 2).toUpperCase();
   const tx = useUploadTexts();
   const label = labelProp ?? tx.imagem;
   const pick = (list: FileList | null) => {
-    if (!list?.length) return;
+    if (!list?.length || ocupado) return;
     const f = list[0];
     const msg = validateFiles([f], { accept, maxSize, textos: tx });
     if (msg) { onError?.(msg); return; }
@@ -351,24 +362,33 @@ export function ImageUpload({
     <div className={cn("inline-flex flex-col items-start gap-2", shape === "wide" && "w-full", className)}>
       <div
         role="button" tabIndex={0} aria-label={value ? tx.trocarRotulo(label) : tx.adicionarRotulo(label)}
-        onClick={() => inputRef.current?.click()}
-        onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); inputRef.current?.click(); } }}
-        onDragOver={e => { e.preventDefault(); setDragging(true); }} onDragLeave={() => setDragging(false)}
+        aria-disabled={ocupado || undefined}
+        aria-busy={ocupado || undefined}
+        onClick={abrir}
+        onKeyDown={e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrir(); } }}
+        onDragOver={e => { e.preventDefault(); if (!ocupado) setDragging(true); }} onDragLeave={() => setDragging(false)}
         onDrop={e => { e.preventDefault(); setDragging(false); pick(e.dataTransfer.files); }}
         style={dims}
         className={cn(
-          "group relative flex cursor-pointer items-center justify-center overflow-hidden border-2 bg-muted/40 text-muted-foreground transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          "group relative flex items-center justify-center overflow-hidden border-2 bg-muted/40 text-muted-foreground transition-all outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           shape === "circle" ? "rounded-full" : "rounded-lg",
-          value ? "border-solid border-border" : "border-dashed border-border hover:border-[var(--border-strong)] hover:bg-accent/60",
+          ocupado ? "cursor-progress" : "cursor-pointer",
+          value || letras ? "border-solid border-border" : cn("border-dashed border-border", !ocupado && "hover:border-[var(--border-strong)] hover:bg-accent/60"),
           dragging && "border-primary bg-[var(--primary-muted)]",
         )}
       >
-        {value ? (
+        {value || letras ? (
           <>
-            <img src={value} alt={label} className="h-full w-full object-cover" />
-            <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-all group-hover:bg-foreground/45 group-hover:opacity-100 group-focus-visible:bg-foreground/45 group-focus-visible:opacity-100">
-              <span className="inline-flex items-center gap-1 rounded-full bg-background/95 px-3 py-1 text-label font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> {tx.trocar}</span>
-            </span>
+            {value ? (
+              <img src={value} alt={label} className={cn("h-full w-full object-cover transition-opacity duration-[var(--duration-normal)]", ocupado && "opacity-50")} />
+            ) : (
+              <span aria-hidden className={cn("flex h-full w-full items-center justify-center bg-primary-muted font-[family-name:var(--font-display)] font-bold text-primary-text transition-opacity duration-[var(--duration-normal)]", ocupado && "opacity-50")} style={{ fontSize: Math.round(Math.min(size, 160) * 0.34) }}>{letras}</span>
+            )}
+            {!ocupado && (
+              <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-all group-hover:bg-foreground/45 group-hover:opacity-100 group-focus-visible:bg-foreground/45 group-focus-visible:opacity-100">
+                <span className="inline-flex items-center gap-1 rounded-full bg-background/95 px-3 py-1 text-label font-semibold text-foreground"><ImagePlus className="h-3.5 w-3.5" aria-hidden /> {value ? tx.trocar : "Adicionar"}</span>
+              </span>
+            )}
           </>
         ) : (
           <span className="flex flex-col items-center gap-1 px-3 text-center">
@@ -377,11 +397,21 @@ export function ImageUpload({
             {maxSize && <span className="text-caption">{tx.ate(formatBytes(maxSize))}</span>}
           </span>
         )}
+        {ocupado && (
+          <span aria-hidden className="absolute inset-0 flex items-center justify-center">
+            <Loader2 className="h-6 w-6 text-foreground motion-safe:animate-spin" />
+          </span>
+        )}
       </div>
       {/* O campo de arquivo fica fora do botão (nenhum controle dentro de outro); ele só é aberto pelo botão. */}
-      <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} aria-label={label} accept={accept.join(",")} capture={capture} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
-      {value && (
-        <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 text-label font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
+      <input ref={inputRef} type="file" className="sr-only" tabIndex={-1} aria-label={label} accept={accept.join(",")} capture={capture} disabled={ocupado} onChange={e => { pick(e.target.files); e.target.value = ""; }} />
+      {ocupado && (
+        <p role="status" className="m-0 inline-flex items-center gap-1.5 text-label text-muted-foreground">
+          <Loader2 aria-hidden className="h-3.5 w-3.5 motion-safe:animate-spin" /> {textoOcupado}
+        </p>
+      )}
+      {value && !ocupado && (
+        <button type="button" onClick={() => onChange(null, null)} className="inline-flex items-center gap-1 rounded-sm text-label font-semibold text-muted-foreground transition-colors hover:text-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <Trash2 className="h-3.5 w-3.5" aria-hidden /> {tx.removerBotao}
         </button>
       )}

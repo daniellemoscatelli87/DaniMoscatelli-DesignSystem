@@ -16,6 +16,7 @@ import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { BotaoDeEnvio, type EstadoDoEnvio } from "../ui/botao-de-envio";
 import { EstadoFinal } from "../ui/estado-vazio";
+import { SecaoQuadroComLinkEsticado } from "./shared/PecasDoProdutoDocs";
 
 /* Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro.
    Todos os nomes e mensagens são de exemplo. */
@@ -165,7 +166,7 @@ function DemoQuadro() {
   );
 }
 
-export function PecasAdminShowcase() {
+function PecasAdminShowcaseBase() {
   const { t } = useI18n();
   return (
     <div className="space-y-20">
@@ -260,5 +261,17 @@ export function PecasAdminShowcase() {
         <DemoQuadro />
       </SectionBlock>
     </div>
+  );
+}
+
+/* Peças de 28/11/2026 (shared/PecasDoProdutoDocs): a mesma documentação nos dois design systems. */
+export function PecasAdminShowcase() {
+  return (
+    <>
+      <PecasAdminShowcaseBase  />
+      <div className="mt-20 space-y-20">
+        <SecaoQuadroComLinkEsticado />
+      </div>
+    </>
   );
 }

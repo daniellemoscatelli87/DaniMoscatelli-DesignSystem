@@ -5,13 +5,13 @@
   "geradoPor": "scripts/gerar-catalogo.mjs",
   "regra": "antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.",
   "resumo": {
-    "arquivosDeComponentes": 125,
-    "componentesExportados": 414,
+    "arquivosDeComponentes": 129,
+    "componentesExportados": 421,
     "templatesEPadroesSoEmDemonstracao": 75,
     "secoesComMarcacaoAMao": 45,
     "tokens": 161,
     "paginas": 33,
-    "ancoras": 234,
+    "ancoras": 242,
     "propostas": 44
   },
   "componentes": [
@@ -146,7 +146,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 206,
+          "linha": 207,
           "uso": "direto",
           "exports": [
             "AgendaDoMes"
@@ -590,7 +590,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Avatar",
@@ -603,7 +603,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 188,
+          "linha": 189,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Avatar",
@@ -616,7 +616,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 249,
+          "linha": 250,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Avatar",
@@ -876,7 +876,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365,
+          "linha": 366,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Badge"
@@ -1011,7 +1011,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "BotaoDeEnvio"
@@ -1023,7 +1023,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "BotaoDeEnvio"
@@ -1471,7 +1471,7 @@
           "ancora": "table",
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1579,7 +1579,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1604,6 +1604,30 @@
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 334,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "quadro-link-esticado",
+          "titulo": "Quadro com link esticado",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 466,
+          "uso": "direto",
+          "exports": [
+            "Button"
+          ]
+        },
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "lista-de-passos",
+          "titulo": "Lista de passos",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 67,
           "uso": "direto",
           "exports": [
             "Button"
@@ -1879,7 +1903,7 @@
           "ancora": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1128,
+          "linha": 1129,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1891,7 +1915,7 @@
           "ancora": "kpi-cards",
           "titulo": "Cards de KPI",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 170,
+          "linha": 171,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1903,7 +1927,7 @@
           "ancora": "charts",
           "titulo": "Gráficos",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 176,
+          "linha": 177,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1939,7 +1963,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1951,7 +1975,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1963,7 +1987,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1975,7 +1999,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 403,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1987,7 +2011,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 206,
+          "linha": 207,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -1999,7 +2023,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2011,7 +2035,7 @@
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Button"
@@ -2217,7 +2241,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "direto",
           "exports": [
             "MolduraDoCadastro",
@@ -2282,7 +2306,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "direto",
           "exports": [
             "CaixaDeEntrada"
@@ -2299,12 +2323,13 @@
         {
           "nome": "Calendar",
           "tipo": "componente",
-          "linha": 24,
+          "linha": 58,
           "descricao": "",
           "props": [
             "className",
             "classNames",
-            "showOutsideDays"
+            "showOutsideDays",
+            "components"
           ],
           "reexportaDe": null
         }
@@ -2318,7 +2343,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374,
+          "linha": 375,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -2342,7 +2367,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "Calendar"
@@ -2480,7 +2505,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "Campo",
@@ -2497,7 +2522,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "Campo"
@@ -2509,7 +2534,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "MensagemDeErro"
@@ -2581,7 +2606,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo"
@@ -2593,7 +2618,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Campo",
@@ -2635,7 +2660,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "direto",
           "exports": [
             "CampoCopiavel"
@@ -2681,7 +2706,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "direto",
           "exports": [
             "CampoDeBusca"
@@ -2743,7 +2768,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "CampoDeEmail"
@@ -2755,7 +2780,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "dentro de outro exemplo",
           "exports": [
             "CampoDeEmail"
@@ -2799,7 +2824,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "direto",
           "exports": [
             "CampoDeEmails"
@@ -2874,7 +2899,7 @@
           "ancora": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388,
+          "linha": 389,
           "uso": "direto",
           "exports": [
             "CampoDeEndereco"
@@ -2923,7 +2948,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "direto",
           "exports": [
             "CampoDeHorario"
@@ -2975,7 +3000,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "CampoEstadoCidade"
@@ -3365,6 +3390,32 @@
           ]
         },
         {
+          "pagina": "graficos",
+          "paginaRotulo": "Gráficos",
+          "ancora": "barras-com-link",
+          "titulo": "Barras ordenadas com link",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 315,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "data",
+          "paginaRotulo": "Exibição de dados",
+          "ancora": "grade-de-miniaturas",
+          "titulo": "Grade de miniaturas",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 262,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
           "pagina": "feedback",
           "paginaRotulo": "Feedback",
           "ancora": "confete",
@@ -3417,12 +3468,90 @@
           ]
         },
         {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "item-marcavel",
+          "titulo": "Item marcável",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 199,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "quadro-link-esticado",
+          "titulo": "Quadro com link esticado",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 466,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "lista-de-passos",
+          "titulo": "Lista de passos",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 67,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "seletor-de-etapa",
+          "titulo": "Seletor de etapa",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 149,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
           "pagina": "upload",
           "paginaRotulo": "Upload",
           "ancora": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 59,
+          "uso": "direto",
+          "exports": [
+            "Card",
+            "CardContent"
+          ]
+        },
+        {
+          "pagina": "upload",
+          "paginaRotulo": "Upload",
+          "ancora": "imagem-enviando",
+          "titulo": "Imagem enviando e iniciais",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 417,
           "uso": "direto",
           "exports": [
             "Card",
@@ -3479,7 +3608,7 @@
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Card",
@@ -3935,7 +4064,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "direto",
           "exports": [
             "GrupoDeCartoesDeEscolha",
@@ -4162,7 +4291,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365,
+          "linha": 366,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Checkbox"
@@ -4203,7 +4332,31 @@
           "ancora": "table",
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
+          "uso": "direto",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "item-marcavel",
+          "titulo": "Item marcável",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 199,
+          "uso": "direto",
+          "exports": [
+            "ChipDeEstado"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "ChipDeEstado"
@@ -4287,7 +4440,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 403,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -4299,7 +4452,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -4311,7 +4464,7 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 249,
+          "linha": 250,
           "uso": "dentro de outro exemplo",
           "exports": [
             "ChipDeEstado"
@@ -4382,7 +4535,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322,
+          "linha": 323,
           "uso": "direto",
           "exports": [
             "GrupoDeChipsFiltraveis"
@@ -5005,7 +5158,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 188,
+          "linha": 189,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -5034,7 +5187,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "direto",
           "exports": [
             "Conversa",
@@ -5061,7 +5214,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 206,
+          "linha": 207,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Conversa"
@@ -5982,7 +6135,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoVazio"
@@ -5994,7 +6147,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "dentro de outro exemplo",
           "exports": [
             "EstadoFinal"
@@ -6592,7 +6745,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 544,
+          "linha": 545,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6604,7 +6757,7 @@
           "ancora": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 860,
+          "linha": 861,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6616,7 +6769,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 904,
+          "linha": 905,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6628,7 +6781,7 @@
           "ancora": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 961,
+          "linha": 962,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6640,7 +6793,7 @@
           "ancora": "graficos-acessibilidade",
           "titulo": "Acessibilidade dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1256,
+          "linha": 1257,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6792,7 +6945,7 @@
           "ancora": "timeline-usage",
           "titulo": "Uso",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 106,
+          "linha": 107,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -6960,7 +7113,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6972,7 +7125,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376,
+          "linha": 377,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6984,7 +7137,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408,
+          "linha": 409,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -6996,7 +7149,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424,
+          "linha": 425,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7008,7 +7161,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459,
+          "linha": 460,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7020,7 +7173,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487,
+          "linha": 488,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7039,12 +7192,36 @@
           ]
         },
         {
+          "pagina": "graficos",
+          "paginaRotulo": "Gráficos",
+          "ancora": "barras-com-link",
+          "titulo": "Barras ordenadas com link",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 315,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
           "pagina": "data",
           "paginaRotulo": "Exibição de dados",
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365,
+          "linha": 366,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "data",
+          "paginaRotulo": "Exibição de dados",
+          "ancora": "grade-de-miniaturas",
+          "titulo": "Grade de miniaturas",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 262,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7200,7 +7377,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7212,7 +7389,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7224,7 +7401,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7236,7 +7413,7 @@
           "ancora": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305,
+          "linha": 306,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7248,7 +7425,7 @@
           "ancora": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322,
+          "linha": 323,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7260,7 +7437,7 @@
           "ancora": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337,
+          "linha": 338,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7272,7 +7449,7 @@
           "ancora": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7284,7 +7461,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374,
+          "linha": 375,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7296,7 +7473,7 @@
           "ancora": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388,
+          "linha": 389,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7308,7 +7485,7 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 403,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7351,12 +7528,36 @@
           ]
         },
         {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "item-marcavel",
+          "titulo": "Item marcável",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 199,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
           "pagina": "pecas-admin",
           "paginaRotulo": "Peças da área restrita",
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7368,7 +7569,7 @@
           "ancora": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 188,
+          "linha": 189,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7380,7 +7581,7 @@
           "ancora": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 206,
+          "linha": 207,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7392,7 +7593,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7404,7 +7605,19 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 249,
+          "linha": 250,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "quadro-link-esticado",
+          "titulo": "Quadro com link esticado",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 466,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7495,12 +7708,24 @@
           ]
         },
         {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "seletor-de-etapa",
+          "titulo": "Seletor de etapa",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 149,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
           "pagina": "upload",
           "paginaRotulo": "Upload",
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
@@ -7519,6 +7744,18 @@
           ]
         },
         {
+          "pagina": "upload",
+          "paginaRotulo": "Upload",
+          "ancora": "imagem-enviando",
+          "titulo": "Imagem enviando e iniciais",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 417,
+          "uso": "dentro de outro exemplo",
+          "exports": [
+            "GradeDeCards"
+          ]
+        },
+        {
           "pagina": "voice",
           "paginaRotulo": "Tom de voz e UX writing",
           "ancora": null,
@@ -7528,6 +7765,49 @@
           "uso": "na página, dentro de outro exemplo",
           "exports": [
             "GradeDeCards"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/grade-de-miniaturas.tsx",
+      "nome": "grade-de-miniaturas",
+      "quandoUsar": "Grade de miniaturas (28/11/2026, igual nos dois DS): poucas fotos pequenas, quadradas, com o nome e uma linha de detalhe embaixo, para dar uma ideia do que existe (as peças de uma ideia de post no Plano de divulgação do FindLook, os trabalhos de um projeto). Não é a galeria de envio (ImageGrid, com capa e remover) nem uma vitrine (ProductCard).",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "GradeDeMiniaturas",
+          "tipo": "componente",
+          "linha": 48,
+          "descricao": "",
+          "props": [
+            "itens",
+            "colunas",
+            "maximo",
+            "vazio",
+            "rotulo",
+            "comoLink",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "GradeDeMiniaturasProps",
+        "MiniaturaDaGrade"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "data",
+          "paginaRotulo": "Exibição de dados",
+          "ancora": "grade-de-miniaturas",
+          "titulo": "Grade de miniaturas",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 262,
+          "uso": "direto",
+          "exports": [
+            "GradeDeMiniaturas"
           ]
         }
       ]
@@ -7971,7 +8251,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "BarrasAgrupadas",
@@ -7985,7 +8265,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376,
+          "linha": 377,
           "uso": "direto",
           "exports": [
             "AreaEmpilhada",
@@ -8001,7 +8281,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408,
+          "linha": 409,
           "uso": "direto",
           "exports": [
             "Pizza",
@@ -8015,7 +8295,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424,
+          "linha": 425,
           "uso": "direto",
           "exports": [
             "Dispersao",
@@ -8032,7 +8312,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459,
+          "linha": 460,
           "uso": "direto",
           "exports": [
             "resumoDaDistribuicao",
@@ -8048,7 +8328,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487,
+          "linha": 488,
           "uso": "direto",
           "exports": [
             "MapaDePontos",
@@ -8061,7 +8341,7 @@
           "ancora": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1195,
+          "linha": 1196,
           "uso": "direto",
           "exports": [
             "BarrasAgrupadas",
@@ -8360,8 +8640,8 @@
         {
           "nome": "BarrasOrdenadas",
           "tipo": "componente",
-          "linha": 502,
-          "descricao": "Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra.",
+          "linha": 519,
+          "descricao": "Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra. Com `href` ou `onClick` nos itens (28/11/2026), o gráfico vira uma lista ordenada (<ol>) em que cada linha inteira é um link ou um botão: o nome do …",
           "props": [
             "itens",
             "destaques",
@@ -8371,6 +8651,7 @@
             "cores",
             "rotulo",
             "formatar",
+            "comoLink",
             "className"
           ],
           "reexportaDe": null
@@ -8378,7 +8659,7 @@
         {
           "nome": "faixa",
           "tipo": "utilitário",
-          "linha": 560,
+          "linha": 601,
           "descricao": "Faixa da escala sequencial (0 a 3) para um valor.",
           "props": [],
           "reexportaDe": null
@@ -8386,7 +8667,7 @@
         {
           "nome": "LegendaSequencial",
           "tipo": "componente",
-          "linha": 565,
+          "linha": 606,
           "descricao": "",
           "props": [
             "menos",
@@ -8397,7 +8678,7 @@
         {
           "nome": "MapaDeCalorPorRegiao",
           "tipo": "componente",
-          "linha": 583,
+          "linha": 624,
           "descricao": "Mapa de calor esquemático: cada região é um bloco numa grade, na posição aproximada (não é mapa em escala). As posições vêm por props; nada de dados geográficos é buscado. O nome fica escrito acima de cada bloco, fora da cor;",
           "props": [
             "regioes",
@@ -8414,7 +8695,7 @@
         {
           "nome": "GraficoDeHalteres",
           "tipo": "componente",
-          "linha": 649,
+          "linha": 690,
           "descricao": "Halteres: para cada item, um ponto para cada medida ligados por uma linha; os valores ficam escritos nos pontos.",
           "props": [
             "itens",
@@ -8430,7 +8711,7 @@
         {
           "nome": "GraficoDeLinhas",
           "tipo": "componente",
-          "linha": 732,
+          "linha": 773,
           "descricao": "Linhas finas com o nome e o último valor escritos no fim de cada linha; passe o cursor para ler cada ponto. Cores: com uma série em `destaque`, ela fica no tom 1 e as outras no contexto (do tom 6 em diante);",
           "props": [
             "series",
@@ -8447,7 +8728,7 @@
         {
           "nome": "GraficoDeInclinacao",
           "tipo": "componente",
-          "linha": 843,
+          "linha": 884,
           "descricao": "Duas colunas (antes e agora) ligadas por linhas: o destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto.",
           "props": [
             "itens",
@@ -8463,7 +8744,7 @@
         {
           "nome": "Mosaico",
           "tipo": "componente",
-          "linha": 934,
+          "linha": 975,
           "descricao": "Mosaico (treemap): a área de cada bloco é a fatia do total. Tons por importância, do maior bloco (tom 1) ao menor; \"Outros\" em cinza de contexto.",
           "props": [
             "itens",
@@ -8477,7 +8758,7 @@
         {
           "nome": "BarrasEmpilhadas100",
           "tipo": "componente",
-          "linha": 1000,
+          "linha": 1041,
           "descricao": "Barras 100%: cada linha soma 100%; o percentual de cada parte fica escrito logo acima dela. Categorias em ordem de importância.",
           "props": [
             "categorias",
@@ -8492,7 +8773,7 @@
         {
           "nome": "GraficoDeBolhas",
           "tipo": "componente",
-          "linha": 1047,
+          "linha": 1088,
           "descricao": "Bolhas: posição em dois eixos e tamanho como terceira medida. O destaque no tom 1; o restante no cinza de contexto.",
           "props": [
             "itens",
@@ -8509,7 +8790,7 @@
         {
           "nome": "MapaDeCalorMatricial",
           "tipo": "componente",
-          "linha": 1126,
+          "linha": 1167,
           "descricao": "Matriz com a cor de cada célula pela escala sequencial. É uma tabela de verdade: as células não mostram o número (ele fica para leitores de tela, na dica ao passar o cursor e em Ver dados);",
           "props": [
             "linhas",
@@ -8527,7 +8808,7 @@
         {
           "nome": "GraficoDeRanking",
           "tipo": "componente",
-          "linha": 1188,
+          "linha": 1229,
           "descricao": "Bump chart: como a posição de cada item muda ao longo dos períodos. O destaque no tom 1 (um 2º no tom 2), o restante no cinza de contexto.",
           "props": [
             "series",
@@ -8540,7 +8821,7 @@
         {
           "nome": "Funil",
           "tipo": "componente",
-          "linha": 1256,
+          "linha": 1297,
           "descricao": "Funil: etapas da jornada com o valor escrito e, entre elas, quanto seguiu para a próxima. A maior perda fica marcada: a etapa logo depois dela é o ponto de atenção (tom 1) e as outras ficam no cinza de contexto. Sem a marca, todas no tom 1.",
           "props": [
             "etapas",
@@ -8593,6 +8874,7 @@
         "GraficoDeLinhasProps",
         "GraficoDeRankingProps",
         "GraficoDeRoscaProps",
+        "ItemDasBarrasOrdenadas",
         "MapaDeCalorMatricialProps",
         "MapaDeCalorPorRegiaoProps",
         "MosaicoProps",
@@ -8608,7 +8890,7 @@
           "ancora": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1128,
+          "linha": 1129,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -8631,10 +8913,22 @@
         {
           "pagina": "graficos",
           "paginaRotulo": "Gráficos",
+          "ancora": "barras-com-link",
+          "titulo": "Barras ordenadas com link",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 315,
+          "uso": "direto",
+          "exports": [
+            "BarrasOrdenadas"
+          ]
+        },
+        {
+          "pagina": "graficos",
+          "paginaRotulo": "Gráficos",
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424,
+          "linha": 425,
           "uso": "direto",
           "exports": [
             "formatarNumero",
@@ -8647,7 +8941,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 544,
+          "linha": 545,
           "uso": "direto",
           "exports": [
             "formatarNumero",
@@ -8665,7 +8959,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 904,
+          "linha": 905,
           "uso": "direto",
           "exports": [
             "GraficoDeRosca"
@@ -8677,7 +8971,7 @@
           "ancora": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 961,
+          "linha": 962,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -8700,7 +8994,7 @@
           "ancora": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1195,
+          "linha": 1196,
           "uso": "direto",
           "exports": [
             "DescobertaVisual",
@@ -8724,7 +9018,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359,
+          "linha": 360,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -8736,7 +9030,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376,
+          "linha": 377,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -8748,7 +9042,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408,
+          "linha": 409,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -8760,7 +9054,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459,
+          "linha": 460,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -8772,7 +9066,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487,
+          "linha": 488,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaDeDados"
@@ -9372,6 +9666,62 @@
       "ondeVer": []
     },
     {
+      "arquivo": "src/app/components/ui/item-marcavel.tsx",
+      "nome": "item-marcavel",
+      "quandoUsar": "Item marcável (28/11/2026, igual nos dois DS): uma etapa de checklist que a própria pessoa marca como feita. Veio do Plano de divulgação do FindLook. O ItemDeChecklist do painel (FindLook) é outra coisa: um link que leva a uma tela, com o estado calculado pelo sistema (em dia ou precisa de atenção). - ListaMarcavel: a lista (<ol>), com 8 px entre os itens.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "ListaMarcavel",
+          "tipo": "componente",
+          "linha": 24,
+          "descricao": "",
+          "props": [
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ItemMarcavel",
+          "tipo": "componente",
+          "linha": 45,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "marcado",
+            "onMarcadoChange",
+            "etiqueta",
+            "descricao",
+            "indicador",
+            "prefixoParaLeitores",
+            "desabilitado",
+            "id",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ItemMarcavelProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "item-marcavel",
+          "titulo": "Item marcável",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 199,
+          "uso": "direto",
+          "exports": [
+            "ListaMarcavel",
+            "ItemMarcavel"
+          ]
+        }
+      ]
+    },
+    {
       "arquivo": "src/app/components/ui/label.tsx",
       "nome": "label",
       "quandoUsar": "Label. `obrigatorio` (28/11/2026) põe o asterisco logo depois do texto, na mesma linha e quebrando junto com ele: o Label é flex (para a caixa de marcar ao lado do texto), e um asterisco solto virava outro item e ia para a ponta direita num rótulo longo. O asterisco é só visual (aria-hidden); o campo leva required ou aria-required.",
@@ -9399,7 +9749,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "direto",
           "exports": [
             "Label"
@@ -9483,7 +9833,7 @@
           "ancora": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290,
+          "linha": 291,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Label"
@@ -9542,7 +9892,7 @@
           "ancora": "table",
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "LinhaDeLista"
@@ -9626,7 +9976,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365,
+          "linha": 366,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -9638,7 +9988,7 @@
           "ancora": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272,
+          "linha": 273,
           "uso": "dentro de outro exemplo",
           "exports": [
             "LinhaDeLista"
@@ -9748,6 +10098,78 @@
             "LinkDeTexto",
             "LinkDeVoltar",
             "LinkPularConteudo"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/lista-de-passos.tsx",
+      "nome": "lista-de-passos",
+      "quandoUsar": "Lista de passos (28/11/2026, igual nos dois DS): instruções numeradas de cima para baixo, com qualquer conteúdo em cada passo (texto, botões, um código, um controle segmentado). Veio dos passos do simulador do WhatsApp do FindLook.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "NumeroDoPasso",
+          "tipo": "componente",
+          "linha": 30,
+          "descricao": "Círculo numerado de destaque. É decorativo (aria-hidden): diga o número em texto perto dele, se ele importar.",
+          "props": [
+            "n",
+            "tamanho",
+            "feito",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "PassoDaLista",
+          "tipo": "componente",
+          "linha": 62,
+          "descricao": "",
+          "props": [
+            "titulo",
+            "children",
+            "numero",
+            "feito",
+            "nivel",
+            "rotuloDoPasso",
+            "textoFeito",
+            "className"
+          ],
+          "reexportaDe": null
+        },
+        {
+          "nome": "ListaDePassos",
+          "tipo": "componente",
+          "linha": 92,
+          "descricao": "",
+          "props": [
+            "inicio",
+            "className",
+            "children"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "ListaDePassosProps",
+        "NumeroDoPassoProps",
+        "PassoDaListaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "lista-de-passos",
+          "titulo": "Lista de passos",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 67,
+          "uso": "direto",
+          "exports": [
+            "NumeroDoPasso",
+            "PassoDaLista",
+            "ListaDePassos"
           ]
         }
       ]
@@ -10375,7 +10797,7 @@
           "ancora": "table",
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 269,
+          "linha": 270,
           "uso": "direto",
           "exports": [
             "Pagination",
@@ -11399,7 +11821,7 @@
         {
           "nome": "Quadro",
           "tipo": "componente",
-          "linha": 89,
+          "linha": 91,
           "descricao": "",
           "props": [
             "colunas",
@@ -11425,7 +11847,19 @@
           "ancora": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 249,
+          "linha": 250,
+          "uso": "direto",
+          "exports": [
+            "Quadro"
+          ]
+        },
+        {
+          "pagina": "pecas-admin",
+          "paginaRotulo": "Peças da área restrita",
+          "ancora": "quadro-link-esticado",
+          "titulo": "Quadro com link esticado",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 466,
           "uso": "direto",
           "exports": [
             "Quadro"
@@ -11529,7 +11963,7 @@
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "dentro de outro exemplo",
           "exports": [
             "RecorteDeFoto"
@@ -11741,6 +12175,18 @@
           ]
         },
         {
+          "pagina": "data",
+          "paginaRotulo": "Exibição de dados",
+          "ancora": "grade-de-miniaturas",
+          "titulo": "Grade de miniaturas",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 262,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
           "pagina": "site",
           "paginaRotulo": "Padrões do site",
           "ancora": "site-entrada",
@@ -11753,12 +12199,48 @@
           ]
         },
         {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
           "pagina": "timeline",
           "paginaRotulo": "Linha do tempo",
           "ancora": "timeline-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
           "linha": 42,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "lista-de-passos",
+          "titulo": "Lista de passos",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 67,
+          "uso": "direto",
+          "exports": [
+            "SegmentedControl"
+          ]
+        },
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "seletor-de-etapa",
+          "titulo": "Seletor de etapa",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 149,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -11878,7 +12360,7 @@
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "dentro de outro exemplo",
           "exports": [
             "SegmentedControl"
@@ -12077,6 +12559,50 @@
             "SelectTrigger",
             "SelectContent",
             "SelectItem"
+          ]
+        }
+      ]
+    },
+    {
+      "arquivo": "src/app/components/ui/seletor-de-etapa.tsx",
+      "nome": "seletor-de-etapa",
+      "quandoUsar": "Seletor de etapa (28/11/2026, igual nos dois DS): mostra em que etapa um processo está (Cadastro → Treinamento → Ativa) e deixa mudar para outra com um toque. Veio da ficha da loja parceira no FindLook. Por que não os que já existiam: o Stepper é o progresso de um assistente (as etapas futuras não abrem e não têm explicação); o SegmentedControl troca uma vista, sem ordem nem etapas já passadas.",
+      "fonteDescricao": "comentário do arquivo",
+      "exports": [
+        {
+          "nome": "SeletorDeEtapa",
+          "tipo": "componente",
+          "linha": 50,
+          "descricao": "",
+          "props": [
+            "etapas",
+            "atual",
+            "onEscolher",
+            "salvando",
+            "feita",
+            "rotulo",
+            "textos",
+            "className"
+          ],
+          "reexportaDe": null
+        }
+      ],
+      "tipos": [
+        "EtapaDoSeletor",
+        "SeletorDeEtapaProps"
+      ],
+      "variantes": {},
+      "ondeVer": [
+        {
+          "pagina": "timeline",
+          "paginaRotulo": "Linha do tempo",
+          "ancora": "seletor-de-etapa",
+          "titulo": "Seletor de etapa",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 149,
+          "uso": "direto",
+          "exports": [
+            "SeletorDeEtapa"
           ]
         }
       ]
@@ -13106,7 +13632,7 @@
           "ancora": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223,
+          "linha": 224,
           "uso": "direto",
           "exports": [
             "Stepper"
@@ -13308,7 +13834,7 @@
         {
           "nome": "TabelaAdaptavel",
           "tipo": "componente",
-          "linha": 115,
+          "linha": 121,
           "descricao": "",
           "props": [
             "colunas",
@@ -13321,6 +13847,7 @@
             "rotuloDaLinha",
             "selecionadas",
             "onSelecionadasChange",
+            "linhaAtual",
             "acoes",
             "larguraDasAcoes",
             "ordem",
@@ -13335,7 +13862,7 @@
         {
           "nome": "BarraDeFerramentasDaTabela",
           "tipo": "componente",
-          "linha": 305,
+          "linha": 316,
           "descricao": "Barra de ferramentas",
           "props": [
             "busca",
@@ -13360,7 +13887,19 @@
           "ancora": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402,
+          "linha": 403,
+          "uso": "direto",
+          "exports": [
+            "TabelaAdaptavel"
+          ]
+        },
+        {
+          "pagina": "campos",
+          "paginaRotulo": "Campos",
+          "ancora": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360,
           "uso": "direto",
           "exports": [
             "TabelaAdaptavel"
@@ -13372,7 +13911,7 @@
           "ancora": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 860,
+          "linha": 861,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaAdaptavel"
@@ -13384,7 +13923,7 @@
           "ancora": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1195,
+          "linha": 1196,
           "uso": "dentro de outro exemplo",
           "exports": [
             "TabelaAdaptavel"
@@ -13689,7 +14228,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245,
+          "linha": 246,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -13701,7 +14240,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172,
+          "linha": 173,
           "uso": "dentro de outro exemplo",
           "exports": [
             "Textarea"
@@ -13767,7 +14306,7 @@
           "ancora": "timeline-usage",
           "titulo": "Uso",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 106,
+          "linha": 107,
           "uso": "direto",
           "exports": [
             "Timeline"
@@ -14059,14 +14598,17 @@
             "maxSize",
             "onError",
             "className",
-            "capture"
+            "capture",
+            "ocupado",
+            "textoOcupado",
+            "iniciais"
           ],
           "reexportaDe": null
         },
         {
           "nome": "ImageGrid",
           "tipo": "componente",
-          "linha": 395,
+          "linha": 425,
           "descricao": "",
           "props": [
             "images",
@@ -14098,13 +14640,26 @@
           "ancora": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131,
+          "linha": 132,
           "uso": "direto",
           "exports": [
             "uploadTextosPt",
             "uploadTextosEn",
             "UploadTextsProvider",
-            "UploadDropzone"
+            "UploadDropzone",
+            "ImageUpload"
+          ]
+        },
+        {
+          "pagina": "upload",
+          "paginaRotulo": "Upload",
+          "ancora": "imagem-enviando",
+          "titulo": "Imagem enviando e iniciais",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 417,
+          "uso": "direto",
+          "exports": [
+            "ImageUpload"
           ]
         }
       ]
@@ -15615,7 +16170,7 @@
       "nome": "CardsDeKpi",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-      "linha": 435,
+      "linha": 436,
       "descricao": "Cards de KPI: métrica, ícone, minigráfico e tendência (usados na página Cards).",
       "pagina": "cards",
       "paginaRotulo": "Cards",
@@ -15682,7 +16237,7 @@
       "nome": "RoscaAntiga",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 27,
+      "linha": 28,
       "descricao": "Earlier donut, reproduced only for comparison (thick ring, number of parts in the centre, graphite as a peer series).",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -15693,7 +16248,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 904
+          "linha": 905
         }
       ],
       "usaComponentes": [],
@@ -15703,7 +16258,7 @@
       "nome": "Cartao",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 73,
+      "linha": 74,
       "descricao": "",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -15714,7 +16269,7 @@
           "ancora": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 544
+          "linha": 545
         },
         {
           "pagina": "graficos",
@@ -15722,7 +16277,7 @@
           "ancora": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 860
+          "linha": 861
         },
         {
           "pagina": "graficos",
@@ -15730,7 +16285,7 @@
           "ancora": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 904
+          "linha": 905
         },
         {
           "pagina": "graficos",
@@ -15738,7 +16293,7 @@
           "ancora": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1128
+          "linha": 1129
         }
       ],
       "usaComponentes": [],
@@ -15748,7 +16303,7 @@
       "nome": "CartaoDoCatalogo",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 119,
+      "linha": 120,
       "descricao": "Catalog card: name, component, when to use, the chart, the reading caveat and See data.",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -15759,7 +16314,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359
+          "linha": 360
         },
         {
           "pagina": "graficos",
@@ -15767,7 +16322,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376
+          "linha": 377
         },
         {
           "pagina": "graficos",
@@ -15775,7 +16330,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408
+          "linha": 409
         },
         {
           "pagina": "graficos",
@@ -15783,7 +16338,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424
+          "linha": 425
         },
         {
           "pagina": "graficos",
@@ -15791,7 +16346,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459
+          "linha": 460
         },
         {
           "pagina": "graficos",
@@ -15799,7 +16354,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487
+          "linha": 488
         }
       ],
       "usaComponentes": [
@@ -15811,7 +16366,7 @@
       "nome": "Familia",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 154,
+      "linha": 155,
       "descricao": "",
       "pagina": "graficos",
       "paginaRotulo": "Gráficos",
@@ -15822,7 +16377,7 @@
           "ancora": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359
+          "linha": 360
         },
         {
           "pagina": "graficos",
@@ -15830,7 +16385,7 @@
           "ancora": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376
+          "linha": 377
         },
         {
           "pagina": "graficos",
@@ -15838,7 +16393,7 @@
           "ancora": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408
+          "linha": 409
         },
         {
           "pagina": "graficos",
@@ -15846,7 +16401,7 @@
           "ancora": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424
+          "linha": 425
         },
         {
           "pagina": "graficos",
@@ -15854,7 +16409,7 @@
           "ancora": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459
+          "linha": 460
         },
         {
           "pagina": "graficos",
@@ -15862,7 +16417,7 @@
           "ancora": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487
+          "linha": 488
         }
       ],
       "usaComponentes": [
@@ -15885,7 +16440,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365
+          "linha": 366
         }
       ],
       "usaComponentes": [
@@ -15908,7 +16463,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365
+          "linha": 366
         }
       ],
       "usaComponentes": [],
@@ -15929,7 +16484,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365
+          "linha": 366
         }
       ],
       "usaComponentes": [
@@ -15954,7 +16509,7 @@
           "ancora": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365
+          "linha": 366
         }
       ],
       "usaComponentes": [
@@ -16114,7 +16669,7 @@
       "nome": "DemoCampos",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 39,
+      "linha": 40,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -16125,7 +16680,7 @@
           "ancora": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245
+          "linha": 246
         }
       ],
       "usaComponentes": [
@@ -16145,7 +16700,7 @@
       "nome": "DemoCalendario",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-      "linha": 196,
+      "linha": 197,
       "descricao": "",
       "pagina": "campos",
       "paginaRotulo": "Campos",
@@ -16156,7 +16711,7 @@
           "ancora": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374
+          "linha": 375
         }
       ],
       "usaComponentes": [
@@ -16168,7 +16723,7 @@
       "nome": "DemoCaixa",
       "tipo": "padrão de componente",
       "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-      "linha": 23,
+      "linha": 24,
       "descricao": "Peças da área restrita (27/11/2026): caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro. Todos os nomes e mensagens são de exemplo.",
       "pagina": "pecas-admin",
       "paginaRotulo": "Peças da área restrita",
@@ -16179,7 +16734,7 @@
           "ancora": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172
+          "linha": 173
         }
       ],
       "usaComponentes": [
@@ -16664,7 +17219,7 @@
       "ancora": "graficos-cores",
       "titulo": "Cores dos gráficos",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 544,
+      "linha": 545,
       "elementosFeitosAMao": 9,
       "usaComponentes": [
         "BarrasEmpilhadas100",
@@ -16681,7 +17236,7 @@
       "ancora": "graficos-escolher",
       "titulo": "Como escolher",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 860,
+      "linha": 861,
       "elementosFeitosAMao": 4,
       "usaComponentes": [
         "GradeDeCards"
@@ -16693,7 +17248,7 @@
       "ancora": "graficos-inteligencia",
       "titulo": "Design de inteligência",
       "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-      "linha": 1128,
+      "linha": 1129,
       "elementosFeitosAMao": 3,
       "usaComponentes": [
         "BarrasOrdenadas",
@@ -16706,7 +17261,7 @@
       "ancora": "charts",
       "titulo": "Gráficos",
       "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-      "linha": 176,
+      "linha": 177,
       "elementosFeitosAMao": 3,
       "usaComponentes": []
     },
@@ -16716,7 +17271,7 @@
       "ancora": "table",
       "titulo": "Tabela",
       "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-      "linha": 269,
+      "linha": 270,
       "elementosFeitosAMao": 8,
       "usaComponentes": [
         "Button",
@@ -18225,7 +18780,7 @@
         "titulo": "Como escolher",
         "resumo": "Gráficos: como escolher",
         "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-        "linha": 860
+        "linha": 861
       },
       {
         "ancora": "graficos-cores",
@@ -18234,7 +18789,7 @@
         "titulo": "Cores dos gráficos",
         "resumo": "Gráficos: cores e ordem dos tons",
         "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-        "linha": 544
+        "linha": 545
       },
       {
         "ancora": "header-usage",
@@ -18318,7 +18873,7 @@
         "ancora": "timeline-usage",
         "titulo": "Uso",
         "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-        "linha": 106
+        "linha": 107
       }
     ],
     "arquivos": [
@@ -19477,91 +20032,97 @@
           "id": "graficos-catalogo",
           "titulo": "Catálogo completo",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 350
+          "linha": 351
         },
         {
           "id": "graficos-catalogo-comparacao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 359
+          "linha": 360
         },
         {
           "id": "graficos-catalogo-tempo",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 376
+          "linha": 377
         },
         {
           "id": "graficos-catalogo-composicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 408
+          "linha": 409
         },
         {
           "id": "graficos-catalogo-relacoes",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 424
+          "linha": 425
         },
         {
           "id": "graficos-catalogo-distribuicao",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 459
+          "linha": 460
         },
         {
           "id": "graficos-catalogo-geografia",
           "titulo": null,
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 487
+          "linha": 488
         },
         {
           "id": "graficos-cores",
           "titulo": "Cores dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 544
+          "linha": 545
         },
         {
           "id": "graficos-escolher",
           "titulo": "Como escolher",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 860
+          "linha": 861
         },
         {
           "id": "graficos-rosca",
           "titulo": "Rosca",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 904
+          "linha": 905
         },
         {
           "id": "graficos-recomendados",
           "titulo": "Gráficos recomendados",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 961
+          "linha": 962
         },
         {
           "id": "graficos-inteligencia",
           "titulo": "Design de inteligência",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1128
+          "linha": 1129
         },
         {
           "id": "graficos-componentes",
           "titulo": "Componentes e props",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1195
+          "linha": 1196
         },
         {
           "id": "graficos-acessibilidade",
           "titulo": "Acessibilidade dos gráficos",
           "arquivo": "src/app/components/showcase/GraficosShowcase.tsx",
-          "linha": 1256
+          "linha": 1257
         },
         {
           "id": "barras-destaque-e-funil",
           "titulo": "Escala em ordem e funil",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 247
+        },
+        {
+          "id": "barras-com-link",
+          "titulo": "Barras ordenadas com link",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 315
         }
       ]
     },
@@ -19574,31 +20135,37 @@
           "id": "kpi-cards",
           "titulo": "Cards de KPI",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 170
+          "linha": 171
         },
         {
           "id": "charts",
           "titulo": "Gráficos",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 176
+          "linha": 177
         },
         {
           "id": "table",
           "titulo": "Tabela",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 269
+          "linha": 270
         },
         {
           "id": "linhas-colunas",
           "titulo": "Linhas com tags e ações",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 365
+          "linha": 366
         },
         {
           "id": "data-tokens",
           "titulo": "Tokens",
           "arquivo": "src/app/components/showcase/DataShowcase.tsx",
-          "linha": 377
+          "linha": 378
+        },
+        {
+          "id": "grade-de-miniaturas",
+          "titulo": "Grade de miniaturas",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 262
         }
       ]
     },
@@ -19899,61 +20466,61 @@
           "id": "campos-campo",
           "titulo": "Campo e máscaras",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 245
+          "linha": 246
         },
         {
           "id": "campos-busca",
           "titulo": "Busca e copiar",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 272
+          "linha": 273
         },
         {
           "id": "campos-emails",
           "titulo": "Vários e-mails",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 290
+          "linha": 291
         },
         {
           "id": "campos-horario",
           "titulo": "Campo de horário",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 305
+          "linha": 306
         },
         {
           "id": "campos-chips",
           "titulo": "Chips de filtro",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 322
+          "linha": 323
         },
         {
           "id": "campos-escolha",
           "titulo": "Cartões de escolha",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 337
+          "linha": 338
         },
         {
           "id": "campos-botoes",
           "titulo": "Botões de envio e exclusão",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 359
+          "linha": 360
         },
         {
           "id": "campos-calendario",
           "titulo": "Seletor de data (Calendar)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 374
+          "linha": 375
         },
         {
           "id": "campos-endereco",
           "titulo": "Endereço com sugestões (CampoDeEndereco)",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 388
+          "linha": 389
         },
         {
           "id": "campos-tabela",
           "titulo": "Tabela adaptável",
           "arquivo": "src/app/components/showcase/CamposShowcase.tsx",
-          "linha": 402
+          "linha": 403
         },
         {
           "id": "campo-com-prefixo",
@@ -19972,6 +20539,18 @@
           "titulo": "Escala de notas",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 334
+        },
+        {
+          "id": "item-marcavel",
+          "titulo": "Item marcável",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 199
+        },
+        {
+          "id": "tabela-linha-atual",
+          "titulo": "Tabela com linha atual",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 360
         }
       ]
     },
@@ -19984,31 +20563,37 @@
           "id": "admin-caixa",
           "titulo": "Caixa de entrada",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 172
+          "linha": 173
         },
         {
           "id": "admin-conversa",
           "titulo": "Conversa",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 188
+          "linha": 189
         },
         {
           "id": "admin-agenda",
           "titulo": "Agenda do mês",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 206
+          "linha": 207
         },
         {
           "id": "admin-etapas",
           "titulo": "Etapas e cadastro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 223
+          "linha": 224
         },
         {
           "id": "admin-quadro",
           "titulo": "Quadro",
           "arquivo": "src/app/components/showcase/PecasAdminShowcase.tsx",
-          "linha": 249
+          "linha": 250
+        },
+        {
+          "id": "quadro-link-esticado",
+          "titulo": "Quadro com link esticado",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 466
         }
       ]
     },
@@ -20204,7 +20789,19 @@
           "id": "timeline-usage",
           "titulo": "Uso",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 106
+          "linha": 107
+        },
+        {
+          "id": "lista-de-passos",
+          "titulo": "Lista de passos",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 67
+        },
+        {
+          "id": "seletor-de-etapa",
+          "titulo": "Seletor de etapa",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 149
         }
       ]
     },
@@ -20217,13 +20814,19 @@
           "id": "upload-dropzone",
           "titulo": "Área de soltar",
           "arquivo": "src/app/components/showcase/UploadShowcase.tsx",
-          "linha": 131
+          "linha": 132
         },
         {
           "id": "recorte-de-foto",
           "titulo": "Recorte de foto",
           "arquivo": "src/app/components/showcase/shared/LacunasDocs.tsx",
           "linha": 59
+        },
+        {
+          "id": "imagem-enviando",
+          "titulo": "Imagem enviando e iniciais",
+          "arquivo": "src/app/components/showcase/shared/PecasDoProdutoDocs.tsx",
+          "linha": 417
         }
       ]
     }

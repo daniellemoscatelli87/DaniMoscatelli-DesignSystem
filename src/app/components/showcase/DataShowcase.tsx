@@ -19,6 +19,7 @@ import { Button } from "../ui/button";
 import { ChipDeEstado } from "../ui/chip-de-estado";
 import { LinhaDeLista } from "../ui/linha-de-lista";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "../ui/pagination";
+import { SecaoGradeDeMiniaturas } from "./shared/PecasDoProdutoDocs";
 
 function ShowcaseCard({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -136,7 +137,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export function DataShowcase() {
+function DataShowcaseBase() {
   const { t } = useI18n();
   const dataTokenGroups = getDataTokenGroups(t);
   const areaData = areaDataBase.map((d, i) => ({ ...d, month: t(d.month, areaMonthsPt[i]) }));
@@ -473,5 +474,17 @@ export function CardsDeKpi() {
         );
       })}
     </GradeDeCards>
+  );
+}
+
+/* Peças de 28/11/2026 (shared/PecasDoProdutoDocs): a mesma documentação nos dois design systems. */
+export function DataShowcase() {
+  return (
+    <>
+      <DataShowcaseBase  />
+      <div className="mt-20 space-y-20">
+        <SecaoGradeDeMiniaturas />
+      </div>
+    </>
   );
 }

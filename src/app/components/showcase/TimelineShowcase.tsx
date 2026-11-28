@@ -7,11 +7,12 @@ import { SegmentedControl } from "../ui/segmented-control";
 import { Callout, DataTable, DoDont, SubTitle, display } from "./shared/Guidance";
 import { TokenTable } from "./shared/TokenTable";
 import { GradeDeCards } from "../ui/grade-de-cards";
+import { SecaoListaDePassos, SecaoSeletorDeEtapa } from "./shared/PecasDoProdutoDocs";
 
 const FINDLOOK = false;
 
 
-export function TimelineShowcase() {
+function TimelineShowcaseBase() {
   const { t } = useI18n();
   const [alternar, setAlternar] = useState<"sim" | "nao">("sim");
   const [check, setCheck] = useState<"icone" | "check">("icone");
@@ -132,5 +133,18 @@ import { Target, Search } from "lucide-react";
         </GradeDeCards>
       </section>
     </div>
+  );
+}
+
+/* Peças de 28/11/2026 (shared/PecasDoProdutoDocs): a mesma documentação nos dois design systems. */
+export function TimelineShowcase() {
+  return (
+    <>
+      <TimelineShowcaseBase  />
+      <div className="mt-20 space-y-20">
+        <SecaoListaDePassos />
+        <SecaoSeletorDeEtapa />
+      </div>
+    </>
   );
 }

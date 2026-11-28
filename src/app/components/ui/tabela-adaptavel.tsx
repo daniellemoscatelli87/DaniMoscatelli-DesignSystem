@@ -18,7 +18,7 @@ import { cn } from "./utils";
  *   à borda esquerda do texto (regra das linhas no celular).
  * Seleção (opcional): caixa de 44 px no celular (a caixa desenhada tem 20 px, como o Checkbox), "selecionar todas" no
  * cabeçalho; linha selecionada no rosa do selecionado (--primary-suave); hover da linha cinza (--row-hover), de ponta
- * a ponta e sem cantos. Ordenação (opcional): botão no título da coluna com a seta da direção e aria-sort.
+ * a ponta e sem cantos. Linha atual (`linhaAtual`, 28/11/2026): o mesmo rosa, com aria-current, sem caixa. Ordenação (opcional): botão no título da coluna com a seta da direção e aria-sort.
  * Ordenação pela própria tabela: `ordemInicial` e `valorParaOrdenar` nas colunas. Textos: `textos`. Vazio: `vazio`.
  * BarraDeFerramentasDaTabela: a faixa de cima (busca à esquerda; até três botões de ferramenta à direita) e, embaixo,
  * os filtros aplicados. Quando a tabela é estreita, os botões descem para baixo da busca, numa linha só, com a mesma
@@ -59,6 +59,12 @@ export type TabelaAdaptavelProps<T> = {
   rotuloDaLinha?: (linha: T) => string;
   selecionadas?: Set<string>;
   onSelecionadasChange?: (s: Set<string>) => void;
+  /**
+   * Linha atual (28/11/2026), pela chave: a linha em destaque sem seleção (o bairro do plano, o item aberto ao lado).
+   * Fica no rosa de selecionado (--primary-suave), com aria-current="true"; não precisa de caixa de seleção. Como o
+   * estado não pode ser só a cor, escreva também na célula o que ela é (por exemplo, um Badge "no plano").
+   */
+  linhaAtual?: string | null;
   acoes?: (linha: T) => React.ReactNode;
   /** Largura das ações, em px (padrão 56). */
   larguraDasAcoes?: number;
@@ -123,6 +129,7 @@ export function TabelaAdaptavel<T>({
   rotuloDaLinha,
   selecionadas,
   onSelecionadasChange,
+  linhaAtual,
   acoes,
   larguraDasAcoes = 56,
   ordem,
@@ -212,12 +219,15 @@ export function TabelaAdaptavel<T>({
             {linhasNaOrdem.map((l) => {
               const id = chave(l);
               const marcada = selecionadas?.has(id) ?? false;
+              const atual = linhaAtual != null && id === linhaAtual;
               const [titulo, ...resto] = mostradas.filter((c) => c.principal).concat(mostradas.filter((c) => !c.principal).sort((a, b) => (a.prioridade ?? 99) - (b.prioridade ?? 99)));
               return (
                 <li
                   key={id}
                   data-selecionada={marcada || undefined}
-                  className={cn("flex gap-3 border-b border-border px-4 py-3 transition-colors last:border-b-0", marcada ? "bg-[var(--primary-suave)]" : "hover:bg-[var(--row-hover)]")}
+                  data-atual={atual || undefined}
+                  aria-current={atual ? "true" : undefined}
+                  className={cn("flex gap-3 border-b border-border px-4 py-3 transition-colors last:border-b-0", marcada || atual ? "bg-[var(--primary-suave)]" : "hover:bg-[var(--row-hover)]")}
                 >
                   {selecionavel && <div className="pt-1"><CaixaDeSelecao marcada={marcada} onMarcadaChange={(v) => marcar(id, v)} rotulo={`Selecionar ${nome(l)}`} /></div>}
                   <div className="min-w-0 flex-1">
@@ -272,8 +282,9 @@ export function TabelaAdaptavel<T>({
               {linhasNaOrdem.map((l) => {
                 const id = chave(l);
                 const marcada = selecionadas?.has(id) ?? false;
+                const atual = linhaAtual != null && id === linhaAtual;
                 return (
-                  <tr key={id} data-selecionada={marcada || undefined} className={cn("border-b border-border transition-colors last:border-b-0", marcada ? "bg-[var(--primary-suave)]" : "hover:bg-[var(--row-hover)]")}>
+                  <tr key={id} data-selecionada={marcada || undefined} data-atual={atual || undefined} aria-current={atual ? "true" : undefined} className={cn("border-b border-border transition-colors last:border-b-0", marcada || atual ? "bg-[var(--primary-suave)]" : "hover:bg-[var(--row-hover)]")}>
                     {selecionavel && (
                       <td className="px-4 py-3 align-middle">
                         <CaixaDeSelecao marcada={marcada} onMarcadaChange={(v) => marcar(id, v)} rotulo={`Selecionar ${nome(l)}`} />

@@ -6,6 +6,7 @@ import { UploadDropzone, UploadList, ImageUpload, ImageGrid, formatBytes, Upload
 import { SectionHeader } from "./shared/SectionHeader";
 import { GradeDeCards } from "../ui/grade-de-cards";
 import { SecaoRecorteDeFoto } from "./shared/LacunasDocs";
+import { SecaoImagemOcupada } from "./shared/PecasDoProdutoDocs";
 
 /* Troque para true no FindLook Design System: muda só os exemplos. */
 const FINDLOOK = false;
@@ -294,6 +295,7 @@ export function UploadShowcase() {
       {(
         <div className="mt-20 space-y-20">
         <SecaoRecorteDeFoto />
+        <SecaoImagemOcupada />
         </div>
       )}
     </>

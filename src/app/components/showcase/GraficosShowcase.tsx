@@ -17,6 +17,7 @@ import {
 } from "../ui/graficos-catalogo";
 import { GradeDeCards } from "../ui/grade-de-cards";
 import { SecaoBarrasEFunil } from "./shared/LacunasDocs";
+import { SecaoBarrasComLink } from "./shared/PecasDoProdutoDocs";
 
 /* Charts and visualizations (19/11/2026). Every number on this page is fictitious example data
    (neutral service examples): none describes real clients, units, regions or contacts. */
@@ -1287,6 +1288,7 @@ export function GraficosShowcase() {
       {(
         <div className="mt-20 space-y-20">
         <SecaoBarrasEFunil />
+        <SecaoBarrasComLink />
         </div>
       )}
     </>

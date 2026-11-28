@@ -478,8 +478,17 @@ export function GraficoDeRosca({ partes, centro, rotulo, formatarQuantidade, loc
 
 /* ── 2. Barras horizontais ordenadas ──────────────────────────────────────────────────────────────────── */
 
+export type ItemDasBarrasOrdenadas = {
+  rotulo: string;
+  valor: number;
+  /** Leva a outra tela (a lista filtrada, por exemplo): a linha inteira vira link (28/11/2026). */
+  href?: string;
+  /** Ou faz uma ação nesta tela: a linha inteira vira botão. */
+  onClick?: () => void;
+};
+
 export type BarrasOrdenadasProps = BaseDoGrafico & {
-  itens: { rotulo: string; valor: number }[];
+  itens: ItemDasBarrasOrdenadas[];
   /** Quantos itens do topo ficam em destaque (o 1º no tom 1, o 2º no tom 2, os seguintes em apoio; o restante em contexto). Padrão 3. */
   destaques?: number;
   /**
@@ -496,10 +505,18 @@ export type BarrasOrdenadasProps = BaseDoGrafico & {
    * "Muito", faixas de idade), use ordenar={false} e destaque="Muito" (ou uma lista). Com ele, `destaques` não vale.
    */
   destaque?: string | string[];
+  /** Componente de link do produto (por exemplo, o Link do Next) para os itens com href. */
+  comoLink?: React.ElementType;
 };
 
-/** Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra. */
-export function BarrasOrdenadas({ itens, destaques = 3, destaque: escolhidos, ordenar = true, posicao = true, cores: modo = "foco", rotulo, formatar = fmtPadrao, className }: BarrasOrdenadasProps) {
+/**
+ * Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra.
+ * Com `href` ou `onClick` nos itens (28/11/2026), o gráfico vira uma lista ordenada (<ol>) em que cada linha inteira é
+ * um link ou um botão: o nome do link é "1º Batel, 5 lojas" (posição, nome e valor), a barra é decorativa, o hover é
+ * cinza de ponta a ponta (--row-hover, sem cantos), o foco é um contorno por dentro e, no toque, cada linha tem pelo
+ * menos 44 px. Sem links, continua uma imagem (role="img") com o resumo dos valores.
+ */
+export function BarrasOrdenadas({ itens, destaques = 3, destaque: escolhidos, ordenar = true, posicao = true, cores: modo = "foco", rotulo, formatar = fmtPadrao, comoLink, className }: BarrasOrdenadasProps) {
   const menos = useReducedMotion();
   const lista = ordenar ? [...itens].sort((a, b) => b.valor - a.valor) : itens;
   const marcados = escolhidos === undefined ? null : new Set(Array.isArray(escolhidos) ? escolhidos : [escolhidos]);
@@ -507,29 +524,53 @@ export function BarrasOrdenadas({ itens, destaques = 3, destaque: escolhidos, or
   const cores = modo === "importancia" ? coresPorImportancia(lista.length).map(corDoTom) : coresDeFoco(lista.map((it, i) => emDestaque(it.rotulo, i)));
   const maximo = Math.max(1, ...lista.map(i => i.valor));
   const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${formatar(i.valor)}`).join(", ")}.`;
+  const comLinks = lista.some(i => i.href || i.onClick);
+  const Link = comoLink ?? "a";
+  const linha = (item: ItemDasBarrasOrdenadas, i: number) => {
+    const destaque = emDestaque(item.rotulo, i);
+    return (
+      <>
+        <span className={cn("mb-1 block text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground", comLinks && "text-foreground group-hover:underline")}>
+          {posicao && <span className="mr-1 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
+          {comLinks && <span className="sr-only">, {formatar(item.valor)}</span>}
+        </span>
+        <span className="flex items-center gap-2" aria-hidden={comLinks || undefined}>
+          <motion.span
+            className="block h-2 rounded-sm"
+            style={{ width: `calc((100% - 4.5rem) * ${item.valor / maximo})`, background: cores[i], originX: 0 }}
+            initial={menos ? false : { scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
+          />
+          <span className={cn("shrink-0 text-body-sm tabular-nums", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>{formatar(item.valor)}</span>
+        </span>
+      </>
+    );
+  };
+  if (comLinks) {
+    const alvo = "group block w-full rounded-none px-3 py-1.5 text-left font-normal transition-colors hover:bg-row-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring toque:min-h-11";
+    return (
+      <ol aria-label={rotulo} data-slot="barras-ordenadas" className={cn("m-0 -mx-3 list-none space-y-1 p-0", className)}>
+        {lista.map((item, i) => (
+          <li key={item.rotulo} className="min-w-0">
+            {item.href ? (
+              <Link href={item.href} className={alvo}>{linha(item, i)}</Link>
+            ) : item.onClick ? (
+              <button type="button" onClick={item.onClick} className={alvo}>{linha(item, i)}</button>
+            ) : (
+              <div className="px-3 py-1.5">{linha(item, i)}</div>
+            )}
+          </li>
+        ))}
+      </ol>
+    );
+  }
   return (
-    <div role="img" aria-label={resumo} className={cn("space-y-3", className)}>
-      {lista.map((item, i) => {
-        const destaque = emDestaque(item.rotulo, i);
-        return (
-          <div key={item.rotulo} className="min-w-0">
-            <p className={cn("mb-1 text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>
-              {posicao && <span className="mr-1 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
-            </p>
-            <div className="flex items-center gap-2">
-              <motion.div
-                className="h-2 rounded-sm"
-                style={{ width: `calc((100% - 4.5rem) * ${item.valor / maximo})`, background: cores[i], originX: 0 }}
-                initial={menos ? false : { scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: menos ? 0 : 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
-              />
-              <span className={cn("shrink-0 text-body-sm tabular-nums", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>{formatar(item.valor)}</span>
-            </div>
-          </div>
-        );
-      })}
+    <div role="img" aria-label={resumo} data-slot="barras-ordenadas" className={cn("space-y-3", className)}>
+      {lista.map((item, i) => (
+        <div key={item.rotulo} className="min-w-0">{linha(item, i)}</div>
+      ))}
     </div>
   );
 }
