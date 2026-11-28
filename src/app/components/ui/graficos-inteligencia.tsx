@@ -512,7 +512,7 @@ export type BarrasOrdenadasProps = BaseDoGrafico & {
 /**
  * Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra.
  * Com `href` ou `onClick` nos itens (28/11/2026), o gráfico vira uma lista ordenada (<ol>) em que cada linha inteira é
- * um link ou um botão: o nome do link é "1º Batel, 5 lojas" (posição, nome e valor), a barra é decorativa, o hover é
+ * um link ou um botão: o nome do link é o próprio texto, "1º Batel 5 lojas" (posição, nome e valor), a barra é decorativa, o hover é
  * cinza de ponta a ponta (--row-hover, sem cantos), o foco é um contorno por dentro e, no toque, cada linha tem pelo
  * menos 44 px. Sem links, continua uma imagem (role="img") com o resumo dos valores.
  */
@@ -531,11 +531,11 @@ export function BarrasOrdenadas({ itens, destaques = 3, destaque: escolhidos, or
     return (
       <>
         <span className={cn("mb-1 block text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground", comLinks && "text-foreground group-hover:underline")}>
-          {posicao && <span className="mr-1 tabular-nums text-muted-foreground">{i + 1}º</span>}{item.rotulo}
-          {comLinks && <span className="sr-only">, {formatar(item.valor)}</span>}
+          {posicao && <span className="tabular-nums text-muted-foreground">{i + 1}º </span>}{item.rotulo}
         </span>
-        <span className="flex items-center gap-2" aria-hidden={comLinks || undefined}>
+        <span className="flex items-center gap-2">
           <motion.span
+            aria-hidden
             className="block h-2 rounded-sm"
             style={{ width: `calc((100% - 4.5rem) * ${item.valor / maximo})`, background: cores[i], originX: 0 }}
             initial={menos ? false : { scaleX: 0 }}

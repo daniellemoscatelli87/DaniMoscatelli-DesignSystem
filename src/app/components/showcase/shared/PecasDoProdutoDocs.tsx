@@ -332,7 +332,7 @@ export function SecaoBarrasComLink() {
   formatar={(n) => \`\${n} lojas\`}
 />`}</ComoUsar>
       <Regras itens={[
-        "Com links, o gráfico vira uma lista ordenada; o nome de cada link é “1º Centro, 12 lojas” (posição, nome e valor) e a barra é decorativa.",
+        "Com links, o gráfico vira uma lista ordenada; o nome de cada link é o próprio texto da linha, “1º Centro 12 lojas” (posição, nome e valor), e a barra é decorativa.",
         "Hover cinza de ponta a ponta (--row-hover, sem cantos), foco por dentro da linha, nome sublinhado no hover; no toque, cada linha tem pelo menos 44 px.",
         "Sem links, continua uma imagem com o resumo dos valores para leitores de tela. As barras crescem ao aparecer; com “menos movimento”, aparecem prontas.",
       ]} />

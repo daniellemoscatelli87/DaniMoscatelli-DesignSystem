@@ -12,7 +12,7 @@
     "tokens": 161,
     "paginas": 33,
     "ancoras": 242,
-    "propostas": 44
+    "propostas": 53
   },
   "componentes": [
     {
@@ -6933,7 +6933,7 @@
           "ancora": "timeline-motion",
           "titulo": "Movimento: Step Indicator",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 73,
+          "linha": 74,
           "uso": "direto",
           "exports": [
             "GradeDeCards"
@@ -12216,7 +12216,7 @@
           "ancora": "timeline-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 42,
+          "linha": 43,
           "uso": "direto",
           "exports": [
             "SegmentedControl"
@@ -14294,7 +14294,7 @@
           "ancora": "timeline-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 42,
+          "linha": 43,
           "uso": "direto",
           "exports": [
             "Timeline"
@@ -14608,7 +14608,7 @@
         {
           "nome": "ImageGrid",
           "tipo": "componente",
-          "linha": 425,
+          "linha": 426,
           "descricao": "",
           "props": [
             "images",
@@ -19112,6 +19112,18 @@
       "componente": "tokens em src/styles/theme.css"
     },
     {
+      "arquivo": "propostas/2026-11-28-barras-com-link.md",
+      "titulo": "Barras com link por linha",
+      "status": "proposta",
+      "componente": "BarrasOrdenadas (graficos-inteligencia.tsx, nos dois DS) e BarrasHorizontais (graficos.tsx, só no FindLook): href/onClick por item e comoLink"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-calendario-v9.md",
+      "titulo": "Calendário no react-day-picker 9",
+      "status": "proposta",
+      "componente": "Calendar em src/app/components/ui/calendar.tsx"
+    },
+    {
       "arquivo": "propostas/2026-11-28-confete.md",
       "titulo": "Confete",
       "status": "proposta",
@@ -19136,16 +19148,58 @@
       "componente": "EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-28-grade-de-miniaturas.md",
+      "titulo": "Grade de miniaturas",
+      "status": "proposta",
+      "componente": "GradeDeMiniaturas em src/app/components/ui/grade-de-miniaturas.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-image-upload-ocupado.md",
+      "titulo": "ImageUpload enviando e com iniciais",
+      "status": "proposta",
+      "componente": "ImageUpload (ocupado, textoOcupado, iniciais) em src/app/components/ui/upload.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-item-marcavel.md",
+      "titulo": "Item marcável",
+      "status": "proposta",
+      "componente": "ItemMarcavel e ListaMarcavel em src/app/components/ui/item-marcavel.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-lista-de-passos.md",
+      "titulo": "Lista de passos",
+      "status": "proposta",
+      "componente": "ListaDePassos, PassoDaLista e NumeroDoPasso em src/app/components/ui/lista-de-passos.tsx"
+    },
+    {
       "arquivo": "propostas/2026-11-28-mock-de-campo.md",
       "titulo": "Campo de exemplo na simulação",
       "status": "proposta",
       "componente": "MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx"
     },
     {
+      "arquivo": "propostas/2026-11-28-quadro-link-esticado.md",
+      "titulo": "Quadro com link esticado",
+      "status": "proposta",
+      "componente": "Quadro em src/app/components/ui/quadro.tsx"
+    },
+    {
       "arquivo": "propostas/2026-11-28-recorte-de-foto.md",
       "titulo": "Recorte de foto",
       "status": "proposta",
       "componente": "RecorteDeFoto em src/app/components/ui/recorte-de-foto.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-seletor-de-etapa.md",
+      "titulo": "Seletor de etapa",
+      "status": "proposta",
+      "componente": "SeletorDeEtapa em src/app/components/ui/seletor-de-etapa.tsx"
+    },
+    {
+      "arquivo": "propostas/2026-11-28-tabela-linha-atual.md",
+      "titulo": "Linha atual na tabela adaptável",
+      "status": "proposta",
+      "componente": "TabelaAdaptavel (linhaAtual) em src/app/components/ui/tabela-adaptavel.tsx"
     }
   ],
   "paginas": [
@@ -20771,19 +20825,19 @@
           "id": "timeline-demo",
           "titulo": "Demonstração",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 42
+          "linha": 43
         },
         {
           "id": "timeline-anatomy",
           "titulo": "Anatomia",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 60
+          "linha": 61
         },
         {
           "id": "timeline-motion",
           "titulo": "Movimento: Step Indicator",
           "arquivo": "src/app/components/showcase/TimelineShowcase.tsx",
-          "linha": 73
+          "linha": 74
         },
         {
           "id": "timeline-usage",

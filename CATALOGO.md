@@ -4,7 +4,7 @@
 
 **A regra:** antes de criar ou alterar qualquer elemento visual (inclusive páginas de demonstração e templates), consulte este catálogo e use o componente, template ou padrão que já existe; não recrie à mão. Peça nova nasce em `src/app/components/ui/` pelo processo de `propostas/README.md`.
 
-**Resumo:** 129 arquivos de componentes em `src/app/components/ui/` com 421 componentes exportados · 75 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 161 tokens · 33 páginas e 242 âncoras no site (https://designsystem.danimoscatelli.com.br) · 44 propostas de componente.
+**Resumo:** 129 arquivos de componentes em `src/app/components/ui/` com 421 componentes exportados · 75 templates e padrões ainda só em demonstração · 45 seções com marcação feita à mão · 161 tokens · 33 páginas e 242 âncoras no site (https://designsystem.danimoscatelli.com.br) · 53 propostas de componente.
 
 Como procurar: use a busca do editor (Ctrl+F) pelo que a tela precisa (por exemplo "plano", "preço", "card", "alerta", "tabela", "chip"). "Onde ver" leva à página do site e à âncora da seção (`página#âncora`); no site, abra a página pelo menu e a seção pelo submenu.
 
@@ -1814,12 +1814,21 @@ Peças novas pedidas por um produto, no processo de [`propostas/README.md`](prop
 | [Stepper e cadastro em etapas](propostas/2026-11-27-stepper-e-cadastro-em-etapas.md) | `Stepper, MolduraDoCadastro, EtapaDoCadastro, BarraDaEtapa, LateralDaEtapa, ListaDeRevisao, BlocoDeRevisao, LinhaDeDado, CampoDoCadastro em src/app/components/ui/stepper.tsx, src/app/components/ui/cadastro-em-etapas.tsx` | proposta |
 | [Tabela adaptável](propostas/2026-11-27-tabela-adaptavel.md) | `TabelaAdaptavel em src/app/components/ui/tabela-adaptavel.tsx` | proposta |
 | [Tokens: sobreposição, raio de pílula, variante de toque e escala de texto](propostas/2026-11-27-tokens-sobreposicao-raio-toque-texto.md) | `tokens em src/styles/theme.css` | proposta |
+| [Barras com link por linha](propostas/2026-11-28-barras-com-link.md) | `BarrasOrdenadas (graficos-inteligencia.tsx, nos dois DS) e BarrasHorizontais (graficos.tsx, só no FindLook): href/onClick por item e comoLink` | proposta |
+| [Calendário no react-day-picker 9](propostas/2026-11-28-calendario-v9.md) | `Calendar em src/app/components/ui/calendar.tsx` | proposta |
 | [Confete](propostas/2026-11-28-confete.md) | `Confete, dispararConfete e EstadoFinal comemorar em src/app/components/ui/confete.tsx` | proposta |
 | [Diagrama do ecossistema](propostas/2026-11-28-diagrama-de-ecossistema.md) | `DiagramaDeEcossistema em src/app/components/ui/diagrama-de-ecossistema.tsx` | proposta |
 | [Escala de notas](propostas/2026-11-28-escala-de-notas.md) | `EscalaDeNotas e GrupoDeEscalas em src/app/components/ui/escala-de-notas.tsx` | proposta |
 | [Escolha ordenada](propostas/2026-11-28-escolha-ordenada.md) | `EscolhaOrdenada (e proximaOrdem) em src/app/components/ui/escolha-ordenada.tsx` | proposta |
+| [Grade de miniaturas](propostas/2026-11-28-grade-de-miniaturas.md) | `GradeDeMiniaturas em src/app/components/ui/grade-de-miniaturas.tsx` | proposta |
+| [ImageUpload enviando e com iniciais](propostas/2026-11-28-image-upload-ocupado.md) | `ImageUpload (ocupado, textoOcupado, iniciais) em src/app/components/ui/upload.tsx` | proposta |
+| [Item marcável](propostas/2026-11-28-item-marcavel.md) | `ItemMarcavel e ListaMarcavel em src/app/components/ui/item-marcavel.tsx` | proposta |
+| [Lista de passos](propostas/2026-11-28-lista-de-passos.md) | `ListaDePassos, PassoDaLista e NumeroDoPasso em src/app/components/ui/lista-de-passos.tsx` | proposta |
 | [Campo de exemplo na simulação](propostas/2026-11-28-mock-de-campo.md) | `MockDeCampo (e useCenaAtiva) em src/app/components/ui/simulacao.tsx` | proposta |
+| [Quadro com link esticado](propostas/2026-11-28-quadro-link-esticado.md) | `Quadro em src/app/components/ui/quadro.tsx` | proposta |
 | [Recorte de foto](propostas/2026-11-28-recorte-de-foto.md) | `RecorteDeFoto em src/app/components/ui/recorte-de-foto.tsx` | proposta |
+| [Seletor de etapa](propostas/2026-11-28-seletor-de-etapa.md) | `SeletorDeEtapa em src/app/components/ui/seletor-de-etapa.tsx` | proposta |
+| [Linha atual na tabela adaptável](propostas/2026-11-28-tabela-linha-atual.md) | `TabelaAdaptavel (linhaAtual) em src/app/components/ui/tabela-adaptavel.tsx` | proposta |
 
 ## 6. Páginas e âncoras do site
 

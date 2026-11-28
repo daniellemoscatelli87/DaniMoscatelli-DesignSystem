@@ -382,7 +382,8 @@ export function ImageUpload({
             {value ? (
               <img src={value} alt={label} className={cn("h-full w-full object-cover transition-opacity duration-[var(--duration-normal)]", ocupado && "opacity-50")} />
             ) : (
-              <span aria-hidden className={cn("flex h-full w-full items-center justify-center bg-primary-muted font-[family-name:var(--font-display)] font-bold text-primary-text transition-opacity duration-[var(--duration-normal)]", ocupado && "opacity-50")} style={{ fontSize: Math.round(Math.min(size, 160) * 0.34) }}>{letras}</span>
+              // As iniciais são só desenho (o nome do botão diz "Adicionar foto"): vêm do CSS (attr), fora do texto lido.
+              <span aria-hidden data-iniciais={letras} className={cn("flex h-full w-full items-center justify-center bg-primary-muted font-[family-name:var(--font-display)] font-bold text-primary-text transition-opacity duration-[var(--duration-normal)] before:content-[attr(data-iniciais)]", ocupado && "opacity-50")} style={{ fontSize: Math.round(Math.min(size, 160) * 0.34) }} />
             )}
             {!ocupado && (
               <span className="absolute inset-0 flex items-center justify-center bg-foreground/0 opacity-0 transition-all group-hover:bg-foreground/45 group-hover:opacity-100 group-focus-visible:bg-foreground/45 group-focus-visible:opacity-100">
