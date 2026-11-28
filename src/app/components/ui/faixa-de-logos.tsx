@@ -15,10 +15,20 @@ import { cn } from "./utils";
  * - Movimento: para ao passar o mouse e tem o botão Pausar/Continuar (44 px; WCAG 2.2.2, conteúdo que se move por
  *   mais de 5 s). Com "menos movimento", não corre: vira uma grade centralizada que quebra de linha.
  * - Cada logo tem texto alternativo (o nome da empresa); a cópia que fecha o laço é escondida dos leitores de tela.
- * - Altura padrão dos logos: 40 px (`altura` em rem para mudar), com largura proporcional.
+ * - Altura padrão dos logos: 40 px, com largura proporcional.
+ * - Silhueta (`silhueta`, 28/11/2026): para logos brancos ou muito coloridos, que somem ou gritam num fundo claro. O
+ *   desenho do logo vira uma silhueta lisa na cor --muted-foreground (máscara com o próprio arquivo do logo) e passa
+ *   para --foreground ao passar o mouse ou focar. Vale para a faixa toda ou só para um logo (`silhueta` no item). O
+ *   arquivo do logo precisa estar no mesmo site (ou liberar CORS), porque a máscara lê a imagem.
  */
 
-export type LogoDaFaixa = { nome: string; src: string; href?: string };
+export type LogoDaFaixa = {
+  nome: string;
+  src: string;
+  href?: string;
+  /** Só este logo em silhueta cinza (por exemplo, um logo branco). */
+  silhueta?: boolean;
+};
 
 export type FaixaDeLogosProps = {
   logos: LogoDaFaixa[];
@@ -27,15 +37,28 @@ export type FaixaDeLogosProps = {
   /** Segundos para uma volta completa (padrão 48). */
   duracao?: number;
   colorirAoPassar?: boolean;
+  /** Todos os logos em silhueta cinza no token --muted-foreground (logos brancos ou coloridos demais no fundo claro). */
+  silhueta?: boolean;
   textos?: { pausar?: string; continuar?: string };
   className?: string;
 };
 
-function FaixaDeLogos({ logos, rotulo, duracao = 48, colorirAoPassar = true, textos, className }: FaixaDeLogosProps) {
+function FaixaDeLogos({ logos, rotulo, duracao = 48, colorirAoPassar = true, silhueta = false, textos, className }: FaixaDeLogosProps) {
   const tx = { pausar: "Pausar a faixa de logos", continuar: "Continuar a faixa de logos", ...textos };
   const [pausada, setPausada] = React.useState(false);
   const item = (l: LogoDaFaixa, copia: boolean) => {
-    const img = (
+    const img = silhueta || l.silhueta ? (
+      // A imagem invisível dá o tamanho; por cima, a mesma imagem como máscara de uma superfície no token de cor.
+      <span role={copia ? undefined : "img"} aria-label={copia ? undefined : l.nome} className="relative block">
+        <img src={l.src} alt="" loading="lazy" className="invisible block h-10 w-auto max-w-40 object-contain" />
+        <span
+          aria-hidden
+          data-slot="silhueta-do-logo"
+          className="absolute inset-0 bg-muted-foreground transition-colors duration-[var(--duration-normal)] [mask-position:center] [mask-repeat:no-repeat] [mask-size:contain] group-hover/logo:bg-foreground group-focus-visible/logo:bg-foreground"
+          style={{ maskImage: `url("${l.src}")`, WebkitMaskImage: `url("${l.src}")` }}
+        />
+      </span>
+    ) : (
       <img
         src={l.src}
         alt={copia ? "" : l.nome}
@@ -61,13 +84,12 @@ function FaixaDeLogos({ logos, rotulo, duracao = 48, colorirAoPassar = true, tex
         data-pausada={pausada ? "sim" : "nao"}
       >
         <ul
-          className="flex w-max animate-[faixa-de-logos_var(--duracao)_linear_infinite] group-hover/faixa:[animation-play-state:paused] group-data-[pausada=sim]/faixa:[animation-play-state:paused] group-focus-within/faixa:[animation-play-state:paused]"
+          className="flex w-max animate-faixa-de-logos group-hover/faixa:[animation-play-state:paused] group-data-[pausada=sim]/faixa:[animation-play-state:paused] group-focus-within/faixa:[animation-play-state:paused]"
           style={{ "--duracao": `${duracao}s` } as React.CSSProperties}
         >
           {logos.map(l => item(l, false))}
           {logos.map(l => item(l, true))}
         </ul>
-        <style>{"@keyframes faixa-de-logos{from{transform:translateX(0)}to{transform:translateX(-50%)}}"}</style>
       </div>
       <div className="mt-2 flex justify-center motion-reduce:hidden">
         <button

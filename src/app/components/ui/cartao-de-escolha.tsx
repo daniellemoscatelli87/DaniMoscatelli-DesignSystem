@@ -52,13 +52,16 @@ function GrupoDeCartoesDeEscolha({ value, defaultValue, onValueChange, colunas =
   };
   return (
     <ContextoDoGrupo.Provider value={{ valor, mudar, nome: name ?? auto, desabilitado: disabled, obrigatorio: required }}>
-      <div className="@container/escolha min-w-0">
+      {/* Sem consulta de contêiner (28/11/2026): o grupo dentro de um <fieldset> sumia (0 × 0 px) no Chromium do celular
+          depois de um envio com erro, até alguma classe mudar. As duas colunas agora saem da própria grade: cada coluna
+          tem no mínimo 13,625 rem (a metade de 28 rem menos o espaço entre elas) e no máximo metade da largura. */}
+      <div className="min-w-0">
         <div
           role="radiogroup"
           data-slot="grupo-de-cartoes-de-escolha"
           aria-required={required || undefined}
           aria-disabled={disabled || undefined}
-          className={cn("grid gap-3", colunas === 2 && "@min-[28rem]/escolha:grid-cols-2", className)}
+          className={cn("grid min-w-0 gap-3", colunas === 2 && "grid-cols-[repeat(auto-fit,minmax(max(13.625rem,calc(50%-0.375rem)),1fr))]", className)}
           {...props}
         >
           {children}

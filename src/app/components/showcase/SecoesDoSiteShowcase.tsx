@@ -1,5 +1,5 @@
 import React from "react";
-import { BookOpen, Code2, Handshake, LayoutGrid, MessageCircle, PenTool, Search, Users } from "lucide-react";
+import { BarChart3, BookOpen, Briefcase, Code2, Database, Factory, GraduationCap, Handshake, HeartPulse, Landmark, LayoutGrid, LayoutTemplate, Leaf, Lightbulb, Megaphone, MessageCircle, Monitor, Network, Package, PenTool, Search, ShoppingBag, Sparkles, TrendingUp, Truck, Users } from "lucide-react";
 import { useI18n } from "../../i18n";
 import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
 import { CardDeDepoimento } from "../ui/card-de-depoimento";
@@ -8,7 +8,9 @@ import { FaixaDeLogos } from "../ui/faixa-de-logos";
 import { Citacao } from "../ui/citacao";
 import { ListaDePilares } from "../ui/lista-de-pilares";
 import { CartaoFlutuante } from "../ui/cartao-flutuante";
-import { Simulacao } from "../ui/simulacao";
+import { Simulacao, MockDeCampo } from "../ui/simulacao";
+import { DiagramaDeEcossistema } from "../ui/diagrama-de-ecossistema";
+import { GradeDeCampos } from "../ui/campo";
 import { LinkSaibaMais } from "../ui/link-saiba-mais";
 import { Prosa } from "../ui/prosa";
 import { LuzesDifusas } from "../ui/luzes-difusas";
@@ -19,7 +21,6 @@ import { ChipDeEstado } from "../ui/chip-de-estado";
 import { Logo } from "../ui/logo";
 import { GradeDeCards, ItemDaGrade } from "../ui/grade-de-cards";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "../ui/carousel";
-import { LinhaDeDado } from "../ui/cadastro-em-etapas";
 
 /* Seções do site (27/11/2026): peças das páginas do site do estúdio. Todo o conteúdo é de exemplo. */
 
@@ -28,6 +29,12 @@ const FOTO = `${BASE}fotos/projeto-piloto-hero.webp`;
 
 function logoDeExemplo(texto: string) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40"><rect width="160" height="40" rx="8" fill="#E4E9F0"/><text x="80" y="25" font-family="sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#283043">${texto}</text></svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}
+
+// Logo de exemplo branco e sem fundo (como um logo pensado para fundo escuro): some no fundo claro sem a silhueta.
+function logoBrancoDeExemplo(texto: string) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="40"><text x="80" y="26" font-family="sans-serif" font-size="18" font-weight="800" text-anchor="middle" fill="white">${texto}</text></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }
 
@@ -108,10 +115,16 @@ export function SecoesDoSiteShowcase() {
         )}
         arquivo="ui/faixa-de-logos.tsx"
         nomes={["FaixaDeLogos"]}
-        api={`<FaixaDeLogos rotulo="Empresas atendidas" logos={[{ nome: "Empresa", src: "/logos/empresa.svg" }]} />`}
+        api={`<FaixaDeLogos rotulo="Empresas atendidas" logos={[{ nome: "Empresa", src: "/logos/empresa.svg" }]} />
+<FaixaDeLogos silhueta … />                                  // todos em silhueta cinza
+logos={[{ nome: "Empresa", src: "/logos/branco.svg", silhueta: true }]}   // só este`}
       >
         <ShowcaseCard>
           <FaixaDeLogos rotulo={t("Example companies", "Empresas de exemplo")} logos={["Marca A", "Marca B", "Marca C", "Marca D", "Marca E", "Marca F"].map(n => ({ nome: n, src: logoDeExemplo(n) }))} />
+        </ShowcaseCard>
+        <ShowcaseCard>
+          <p className="mb-2 text-body-sm text-muted-foreground">{t("Silhouette: white or very colourful logos become a flat grey shape (token) on a light background.", "Silhueta (silhueta): logos brancos ou coloridos demais viram uma forma lisa no cinza do token --muted-foreground; ao passar o mouse, ficam no --foreground. Os de exemplo são brancos e sumiriam neste fundo.")}</p>
+          <FaixaDeLogos silhueta rotulo={t("Example companies (silhouette)", "Empresas de exemplo (silhueta)")} logos={["Marca G", "Marca H", "Marca I", "Marca J", "Marca K", "Marca L"].map(n => ({ nome: n, src: logoBrancoDeExemplo(n) }))} />
         </ShowcaseCard>
       </SectionBlock>
 
@@ -194,9 +207,17 @@ export function SecoesDoSiteShowcase() {
           "Conta um processo em etapas com uma tela de exemplo que muda a cada etapa (Da conexão à colaboração). Avança sozinha enquanto está na tela, com Pausar; as setas trocam o tópico.",
         )}
         arquivo="ui/simulacao.tsx"
-        nomes={["Simulacao"]}
+        nomes={["Simulacao", "MockDeCampo", "useCenaAtiva"]}
         api={`<Simulacao intro="Como sua participação acontece" topoDaTela={<><Logo variante="simbolo" className="h-5" />Rede de Parceiros</>}
-  topicos={[{ id: "1", titulo: "Faça parte da rede", descricao: "…", cena: <…/> }]} />`}
+  topicos={[{ id: "1", titulo: "Faça parte da rede", descricao: "…", cena: <…/> }]} />
+// Campos de exemplo dentro da cena (ilustração, não são campos de verdade):
+<GradeDeCampos>
+  <MockDeCampo rotulo="Nome completo" valor="Pessoa de exemplo" obrigatorio digitar />
+  <MockDeCampo rotulo="Senioridade" tipo="selecao" valor="Sênior" opcoes={["Pleno", "Sênior"]} aberta />
+  <MockDeCampo rotulo="Setores" tipo="opcoes" opcoes={["Saúde", "Varejo"]} selecionadas={["Saúde"]} largo />
+</GradeDeCampos>`}
+        faca={[t("Use MockDeCampo for example fields inside the scene.", "Use MockDeCampo para os campos de exemplo dentro da cena: o valor é digitado quando a cena aparece e o leitor de tela lê rótulo e valor de uma vez."), t("All scenes stay in the HTML; only the active one shows.", "Todas as cenas ficam no HTML (buscadores e leitores de tela no servidor); só a ativa aparece.")]}
+        naoFaca={[t("Don't put real fields or buttons inside the scene.", "Não ponha campos nem botões de verdade dentro da cena: ela é ilustração."), t("Don't use real people's data.", "Não use dados de pessoas reais.")]}
       >
         <Simulacao
           intro={t("How your participation happens", "Como sua participação acontece")}
@@ -206,9 +227,14 @@ export function SecoesDoSiteShowcase() {
             {
               id: "cadastro", titulo: t("Join the network", "Faça parte da rede"), descricao: t("Register your path, skills and areas.", "Cadastre sua trajetória, competências e áreas de atuação."),
               cena: (
-                <div className="mx-auto grid max-w-sm gap-4 rounded-lg border border-border bg-card p-4">
+                <div className="mx-auto grid max-w-md gap-4 rounded-lg border border-border bg-card p-4">
                   <p className="text-body font-semibold text-foreground">{t("I want to be a partner", "Quero ser parceiro")}</p>
-                  <dl className="grid gap-3"><LinhaDeDado rotulo={t("Full name", "Nome completo")} valor={t("Example person", "Pessoa de exemplo")} /><LinhaDeDado rotulo={t("Main specialty", "Especialidade principal")} valor="UX Research" /></dl>
+                  <GradeDeCampos>
+                    <MockDeCampo rotulo={t("Full name", "Nome completo")} valor={t("Example person", "Pessoa de exemplo")} obrigatorio digitar />
+                    <MockDeCampo rotulo={t("Main specialty", "Especialidade principal")} valor="UX Research" obrigatorio digitar atraso={900} />
+                    <MockDeCampo rotulo={t("Seniority", "Senioridade")} tipo="selecao" valor="Sênior" opcoes={["Pleno", "Sênior", "Especialista"]} aberta largo />
+                    <MockDeCampo rotulo={t("Sectors", "Setores em que já atuou")} tipo="opcoes" opcoes={["Saúde", "Educação", "Varejo", "Indústria"]} selecionadas={["Saúde", "Varejo"]} largo />
+                  </GradeDeCampos>
                 </div>
               ),
             },
@@ -233,6 +259,57 @@ export function SecoesDoSiteShowcase() {
             },
           ]}
         />
+      </SectionBlock>
+
+      <SectionBlock
+        id="secoes-ecossistema"
+        titulo={t("Ecosystem diagram", "Diagrama do ecossistema")}
+        quando={t(
+          "A centre with the parts around it (the partner network wheel): specialities in petals and, on an outer ring, the sectors. From 48 rem of space it is the wheel; below, the same list vertically, with a trunk from the centre and a spoke to each item.",
+          "Um centro com as partes em volta (a roda da Rede de Parceiros): as especialidades em pétalas e, num anel de fora, os setores, cada um ligado por uma linha. A partir de 48 rem de espaço, a roda; abaixo, a mesma lista na vertical, com um tronco saindo do centro e um raio para cada item. Entra ao aparecer na tela (parado com menos movimento).",
+        )}
+        arquivo="ui/diagrama-de-ecossistema.tsx"
+        nomes={["DiagramaDeEcossistema"]}
+        api={`<DiagramaDeEcossistema rotulo="Ecossistema da Rede de Parceiros"
+  centro={{ titulo: "12 setores", descricao: "Expertises conectadas.", icone: <Network /> }}
+  rotuloDosItens="Especialidades" itens={[{ id: "design", rotulo: "Design", icone: <PenTool /> }, …]}
+  rotuloDoAnelExterno="Setores" anelExterno={[{ id: "saude", rotulo: "Saúde", icone: <HeartPulse /> }, …]} />`}
+        faca={[t("Use 6 to 10 short items on the inner ring and up to 12 outside.", "Use de 6 a 10 itens curtos no anel de dentro e até 12 no de fora."), t("Give each ring a name.", "Dê um nome a cada anel (rotuloDosItens, rotuloDoAnelExterno): é a lista que os leitores de tela percorrem.")]}
+        naoFaca={[t("Don't make the items links.", "Não transforme os itens em links: o diagrama mostra o conjunto."), t("Don't use it for a sequence: that is the Timeline.", "Não use para uma sequência de passos: isso é a Timeline.")]}
+      >
+        <ShowcaseCard>
+          <DiagramaDeEcossistema
+            rotulo={t("Partner network ecosystem", "Ecossistema da Rede de Parceiros")}
+            centro={{ titulo: t("12 sectors", "12 setores"), descricao: t("Connected expertise.", "Expertises conectadas."), icone: <Network /> }}
+            rotuloDosItens={t("Specialities", "Especialidades")}
+            itens={[
+              { id: "design", rotulo: "Design", icone: <PenTool /> },
+              { id: "dev", rotulo: "Dev", icone: <Code2 /> },
+              { id: "dados", rotulo: "Dados", icone: <BarChart3 /> },
+              { id: "marketing", rotulo: "Marketing", icone: <Megaphone /> },
+              { id: "inovacao", rotulo: "Inovação", icone: <Lightbulb /> },
+              { id: "negocios", rotulo: "Negócios", icone: <TrendingUp /> },
+              { id: "ia", rotulo: "IA", icone: <Sparkles /> },
+              { id: "pesquisa", rotulo: "Pesquisa", icone: <Search /> },
+              { id: "ux", rotulo: "UX/UI", icone: <LayoutTemplate /> },
+            ]}
+            rotuloDoAnelExterno={t("Sectors", "Setores")}
+            anelExterno={[
+              { id: "saude", rotulo: "Saúde", icone: <HeartPulse /> },
+              { id: "hospitalidade", rotulo: "Hospitalidade e Turismo", icone: <Briefcase /> },
+              { id: "educacao", rotulo: "Educação", icone: <GraduationCap /> },
+              { id: "varejo", rotulo: "Varejo", icone: <ShoppingBag /> },
+              { id: "financeiro", rotulo: "Serviços Financeiros", icone: <Database /> },
+              { id: "industria", rotulo: "Indústria", icone: <Factory /> },
+              { id: "tecnologia", rotulo: "Tecnologia", icone: <Monitor /> },
+              { id: "consumo", rotulo: "Bens de Consumo", icone: <Package /> },
+              { id: "mobilidade", rotulo: "Mobilidade e Logística", icone: <Truck /> },
+              { id: "energia", rotulo: "Energia e Sustentabilidade", icone: <Leaf /> },
+              { id: "publico", rotulo: "Setor Público", icone: <Landmark /> },
+              { id: "terceiro", rotulo: "Terceiro Setor", icone: <Users /> },
+            ]}
+          />
+        </ShowcaseCard>
       </SectionBlock>
 
       <SectionBlock

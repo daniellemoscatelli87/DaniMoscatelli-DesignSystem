@@ -2,6 +2,7 @@ import React, {
   useState, useEffect, useRef, useCallback,
 } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring } from "motion/react";
+import { SegmentedControl } from "../ui/segmented-control";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
 import { DoodleTexture, doodleTextureFiles } from "@/app/components/ui/doodle-texture";
 import { Download } from "lucide-react";
@@ -269,14 +270,8 @@ function GradientAnimCard() {
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
-          {(["spec", "usage"] as const).map(k => (
-            <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-sm text-label font-semibold transition-colors
-                ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
-            </button>
-          ))}
+        <div className="w-fit">
+          <SegmentedControl size="sm" aria-label={t("Show", "Mostrar")} value={tab} onValueChange={v => setTab(v as typeof tab)} options={(["spec", "usage"] as const).map(k => ({ value: k, label: <>{k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}</> }))} />
         </div>
 
         {tab === "spec" && (
@@ -540,56 +535,21 @@ export function CanvasRevealCard() {
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1">
-            {CANVAS_PRESETS.map(p => (
-              <button key={p.id} onClick={() => setPresetId(p.id)}
-                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${presetId === p.id ? "#D44D4D" : ctrl}`,
-                  background: presetId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: presetId === p.id ? "#D44D4D" : idle,
-                }}>
-                <span className="flex gap-1">
-                  {p.swatches.map(hex => (
-                    <span key={hex} style={{ width:7, height:7, borderRadius:2, background:hex, display:"inline-block" }} />
-                  ))}
-                </span>
-                {p.label}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Colors", "Cores")} value={presetId} onValueChange={v => setPresetId(v as typeof presetId)} options={CANVAS_PRESETS.map(p => ({ value: p.id, label: <><span className="flex gap-1"> {p.swatches.map(hex => ( <span key={hex} style={{ width:7, height:7, borderRadius:2, background:hex, display:"inline-block" }} /> ))} </span> {p.label}</> }))} />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Size", "Tamanho")}</span>
           <div className="flex gap-1">
-            {DOT_SIZES.map(s => (
-              <button key={s.id} onClick={() => setDotSizeId(s.id)}
-                className="w-9 py-1 rounded-sm text-caption font-bold transition-all"
-                style={{
-                  border: `1.5px solid ${dotSizeId === s.id ? "#D44D4D" : ctrl}`,
-                  background: dotSizeId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: dotSizeId === s.id ? "#D44D4D" : idle,
-                }}>
-                {bi(s.label)}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Size", "Tamanho")} value={dotSizeId} onValueChange={v => setDotSizeId(v as typeof dotSizeId)} options={DOT_SIZES.map(s => ({ value: s.id, label: <>{bi(s.label)}</> }))} />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
-            {ANIM_SPEEDS.map(s => (
-              <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
-                  background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: speedId === s.id ? "#D44D4D" : idle,
-                }}>
-                {bi(s.label)}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Speed", "Velocidade")} value={speedId} onValueChange={v => setSpeedId(v as typeof speedId)} options={ANIM_SPEEDS.map(s => ({ value: s.id, label: <>{bi(s.label)}</> }))} />
           </div>
         </div>
       </div>
@@ -611,13 +571,8 @@ export function CanvasRevealCard() {
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
-          {(["spec", "usage"] as const).map(k => (
-            <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-sm text-label font-semibold transition-colors ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
-            </button>
-          ))}
+        <div className="w-fit">
+          <SegmentedControl size="sm" aria-label={t("Show", "Mostrar")} value={tab} onValueChange={v => setTab(v as typeof tab)} options={(["spec", "usage"] as const).map(k => ({ value: k, label: <>{k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}</> }))} />
         </div>
 
         {tab === "spec" && (
@@ -1174,39 +1129,14 @@ function BigBangCard() {
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
-            {BB_SPEEDS.map(s => (
-              <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
-                  background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: speedId === s.id ? "#D44D4D" : idle,
-                }}>
-                {bi(s.label)}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Speed", "Velocidade")} value={speedId} onValueChange={v => setSpeedId(v as typeof speedId)} options={BB_SPEEDS.map(s => ({ value: s.id, label: <>{bi(s.label)}</> }))} />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1">
-            {BB_PALETTES.map(p => (
-              <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
-                  background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: paletteId === p.id ? "#D44D4D" : idle,
-                }}>
-                <span className="flex gap-1">
-                  {p.swatches.slice(0, 2).map((hex, i) => (
-                    <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} />
-                  ))}
-                </span>
-                {p.label}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Colors", "Cores")} value={paletteId} onValueChange={v => setPaletteId(v as typeof paletteId)} options={BB_PALETTES.map(p => ({ value: p.id, label: <><span className="flex gap-1"> {p.swatches.slice(0, 2).map((hex, i) => ( <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} /> ))} </span> {p.label}</> }))} />
           </div>
         </div>
       </div>
@@ -1268,56 +1198,21 @@ function BgLinesCard() {
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Speed", "Velocidade")}</span>
           <div className="flex gap-1">
-            {BGL_SPEEDS.map(s => (
-              <button key={s.id} onClick={() => setSpeedId(s.id)}
-                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${speedId === s.id ? "#D44D4D" : ctrl}`,
-                  background: speedId === s.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: speedId === s.id ? "#D44D4D" : idle,
-                }}>
-                {bi(s.label)}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Speed", "Velocidade")} value={speedId} onValueChange={v => setSpeedId(v as typeof speedId)} options={BGL_SPEEDS.map(s => ({ value: s.id, label: <>{bi(s.label)}</> }))} />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Density", "Densidade")}</span>
           <div className="flex gap-1">
-            {BGL_DENSITIES.map(d => (
-              <button key={d.id} onClick={() => setDensityId(d.id)}
-                className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${densityId === d.id ? "#D44D4D" : ctrl}`,
-                  background: densityId === d.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: densityId === d.id ? "#D44D4D" : idle,
-                }}>
-                {bi(d.label)}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Density", "Densidade")} value={densityId} onValueChange={v => setDensityId(v as typeof densityId)} options={BGL_DENSITIES.map(d => ({ value: d.id, label: <>{bi(d.label)}</> }))} />
           </div>
         </div>
 
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Colors", "Cores")}</span>
           <div className="flex flex-wrap gap-1">
-            {BGL_PALETTES.map(p => (
-              <button key={p.id} onClick={() => setPaletteId(p.id)}
-                className="flex items-center gap-1 px-2 py-1 rounded-sm text-caption font-semibold transition-all"
-                style={{
-                  border: `1.5px solid ${paletteId === p.id ? "#D44D4D" : ctrl}`,
-                  background: paletteId === p.id ? "rgba(212,77,77,0.08)" : "transparent",
-                  color: paletteId === p.id ? "#D44D4D" : idle,
-                }}>
-                <span className="flex gap-1">
-                  {p.swatches.map((hex, i) => (
-                    <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} />
-                  ))}
-                </span>
-                {p.label}
-              </button>
-            ))}
+            <SegmentedControl size="sm" aria-label={t("Colors", "Cores")} value={paletteId} onValueChange={v => setPaletteId(v as typeof paletteId)} options={BGL_PALETTES.map(p => ({ value: p.id, label: <><span className="flex gap-1"> {p.swatches.map((hex, i) => ( <span key={i} style={{ width: 7, height: 7, borderRadius: 2, background: hex, display: "inline-block" }} /> ))} </span> {p.label}</> }))} />
           </div>
         </div>
       </div>
@@ -1374,12 +1269,12 @@ function HeroContent({ dark }: { dark: boolean }) {
           {t("Deploy, observability and monitoring in one place.", "Deploy, observabilidade e monitoramento em um só lugar.")}
         </p>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 9, background: "#D44D4D", color: "#fff", fontSize: "0.75rem", fontWeight: 700, border: "none", cursor: "pointer" }}>
-            {t("Get started", "Começar")} <ArrowRight style={{ width: 12, height: 12 }} />
-          </button>
-          <button style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 14px", borderRadius: 9, border: `1px solid ${dark ? "rgba(255,255,255,0.12)" : "rgba(19,26,39,0.15)"}`, background: "transparent", color: dark ? "#8898B0" : "#627288", fontSize: "0.75rem", fontWeight: 600, cursor: "pointer" }}>
+          <Button type="button" size="sm">
+            {t("Get started", "Começar")} <ArrowRight aria-hidden />
+          </Button>
+          <Button type="button" size="sm" variant="outline">
             {t("View demo", "Ver demo")}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
@@ -1518,14 +1413,8 @@ function EffectCard({ ef }: { ef: EffectDef }) {
           </div>
         </div>
 
-        <div className="flex gap-1 p-1 rounded-md bg-muted w-fit">
-          {(["spec", "usage"] as const).map(k => (
-            <button key={k} onClick={() => setTab(k)}
-              className={`px-3 py-1 rounded-sm text-label font-semibold transition-colors
-                ${tab === k ? "bg-card text-foreground" : "text-muted-foreground"}`}>
-              {k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}
-            </button>
-          ))}
+        <div className="w-fit">
+          <SegmentedControl size="sm" aria-label={t("Show", "Mostrar")} value={tab} onValueChange={v => setTab(v as typeof tab)} options={(["spec", "usage"] as const).map(k => ({ value: k, label: <>{k === "spec" ? t("Technique", "Técnica") : t("When to use", "Quando usar")}</> }))} />
         </div>
 
         {tab === "spec" && (
@@ -1655,12 +1544,6 @@ function DoodleTextureCard() {
     [t("SVG primary", "SVG primária"), doodleTextureFiles.primaria], [t("SVG stroke (currentColor)", "SVG traço (currentColor)"), doodleTextureFiles.traco],
     [t("PNG light 1600 px", "PNG claro 1600 px"), doodleTextureFiles.pngClaro], [t("PNG dark 1600 px", "PNG escuro 1600 px"), doodleTextureFiles.pngEscuro],
   ];
-  const Btn = ({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) => (
-    <button onClick={onClick} className="px-3 py-1 rounded-sm text-caption font-semibold transition-all"
-      style={{ border: `1.5px solid ${active ? "var(--primary)" : ctrl}`, background: active ? "var(--primary-muted)" : "transparent", color: active ? "var(--primary-text, var(--primary))" : idle }}>
-      {children}
-    </button>
-  );
   return (
     <div className="rounded-lg border border-border bg-card overflow-hidden" style={{ boxShadow: "var(--shadow-md)" }}>
       <div className="relative isolate h-80 overflow-hidden bg-background">
@@ -1675,11 +1558,11 @@ function DoodleTextureCard() {
       <div className="border-t border-border bg-card px-5 py-3 flex flex-wrap items-center gap-6">
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Scale", "Escala")}</span>
-          <div className="flex gap-1">{(["p", "m", "g"] as const).map(s => <Btn key={s} active={scale === s} onClick={() => setScale(s)}>{s.toUpperCase()}</Btn>)}</div>
+          <SegmentedControl size="sm" aria-label={t("Scale", "Escala")} value={scale} onValueChange={v => setScale(v as typeof scale)} options={(["p", "m", "g"] as const).map(s => ({ value: s, label: s.toUpperCase() }))} />
         </div>
         <div className="flex items-center gap-3">
           <span className="text-caption font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap">{t("Stroke", "Traço")}</span>
-          <div className="flex gap-1">{colors.map(c => <Btn key={c.id} active={colorId === c.id} onClick={() => setColorId(c.id)}>{c.label}</Btn>)}</div>
+          <SegmentedControl size="sm" aria-label={t("Stroke", "Traço")} value={colorId} onValueChange={v => setColorId(v as typeof colorId)} options={colors.map(c => ({ value: c.id, label: c.label }))} />
         </div>
       </div>
       <div className="border-t border-border px-5 py-4 space-y-4">

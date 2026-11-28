@@ -22,7 +22,7 @@ function Switch({
       <span
         aria-hidden
         data-slot="switch-trilho"
-        className="inline-flex h-6 w-11 shrink-0 items-center rounded-full border border-transparent transition-all group-data-[state=checked]:bg-primary group-data-[state=unchecked]:bg-switch-background dark:group-data-[state=unchecked]:bg-input/80 group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2"
+        className="inline-flex h-6 w-11 shrink-0 items-center rounded-full border border-transparent transition-all group-data-[state=checked]:bg-primary group-data-[state=unchecked]:bg-switch-background group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2"
       >
         <SwitchPrimitive.Thumb
           data-slot="switch-thumb"

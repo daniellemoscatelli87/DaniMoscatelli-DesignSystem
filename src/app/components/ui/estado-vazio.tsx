@@ -3,6 +3,7 @@
 import * as React from "react";
 import { CheckCircle2, Info, XCircle, AlertCircle } from "lucide-react";
 import { cn } from "./utils";
+import { Confete } from "./confete";
 import { IconeComBase } from "./painel-dados";
 
 /**
@@ -122,9 +123,11 @@ export type EstadoFinalProps = Omit<React.ComponentProps<"div">, "title"> & {
   nivel?: Nivel;
   /** Recebe o foco ao aparecer (troca de tela num fluxo). */
   focarAoAparecer?: boolean;
+  /** Confete ao aparecer (28/11/2026): só para uma conquista de verdade, como um cadastro concluído. Nada com "menos movimento". */
+  comemorar?: boolean;
 };
 
-function EstadoFinal({ tom = "sucesso", icone, titulo: t, descricao, acoes, nivel = 2, focarAoAparecer = true, children, className, ...props }: EstadoFinalProps) {
+function EstadoFinal({ tom = "sucesso", icone, titulo: t, descricao, acoes, nivel = 2, focarAoAparecer = true, comemorar = false, children, className, ...props }: EstadoFinalProps) {
   const H = titulo(nivel);
   const ref = React.useRef<HTMLHeadingElement>(null);
   const { Icone, base } = TONS_FINAIS[tom];
@@ -140,6 +143,7 @@ function EstadoFinal({ tom = "sucesso", icone, titulo: t, descricao, acoes, nive
       {descricao && <p className="m-0 mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{descricao}</p>}
       {children && <div className="mt-6 w-full text-left">{children}</div>}
       <Acoes>{acoes}</Acoes>
+      {comemorar && <Confete ativo />}
     </div>
   );
 }

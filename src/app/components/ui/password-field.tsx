@@ -57,7 +57,7 @@ export const textosPadrao: PasswordTexts = {
 };
 
 const inputCls =
-  "h-10 toque:h-11 w-full rounded-md border border-input bg-card pl-3 pr-11 text-body text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50";
+  "h-10 toque:h-11 w-full rounded-md border border-input bg-card pl-3 pr-11 text-body text-foreground outline-none transition-all duration-150 placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-ring focus:border-primary/60 disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[var(--border-strong)]";
 
 type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "value" | "onChange"> & {
   label: string;

@@ -126,7 +126,8 @@ function QuadroDeCartoes({ colunas, rotulo, textos, className }: Pick<QuadroProp
                       )}
                     </>
                   );
-                  const classe = "block w-full rounded-md border border-border bg-card p-3 text-left";
+                  const classe = "relative block w-full rounded-md border border-border bg-card p-3 text-left";
+                  // relative (28/11/2026): um link esticado dentro do cartão (after:absolute after:inset-0) fica no cartão.
                   const interativo = "transition-colors duration-[var(--duration-fast)] hover:border-[var(--border-strong)] hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
                   return (
                     <motion.li
@@ -243,7 +244,7 @@ function QuadroDeItens<K extends string, T>({
                         }}
                         onDragEnd={() => { setArrastando(null); setAlvo(null); }}
                         className={cn(
-                          "flex min-w-0 items-start gap-1 rounded-md border border-border bg-card p-3 transition-[border-color,opacity] duration-[var(--duration-fast)] hover:border-[var(--border-strong)] motion-safe:animate-in motion-safe:fade-in",
+                          "relative flex min-w-0 items-start gap-1 rounded-md border border-border bg-card p-3 transition-[border-color,opacity] duration-[var(--duration-fast)] hover:border-[var(--border-strong)] motion-safe:animate-in motion-safe:fade-in",
                           destinos.length > 0 && "cursor-grab active:cursor-grabbing",
                           arrastando === chave(t) && "opacity-50",
                         )}

@@ -31,11 +31,13 @@ const horizontal = [
   "sm:data-[orientacao=horizontal]:*:data-[slot=card-footer]:*:data-[slot=card-divisor]:block sm:data-[orientacao=horizontal]:*:data-[slot=card-footer]:*:data-[slot=card-divisor]:mb-4 sm:data-[orientacao=horizontal]:*:data-[slot=card-footer]:*:data-[slot=card-divisor]:basis-full",
 ].join(" ");
 
-function Card({ className, orientacao, children, ...props }: React.ComponentProps<"div"> & { orientacao?: OrientacaoDoCard }) {
+// forwardRef (28/11/2026): o card pode ser o filho de um Radix com asChild (HoverCardTrigger, CollapsibleTrigger).
+const Card = React.forwardRef<HTMLDivElement, React.ComponentProps<"div"> & { orientacao?: OrientacaoDoCard }>(function Card({ className, orientacao, children, ...props }, ref) {
   const daGrade = useOrientacaoDoCard();
   const o = orientacao ?? daGrade ?? "vertical";
   return (
     <div
+      ref={ref}
       data-slot="card"
       data-orientacao={o}
       className={cn(
@@ -48,7 +50,7 @@ function Card({ className, orientacao, children, ...props }: React.ComponentProp
       <SemOrientacaoHerdada>{children}</SemOrientacaoHerdada>
     </div>
   );
-}
+});
 
 /**
  * Mídia do card: foto (tipo="imagem", de ponta a ponta) ou ícone (tipo="icone", com o respiro do card; um ícone svg

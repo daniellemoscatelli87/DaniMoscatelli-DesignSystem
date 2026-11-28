@@ -151,6 +151,9 @@
      cards e divisores, que não são campos. */
   --input:            var(--graphite-400);
   --input-background: #FFFFFF;
+  /* Preenchimento dos campos no tema escuro (28/11/2026): o --input passou a ser só o contorno. No claro, igual ao
+     --input-background. Campo, seleção, caixa de marcar e botão de contorno usam dark:bg-input-fundo/30. */
+  --input-fundo:       #FFFFFF;
   --switch-background: var(--graphite-400);   /* interruptor desligado: trilho 4,9:1 no branco; bolinha branca 4,9:1 no trilho */
   --ring:             rgba(212, 77, 77, 0.35);
 
@@ -272,9 +275,12 @@
   --card-foreground:  #E4E9F0;
   --popover:          rgba(19, 26, 39, 0.95);
   --popover-foreground: #E4E9F0;
-  --input:            rgba(19, 26, 39, 0.6);
+  /* Contorno dos campos no escuro (28/11/2026): grafite 400, 3,63:1 no card, 3,62:1 no campo e 3,85:1 no fundo
+     (antes rgba(19, 26, 39, 0.6), que também era o preenchimento: 1,01:1). O preenchimento é o --input-fundo. */
+  --input:            var(--graphite-400);
   --input-background: rgba(19, 26, 39, 0.6);
-  --switch-background: var(--graphite-600);
+  --input-fundo:       rgba(19, 26, 39, 0.6);
+  --switch-background: var(--graphite-400);   /* interruptor desligado no escuro: o mesmo grafite do contorno (28/11/2026) */
   --ring:             rgba(212, 77, 77, 0.4);
 
   --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.4);
@@ -340,6 +346,24 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --animate-shine: shine var(--duration) infinite linear;
+  /* AvisoProjeto (28/11/2026): entra com um leve deslize 0,6 s depois de a página abrir e flutua 3 vezes. Antes era um
+     <style> dentro do componente, que quebrava a hidratação no servidor (as aspas viravam &quot;). Use com motion-safe:. */
+  --animate-aviso-projeto: aviso-projeto-entra 0.45s var(--ease-out) 0.6s both, aviso-projeto-flutua 2.6s var(--ease-in-out) 1.2s 3;
+  /* FaixaDeLogos: a faixa anda metade da largura (a cópia fecha o laço). A duração vem de --duracao no próprio elemento. */
+  --animate-faixa-de-logos: faixa-de-logos var(--duracao, 48s) linear infinite;
+
+  @keyframes aviso-projeto-entra {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes aviso-projeto-flutua {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
+  @keyframes faixa-de-logos {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
 
   /* Shine Border: o feixe dá uma volta completa pela borda a cada --duration */
   @keyframes shine {
@@ -381,6 +405,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-input-background: var(--input-background);
+  --color-input-fundo: var(--input-fundo);
   --color-switch-background: var(--switch-background);
   --color-ring: var(--ring);
   --color-sobreposicao: var(--sobreposicao);

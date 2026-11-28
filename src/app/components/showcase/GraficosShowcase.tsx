@@ -16,6 +16,7 @@ import {
   Histograma, BoxPlot, Violino, Densidade, MapaDePontos, MapaDeBolhas, resumoDaDistribuicao,
 } from "../ui/graficos-catalogo";
 import { GradeDeCards } from "../ui/grade-de-cards";
+import { SecaoBarrasEFunil } from "./shared/LacunasDocs";
 
 /* Charts and visualizations (19/11/2026). Every number on this page is fictitious example data
    (neutral service examples): none describes real clients, units, regions or contacts. */
@@ -692,7 +693,7 @@ function SecaoCores() {
   );
 }
 
-export function GraficosShowcase() {
+function GraficosShowcaseBase() {
   const { t, lang } = useI18n();
   const loc = lang === "pt" ? "pt-BR" : "en-US";
   const n = (v: number) => formatarNumero(v, 0, loc);
@@ -1275,5 +1276,19 @@ export function GraficosShowcase() {
         </GradeDeCards>
       </section>
     </div>
+  );
+}
+
+/* Peças de 28/11/2026 (shared/LacunasDocs): a mesma documentação nos dois design systems. */
+export function GraficosShowcase() {
+  return (
+    <>
+      <GraficosShowcaseBase />
+      {(
+        <div className="mt-20 space-y-20">
+        <SecaoBarrasEFunil />
+        </div>
+      )}
+    </>
   );
 }

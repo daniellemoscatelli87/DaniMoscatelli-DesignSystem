@@ -36,7 +36,7 @@ function RadioGroupItem({
       <span
         aria-hidden
         data-slot="radio-group-circulo"
-        className="relative flex aspect-square size-5 shrink-0 items-center justify-center rounded-full border-2 border-input shadow-xs transition-[color,box-shadow] dark:bg-input/30 group-data-[state=checked]:border-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-destructive"
+        className="relative flex aspect-square size-5 shrink-0 items-center justify-center rounded-full border-2 border-input group-disabled:group-data-[state=unchecked]:border-[var(--border-strong)] shadow-xs transition-[color,box-shadow] dark:bg-input-fundo/30 group-data-[state=checked]:border-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-error"
       >
         <RadioGroupPrimitive.Indicator
           data-slot="radio-group-indicator"

@@ -26,7 +26,7 @@ function Checkbox({
       <span
         aria-hidden
         data-slot="checkbox-caixa"
-        className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background text-primary-foreground shadow-xs transition-shadow dark:bg-input/30 group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-destructive group-aria-invalid:ring-destructive/20"
+        className="flex size-5 shrink-0 items-center justify-center rounded-sm border border-input bg-input-background group-disabled:group-data-[state=unchecked]:border-[var(--border-strong)] text-primary-foreground shadow-xs transition-shadow dark:bg-input-fundo/30 group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary group-data-[state=indeterminate]:border-primary group-data-[state=indeterminate]:bg-primary group-focus-visible:border-ring group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2 group-aria-invalid:border-error group-aria-invalid:ring-error/20"
       >
         <CheckboxPrimitive.Indicator
           data-slot="checkbox-indicator"

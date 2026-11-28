@@ -86,6 +86,12 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
   /** Total de que o valor faz parte (48 de 75): aparece "de 75", menor, ao lado do número. */
   total?: number;
   rotulo: string;
+  /**
+   * Como o número aparece (28/11/2026): "numero" (padrão, 1.234) ou "percentual" (o valor em pontos: 67 vira "67%").
+   * Para outro formato (moeda, horas), passe `formatar`, que recebe o número e devolve o texto; ele vale também para o total.
+   */
+  formato?: "numero" | "percentual";
+  formatar?: (n: number) => string;
   /** Linha curta de contexto, embaixo do número ("nos últimos 7 dias"). */
   apoio?: React.ReactNode;
   variacao?: number;
@@ -122,7 +128,8 @@ type CardIndicadorProps = Omit<React.ComponentProps<"div">, "children"> & {
  * Use numa GradeDeCards com colunas pelo contêiner (não aperte: 4 lado a lado só com um contêiner de 66rem, cada card com
  * ~15,75rem e o rótulo numa linha; senão 2 × 2, e 1 no celular).
  */
-function CardIndicador({ icone, valor, total, rotulo, apoio, variacao, comparacao, explicacao, selo, acao, tom = "neutro", href, as, compacto = false, soNumeroNoCelular = false, className, ...props }: CardIndicadorProps) {
+function CardIndicador({ icone, valor, total, rotulo, formato = "numero", formatar, apoio, variacao, comparacao, explicacao, selo, acao, tom = "neutro", href, as, compacto = false, soNumeroNoCelular = false, className, ...props }: CardIndicadorProps) {
+  const mostrar = (n: number) => (formatar ? formatar(n) : formato === "percentual" ? `${formatarNumero(n)}%` : formatarNumero(n));
   const extra = soNumeroNoCelular ? "max-sm:hidden" : undefined;
   const palavras = rotulo.split(" ");
   const ultima = palavras.pop() ?? "";
@@ -160,8 +167,8 @@ function CardIndicador({ icone, valor, total, rotulo, apoio, variacao, comparaca
       </div>
       <div className="pt-2">
         <p className={cn("font-bold leading-none tracking-[-0.025em] tabular-nums text-foreground", "text-h2")}>
-          {valor === null ? <><span aria-hidden>–</span><span className="sr-only">Sem dado</span></> : formatarNumero(valor)}
-          {total !== undefined && valor !== null && <span className="ml-1 text-body font-semibold tracking-normal text-muted-foreground">de {formatarNumero(total)}</span>}
+          {valor === null ? <><span aria-hidden>–</span><span className="sr-only">Sem dado</span></> : mostrar(valor)}
+          {total !== undefined && valor !== null && <span className="ml-1 text-body font-semibold tracking-normal text-muted-foreground">de {mostrar(total)}</span>}
         </p>
         {apoio && <p className={cn("mt-2 text-body-sm leading-snug text-muted-foreground", extra)}>{apoio}</p>}
         {variacao !== undefined && <div className={cn("mt-2", extra)}><Variacao valor={variacao} comparacao={comparacao} /></div>}

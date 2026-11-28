@@ -36,8 +36,8 @@ export type SegmentedControlProps<T extends string = string> = Omit<
 };
 
 const sizes = {
-  sm: { root: "rounded-sm", item: "h-8 px-3 text-button gap-1 [&_svg]:size-3.5 toque:h-11" },
-  md: { root: "rounded-md", item: "h-10 px-4 text-button gap-2 [&_svg]:size-4 toque:h-11" },
+  sm: { root: "rounded-sm", item: "h-8 px-3 text-button gap-1 [&_svg]:size-3.5 toque:h-11 toque:min-w-11" },
+  md: { root: "rounded-md", item: "h-10 px-4 text-button gap-2 [&_svg]:size-4 toque:h-11 toque:min-w-11" },
   lg: { root: "rounded-md", item: "h-11 px-5 text-body gap-2 [&_svg]:size-4" },
 } as const;
 

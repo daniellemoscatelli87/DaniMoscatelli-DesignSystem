@@ -17,6 +17,8 @@ import { Campo, type CampoProps } from "./campo";
  *   campo. Escolher uma devolve o foco ao campo.
  * - type="email", inputMode="email" e autoComplete="email" por padrão (teclado certo no celular).
  * Controlado: `valor` e `onValorChange`; o resto das props é do Campo (rotulo, ajuda, erro, obrigatorio…).
+ * - Classes (28/11/2026): `className`, `classeDoBloco` e `inteiro` vão para o bloco de fora (o que ocupa o lugar na grade
+ *   ou na linha, como "w-full" ou "sm:col-span-2"); `classeDoCampo` vai para o campo de digitar.
  */
 
 export const DOMINIOS_COMUNS = ["gmail.com", "outlook.com", "hotmail.com", "icloud.com", "yahoo.com.br", "live.com", "uol.com.br", "terra.com.br"];
@@ -32,13 +34,17 @@ export function sugestoesDeEmail(valor: string, dominios = DOMINIOS_COMUNS) {
 }
 
 export type CampoDeEmailProps = Omit<CampoProps, "value" | "onChange" | "children" | "depois"> & {
+  /** Classes do bloco de fora (lugar na grade ou na linha). */
+  className?: string;
+  /** Classes do campo de digitar (o className do Campo). */
+  classeDoCampo?: string;
   valor: string;
   onValorChange: (valor: string) => void;
   dominios?: string[];
   textos?: { sugestoes?: string; sugestao?: string };
 };
 
-function CampoDeEmail({ valor, onValorChange, dominios, textos, onFocus, onBlur, placeholder = "nome@exemplo.com", ...props }: CampoDeEmailProps) {
+function CampoDeEmail({ valor, onValorChange, dominios, textos, onFocus, onBlur, placeholder = "nome@exemplo.com", className, classeDoBloco, classeDoCampo, inteiro, ...props }: CampoDeEmailProps) {
   const tx = { sugestoes: "sugestões de e-mail", sugestao: "sugestão de e-mail", ...textos };
   const [emFoco, setEmFoco] = React.useState(false);
   const blocoRef = React.useRef<HTMLDivElement>(null);
@@ -49,6 +55,8 @@ function CampoDeEmail({ valor, onValorChange, dominios, textos, onFocus, onBlur,
   return (
     <div
       ref={blocoRef}
+      data-slot="campo-de-email"
+      className={cn("min-w-0", inteiro && "col-span-full", classeDoBloco, className)}
       onFocus={() => setEmFoco(true)}
       onBlur={e => { if (!blocoRef.current?.contains(e.relatedTarget as Node)) setEmFoco(false); }}
     >
@@ -84,6 +92,7 @@ function CampoDeEmail({ valor, onValorChange, dominios, textos, onFocus, onBlur,
             )}
           </>
         }
+        className={classeDoCampo}
         {...props}
       />
     </div>

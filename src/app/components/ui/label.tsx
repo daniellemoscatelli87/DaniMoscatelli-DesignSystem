@@ -5,10 +5,17 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 
 import { cn } from "./utils";
 
+/**
+ * Label. `obrigatorio` (28/11/2026) põe o asterisco logo depois do texto, na mesma linha e quebrando junto com ele: o
+ * Label é flex (para a caixa de marcar ao lado do texto), e um asterisco solto virava outro item e ia para a ponta
+ * direita num rótulo longo. O asterisco é só visual (aria-hidden); o campo leva required ou aria-required.
+ */
 function Label({
   className,
+  obrigatorio = false,
+  children,
   ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+}: React.ComponentProps<typeof LabelPrimitive.Root> & { obrigatorio?: boolean }) {
   return (
     <LabelPrimitive.Root
       data-slot="label"
@@ -17,7 +24,14 @@ function Label({
         className,
       )}
       {...props}
-    />
+    >
+      {obrigatorio ? (
+        <span className="min-w-0 leading-snug">
+          {children}
+          <span aria-hidden className="text-primary-text"> *</span>
+        </span>
+      ) : children}
+    </LabelPrimitive.Root>
   );
 }
 

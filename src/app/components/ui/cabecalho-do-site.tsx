@@ -5,6 +5,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { cn } from "./utils";
 import { Logo } from "./logo";
+import { Button } from "./button";
 
 /**
  * CabecalhoDoSite (cabeçalho do site + menu do celular)
@@ -96,6 +97,18 @@ function useRolagem(raiz: React.RefObject<HTMLElement | null> | undefined, escon
   return { rolado: y > ROLADO_APOS, escondido, mostrar: () => setEscondido(false) };
 }
 
+/** Uma ação do cabeçalho (link ou botão) desenhada pelo Button do DS. Fora do componente para não remontar a cada rolagem. */
+function BotaoDaAcao({ a, A, variant, forma = "pilula", className, slot, aoClicar }: { a: AcaoDoCabecalho; A: React.ElementType; variant: "default" | "outline" | "ghost"; forma?: "pilula" | "padrao"; className?: string; slot: string; aoClicar?: () => void }) {
+  const onClick = () => { aoClicar?.(); a.onClick?.(); };
+  return a.href ? (
+    <Button asChild variant={variant} forma={forma} quebra="nunca" className={className}>
+      <A href={a.href} onClick={onClick} data-slot={slot}>{a.icone}{a.rotulo}</A>
+    </Button>
+  ) : (
+    <Button type="button" variant={variant} forma={forma} quebra="nunca" onClick={onClick} data-slot={slot} className={className}>{a.icone}{a.rotulo}</Button>
+  );
+}
+
 function CabecalhoDoSite({
   itens,
   atual,
@@ -151,41 +164,15 @@ function CabecalhoDoSite({
     </nav>
   );
 
-  const botaoAcao = acao && (
-    React.createElement(
-      acao.href ? A : "button",
-      {
-        ...(acao.href ? { href: acao.href } : { type: "button" }),
-        onClick: acao.onClick,
-        "data-slot": "cabecalho-acao",
-        className: cn(
-          "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border px-6 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)] [&_svg]:size-4",
-          escuro
-            ? "border-white/85 text-white hover:bg-white hover:text-graphite-900"
-            : "border-foreground text-foreground hover:bg-foreground hover:text-background",
-          foco,
-        ),
-      },
-      acao.icone,
-      acao.rotulo,
-    )
-  );
-
-  const botaoSecundario = (extra?: string, aoClicar?: () => void) => acaoSecundaria && React.createElement(
-    acaoSecundaria.href ? A : "button",
-    {
-      ...(acaoSecundaria.href ? { href: acaoSecundaria.href } : { type: "button" }),
-      onClick: () => { aoClicar?.(); acaoSecundaria.onClick?.(); },
-      "data-slot": "cabecalho-acao-secundaria",
-      className: cn(
-        "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 text-body-sm font-semibold transition-colors duration-[var(--duration-fast)] [&_svg]:size-4",
-        escuro ? "text-white hover:bg-white/15" : "text-foreground hover:bg-accent",
-        foco,
-        extra,
-      ),
-    },
-    acaoSecundaria.icone,
-    acaoSecundaria.rotulo,
+  // Ações desenhadas pelo Button do DS (28/11/2026; antes, classes próprias): pílula de contorno escuro na ação,
+  // pílula transparente na secundária; no menu do celular, botões de 48 px na largura toda.
+  const contornoDaAcao = (sobreEscuro: boolean) => sobreEscuro
+    ? "border-white/85 bg-transparent px-6 text-white hover:bg-white hover:text-graphite-900 dark:bg-transparent"
+    : "border-foreground bg-transparent px-6 text-foreground hover:bg-foreground hover:text-background dark:bg-transparent dark:border-foreground";
+  const botaoAcao = acao && <BotaoDaAcao A={A} a={acao} variant="outline" slot="cabecalho-acao" className={contornoDaAcao(escuro)} />;
+  const botaoSecundario = (extra?: string, aoClicar?: () => void) => acaoSecundaria && (
+    <BotaoDaAcao A={A} a={acaoSecundaria} variant="ghost" slot="cabecalho-acao-secundaria" aoClicar={aoClicar}
+      className={cn("px-4", escuro ? "text-white hover:bg-white/15 hover:text-white" : "text-foreground", extra)} />
   );
 
   const linkInicio = (conteudo: React.ReactNode, extra?: string) => (
@@ -233,12 +220,7 @@ function CabecalhoDoSite({
               ))}
             </nav>
             {botaoSecundario("text-foreground hover:bg-accent")}
-            {acao && React.cloneElement(botaoAcao as React.ReactElement<{ className?: string }>, {
-              className: cn(
-                "inline-flex h-10 shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-foreground px-6 text-body-sm font-semibold text-foreground transition-colors duration-[var(--duration-fast)] hover:bg-foreground hover:text-background [&_svg]:size-4",
-                foco,
-              ),
-            })}
+            {acao && <BotaoDaAcao A={A} a={acao} variant="outline" slot="cabecalho-acao" className={contornoDaAcao(false)} />}
           </header>
         </div>
       ) : (
@@ -321,20 +303,8 @@ function CabecalhoDoSite({
                     </A>
                   ))}
                 </nav>
-                {acao && React.createElement(
-                  acao.href ? A : "button",
-                  {
-                    ...(acao.href ? { href: acao.href } : { type: "button" }),
-                    onClick: () => { setAberto(false); acao.onClick?.(); },
-                    className: cn(
-                      "mt-4 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-primary px-4 text-body font-semibold text-primary-foreground transition-colors duration-[var(--duration-fast)] hover:bg-[var(--primary-hover)] [&_svg]:size-4",
-                      foco,
-                    ),
-                  },
-                  acao.icone,
-                  acao.rotulo,
-                )}
-                {acaoSecundaria && botaoSecundario(cn("mt-2 h-12 w-full rounded-md border border-input text-body text-foreground hover:bg-accent", !acao && "mt-4"), () => setAberto(false))}
+                {acao && <BotaoDaAcao A={A} a={acao} variant="default" forma="padrao" slot="cabecalho-acao" aoClicar={() => setAberto(false)} className="mt-4 h-12 w-full text-body" />}
+                {acaoSecundaria && <BotaoDaAcao A={A} a={acaoSecundaria} variant="outline" forma="padrao" slot="cabecalho-acao-secundaria" aoClicar={() => setAberto(false)} className={cn("mt-2 h-12 w-full text-body", !acao && "mt-4")} />}
               </DialogPrimitive.Content>
             </DialogPrimitive.Portal>
           </DialogPrimitive.Root>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { TokenTable, type TokenGroup } from "./shared/TokenTable";
+import { Skeleton } from "../ui/skeleton";
 import { Selo } from "@/app/components/ui/selo";
 import { SeloSecao } from "@/app/components/ui/selo-secao";
 import { AvatarCircles } from "@/app/components/ui/avatar-circles";
@@ -19,6 +20,7 @@ import { EstadoVazio } from "../ui/estado-vazio";
 import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
 import { GradeDeCards } from "../ui/grade-de-cards";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
+import { SecaoConfete, SecaoAvatarDecorativo } from "./shared/LacunasDocs";
 
 type Bi = { en: string; pt: string };
 type TFn = (en: string, pt: string) => string;
@@ -106,9 +108,6 @@ const toastTypes = [
 ];
 
 /* ── Skeleton ── */
-function SkeletonPulse({ className = "" }: { className?: string }) {
-  return <div className={`animate-pulse bg-muted rounded-sm ${className}`} />;
-}
 
 /* ── Progress ── */
 const progressItems = [
@@ -161,7 +160,7 @@ const timelineItems = [
   { icon: CheckCircle,   color: "bg-success text-white",   title: { en: "PR #284 merged", pt: "PR #284 mesclado" },          desc: { en: "Feature: enhanced search indexing.", pt: "Funcionalidade: indexação de busca aprimorada." },            time: { en: "1 hr ago", pt: "há 1 h" } },
 ];
 
-export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | "rotulos" }) {
+function FeedbackShowcaseBase({ parte = "feedback" }: { parte?: "feedback" | "rotulos" }) {
   const { t, bi, lang } = useI18n();
   const [defaultTab,   setDefaultTab]   = useState("overview");
   const [underlineTab, setUnderlineTab] = useState("overview");
@@ -352,37 +351,37 @@ export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | 
             {/* Card skeleton */}
             <ShowcaseCard>
               <div className="flex items-start gap-3 mb-4">
-                <SkeletonPulse className="h-10 w-10 rounded-full shrink-0" />
+                <Skeleton className="h-10 w-10 rounded-full shrink-0" />
                 <div className="flex-1 space-y-2">
-                  <SkeletonPulse className="h-4 w-32" />
-                  <SkeletonPulse className="h-3 w-24" />
+                  <Skeleton className="h-4 w-32" />
+                  <Skeleton className="h-3 w-24" />
                 </div>
               </div>
               <div className="space-y-2">
-                <SkeletonPulse className="h-3.5 w-full" />
-                <SkeletonPulse className="h-3.5 w-5/6" />
-                <SkeletonPulse className="h-3.5 w-4/6" />
+                <Skeleton className="h-3.5 w-full" />
+                <Skeleton className="h-3.5 w-5/6" />
+                <Skeleton className="h-3.5 w-4/6" />
               </div>
               <div className="mt-4 flex gap-2">
-                <SkeletonPulse className="h-8 w-20 rounded-sm" />
-                <SkeletonPulse className="h-8 w-16 rounded-sm" />
+                <Skeleton className="h-8 w-20 rounded-sm" />
+                <Skeleton className="h-8 w-16 rounded-sm" />
               </div>
             </ShowcaseCard>
 
             {/* Table skeleton */}
             <ShowcaseCard className="p-0 overflow-hidden">
               <div className="px-5 py-3 border-b border-border">
-                <SkeletonPulse className="h-4 w-28" />
+                <Skeleton className="h-4 w-28" />
               </div>
               {[1, 2, 3, 4].map(i => (
                 <div key={i} className="flex items-center gap-3 px-5 py-3 border-b border-border/50">
-                  <SkeletonPulse className="h-8 w-8 rounded-full shrink-0" />
+                  <Skeleton className="h-8 w-8 rounded-full shrink-0" />
                   <div className="flex-1 space-y-1">
-                    <SkeletonPulse className="h-3.5 w-36" />
-                    <SkeletonPulse className="h-3 w-24" />
+                    <Skeleton className="h-3.5 w-36" />
+                    <Skeleton className="h-3 w-24" />
                   </div>
-                  <SkeletonPulse className="h-6 w-16 rounded-sm" />
-                  <SkeletonPulse className="h-3.5 w-16" />
+                  <Skeleton className="h-6 w-16 rounded-sm" />
+                  <Skeleton className="h-3.5 w-16" />
                 </div>
               ))}
             </ShowcaseCard>
@@ -723,3 +722,18 @@ const badgesTokenGroups = (t: TFn): TokenGroup[] => [
     ],
   },
 ];
+
+/* Peças de 28/11/2026 (shared/LacunasDocs): a mesma documentação nos dois design systems. */
+export function FeedbackShowcase({ parte = "feedback" }: { parte?: "feedback" | "rotulos" }) {
+  return (
+    <>
+      <FeedbackShowcaseBase parte={parte} />
+      {parte === "feedback" && (
+        <div className="mt-20 space-y-20">
+        <SecaoConfete />
+        <SecaoAvatarDecorativo />
+        </div>
+      )}
+    </>
+  );
+}

@@ -9,7 +9,8 @@ import { cn } from "./utils";
  *
  * Balão da página inicial do site (src/compartilhado/partes.ts e menu.ts) que aponta para o botão do WhatsApp e,
  * ao ser clicado, abre a conversa. Entra com um leve deslize 0,6 s depois de a página abrir e flutua 3 vezes;
- * sem animação para quem pede menos movimento. Pode ser fechado no X e não volta mais na mesma sessão
+ * sem animação para quem pede menos movimento (classe motion-safe:animate-aviso-projeto, com os keyframes no theme.css; sem
+ * <style> dentro do componente, que quebrava a hidratação no servidor). Pode ser fechado no X e não volta mais na mesma sessão
  * (sessionStorage, chave "cta-contato-fechado"); também some quando a pessoa clica nele ou no botão do WhatsApp.
  *
  * posicao — "acima": em cima do botão do WhatsApp, com a seta apontando para baixo (computador, a partir de 1024 px).
@@ -38,12 +39,6 @@ export type AvisoProjetoProps = {
 
 const CHAVE = "cta-contato-fechado";
 
-const CSS = `
-@keyframes dm-aviso-entra { from { opacity: 0; transform: translateY(8px) scale(.97); } to { opacity: 1; transform: none; } }
-@keyframes dm-aviso-flutua { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
-.dm-aviso-projeto[data-animar="sim"] { animation: dm-aviso-entra .45s ease-out .6s both, dm-aviso-flutua 2.6s ease-in-out 1.2s 3; }
-@media (prefers-reduced-motion: reduce) { .dm-aviso-projeto[data-animar="sim"] { animation: none; } }
-`;
 
 const POS = {
   acima: {
@@ -121,9 +116,8 @@ function AvisoProjeto({
     <div
       data-slot="aviso-projeto"
       data-animar={animar ? "sim" : "nao"}
-      className={cn("dm-aviso-projeto z-[44] font-sans", fixo ? "fixed" : "absolute", p.caixa, className)}
+      className={cn("z-[44] font-sans", animar && "motion-safe:animate-aviso-projeto", fixo ? "fixed" : "absolute", p.caixa, className)}
     >
-      <style>{CSS}</style>
       <div className="relative w-full rounded-lg border border-border bg-card text-foreground shadow-xl">
         {href ? (
           <a href={href} target="_blank" rel="noopener" aria-label={rotuloAcao} onClick={() => { onAcao?.(); esconder(); }} className={classeAcao}>

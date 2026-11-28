@@ -288,10 +288,9 @@ function GlassFinishPicker() {
           <Slider aria-label={t("Blur", "Desfoque")} min={0} max={80} step={1} value={[desfoque ?? 24]} onValueChange={([v]) => setDesfoque(v)} />
           <p className="text-caption text-muted-foreground">{t("0 px = sees through sharp · 80 px = fully frosted", "0 px = vê através nítido · 80 px = totalmente jateado")}</p>
         </div>
-        <button type="button" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}
-          className="h-9 rounded-full border border-border bg-card px-4 text-label font-semibold text-foreground transition-colors hover:border-[var(--border-strong)] hover:bg-accent disabled:opacity-40 disabled:pointer-events-none">
+        <Button type="button" variant="outline" size="sm" forma="pilula" onClick={() => { setOpacidade(null); setDesfoque(null); }} disabled={!livre}>
           {t("Back to finish", "Voltar ao acabamento")}
-        </button>
+        </Button>
       </div>
       <CenaDeTesteCtx.Provider value={cena}>
       <CenaDoVidro>
@@ -340,11 +339,11 @@ function CardPorFundo({ fundo }: { fundo: FundoSolido }) {
   const r = regras[fundo];
   return (
     <div data-fundo-solido={fundo} className={cn("rounded-lg border border-border p-6", r.painel)}>
-      <div className={cn("rounded-xl bg-white p-5 text-[var(--graphite-900)]", r.card)} style={{ boxShadow: r.sombra }}>
+      <Card className={cn("gap-0 rounded-xl bg-white p-5 text-[var(--graphite-900)]", r.card || "border-0")} style={{ boxShadow: r.sombra }}>
         <p className={`${display} text-body font-semibold`}>{t("Card title", "Título do card")}</p>
         <p className="mt-1 text-body-sm leading-relaxed text-[var(--graphite-500)]">{t("Short description of the content.", "Descrição curta do conteúdo.")}</p>
         <Button size="sm" className="mt-4">{t("Action", "Ação")}</Button>
-      </div>
+      </Card>
       <p className={cn("mt-3 text-label font-semibold", fundo === "escuro" ? "text-white/80" : "text-[var(--graphite-700)]")}>{r.regra}</p>
     </div>
   );

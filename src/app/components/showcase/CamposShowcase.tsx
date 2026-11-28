@@ -12,6 +12,7 @@ import { CampoDeHorario } from "../ui/campo-de-horario";
 import { CampoDeEmails } from "../ui/campo-de-emails";
 import { GrupoDeChipsFiltraveis } from "../ui/chip-filtravel";
 import { GrupoDeCartoesDeEscolha, CartaoDeEscolha } from "../ui/cartao-de-escolha";
+import { EscolhaObrigatoriaDemo, opcoesDeExemplo } from "./shared/EscolhaObrigatoriaDemo";
 import { BotaoDeEnvio, type EstadoDoEnvio } from "../ui/botao-de-envio";
 import { TabelaAdaptavel } from "../ui/tabela-adaptavel";
 import { ChipDeEstado } from "../ui/chip-de-estado";
@@ -21,6 +22,7 @@ import { Textarea } from "../ui/textarea";
 import { EstadoVazio } from "../ui/estado-vazio";
 import { Calendar } from "../ui/calendar";
 import { CampoDeEndereco, type SugestaoDeEndereco } from "../ui/campo-de-endereco";
+import { SecaoCamposComAfixo, SecaoEscolhaOrdenada, SecaoEscalaDeNotas } from "./shared/LacunasDocs";
 
 /* Campos (27/11/2026): o campo padrão, e-mail com sugestão, estado e cidade, máscaras, busca, copiar, vários e-mails,
    chips de filtro, cartões de escolha, botão com estados de envio e a tabela que se adapta. */
@@ -236,7 +238,7 @@ function DemoEndereco() {
   );
 }
 
-export function CamposShowcase() {
+function CamposShowcaseBase() {
   const { t } = useI18n();
   return (
     <div className="space-y-20">
@@ -348,6 +350,10 @@ export function CamposShowcase() {
         naoFaca={[t("Don't use for short options: that is the Segmented control.", "Não use para opções curtas: isso é o Controle segmentado.")]}
       >
         <DemoEscolha />
+        <ShowcaseCard>
+          <p className="mb-4 max-w-3xl text-body-sm leading-relaxed text-muted-foreground">{t("In a form, with a required choice: tap Continue without choosing.", "Num formulário, com escolha obrigatória (required): toque em Continuar sem escolher. O erro aparece abaixo da pergunta, ligado ao grupo, e os cartões continuam do mesmo tamanho.")}</p>
+          <EscolhaObrigatoriaDemo pergunta={t("My business is…", "Meu negócio é…")} opcoes={opcoesDeExemplo("DM")} />
+        </ShowcaseCard>
       </SectionBlock>
 
       <SectionBlock
@@ -410,5 +416,21 @@ export function CamposShowcase() {
         <DemoTabela />
       </SectionBlock>
     </div>
+  );
+}
+
+/* Peças de 28/11/2026 (shared/LacunasDocs): a mesma documentação nos dois design systems. */
+export function CamposShowcase() {
+  return (
+    <>
+      <CamposShowcaseBase />
+      {(
+        <div className="mt-20 space-y-20">
+        <SecaoCamposComAfixo />
+        <SecaoEscolhaOrdenada />
+        <SecaoEscalaDeNotas />
+        </div>
+      )}
+    </>
   );
 }

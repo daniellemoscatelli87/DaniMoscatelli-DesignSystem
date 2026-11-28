@@ -491,19 +491,26 @@ export type BarrasOrdenadasProps = BaseDoGrafico & {
   ordenar?: boolean;
   /** Mostra a posição (1º, 2º…) antes do nome. */
   posicao?: boolean;
+  /**
+   * Destaca estes itens (pelo rótulo) em vez dos primeiros (28/11/2026): para escalas em ordem natural (de "Nada" a
+   * "Muito", faixas de idade), use ordenar={false} e destaque="Muito" (ou uma lista). Com ele, `destaques` não vale.
+   */
+  destaque?: string | string[];
 };
 
 /** Barras horizontais ordenadas, com o nome em cima e o valor escrito no fim de cada barra. */
-export function BarrasOrdenadas({ itens, destaques = 3, ordenar = true, posicao = true, cores: modo = "foco", rotulo, formatar = fmtPadrao, className }: BarrasOrdenadasProps) {
+export function BarrasOrdenadas({ itens, destaques = 3, destaque: escolhidos, ordenar = true, posicao = true, cores: modo = "foco", rotulo, formatar = fmtPadrao, className }: BarrasOrdenadasProps) {
   const menos = useReducedMotion();
   const lista = ordenar ? [...itens].sort((a, b) => b.valor - a.valor) : itens;
-  const cores = modo === "importancia" ? coresPorImportancia(lista.length).map(corDoTom) : coresDeFoco(lista.map((_, i) => i < destaques));
+  const marcados = escolhidos === undefined ? null : new Set(Array.isArray(escolhidos) ? escolhidos : [escolhidos]);
+  const emDestaque = (rotuloDoItem: string, i: number) => (marcados ? marcados.has(rotuloDoItem) : i < destaques);
+  const cores = modo === "importancia" ? coresPorImportancia(lista.length).map(corDoTom) : coresDeFoco(lista.map((it, i) => emDestaque(it.rotulo, i)));
   const maximo = Math.max(1, ...lista.map(i => i.valor));
   const resumo = `${rotulo}: ${lista.map(i => `${i.rotulo} ${formatar(i.valor)}`).join(", ")}.`;
   return (
     <div role="img" aria-label={resumo} className={cn("space-y-3", className)}>
       {lista.map((item, i) => {
-        const destaque = i < destaques;
+        const destaque = emDestaque(item.rotulo, i);
         return (
           <div key={item.rotulo} className="min-w-0">
             <p className={cn("mb-1 text-body-sm leading-snug", destaque ? "font-semibold text-foreground" : "text-muted-foreground")}>
@@ -1255,7 +1262,9 @@ export function Funil({ etapas, destacarMaiorPerda = true, rotulo, formatar = fm
   const corDaEtapa = (i: number) => (piorPassagem < 0 || i === piorPassagem + 1 ? "var(--chart-1)" : "var(--chart-6)");
   const resumo = `${rotulo}: ${etapas.map(e => `${e.rotulo} ${formatar(e.valor)}`).join(", ")}.`;
   return (
-    <ol role="img" aria-label={resumo} className={cn("m-0 list-none p-0", className)}>
+    // Lista de verdade (28/11/2026): sem role="img" (que escondia os itens e o axe acusava listitem fora de lista); cada
+    // etapa lê o nome, o valor e quanto seguiu. O resumo fica no nome da lista.
+    <ol aria-label={resumo} data-slot="funil" className={cn("m-0 list-none p-0", className)}>
       {etapas.map((e, i) => (
         <li key={e.rotulo}>
           {i > 0 && (
