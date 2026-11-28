@@ -532,7 +532,8 @@ function variantesCva(src) {
       if (!mm) break;
       const a = mm.index + mm[0].length - 1;
       const f = fimDoBloco(corpo, a);
-      const interno = corpo.slice(a + 1, f);
+      // Comentários de linha inteira entre as opções (28/11/2026) não escondem a opção que vem depois deles.
+      const interno = corpo.slice(a + 1, f).replace(/^[ \t]*\/\/.*$/gm, "");
       const valores = dividirNivelZero(interno).map((p) => p.match(/^["']?([\w-]+)["']?\s*:/)).filter(Boolean).map((x) => x[1]);
       if (valores.length) out[mm[1]] = valores;
       j = f + 1;

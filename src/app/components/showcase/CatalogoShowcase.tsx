@@ -45,7 +45,7 @@ const itens: Item[] = [
   { nome: "botao-subir", en: "Back-to-top button that appears with the footer, beside the WhatsApp button.", pt: "Botão de voltar ao topo que aparece com o rodapé, ao lado do botão do WhatsApp.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "botao-whatsapp", en: "Floating WhatsApp button with a ready message.", pt: "Botão flutuante do WhatsApp com mensagem pronta.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "breadcrumb", en: "Trail showing where the page is in the hierarchy.", pt: "Trilha que mostra onde a página está na hierarquia.", pagina: P.overlays },
-  { nome: "button", en: "Action button: 40 px, variants default, outline, secondary, ghost, link and destructive.", pt: "Botão de ação: 40 px, variantes padrão, contorno, secundário, ghost, link e destrutivo.", pagina: P.form },
+  { nome: "button", en: "Action button: 40 px, variants primary (default), secondary with an outline (\"outline\" is an alias of the same button), ghost, link and destructive.", pt: "Botão de ação: 40 px, variantes principal (default), secundário de contorno (secondary; \"outline\" é apelido do mesmo botão), ghost, link e destrutivo.", pagina: P.form },
   { nome: "calendar", en: "Month calendar to pick a date or a range.", pt: "Calendário mensal para escolher uma data ou um intervalo." },
   { nome: "card", en: "Base card with header, content and footer.", pt: "Card base com cabeçalho, conteúdo e rodapé.", pagina: P.cards },
   { nome: "card-frente", en: "Area of work card (icon, title, red subtitle, topics) and its grid/phone carousel.", pt: "Card de frente de atuação (ícone, título, subtítulo vermelho, temas) e sua grade/carrossel no celular.", pagina: { ...P.site, ancora: "site-frentes" } },

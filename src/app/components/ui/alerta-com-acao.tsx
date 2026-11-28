@@ -170,6 +170,8 @@ function BotaoDoAlerta({ tom, asChild = false, className, ...props }: BotaoDoAle
         "inline-flex min-h-10 max-w-full items-center justify-center gap-2 rounded-full toque:min-h-11 border-[length:1.5px] border-[color:var(--alerta-cor)] bg-transparent px-4 py-1 text-left text-body-sm font-semibold leading-snug text-[color:var(--alerta-texto)]",
         "hover:bg-[color:color-mix(in_oklab,var(--alerta-cor)_8%,transparent)] [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
         "disabled:cursor-not-allowed disabled:border-transparent disabled:bg-disabled disabled:text-disabled-foreground aria-disabled:pointer-events-none aria-disabled:border-transparent aria-disabled:bg-disabled aria-disabled:text-disabled-foreground",
+        // Ocupado (aria-busy, 28/11/2026): como o Button carregando, fica na cor do tom, um pouco esmaecido e sem clique.
+        "aria-busy:pointer-events-none aria-busy:opacity-80",
         transicao,
         foco,
         className,

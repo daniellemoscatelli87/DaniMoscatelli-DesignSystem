@@ -104,9 +104,11 @@
   --secondary-hover:      var(--graphite-100);
   --secondary-foreground: var(--graphite-900);
 
-  /* Desabilitado: fundo grafite-100 (#D6DCE6, decisão da dona do produto, 23/11/2026), com forma de botão e texto
-     meio apagado mas legível: grafite-400 sobre ele dá 3,6:1 (antes: cinza médio e 3,7:1, decisão de 20/11/2026) */
-  --disabled:            var(--graphite-100);
+  /* Desabilitado: fundo um pouco mais claro (decisão da dona do produto, 28/11/2026: "o fundo do cinza quero um pouco
+     mais claro"), a meio caminho entre o grafite-100 e o fundo da página (grafite-50): ≈ #E2E6EE. Ainda tem forma de
+     botão no branco (1,25:1) e no fundo da página (1,1:1); texto grafite-400 sobre ele: 3,9:1. Antes: grafite-100
+     (#D6DCE6, 23/11/2026, 3,6:1) e cinza médio (20/11/2026). Carregando não usa este cinza: veja ui/button.tsx. */
+  --disabled:            color-mix(in srgb, var(--graphite-100) 50%, var(--graphite-50));
   --disabled-foreground: var(--graphite-400);
   /* Hover de linha ou item dentro do card: cinza bem claro e sutil, metade do grafite-50 sobre o card (≈ #F6F8FA no branco); decisão de 23/11/2026 */
   --row-hover:           color-mix(in srgb, var(--graphite-50) 50%, var(--card));
