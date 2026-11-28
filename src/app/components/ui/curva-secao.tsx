@@ -14,6 +14,10 @@ import { cn } from "./utils";
  * A seção precisa de position relative e overflow hidden, e de respiro extra no topo/base para o conteúdo não
  * ficar sob a curva (no site, +3rem / +5rem / +6rem conforme a tela, a mesma altura da curva).
  * Altura padrão: 48 px, 80 px a partir de 640 px e 96 px a partir de 1024 px.
+ *
+ * Classe de CSS puro (páginas em HTML, 28/11/2026): svg.ds-curva-secao com data-posicao="topo" ou "base" e o mesmo
+ * viewBox e caminho; a classe é a fonte única do tamanho e da posição (página Navegação de landing page). Mesma API
+ * no DS FindLook.
  */
 
 export type CurvaSecaoProps = Omit<React.SVGProps<SVGSVGElement>, "children"> & {
@@ -35,11 +39,8 @@ function CurvaSecao({ posicao = "topo", cor = "var(--background)", className, ..
       data-slot="curva-secao"
       viewBox="0 0 1440 96"
       preserveAspectRatio="none"
-      className={cn(
-        "pointer-events-none absolute left-0 z-[2] block h-12 w-full sm:h-20 lg:h-24",
-        posicao === "topo" ? "top-0" : "bottom-0",
-        className,
-      )}
+      data-posicao={posicao}
+      className={cn("ds-curva-secao", className)}
       {...props}
     >
       <path fill={cor} d={CAMINHOS[posicao]} />

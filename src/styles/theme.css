@@ -622,6 +622,315 @@
   }
 }
 
+/* @ds-css-puro:navegacao-landing — início (bloco próprio da página Navegação de landing page; não misturar com outros) */
+/* ── Navegação de landing page (28/11/2026) ──
+   Classes de CSS puro das peças da página "Navegação de landing page": HeroComAba e AbaSaibaMais, CurvaSecao,
+   Parallax, MenuDeAncoras, ProgressoDeLeitura e SecaoFixa. São a fonte única do visual: os componentes React usam
+   estas mesmas classes, e as páginas em HTML do site usam as classes direto (exemplos na página do DS).
+   Mesmas classes e mesmas variáveis nos dois DS; só o fundo padrão do hero segue a marca.
+   Pontos de quebra: 640 px (sm) e 1024 px (lg), os do grid. data-tela="celular" ou "computador" força um dos
+   desenhos (demonstrações); sem ele, vale a largura da tela. */
+@layer components {
+  /* HeroComAba: o hero num painel arredondado, com a aba "Saiba mais" recortada no centro da base, na cor da seção
+     seguinte. Medidas do site do estúdio (página inicial, Projeto Piloto e Rede de Parceiros), copiadas como estão:
+     computador — painel com 16 px de respiro e cantos de 32 px; aba de 320 × 56, topo com cantos de 40 px, texto de
+     16 px, 16 px entre o texto e a cápsula da seta (20 × 32, seta de 14 px).
+     celular e tablet — o hero vai de ponta a ponta; a seção seguinte começa com cantos de 28 px (a "tampa") e a aba
+     de 132 × 28 (cantos de 20 px, texto de 12 px, cápsula de 14 × 20, seta de 10 px) fica no centro dela.
+     Os raios e tamanhos da aba ficam em variáveis do próprio componente (fora da escala de raios de propósito: são
+     o desenho da aba no site, aprovado como está). */
+  .ds-hero-com-aba {
+    --hero-aba-cor: var(--card);
+    --hero-fundo: var(--background);
+    --hero-respiro: 0px;
+    --hero-raio: 0px;
+    --hero-tampa: 28px;
+    --aba-largura: 132px;
+    --aba-altura: 28px;
+    --aba-raio: 20px;
+    --aba-fonte: var(--text-label);
+    --aba-espaco: var(--space-2);
+    --aba-seta-largura: 14px;
+    --aba-seta-altura: 20px;
+    --aba-seta-icone: 10px;
+    --aba-seta-borda: var(--graphite-100);
+    position: relative;
+    padding: var(--hero-respiro);
+    background: var(--hero-aba-cor);
+  }
+  .dark .ds-hero-com-aba { --aba-seta-borda: var(--border-strong); }
+  .ds-hero-com-aba-painel {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: var(--hero-raio);
+    background: var(--hero-fundo);
+    padding-bottom: calc(var(--hero-tampa) + var(--aba-altura));
+  }
+  /* a tampa: o começo arredondado da seção seguinte (só no celular e no tablet) */
+  .ds-hero-com-aba-painel::after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: var(--hero-tampa);
+    border-radius: var(--hero-tampa) var(--hero-tampa) 0 0;
+    background: var(--hero-aba-cor);
+    pointer-events: none;
+  }
+  .ds-aba-saiba-mais {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: max(0px, calc(var(--hero-tampa) - 1px));
+    translate: -50% 0;
+    box-sizing: border-box;
+    width: var(--aba-largura);
+    height: var(--aba-altura);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--aba-espaco);
+    border: 0;
+    border-radius: var(--aba-raio) var(--aba-raio) 0 0;
+    background: var(--hero-aba-cor);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: var(--aba-fonte);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* área de toque de 44 px (a aba do celular desenha 28 px): 8 px invisíveis acima e abaixo */
+  .ds-aba-saiba-mais::before { content: ""; position: absolute; inset: -8px 0; }
+  .ds-aba-saiba-mais:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--primary); }
+  .ds-aba-saiba-mais-seta {
+    flex: none;
+    box-sizing: border-box;
+    width: var(--aba-seta-largura);
+    height: var(--aba-seta-altura);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--aba-seta-borda);
+    border-radius: 9999px;
+    color: var(--primary);
+    transition: background-color var(--duration-fast) var(--ease-out);
+  }
+  .ds-aba-saiba-mais-seta svg { width: var(--aba-seta-icone); height: var(--aba-seta-icone); }
+  /* hover cinza (regra do DS: rosa só para selecionado) */
+  .ds-aba-saiba-mais:hover .ds-aba-saiba-mais-seta { background: var(--accent); }
+  /* computador: painel com respiro, cantos de 32 px e a aba grande, recortada na base do painel */
+  .ds-hero-com-aba[data-tela="computador"] {
+    --hero-respiro: var(--space-4);
+    --hero-raio: 32px;
+    --hero-tampa: 0px;
+    --aba-largura: 320px;
+    --aba-altura: 56px;
+    --aba-raio: 40px;
+    --aba-fonte: var(--text-body);
+    --aba-espaco: var(--space-4);
+    --aba-seta-largura: 20px;
+    --aba-seta-altura: 32px;
+    --aba-seta-icone: 14px;
+  }
+  .ds-hero-com-aba[data-tela="computador"] > .ds-hero-com-aba-painel { padding-bottom: calc(var(--aba-altura) + var(--space-5)); }
+  .ds-hero-com-aba[data-tela="computador"][data-tela-cheia] > .ds-hero-com-aba-painel { min-height: calc(100svh - 2 * var(--hero-respiro)); }
+  .ds-hero-com-aba[data-tela="computador"] > .ds-hero-com-aba-painel::after { display: none; }
+  .ds-hero-com-aba[data-tela="computador"] .ds-aba-saiba-mais { padding: var(--space-3); }
+  .ds-hero-com-aba[data-tela="computador"] .ds-aba-saiba-mais::before { inset: 0; }
+  @media (min-width: 1024px) {
+    .ds-hero-com-aba:not([data-tela="celular"]) {
+      --hero-respiro: var(--space-4);
+      --hero-raio: 32px;
+      --hero-tampa: 0px;
+      --aba-largura: 320px;
+      --aba-altura: 56px;
+      --aba-raio: 40px;
+      --aba-fonte: var(--text-body);
+      --aba-espaco: var(--space-4);
+      --aba-seta-largura: 20px;
+      --aba-seta-altura: 32px;
+      --aba-seta-icone: 14px;
+    }
+    .ds-hero-com-aba:not([data-tela="celular"]) > .ds-hero-com-aba-painel { padding-bottom: calc(var(--aba-altura) + var(--space-5)); }
+    .ds-hero-com-aba:not([data-tela="celular"])[data-tela-cheia] > .ds-hero-com-aba-painel { min-height: calc(100svh - 2 * var(--hero-respiro)); }
+    .ds-hero-com-aba:not([data-tela="celular"]) > .ds-hero-com-aba-painel::after { display: none; }
+    .ds-hero-com-aba:not([data-tela="celular"]) .ds-aba-saiba-mais { padding: var(--space-3); }
+    .ds-hero-com-aba:not([data-tela="celular"]) .ds-aba-saiba-mais::before { inset: 0; }
+  }
+  /* a aba grande sobe da base do painel (0,7 s, curva snappy, depois de 0,6 s), como no site; parada com menos movimento */
+  @media (prefers-reduced-motion: no-preference) {
+    .ds-hero-com-aba[data-tela="computador"] .ds-aba-saiba-mais { animation: ds-aba-entra 700ms var(--ease-snappy) 600ms both; }
+  }
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .ds-hero-com-aba:not([data-tela="celular"]) .ds-aba-saiba-mais { animation: ds-aba-entra 700ms var(--ease-snappy) 600ms both; }
+  }
+
+  /* CurvaSecao: borda curva entre duas seções (SVG decorativo, de ponta a ponta). 48 px no celular, 80 px a partir
+     de 640 px e 96 px a partir de 1024 px. A seção precisa de position: relative e overflow: hidden. */
+  .ds-curva-secao {
+    pointer-events: none;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: var(--space-12);
+  }
+  .ds-curva-secao[data-posicao="topo"] { top: 0; }
+  .ds-curva-secao[data-posicao="base"] { bottom: 0; }
+  @media (min-width: 640px) { .ds-curva-secao { height: var(--space-20); } }
+  @media (min-width: 1024px) { .ds-curva-secao { height: var(--space-24); } }
+
+  /* Parallax: a camada de fundo anda mais devagar que o conteúdo. Só transform (sem mexer no layout): a camada passa
+     --parallax-sobra para cima e para baixo do bloco e desliza dentro dele enquanto o bloco atravessa a tela.
+     Sem JavaScript nos navegadores com animação ligada à rolagem (animation-timeline); o componente React cobre os
+     outros. Parada com menos movimento e, com data-toque="parado", nas telas de toque. */
+  .ds-parallax {
+    --parallax-velocidade: 0.2;
+    --parallax-sobra: calc(var(--parallax-velocidade) * 50vh);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    view-timeline-name: --ds-parallax;
+    view-timeline-axis: block;
+  }
+  .ds-parallax-camada {
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 0;
+    top: calc(-1 * var(--parallax-sobra));
+    bottom: calc(-1 * var(--parallax-sobra));
+    pointer-events: none;
+    will-change: transform;
+  }
+  .ds-parallax-camada > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .ds-parallax:not([data-js]) .ds-parallax-camada {
+        animation: ds-parallax linear both;
+        animation-timeline: --ds-parallax;
+        animation-range: cover 0% cover 100%;
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-parallax-camada { top: 0; bottom: 0; transform: none !important; will-change: auto; }
+  }
+  @media (pointer: coarse) {
+    .ds-parallax[data-toque="parado"] .ds-parallax-camada { top: 0; bottom: 0; animation: none; transform: none !important; will-change: auto; }
+  }
+
+  /* MenuDeAncoras: os links para as seções da página, com a seção em leitura marcada (aria-current, no rosa de
+     selecionado). Fileira de chips que quebra de linha (nunca rola para o lado); vertical a partir de 1024 px com
+     data-orientacao="vertical"; no celular, data-celular="seletor" troca os chips por uma lista de seleção. */
+  .ds-menu-de-ancoras { font-family: var(--font-sans); }
+  .ds-menu-de-ancoras[data-fixo] { position: sticky; z-index: 10; top: var(--menu-ancoras-topo, var(--altura-cabecalho, 0px)); }
+  .ds-menu-de-ancoras[data-fixo][data-orientacao="horizontal"] {
+    padding-block: var(--space-2);
+    background: color-mix(in srgb, var(--card) 85%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+    border-bottom: 1px solid var(--border);
+  }
+  .ds-menu-de-ancoras-lista { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+  .ds-menu-de-ancoras-lista > li { min-width: 0; }
+  .ds-menu-de-ancoras-item {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    max-width: 100%;
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-4);
+    border: 1px solid var(--border-strong);
+    border-radius: 9999px;
+    background: var(--card);
+    color: var(--muted-foreground);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.3;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  }
+  .ds-menu-de-ancoras-item:hover { background: var(--accent); color: var(--foreground); }
+  .ds-menu-de-ancoras-item[aria-current="true"],
+  .ds-menu-de-ancoras-item[aria-current="true"]:hover { background: var(--primary-suave); border-color: var(--primary); color: var(--primary-text); }
+  .ds-menu-de-ancoras-item:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .ds-menu-de-ancoras-seletor { display: none; }
+  .ds-menu-de-ancoras[data-celular="seletor"] .ds-menu-de-ancoras-seletor { display: block; }
+  .ds-menu-de-ancoras[data-celular="seletor"] .ds-menu-de-ancoras-lista { display: none; }
+  /* vertical (computador): lista de linhas, a atual com um traço à esquerda além do rosa (nunca só cor) */
+  .ds-menu-de-ancoras[data-tela="computador"] .ds-menu-de-ancoras-seletor { display: none; }
+  .ds-menu-de-ancoras[data-tela="computador"] .ds-menu-de-ancoras-lista { display: flex; }
+  .ds-menu-de-ancoras[data-tela="computador"][data-orientacao="vertical"] .ds-menu-de-ancoras-lista { flex-direction: column; flex-wrap: nowrap; gap: var(--space-1); }
+  .ds-menu-de-ancoras[data-tela="computador"][data-orientacao="vertical"] .ds-menu-de-ancoras-item { position: relative; display: flex; width: 100%; min-height: 2.5rem; border-color: transparent; border-radius: var(--space-2); background: transparent; }
+  .ds-menu-de-ancoras[data-tela="computador"][data-orientacao="vertical"] .ds-menu-de-ancoras-item:hover { background: var(--accent); }
+  .ds-menu-de-ancoras[data-tela="computador"][data-orientacao="vertical"] .ds-menu-de-ancoras-item[aria-current="true"] { background: var(--primary-suave); border-color: transparent; }
+  .ds-menu-de-ancoras[data-tela="computador"][data-orientacao="vertical"] .ds-menu-de-ancoras-item[aria-current="true"]::before { content: ""; position: absolute; left: 0; top: var(--space-2); bottom: var(--space-2); width: 3px; border-radius: 9999px; background: var(--primary); }
+  @media (min-width: 1024px) {
+    .ds-menu-de-ancoras:not([data-tela="celular"]) .ds-menu-de-ancoras-seletor { display: none; }
+    .ds-menu-de-ancoras:not([data-tela="celular"]) .ds-menu-de-ancoras-lista { display: flex; }
+    .ds-menu-de-ancoras:not([data-tela="celular"])[data-orientacao="vertical"] .ds-menu-de-ancoras-lista { flex-direction: column; flex-wrap: nowrap; gap: var(--space-1); }
+    .ds-menu-de-ancoras:not([data-tela="celular"])[data-orientacao="vertical"] .ds-menu-de-ancoras-item { position: relative; display: flex; width: 100%; min-height: 2.5rem; border-color: transparent; border-radius: var(--space-2); background: transparent; }
+    .ds-menu-de-ancoras:not([data-tela="celular"])[data-orientacao="vertical"] .ds-menu-de-ancoras-item:hover { background: var(--accent); }
+    .ds-menu-de-ancoras:not([data-tela="celular"])[data-orientacao="vertical"] .ds-menu-de-ancoras-item[aria-current="true"] { background: var(--primary-suave); border-color: transparent; }
+    .ds-menu-de-ancoras:not([data-tela="celular"])[data-orientacao="vertical"] .ds-menu-de-ancoras-item[aria-current="true"]::before { content: ""; position: absolute; left: 0; top: var(--space-2); bottom: var(--space-2); width: 3px; border-radius: 9999px; background: var(--primary); }
+  }
+  @media (prefers-reduced-motion: reduce) { .ds-menu-de-ancoras-item { transition: none; } }
+  /* a seção de destino para logo abaixo do cabeçalho (e do menu fixo, quando houver) */
+  .ds-alvo-de-ancora { scroll-margin-top: var(--menu-ancoras-topo, var(--altura-cabecalho, 0px)); }
+  .ds-alvo-de-ancora:focus { outline: none; }
+
+  /* ProgressoDeLeitura: barra fina (4 px) no topo, na cor da marca, que enche conforme a página rola. Decorativa
+     (aria-hidden). Sem transição: acompanha a rolagem quadro a quadro, então não anima sozinha (menos movimento ok).
+     Sem JavaScript nos navegadores com animation-timeline; o componente React mede a rolagem nos outros. */
+  .ds-progresso-de-leitura {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    right: 0;
+    top: var(--progresso-topo, 0px);
+    height: var(--space-1);
+    pointer-events: none;
+  }
+  .ds-progresso-de-leitura[data-posicao="grudado"] { position: sticky; }
+  .ds-progresso-de-leitura[data-posicao="absoluto"] { position: absolute; }
+  .ds-progresso-de-leitura-barra {
+    height: 100%;
+    background: var(--primary);
+    transform-origin: 0 50%;
+    transform: scaleX(var(--progresso, 0));
+  }
+  @supports (animation-timeline: scroll()) {
+    .ds-progresso-de-leitura:not([data-js]) .ds-progresso-de-leitura-barra { animation: ds-progresso linear both; animation-timeline: scroll(root block); }
+  }
+
+  /* SecaoFixa: no computador, o título ou a imagem fica parado ao lado enquanto a coluna de texto rola; no celular e
+     no tablet, tudo empilha. Para logo abaixo do cabeçalho do site, com o espaço padrão abaixo dele. */
+  .ds-secao-fixa { display: grid; gap: var(--space-8); }
+  .ds-secao-fixa-lado, .ds-secao-fixa-conteudo { min-width: 0; }
+  @media (min-width: 1024px) {
+    .ds-secao-fixa { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: start; gap: var(--space-16); }
+    .ds-secao-fixa[data-lado="direita"] { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .ds-secao-fixa[data-lado="direita"] > .ds-secao-fixa-lado { order: 2; }
+    .ds-secao-fixa-lado { position: sticky; top: var(--secao-fixa-topo, calc(var(--altura-cabecalho, 0px) + var(--espaco-abaixo-do-cabecalho))); }
+  }
+}
+@keyframes ds-aba-entra { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
+@keyframes ds-parallax {
+  from { transform: translate3d(0, calc(-1 * var(--parallax-sobra)), 0); }
+  to { transform: translate3d(0, var(--parallax-sobra), 0); }
+}
+@keyframes ds-progresso { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* @ds-css-puro:navegacao-landing — fim */
+
 /* ── Grid e espaçamento ──
    Escala de 4 px (--space-*), grid de colunas que muda por tela, larguras máximas do conteúdo
    e ritmo vertical entre seções. Pontos de quebra iguais aos do Tailwind: 640 px (sm) e 1024 px (lg). */
