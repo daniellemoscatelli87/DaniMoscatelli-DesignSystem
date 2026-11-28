@@ -1,7 +1,8 @@
 import React from "react";
 import { BarChart3, BookOpen, Briefcase, Code2, Database, Factory, GraduationCap, Handshake, HeartPulse, Landmark, LayoutGrid, LayoutTemplate, Leaf, Lightbulb, Megaphone, MessageCircle, Monitor, Network, Package, PenTool, Search, ShoppingBag, Sparkles, TrendingUp, Truck, Users } from "lucide-react";
 import { useI18n } from "../../i18n";
-import { SectionBlock, ShowcaseCard } from "./shared/SectionBlock";
+import { SectionBlock, ShowcaseCard, CodeBlock } from "./shared/SectionBlock";
+import { SecaoBotaoWhatsApp, SecaoCardDeRedeSocial, SecaoLinkDeRedeSocial, SecaoPilulaDeDestaque } from "./shared/SecoesRedesEDestaques";
 import { CardDeDepoimento } from "../ui/card-de-depoimento";
 import { CardDeArtigo } from "../ui/card-de-artigo";
 import { FaixaDeLogos } from "../ui/faixa-de-logos";
@@ -55,17 +56,18 @@ export function SecoesDoSiteShowcase() {
         id="secoes-depoimentos"
         titulo={t("Testimonial card", "Card de depoimento")}
         quando={t(
-          "Testimonials from clients and peers (home page, presentation pages): photo, name and role, the quote and, optionally, its origin. In a Carousel: one at a time on phones, two on tablets, three on desktop, all the same height.",
-          "Depoimentos de clientes e pares (página inicial, páginas de apresentação): foto, nome e cargo, o depoimento e, se quiser, a origem. No Carousel: um por vez no celular, dois no tablet, três no computador, todos da mesma altura.",
+          "The standard testimonial card (owner's decision, 28/11/2026): quote icon, the testimonial first, a divider and the person at the bottom (photo, name and role and, optionally, the origin). Home page and presentation pages. In a Carousel: one at a time on phones, two on tablets, three on desktop, all the same height. Same component and API in the FindLook DS (there with profile, store and rating, which the studio site does not use).",
+          "O card padrão de depoimento (decisão da dona do produto, 28/11/2026): aspas, o depoimento primeiro, um divisor e a pessoa embaixo (foto, nome e cargo e, se quiser, a origem). Página inicial e páginas de apresentação. No Carousel: um por vez no celular, dois no tablet, três no computador, todos da mesma altura. Mesmo componente e API no DS FindLook (lá com perfil, loja e nota, que o site do estúdio não usa).",
         )}
-        arquivo="ui/card-de-depoimento.tsx"
+        arquivo="ui/card-de-depoimento.tsx · styles/theme.css (.ds-card-depoimento)"
         nomes={["CardDeDepoimento"]}
         api={`<CardDeDepoimento nome="…" cargo="…" foto="/img/…webp" origem="Recomendação no LinkedIn">
   “Texto do depoimento com <strong>o trecho principal</strong>.”
 </CardDeDepoimento>`}
-        faca={[t("Only real testimonials, with permission.", "Só depoimentos reais, com autorização.")]}
-        naoFaca={[t("Don't put a resting shadow on the cards: border only.", "Não ponha sombra parada nos cards: só borda.")]}
+        faca={[t("Only real testimonials, with permission.", "Só depoimentos reais, com autorização."), t("In plain HTML pages, use the same classes (.ds-card-depoimento and its parts).", "Nas páginas de HTML puro, use as mesmas classes (.ds-card-depoimento e suas partes).")]}
+        naoFaca={[t("Don't put a resting shadow on the cards: border only.", "Não ponha sombra parada nos cards: só borda."), t("Don't rebuild the card by hand in the page.", "Não refaça o card à mão na página.")]}
       >
+        <div data-demo="depoimentos-dm">
         <Carousel opts={{ align: "start" }} className="px-0">
           <CarouselContent>
             {depoimentos.map(d => (
@@ -81,6 +83,25 @@ export function SecoesDoSiteShowcase() {
             <CarouselNext className="static translate-y-0" />
           </div>
         </Carousel>
+        </div>
+        <div className="space-y-2">
+          <h3 className="text-body-sm font-semibold text-foreground">{t("In plain HTML pages (the same classes)", "Em páginas de HTML puro (as mesmas classes)")}</h3>
+          <CodeBlock>{`<figure class="ds-card-depoimento">
+  <blockquote class="ds-card-depoimento__texto">
+    <span class="ds-card-depoimento__topo"><svg class="ds-card-depoimento__aspas" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">(ícone Quote da Lucide)</svg></span>
+    “Texto do depoimento com <strong>o trecho principal</strong>.”
+  </blockquote>
+  <figcaption class="ds-card-depoimento__pessoa">
+    <img class="ds-card-depoimento__foto" src="/img/…webp" alt="" loading="lazy">
+    <span class="ds-card-depoimento__quem">
+      <span class="ds-card-depoimento__nome">Nome</span>
+      <span class="ds-card-depoimento__cargo">Cargo</span>
+      <span class="ds-card-depoimento__origem">Recomendação no LinkedIn</span>
+    </span>
+  </figcaption>
+</figure>`}</CodeBlock>
+          <p className="m-0 text-body-sm text-muted-foreground">{t("Without a photo: <span class=\"ds-card-depoimento__iniciais\" aria-hidden=\"true\">DM</span> in place of the img. The origin line is optional.", "Sem foto: <span class=\"ds-card-depoimento__iniciais\" aria-hidden=\"true\">DM</span> no lugar do img. A linha da origem é opcional.")}</p>
+        </div>
       </SectionBlock>
 
       <SectionBlock
@@ -363,6 +384,10 @@ logos={[{ nome: "Empresa", src: "/logos/branco.svg", silhueta: true }]}   // só
           </ItemDaGrade>
         </GradeDeCards>
       </SectionBlock>
+      <SecaoLinkDeRedeSocial />
+      <SecaoCardDeRedeSocial />
+      <SecaoBotaoWhatsApp />
+      <SecaoPilulaDeDestaque />
     </div>
   );
 }

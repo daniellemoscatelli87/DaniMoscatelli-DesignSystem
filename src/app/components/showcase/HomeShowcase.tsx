@@ -48,7 +48,7 @@ const explore: { label: Bi; items: CardItem[] }[] = [
       { icon: Frame, title: { en: "Frames & states", pt: "Molduras e estados" }, desc: { en: "Site header and footer, account frame, empty, final and error states, logo.", pt: "Cabeçalho e rodapé do site, moldura de conta, estados vazio, final e de erro, logo." }, target: { page: "molduras" } },
       { icon: TextCursorInput, title: { en: "Fields", pt: "Campos" }, desc: { en: "Standard field, e-mail, state and city, masks, search, chips and the adaptive table.", pt: "Campo padrão, e-mail, estado e cidade, máscaras, busca, chips e a tabela adaptável." }, target: { page: "campos" } },
       { icon: Inbox, title: { en: "Restricted area pieces", pt: "Peças da área restrita" }, desc: { en: "Inbox, conversation, month agenda, step-by-step sign-up and board.", pt: "Caixa de entrada, conversa, agenda do mês, cadastro em etapas e quadro." }, target: { page: "pecas-admin" } },
-      { icon: Newspaper, title: { en: "Site sections", pt: "Seções do site" }, desc: { en: "Testimonials, articles, logos, quotes, pillars, simulation and long text.", pt: "Depoimentos, artigos, logos, citações, pilares, simulação e texto longo." }, target: { page: "secoes-site" } },
+      { icon: Newspaper, title: { en: "Site sections", pt: "Seções do site" }, desc: { en: "Testimonials, articles, logos, quotes, pillars, simulation, long text, social media links and highlight pills.", pt: "Depoimentos, artigos, logos, citações, pilares, simulação, texto longo, links de redes sociais e pílulas de destaque." }, target: { page: "secoes-site" } },
     ],
   },
 ];

@@ -1,20 +1,30 @@
 import * as React from "react";
 import { Quote } from "lucide-react";
 import { cn } from "./utils";
+import { ChipDeEstado } from "./chip-de-estado";
+import { Avaliacao } from "./avaliacao";
 
 /**
- * CardDeDepoimento (depoimento de cliente ou par)
+ * CardDeDepoimento (depoimento de cliente, par ou de quem usou a plataforma)
  *
- * O cartão dos depoimentos da página inicial (21 recomendações do LinkedIn, `testimonial-card`) e das páginas de
- * apresentação: o depoimento em cima e, depois de um divisor, a pessoa (foto, nome e cargo) e, opcional, a origem
- * ("Recomendação no LinkedIn"). A frase vem primeiro e começa na borda do card; a pessoa assina embaixo.
- * Use dentro do Carousel (um por vez no celular, dois no tablet, três no computador) ou numa GradeDeCards.
+ * O cartão padrão de depoimento nos dois design systems (decisão da dona do produto, 28/11/2026): o ícone de aspas, o
+ * depoimento em cima e, depois de um divisor, a pessoa (foto ou iniciais, nome, cargo e, opcional, a origem, como
+ * "Recomendação no LinkedIn"). No Dani Moscatelli, os depoimentos da página inicial (`testimonial-card`) e das páginas
+ * de apresentação; no FindLook, o feedback de quem usou a plataforma, com o perfil ("Cliente" ou "Loja parceira"), a
+ * loja e a nota. Use dentro do Carousel (um por vez no celular, dois no tablet, três no computador) ou numa GradeDeCards.
  *
- * - Card do DS só com borda (sem sombra parada); altura total da célula (h-full), para os vizinhos ficarem iguais.
- * - Depoimento num <blockquote> (aspas de abertura decorativas em ícone); trechos em <strong> ficam no texto principal.
- * - Pessoa num <figcaption>: foto redonda de 48 px (ou as iniciais), nome em negrito e cargo numa linha.
- * - Não invente depoimentos: o conteúdo vem do produto, com autorização de quem escreveu.
+ * Uma fonte só do desenho: as classes .ds-card-depoimento e suas partes (theme.css, bloco "@ds-css-puro"). Este
+ * componente só monta o HTML com elas; as páginas em HTML puro usam as mesmas classes (ver a documentação).
+ *
+ * - Card do DS só com borda (sem sombra parada); altura total da célula, para os vizinhos ficarem iguais.
+ * - Depoimento num <blockquote>; trechos em <strong> ficam no texto principal. Pessoa num <figcaption>.
+ * - perfil: "consumidor" (selo "Cliente") ou "lojista" (selo "Loja parceira"), no ChipDeEstado neutro.
+ * - loja: o nome da loja, na linha do cargo. nota: a nota de 1 a 5 que a pessoa deu, na Avaliacao do DS (estrela e
+ *   número), no alto à direita.
+ * - Não invente depoimentos nem notas: o conteúdo vem do produto, com autorização de quem escreveu.
  */
+
+export type PerfilDoDepoimento = "consumidor" | "lojista";
 
 export type CardDeDepoimentoProps = Omit<React.ComponentProps<"figure">, "children"> & {
   nome: string;
@@ -23,32 +33,45 @@ export type CardDeDepoimentoProps = Omit<React.ComponentProps<"figure">, "childr
   foto?: string;
   /** Origem do depoimento ("Recomendação no LinkedIn"). */
   origem?: React.ReactNode;
+  /** Quem escreveu: "consumidor" (selo "Cliente") ou "lojista" (selo "Loja parceira"). */
+  perfil?: PerfilDoDepoimento;
+  /** Nome da loja (para lojistas), na linha do cargo. */
+  loja?: string;
+  /** Nota de 1 a 5 dada pela pessoa (Avaliacao do DS). */
+  nota?: number;
   children: React.ReactNode;
 };
 
+const SELO_DO_PERFIL: Record<PerfilDoDepoimento, string> = { consumidor: "Cliente", lojista: "Loja parceira" };
+
 const iniciais = (nome: string) => nome.split(/\s+/).filter(Boolean).slice(0, 2).map(p => p[0]).join("").toUpperCase();
 
-function CardDeDepoimento({ nome, cargo, foto, origem, children, className, ...props }: CardDeDepoimentoProps) {
+function CardDeDepoimento({ nome, cargo, foto, origem, perfil, loja, nota, children, className, ...props }: CardDeDepoimentoProps) {
+  const linha = [cargo, loja].filter(Boolean).join(" · ");
   return (
-    <figure
-      data-slot="card-de-depoimento"
-      className={cn("flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6 text-left text-card-foreground transition-colors duration-[var(--duration-normal)] hover:border-[var(--border-strong)]", className)}
-      {...props}
-    >
-      <blockquote className="relative flex-1 text-body-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
-        <Quote aria-hidden className="mb-2 size-5 text-primary-text" />
+    <figure data-slot="card-de-depoimento" className={cn("ds-card-depoimento", className)} {...props}>
+      <blockquote className="ds-card-depoimento__texto">
+        <span className="ds-card-depoimento__topo">
+          <Quote aria-hidden="true" className="ds-card-depoimento__aspas" />
+          {typeof nota === "number" && <Avaliacao nota={nota} fonte="dada por quem escreveu" />}
+        </span>
         {children}
       </blockquote>
-      <figcaption className="flex items-center gap-3 border-t border-border pt-4">
+      <figcaption className="ds-card-depoimento__pessoa">
         {foto ? (
-          <img src={foto} alt="" loading="lazy" className="size-12 shrink-0 rounded-full object-cover ring-2 ring-primary-muted" />
+          <img src={foto} alt="" loading="lazy" className="ds-card-depoimento__foto" />
         ) : (
-          <span aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary-muted text-body-sm font-bold text-primary-text">{iniciais(nome)}</span>
+          <span aria-hidden="true" className="ds-card-depoimento__iniciais">{iniciais(nome)}</span>
         )}
-        <span className="min-w-0">
-          <span className="block text-body-sm font-bold text-foreground">{nome}</span>
-          {cargo && <span className="block truncate text-label text-muted-foreground" title={cargo}>{cargo}</span>}
-          {origem && <span className="mt-1 block text-label font-medium text-primary-text">{origem}</span>}
+        <span className="ds-card-depoimento__quem">
+          <span className="ds-card-depoimento__nome">{nome}</span>
+          {linha && <span className="ds-card-depoimento__cargo" title={linha}>{linha}</span>}
+          {origem && <span className="ds-card-depoimento__origem">{origem}</span>}
+          {perfil && (
+            <span className="ds-card-depoimento__perfil">
+              <ChipDeEstado tom="neutro">{SELO_DO_PERFIL[perfil]}</ChipDeEstado>
+            </span>
+          )}
         </span>
       </figcaption>
     </figure>

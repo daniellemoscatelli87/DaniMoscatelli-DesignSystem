@@ -30,6 +30,7 @@ const P = {
   upload: { secao: "upload", rotulo: ["Upload", "Upload"] as [string, string] },
   painel: { secao: "sidepanel", rotulo: ["Side panel", "Painel lateral"] as [string, string] },
   site: { secao: "site", rotulo: ["Site patterns", "Padrões do site"] as [string, string] },
+  secoes: { secao: "secoes-site", rotulo: ["Site sections", "Seções do site"] as [string, string] },
 };
 
 const itens: Item[] = [
@@ -43,11 +44,13 @@ const itens: Item[] = [
   { nome: "aviso-projeto", en: "Floating “Got a project?” notice pointing to the WhatsApp button.", pt: "Aviso flutuante “Tem um projeto?” apontando para o botão do WhatsApp.", pagina: { ...P.site, ancora: "site-flutuantes" } },
   { nome: "badge", en: "Short label for status or category.", pt: "Rótulo curto de status ou categoria.", pagina: P.rotulos },
   { nome: "botao-subir", en: "Back-to-top button that appears with the footer, beside the WhatsApp button.", pt: "Botão de voltar ao topo que aparece com o rodapé, ao lado do botão do WhatsApp.", pagina: { ...P.site, ancora: "site-flutuantes" } },
-  { nome: "botao-whatsapp", en: "Floating WhatsApp button with a ready message.", pt: "Botão flutuante do WhatsApp com mensagem pronta.", pagina: { ...P.site, ancora: "site-flutuantes" } },
+  { nome: "botao-whatsapp", en: "Floating WhatsApp button with a ready message (same API in the FindLook DS).", pt: "Botão flutuante do WhatsApp com mensagem pronta (mesma API no DS FindLook).", pagina: { ...P.secoes, ancora: "secoes-botao-whatsapp" } },
   { nome: "breadcrumb", en: "Trail showing where the page is in the hierarchy.", pt: "Trilha que mostra onde a página está na hierarquia.", pagina: P.overlays },
   { nome: "button", en: "Action button: 40 px, variants primary (default), secondary with an outline (\"outline\" is an alias of the same button), ghost, link and destructive.", pt: "Botão de ação: 40 px, variantes principal (default), secundário de contorno (secondary; \"outline\" é apelido do mesmo botão), ghost, link e destrutivo.", pagina: P.form },
   { nome: "calendar", en: "Month calendar to pick a date or a range.", pt: "Calendário mensal para escolher uma data ou um intervalo." },
   { nome: "card", en: "Base card with header, content and footer.", pt: "Card base com cabeçalho, conteúdo e rodapé.", pagina: P.cards },
+  { nome: "card-de-depoimento", en: "Testimonial card: quote, divider and the person at the bottom (FindLook: profile, store and rating).", pt: "Card de depoimento: aspas, divisor e a pessoa embaixo (FindLook: perfil, loja e nota).", pagina: { ...P.secoes, ancora: "secoes-depoimentos" } },
+  { nome: "card-de-rede-social", en: "Invitation card to see everything on a social network (\"See all 35 recommendations\"), with the network button.", pt: "Card de convite para ver tudo numa rede social (\"Veja todas as 35 recomendações\"), com o botão da rede.", pagina: { ...P.secoes, ancora: "secoes-card-rede-social" } },
   { nome: "card-frente", en: "Area of work card (icon, title, red subtitle, topics) and its grid/phone carousel.", pt: "Card de frente de atuação (ícone, título, subtítulo vermelho, temas) e sua grade/carrossel no celular.", pagina: { ...P.site, ancora: "site-frentes" } },
   { nome: "carousel", en: "Horizontal list that slides, with previous and next buttons.", pt: "Lista horizontal que desliza, com botões de anterior e próximo." },
   { nome: "chart", en: "Wrapper for Recharts charts with DS colors and tooltip.", pt: "Base para gráficos (Recharts) com as cores e a dica do DS.", pagina: P.dados },
@@ -72,6 +75,7 @@ const itens: Item[] = [
   { nome: "input-otp", en: "Field for verification codes, one box per digit.", pt: "Campo de código de verificação, uma caixa por dígito." },
   { nome: "input", en: "Text field: 40 px, visible border and focus ring.", pt: "Campo de texto: 40 px, borda visível e anel de foco.", pagina: P.form },
   { nome: "label", en: "Field label linked to the field.", pt: "Rótulo de campo, ligado ao campo." },
+  { nome: "link-de-rede-social", en: "White pill link to a social network: brand icon in its official colour, text and soft shadow; group centred.", pt: "Link em pílula branca para uma rede social: ícone da marca na cor oficial, texto e sombra suave; grupo centralizado.", pagina: { ...P.secoes, ancora: "secoes-redes-sociais" } },
   { nome: "lucide-catalogo", en: "Searchable list of Lucide icons.", pt: "Lista pesquisável dos ícones Lucide.", pagina: P.icones },
   { nome: "luzes-difusas", en: "Soft animated lights for dark backgrounds.", pt: "Luzes suaves e animadas para fundos escuros.", pagina: P.cards },
   { nome: "menubar", en: "Horizontal menu bar, like desktop apps.", pt: "Barra de menus horizontal, como em programas de computador." },
@@ -84,6 +88,7 @@ const itens: Item[] = [
   { nome: "partner-card", en: "Invitation card with highlight, main action and secondary link.", pt: "Card de convite com destaque, ação principal e link secundário.", pagina: P.cards },
   { nome: "password-field", en: "Password with show/hide, strength and requirements.", pt: "Senha com mostrar/ocultar, força e requisitos.", pagina: P.form },
   { nome: "pilula-de-acao", en: "Floating action pill beside the WhatsApp button, with the bottom band on phones.", pt: "Pílula de ação flutuante ao lado do botão do WhatsApp, com a faixa de baixo no celular.", pagina: { ...P.site, ancora: "site-flutuantes" } },
+  { nome: "pilula-de-destaque", en: "Highlight pill that is not clickable (numbers, qualities): light grey, thin border, red Lucide icon; list centred.", pt: "Pílula de destaque que não é clicável (números, qualidades): cinza claro, borda fina, ícone Lucide vermelho; lista centralizada.", pagina: { ...P.secoes, ancora: "secoes-pilulas-destaque" } },
   { nome: "popover", en: "Floating panel anchored to a button.", pt: "Painel flutuante preso a um botão." },
   { nome: "product-card", en: "Item card with photo, price and condition.", pt: "Card de peça com foto, preço e condição.", pagina: P.cards },
   { nome: "progress", en: "Progress bar.", pt: "Barra de progresso.", pagina: P.feedback },
