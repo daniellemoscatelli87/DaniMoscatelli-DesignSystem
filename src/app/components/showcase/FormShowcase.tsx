@@ -185,11 +185,15 @@ export function FormShowcase() {
         <SubSection title={t("Pill shape and 44 px icon", "Forma pílula e ícone de 44 px")}>
           <ShowcaseCard>
             <p className="mb-4 max-w-2xl text-body-sm text-muted-foreground">{t("forma=\"pilula\" rounds the button fully; use it only where the brand asks for it (the site header). size=\"icon\" is 40 px with a mouse and 44 px on touch; size=\"icon-lg\" is always 44 px. Every button is 44 px tall on phones (below 640 px) and on touch screens.", "forma=\"pilula\" arredonda o botão inteiro; use só onde a marca pede (o cabeçalho do site). size=\"icon\" tem 40 px com mouse e 44 px no toque; size=\"icon-lg\" tem 44 px sempre. Todo botão tem 44 px de altura no celular (abaixo de 640 px) e em telas de toque.")}</p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Button forma="pilula" variant="outline">{t("Outline pill", "Pílula de contorno")}</Button>
-              <Button forma="pilula">{t("Filled pill", "Pílula preenchida")}</Button>
+            <div className="space-y-3">
+              <div className="flex flex-wrap items-center gap-3">
+              <Button forma="pilula" variant="outline">{t("Outline", "Contorno")}</Button>
+              <Button forma="pilula">{t("Filled", "Preenchida")}</Button>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
               <Button size="icon" variant="outline" aria-label={t("Edit", "Editar")}><Edit3 aria-hidden /></Button>
               <Button size="icon-lg" variant="ghost" aria-label={t("More options", "Mais opções")}><MoreHorizontal aria-hidden /></Button>
+              </div>
             </div>
           </ShowcaseCard>
         </SubSection>

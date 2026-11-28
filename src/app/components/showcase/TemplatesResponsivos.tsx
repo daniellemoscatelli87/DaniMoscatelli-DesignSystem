@@ -412,18 +412,17 @@ export function InboxTemplate() {
         renderLeitura={item => {
           const n = notificacoes[Number(item.id)];
           return (
-            <div>
-              <div className="flex items-start gap-3">
-                <IconeComBase tom="marca">{React.createElement(n.icone)}</IconeComBase>
-                <div className="min-w-0">
-                  <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(n.titulo)}</h3>
-                  <p className="text-body-sm text-muted-foreground">{bi(n.quando)}</p>
+            // Ícone numa coluna própria; título, texto e ações na coluna do texto (mesma borda esquerda).
+            <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-3">
+              <IconeComBase tom="marca">{React.createElement(n.icone)}</IconeComBase>
+              <div className="min-w-0">
+                <h3 className="text-body-lg font-semibold text-foreground [text-wrap:pretty]">{bi(n.titulo)}</h3>
+                <p className="text-body-sm text-muted-foreground">{bi(n.quando)}</p>
+                <p className="mt-4 text-body leading-relaxed text-foreground">{bi(n.corpo)}</p>
+                <div className="mt-6 flex flex-wrap items-center gap-3">
+                  <Button>{t("View details", "Ver detalhes")}</Button>
+                  <Button variant="outline">{t("Dismiss", "Dispensar")}</Button>
                 </div>
-              </div>
-              <p className="mt-4 text-body leading-relaxed text-foreground">{bi(n.corpo)}</p>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Button>{t("View details", "Ver detalhes")}</Button>
-                <Button variant="outline">{t("Dismiss", "Dispensar")}</Button>
               </div>
             </div>
           );
